@@ -1,5 +1,5 @@
 /**
- *  Copyright 2005-2018 Red Hat, Inc.
+ *  Copyright 2005-2016 Red Hat, Inc.
  *
  *  Red Hat licenses this file to you under the Apache License, version
  *  2.0 (the "License"); you may not use this file except in compliance
@@ -13,22 +13,19 @@
  *  implied.  See the License for the specific language governing
  *  permissions and limitations under the License.
  */
-package org.mycompany;
+package io.fabric8.quickstarts.cxf.jaxrs;
 
-import org.springframework.boot.SpringApplication;
-import org.springframework.boot.autoconfigure.SpringBootApplication;
-import org.springframework.context.annotation.ImportResource;
+import io.swagger.annotations.Api;
 
-/**
- * A spring-boot application that includes a Camel route builder to setup the Camel routes
- */
-@SpringBootApplication
-@ImportResource({"classpath:spring/camel-context.xml"})
-public class Application {
+@Api("/sayHello")
+public class HelloServiceImpl implements HelloService {
 
-    // must have a main method spring-boot can run
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
+    public String welcome() {
+        return "Welcome to the CXF RS Spring Boot application, append /{name} to call the hello service";
     }
 
+    public String sayHello(String a) {
+        return "Hello " + a + ", Welcome to CXF RS Spring Boot World!!!";
+    }
+    
 }
