@@ -49,7 +49,7 @@ public class PageLayout {
 	 *	@param c is for wrapping a value to be assigned to this field during initialization. 
 	 *	@throws java.lang.Exception so that any exception during initialization is handled by the servlet. 
 	 */
-	public SiteRequest siteRequest;
+	protected void siteRequest(Wrap<SiteRequest> c);
 	protected void siteRequestInitialize() throws Exception {
 	}
 
