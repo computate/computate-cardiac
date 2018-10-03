@@ -33,7 +33,7 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.heytate.fuse.servlet.cdi.example;
+package com.heytate.frFR.cardiac.servlet.cdi.example;
 
 import javax.enterprise.context.ApplicationScoped;
 

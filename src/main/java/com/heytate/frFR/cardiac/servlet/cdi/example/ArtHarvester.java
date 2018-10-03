@@ -1,4 +1,4 @@
-package com.heytate.fuse.servlet.cdi.example;
+package com.heytate.frFR.cardiac.servlet.cdi.example;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;

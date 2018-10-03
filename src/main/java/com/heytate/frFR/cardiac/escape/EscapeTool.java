@@ -1,4 +1,4 @@
-package com.heytate.fuse.art.escape;
+package com.heytate.frFR.cardiac.escape;
 
 public class EscapeTool {
 
