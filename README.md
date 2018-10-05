@@ -47,6 +47,3 @@ Then create the quickstart template:
 
 Now when you use "Add to Project" button in the OpenShift console, you should see a template for this quickstart. 
 
-=======
-# heytate-cardiac
-For harvesting art from oai-pmh enabled servers. 
