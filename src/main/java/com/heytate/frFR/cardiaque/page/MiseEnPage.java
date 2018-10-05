@@ -18,7 +18,6 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.lang3.reflect.MethodUtils;
 
 import com.heytate.frFR.cardiac.chaine.Chaine;
-import com.heytate.frFR.cardiac.page.MiseEnPageGen;
 import com.heytate.frFR.cardiaque.couverture.Couverture;
 import com.heytate.frFR.cardiaque.page.parti.PageParti;
 import com.heytate.frFR.cardiaque.requete.RequeteSite;
