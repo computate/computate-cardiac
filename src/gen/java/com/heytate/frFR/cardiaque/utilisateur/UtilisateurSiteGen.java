@@ -759,12 +759,6 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 
 	protected boolean dejaInitialiseUtilisateurSite = false;
 
-	public void initLoinUtilisateurSite(RequeteSite requeteSite) throws Exception {
-		((UtilisateurSite)this).requeteSite(requeteSite);
-		requeteSite(requeteSite);
-		initLoinUtilisateurSite();
-	}
-
 	public void initLoinUtilisateurSite() throws Exception {
 		if(!dejaInitialiseUtilisateurSite) {
 			requeteSiteInit();
@@ -786,9 +780,5 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 			modeleSuggestionIndexeInit();
 			dejaInitialiseUtilisateurSite = true;
 		}
-	}
-
-	public void initLoinPourClasse(RequeteSite requeteSite) throws Exception {
-		initLoinUtilisateurSite(requeteSite);
 	}
 }

@@ -1,8 +1,9 @@
-package com.heytate.frFR.cardiaque.cluster;
+package com.heytate.frFR.cardiaque.cluster;     
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.Locale;
 
-import com.heytate.frFR.cardiac.cluster.ClusterGen;
 import com.heytate.frFR.cardiaque.couverture.Couverture;
 import com.heytate.frFR.cardiaque.page.MiseEnPage;
 import com.heytate.frFR.cardiaque.requete.RequeteSite;
@@ -12,17 +13,19 @@ import com.heytate.frFR.cardiaque.requete.RequeteSite;
  */
 public class Cluster extends ClusterGen<Object> { 
 
-	/**
-	 * ignorer: true
-	 * var.enUS: siteRequestCluster
-	 * param1.var.enUS: siteRequest
-	 * remplacer.enUS: requeteSite
-	 * siteRequest
-	 */
-	@Override public void requeteSiteCluster(RequeteSite requeteSite) throws Exception {  
-		super.requeteSiteCluster(requeteSite);
-		requeteSite(requeteSite);
-	}
+	public static DateTimeFormatter FORMAT_dateMedicalCourt = DateTimeFormatter.ofPattern("M/d/yyyy", Locale.FRANCE);
+
+//	/**
+//	 * ignorer: true
+//	 * var.enUS: siteRequestCluster
+//	 * param1.var.enUS: siteRequest
+//	 * remplacer.enUS: requeteSite
+//	 * siteRequest
+//	 */
+//	@Override public void requeteSiteCluster(RequeteSite requeteSite) throws Exception {  
+//		super.requeteSiteCluster(requeteSite);
+//		requeteSite(requeteSite);
+//	}
 
 	/**
 	 * var.enUS: _siteRequest

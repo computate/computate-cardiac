@@ -18,13 +18,12 @@ import org.postgresql.ds.PGSimpleDataSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.heytate.frFR.cardiac.contexte.EcouteurContexteGen;
 import com.heytate.frFR.cardiaque.config.ConfigSite;
 import com.heytate.frFR.cardiaque.couverture.Couverture;
 import com.heytate.frFR.cardiaque.fil.DaemonFabriqueFil;
 import com.heytate.frFR.cardiaque.requete.RequeteSite;
 
-public class EcouteurContexte extends EcouteurContexteGen<Object> implements ServletContextListener { 
+public class EcouteurContexte extends EcouteurContexteGen<Object> implements ServletContextListener {  
 
 	protected Logger log = LoggerFactory.getLogger(getClass());
 

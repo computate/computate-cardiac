@@ -1,4 +1,4 @@
-package com.heytate.frFR.cardiaque.config;    
+package com.heytate.frFR.cardiaque.config;  
 
 import org.apache.commons.configuration2.INIConfiguration;
 import org.apache.commons.configuration2.builder.fluent.Configurations;
@@ -6,7 +6,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.heytate.frFR.cardiac.config.ConfigSiteGen;
 import com.heytate.frFR.cardiaque.contexte.EcouteurContexte;
 import com.heytate.frFR.cardiaque.couverture.Couverture;
 import com.heytate.frFR.cardiaque.requete.RequeteSite;
@@ -16,7 +15,7 @@ import com.heytate.frFR.cardiaque.requete.RequeteSite;
  * enUS: Loads the properties in the application config file into specific fields. 
  * frFR: Charge les propriétés dans le fichier de config de l'application dans des champs spécifiques. 
  */    
-public class ConfigSite extends ConfigSiteGen<Object> { 
+public class ConfigSite extends ConfigSiteGen<Object> {  
 
 	/** do stuff **/
 	protected Logger log = LoggerFactory.getLogger(getClass());

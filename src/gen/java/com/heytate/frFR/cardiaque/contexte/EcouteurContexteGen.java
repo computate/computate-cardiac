@@ -93,6 +93,7 @@ public abstract class EcouteurContexteGen<DEV> extends Object {
 		if(!configSiteCouverture.dejaInitialise) {
 			_configSite(configSite);
 		}
+		configSite.initLoinPourClasse(requeteSite);
 		configSiteCouverture.dejaInitialise(true);
 	}
 

@@ -94,21 +94,12 @@ public abstract class PagePartiGen<DEV> extends Cluster {
 
 	protected boolean dejaInitialisePageParti = false;
 
-	public void initLoinPageParti(RequeteSite requeteSite) throws Exception {
-		((PageParti)this).requeteSite(requeteSite);
-		requeteSite(requeteSite);
-		initLoinPageParti();
-	}
-
 	public void initLoinPageParti() throws Exception {
 		if(!dejaInitialisePageParti) {
+			super.initLoinCluster(requeteSite);
 			requeteSiteInit();
 			partiVarInit();
 			dejaInitialisePageParti = true;
 		}
-	}
-
-	public void initLoinPourClasse(RequeteSite requeteSite) throws Exception {
-		initLoinPageParti(requeteSite);
 	}
 }

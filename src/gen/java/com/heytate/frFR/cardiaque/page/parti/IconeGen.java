@@ -130,22 +130,13 @@ public abstract class IconeGen<DEV> extends PageParti {
 
 	protected boolean dejaInitialiseIcone = false;
 
-	public void initLoinIcone(RequeteSite requeteSite) throws Exception {
-		((Icone)this).requeteSite(requeteSite);
-		requeteSite(requeteSite);
-		initLoinIcone();
-	}
-
 	public void initLoinIcone() throws Exception {
 		if(!dejaInitialiseIcone) {
+			super.initLoinPageParti(requeteSite);
 			typeInit();
 			nomInit();
 			page_Init();
 			dejaInitialiseIcone = true;
 		}
-	}
-
-	public void initLoinPourClasse(RequeteSite requeteSite) throws Exception {
-		initLoinIcone(requeteSite);
 	}
 }

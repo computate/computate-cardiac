@@ -104,6 +104,8 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 			if(configSite == null)
 				configSite(configSiteCouverture.o);
 		}
+		if(configSite != null)
+			configSite.initLoinPourClasse(requeteSite);
 		configSiteCouverture.dejaInitialise(true);
 	}
 
@@ -146,6 +148,8 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 			if(ecouteurContexte == null)
 				ecouteurContexte(ecouteurContexteCouverture.o);
 		}
+		if(ecouteurContexte != null)
+			ecouteurContexte.initLoinPourClasse(requeteSite);
 		ecouteurContexteCouverture.dejaInitialise(true);
 	}
 
