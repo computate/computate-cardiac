@@ -345,6 +345,7 @@ public abstract class ClusterGen<DEV> extends Object {
 
 	public void initLoinCluster() throws Exception {
 		if(!dejaInitialiseCluster) {
+			super.initLoinObject(requeteSite);
 			requeteSiteInit();
 			page_Init();
 			cleInit();
@@ -360,5 +361,159 @@ public abstract class ClusterGen<DEV> extends Object {
 
 	public void initLoinPourClasse(RequeteSite requeteSite) throws Exception {
 		initLoinCluster(requeteSite);
+	}
+
+	@Test public void indexerClusterTest() throws Exception {
+		RequeteSite requeteSite = new RequeteSite();
+		requeteSite.initLoinRequeteSite();
+		EcouteurContexte ecouteurContexte = new EcouteurContexte();
+		ecouteurContexte.initLoinEcouteurContexte();
+		ecouteurContexte.requeteSite(requeteSite);
+		requeteSite.ecouteurContexte(ecouteurContexte);
+		requeteSite.configSite(ecouteurContexte.configSite);
+		requeteSiteCluster(requeteSite);
+		initLoinCluster(requeteSite);
+		indexerCluster(requeteSite);
+	}
+
+
+	public void indexerPourClasse(RequeteSite requeteSite) throws Exception {
+		indexerCluster(requeteSite);
+	}
+
+	public void indexerPourClasse(SolrInputDocument document) throws Exception {
+		indexerCluster(document);
+	}
+	public void indexerCluster(RequeteSite requeteSite) throws Exception {
+		SolrInputDocument document = new SolrInputDocument();
+		indexerCluster(document);
+		SolrClient clientSolr = requeteSite.ecouteurContexte.clientSolr;
+		clientSolr.add(document);
+		clientSolr.commit();
+	}
+
+	public void indexerCluster(SolrInputDocument document) throws Exception {
+		if(cle != null) {
+		}
+		if(cree != null) {
+		}
+		if(modifie != null) {
+		}
+		if(utilisateurId != null) {
+		}
+		if(clusterNomCanonique != null) {
+		}
+		if(clusterNomSimple != null) {
+		}
+	}
+
+	public Object obtenirPourClasse(String var) throws Exception {
+		String[] vars = org.apache.commons.lang3.StringUtils.split(var, ".");
+		Object o = null;
+		for(String v : vars) {
+			if(o == null)
+				o = obtenirCluster(v);
+			else if(o instanceof Cluster) {
+				Cluster cluster = (Cluster)o;
+				o = cluster.obtenirPourClasse(v);
+			}
+		}
+		return o;
+	}
+	public Object obtenirCluster(String var) throws Exception {
+		Cluster oCluster = (Cluster)this;
+		switch(var) {
+		case "requeteSite": return oCluster.requeteSite;
+		case "page_": return oCluster.page_;
+		case "cle": return oCluster.cle;
+		case "cree": return oCluster.cree;
+		case "modifie": return oCluster.modifie;
+		case "utilisateurId": return oCluster.utilisateurId;
+		case "clusterNomCanonique": return oCluster.clusterNomCanonique;
+		case "clusterNomSimple": return oCluster.clusterNomSimple;
+		case "supprime": return oCluster.supprime;
+		default:
+			return null;
+		}
+	}
+
+	public boolean attribuerPourClasse(String var, Object val) throws Exception {
+		String[] vars = org.apache.commons.lang3.StringUtils.split(var, ".");
+		Object o = null;
+		for(String v : vars) {
+			if(o == null)
+				o = attribuerCluster(v, val);
+			else if(o instanceof Cluster) {
+				Cluster cluster = (Cluster)o;
+				o = cluster.attribuerPourClasse(v, val);
+			}
+		}
+		return o != null;
+	}
+	public Object attribuerCluster(String var, Object val) throws Exception {
+		Cluster oCluster = (Cluster)this;		switch(var) {
+		case "requeteSite": oCluster.setRequeteSite((RequeteSite)val); return val;
+		case "page_": oCluster.setPage_((MiseEnPage)val); return val;
+		case "cle": oCluster.setCle((Long)val); return val;
+		case "cree": oCluster.setCree((LocalDateTime)val); return val;
+		case "modifie": oCluster.setModifie((LocalDateTime)val); return val;
+		case "utilisateurId": oCluster.setUtilisateurId((String)val); return val;
+		case "clusterNomCanonique": oCluster.setClusterNomCanonique((String)val); return val;
+		case "clusterNomSimple": oCluster.setClusterNomSimple((String)val); return val;
+		case "supprime": oCluster.setSupprime((Boolean)val); return val;
+		default:
+			return null;
+		}
+	}
+
+	public boolean definirPourClasse(String var, String...vals) throws Exception {
+		String[] vars = org.apache.commons.lang3.StringUtils.split(var, ".");
+		Object o = null;
+		String val = vals == null ? null : vals[vals.length - 1];
+		if(val != null) {
+			for(String v : vars) {
+				if(o == null)
+					o = definirCluster(v, val);
+				else if(o instanceof Cluster) {
+					Cluster cluster = (Cluster)o;
+					o = cluster.definirPourClasse(v, val);
+				}
+			}
+		}
+		return o != null;
+	}
+	public Object definirCluster(String var, String val) throws Exception {
+		Cluster oCluster = (Cluster)this;
+		switch(var) {
+		case "requeteSite":
+			oCluster.setRequeteSite(val);
+			return val;
+		case "page_":
+			oCluster.setPage_(val);
+			return val;
+		case "cle":
+			oCluster.setCle(val);
+			return val;
+		case "cree":
+			oCluster.setCree(val);
+			return val;
+		case "modifie":
+			oCluster.setModifie(val);
+			return val;
+		case "utilisateurId":
+			oCluster.setUtilisateurId(val);
+			return val;
+		case "clusterNomCanonique":
+			oCluster.setClusterNomCanonique(val);
+			return val;
+		case "clusterNomSimple":
+			oCluster.setClusterNomSimple(val);
+			return val;
+		case "supprime":
+			oCluster.setSupprime(val);
+			return val;
+		default:
+			return null;
+		}
 	}
 }

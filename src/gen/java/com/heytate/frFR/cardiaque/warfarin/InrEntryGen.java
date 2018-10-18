@@ -2,6 +2,7 @@ package com.heytate.frFR.cardiaque.warfarin;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import com.heytate.frFR.cardiaque.requete.RequeteSite;
 import com.heytate.frFR.cardiac.chaine.Chaine;
 import com.heytate.frFR.cardiaque.cluster.Cluster;
 import com.heytate.frFR.cardiaque.couverture.Couverture;
@@ -181,14 +182,148 @@ public abstract class InrEntryGen<DEV> extends Cluster {
 
 	protected boolean dejaInitialiseInrEntry = false;
 
+	public void initLoinInrEntry(RequeteSite requeteSite) throws Exception {
+		setRequeteSite(requeteSite);
+		initLoinInrEntry();
+	}
+
 	public void initLoinInrEntry() throws Exception {
 		if(!dejaInitialiseInrEntry) {
+			super.initLoinCluster(requeteSite);
 			inrDateInit();
 			doseActuelValeurInit();
 			doseActuelTexteInit();
 			changementDoseValeurInit();
 			changementDoseTexteInit();
 			dejaInitialiseInrEntry = true;
+		}
+	}
+
+	public void initLoinPourClasse(RequeteSite requeteSite) throws Exception {
+		initLoinInrEntry(requeteSite);
+	}
+
+	@Test public void indexerInrEntryTest() throws Exception {
+		RequeteSite requeteSite = new RequeteSite();
+		requeteSite.initLoinRequeteSite();
+		EcouteurContexte ecouteurContexte = new EcouteurContexte();
+		ecouteurContexte.initLoinEcouteurContexte();
+		ecouteurContexte.requeteSite(requeteSite);
+		requeteSite.ecouteurContexte(ecouteurContexte);
+		requeteSite.configSite(ecouteurContexte.configSite);
+		requeteSiteInrEntry(requeteSite);
+		initLoinInrEntry(requeteSite);
+		indexerInrEntry(requeteSite);
+	}
+
+
+	@Override public void indexerPourClasse(RequeteSite requeteSite) throws Exception {
+		indexerInrEntry(requeteSite);
+	}
+
+	@Override public void indexerPourClasse(SolrInputDocument document) throws Exception {
+		indexerInrEntry(document);
+	}
+	public void indexerInrEntry(RequeteSite requeteSite) throws Exception {
+		SolrInputDocument document = new SolrInputDocument();
+		indexerInrEntry(document);
+		SolrClient clientSolr = requeteSite.ecouteurContexte.clientSolr;
+		clientSolr.add(document);
+		clientSolr.commit();
+	}
+
+	public void indexerInrEntry(SolrInputDocument document) throws Exception {
+		super.indexerCluster(document);
+
+	}
+
+	@Override public Object obtenirPourClasse(String var) throws Exception {
+		String[] vars = org.apache.commons.lang3.StringUtils.split(var, ".");
+		Object o = null;
+		for(String v : vars) {
+			if(o == null)
+				o = obtenirInrEntry(v);
+			else if(o instanceof Cluster) {
+				Cluster cluster = (Cluster)o;
+				o = cluster.obtenirPourClasse(v);
+			}
+		}
+		return o;
+	}
+	public Object obtenirInrEntry(String var) throws Exception {
+		InrEntry oInrEntry = (InrEntry)this;
+		switch(var) {
+		case "inrDate": return oInrEntry.inrDate;
+		case "doseActuelValeur": return oInrEntry.doseActuelValeur;
+		case "doseActuelTexte": return oInrEntry.doseActuelTexte;
+		case "changementDoseValeur": return oInrEntry.changementDoseValeur;
+		case "changementDoseTexte": return oInrEntry.changementDoseTexte;
+		default:
+			return super.obtenirCluster(var);
+		}
+	}
+
+	@Override public boolean attribuerPourClasse(String var, Object val) throws Exception {
+		String[] vars = org.apache.commons.lang3.StringUtils.split(var, ".");
+		Object o = null;
+		for(String v : vars) {
+			if(o == null)
+				o = attribuerInrEntry(v, val);
+			else if(o instanceof Cluster) {
+				Cluster cluster = (Cluster)o;
+				o = cluster.attribuerPourClasse(v, val);
+			}
+		}
+		return o != null;
+	}
+	public Object attribuerInrEntry(String var, Object val) throws Exception {
+		InrEntry oInrEntry = (InrEntry)this;		switch(var) {
+		case "inrDate": oInrEntry.setInrDate((LocalDate)val); return val;
+		case "doseActuelValeur": oInrEntry.setDoseActuelValeur((BigDecimal)val); return val;
+		case "doseActuelTexte": oInrEntry.setDoseActuelTexte((Chaine)val); return val;
+		case "changementDoseValeur": oInrEntry.setChangementDoseValeur((BigDecimal)val); return val;
+		case "changementDoseTexte": oInrEntry.setChangementDoseTexte((Chaine)val); return val;
+		default:
+			return super.attribuerCluster(var, val);
+		}
+	}
+
+	@Override public boolean definirPourClasse(String var, String...vals) throws Exception {
+		String[] vars = org.apache.commons.lang3.StringUtils.split(var, ".");
+		Object o = null;
+		String val = vals == null ? null : vals[vals.length - 1];
+		if(val != null) {
+			for(String v : vars) {
+				if(o == null)
+					o = definirInrEntry(v, val);
+				else if(o instanceof Cluster) {
+					Cluster cluster = (Cluster)o;
+					o = cluster.definirPourClasse(v, val);
+				}
+			}
+		}
+		return o != null;
+	}
+	public Object definirInrEntry(String var, String val) throws Exception {
+		InrEntry oInrEntry = (InrEntry)this;
+		switch(var) {
+		case "inrDate":
+			oInrEntry.setInrDate(val);
+			return val;
+		case "doseActuelValeur":
+			oInrEntry.setDoseActuelValeur(val);
+			return val;
+		case "doseActuelTexte":
+			oInrEntry.setDoseActuelTexte(val);
+			return val;
+		case "changementDoseValeur":
+			oInrEntry.setChangementDoseValeur(val);
+			return val;
+		case "changementDoseTexte":
+			oInrEntry.setChangementDoseTexte(val);
+			return val;
+		default:
+			return super.definirCluster(var, val);
 		}
 	}
 }

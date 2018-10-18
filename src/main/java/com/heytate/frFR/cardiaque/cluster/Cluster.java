@@ -1,4 +1,4 @@
-package com.heytate.frFR.cardiaque.cluster;     
+package com.heytate.frFR.cardiaque.cluster;        
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -10,8 +10,9 @@ import com.heytate.frFR.cardiaque.requete.RequeteSite;
 
 /**
  * nomCanonique.enUS: org.computate.site.course.c000.cluster.Cluster
+ * modele: true
  */
-public class Cluster extends ClusterGen<Object> { 
+public class Cluster extends ClusterGen<Object> {   
 
 	public static DateTimeFormatter FORMAT_dateMedicalCourt = DateTimeFormatter.ofPattern("M/d/yyyy", Locale.FRANCE);
 
