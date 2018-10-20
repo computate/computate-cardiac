@@ -10,7 +10,7 @@ import com.heytate.frFR.cardiaque.couverture.Couverture;
 /**
  * modele: true
  */
-public class InrEntry extends InrEntryGen<Cluster> { 
+public class InrEntry extends InrEntryGen<Cluster> {
 
 	protected void _inrDate(Couverture<LocalDate> c) throws Exception {
 		c.o(LocalDate.now());

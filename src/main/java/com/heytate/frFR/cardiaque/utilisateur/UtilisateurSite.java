@@ -1,9 +1,8 @@
-package com.heytate.frFR.cardiaque.utilisateur;
+package com.heytate.frFR.cardiaque.utilisateur; 
 
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
-import com.heytate.frFR.cardiac.utilisateur.UtilisateurSiteGen;
 import com.heytate.frFR.cardiaque.couverture.Couverture;
 import com.heytate.frFR.cardiaque.requete.RequeteSite;
 

@@ -7,6 +7,7 @@ import java.security.MessageDigest;
 import com.heytate.frFR.cardiaque.requete.RequeteSite;
 import javax.servlet.http.HttpServletResponse;
 import javax.crypto.spec.SecretKeySpec;
+import com.heytate.frFR.cardiaque.cluster.Cluster;
 import javax.crypto.Cipher;
 import java.util.Stack;
 import java.util.HashSet;
@@ -16,6 +17,7 @@ import javax.servlet.http.HttpServletRequest;
 import com.heytate.frFR.cardiaque.utilisateur.UtilisateurSite;
 import org.keycloak.representations.AccessToken;
 import java.lang.Boolean;
+import java.lang.Object;
 import java.lang.String;
 import com.heytate.frFR.cardiaque.couverture.Couverture;
 
@@ -38,17 +40,8 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _requeteSite(Couverture<RequeteSite> o) throws Exception;
 
-	public RequeteSite requeteSite(RequeteSite o) throws Exception {
-		setRequeteSite(o);
-		return (RequeteSite)this;
-	}
-
 	public void setRequeteSite(RequeteSite o) throws Exception {
 		this.requeteSite = o;
-	}
-
-	public RequeteSite requeteSite() throws Exception {
-		return getRequeteSite();
 	}
 
 	public RequeteSite getRequeteSite() throws Exception {
@@ -58,7 +51,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		if(!requeteSiteCouverture.dejaInitialise) {
 			_requeteSite(requeteSiteCouverture);
 			if(requeteSite == null)
-				requeteSite(requeteSiteCouverture.o);
+				setRequeteSite(requeteSiteCouverture.o);
 		}
 		if(requeteSite != null)
 			requeteSite.initLoinPourClasse(requeteSite);
@@ -82,17 +75,8 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _configSite(Couverture<ConfigSite> o) throws Exception;
 
-	public RequeteSite configSite(ConfigSite o) throws Exception {
-		setConfigSite(o);
-		return (RequeteSite)this;
-	}
-
 	public void setConfigSite(ConfigSite o) throws Exception {
 		this.configSite = o;
-	}
-
-	public ConfigSite configSite() throws Exception {
-		return getConfigSite();
 	}
 
 	public ConfigSite getConfigSite() throws Exception {
@@ -102,7 +86,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		if(!configSiteCouverture.dejaInitialise) {
 			_configSite(configSiteCouverture);
 			if(configSite == null)
-				configSite(configSiteCouverture.o);
+				setConfigSite(configSiteCouverture.o);
 		}
 		if(configSite != null)
 			configSite.initLoinPourClasse(requeteSite);
@@ -126,17 +110,8 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _ecouteurContexte(Couverture<EcouteurContexte> o) throws Exception;
 
-	public RequeteSite ecouteurContexte(EcouteurContexte o) throws Exception {
-		setEcouteurContexte(o);
-		return (RequeteSite)this;
-	}
-
 	public void setEcouteurContexte(EcouteurContexte o) throws Exception {
 		this.ecouteurContexte = o;
-	}
-
-	public EcouteurContexte ecouteurContexte() throws Exception {
-		return getEcouteurContexte();
 	}
 
 	public EcouteurContexte getEcouteurContexte() throws Exception {
@@ -146,7 +121,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		if(!ecouteurContexteCouverture.dejaInitialise) {
 			_ecouteurContexte(ecouteurContexteCouverture);
 			if(ecouteurContexte == null)
-				ecouteurContexte(ecouteurContexteCouverture.o);
+				setEcouteurContexte(ecouteurContexteCouverture.o);
 		}
 		if(ecouteurContexte != null)
 			ecouteurContexte.initLoinPourClasse(requeteSite);
@@ -170,17 +145,8 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _jetonAcces(Couverture<AccessToken> o) throws Exception;
 
-	public RequeteSite jetonAcces(AccessToken o) throws Exception {
-		setJetonAcces(o);
-		return (RequeteSite)this;
-	}
-
 	public void setJetonAcces(AccessToken o) throws Exception {
 		this.jetonAcces = o;
-	}
-
-	public AccessToken jetonAcces() throws Exception {
-		return getJetonAcces();
 	}
 
 	public AccessToken getJetonAcces() throws Exception {
@@ -190,7 +156,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		if(!jetonAccesCouverture.dejaInitialise) {
 			_jetonAcces(jetonAccesCouverture);
 			if(jetonAcces == null)
-				jetonAcces(jetonAccesCouverture.o);
+				setJetonAcces(jetonAccesCouverture.o);
 		}
 		jetonAccesCouverture.dejaInitialise(true);
 	}
@@ -212,17 +178,8 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _utilisateurNomDomaine(Couverture<String> o) throws Exception;
 
-	public RequeteSite utilisateurNomDomaine(String o) throws Exception {
-		setUtilisateurNomDomaine(o);
-		return (RequeteSite)this;
-	}
-
 	public void setUtilisateurNomDomaine(String o) throws Exception {
 		this.utilisateurNomDomaine = o;
-	}
-
-	public String utilisateurNomDomaine() throws Exception {
-		return getUtilisateurNomDomaine();
 	}
 
 	public String getUtilisateurNomDomaine() throws Exception {
@@ -232,7 +189,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		if(!utilisateurNomDomaineCouverture.dejaInitialise) {
 			_utilisateurNomDomaine(utilisateurNomDomaineCouverture);
 			if(utilisateurNomDomaine == null)
-				utilisateurNomDomaine(utilisateurNomDomaineCouverture.o);
+				setUtilisateurNomDomaine(utilisateurNomDomaineCouverture.o);
 		}
 		utilisateurNomDomaineCouverture.dejaInitialise(true);
 	}
@@ -254,17 +211,8 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _utilisateurNomEnsemble(Couverture<String> o) throws Exception;
 
-	public RequeteSite utilisateurNomEnsemble(String o) throws Exception {
-		setUtilisateurNomEnsemble(o);
-		return (RequeteSite)this;
-	}
-
 	public void setUtilisateurNomEnsemble(String o) throws Exception {
 		this.utilisateurNomEnsemble = o;
-	}
-
-	public String utilisateurNomEnsemble() throws Exception {
-		return getUtilisateurNomEnsemble();
 	}
 
 	public String getUtilisateurNomEnsemble() throws Exception {
@@ -274,7 +222,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		if(!utilisateurNomEnsembleCouverture.dejaInitialise) {
 			_utilisateurNomEnsemble(utilisateurNomEnsembleCouverture);
 			if(utilisateurNomEnsemble == null)
-				utilisateurNomEnsemble(utilisateurNomEnsembleCouverture.o);
+				setUtilisateurNomEnsemble(utilisateurNomEnsembleCouverture.o);
 		}
 		utilisateurNomEnsembleCouverture.dejaInitialise(true);
 	}
@@ -296,17 +244,8 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _utilisateurSite(Couverture<UtilisateurSite> o) throws Exception;
 
-	public RequeteSite utilisateurSite(UtilisateurSite o) throws Exception {
-		setUtilisateurSite(o);
-		return (RequeteSite)this;
-	}
-
 	public void setUtilisateurSite(UtilisateurSite o) throws Exception {
 		this.utilisateurSite = o;
-	}
-
-	public UtilisateurSite utilisateurSite() throws Exception {
-		return getUtilisateurSite();
 	}
 
 	public UtilisateurSite getUtilisateurSite() throws Exception {
@@ -316,7 +255,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		if(!utilisateurSiteCouverture.dejaInitialise) {
 			_utilisateurSite(utilisateurSiteCouverture);
 			if(utilisateurSite == null)
-				utilisateurSite(utilisateurSiteCouverture.o);
+				setUtilisateurSite(utilisateurSiteCouverture.o);
 		}
 		if(utilisateurSite != null)
 			utilisateurSite.initLoinPourClasse(requeteSite);
@@ -340,17 +279,8 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _utilisateurId(Couverture<String> o) throws Exception;
 
-	public RequeteSite utilisateurId(String o) throws Exception {
-		setUtilisateurId(o);
-		return (RequeteSite)this;
-	}
-
 	public void setUtilisateurId(String o) throws Exception {
 		this.utilisateurId = o;
-	}
-
-	public String utilisateurId() throws Exception {
-		return getUtilisateurId();
 	}
 
 	public String getUtilisateurId() throws Exception {
@@ -360,7 +290,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		if(!utilisateurIdCouverture.dejaInitialise) {
 			_utilisateurId(utilisateurIdCouverture);
 			if(utilisateurId == null)
-				utilisateurId(utilisateurIdCouverture.o);
+				setUtilisateurId(utilisateurIdCouverture.o);
 		}
 		utilisateurIdCouverture.dejaInitialise(true);
 	}
@@ -382,17 +312,8 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _utilisateurNom(Couverture<String> o) throws Exception;
 
-	public RequeteSite utilisateurNom(String o) throws Exception {
-		setUtilisateurNom(o);
-		return (RequeteSite)this;
-	}
-
 	public void setUtilisateurNom(String o) throws Exception {
 		this.utilisateurNom = o;
-	}
-
-	public String utilisateurNom() throws Exception {
-		return getUtilisateurNom();
 	}
 
 	public String getUtilisateurNom() throws Exception {
@@ -402,7 +323,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		if(!utilisateurNomCouverture.dejaInitialise) {
 			_utilisateurNom(utilisateurNomCouverture);
 			if(utilisateurNom == null)
-				utilisateurNom(utilisateurNomCouverture.o);
+				setUtilisateurNom(utilisateurNomCouverture.o);
 		}
 		utilisateurNomCouverture.dejaInitialise(true);
 	}
@@ -424,17 +345,8 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _utilisateurNomFamille(Couverture<String> o) throws Exception;
 
-	public RequeteSite utilisateurNomFamille(String o) throws Exception {
-		setUtilisateurNomFamille(o);
-		return (RequeteSite)this;
-	}
-
 	public void setUtilisateurNomFamille(String o) throws Exception {
 		this.utilisateurNomFamille = o;
-	}
-
-	public String utilisateurNomFamille() throws Exception {
-		return getUtilisateurNomFamille();
 	}
 
 	public String getUtilisateurNomFamille() throws Exception {
@@ -444,7 +356,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		if(!utilisateurNomFamilleCouverture.dejaInitialise) {
 			_utilisateurNomFamille(utilisateurNomFamilleCouverture);
 			if(utilisateurNomFamille == null)
-				utilisateurNomFamille(utilisateurNomFamilleCouverture.o);
+				setUtilisateurNomFamille(utilisateurNomFamilleCouverture.o);
 		}
 		utilisateurNomFamilleCouverture.dejaInitialise(true);
 	}
@@ -466,17 +378,8 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _utilisateurPrenom(Couverture<String> o) throws Exception;
 
-	public RequeteSite utilisateurPrenom(String o) throws Exception {
-		setUtilisateurPrenom(o);
-		return (RequeteSite)this;
-	}
-
 	public void setUtilisateurPrenom(String o) throws Exception {
 		this.utilisateurPrenom = o;
-	}
-
-	public String utilisateurPrenom() throws Exception {
-		return getUtilisateurPrenom();
 	}
 
 	public String getUtilisateurPrenom() throws Exception {
@@ -486,7 +389,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		if(!utilisateurPrenomCouverture.dejaInitialise) {
 			_utilisateurPrenom(utilisateurPrenomCouverture);
 			if(utilisateurPrenom == null)
-				utilisateurPrenom(utilisateurPrenomCouverture.o);
+				setUtilisateurPrenom(utilisateurPrenomCouverture.o);
 		}
 		utilisateurPrenomCouverture.dejaInitialise(true);
 	}
@@ -508,17 +411,8 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _utilisateurNomComplet(Couverture<String> o) throws Exception;
 
-	public RequeteSite utilisateurNomComplet(String o) throws Exception {
-		setUtilisateurNomComplet(o);
-		return (RequeteSite)this;
-	}
-
 	public void setUtilisateurNomComplet(String o) throws Exception {
 		this.utilisateurNomComplet = o;
-	}
-
-	public String utilisateurNomComplet() throws Exception {
-		return getUtilisateurNomComplet();
 	}
 
 	public String getUtilisateurNomComplet() throws Exception {
@@ -528,7 +422,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		if(!utilisateurNomCompletCouverture.dejaInitialise) {
 			_utilisateurNomComplet(utilisateurNomCompletCouverture);
 			if(utilisateurNomComplet == null)
-				utilisateurNomComplet(utilisateurNomCompletCouverture.o);
+				setUtilisateurNomComplet(utilisateurNomCompletCouverture.o);
 		}
 		utilisateurNomCompletCouverture.dejaInitialise(true);
 	}
@@ -550,17 +444,8 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _utilisateurRolesRoyaume(HashSet<String> o) throws Exception;
 
-	public RequeteSite utilisateurRolesRoyaume(HashSet<String> o) throws Exception {
-		setUtilisateurRolesRoyaume(o);
-		return (RequeteSite)this;
-	}
-
 	public void setUtilisateurRolesRoyaume(HashSet<String> o) throws Exception {
 		this.utilisateurRolesRoyaume = o;
-	}
-
-	public HashSet<String> utilisateurRolesRoyaume() throws Exception {
-		return getUtilisateurRolesRoyaume();
 	}
 
 	public HashSet<String> getUtilisateurRolesRoyaume() throws Exception {
@@ -590,17 +475,8 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _utilisateurRolesRessource(HashSet<String> o) throws Exception;
 
-	public RequeteSite utilisateurRolesRessource(HashSet<String> o) throws Exception {
-		setUtilisateurRolesRessource(o);
-		return (RequeteSite)this;
-	}
-
 	public void setUtilisateurRolesRessource(HashSet<String> o) throws Exception {
 		this.utilisateurRolesRessource = o;
-	}
-
-	public HashSet<String> utilisateurRolesRessource() throws Exception {
-		return getUtilisateurRolesRessource();
 	}
 
 	public HashSet<String> getUtilisateurRolesRessource() throws Exception {
@@ -630,17 +506,8 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _xmlPile(Stack<String> o) throws Exception;
 
-	public RequeteSite xmlPile(Stack<String> o) throws Exception {
-		setXmlPile(o);
-		return (RequeteSite)this;
-	}
-
 	public void setXmlPile(Stack<String> o) throws Exception {
 		this.xmlPile = o;
-	}
-
-	public Stack<String> xmlPile() throws Exception {
-		return getXmlPile();
 	}
 
 	public Stack<String> getXmlPile() throws Exception {
@@ -670,17 +537,8 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _requete(Couverture<HttpServletRequest> o) throws Exception;
 
-	public RequeteSite requete(HttpServletRequest o) throws Exception {
-		setRequete(o);
-		return (RequeteSite)this;
-	}
-
 	public void setRequete(HttpServletRequest o) throws Exception {
 		this.requete = o;
-	}
-
-	public HttpServletRequest requete() throws Exception {
-		return getRequete();
 	}
 
 	public HttpServletRequest getRequete() throws Exception {
@@ -690,7 +548,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		if(!requeteCouverture.dejaInitialise) {
 			_requete(requeteCouverture);
 			if(requete == null)
-				requete(requeteCouverture.o);
+				setRequete(requeteCouverture.o);
 		}
 		requeteCouverture.dejaInitialise(true);
 	}
@@ -712,17 +570,8 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _reponse(Couverture<HttpServletResponse> o) throws Exception;
 
-	public RequeteSite reponse(HttpServletResponse o) throws Exception {
-		setReponse(o);
-		return (RequeteSite)this;
-	}
-
 	public void setReponse(HttpServletResponse o) throws Exception {
 		this.reponse = o;
-	}
-
-	public HttpServletResponse reponse() throws Exception {
-		return getReponse();
 	}
 
 	public HttpServletResponse getReponse() throws Exception {
@@ -732,7 +581,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		if(!reponseCouverture.dejaInitialise) {
 			_reponse(reponseCouverture);
 			if(reponse == null)
-				reponse(reponseCouverture.o);
+				setReponse(reponseCouverture.o);
 		}
 		reponseCouverture.dejaInitialise(true);
 	}
@@ -754,17 +603,8 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _solrDocument(Couverture<SolrDocument> o) throws Exception;
 
-	public RequeteSite solrDocument(SolrDocument o) throws Exception {
-		setSolrDocument(o);
-		return (RequeteSite)this;
-	}
-
 	public void setSolrDocument(SolrDocument o) throws Exception {
 		this.solrDocument = o;
-	}
-
-	public SolrDocument solrDocument() throws Exception {
-		return getSolrDocument();
 	}
 
 	public SolrDocument getSolrDocument() throws Exception {
@@ -774,7 +614,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		if(!solrDocumentCouverture.dejaInitialise) {
 			_solrDocument(solrDocumentCouverture);
 			if(solrDocument == null)
-				solrDocument(solrDocumentCouverture.o);
+				setSolrDocument(solrDocumentCouverture.o);
 		}
 		solrDocumentCouverture.dejaInitialise(true);
 	}
@@ -796,17 +636,8 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _ecrivain(Couverture<PrintWriter> o) throws Exception;
 
-	public RequeteSite ecrivain(PrintWriter o) throws Exception {
-		setEcrivain(o);
-		return (RequeteSite)this;
-	}
-
 	public void setEcrivain(PrintWriter o) throws Exception {
 		this.ecrivain = o;
-	}
-
-	public PrintWriter ecrivain() throws Exception {
-		return getEcrivain();
 	}
 
 	public PrintWriter getEcrivain() throws Exception {
@@ -816,7 +647,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		if(!ecrivainCouverture.dejaInitialise) {
 			_ecrivain(ecrivainCouverture);
 			if(ecrivain == null)
-				ecrivain(ecrivainCouverture.o);
+				setEcrivain(ecrivainCouverture.o);
 		}
 		ecrivainCouverture.dejaInitialise(true);
 	}
@@ -838,17 +669,8 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _pageAchete(Couverture<Boolean> o) throws Exception;
 
-	public RequeteSite pageAchete(Boolean o) throws Exception {
-		setPageAchete(o);
-		return (RequeteSite)this;
-	}
-
 	public void setPageAchete(Boolean o) throws Exception {
 		this.pageAchete = o;
-	}
-
-	public Boolean pageAchete() throws Exception {
-		return getPageAchete();
 	}
 
 	public Boolean getPageAchete() throws Exception {
@@ -863,7 +685,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		if(!pageAcheteCouverture.dejaInitialise) {
 			_pageAchete(pageAcheteCouverture);
 			if(pageAchete == null)
-				pageAchete(pageAcheteCouverture.o);
+				setPageAchete(pageAcheteCouverture.o);
 		}
 		pageAcheteCouverture.dejaInitialise(true);
 	}
@@ -885,17 +707,8 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _pageAdmin(Couverture<Boolean> o) throws Exception;
 
-	public RequeteSite pageAdmin(Boolean o) throws Exception {
-		setPageAdmin(o);
-		return (RequeteSite)this;
-	}
-
 	public void setPageAdmin(Boolean o) throws Exception {
 		this.pageAdmin = o;
-	}
-
-	public Boolean pageAdmin() throws Exception {
-		return getPageAdmin();
 	}
 
 	public Boolean getPageAdmin() throws Exception {
@@ -910,7 +723,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		if(!pageAdminCouverture.dejaInitialise) {
 			_pageAdmin(pageAdminCouverture);
 			if(pageAdmin == null)
-				pageAdmin(pageAdminCouverture.o);
+				setPageAdmin(pageAdminCouverture.o);
 		}
 		pageAdminCouverture.dejaInitialise(true);
 	}
@@ -932,17 +745,8 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _h(Couverture<String> o) throws Exception;
 
-	public RequeteSite h(String o) throws Exception {
-		setH(o);
-		return (RequeteSite)this;
-	}
-
 	public void setH(String o) throws Exception {
 		this.h = o;
-	}
-
-	public String h() throws Exception {
-		return getH();
 	}
 
 	public String getH() throws Exception {
@@ -952,7 +756,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		if(!hCouverture.dejaInitialise) {
 			_h(hCouverture);
 			if(h == null)
-				h(hCouverture.o);
+				setH(hCouverture.o);
 		}
 		hCouverture.dejaInitialise(true);
 	}
@@ -974,17 +778,8 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _chiffrementCrypter(Couverture<Cipher> o) throws Exception;
 
-	public RequeteSite chiffrementCrypter(Cipher o) throws Exception {
-		setChiffrementCrypter(o);
-		return (RequeteSite)this;
-	}
-
 	public void setChiffrementCrypter(Cipher o) throws Exception {
 		this.chiffrementCrypter = o;
-	}
-
-	public Cipher chiffrementCrypter() throws Exception {
-		return getChiffrementCrypter();
 	}
 
 	public Cipher getChiffrementCrypter() throws Exception {
@@ -994,7 +789,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		if(!chiffrementCrypterCouverture.dejaInitialise) {
 			_chiffrementCrypter(chiffrementCrypterCouverture);
 			if(chiffrementCrypter == null)
-				chiffrementCrypter(chiffrementCrypterCouverture.o);
+				setChiffrementCrypter(chiffrementCrypterCouverture.o);
 		}
 		chiffrementCrypterCouverture.dejaInitialise(true);
 	}
@@ -1016,17 +811,8 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _chiffrementDecrypter(Couverture<Cipher> o) throws Exception;
 
-	public RequeteSite chiffrementDecrypter(Cipher o) throws Exception {
-		setChiffrementDecrypter(o);
-		return (RequeteSite)this;
-	}
-
 	public void setChiffrementDecrypter(Cipher o) throws Exception {
 		this.chiffrementDecrypter = o;
-	}
-
-	public Cipher chiffrementDecrypter() throws Exception {
-		return getChiffrementDecrypter();
 	}
 
 	public Cipher getChiffrementDecrypter() throws Exception {
@@ -1036,7 +822,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		if(!chiffrementDecrypterCouverture.dejaInitialise) {
 			_chiffrementDecrypter(chiffrementDecrypterCouverture);
 			if(chiffrementDecrypter == null)
-				chiffrementDecrypter(chiffrementDecrypterCouverture.o);
+				setChiffrementDecrypter(chiffrementDecrypterCouverture.o);
 		}
 		chiffrementDecrypterCouverture.dejaInitialise(true);
 	}
@@ -1058,17 +844,8 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _digestMessage(Couverture<MessageDigest> o) throws Exception;
 
-	public RequeteSite digestMessage(MessageDigest o) throws Exception {
-		setDigestMessage(o);
-		return (RequeteSite)this;
-	}
-
 	public void setDigestMessage(MessageDigest o) throws Exception {
 		this.digestMessage = o;
-	}
-
-	public MessageDigest digestMessage() throws Exception {
-		return getDigestMessage();
 	}
 
 	public MessageDigest getDigestMessage() throws Exception {
@@ -1078,7 +855,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		if(!digestMessageCouverture.dejaInitialise) {
 			_digestMessage(digestMessageCouverture);
 			if(digestMessage == null)
-				digestMessage(digestMessageCouverture.o);
+				setDigestMessage(digestMessageCouverture.o);
 		}
 		digestMessageCouverture.dejaInitialise(true);
 	}
@@ -1100,17 +877,8 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _sel(Couverture<String> o) throws Exception;
 
-	public RequeteSite sel(String o) throws Exception {
-		setSel(o);
-		return (RequeteSite)this;
-	}
-
 	public void setSel(String o) throws Exception {
 		this.sel = o;
-	}
-
-	public String sel() throws Exception {
-		return getSel();
 	}
 
 	public String getSel() throws Exception {
@@ -1120,7 +888,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		if(!selCouverture.dejaInitialise) {
 			_sel(selCouverture);
 			if(sel == null)
-				sel(selCouverture.o);
+				setSel(selCouverture.o);
 		}
 		selCouverture.dejaInitialise(true);
 	}
@@ -1142,17 +910,8 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _cle(Couverture<byte[]> o) throws Exception;
 
-	public RequeteSite cle(byte[] o) throws Exception {
-		setCle(o);
-		return (RequeteSite)this;
-	}
-
 	public void setCle(byte[] o) throws Exception {
 		this.cle = o;
-	}
-
-	public byte[] cle() throws Exception {
-		return getCle();
 	}
 
 	public byte[] getCle() throws Exception {
@@ -1162,7 +921,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		if(!cleCouverture.dejaInitialise) {
 			_cle(cleCouverture);
 			if(cle == null)
-				cle(cleCouverture.o);
+				setCle(cleCouverture.o);
 		}
 		cleCouverture.dejaInitialise(true);
 	}
@@ -1184,17 +943,8 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _aleatoireSecurise(SecureRandom o) throws Exception;
 
-	public RequeteSite aleatoireSecurise(SecureRandom o) throws Exception {
-		setAleatoireSecurise(o);
-		return (RequeteSite)this;
-	}
-
 	public void setAleatoireSecurise(SecureRandom o) throws Exception {
 		this.aleatoireSecurise = o;
-	}
-
-	public SecureRandom aleatoireSecurise() throws Exception {
-		return getAleatoireSecurise();
 	}
 
 	public SecureRandom getAleatoireSecurise() throws Exception {
@@ -1224,17 +974,8 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _specCleSecrete(Couverture<SecretKeySpec> o) throws Exception;
 
-	public RequeteSite specCleSecrete(SecretKeySpec o) throws Exception {
-		setSpecCleSecrete(o);
-		return (RequeteSite)this;
-	}
-
 	public void setSpecCleSecrete(SecretKeySpec o) throws Exception {
 		this.specCleSecrete = o;
-	}
-
-	public SecretKeySpec specCleSecrete() throws Exception {
-		return getSpecCleSecrete();
 	}
 
 	public SecretKeySpec getSpecCleSecrete() throws Exception {
@@ -1244,16 +985,19 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		if(!specCleSecreteCouverture.dejaInitialise) {
 			_specCleSecrete(specCleSecreteCouverture);
 			if(specCleSecrete == null)
-				specCleSecrete(specCleSecreteCouverture.o);
+				setSpecCleSecrete(specCleSecreteCouverture.o);
 		}
 		specCleSecreteCouverture.dejaInitialise(true);
 	}
 
+	/////////////////////
+	// initialiserLoin //
+	/////////////////////
+
 	protected boolean dejaInitialiseRequeteSite = false;
 
 	public void initLoinRequeteSite(RequeteSite requeteSite) throws Exception {
-		((RequeteSite)this).requeteSite(requeteSite);
-		requeteSite(requeteSite);
+		setRequeteSite(requeteSite);
 		initLoinRequeteSite();
 	}
 
@@ -1294,5 +1038,182 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 
 	public void initLoinPourClasse(RequeteSite requeteSite) throws Exception {
 		initLoinRequeteSite(requeteSite);
+	}
+
+	/////////////////
+	// requeteSite //
+	/////////////////
+
+	public void requeteSiteRequeteSite(RequeteSite requeteSite) throws Exception {
+		requeteSite.setRequeteSite(requeteSite);
+		configSite.setRequeteSite(requeteSite);
+		ecouteurContexte.setRequeteSite(requeteSite);
+		utilisateurSite.setRequeteSite(requeteSite);
+	}
+
+	public void requeteSitePourClasse(RequeteSite requeteSite) throws Exception {
+		requeteSiteRequeteSite(requeteSite);
+	}
+
+	/////////////
+	// obtenir //
+	/////////////
+
+	public Object obtenirPourClasse(String var) throws Exception {
+		String[] vars = org.apache.commons.lang3.StringUtils.split(var, ".");
+		Object o = null;
+		for(String v : vars) {
+			if(o == null)
+				o = obtenirRequeteSite(v);
+			else if(o instanceof Cluster) {
+				Cluster cluster = (Cluster)o;
+				o = cluster.obtenirPourClasse(v);
+			}
+		}
+		return o;
+	}
+	public Object obtenirRequeteSite(String var) throws Exception {
+		RequeteSite oRequeteSite = (RequeteSite)this;
+		switch(var) {
+		case "requeteSite": return oRequeteSite.requeteSite;
+		case "configSite": return oRequeteSite.configSite;
+		case "ecouteurContexte": return oRequeteSite.ecouteurContexte;
+		case "jetonAcces": return oRequeteSite.jetonAcces;
+		case "utilisateurNomDomaine": return oRequeteSite.utilisateurNomDomaine;
+		case "utilisateurNomEnsemble": return oRequeteSite.utilisateurNomEnsemble;
+		case "utilisateurSite": return oRequeteSite.utilisateurSite;
+		case "utilisateurId": return oRequeteSite.utilisateurId;
+		case "utilisateurNom": return oRequeteSite.utilisateurNom;
+		case "utilisateurNomFamille": return oRequeteSite.utilisateurNomFamille;
+		case "utilisateurPrenom": return oRequeteSite.utilisateurPrenom;
+		case "utilisateurNomComplet": return oRequeteSite.utilisateurNomComplet;
+		case "utilisateurRolesRoyaume": return oRequeteSite.utilisateurRolesRoyaume;
+		case "utilisateurRolesRessource": return oRequeteSite.utilisateurRolesRessource;
+		case "xmlPile": return oRequeteSite.xmlPile;
+		case "requete": return oRequeteSite.requete;
+		case "reponse": return oRequeteSite.reponse;
+		case "solrDocument": return oRequeteSite.solrDocument;
+		case "ecrivain": return oRequeteSite.ecrivain;
+		case "pageAchete": return oRequeteSite.pageAchete;
+		case "pageAdmin": return oRequeteSite.pageAdmin;
+		case "h": return oRequeteSite.h;
+		case "chiffrementCrypter": return oRequeteSite.chiffrementCrypter;
+		case "chiffrementDecrypter": return oRequeteSite.chiffrementDecrypter;
+		case "digestMessage": return oRequeteSite.digestMessage;
+		case "sel": return oRequeteSite.sel;
+		case "cle": return oRequeteSite.cle;
+		case "aleatoireSecurise": return oRequeteSite.aleatoireSecurise;
+		case "specCleSecrete": return oRequeteSite.specCleSecrete;
+		default:
+			return null;
+		}
+	}
+
+	///////////////
+	// attribuer //
+	///////////////
+
+	public boolean attribuerPourClasse(String var, Object val) throws Exception {
+		String[] vars = org.apache.commons.lang3.StringUtils.split(var, ".");
+		Object o = null;
+		for(String v : vars) {
+			if(o == null)
+				o = attribuerRequeteSite(v, val);
+			else if(o instanceof Cluster) {
+				Cluster cluster = (Cluster)o;
+				o = cluster.attribuerPourClasse(v, val);
+			}
+		}
+		return o != null;
+	}
+	public Object attribuerRequeteSite(String var, Object val) throws Exception {
+		RequeteSite oRequeteSite = (RequeteSite)this;		switch(var) {
+		case "requeteSite": oRequeteSite.setRequeteSite((RequeteSite)val); return val;
+		case "configSite": oRequeteSite.setConfigSite((ConfigSite)val); return val;
+		case "ecouteurContexte": oRequeteSite.setEcouteurContexte((EcouteurContexte)val); return val;
+		case "jetonAcces": oRequeteSite.setJetonAcces((AccessToken)val); return val;
+		case "utilisateurNomDomaine": oRequeteSite.setUtilisateurNomDomaine((String)val); return val;
+		case "utilisateurNomEnsemble": oRequeteSite.setUtilisateurNomEnsemble((String)val); return val;
+		case "utilisateurSite": oRequeteSite.setUtilisateurSite((UtilisateurSite)val); return val;
+		case "utilisateurId": oRequeteSite.setUtilisateurId((String)val); return val;
+		case "utilisateurNom": oRequeteSite.setUtilisateurNom((String)val); return val;
+		case "utilisateurNomFamille": oRequeteSite.setUtilisateurNomFamille((String)val); return val;
+		case "utilisateurPrenom": oRequeteSite.setUtilisateurPrenom((String)val); return val;
+		case "utilisateurNomComplet": oRequeteSite.setUtilisateurNomComplet((String)val); return val;
+		case "utilisateurRolesRoyaume": oRequeteSite.setUtilisateurRolesRoyaume((HashSet<String>)val); return val;
+		case "utilisateurRolesRessource": oRequeteSite.setUtilisateurRolesRessource((HashSet<String>)val); return val;
+		case "xmlPile": oRequeteSite.setXmlPile((Stack<String>)val); return val;
+		case "requete": oRequeteSite.setRequete((HttpServletRequest)val); return val;
+		case "reponse": oRequeteSite.setReponse((HttpServletResponse)val); return val;
+		case "solrDocument": oRequeteSite.setSolrDocument((SolrDocument)val); return val;
+		case "ecrivain": oRequeteSite.setEcrivain((PrintWriter)val); return val;
+		case "pageAchete": oRequeteSite.setPageAchete((Boolean)val); return val;
+		case "pageAdmin": oRequeteSite.setPageAdmin((Boolean)val); return val;
+		case "h": oRequeteSite.setH((String)val); return val;
+		case "chiffrementCrypter": oRequeteSite.setChiffrementCrypter((Cipher)val); return val;
+		case "chiffrementDecrypter": oRequeteSite.setChiffrementDecrypter((Cipher)val); return val;
+		case "digestMessage": oRequeteSite.setDigestMessage((MessageDigest)val); return val;
+		case "sel": oRequeteSite.setSel((String)val); return val;
+		case "cle": oRequeteSite.setCle((byte[])val); return val;
+		case "aleatoireSecurise": oRequeteSite.setAleatoireSecurise((SecureRandom)val); return val;
+		case "specCleSecrete": oRequeteSite.setSpecCleSecrete((SecretKeySpec)val); return val;
+		default:
+			return null;
+		}
+	}
+
+	/////////////
+	// definir //
+	/////////////
+
+	public boolean definirPourClasse(String var, String...vals) throws Exception {
+		String[] vars = org.apache.commons.lang3.StringUtils.split(var, ".");
+		Object o = null;
+		String val = vals == null ? null : vals[vals.length - 1];
+		if(val != null) {
+			for(String v : vars) {
+				if(o == null)
+					o = definirRequeteSite(v, val);
+				else if(o instanceof Cluster) {
+					Cluster cluster = (Cluster)o;
+					o = cluster.definirPourClasse(v, val);
+				}
+			}
+		}
+		return o != null;
+	}
+	public Object definirRequeteSite(String var, String val) throws Exception {
+		RequeteSite oRequeteSite = (RequeteSite)this;
+		switch(var) {
+		case "utilisateurNomDomaine":
+			oRequeteSite.setUtilisateurNomDomaine(val);
+			return val;
+		case "utilisateurNomEnsemble":
+			oRequeteSite.setUtilisateurNomEnsemble(val);
+			return val;
+		case "utilisateurId":
+			oRequeteSite.setUtilisateurId(val);
+			return val;
+		case "utilisateurNom":
+			oRequeteSite.setUtilisateurNom(val);
+			return val;
+		case "utilisateurNomFamille":
+			oRequeteSite.setUtilisateurNomFamille(val);
+			return val;
+		case "utilisateurPrenom":
+			oRequeteSite.setUtilisateurPrenom(val);
+			return val;
+		case "utilisateurNomComplet":
+			oRequeteSite.setUtilisateurNomComplet(val);
+			return val;
+		case "h":
+			oRequeteSite.setH(val);
+			return val;
+		case "sel":
+			oRequeteSite.setSel(val);
+			return val;
+		default:
+			return null;
+		}
 	}
 }

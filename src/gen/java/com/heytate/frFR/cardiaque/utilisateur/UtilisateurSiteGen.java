@@ -4,7 +4,9 @@ import java.lang.Long;
 import java.time.ZonedDateTime;
 import com.heytate.frFR.cardiaque.requete.RequeteSite;
 import java.lang.Boolean;
+import java.lang.Object;
 import java.lang.String;
+import com.heytate.frFR.cardiaque.cluster.Cluster;
 import com.heytate.frFR.cardiaque.couverture.Couverture;
 import java.util.ArrayList;
 
@@ -27,17 +29,8 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _requeteSite(Couverture<RequeteSite> o) throws Exception;
 
-	public UtilisateurSite requeteSite(RequeteSite o) throws Exception {
-		setRequeteSite(o);
-		return (UtilisateurSite)this;
-	}
-
 	public void setRequeteSite(RequeteSite o) throws Exception {
 		this.requeteSite = o;
-	}
-
-	public RequeteSite requeteSite() throws Exception {
-		return getRequeteSite();
 	}
 
 	public RequeteSite getRequeteSite() throws Exception {
@@ -47,7 +40,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 		if(!requeteSiteCouverture.dejaInitialise) {
 			_requeteSite(requeteSiteCouverture);
 			if(requeteSite == null)
-				requeteSite(requeteSiteCouverture.o);
+				setRequeteSite(requeteSiteCouverture.o);
 		}
 		if(requeteSite != null)
 			requeteSite.initLoinPourClasse(requeteSite);
@@ -71,17 +64,8 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _equipeCles(ArrayList<Long> l) throws Exception;
 
-	public UtilisateurSite equipeCles(ArrayList<Long> l) throws Exception {
-		setEquipeCles(l);
-		return (UtilisateurSite)this;
-	}
-
 	public void setEquipeCles(ArrayList<Long> l) throws Exception {
 		this.equipeCles = l;
-	}
-
-	public ArrayList<Long> equipeCles() throws Exception {
-		return getEquipeCles();
 	}
 
 	public ArrayList<Long> getEquipeCles() throws Exception {
@@ -129,17 +113,8 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _utilisateurNom(Couverture<String> o) throws Exception;
 
-	public UtilisateurSite utilisateurNom(String o) throws Exception {
-		setUtilisateurNom(o);
-		return (UtilisateurSite)this;
-	}
-
 	public void setUtilisateurNom(String o) throws Exception {
 		this.utilisateurNom = o;
-	}
-
-	public String utilisateurNom() throws Exception {
-		return getUtilisateurNom();
 	}
 
 	public String getUtilisateurNom() throws Exception {
@@ -149,7 +124,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 		if(!utilisateurNomCouverture.dejaInitialise) {
 			_utilisateurNom(utilisateurNomCouverture);
 			if(utilisateurNom == null)
-				utilisateurNom(utilisateurNomCouverture.o);
+				setUtilisateurNom(utilisateurNomCouverture.o);
 		}
 		utilisateurNomCouverture.dejaInitialise(true);
 	}
@@ -171,17 +146,8 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _utilisateurMail(Couverture<String> o) throws Exception;
 
-	public UtilisateurSite utilisateurMail(String o) throws Exception {
-		setUtilisateurMail(o);
-		return (UtilisateurSite)this;
-	}
-
 	public void setUtilisateurMail(String o) throws Exception {
 		this.utilisateurMail = o;
-	}
-
-	public String utilisateurMail() throws Exception {
-		return getUtilisateurMail();
 	}
 
 	public String getUtilisateurMail() throws Exception {
@@ -191,7 +157,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 		if(!utilisateurMailCouverture.dejaInitialise) {
 			_utilisateurMail(utilisateurMailCouverture);
 			if(utilisateurMail == null)
-				utilisateurMail(utilisateurMailCouverture.o);
+				setUtilisateurMail(utilisateurMailCouverture.o);
 		}
 		utilisateurMailCouverture.dejaInitialise(true);
 	}
@@ -213,17 +179,8 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _utilisateurId(Couverture<String> o) throws Exception;
 
-	public UtilisateurSite utilisateurId(String o) throws Exception {
-		setUtilisateurId(o);
-		return (UtilisateurSite)this;
-	}
-
 	public void setUtilisateurId(String o) throws Exception {
 		this.utilisateurId = o;
-	}
-
-	public String utilisateurId() throws Exception {
-		return getUtilisateurId();
 	}
 
 	public String getUtilisateurId() throws Exception {
@@ -233,7 +190,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 		if(!utilisateurIdCouverture.dejaInitialise) {
 			_utilisateurId(utilisateurIdCouverture);
 			if(utilisateurId == null)
-				utilisateurId(utilisateurIdCouverture.o);
+				setUtilisateurId(utilisateurIdCouverture.o);
 		}
 		utilisateurIdCouverture.dejaInitialise(true);
 	}
@@ -255,17 +212,8 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _utilisateurPrenom(Couverture<String> o) throws Exception;
 
-	public UtilisateurSite utilisateurPrenom(String o) throws Exception {
-		setUtilisateurPrenom(o);
-		return (UtilisateurSite)this;
-	}
-
 	public void setUtilisateurPrenom(String o) throws Exception {
 		this.utilisateurPrenom = o;
-	}
-
-	public String utilisateurPrenom() throws Exception {
-		return getUtilisateurPrenom();
 	}
 
 	public String getUtilisateurPrenom() throws Exception {
@@ -275,7 +223,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 		if(!utilisateurPrenomCouverture.dejaInitialise) {
 			_utilisateurPrenom(utilisateurPrenomCouverture);
 			if(utilisateurPrenom == null)
-				utilisateurPrenom(utilisateurPrenomCouverture.o);
+				setUtilisateurPrenom(utilisateurPrenomCouverture.o);
 		}
 		utilisateurPrenomCouverture.dejaInitialise(true);
 	}
@@ -297,17 +245,8 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _utilisateurNomFamille(Couverture<String> o) throws Exception;
 
-	public UtilisateurSite utilisateurNomFamille(String o) throws Exception {
-		setUtilisateurNomFamille(o);
-		return (UtilisateurSite)this;
-	}
-
 	public void setUtilisateurNomFamille(String o) throws Exception {
 		this.utilisateurNomFamille = o;
-	}
-
-	public String utilisateurNomFamille() throws Exception {
-		return getUtilisateurNomFamille();
 	}
 
 	public String getUtilisateurNomFamille() throws Exception {
@@ -317,7 +256,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 		if(!utilisateurNomFamilleCouverture.dejaInitialise) {
 			_utilisateurNomFamille(utilisateurNomFamilleCouverture);
 			if(utilisateurNomFamille == null)
-				utilisateurNomFamille(utilisateurNomFamilleCouverture.o);
+				setUtilisateurNomFamille(utilisateurNomFamilleCouverture.o);
 		}
 		utilisateurNomFamilleCouverture.dejaInitialise(true);
 	}
@@ -339,17 +278,8 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _utilisateurNomComplet(Couverture<String> o) throws Exception;
 
-	public UtilisateurSite utilisateurNomComplet(String o) throws Exception {
-		setUtilisateurNomComplet(o);
-		return (UtilisateurSite)this;
-	}
-
 	public void setUtilisateurNomComplet(String o) throws Exception {
 		this.utilisateurNomComplet = o;
-	}
-
-	public String utilisateurNomComplet() throws Exception {
-		return getUtilisateurNomComplet();
 	}
 
 	public String getUtilisateurNomComplet() throws Exception {
@@ -359,7 +289,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 		if(!utilisateurNomCompletCouverture.dejaInitialise) {
 			_utilisateurNomComplet(utilisateurNomCompletCouverture);
 			if(utilisateurNomComplet == null)
-				utilisateurNomComplet(utilisateurNomCompletCouverture.o);
+				setUtilisateurNomComplet(utilisateurNomCompletCouverture.o);
 		}
 		utilisateurNomCompletCouverture.dejaInitialise(true);
 	}
@@ -381,17 +311,8 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _utilisateurSite(Couverture<String> o) throws Exception;
 
-	public UtilisateurSite utilisateurSite(String o) throws Exception {
-		setUtilisateurSite(o);
-		return (UtilisateurSite)this;
-	}
-
 	public void setUtilisateurSite(String o) throws Exception {
 		this.utilisateurSite = o;
-	}
-
-	public String utilisateurSite() throws Exception {
-		return getUtilisateurSite();
 	}
 
 	public String getUtilisateurSite() throws Exception {
@@ -401,7 +322,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 		if(!utilisateurSiteCouverture.dejaInitialise) {
 			_utilisateurSite(utilisateurSiteCouverture);
 			if(utilisateurSite == null)
-				utilisateurSite(utilisateurSiteCouverture.o);
+				setUtilisateurSite(utilisateurSiteCouverture.o);
 		}
 		utilisateurSiteCouverture.dejaInitialise(true);
 	}
@@ -423,17 +344,8 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _utilisateurRecevoirCourriels(Couverture<Boolean> o) throws Exception;
 
-	public UtilisateurSite utilisateurRecevoirCourriels(Boolean o) throws Exception {
-		setUtilisateurRecevoirCourriels(o);
-		return (UtilisateurSite)this;
-	}
-
 	public void setUtilisateurRecevoirCourriels(Boolean o) throws Exception {
 		this.utilisateurRecevoirCourriels = o;
-	}
-
-	public Boolean utilisateurRecevoirCourriels() throws Exception {
-		return getUtilisateurRecevoirCourriels();
 	}
 
 	public Boolean getUtilisateurRecevoirCourriels() throws Exception {
@@ -448,7 +360,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 		if(!utilisateurRecevoirCourrielsCouverture.dejaInitialise) {
 			_utilisateurRecevoirCourriels(utilisateurRecevoirCourrielsCouverture);
 			if(utilisateurRecevoirCourriels == null)
-				utilisateurRecevoirCourriels(utilisateurRecevoirCourrielsCouverture.o);
+				setUtilisateurRecevoirCourriels(utilisateurRecevoirCourrielsCouverture.o);
 		}
 		utilisateurRecevoirCourrielsCouverture.dejaInitialise(true);
 	}
@@ -470,17 +382,8 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _modeleSupprime(Couverture<Boolean> o) throws Exception;
 
-	public UtilisateurSite modeleSupprime(Boolean o) throws Exception {
-		setModeleSupprime(o);
-		return (UtilisateurSite)this;
-	}
-
 	public void setModeleSupprime(Boolean o) throws Exception {
 		this.modeleSupprime = o;
-	}
-
-	public Boolean modeleSupprime() throws Exception {
-		return getModeleSupprime();
 	}
 
 	public Boolean getModeleSupprime() throws Exception {
@@ -495,7 +398,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 		if(!modeleSupprimeCouverture.dejaInitialise) {
 			_modeleSupprime(modeleSupprimeCouverture);
 			if(modeleSupprime == null)
-				modeleSupprime(modeleSupprimeCouverture.o);
+				setModeleSupprime(modeleSupprimeCouverture.o);
 		}
 		modeleSupprimeCouverture.dejaInitialise(true);
 	}
@@ -517,17 +420,8 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _modeleCree(Couverture<ZonedDateTime> o) throws Exception;
 
-	public UtilisateurSite modeleCree(ZonedDateTime o) throws Exception {
-		setModeleCree(o);
-		return (UtilisateurSite)this;
-	}
-
 	public void setModeleCree(ZonedDateTime o) throws Exception {
 		this.modeleCree = o;
-	}
-
-	public ZonedDateTime modeleCree() throws Exception {
-		return getModeleCree();
 	}
 
 	public ZonedDateTime getModeleCree() throws Exception {
@@ -537,7 +431,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 		if(!modeleCreeCouverture.dejaInitialise) {
 			_modeleCree(modeleCreeCouverture);
 			if(modeleCree == null)
-				modeleCree(modeleCreeCouverture.o);
+				setModeleCree(modeleCreeCouverture.o);
 		}
 		modeleCreeCouverture.dejaInitialise(true);
 	}
@@ -559,17 +453,8 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _modeleModifie(Couverture<ZonedDateTime> o) throws Exception;
 
-	public UtilisateurSite modeleModifie(ZonedDateTime o) throws Exception {
-		setModeleModifie(o);
-		return (UtilisateurSite)this;
-	}
-
 	public void setModeleModifie(ZonedDateTime o) throws Exception {
 		this.modeleModifie = o;
-	}
-
-	public ZonedDateTime modeleModifie() throws Exception {
-		return getModeleModifie();
 	}
 
 	public ZonedDateTime getModeleModifie() throws Exception {
@@ -579,7 +464,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 		if(!modeleModifieCouverture.dejaInitialise) {
 			_modeleModifie(modeleModifieCouverture);
 			if(modeleModifie == null)
-				modeleModifie(modeleModifieCouverture.o);
+				setModeleModifie(modeleModifieCouverture.o);
 		}
 		modeleModifieCouverture.dejaInitialise(true);
 	}
@@ -601,17 +486,8 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _modeleClasseNomCanonique(Couverture<String> o) throws Exception;
 
-	public UtilisateurSite modeleClasseNomCanonique(String o) throws Exception {
-		setModeleClasseNomCanonique(o);
-		return (UtilisateurSite)this;
-	}
-
 	public void setModeleClasseNomCanonique(String o) throws Exception {
 		this.modeleClasseNomCanonique = o;
-	}
-
-	public String modeleClasseNomCanonique() throws Exception {
-		return getModeleClasseNomCanonique();
 	}
 
 	public String getModeleClasseNomCanonique() throws Exception {
@@ -621,7 +497,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 		if(!modeleClasseNomCanoniqueCouverture.dejaInitialise) {
 			_modeleClasseNomCanonique(modeleClasseNomCanoniqueCouverture);
 			if(modeleClasseNomCanonique == null)
-				modeleClasseNomCanonique(modeleClasseNomCanoniqueCouverture.o);
+				setModeleClasseNomCanonique(modeleClasseNomCanoniqueCouverture.o);
 		}
 		modeleClasseNomCanoniqueCouverture.dejaInitialise(true);
 	}
@@ -643,17 +519,8 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _modeleCle(Couverture<Long> o) throws Exception;
 
-	public UtilisateurSite modeleCle(Long o) throws Exception {
-		setModeleCle(o);
-		return (UtilisateurSite)this;
-	}
-
 	public void setModeleCle(Long o) throws Exception {
 		this.modeleCle = o;
-	}
-
-	public Long modeleCle() throws Exception {
-		return getModeleCle();
 	}
 
 	public Long getModeleCle() throws Exception {
@@ -668,7 +535,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 		if(!modeleCleCouverture.dejaInitialise) {
 			_modeleCle(modeleCleCouverture);
 			if(modeleCle == null)
-				modeleCle(modeleCleCouverture.o);
+				setModeleCle(modeleCleCouverture.o);
 		}
 		modeleCleCouverture.dejaInitialise(true);
 	}
@@ -690,17 +557,8 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _modeleSuggestionStocke(Couverture<String> o) throws Exception;
 
-	public UtilisateurSite modeleSuggestionStocke(String o) throws Exception {
-		setModeleSuggestionStocke(o);
-		return (UtilisateurSite)this;
-	}
-
 	public void setModeleSuggestionStocke(String o) throws Exception {
 		this.modeleSuggestionStocke = o;
-	}
-
-	public String modeleSuggestionStocke() throws Exception {
-		return getModeleSuggestionStocke();
 	}
 
 	public String getModeleSuggestionStocke() throws Exception {
@@ -710,7 +568,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 		if(!modeleSuggestionStockeCouverture.dejaInitialise) {
 			_modeleSuggestionStocke(modeleSuggestionStockeCouverture);
 			if(modeleSuggestionStocke == null)
-				modeleSuggestionStocke(modeleSuggestionStockeCouverture.o);
+				setModeleSuggestionStocke(modeleSuggestionStockeCouverture.o);
 		}
 		modeleSuggestionStockeCouverture.dejaInitialise(true);
 	}
@@ -732,17 +590,8 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 	 */
 	protected abstract void _modeleSuggestionIndexe(Couverture<String> o) throws Exception;
 
-	public UtilisateurSite modeleSuggestionIndexe(String o) throws Exception {
-		setModeleSuggestionIndexe(o);
-		return (UtilisateurSite)this;
-	}
-
 	public void setModeleSuggestionIndexe(String o) throws Exception {
 		this.modeleSuggestionIndexe = o;
-	}
-
-	public String modeleSuggestionIndexe() throws Exception {
-		return getModeleSuggestionIndexe();
 	}
 
 	public String getModeleSuggestionIndexe() throws Exception {
@@ -752,12 +601,17 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 		if(!modeleSuggestionIndexeCouverture.dejaInitialise) {
 			_modeleSuggestionIndexe(modeleSuggestionIndexeCouverture);
 			if(modeleSuggestionIndexe == null)
-				modeleSuggestionIndexe(modeleSuggestionIndexeCouverture.o);
+				setModeleSuggestionIndexe(modeleSuggestionIndexeCouverture.o);
 		}
 		modeleSuggestionIndexeCouverture.dejaInitialise(true);
 	}
 
 	protected boolean dejaInitialiseUtilisateurSite = false;
+
+	public void initLoinUtilisateurSite(RequeteSite requeteSite) throws Exception {
+		setRequeteSite(requeteSite);
+		initLoinUtilisateurSite();
+	}
 
 	public void initLoinUtilisateurSite() throws Exception {
 		if(!dejaInitialiseUtilisateurSite) {
@@ -779,6 +633,148 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 			modeleSuggestionStockeInit();
 			modeleSuggestionIndexeInit();
 			dejaInitialiseUtilisateurSite = true;
+		}
+	}
+
+	public void initLoinPourClasse(RequeteSite requeteSite) throws Exception {
+		initLoinUtilisateurSite(requeteSite);
+	}
+
+
+	public void requeteSiteUtilisateurSite(RequeteSite requeteSite) throws Exception {
+		requeteSite.setRequeteSite(requeteSite);
+	}
+
+	public void requeteSitePourClasse(RequeteSite requeteSite) throws Exception {
+		requeteSiteUtilisateurSite(requeteSite);
+	}
+
+	public Object obtenirPourClasse(String var) throws Exception {
+		String[] vars = org.apache.commons.lang3.StringUtils.split(var, ".");
+		Object o = null;
+		for(String v : vars) {
+			if(o == null)
+				o = obtenirUtilisateurSite(v);
+			else if(o instanceof Cluster) {
+				Cluster cluster = (Cluster)o;
+				o = cluster.obtenirPourClasse(v);
+			}
+		}
+		return o;
+	}
+	public Object obtenirUtilisateurSite(String var) throws Exception {
+		UtilisateurSite oUtilisateurSite = (UtilisateurSite)this;
+		switch(var) {
+		case "requeteSite": return oUtilisateurSite.requeteSite;
+		case "equipeCles": return oUtilisateurSite.equipeCles;
+		case "utilisateurNom": return oUtilisateurSite.utilisateurNom;
+		case "utilisateurMail": return oUtilisateurSite.utilisateurMail;
+		case "utilisateurId": return oUtilisateurSite.utilisateurId;
+		case "utilisateurPrenom": return oUtilisateurSite.utilisateurPrenom;
+		case "utilisateurNomFamille": return oUtilisateurSite.utilisateurNomFamille;
+		case "utilisateurNomComplet": return oUtilisateurSite.utilisateurNomComplet;
+		case "utilisateurSite": return oUtilisateurSite.utilisateurSite;
+		case "utilisateurRecevoirCourriels": return oUtilisateurSite.utilisateurRecevoirCourriels;
+		case "modeleSupprime": return oUtilisateurSite.modeleSupprime;
+		case "modeleCree": return oUtilisateurSite.modeleCree;
+		case "modeleModifie": return oUtilisateurSite.modeleModifie;
+		case "modeleClasseNomCanonique": return oUtilisateurSite.modeleClasseNomCanonique;
+		case "modeleCle": return oUtilisateurSite.modeleCle;
+		case "modeleSuggestionStocke": return oUtilisateurSite.modeleSuggestionStocke;
+		case "modeleSuggestionIndexe": return oUtilisateurSite.modeleSuggestionIndexe;
+		default:
+			return null;
+		}
+	}
+
+	public boolean attribuerPourClasse(String var, Object val) throws Exception {
+		String[] vars = org.apache.commons.lang3.StringUtils.split(var, ".");
+		Object o = null;
+		for(String v : vars) {
+			if(o == null)
+				o = attribuerUtilisateurSite(v, val);
+			else if(o instanceof Cluster) {
+				Cluster cluster = (Cluster)o;
+				o = cluster.attribuerPourClasse(v, val);
+			}
+		}
+		return o != null;
+	}
+	public Object attribuerUtilisateurSite(String var, Object val) throws Exception {
+		UtilisateurSite oUtilisateurSite = (UtilisateurSite)this;		switch(var) {
+		case "requeteSite": oUtilisateurSite.setRequeteSite((RequeteSite)val); return val;
+		case "equipeCles": oUtilisateurSite.setEquipeCles((ArrayList<Long>)val); return val;
+		case "utilisateurNom": oUtilisateurSite.setUtilisateurNom((String)val); return val;
+		case "utilisateurMail": oUtilisateurSite.setUtilisateurMail((String)val); return val;
+		case "utilisateurId": oUtilisateurSite.setUtilisateurId((String)val); return val;
+		case "utilisateurPrenom": oUtilisateurSite.setUtilisateurPrenom((String)val); return val;
+		case "utilisateurNomFamille": oUtilisateurSite.setUtilisateurNomFamille((String)val); return val;
+		case "utilisateurNomComplet": oUtilisateurSite.setUtilisateurNomComplet((String)val); return val;
+		case "utilisateurSite": oUtilisateurSite.setUtilisateurSite((String)val); return val;
+		case "utilisateurRecevoirCourriels": oUtilisateurSite.setUtilisateurRecevoirCourriels((Boolean)val); return val;
+		case "modeleSupprime": oUtilisateurSite.setModeleSupprime((Boolean)val); return val;
+		case "modeleCree": oUtilisateurSite.setModeleCree((ZonedDateTime)val); return val;
+		case "modeleModifie": oUtilisateurSite.setModeleModifie((ZonedDateTime)val); return val;
+		case "modeleClasseNomCanonique": oUtilisateurSite.setModeleClasseNomCanonique((String)val); return val;
+		case "modeleCle": oUtilisateurSite.setModeleCle((Long)val); return val;
+		case "modeleSuggestionStocke": oUtilisateurSite.setModeleSuggestionStocke((String)val); return val;
+		case "modeleSuggestionIndexe": oUtilisateurSite.setModeleSuggestionIndexe((String)val); return val;
+		default:
+			return null;
+		}
+	}
+
+	public boolean definirPourClasse(String var, String...vals) throws Exception {
+		String[] vars = org.apache.commons.lang3.StringUtils.split(var, ".");
+		Object o = null;
+		String val = vals == null ? null : vals[vals.length - 1];
+		if(val != null) {
+			for(String v : vars) {
+				if(o == null)
+					o = definirUtilisateurSite(v, val);
+				else if(o instanceof Cluster) {
+					Cluster cluster = (Cluster)o;
+					o = cluster.definirPourClasse(v, val);
+				}
+			}
+		}
+		return o != null;
+	}
+	public Object definirUtilisateurSite(String var, String val) throws Exception {
+		UtilisateurSite oUtilisateurSite = (UtilisateurSite)this;
+		switch(var) {
+		case "utilisateurNom":
+			oUtilisateurSite.setUtilisateurNom(val);
+			return val;
+		case "utilisateurMail":
+			oUtilisateurSite.setUtilisateurMail(val);
+			return val;
+		case "utilisateurId":
+			oUtilisateurSite.setUtilisateurId(val);
+			return val;
+		case "utilisateurPrenom":
+			oUtilisateurSite.setUtilisateurPrenom(val);
+			return val;
+		case "utilisateurNomFamille":
+			oUtilisateurSite.setUtilisateurNomFamille(val);
+			return val;
+		case "utilisateurNomComplet":
+			oUtilisateurSite.setUtilisateurNomComplet(val);
+			return val;
+		case "utilisateurSite":
+			oUtilisateurSite.setUtilisateurSite(val);
+			return val;
+		case "modeleClasseNomCanonique":
+			oUtilisateurSite.setModeleClasseNomCanonique(val);
+			return val;
+		case "modeleSuggestionStocke":
+			oUtilisateurSite.setModeleSuggestionStocke(val);
+			return val;
+		case "modeleSuggestionIndexe":
+			oUtilisateurSite.setModeleSuggestionIndexe(val);
+			return val;
+		default:
+			return null;
 		}
 	}
 }

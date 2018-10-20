@@ -1,4 +1,4 @@
-package com.heytate.frFR.cardiaque.contexte; 
+package com.heytate.frFR.cardiaque.contexte;  
 
 import java.net.InetAddress;
 import java.util.Properties;
@@ -23,7 +23,7 @@ import com.heytate.frFR.cardiaque.couverture.Couverture;
 import com.heytate.frFR.cardiaque.fil.DaemonFabriqueFil;
 import com.heytate.frFR.cardiaque.requete.RequeteSite;
 
-public class EcouteurContexte extends EcouteurContexteGen<Object> implements ServletContextListener {  
+public class EcouteurContexte extends EcouteurContexteGen<Object> implements ServletContextListener { 
 
 	protected Logger log = LoggerFactory.getLogger(getClass());
 
@@ -147,7 +147,7 @@ public class EcouteurContexte extends EcouteurContexteGen<Object> implements Ser
 	}
 
 	/**	Tous les infos importants à propos de la requête actuelle. **/
-	protected void _requeteSite(RequeteSite o) throws Exception {
+	protected void _requeteSite(RequeteSite o) throws Exception { 
 		o.configSite = configSite;
 		o.ecouteurContexte = this;
 	}
@@ -158,8 +158,8 @@ public class EcouteurContexte extends EcouteurContexteGen<Object> implements Ser
 			c001EcouteurContexte.initLoinEcouteurContexte();
 
 			RequeteSite requeteSite = new RequeteSite();
-			requeteSite.configSite(configSite);
-			requeteSite.ecouteurContexte(this);
+			requeteSite.setConfigSite(configSite);
+			requeteSite.setEcouteurContexte(this);
 			requeteSite.initLoinRequeteSite();
 			initLoinEcouteurContexte();
 			ServletContext contexteServlet = evenement.getServletContext();

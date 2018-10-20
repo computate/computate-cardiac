@@ -25,7 +25,7 @@ import com.heytate.frFR.cardiaque.contexte.EcouteurContexte;
 import com.heytate.frFR.cardiaque.couverture.Couverture;
 import com.heytate.frFR.cardiaque.utilisateur.UtilisateurSite;
 
-public class RequeteSite extends RequeteSiteGen<Object> { 
+public class RequeteSite extends RequeteSiteGen<Object> {    
 
 	public RequeteSite() {
 	}
@@ -33,8 +33,8 @@ public class RequeteSite extends RequeteSiteGen<Object> {
 	protected void _requeteSite(Couverture<RequeteSite> c) throws Exception { 
 		c.o(this);
 	}
-	@Override protected void requeteSiteInit() throws Exception {
-		requeteSite(this);
+	@Override public void requeteSiteRequeteSite(RequeteSite requeteSite) throws Exception {
+		setRequeteSite(this);
 	}
 
 	/**	L'objet de configuration du site. **/
@@ -97,7 +97,7 @@ public class RequeteSite extends RequeteSiteGen<Object> {
 	}
 
 	/**	Le prenom de l'utilisateur. **/
-	protected void _utilisateurPrenom(Couverture<String> c) throws Exception {
+	protected void _utilisateurPrenom(Couverture<String> c) throws Exception { 
 		if(jetonAcces != null) {
 			String o = jetonAcces.getGivenName();
 			c.o(o);
@@ -112,7 +112,7 @@ public class RequeteSite extends RequeteSiteGen<Object> {
 		}
 	}
 
-	/**	Les rôles du royaume de l'utilisateur. **/
+	/**	Les rôles du royaume de l'utilisateur. **/ 
 	protected void _utilisateurRolesRoyaume(HashSet<String> o) throws Exception {  
 		if(jetonAcces != null) {
 			Set<String> s = jetonAcces.getRealmAccess().getRoles();

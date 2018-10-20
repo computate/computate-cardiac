@@ -2,13 +2,15 @@ package com.heytate.frFR.cardiaque.contexte;
 
 import com.heytate.frFR.cardiaque.config.ConfigSite;
 import javax.naming.InitialContext;
+import com.heytate.frFR.cardiaque.requete.RequeteSite;
+import com.heytate.frFR.cardiaque.cluster.Cluster;
+import java.lang.Integer;
 import com.heytate.frFR.cardiaque.fil.DaemonFabriqueFil;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import javax.sql.DataSource;
-import com.heytate.frFR.cardiaque.requete.RequeteSite;
 import javax.mail.Session;
+import java.lang.Object;
 import java.lang.String;
-import java.lang.Integer;
 import java.util.concurrent.ExecutorService;
 import com.heytate.frFR.cardiaque.couverture.Couverture;
 
@@ -31,17 +33,8 @@ public abstract class EcouteurContexteGen<DEV> extends Object {
 	 */
 	protected abstract void _cheminConfig(Couverture<String> o) throws Exception;
 
-	public EcouteurContexte cheminConfig(String o) throws Exception {
-		setCheminConfig(o);
-		return (EcouteurContexte)this;
-	}
-
 	public void setCheminConfig(String o) throws Exception {
 		this.cheminConfig = o;
-	}
-
-	public String cheminConfig() throws Exception {
-		return getCheminConfig();
 	}
 
 	public String getCheminConfig() throws Exception {
@@ -51,7 +44,7 @@ public abstract class EcouteurContexteGen<DEV> extends Object {
 		if(!cheminConfigCouverture.dejaInitialise) {
 			_cheminConfig(cheminConfigCouverture);
 			if(cheminConfig == null)
-				cheminConfig(cheminConfigCouverture.o);
+				setCheminConfig(cheminConfigCouverture.o);
 		}
 		cheminConfigCouverture.dejaInitialise(true);
 	}
@@ -73,17 +66,8 @@ public abstract class EcouteurContexteGen<DEV> extends Object {
 	 */
 	protected abstract void _configSite(ConfigSite o) throws Exception;
 
-	public EcouteurContexte configSite(ConfigSite o) throws Exception {
-		setConfigSite(o);
-		return (EcouteurContexte)this;
-	}
-
 	public void setConfigSite(ConfigSite o) throws Exception {
 		this.configSite = o;
-	}
-
-	public ConfigSite configSite() throws Exception {
-		return getConfigSite();
 	}
 
 	public ConfigSite getConfigSite() throws Exception {
@@ -114,17 +98,8 @@ public abstract class EcouteurContexteGen<DEV> extends Object {
 	 */
 	protected abstract void _contexteInitiale(Couverture<InitialContext> o) throws Exception;
 
-	public EcouteurContexte contexteInitiale(InitialContext o) throws Exception {
-		setContexteInitiale(o);
-		return (EcouteurContexte)this;
-	}
-
 	public void setContexteInitiale(InitialContext o) throws Exception {
 		this.contexteInitiale = o;
-	}
-
-	public InitialContext contexteInitiale() throws Exception {
-		return getContexteInitiale();
 	}
 
 	public InitialContext getContexteInitiale() throws Exception {
@@ -134,7 +109,7 @@ public abstract class EcouteurContexteGen<DEV> extends Object {
 		if(!contexteInitialeCouverture.dejaInitialise) {
 			_contexteInitiale(contexteInitialeCouverture);
 			if(contexteInitiale == null)
-				contexteInitiale(contexteInitialeCouverture.o);
+				setContexteInitiale(contexteInitialeCouverture.o);
 		}
 		contexteInitialeCouverture.dejaInitialise(true);
 	}
@@ -156,17 +131,8 @@ public abstract class EcouteurContexteGen<DEV> extends Object {
 	 */
 	protected abstract void _urlSourceDonnees(Couverture<String> o) throws Exception;
 
-	public EcouteurContexte urlSourceDonnees(String o) throws Exception {
-		setUrlSourceDonnees(o);
-		return (EcouteurContexte)this;
-	}
-
 	public void setUrlSourceDonnees(String o) throws Exception {
 		this.urlSourceDonnees = o;
-	}
-
-	public String urlSourceDonnees() throws Exception {
-		return getUrlSourceDonnees();
 	}
 
 	public String getUrlSourceDonnees() throws Exception {
@@ -176,7 +142,7 @@ public abstract class EcouteurContexteGen<DEV> extends Object {
 		if(!urlSourceDonneesCouverture.dejaInitialise) {
 			_urlSourceDonnees(urlSourceDonneesCouverture);
 			if(urlSourceDonnees == null)
-				urlSourceDonnees(urlSourceDonneesCouverture.o);
+				setUrlSourceDonnees(urlSourceDonneesCouverture.o);
 		}
 		urlSourceDonneesCouverture.dejaInitialise(true);
 	}
@@ -198,17 +164,8 @@ public abstract class EcouteurContexteGen<DEV> extends Object {
 	 */
 	protected abstract void _urlSourceDonneesSimple(Couverture<String> o) throws Exception;
 
-	public EcouteurContexte urlSourceDonneesSimple(String o) throws Exception {
-		setUrlSourceDonneesSimple(o);
-		return (EcouteurContexte)this;
-	}
-
 	public void setUrlSourceDonneesSimple(String o) throws Exception {
 		this.urlSourceDonneesSimple = o;
-	}
-
-	public String urlSourceDonneesSimple() throws Exception {
-		return getUrlSourceDonneesSimple();
 	}
 
 	public String getUrlSourceDonneesSimple() throws Exception {
@@ -218,7 +175,7 @@ public abstract class EcouteurContexteGen<DEV> extends Object {
 		if(!urlSourceDonneesSimpleCouverture.dejaInitialise) {
 			_urlSourceDonneesSimple(urlSourceDonneesSimpleCouverture);
 			if(urlSourceDonneesSimple == null)
-				urlSourceDonneesSimple(urlSourceDonneesSimpleCouverture.o);
+				setUrlSourceDonneesSimple(urlSourceDonneesSimpleCouverture.o);
 		}
 		urlSourceDonneesSimpleCouverture.dejaInitialise(true);
 	}
@@ -240,17 +197,8 @@ public abstract class EcouteurContexteGen<DEV> extends Object {
 	 */
 	protected abstract void _sourceDonnees(Couverture<DataSource> o) throws Exception;
 
-	public EcouteurContexte sourceDonnees(DataSource o) throws Exception {
-		setSourceDonnees(o);
-		return (EcouteurContexte)this;
-	}
-
 	public void setSourceDonnees(DataSource o) throws Exception {
 		this.sourceDonnees = o;
-	}
-
-	public DataSource sourceDonnees() throws Exception {
-		return getSourceDonnees();
 	}
 
 	public DataSource getSourceDonnees() throws Exception {
@@ -260,7 +208,7 @@ public abstract class EcouteurContexteGen<DEV> extends Object {
 		if(!sourceDonneesCouverture.dejaInitialise) {
 			_sourceDonnees(sourceDonneesCouverture);
 			if(sourceDonnees == null)
-				sourceDonnees(sourceDonneesCouverture.o);
+				setSourceDonnees(sourceDonneesCouverture.o);
 		}
 		sourceDonneesCouverture.dejaInitialise(true);
 	}
@@ -282,17 +230,8 @@ public abstract class EcouteurContexteGen<DEV> extends Object {
 	 */
 	protected abstract void _urlSourceMail(Couverture<String> o) throws Exception;
 
-	public EcouteurContexte urlSourceMail(String o) throws Exception {
-		setUrlSourceMail(o);
-		return (EcouteurContexte)this;
-	}
-
 	public void setUrlSourceMail(String o) throws Exception {
 		this.urlSourceMail = o;
-	}
-
-	public String urlSourceMail() throws Exception {
-		return getUrlSourceMail();
 	}
 
 	public String getUrlSourceMail() throws Exception {
@@ -302,7 +241,7 @@ public abstract class EcouteurContexteGen<DEV> extends Object {
 		if(!urlSourceMailCouverture.dejaInitialise) {
 			_urlSourceMail(urlSourceMailCouverture);
 			if(urlSourceMail == null)
-				urlSourceMail(urlSourceMailCouverture.o);
+				setUrlSourceMail(urlSourceMailCouverture.o);
 		}
 		urlSourceMailCouverture.dejaInitialise(true);
 	}
@@ -324,17 +263,8 @@ public abstract class EcouteurContexteGen<DEV> extends Object {
 	 */
 	protected abstract void _sessionCourriel(Couverture<Session> o) throws Exception;
 
-	public EcouteurContexte sessionCourriel(Session o) throws Exception {
-		setSessionCourriel(o);
-		return (EcouteurContexte)this;
-	}
-
 	public void setSessionCourriel(Session o) throws Exception {
 		this.sessionCourriel = o;
-	}
-
-	public Session sessionCourriel() throws Exception {
-		return getSessionCourriel();
 	}
 
 	public Session getSessionCourriel() throws Exception {
@@ -344,7 +274,7 @@ public abstract class EcouteurContexteGen<DEV> extends Object {
 		if(!sessionCourrielCouverture.dejaInitialise) {
 			_sessionCourriel(sessionCourrielCouverture);
 			if(sessionCourriel == null)
-				sessionCourriel(sessionCourrielCouverture.o);
+				setSessionCourriel(sessionCourrielCouverture.o);
 		}
 		sessionCourrielCouverture.dejaInitialise(true);
 	}
@@ -366,17 +296,8 @@ public abstract class EcouteurContexteGen<DEV> extends Object {
 	 */
 	protected abstract void _clientSolr(Couverture<HttpSolrClient> o) throws Exception;
 
-	public EcouteurContexte clientSolr(HttpSolrClient o) throws Exception {
-		setClientSolr(o);
-		return (EcouteurContexte)this;
-	}
-
 	public void setClientSolr(HttpSolrClient o) throws Exception {
 		this.clientSolr = o;
-	}
-
-	public HttpSolrClient clientSolr() throws Exception {
-		return getClientSolr();
 	}
 
 	public HttpSolrClient getClientSolr() throws Exception {
@@ -386,7 +307,7 @@ public abstract class EcouteurContexteGen<DEV> extends Object {
 		if(!clientSolrCouverture.dejaInitialise) {
 			_clientSolr(clientSolrCouverture);
 			if(clientSolr == null)
-				clientSolr(clientSolrCouverture.o);
+				setClientSolr(clientSolrCouverture.o);
 		}
 		clientSolrCouverture.dejaInitialise(true);
 	}
@@ -408,17 +329,8 @@ public abstract class EcouteurContexteGen<DEV> extends Object {
 	 */
 	protected abstract void _selCryptage(Couverture<String> o) throws Exception;
 
-	public EcouteurContexte selCryptage(String o) throws Exception {
-		setSelCryptage(o);
-		return (EcouteurContexte)this;
-	}
-
 	public void setSelCryptage(String o) throws Exception {
 		this.selCryptage = o;
-	}
-
-	public String selCryptage() throws Exception {
-		return getSelCryptage();
 	}
 
 	public String getSelCryptage() throws Exception {
@@ -428,7 +340,7 @@ public abstract class EcouteurContexteGen<DEV> extends Object {
 		if(!selCryptageCouverture.dejaInitialise) {
 			_selCryptage(selCryptageCouverture);
 			if(selCryptage == null)
-				selCryptage(selCryptageCouverture.o);
+				setSelCryptage(selCryptageCouverture.o);
 		}
 		selCryptageCouverture.dejaInitialise(true);
 	}
@@ -450,17 +362,8 @@ public abstract class EcouteurContexteGen<DEV> extends Object {
 	 */
 	protected abstract void _motDePasseCryptage(Couverture<String> o) throws Exception;
 
-	public EcouteurContexte motDePasseCryptage(String o) throws Exception {
-		setMotDePasseCryptage(o);
-		return (EcouteurContexte)this;
-	}
-
 	public void setMotDePasseCryptage(String o) throws Exception {
 		this.motDePasseCryptage = o;
-	}
-
-	public String motDePasseCryptage() throws Exception {
-		return getMotDePasseCryptage();
 	}
 
 	public String getMotDePasseCryptage() throws Exception {
@@ -470,7 +373,7 @@ public abstract class EcouteurContexteGen<DEV> extends Object {
 		if(!motDePasseCryptageCouverture.dejaInitialise) {
 			_motDePasseCryptage(motDePasseCryptageCouverture);
 			if(motDePasseCryptage == null)
-				motDePasseCryptage(motDePasseCryptageCouverture.o);
+				setMotDePasseCryptage(motDePasseCryptageCouverture.o);
 		}
 		motDePasseCryptageCouverture.dejaInitialise(true);
 	}
@@ -492,17 +395,8 @@ public abstract class EcouteurContexteGen<DEV> extends Object {
 	 */
 	protected abstract void _jetonIdentitePaypal(Couverture<String> o) throws Exception;
 
-	public EcouteurContexte jetonIdentitePaypal(String o) throws Exception {
-		setJetonIdentitePaypal(o);
-		return (EcouteurContexte)this;
-	}
-
 	public void setJetonIdentitePaypal(String o) throws Exception {
 		this.jetonIdentitePaypal = o;
-	}
-
-	public String jetonIdentitePaypal() throws Exception {
-		return getJetonIdentitePaypal();
 	}
 
 	public String getJetonIdentitePaypal() throws Exception {
@@ -512,7 +406,7 @@ public abstract class EcouteurContexteGen<DEV> extends Object {
 		if(!jetonIdentitePaypalCouverture.dejaInitialise) {
 			_jetonIdentitePaypal(jetonIdentitePaypalCouverture);
 			if(jetonIdentitePaypal == null)
-				jetonIdentitePaypal(jetonIdentitePaypalCouverture.o);
+				setJetonIdentitePaypal(jetonIdentitePaypalCouverture.o);
 		}
 		jetonIdentitePaypalCouverture.dejaInitialise(true);
 	}
@@ -534,23 +428,14 @@ public abstract class EcouteurContexteGen<DEV> extends Object {
 	 */
 	protected abstract void _nombreExecuteurs(Couverture<Integer> o) throws Exception;
 
-	public EcouteurContexte nombreExecuteurs(Integer o) throws Exception {
-		setNombreExecuteurs(o);
-		return (EcouteurContexte)this;
-	}
-
 	public void setNombreExecuteurs(Integer o) throws Exception {
 		this.nombreExecuteurs = o;
-	}
-
-	public Integer nombreExecuteurs() throws Exception {
-		return getNombreExecuteurs();
 	}
 
 	public Integer getNombreExecuteurs() throws Exception {
 		return nombreExecuteurs;
 	}
-	public EcouteurContexte nombreExecuteurs(String o) throws Exception {
+	public EcouteurContexte setNombreExecuteurs(String o) throws Exception {
 		if(org.apache.commons.lang3.math.NumberUtils.isNumber(o))
 			this.nombreExecuteurs = Integer.parseInt(o);
 		return (EcouteurContexte)this;
@@ -559,7 +444,7 @@ public abstract class EcouteurContexteGen<DEV> extends Object {
 		if(!nombreExecuteursCouverture.dejaInitialise) {
 			_nombreExecuteurs(nombreExecuteursCouverture);
 			if(nombreExecuteurs == null)
-				nombreExecuteurs(nombreExecuteursCouverture.o);
+				setNombreExecuteurs(nombreExecuteursCouverture.o);
 		}
 		nombreExecuteursCouverture.dejaInitialise(true);
 	}
@@ -581,17 +466,8 @@ public abstract class EcouteurContexteGen<DEV> extends Object {
 	 */
 	protected abstract void _daemonFabriqueFil(Couverture<DaemonFabriqueFil> o) throws Exception;
 
-	public EcouteurContexte daemonFabriqueFil(DaemonFabriqueFil o) throws Exception {
-		setDaemonFabriqueFil(o);
-		return (EcouteurContexte)this;
-	}
-
 	public void setDaemonFabriqueFil(DaemonFabriqueFil o) throws Exception {
 		this.daemonFabriqueFil = o;
-	}
-
-	public DaemonFabriqueFil daemonFabriqueFil() throws Exception {
-		return getDaemonFabriqueFil();
 	}
 
 	public DaemonFabriqueFil getDaemonFabriqueFil() throws Exception {
@@ -601,7 +477,7 @@ public abstract class EcouteurContexteGen<DEV> extends Object {
 		if(!daemonFabriqueFilCouverture.dejaInitialise) {
 			_daemonFabriqueFil(daemonFabriqueFilCouverture);
 			if(daemonFabriqueFil == null)
-				daemonFabriqueFil(daemonFabriqueFilCouverture.o);
+				setDaemonFabriqueFil(daemonFabriqueFilCouverture.o);
 		}
 		daemonFabriqueFilCouverture.dejaInitialise(true);
 	}
@@ -623,17 +499,8 @@ public abstract class EcouteurContexteGen<DEV> extends Object {
 	 */
 	protected abstract void _serviceExecuteur(Couverture<ExecutorService> o) throws Exception;
 
-	public EcouteurContexte serviceExecuteur(ExecutorService o) throws Exception {
-		setServiceExecuteur(o);
-		return (EcouteurContexte)this;
-	}
-
 	public void setServiceExecuteur(ExecutorService o) throws Exception {
 		this.serviceExecuteur = o;
-	}
-
-	public ExecutorService serviceExecuteur() throws Exception {
-		return getServiceExecuteur();
 	}
 
 	public ExecutorService getServiceExecuteur() throws Exception {
@@ -643,7 +510,7 @@ public abstract class EcouteurContexteGen<DEV> extends Object {
 		if(!serviceExecuteurCouverture.dejaInitialise) {
 			_serviceExecuteur(serviceExecuteurCouverture);
 			if(serviceExecuteur == null)
-				serviceExecuteur(serviceExecuteurCouverture.o);
+				setServiceExecuteur(serviceExecuteurCouverture.o);
 		}
 		serviceExecuteurCouverture.dejaInitialise(true);
 	}
@@ -665,17 +532,8 @@ public abstract class EcouteurContexteGen<DEV> extends Object {
 	 */
 	protected abstract void _requeteSite(RequeteSite o) throws Exception;
 
-	public EcouteurContexte requeteSite(RequeteSite o) throws Exception {
-		setRequeteSite(o);
-		return (EcouteurContexte)this;
-	}
-
 	public void setRequeteSite(RequeteSite o) throws Exception {
 		this.requeteSite = o;
-	}
-
-	public RequeteSite requeteSite() throws Exception {
-		return getRequeteSite();
 	}
 
 	public RequeteSite getRequeteSite() throws Exception {
@@ -689,11 +547,14 @@ public abstract class EcouteurContexteGen<DEV> extends Object {
 		requeteSiteCouverture.dejaInitialise(true);
 	}
 
+	/////////////////////
+	// initialiserLoin //
+	/////////////////////
+
 	protected boolean dejaInitialiseEcouteurContexte = false;
 
 	public void initLoinEcouteurContexte(RequeteSite requeteSite) throws Exception {
-		((EcouteurContexte)this).requeteSite(requeteSite);
-		requeteSite(requeteSite);
+		setRequeteSite(requeteSite);
 		initLoinEcouteurContexte();
 	}
 
@@ -721,5 +582,199 @@ public abstract class EcouteurContexteGen<DEV> extends Object {
 
 	public void initLoinPourClasse(RequeteSite requeteSite) throws Exception {
 		initLoinEcouteurContexte(requeteSite);
+	}
+
+	/////////////////
+	// requeteSite //
+	/////////////////
+
+	public void requeteSiteEcouteurContexte(RequeteSite requeteSite) throws Exception {
+		configSite.setRequeteSite(requeteSite);
+		requeteSite.setRequeteSite(requeteSite);
+	}
+
+	public void requeteSitePourClasse(RequeteSite requeteSite) throws Exception {
+		requeteSiteEcouteurContexte(requeteSite);
+	}
+
+	/////////////
+	// obtenir //
+	/////////////
+
+	public Object obtenirPourClasse(String var) throws Exception {
+		String[] vars = org.apache.commons.lang3.StringUtils.split(var, ".");
+		Object o = null;
+		for(String v : vars) {
+			if(o == null)
+				o = obtenirEcouteurContexte(v);
+			else if(o instanceof Cluster) {
+				Cluster cluster = (Cluster)o;
+				o = cluster.obtenirPourClasse(v);
+			}
+		}
+		return o;
+	}
+	public Object obtenirEcouteurContexte(String var) throws Exception {
+		EcouteurContexte oEcouteurContexte = (EcouteurContexte)this;
+		switch(var) {
+		case "cheminConfig":
+			return oEcouteurContexte.cheminConfig;
+		case "configSite":
+			return oEcouteurContexte.configSite;
+		case "contexteInitiale":
+			return oEcouteurContexte.contexteInitiale;
+		case "urlSourceDonnees":
+			return oEcouteurContexte.urlSourceDonnees;
+		case "urlSourceDonneesSimple":
+			return oEcouteurContexte.urlSourceDonneesSimple;
+		case "sourceDonnees":
+			return oEcouteurContexte.sourceDonnees;
+		case "urlSourceMail":
+			return oEcouteurContexte.urlSourceMail;
+		case "sessionCourriel":
+			return oEcouteurContexte.sessionCourriel;
+		case "clientSolr":
+			return oEcouteurContexte.clientSolr;
+		case "selCryptage":
+			return oEcouteurContexte.selCryptage;
+		case "motDePasseCryptage":
+			return oEcouteurContexte.motDePasseCryptage;
+		case "jetonIdentitePaypal":
+			return oEcouteurContexte.jetonIdentitePaypal;
+		case "nombreExecuteurs":
+			return oEcouteurContexte.nombreExecuteurs;
+		case "daemonFabriqueFil":
+			return oEcouteurContexte.daemonFabriqueFil;
+		case "serviceExecuteur":
+			return oEcouteurContexte.serviceExecuteur;
+		case "requeteSite":
+			return oEcouteurContexte.requeteSite;
+		default:
+			return null;
+		}
+	}
+
+	///////////////
+	// attribuer //
+	///////////////
+
+	public boolean attribuerPourClasse(String var, Object val) throws Exception {
+		String[] vars = org.apache.commons.lang3.StringUtils.split(var, ".");
+		Object o = null;
+		for(String v : vars) {
+			if(o == null)
+				o = attribuerEcouteurContexte(v, val);
+			else if(o instanceof Cluster) {
+				Cluster cluster = (Cluster)o;
+				o = cluster.attribuerPourClasse(v, val);
+			}
+		}
+		return o != null;
+	}
+	public Object attribuerEcouteurContexte(String var, Object val) throws Exception {
+		EcouteurContexte oEcouteurContexte = (EcouteurContexte)this;		switch(var) {
+		case "cheminConfig":
+			oEcouteurContexte.setCheminConfig((String)val);
+			return val;
+		case "configSite":
+			oEcouteurContexte.setConfigSite((ConfigSite)val);
+			return val;
+		case "contexteInitiale":
+			oEcouteurContexte.setContexteInitiale((InitialContext)val);
+			return val;
+		case "urlSourceDonnees":
+			oEcouteurContexte.setUrlSourceDonnees((String)val);
+			return val;
+		case "urlSourceDonneesSimple":
+			oEcouteurContexte.setUrlSourceDonneesSimple((String)val);
+			return val;
+		case "sourceDonnees":
+			oEcouteurContexte.setSourceDonnees((DataSource)val);
+			return val;
+		case "urlSourceMail":
+			oEcouteurContexte.setUrlSourceMail((String)val);
+			return val;
+		case "sessionCourriel":
+			oEcouteurContexte.setSessionCourriel((Session)val);
+			return val;
+		case "clientSolr":
+			oEcouteurContexte.setClientSolr((HttpSolrClient)val);
+			return val;
+		case "selCryptage":
+			oEcouteurContexte.setSelCryptage((String)val);
+			return val;
+		case "motDePasseCryptage":
+			oEcouteurContexte.setMotDePasseCryptage((String)val);
+			return val;
+		case "jetonIdentitePaypal":
+			oEcouteurContexte.setJetonIdentitePaypal((String)val);
+			return val;
+		case "nombreExecuteurs":
+			oEcouteurContexte.setNombreExecuteurs((Integer)val);
+			return val;
+		case "daemonFabriqueFil":
+			oEcouteurContexte.setDaemonFabriqueFil((DaemonFabriqueFil)val);
+			return val;
+		case "serviceExecuteur":
+			oEcouteurContexte.setServiceExecuteur((ExecutorService)val);
+			return val;
+		case "requeteSite":
+			oEcouteurContexte.setRequeteSite((RequeteSite)val);
+			return val;
+		default:
+			return null;
+		}
+	}
+
+	/////////////
+	// definir //
+	/////////////
+
+	public boolean definirPourClasse(String var, String...vals) throws Exception {
+		String[] vars = org.apache.commons.lang3.StringUtils.split(var, ".");
+		Object o = null;
+		String val = vals == null ? null : vals[vals.length - 1];
+		if(val != null) {
+			for(String v : vars) {
+				if(o == null)
+					o = definirEcouteurContexte(v, val);
+				else if(o instanceof Cluster) {
+					Cluster cluster = (Cluster)o;
+					o = cluster.definirPourClasse(v, val);
+				}
+			}
+		}
+		return o != null;
+	}
+	public Object definirEcouteurContexte(String var, String val) throws Exception {
+		EcouteurContexte oEcouteurContexte = (EcouteurContexte)this;
+		switch(var) {
+		case "cheminConfig":
+			oEcouteurContexte.setCheminConfig(val);
+			return val;
+		case "urlSourceDonnees":
+			oEcouteurContexte.setUrlSourceDonnees(val);
+			return val;
+		case "urlSourceDonneesSimple":
+			oEcouteurContexte.setUrlSourceDonneesSimple(val);
+			return val;
+		case "urlSourceMail":
+			oEcouteurContexte.setUrlSourceMail(val);
+			return val;
+		case "selCryptage":
+			oEcouteurContexte.setSelCryptage(val);
+			return val;
+		case "motDePasseCryptage":
+			oEcouteurContexte.setMotDePasseCryptage(val);
+			return val;
+		case "jetonIdentitePaypal":
+			oEcouteurContexte.setJetonIdentitePaypal(val);
+			return val;
+		case "nombreExecuteurs":
+			oEcouteurContexte.setNombreExecuteurs(val);
+			return val;
+		default:
+			return null;
+		}
 	}
 }

@@ -1,4 +1,4 @@
-package com.heytate.frFR.cardiaque.cluster;        
+package com.heytate.frFR.cardiaque.cluster;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

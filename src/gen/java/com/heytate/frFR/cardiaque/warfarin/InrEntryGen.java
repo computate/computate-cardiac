@@ -1,11 +1,14 @@
 package com.heytate.frFR.cardiaque.warfarin;
 
 import java.math.BigDecimal;
+import com.heytate.frFR.cardiaque.contexte.EcouteurContexte;
 import java.time.LocalDate;
 import com.heytate.frFR.cardiaque.requete.RequeteSite;
 import com.heytate.frFR.cardiac.chaine.Chaine;
 import com.heytate.frFR.cardiaque.cluster.Cluster;
 import com.heytate.frFR.cardiaque.couverture.Couverture;
+import org.apache.solr.common.SolrInputDocument;
+import org.apache.solr.client.solrj.SolrClient;
 
 public abstract class InrEntryGen<DEV> extends Cluster {
 
@@ -32,6 +35,14 @@ public abstract class InrEntryGen<DEV> extends Cluster {
 
 	public LocalDate getInrDate() throws Exception {
 		return inrDate;
+	}
+	public InrEntry setInrDate(String o) throws Exception {
+		this.inrDate = java.time.LocalDate.parse(o, java.time.format.DateTimeFormatter.ISO_OFFSET_DATE);
+		return (InrEntry)this;
+	}
+	public InrEntry setInrDate(java.util.Date o) throws Exception {
+		this.inrDate = o.toInstant().atZone(java.time.ZoneId.systemDefault()).toLocalDate();
+		return (InrEntry)this;
 	}
 	protected void inrDateInit() throws Exception {
 		if(!inrDateCouverture.dejaInitialise) {
@@ -66,8 +77,8 @@ public abstract class InrEntryGen<DEV> extends Cluster {
 	public BigDecimal getDoseActuelValeur() throws Exception {
 		return doseActuelValeur;
 	}
-	public InrEntry doseActuelValeur(String o) throws Exception {
-		if(org.apache.commons.lang3.math.NumberUtils.isNumber(o))
+	public InrEntry setDoseActuelValeur(String o) throws Exception {
+		if(org.apache.commons.lang3.math.NumberUtils.isCreatable(o))
 			this.doseActuelValeur = new BigDecimal(o);
 		return (InrEntry)this;
 	}
@@ -104,6 +115,10 @@ public abstract class InrEntryGen<DEV> extends Cluster {
 	public Chaine getDoseActuelTexte() throws Exception {
 		return doseActuelTexte;
 	}
+	public InrEntry setDoseActuelTexte(String o) throws Exception {
+		doseActuelTexte.tout(o);
+		return (InrEntry)this;
+	}
 	protected void doseActuelTexteInit() throws Exception {
 		if(!doseActuelTexteCouverture.dejaInitialise) {
 			_doseActuelTexte(doseActuelTexte);
@@ -135,8 +150,8 @@ public abstract class InrEntryGen<DEV> extends Cluster {
 	public BigDecimal getChangementDoseValeur() throws Exception {
 		return changementDoseValeur;
 	}
-	public InrEntry changementDoseValeur(String o) throws Exception {
-		if(org.apache.commons.lang3.math.NumberUtils.isNumber(o))
+	public InrEntry setChangementDoseValeur(String o) throws Exception {
+		if(org.apache.commons.lang3.math.NumberUtils.isCreatable(o))
 			this.changementDoseValeur = new BigDecimal(o);
 		return (InrEntry)this;
 	}
@@ -173,12 +188,20 @@ public abstract class InrEntryGen<DEV> extends Cluster {
 	public Chaine getChangementDoseTexte() throws Exception {
 		return changementDoseTexte;
 	}
+	public InrEntry setChangementDoseTexte(String o) throws Exception {
+		changementDoseTexte.tout(o);
+		return (InrEntry)this;
+	}
 	protected void changementDoseTexteInit() throws Exception {
 		if(!changementDoseTexteCouverture.dejaInitialise) {
 			_changementDoseTexte(changementDoseTexte);
 		}
 		changementDoseTexteCouverture.dejaInitialise(true);
 	}
+
+	/////////////////////
+	// initialiserLoin //
+	/////////////////////
 
 	protected boolean dejaInitialiseInrEntry = false;
 
@@ -203,14 +226,30 @@ public abstract class InrEntryGen<DEV> extends Cluster {
 		initLoinInrEntry(requeteSite);
 	}
 
-	@Test public void indexerInrEntryTest() throws Exception {
+	/////////////////
+	// requeteSite //
+	/////////////////
+
+	public void requeteSiteInrEntry(RequeteSite requeteSite) throws Exception {
+			super.requeteSiteCluster(requeteSite);
+	}
+
+	public void requeteSitePourClasse(RequeteSite requeteSite) throws Exception {
+		requeteSiteInrEntry(requeteSite);
+	}
+
+	/////////////
+	// indexer //
+	/////////////
+
+	public void indexerInrEntry() throws Exception {
 		RequeteSite requeteSite = new RequeteSite();
 		requeteSite.initLoinRequeteSite();
 		EcouteurContexte ecouteurContexte = new EcouteurContexte();
 		ecouteurContexte.initLoinEcouteurContexte();
-		ecouteurContexte.requeteSite(requeteSite);
-		requeteSite.ecouteurContexte(ecouteurContexte);
-		requeteSite.configSite(ecouteurContexte.configSite);
+		ecouteurContexte.setRequeteSite(requeteSite);
+		requeteSite.setEcouteurContexte(ecouteurContexte);
+		requeteSite.setConfigSite(ecouteurContexte.configSite);
 		requeteSiteInrEntry(requeteSite);
 		initLoinInrEntry(requeteSite);
 		indexerInrEntry(requeteSite);
@@ -237,6 +276,10 @@ public abstract class InrEntryGen<DEV> extends Cluster {
 
 	}
 
+	/////////////
+	// obtenir //
+	/////////////
+
 	@Override public Object obtenirPourClasse(String var) throws Exception {
 		String[] vars = org.apache.commons.lang3.StringUtils.split(var, ".");
 		Object o = null;
@@ -253,15 +296,24 @@ public abstract class InrEntryGen<DEV> extends Cluster {
 	public Object obtenirInrEntry(String var) throws Exception {
 		InrEntry oInrEntry = (InrEntry)this;
 		switch(var) {
-		case "inrDate": return oInrEntry.inrDate;
-		case "doseActuelValeur": return oInrEntry.doseActuelValeur;
-		case "doseActuelTexte": return oInrEntry.doseActuelTexte;
-		case "changementDoseValeur": return oInrEntry.changementDoseValeur;
-		case "changementDoseTexte": return oInrEntry.changementDoseTexte;
-		default:
-			return super.obtenirCluster(var);
+			case "inrDate":
+				return oInrEntry.inrDate;
+			case "doseActuelValeur":
+				return oInrEntry.doseActuelValeur;
+			case "doseActuelTexte":
+				return oInrEntry.doseActuelTexte;
+			case "changementDoseValeur":
+				return oInrEntry.changementDoseValeur;
+			case "changementDoseTexte":
+				return oInrEntry.changementDoseTexte;
+			default:
+				return super.obtenirCluster(var);
 		}
 	}
+
+	///////////////
+	// attribuer //
+	///////////////
 
 	@Override public boolean attribuerPourClasse(String var, Object val) throws Exception {
 		String[] vars = org.apache.commons.lang3.StringUtils.split(var, ".");
@@ -277,16 +329,31 @@ public abstract class InrEntryGen<DEV> extends Cluster {
 		return o != null;
 	}
 	public Object attribuerInrEntry(String var, Object val) throws Exception {
-		InrEntry oInrEntry = (InrEntry)this;		switch(var) {
-		case "inrDate": oInrEntry.setInrDate((LocalDate)val); return val;
-		case "doseActuelValeur": oInrEntry.setDoseActuelValeur((BigDecimal)val); return val;
-		case "doseActuelTexte": oInrEntry.setDoseActuelTexte((Chaine)val); return val;
-		case "changementDoseValeur": oInrEntry.setChangementDoseValeur((BigDecimal)val); return val;
-		case "changementDoseTexte": oInrEntry.setChangementDoseTexte((Chaine)val); return val;
-		default:
-			return super.attribuerCluster(var, val);
+		InrEntry oInrEntry = (InrEntry)this;
+		switch(var) {
+			case "inrDate":
+				oInrEntry.setInrDate((LocalDate)val);
+				return val;
+			case "doseActuelValeur":
+				oInrEntry.setDoseActuelValeur((BigDecimal)val);
+				return val;
+			case "doseActuelTexte":
+				oInrEntry.setDoseActuelTexte((Chaine)val);
+				return val;
+			case "changementDoseValeur":
+				oInrEntry.setChangementDoseValeur((BigDecimal)val);
+				return val;
+			case "changementDoseTexte":
+				oInrEntry.setChangementDoseTexte((Chaine)val);
+				return val;
+			default:
+				return super.attribuerCluster(var, val);
 		}
 	}
+
+	/////////////
+	// definir //
+	/////////////
 
 	@Override public boolean definirPourClasse(String var, String...vals) throws Exception {
 		String[] vars = org.apache.commons.lang3.StringUtils.split(var, ".");
@@ -307,23 +374,23 @@ public abstract class InrEntryGen<DEV> extends Cluster {
 	public Object definirInrEntry(String var, String val) throws Exception {
 		InrEntry oInrEntry = (InrEntry)this;
 		switch(var) {
-		case "inrDate":
-			oInrEntry.setInrDate(val);
-			return val;
-		case "doseActuelValeur":
-			oInrEntry.setDoseActuelValeur(val);
-			return val;
-		case "doseActuelTexte":
-			oInrEntry.setDoseActuelTexte(val);
-			return val;
-		case "changementDoseValeur":
-			oInrEntry.setChangementDoseValeur(val);
-			return val;
-		case "changementDoseTexte":
-			oInrEntry.setChangementDoseTexte(val);
-			return val;
-		default:
-			return super.definirCluster(var, val);
+			case "inrDate":
+				oInrEntry.setInrDate(val);
+				return val;
+			case "doseActuelValeur":
+				oInrEntry.setDoseActuelValeur(val);
+				return val;
+			case "doseActuelTexte":
+				oInrEntry.setDoseActuelTexte(val);
+				return val;
+			case "changementDoseValeur":
+				oInrEntry.setChangementDoseValeur(val);
+				return val;
+			case "changementDoseTexte":
+				oInrEntry.setChangementDoseTexte(val);
+				return val;
+			default:
+				return super.definirCluster(var, val);
 		}
 	}
 }

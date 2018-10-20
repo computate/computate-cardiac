@@ -1,13 +1,17 @@
 package com.heytate.frFR.cardiaque.cluster;
 
 import java.lang.Long;
+import com.heytate.frFR.cardiaque.contexte.EcouteurContexte;
 import com.heytate.frFR.cardiaque.page.MiseEnPage;
 import com.heytate.frFR.cardiaque.requete.RequeteSite;
 import java.time.LocalDateTime;
 import java.lang.Boolean;
 import java.lang.Object;
 import java.lang.String;
+import com.heytate.frFR.cardiaque.cluster.Cluster;
 import com.heytate.frFR.cardiaque.couverture.Couverture;
+import org.apache.solr.common.SolrInputDocument;
+import org.apache.solr.client.solrj.SolrClient;
 
 public abstract class ClusterGen<DEV> extends Object {
 
@@ -103,8 +107,8 @@ public abstract class ClusterGen<DEV> extends Object {
 	public Long getCle() throws Exception {
 		return cle;
 	}
-	public Cluster cle(String o) throws Exception {
-		if(org.apache.commons.lang3.math.NumberUtils.isNumber(o))
+	public Cluster setCle(String o) throws Exception {
+		if(org.apache.commons.lang3.math.NumberUtils.isCreatable(o))
 			this.cle = Long.parseLong(o);
 		return (Cluster)this;
 	}
@@ -141,11 +145,11 @@ public abstract class ClusterGen<DEV> extends Object {
 	public LocalDateTime getCree() throws Exception {
 		return cree;
 	}
-	public Cluster cree(String o) throws Exception {
+	public Cluster setCree(String o) throws Exception {
 		this.cree = java.time.LocalDateTime.parse(o, java.time.format.DateTimeFormatter.ISO_OFFSET_DATE_TIME);
 		return (Cluster)this;
 	}
-	public Cluster cree(java.util.Date o) throws Exception {
+	public Cluster setCree(java.util.Date o) throws Exception {
 		this.cree = java.time.LocalDateTime.ofInstant(o.toInstant(), java.time.ZoneId.systemDefault());
 		return (Cluster)this;
 	}
@@ -182,11 +186,11 @@ public abstract class ClusterGen<DEV> extends Object {
 	public LocalDateTime getModifie() throws Exception {
 		return modifie;
 	}
-	public Cluster modifie(String o) throws Exception {
+	public Cluster setModifie(String o) throws Exception {
 		this.modifie = java.time.LocalDateTime.parse(o, java.time.format.DateTimeFormatter.ISO_OFFSET_DATE_TIME);
 		return (Cluster)this;
 	}
-	public Cluster modifie(java.util.Date o) throws Exception {
+	public Cluster setModifie(java.util.Date o) throws Exception {
 		this.modifie = java.time.LocalDateTime.ofInstant(o.toInstant(), java.time.ZoneId.systemDefault());
 		return (Cluster)this;
 	}
@@ -322,7 +326,7 @@ public abstract class ClusterGen<DEV> extends Object {
 	public Boolean getSupprime() throws Exception {
 		return supprime;
 	}
-	public Cluster supprime(String o) throws Exception {
+	public Cluster setSupprime(String o) throws Exception {
 		if(org.apache.commons.lang3.BooleanUtils.isTrue(org.apache.commons.lang3.BooleanUtils.toBoolean(o)))
 			this.supprime = Boolean.parseBoolean(o);
 		return (Cluster)this;
@@ -336,6 +340,10 @@ public abstract class ClusterGen<DEV> extends Object {
 		supprimeCouverture.dejaInitialise(true);
 	}
 
+	/////////////////////
+	// initialiserLoin //
+	/////////////////////
+
 	protected boolean dejaInitialiseCluster = false;
 
 	public void initLoinCluster(RequeteSite requeteSite) throws Exception {
@@ -345,7 +353,6 @@ public abstract class ClusterGen<DEV> extends Object {
 
 	public void initLoinCluster() throws Exception {
 		if(!dejaInitialiseCluster) {
-			super.initLoinObject(requeteSite);
 			requeteSiteInit();
 			page_Init();
 			cleInit();
@@ -363,14 +370,30 @@ public abstract class ClusterGen<DEV> extends Object {
 		initLoinCluster(requeteSite);
 	}
 
-	@Test public void indexerClusterTest() throws Exception {
+	/////////////////
+	// requeteSite //
+	/////////////////
+
+	public void requeteSiteCluster(RequeteSite requeteSite) throws Exception {
+		requeteSite.setRequeteSite(requeteSite);
+	}
+
+	public void requeteSitePourClasse(RequeteSite requeteSite) throws Exception {
+		requeteSiteCluster(requeteSite);
+	}
+
+	/////////////
+	// indexer //
+	/////////////
+
+	public void indexerCluster() throws Exception {
 		RequeteSite requeteSite = new RequeteSite();
 		requeteSite.initLoinRequeteSite();
 		EcouteurContexte ecouteurContexte = new EcouteurContexte();
 		ecouteurContexte.initLoinEcouteurContexte();
-		ecouteurContexte.requeteSite(requeteSite);
-		requeteSite.ecouteurContexte(ecouteurContexte);
-		requeteSite.configSite(ecouteurContexte.configSite);
+		ecouteurContexte.setRequeteSite(requeteSite);
+		requeteSite.setEcouteurContexte(ecouteurContexte);
+		requeteSite.setConfigSite(ecouteurContexte.configSite);
 		requeteSiteCluster(requeteSite);
 		initLoinCluster(requeteSite);
 		indexerCluster(requeteSite);
@@ -407,6 +430,10 @@ public abstract class ClusterGen<DEV> extends Object {
 		}
 	}
 
+	/////////////
+	// obtenir //
+	/////////////
+
 	public Object obtenirPourClasse(String var) throws Exception {
 		String[] vars = org.apache.commons.lang3.StringUtils.split(var, ".");
 		Object o = null;
@@ -423,19 +450,32 @@ public abstract class ClusterGen<DEV> extends Object {
 	public Object obtenirCluster(String var) throws Exception {
 		Cluster oCluster = (Cluster)this;
 		switch(var) {
-		case "requeteSite": return oCluster.requeteSite;
-		case "page_": return oCluster.page_;
-		case "cle": return oCluster.cle;
-		case "cree": return oCluster.cree;
-		case "modifie": return oCluster.modifie;
-		case "utilisateurId": return oCluster.utilisateurId;
-		case "clusterNomCanonique": return oCluster.clusterNomCanonique;
-		case "clusterNomSimple": return oCluster.clusterNomSimple;
-		case "supprime": return oCluster.supprime;
-		default:
-			return null;
+			case "requeteSite":
+				return oCluster.requeteSite;
+			case "page_":
+				return oCluster.page_;
+			case "cle":
+				return oCluster.cle;
+			case "cree":
+				return oCluster.cree;
+			case "modifie":
+				return oCluster.modifie;
+			case "utilisateurId":
+				return oCluster.utilisateurId;
+			case "clusterNomCanonique":
+				return oCluster.clusterNomCanonique;
+			case "clusterNomSimple":
+				return oCluster.clusterNomSimple;
+			case "supprime":
+				return oCluster.supprime;
+			default:
+				return null;
 		}
 	}
+
+	///////////////
+	// attribuer //
+	///////////////
 
 	public boolean attribuerPourClasse(String var, Object val) throws Exception {
 		String[] vars = org.apache.commons.lang3.StringUtils.split(var, ".");
@@ -451,20 +491,43 @@ public abstract class ClusterGen<DEV> extends Object {
 		return o != null;
 	}
 	public Object attribuerCluster(String var, Object val) throws Exception {
-		Cluster oCluster = (Cluster)this;		switch(var) {
-		case "requeteSite": oCluster.setRequeteSite((RequeteSite)val); return val;
-		case "page_": oCluster.setPage_((MiseEnPage)val); return val;
-		case "cle": oCluster.setCle((Long)val); return val;
-		case "cree": oCluster.setCree((LocalDateTime)val); return val;
-		case "modifie": oCluster.setModifie((LocalDateTime)val); return val;
-		case "utilisateurId": oCluster.setUtilisateurId((String)val); return val;
-		case "clusterNomCanonique": oCluster.setClusterNomCanonique((String)val); return val;
-		case "clusterNomSimple": oCluster.setClusterNomSimple((String)val); return val;
-		case "supprime": oCluster.setSupprime((Boolean)val); return val;
-		default:
-			return null;
+		Cluster oCluster = (Cluster)this;
+		switch(var) {
+			case "requeteSite":
+				oCluster.setRequeteSite((RequeteSite)val);
+				return val;
+			case "page_":
+				oCluster.setPage_((MiseEnPage)val);
+				return val;
+			case "cle":
+				oCluster.setCle((Long)val);
+				return val;
+			case "cree":
+				oCluster.setCree((LocalDateTime)val);
+				return val;
+			case "modifie":
+				oCluster.setModifie((LocalDateTime)val);
+				return val;
+			case "utilisateurId":
+				oCluster.setUtilisateurId((String)val);
+				return val;
+			case "clusterNomCanonique":
+				oCluster.setClusterNomCanonique((String)val);
+				return val;
+			case "clusterNomSimple":
+				oCluster.setClusterNomSimple((String)val);
+				return val;
+			case "supprime":
+				oCluster.setSupprime((Boolean)val);
+				return val;
+			default:
+				return null;
 		}
 	}
+
+	/////////////
+	// definir //
+	/////////////
 
 	public boolean definirPourClasse(String var, String...vals) throws Exception {
 		String[] vars = org.apache.commons.lang3.StringUtils.split(var, ".");
@@ -485,35 +548,29 @@ public abstract class ClusterGen<DEV> extends Object {
 	public Object definirCluster(String var, String val) throws Exception {
 		Cluster oCluster = (Cluster)this;
 		switch(var) {
-		case "requeteSite":
-			oCluster.setRequeteSite(val);
-			return val;
-		case "page_":
-			oCluster.setPage_(val);
-			return val;
-		case "cle":
-			oCluster.setCle(val);
-			return val;
-		case "cree":
-			oCluster.setCree(val);
-			return val;
-		case "modifie":
-			oCluster.setModifie(val);
-			return val;
-		case "utilisateurId":
-			oCluster.setUtilisateurId(val);
-			return val;
-		case "clusterNomCanonique":
-			oCluster.setClusterNomCanonique(val);
-			return val;
-		case "clusterNomSimple":
-			oCluster.setClusterNomSimple(val);
-			return val;
-		case "supprime":
-			oCluster.setSupprime(val);
-			return val;
-		default:
-			return null;
+			case "cle":
+				oCluster.setCle(val);
+				return val;
+			case "cree":
+				oCluster.setCree(val);
+				return val;
+			case "modifie":
+				oCluster.setModifie(val);
+				return val;
+			case "utilisateurId":
+				oCluster.setUtilisateurId(val);
+				return val;
+			case "clusterNomCanonique":
+				oCluster.setClusterNomCanonique(val);
+				return val;
+			case "clusterNomSimple":
+				oCluster.setClusterNomSimple(val);
+				return val;
+			case "supprime":
+				oCluster.setSupprime(val);
+				return val;
+			default:
+				return null;
 		}
 	}
 }
