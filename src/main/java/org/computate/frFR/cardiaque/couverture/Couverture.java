@@ -1,12 +1,14 @@
-package com.heytate.frFR.cardiaque.couverture;   
+package org.computate.frFR.cardiaque.couverture;    
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
  * 
  * nomCanonique.enUS: org.computate.enUS.wrap.Wrap
  */ 
-public class Couverture<DEV> { 
+public class Couverture<DEV> implements Serializable { 
+	private static final long serialVersionUID = 4171725370071929571L;
 
 	/**	
 	 * frFR: Le nom du champ qui est couvert par cette couverture. 

@@ -1,4 +1,4 @@
-package com.heytate.frFR.cardiaque.xml;
+package org.computate.frFR.cardiaque.xml;
 
 public class OutilXml {
 	

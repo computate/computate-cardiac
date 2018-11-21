@@ -1,21 +1,17 @@
-package com.heytate.frFR.cardiac.chaine;   
+package org.computate.frFR.cardiaque.chaine;    
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.computate.frFR.cardiaque.couverture.Couverture;
+import org.computate.frFR.cardiaque.page.parti.Icone;
+import org.computate.frFR.cardiaque.requete.RequeteSite;
 
-import com.heytate.frFR.cardiaque.couverture.Couverture;
-import com.heytate.frFR.cardiaque.page.MiseEnPage;
-import com.heytate.frFR.cardiaque.page.parti.Icone;
-import com.heytate.frFR.cardiaque.requete.RequeteSite;
-import com.heytate.frFR.cardiaque.xml.OutilXml;
+public class Chaine extends ChaineGen<Object> {  
 
-public class Chaine extends ChaineGen<Object> {
-
-	protected void _requeteSite(Couverture<RequeteSite> c) {}
+	protected void _requeteSite_(Couverture<RequeteSite> c) {}
 
 	protected void _police(Couverture<String> c) {}
 
@@ -39,27 +35,27 @@ public class Chaine extends ChaineGen<Object> {
 	}
 	protected void _hLigne(Couverture<Double> c) {}
 	protected void _hEspace(Couverture<Double> c) {}
-
-	public Chaine iconeAvant(MiseEnPage page, String type, String nom) throws Exception {
-		Icone o = new Icone();
-		o.type.tout(type);
-		o.nom.tout(nom);
-		o.page_(page);
-		o.requeteSitePourClasse(page.requeteSite);
-		o.initLoinIcone(page.requeteSite);
-		iconesAvantAjouter(o);
-		return this;
-	}
-	public Chaine iconeApres(MiseEnPage page, String type, String nom) throws Exception {
-		Icone o = new Icone();
-		o.type.tout(type);
-		o.nom.tout(nom);
-		o.page_(page);
-		o.requeteSitePourClasse(page.requeteSite);
-		o.initLoinIcone(page.requeteSite);
-		iconesApresAjouter(o);
-		return this;
-	}
+//
+//	public Chaine iconeAvant(MiseEnPage page, String type, String nom) throws Exception {
+//		Icone o = new Icone();
+//		o.type.tout(type);
+//		o.nom.tout(nom);
+//		o.setPage_(page);
+//		o.requeteSitePourClasse(page.requeteSite_);
+//		o.initLoinIcone(page.requeteSite_);
+////		iconesAvantAjouter(o);
+//		return this;
+//	}
+//	public Chaine iconeApres(MiseEnPage page, String type, String nom) throws Exception {
+//		Icone o = new Icone();
+//		o.type.tout(type);
+//		o.nom.tout(nom);
+//		o.setPage_(page);
+//		o.requeteSitePourClasse(page.requeteSite_);
+//		o.initLoinIcone(page.requeteSite_);
+////		iconesApresAjouter(o);
+//		return this;
+//	}
 
 	protected void _tout(ArrayList<Object> l) {}
 
@@ -76,7 +72,7 @@ public class Chaine extends ChaineGen<Object> {
 
 	@Override public String toString() { 
 		StringBuilder o = new StringBuilder();
-		if(requeteSite != null) {
+		if(requeteSite_ != null) {
 			for(Object p : tout) {
 				if(p != null && !(p instanceof Chaine))
 					o.append(p.toString());
@@ -358,8 +354,8 @@ public class Chaine extends ChaineGen<Object> {
 	}
 //
 //	@org.junit.Test public void genererClasseChaine() throws Exception {
-//		org.computate.site.ecouteurcontexte.EcouteurContexte ecouteurContexte = new org.computate.site.ecouteurcontexte.EcouteurContexte();
-//		ecouteurContexte.initialiserLoinEcouteurContexte();
+//		org.computate.site.SiteContexte.SiteContexte SiteContexte = new org.computate.site.SiteContexte.SiteContexte();
+//		SiteContexte.initialiserLoinSiteContexte();
 //
 //		org.computate.site.langue.LangueSite langue = new org.computate.site.langue.LangueSite();
 //		langue.identifiant("frFR");
@@ -370,8 +366,8 @@ public class Chaine extends ChaineGen<Object> {
 //		requeteSite.initialiserLoinRequeteSite();
 //
 //		org.computate.site.java.classe.generateur.GenerateurClasse generateurClasse = new org.computate.site.java.classe.generateur.GenerateurClasse();
-//		generateurClasse.cheminConfiguration(ecouteurContexte.cheminConfig);
-//		String cheminRessource = ecouteurContexte.configSite.cheminProjet + "/src/main/java/" + getClass().getCanonicalName().replace(".", "/") + ".java";
+//		generateurClasse.cheminConfiguration(SiteContexte.cheminConfig);
+//		String cheminRessource = SiteContexte.configSite.cheminProjet + "/src/main/java/" + getClass().getCanonicalName().replace(".", "/") + ".java";
 //		generateurClasse.requeteSite(requeteSite);
 //		generateurClasse.cheminRessource(cheminRessource);
 //		generateurClasse.initialiserLoinGenerateurClasse(requeteSite);
@@ -384,131 +380,131 @@ public class Chaine extends ChaineGen<Object> {
 
 	public static List<String> HTML_ELEMENTS_FERMES = Arrays.asList("area", "base", "br", "col", "command", "embed", "hr", "img", "input", "keygen", "link", "meta", "param", "source", "track", "wbr");
 	public static List<String> HTML_ELEMENTS_NO_WRAP = Arrays.asList("script", "span", "a", "b", "i", "u", "title", "use", "h1", "h2", "h3", "h4", "h5", "h6");
-
-	public Chaine e(String nomLocal) {
-		String nomLocalParent = requeteSite.xmlPile.isEmpty() ? null : requeteSite.xmlPile.peek();
-
-		boolean eNoWrapParent = nomLocalParent == null || HTML_ELEMENTS_NO_WRAP.contains(nomLocalParent);
-		String tabulations = String.join("", Collections.nCopies(requeteSite.xmlPile.size(), "\t"));
-		String tabulationsEchappes = String.join("", Collections.nCopies(requeteSite.xmlPile.size(), "\\t"));
-
-		requeteSite.xmlPile.push(nomLocal);
-		if(StringUtils.equals(nomLocal, "html"))
-			tout("<!DOCTYPE html>\n");
-		if(!eNoWrapParent && !tabulationsEchappes.isEmpty()) {
-			tout("\n");
-			tout(tabulations);
-		}
-		tout("<");
-		tout(nomLocal);
-		
-		return this;
-	}
-
-	public Chaine a(String nomAttribut, Object...objets) {
-		tout(" ");
-		tout(nomAttribut);
-		tout("=\"");
-		for(Object objet : objets) {
-			if(objet != null) {
-				String s = objet.toString();
-				tout(OutilXml.echapperDansCitatations(s));
-			}
-		}
-		tout("\"");
-		
-		return this;
-	}
-
-	public Chaine f() {
-		tout(">");
-		
-		return this;
-	}
-
-	public Chaine toutXml(Object...objets) {
-		for(Object objet : objets) {
-			if(objet != null) {
-				if(objet instanceof Chaine) {
-					Chaine chaine = (Chaine)objet;
-					String s = chaine.s();
-					tout(OutilXml.echapper(s));
-				}
-				else {
-					String s = objet.toString();
-					tout(OutilXml.echapper(s));
-				}
-			}
-		}
-		
-		return this;
-	}
-
-	public Chaine fg() {
-		tout("/>");
-		requeteSite.xmlPile.pop();
-		
-		return this;
-	}
-
-	public Chaine g(String nomLocal) {
-		String nomLocalParent = requeteSite.xmlPile.peek();
-
-		boolean eNoWrap = nomLocalParent == null || HTML_ELEMENTS_NO_WRAP.contains(nomLocal);
-		String tabulations = String.join("", Collections.nCopies(requeteSite.xmlPile.size(), "\t"));
-		String tabulationsEchappes = String.join("", Collections.nCopies(requeteSite.xmlPile.size(), "\\t"));
-
-		if(!eNoWrap && !tabulationsEchappes.isEmpty()) {
-			tout("\n");
-			tout(tabulations);
-		}
-		tout("</");
-		tout(nomLocal);
-		tout(">");
-		requeteSite.xmlPile.pop();
-		
-		return this;
-	}
-
-	public Chaine icone(String href) {
-		e("svg").a("class", "fa-icon w3-padding-4 w3-margin-right-4 ").f();
-			e("use").a("xlink:href", href).f().g("use");
-		g("svg");
-		return this;
-	}
-
-	public Chaine iconeLight(String nom) {
-		e("svg").a("class", "fa-icon w3-padding-4 w3-margin-right-4 ").f();
-			e("use").a("xlink:href", "/sprites/light.svg#", nom).f().g("use");
-		g("svg");
-		return this;
-	}
-
-	public Chaine iconeRegular(String nom) {
-		e("svg").a("class", "fa-icon w3-padding-4 w3-margin-right-4 ").f();
-			e("use").a("xlink:href", "/sprites/regular.svg#", nom).f().g("use");
-		g("svg");
-		return this;
-	}
-
-	public Chaine iconeSolid(String nom) {
-		e("svg").a("class", "fa-icon w3-padding-4 w3-margin-right-4 ").f();
-			e("use").a("xlink:href", "/sprites/solid.svg#", nom).f().g("use");
-		g("svg");
-		return this;
-	}
-
-	public Chaine iconeBrands(String nom) {
-		e("svg").a("class", "fa-icon w3-padding-4 w3-margin-right-4 ").f();
-			e("use").a("xlink:href", "/sprites/brands.svg#", nom).f().g("use");
-		g("svg");
-		return this;
-	}
-
-	public Chaine iconeComputate(String nom) {
-		e("svg").a("class", "fa-icon w3-padding-4 w3-margin-right-4 ").f();
-			e("use").a("xlink:href", "/sprites/computate.svg#", nom).f().g("use");
-		g("svg");
-		return this;
-	}
+//
+//	public Chaine e(String nomLocal) {
+//		String nomLocalParent = requeteSite_.xmlPile.isEmpty() ? null : requeteSite_.xmlPile.peek();
+//
+//		boolean eNoWrapParent = nomLocalParent == null || HTML_ELEMENTS_NO_WRAP.contains(nomLocalParent);
+//		String tabulations = String.join("", Collections.nCopies(requeteSite_.xmlPile.size(), "\t"));
+//		String tabulationsEchappes = String.join("", Collections.nCopies(requeteSite_.xmlPile.size(), "\\t"));
+//
+//		requeteSite_.xmlPile.push(nomLocal);
+//		if(StringUtils.equals(nomLocal, "html"))
+//			tout("<!DOCTYPE html>\n");
+//		if(!eNoWrapParent && !tabulationsEchappes.isEmpty()) {
+//			tout("\n");
+//			tout(tabulations);
+//		}
+//		tout("<");
+//		tout(nomLocal);
+//		
+//		return this;
+//	}
+//
+//	public Chaine a(String nomAttribut, Object...objets) {
+//		tout(" ");
+//		tout(nomAttribut);
+//		tout("=\"");
+//		for(Object objet : objets) {
+//			if(objet != null) {
+//				String s = objet.toString();
+//				tout(OutilXml.echapperDansCitatations(s));
+//			}
+//		}
+//		tout("\"");
+//		
+//		return this;
+//	}
+//
+//	public Chaine f() {
+//		tout(">");
+//		
+//		return this;
+//	}
+//
+//	public Chaine toutXml(Object...objets) {
+//		for(Object objet : objets) {
+//			if(objet != null) {
+//				if(objet instanceof Chaine) {
+//					Chaine chaine = (Chaine)objet;
+//					String s = chaine.s();
+//					tout(OutilXml.echapper(s));
+//				}
+//				else {
+//					String s = objet.toString();
+//					tout(OutilXml.echapper(s));
+//				}
+//			}
+//		}
+//		
+//		return this;
+//	}
+//
+//	public Chaine fg() {
+//		tout("/>");
+//		requeteSite_.xmlPile.pop();
+//		
+//		return this;
+//	}
+//
+//	public Chaine g(String nomLocal) {
+//		String nomLocalParent = requeteSite_.xmlPile.peek();
+//
+//		boolean eNoWrap = nomLocalParent == null || HTML_ELEMENTS_NO_WRAP.contains(nomLocal);
+//		String tabulations = String.join("", Collections.nCopies(requeteSite_.xmlPile.size(), "\t"));
+//		String tabulationsEchappes = String.join("", Collections.nCopies(requeteSite_.xmlPile.size(), "\\t"));
+//
+//		if(!eNoWrap && !tabulationsEchappes.isEmpty()) {
+//			tout("\n");
+//			tout(tabulations);
+//		}
+//		tout("</");
+//		tout(nomLocal);
+//		tout(">");
+//		requeteSite_.xmlPile.pop();
+//		
+//		return this;
+//	}
+//
+//	public Chaine icone(String href) {
+//		e("svg").a("class", "fa-icon w3-padding-4 w3-margin-right-4 ").f();
+//			e("use").a("xlink:href", href).f().g("use");
+//		g("svg");
+//		return this;
+//	}
+//
+//	public Chaine iconeLight(String nom) {
+//		e("svg").a("class", "fa-icon w3-padding-4 w3-margin-right-4 ").f();
+//			e("use").a("xlink:href", "/sprites/light.svg#", nom).f().g("use");
+//		g("svg");
+//		return this;
+//	}
+//
+//	public Chaine iconeRegular(String nom) {
+//		e("svg").a("class", "fa-icon w3-padding-4 w3-margin-right-4 ").f();
+//			e("use").a("xlink:href", "/sprites/regular.svg#", nom).f().g("use");
+//		g("svg");
+//		return this;
+//	}
+//
+//	public Chaine iconeSolid(String nom) {
+//		e("svg").a("class", "fa-icon w3-padding-4 w3-margin-right-4 ").f();
+//			e("use").a("xlink:href", "/sprites/solid.svg#", nom).f().g("use");
+//		g("svg");
+//		return this;
+//	}
+//
+//	public Chaine iconeBrands(String nom) {
+//		e("svg").a("class", "fa-icon w3-padding-4 w3-margin-right-4 ").f();
+//			e("use").a("xlink:href", "/sprites/brands.svg#", nom).f().g("use");
+//		g("svg");
+//		return this;
+//	}
+//
+//	public Chaine iconeComputate(String nom) {
+//		e("svg").a("class", "fa-icon w3-padding-4 w3-margin-right-4 ").f();
+//			e("use").a("xlink:href", "/sprites/computate.svg#", nom).f().g("use");
+//		g("svg");
+//		return this;
+//	}
 }

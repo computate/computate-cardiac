@@ -1,17 +1,17 @@
-package com.heytate.frFR.cardiaque.utilisateur; 
+package org.computate.frFR.cardiaque.utilisateur; 
 
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
 
-import com.heytate.frFR.cardiaque.couverture.Couverture;
-import com.heytate.frFR.cardiaque.requete.RequeteSite;
+import org.computate.frFR.cardiaque.couverture.Couverture;
+import org.computate.frFR.cardiaque.requete.RequeteSite;
 
-public class UtilisateurSite extends UtilisateurSiteGen<Object> { 
+public class UtilisateurSite extends UtilisateurSiteGen<Object> {  
 
 	/**
 	 * var.enUS: _siteRequest
 	 */
-	protected void _requeteSite(Couverture<RequeteSite> c) throws Exception {}
+	protected void _requeteSite_(Couverture<RequeteSite> c) throws Exception {}
 
 	/**	
 	 * var.enUS: _teamKeys
@@ -29,6 +29,8 @@ public class UtilisateurSite extends UtilisateurSiteGen<Object> {
 	 * stocke: true
 	 */
 	protected void _utilisateurNom(Couverture<String> c) throws Exception {
+		String o = requeteSite_.getUtilisateurNom();
+		c.o(o);
 	}
 
 	/**	
@@ -47,6 +49,8 @@ public class UtilisateurSite extends UtilisateurSiteGen<Object> {
 	 * stocke: true
 	 */
 	protected void _utilisateurId(Couverture<String> c) throws Exception {
+		String o = requeteSite_.getUtilisateurId();
+		c.o(o);
 	}
 
 	/**	
@@ -56,6 +60,8 @@ public class UtilisateurSite extends UtilisateurSiteGen<Object> {
 	 * stocke: true
 	 */
 	protected void _utilisateurPrenom(Couverture<String> c) throws Exception {
+		String o = requeteSite_.getUtilisateurPrenom();
+		c.o(o);
 	}
 
 	/**	
@@ -65,6 +71,8 @@ public class UtilisateurSite extends UtilisateurSiteGen<Object> {
 	 * stocke: true
 	 */
 	protected void _utilisateurNomFamille(Couverture<String> c) throws Exception {
+		String o = requeteSite_.getUtilisateurNomFamille();
+		c.o(o);
 	}
 
 	/**	
@@ -78,7 +86,8 @@ public class UtilisateurSite extends UtilisateurSiteGen<Object> {
 	 * r.enUS: userLastName
 	 */
 	protected void _utilisateurNomComplet(Couverture<String> c) throws Exception {
-		c.o(utilisateurPrenom + utilisateurNomFamille);
+		String o = requeteSite_.getUtilisateurNomComplet();
+		c.o(o);
 	}
 
 	/**	

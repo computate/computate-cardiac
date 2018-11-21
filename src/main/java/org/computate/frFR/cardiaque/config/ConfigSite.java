@@ -1,48 +1,38 @@
-package com.heytate.frFR.cardiaque.config;  
+package org.computate.frFR.cardiaque.config;  
+
+import java.io.File;
+import java.io.Serializable;
 
 import org.apache.commons.configuration2.INIConfiguration;
 import org.apache.commons.configuration2.builder.fluent.Configurations;
 import org.apache.commons.lang3.StringUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.lang3.math.NumberUtils;
+import org.computate.frFR.cardiaque.contexte.SiteContexte;
+import org.computate.frFR.cardiaque.couverture.Couverture;
+import org.computate.frFR.cardiaque.requete.RequeteSite;
 
-import com.heytate.frFR.cardiaque.contexte.EcouteurContexte;
-import com.heytate.frFR.cardiaque.couverture.Couverture;
-import com.heytate.frFR.cardiaque.requete.RequeteSite;
+
 
 /**
  * nomCanonique.enUS: org.computate.enUS.java.SiteConfig
  * enUS: Loads the properties in the application config file into specific fields. 
  * frFR: Charge les propriétés dans le fichier de config de l'application dans des champs spécifiques. 
  */    
-public class ConfigSite extends ConfigSiteGen<Object> {  
-
-	/** do stuff **/
-	protected Logger log = LoggerFactory.getLogger(getClass());
-
+public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {   
 
 	/**	Tous les infos importants à propos de la requête actuelle. **/
-	protected void _requeteSite(RequeteSite o) throws Exception {
-	}
-	@Override protected void requeteSiteInit() throws Exception {
+	protected void _requeteSite_(RequeteSite o) throws Exception {
 	}
 
 	/**	L'écouteur de contexte du site pour obtenir des objets globals du contexte. **/
-	protected void _ecouteurContexte(Couverture<EcouteurContexte> c) throws Exception {
+	protected void _siteContexte_(Couverture<SiteContexte> c) throws Exception {
 	}
-	@Override protected void ecouteurContexteInit() throws Exception {
-	} 
 
 	/**	Le chemin vers le fichier de config du site. **/
 	protected void _cheminConfig(Couverture<String> c) throws Exception {   
+		String o = System.getenv("cheminConfig");
+		c.o(o);
 	}
-
-	/**
-	 * enUS: The Apache Commons Configurations object for reading config files. 
-	 */
-	protected void _configurations(Couverture<Configurations> c) throws Exception {  
-		configurations = new Configurations();
-	} 
 
 	/**
 	/**	
@@ -51,12 +41,22 @@ public class ConfigSite extends ConfigSiteGen<Object> {
 	 * enUS: The INI Configuration Object for the config file. 
 	 **/ 
 	protected void _config(Couverture<INIConfiguration> c) throws Exception {
-		config = configurations.ini(cheminConfig);
+		Configurations configurations = new Configurations();
+		File fichierConfig = new File(cheminConfig);
+		if(cheminConfig != null && fichierConfig.exists()) {
+			INIConfiguration o = configurations.ini(fichierConfig);
+			c.o(o);
+		}
 	}
 
 	/**	Le nom du groupe principal du config pour ce site Web. **/
 	protected void _identifiantSite(Couverture<String> c) throws Exception {
-		String o = config.getString("appli");
+		String o;
+		if(config == null)
+			o = System.getenv("appliNom");
+		else
+			o = config.getString("appliNom");
+
 		c.o(o);
 	}
 
@@ -68,145 +68,390 @@ public class ConfigSite extends ConfigSiteGen<Object> {
 
 	/**	Le chemin vers le projet du site cloné de git. **/
 	protected void _cheminProjet(Couverture<String> c) throws Exception {
-		String o = config.getString(prefixeEchappe + "cheminProjet");
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = config.getString(prefixeEchappe + c.var);
 		c.o(o);
 	}
 
 	/**	Le chemin vers la racine de document pour le projet. **/
 	protected void _racineDocument(Couverture<String> c) throws Exception {
-		String o = config.getString(prefixeEchappe + "racineDocument");
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = config.getString(prefixeEchappe + c.var);
 		c.o(o);
 	}
 
 	/**	Le nom de l'entreprise. **/
 	protected void _nomEntreprise(Couverture<String> c) throws Exception {
-		String o = config.getString(prefixeEchappe + c.var);
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = config.getString(prefixeEchappe + c.var);
 		c.o(o);
 	}
 
 	/**	Le nom de domaine du site. **/
 	protected void _nomDomaine(Couverture<String> c) throws Exception {
-		String o = config.getString(prefixeEchappe + "nomDomaine");
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = config.getString(prefixeEchappe + c.var);
 		c.o(o);
 	}
 
 	/**	Le nom d'hôte du site. **/
-	protected void _nomHoteSite(Couverture<String> c) throws Exception {
-		String o = config.getString(prefixeEchappe + "nomHoteSite");
+	protected void _siteNomHote(Couverture<String> c) throws Exception {
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = config.getString(prefixeEchappe + c.var);
+		c.o(o);
+	}
+
+	/**	Le port du site. **/
+	protected void _sitePort(Couverture<Integer> c) throws Exception {
+		Integer o;
+		if(config == null)
+			o = NumberUtils.toInt(System.getenv(c.var));
+		else
+			o = config.getInt(prefixeEchappe + c.var, 8080);
 		c.o(o);
 	}
 
 	/**	L'ID client Keycloak du site. **/
-	protected void _siteIdKeycloak(Couverture<String> c) throws Exception {
-		String o = config.getString(prefixeEchappe + "siteIdKeycloak");
+	protected void _authRoyaume(Couverture<String> c) throws Exception {
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = StringUtils.defaultIfBlank(config.getString(prefixeEchappe + c.var), identifiantSite);
+		c.o(o);
+	}
+
+	/**	L'ID client Keycloak du site. **/
+	protected void _authRessource(Couverture<String> c) throws Exception {
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = StringUtils.defaultIfBlank(config.getString(prefixeEchappe + c.var), identifiantSite);
+		c.o(o);
+	}
+
+	/**	L'ID client Keycloak du site. **/
+	protected void _authSecret(Couverture<String> c) throws Exception {
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = StringUtils.defaultIfBlank(config.getString(prefixeEchappe + c.var), identifiantSite);
+		c.o(o);
+	}
+
+	/**	L'ID client Keycloak du site. **/
+	protected void _authSslRequis(Couverture<String> c) throws Exception {
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = StringUtils.defaultIfBlank(config.getString(prefixeEchappe + c.var), identifiantSite);
+		c.o(o);
+	}
+
+	protected void _sslJksChemin(Couverture<String> c) throws Exception {
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = StringUtils.defaultIfBlank(config.getString(prefixeEchappe + c.var), identifiantSite);
+		c.o(o);
+	}
+
+	protected void _sslJksMotDePasse(Couverture<String> c) throws Exception {
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = StringUtils.defaultIfBlank(config.getString(prefixeEchappe + c.var), identifiantSite);
+		c.o(o);
+	}
+
+	/**	L'ID client Keycloak du site. **/
+	protected void _authUrl(Couverture<String> c) throws Exception {
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = StringUtils.defaultIfBlank(config.getString(prefixeEchappe + c.var), identifiantSite);
 		c.o(o);
 	}
 
 	/**	Le sel de cryptage à utiliser pour tout cryptage. **/
 	protected void _selCryptage(Couverture<String> c) throws Exception {
-		String o = config.getString(prefixeEchappe + "selCryptage");
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = config.getString(prefixeEchappe + c.var);
 		c.o(o);
 	}
 
 	/**	Le mot de passe de cryptage à utiliser pour tout cryptage. **/
 	protected void _motDePasseCryptage(Couverture<String> c) throws Exception {
-		String o = config.getString(prefixeEchappe + "motDePasseCryptage");
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = config.getString(prefixeEchappe + c.var);
 		c.o(o);
 	}
 
 	/**	L'URL du domaine de base pour les URLs du site. **/
 	protected void _urlDomaineBase(Couverture<String> c) throws Exception {
-		String o = config.getString(prefixeEchappe + "urlDomaineBase");
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = StringUtils.defaultIfBlank(config.getString(prefixeEchappe + c.var), "https://" + siteNomHote);
 		c.o(o);
 	}
 
 	/**	Le nom d'affichage du site. **/
 	protected void _nomAffichageSite(Couverture<String> c) throws Exception {
-		String o = config.getString(prefixeEchappe + "nomAffichageSite");
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = StringUtils.defaultIfBlank(config.getString(prefixeEchappe + c.var), identifiantSite);
 		c.o(o);
 	}
 
-	/**	L'URL JDBC vers le soruce de données pour les tests unitaires. **/
-	protected void _urlSourceDonneesSimple(Couverture<String> c) throws Exception {
-		String o = config.getString(prefixeEchappe + "urlSourceDonneesSimple");
+	protected void _jdbcClassePilote(Couverture<String> c) throws Exception {
+		String o;
+		if(config == null)
+			o = StringUtils.defaultIfEmpty(System.getenv(c.var), "org.postgresql.Driver");
+		else
+			o = config.getString(prefixeEchappe + c.var, "org.postgresql.Driver");
+		c.o(o);
+	}
+
+	protected void _jdbcUtilisateur(Couverture<String> c) throws Exception {
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = config.getString(prefixeEchappe + c.var);
+		c.o(o);
+	}
+
+	protected void _jdbcMotDePasse(Couverture<String> c) throws Exception {
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = config.getString(prefixeEchappe + c.var);
+		c.o(o);
+	}
+
+	protected void _jdbcTailleMaxPiscine(Couverture<Integer> c) throws Exception {
+		Integer o;
+		if(config == null)
+			o = NumberUtils.toInt(System.getenv(c.var), 15);
+		else
+			o = config.getInt(prefixeEchappe + c.var, 15);
+		c.o(o);
+	}
+
+	protected void _jdbcTailleInitialePiscine(Couverture<Integer> c) throws Exception {
+		Integer o;
+		if(config == null)
+			o = NumberUtils.toInt(System.getenv(c.var), 3);
+		else
+			o = config.getInt(prefixeEchappe + c.var, 3);
+		c.o(o);
+	}
+
+	protected void _jdbcTailleMinPiscine(Couverture<Integer> c) throws Exception {
+		Integer o;
+		if(config == null)
+			o = NumberUtils.toInt(System.getenv(c.var), 0);
+		else
+			o = config.getInt(prefixeEchappe + c.var, 0);
+		c.o(o);
+	}
+
+	protected void _jdbcMaxDeclarations(Couverture<Integer> c) throws Exception {
+		Integer o;
+		if(config == null)
+			o = NumberUtils.toInt(System.getenv(c.var), 0);
+		else
+			o = config.getInt(prefixeEchappe + c.var, 0);
+		c.o(o);
+	}
+
+	protected void _jdbcMaxDeclarationsParConnexion(Couverture<Integer> c) throws Exception {
+		Integer o;
+		if(config == null)
+			o = NumberUtils.toInt(System.getenv(c.var), 0);
+		else
+			o = config.getInt(prefixeEchappe + c.var, 0);
+		c.o(o);
+	}
+
+	protected void _jdbcTempsInactiviteMax(Couverture<Integer> c) throws Exception {
+		Integer o;
+		if(config == null)
+			o = NumberUtils.toInt(System.getenv(c.var), 0);
+		else
+			o = config.getInt(prefixeEchappe + c.var, 0);
+		c.o(o);
+	}
+
+	/**	L'URL JDBC vers le source de données. **/ 
+	protected void _jdbcUrl(Couverture<String> c) throws Exception {
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = config.getString(prefixeEchappe + c.var);
 		c.o(o);
 	}
 
 	/**	L'URL vers le moteur de recherche SOLR. **/
-	protected void _urlSolr(Couverture<String> c) throws Exception {
-		String o = config.getString(prefixeEchappe + "urlSolr");
+	protected void _solrUrl(Couverture<String> c) throws Exception {
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = config.getString(prefixeEchappe + c.var);
 		c.o(o);
 	}
 
 	/**	Le jeton d'identité Paypal pour valider des transactions Paypal. **/
 	protected void _jetonIdentitePaypal(Couverture<String> c) throws Exception {
-		String o = config.getString(prefixeEchappe + "jetonIdentitePaypal");
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = config.getString(prefixeEchappe + c.var);
 		c.o(o);
 	}
 
 	/**	Le compte Facebook pour le site. **/
 	protected void _compteFacebook(Couverture<String> c) throws Exception {
-		String o = config.getString(prefixeEchappe + "compteFacebook");
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = config.getString(prefixeEchappe + c.var);
 		c.o(o);
 	}
 
 	/**	Le compte Twitter pour le site. **/
 	protected void _compteTwitter(Couverture<String> c) throws Exception {
-		String o = config.getString(prefixeEchappe + "compteTwitter");
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = config.getString(prefixeEchappe + c.var);
 		c.o(o);
 	}
 
 	/**	Le compte Google Plus pour le site. **/
 	protected void _compteGooglePlus(Couverture<String> c) throws Exception {
-		String o = config.getString(prefixeEchappe + "compteGooglePlus");
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = config.getString(prefixeEchappe + c.var);
 		c.o(o);
 	}
 
 	/**	Le compte Instagram pour le site. **/
 	protected void _compteInstagram(Couverture<String> c) throws Exception {
-		String o = config.getString(prefixeEchappe + "compteInstagram");
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = config.getString(prefixeEchappe + c.var);
 		c.o(o);
 	}
 
 	/**	Le compte Youtube pour le site. **/
 	protected void _compteYoutube(Couverture<String> c) throws Exception {
-		String o = config.getString(prefixeEchappe + "compteYoutube");
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = config.getString(prefixeEchappe + c.var);
 		c.o(o);
 	}
 
 	/**	L'identifiant du canal Youtube pour le site. **/
 	protected void _identifiantCanalYoutube(Couverture<String> c) throws Exception {
-		String o = config.getString(prefixeEchappe + "identifiantCanalYoutube");
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = config.getString(prefixeEchappe + c.var);
 		c.o(o);
 	}
 
 	/**	Le compte Pinterest pour le site. **/
 	protected void _comptePinterest(Couverture<String> c) throws Exception {
-		String o = config.getString(prefixeEchappe + "comptePinterest");
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = config.getString(prefixeEchappe + c.var);
 		c.o(o);
 	}
 
 	/**	Le compte Open Clipart pour le site. **/
 	protected void _compteOpenclipart(Couverture<String> c) throws Exception {
-		String o = config.getString(prefixeEchappe + "compteOpenclipart");
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = config.getString(prefixeEchappe + c.var);
 		c.o(o);
 	}
 
 	/**	Le compte mail pour le site. **/
 	protected void _compteMail(Couverture<String> c) throws Exception {
-		String o = config.getString(prefixeEchappe + "compteMail");
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = config.getString(prefixeEchappe + c.var);
 		c.o(o);
 	}
 
 	/**	L'addresse mail pour l'administrateur du site pour les rapports d'erreur. **/
 	protected void _mailAdmin(Couverture<String> c) throws Exception {
-		String o = config.getString(prefixeEchappe + "mailAdmin");
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = config.getString(prefixeEchappe + c.var);
 		c.o(o);
 	}
 
 	/**	Le nombre de fils pour executer des tâches daemon dans le site. **/
 	protected void _nombreExecuteurs(Couverture<Integer> c) throws Exception {
-		Integer o = config.getInt(prefixeEchappe + "nombreExecuteurs");
+		Integer o;
+		if(config == null)
+			o = Integer.parseInt(System.getenv(c.var), 1);
+		else
+			o = config.getInt(prefixeEchappe + c.var, 1);
 		c.o(o);
 	}
 }

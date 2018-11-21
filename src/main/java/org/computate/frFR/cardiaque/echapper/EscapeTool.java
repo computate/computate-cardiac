@@ -1,4 +1,4 @@
-package com.heytate.frFR.cardiaque.echapper;
+package org.computate.frFR.cardiaque.echapper;
 
 public class EscapeTool {
 

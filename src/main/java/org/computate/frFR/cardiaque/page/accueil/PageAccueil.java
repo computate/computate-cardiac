@@ -1,10 +1,9 @@
-package com.heytate.frFR.cardiaque.page.accueil; 
+package org.computate.frFR.cardiaque.page.accueil; 
 
-import com.heytate.frFR.cardiac.page.MiseEnPage;
-import com.heytate.frFR.cardiac.page.accueil.PageAccueilGen;
-import com.heytate.frFR.cardiaque.couverture.Couverture;
+import org.computate.frFR.cardiaque.couverture.Couverture;
+import org.computate.frFR.cardiaque.page.MiseEnPage;
 
-public class PageAccueil extends PageAccueilGen<MiseEnPage> {
+public class PageAccueil extends PageAccueilGen<MiseEnPage> { 
 //	
 //	public PageAccueil() {
 //		pageClasseNomCanoniqueCouverture.valeurIndexéStocké(true);
@@ -17,7 +16,7 @@ public class PageAccueil extends PageAccueilGen<MiseEnPage> {
 //	}
 
 	protected void _pageTitre(Couverture<String> c) throws Exception {
-		c.o(requeteSite.configSite.nomEntreprise);
+//		c.o(requeteSite.configSite.nomEntreprise);
 	}
 	
 	protected void _pageUri(Couverture<String> c) throws Exception {
@@ -41,44 +40,44 @@ public class PageAccueil extends PageAccueilGen<MiseEnPage> {
 //  g("div>
 //g("nav>
 	}
-	
-	protected void _body(CouvertureÉ> c) {
-		É body = c.o(html.é("body")).o();
-		contexteUnivers0.modaleErreur.contexteHtml(requeteSite, body, blogs, this);
-		contexteUnivers0.sectionHaut.contexteHtml(requeteSite, body, blogs, this);
-		É sectionTout = contexteUnivers0.sectionTout.contexteHtml(requeteSite, body, blogs, this);
-		É sectionPrimaire = contexteUnivers0.sectionPrimaire.contexteHtml(requeteSite, sectionTout, blogs, this);
-		contexteUnivers0.sectionContact.contexteHtml(requeteSite, sectionTout, blogs, this);
-
-		{ É content = sectionPrimaire.é("div").a("class", "w3-content").é();
-			{ É h1 = content.é("h1").a("class", "w3-center ").é();
-				h1.texte()
-					.enUSXml("Take control of your computer. ")
-					.frFRXml("Prenez le contrôle de votre ordinateur. ")
-				;
-			}
-			{ É h2 = content.é("h2").a("class", "w3-center ").é();
-				h2.texte()
-					.enUSXml("Launch your own powerful web site on your own computer with open-source software. ")
-					.frFRXml("Construire votre propre site Web puissant sur votre propre ordinateur avec des logiciels libres. ")
-				;
-			}
-			{ É h4 = content.é("h4").a("class", "w3-center ").é();
-				h4.texte()
-					.enUSXml("Most recent blog posts: ")
-					.frFRXml("Les dernières publications du blog : ")
-				;
-			}
-			{ É div = content.é("div").a("class", "w3-cell-row ").é();
-				div.commentaire("//");
-				É div2 = null;
-				for(int i = 0; i < blogs.size(); i++) {
-					BlogComputate2 blog = blogs.get(i);
-					if((i & 1) == 0)
-						div2 = div.é("div").a("class", "w3-cell-row ").é();
-					contexteBlog.blogHalf().contexteHtml(requeteSite, div2, blogs, blog);
-				}
-			}
-		}
-	}
+//	
+//	protected void _body(Couverture<É> c) {
+//		É body = c.o(html.é("body")).o();
+//		contexteUnivers0.modaleErreur.contexteHtml(requeteSite, body, blogs, this);
+//		contexteUnivers0.sectionHaut.contexteHtml(requeteSite, body, blogs, this);
+//		É sectionTout = contexteUnivers0.sectionTout.contexteHtml(requeteSite, body, blogs, this);
+//		É sectionPrimaire = contexteUnivers0.sectionPrimaire.contexteHtml(requeteSite, sectionTout, blogs, this);
+//		contexteUnivers0.sectionContact.contexteHtml(requeteSite, sectionTout, blogs, this);
+//
+//		{ É content = sectionPrimaire.é("div").a("class", "w3-content").é();
+//			{ É h1 = content.é("h1").a("class", "w3-center ").é();
+//				h1.texte()
+//					.enUSXml("Take control of your computer. ")
+//					.frFRXml("Prenez le contrôle de votre ordinateur. ")
+//				;
+//			}
+//			{ É h2 = content.é("h2").a("class", "w3-center ").é();
+//				h2.texte()
+//					.enUSXml("Launch your own powerful web site on your own computer with open-source software. ")
+//					.frFRXml("Construire votre propre site Web puissant sur votre propre ordinateur avec des logiciels libres. ")
+//				;
+//			}
+//			{ É h4 = content.é("h4").a("class", "w3-center ").é();
+//				h4.texte()
+//					.enUSXml("Most recent blog posts: ")
+//					.frFRXml("Les dernières publications du blog : ")
+//				;
+//			}
+//			{ É div = content.é("div").a("class", "w3-cell-row ").é();
+//				div.commentaire("//");
+//				É div2 = null;
+//				for(int i = 0; i < blogs.size(); i++) {
+//					BlogComputate2 blog = blogs.get(i);
+//					if((i & 1) == 0)
+//						div2 = div.é("div").a("class", "w3-cell-row ").é();
+//					contexteBlog.blogHalf().contexteHtml(requeteSite, div2, blogs, blog);
+//				}
+//			}
+//		}
+//	}
 }
