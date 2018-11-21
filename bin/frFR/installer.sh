@@ -1,7 +1,7 @@
 #!/bin/bash
 
 export langueNom="frFR"
-export appliNom="${appliNom:-heytate-cardiac}"
+export appliNom="${appliNom:-computate-cardiac}"
 export appliChemin="${appliChemin:-$(readlink -f $( dirname $( dirname $( dirname ${BASH_SOURCE[0]} ) ) ) )}"
 export appliComputateChemin="${appliComputateChemin:-/usr/local/src/computate}"
 

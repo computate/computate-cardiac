@@ -1,14 +1,14 @@
 #!/bin/bash
 
 export languageName="enUS"
-export appName="${appName:-heytate-cardiac}"
+export appName="${appName:-computate-cardiac}"
 export appPath="${appPath:-$(readlink -f $( dirname $( dirname $( dirname ${BASH_SOURCE[0]} ) ) ) )}"
 export appComputatePath="${appComputatePath:-/usr/local/src/computate}"
 
 source "$appComputatePath/bin/enUS/00-functions.sh"
 
 ############
-# heytate-cardiac #
+# computate-cardiac #
 ############
 
 computate "cd $appPath && mvn install"
