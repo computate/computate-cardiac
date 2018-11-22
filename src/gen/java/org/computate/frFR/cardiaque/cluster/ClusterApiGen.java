@@ -92,7 +92,7 @@ public class ClusterApiGen {
 
 	public static final String ENTITE_VAR_supprime = "supprime";
 
-	public void getCluster(SiteContexte siteContexte) {
+	public void handleGetCluster(SiteContexte siteContexte) {
 		OpenAPI3RouterFactory usineRouteur = siteContexte.getUsineRouteur_();
 
 		usineRouteur.addHandlerByOperationId("getCluster", rc -> {
@@ -429,28 +429,18 @@ public class ClusterApiGen {
 		return j;
 	}
 
-	protected void postCluster(SiteContexte siteContexte) {
+	protected void handlePostCluster(SiteContexte siteContexte) {
 		OpenAPI3RouterFactory usineRouteur = siteContexte.getUsineRouteur_();
 		usineRouteur.addHandlerByOperationId("postCluster", rc -> {
 			try {
 				rc.response().putHeader("content-type", "application/json").setChunked(true);
 				RequeteSite requeteSite = genererRequeteSitePourCluster(siteContexte, rc);
-				SolrQuery rechercheSolr = requeteSite.getRechercheSolr_();
-				SolrDocumentList resultatsRecherche = requeteSite.getReponseRecherche().getResults();
-				Integer rechercheLignes = rechercheSolr.getRows();
 
 				genererPostDebutCluster(requeteSite);
-				for(long i = resultatsRecherche.getStart(); i < resultatsRecherche.getNumFound(); i+=rechercheLignes) {
-					for(int j = 0; j < resultatsRecherche.size(); j++) {
-						long resultatIndice = i + j;
-						SolrDocument documentSolr = resultatsRecherche.get(j);
-						ResultatRecherche resultatRecherche = new ResultatRecherche();
-						resultatRecherche.setRequeteSite_(requeteSite);
-						resultatRecherche.setDocumentSolr(documentSolr);
-						resultatRecherche.setResultatIndice(resultatIndice);
-						genererPostIndividuelCluster(resultatRecherche);
-					}
-				}
+				Cluster nouveauCluster = new Cluster();
+				 nouveauCluster.initLoinCluster(requeteSite);
+				 nouveauCluster.peuplerCluster();
+				postCluster();
 				genererPostFinCluster(requeteSite);
 				requeteSite.getReponseServeur().end();
 			} catch(Exception e) {
@@ -661,6 +651,243 @@ public class ClusterApiGen {
 	}
 
 	public void genererPostFinCluster(RequeteSite requeteSite) {
+		HttpServerResponse reponseServeur = requeteSite.getReponseServeur();
+		reponseServeur.write("\t]\n");
+		reponseServeur.write("}\n");
+	}
+
+	protected void handlePatchCluster(SiteContexte siteContexte) {
+		OpenAPI3RouterFactory usineRouteur = siteContexte.getUsineRouteur_();
+		usineRouteur.addHandlerByOperationId("patchCluster", rc -> {
+			try {
+				rc.response().putHeader("content-type", "application/json").setChunked(true);
+				RequeteSite requeteSite = genererRequeteSitePourCluster(siteContexte, rc);
+				SolrQuery rechercheSolr = requeteSite.getRechercheSolr_();
+				SolrDocumentList resultatsRecherche = requeteSite.getReponseRecherche().getResults();
+				Integer rechercheLignes = rechercheSolr.getRows();
+
+				genererPatchDebutCluster(requeteSite);
+				for(long i = resultatsRecherche.getStart(); i < resultatsRecherche.getNumFound(); i+=rechercheLignes) {
+					for(int j = 0; j < resultatsRecherche.size(); j++) {
+						long resultatIndice = i + j;
+						SolrDocument documentSolr = resultatsRecherche.get(j);
+						ResultatRecherche resultatRecherche = new ResultatRecherche();
+						resultatRecherche.setRequeteSite_(requeteSite);
+						resultatRecherche.setDocumentSolr(documentSolr);
+						resultatRecherche.setResultatIndice(resultatIndice);
+						genererPatchIndividuelCluster(resultatRecherche);
+					}
+				}
+				genererPatchFinCluster(requeteSite);
+				requeteSite.getReponseServeur().end();
+			} catch(Exception e) {
+				LOGGER.error("Error: ", e.getMessage());
+				rc.fail(e);
+			}
+		});
+	}
+
+	public void genererPatchDebutCluster(RequeteSite requeteSite) {
+		HttpServerResponse reponseServeur = requeteSite.getReponseServeur();
+		QueryResponse reponseRecherche = requeteSite.getReponseRecherche();
+		reponseServeur.write("{\n");
+		Long millisRecherche = Long.valueOf(reponseRecherche.getQTime());
+		Long millisTransmission = reponseRecherche.getElapsedTime();
+		Long numCommence = reponseRecherche.getResults().getStart();
+		Long numTrouve = reponseRecherche.getResults().getNumFound();
+		Integer numRetourne = reponseRecherche.getResponse().size();
+		String tempsRecherche = String.format("%d.%03d sec", TimeUnit.MILLISECONDS.toSeconds(millisRecherche), TimeUnit.MILLISECONDS.toMillis(millisRecherche) - TimeUnit.SECONDS.toMillis(TimeUnit.MILLISECONDS.toSeconds(millisRecherche)));
+		String tempsTransmission = String.format("%d.%03d sec", TimeUnit.MILLISECONDS.toSeconds(millisTransmission), TimeUnit.MILLISECONDS.toMillis(millisTransmission) - TimeUnit.SECONDS.toSeconds(TimeUnit.MILLISECONDS.toSeconds(millisTransmission)));
+		Exception exceptionRecherche = reponseRecherche.getException();
+
+		reponseServeur.write("\t\"numCommence\": ");
+		reponseServeur.write(numCommence.toString());
+
+		reponseServeur.write(",\n\t\"numTrouve\": ");
+		reponseServeur.write(numTrouve.toString());
+
+		reponseServeur.write(",\n\t\"numRetourne\": ");
+		reponseServeur.write(numRetourne.toString());
+
+		reponseServeur.write(",\n\t\"tempsRecherche\": \"");
+		reponseServeur.write(tempsRecherche);
+		reponseServeur.write("\"");
+
+		reponseServeur.write(",\n\t\"tempsTransmission\": \"");
+		reponseServeur.write(tempsTransmission);
+		reponseServeur.write("\"");
+
+		if(exceptionRecherche != null) {
+			reponseServeur.write(",\n\t\"exceptionRecherche\": \"");
+			reponseServeur.write(exceptionRecherche.getMessage());
+			reponseServeur.write("\"");
+		}
+
+		reponseServeur.write(",\n\t\"resultats\": [\n");
+	}
+
+	public void genererPatchIndividuelCluster(ResultatRecherche resultatRecherche) throws Exception {
+		RequeteSite requeteSite = resultatRecherche.getRequeteSite_();
+		SolrDocument documentSolr = resultatRecherche.getDocumentSolr();
+		Long resultatIndice = resultatRecherche.getResultatIndice();
+		HttpServerResponse reponseServeur = requeteSite.getReponseServeur();
+		reponseServeur.write("\t\t");
+		if(resultatIndice > 0)
+			reponseServeur.write(", ");
+		reponseServeur.write("{\n");
+		Collection<String> champNoms = documentSolr.getFieldNames();
+		Integer j = 0;
+		for(String champNomStocke : champNoms) {
+			Collection<Object> champValeurs = documentSolr.getFieldValues(champNomStocke);
+			j = genererPatchCluster(j, resultatRecherche, champNomStocke, champValeurs);
+		}
+		reponseServeur.write("\t\t}\n");
+	}
+
+	public Integer genererPatchCluster(Integer j, ResultatRecherche resultatRecherche, String entiteVarStocke, Collection<Object> champValeurs) throws Exception {
+		RequeteSite requeteSite = resultatRecherche.getRequeteSite_();
+		HttpServerResponse reponseServeur = requeteSite.getReponseServeur();
+		if(!champValeurs.isEmpty()) {
+			Object champValeur = champValeurs.iterator().next();
+			if(champValeur != null) {
+				if(ENTITE_VAR_STOCKE_pk.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_virguleEspace);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_pk);
+					reponseServeur.write(VAL_citationDeuxPointsEspace);
+					reponseServeur.write(((Long)champValeur).toString());
+					reponseServeur.write(VAL_ligne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_pk.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_virguleEspace);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_pk);
+					reponseServeur.write(VAL_citationDeuxPointsEspace);
+					reponseServeur.write(((Long)champValeur).toString());
+					reponseServeur.write(VAL_ligne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_cree.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_citationVirguleEspaceCitation);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_cree);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(((Date)champValeur).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_cree.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_citationVirguleEspaceCitation);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_cree);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(((Date)champValeur).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_modifie.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_citationVirguleEspaceCitation);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_modifie);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(((Date)champValeur).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_modifie.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_citationVirguleEspaceCitation);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_modifie);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(((Date)champValeur).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_utilisateurId.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_virguleEspace);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_utilisateurId);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_utilisateurId.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_virguleEspace);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_utilisateurId);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_clusterNomCanonique.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_virguleEspace);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_clusterNomCanonique);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_clusterNomCanonique.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_virguleEspace);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_clusterNomCanonique);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_clusterNomSimple.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_virguleEspace);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_clusterNomSimple);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_clusterNomSimple.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_virguleEspace);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_clusterNomSimple);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+			}
+		}
+		return j;
+	}
+
+	public void genererPatchFinCluster(RequeteSite requeteSite) {
 		HttpServerResponse reponseServeur = requeteSite.getReponseServeur();
 		reponseServeur.write("\t]\n");
 		reponseServeur.write("}\n");

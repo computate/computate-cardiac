@@ -6,7 +6,12 @@ import java.util.ArrayList;
 import org.computate.frFR.cardiaque.couverture.Couverture;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
 
-public class UtilisateurSite extends UtilisateurSiteGen<Object> {  
+/**
+ * modele: true
+ * apiUri.enUS: /api/v1/site/user
+ * apiUri.frFR: /api/v1/site/utilisateur
+ */
+public class UtilisateurSite extends UtilisateurSiteGen<Object> {    
 
 	/**
 	 * var.enUS: _siteRequest

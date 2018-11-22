@@ -1,5 +1,6 @@
 package org.computate.frFR.cardiaque.utilisateur;
 
+import org.computate.frFR.cardiaque.contexte.SiteContexte;
 import org.computate.frFR.cardiaque.couverture.Couverture;
 import java.lang.Long;
 import org.computate.frFR.cardiaque.cluster.Cluster;
@@ -8,6 +9,8 @@ import org.computate.frFR.cardiaque.requete.RequeteSite;
 import java.lang.Boolean;
 import java.lang.Object;
 import java.lang.String;
+import org.apache.solr.common.SolrInputDocument;
+import org.apache.solr.client.solrj.SolrClient;
 import java.util.ArrayList;
 
 public abstract class UtilisateurSiteGen<DEV> extends Object {
@@ -33,16 +36,17 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 		return requeteSite_;
 	}
 
-	public void setRequeteSite_(RequeteSite o) throws Exception {
+	public void setRequeteSite_(RequeteSite o) {
 		this.requeteSite_ = o;
 	}
-	protected void requeteSite_Init() throws Exception {
+	protected UtilisateurSite requeteSite_Init() throws Exception {
 		if(!requeteSite_Couverture.dejaInitialise) {
 			_requeteSite_(requeteSite_Couverture);
 			if(requeteSite_ == null)
 				setRequeteSite_(requeteSite_Couverture.o);
 		}
 		requeteSite_Couverture.dejaInitialise(true);
+		return (UtilisateurSite)this;
 	}
 
 	////////////////
@@ -66,7 +70,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 		return equipeCles;
 	}
 
-	public void setEquipeCles(ArrayList<Long> l) throws Exception {
+	public void setEquipeCles(ArrayList<Long> l) {
 		this.equipeCles = l;
 	}
 	public UtilisateurSite setEquipeCles(String o) throws Exception {
@@ -94,11 +98,12 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 		}
 		return (UtilisateurSite)this;
 	}
-	protected void equipeClesInit() throws Exception {
+	protected UtilisateurSite equipeClesInit() throws Exception {
 		if(!equipeClesCouverture.dejaInitialise) {
 			_equipeCles(equipeCles);
 		}
 		equipeClesCouverture.dejaInitialise(true);
+		return (UtilisateurSite)this;
 	}
 
 	////////////////////
@@ -122,16 +127,17 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 		return utilisateurNom;
 	}
 
-	public void setUtilisateurNom(String o) throws Exception {
+	public void setUtilisateurNom(String o) {
 		this.utilisateurNom = o;
 	}
-	protected void utilisateurNomInit() throws Exception {
+	protected UtilisateurSite utilisateurNomInit() throws Exception {
 		if(!utilisateurNomCouverture.dejaInitialise) {
 			_utilisateurNom(utilisateurNomCouverture);
 			if(utilisateurNom == null)
 				setUtilisateurNom(utilisateurNomCouverture.o);
 		}
 		utilisateurNomCouverture.dejaInitialise(true);
+		return (UtilisateurSite)this;
 	}
 
 	/////////////////////
@@ -155,16 +161,17 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 		return utilisateurMail;
 	}
 
-	public void setUtilisateurMail(String o) throws Exception {
+	public void setUtilisateurMail(String o) {
 		this.utilisateurMail = o;
 	}
-	protected void utilisateurMailInit() throws Exception {
+	protected UtilisateurSite utilisateurMailInit() throws Exception {
 		if(!utilisateurMailCouverture.dejaInitialise) {
 			_utilisateurMail(utilisateurMailCouverture);
 			if(utilisateurMail == null)
 				setUtilisateurMail(utilisateurMailCouverture.o);
 		}
 		utilisateurMailCouverture.dejaInitialise(true);
+		return (UtilisateurSite)this;
 	}
 
 	///////////////////
@@ -188,16 +195,17 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 		return utilisateurId;
 	}
 
-	public void setUtilisateurId(String o) throws Exception {
+	public void setUtilisateurId(String o) {
 		this.utilisateurId = o;
 	}
-	protected void utilisateurIdInit() throws Exception {
+	protected UtilisateurSite utilisateurIdInit() throws Exception {
 		if(!utilisateurIdCouverture.dejaInitialise) {
 			_utilisateurId(utilisateurIdCouverture);
 			if(utilisateurId == null)
 				setUtilisateurId(utilisateurIdCouverture.o);
 		}
 		utilisateurIdCouverture.dejaInitialise(true);
+		return (UtilisateurSite)this;
 	}
 
 	///////////////////////
@@ -221,16 +229,17 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 		return utilisateurPrenom;
 	}
 
-	public void setUtilisateurPrenom(String o) throws Exception {
+	public void setUtilisateurPrenom(String o) {
 		this.utilisateurPrenom = o;
 	}
-	protected void utilisateurPrenomInit() throws Exception {
+	protected UtilisateurSite utilisateurPrenomInit() throws Exception {
 		if(!utilisateurPrenomCouverture.dejaInitialise) {
 			_utilisateurPrenom(utilisateurPrenomCouverture);
 			if(utilisateurPrenom == null)
 				setUtilisateurPrenom(utilisateurPrenomCouverture.o);
 		}
 		utilisateurPrenomCouverture.dejaInitialise(true);
+		return (UtilisateurSite)this;
 	}
 
 	///////////////////////////
@@ -254,16 +263,17 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 		return utilisateurNomFamille;
 	}
 
-	public void setUtilisateurNomFamille(String o) throws Exception {
+	public void setUtilisateurNomFamille(String o) {
 		this.utilisateurNomFamille = o;
 	}
-	protected void utilisateurNomFamilleInit() throws Exception {
+	protected UtilisateurSite utilisateurNomFamilleInit() throws Exception {
 		if(!utilisateurNomFamilleCouverture.dejaInitialise) {
 			_utilisateurNomFamille(utilisateurNomFamilleCouverture);
 			if(utilisateurNomFamille == null)
 				setUtilisateurNomFamille(utilisateurNomFamilleCouverture.o);
 		}
 		utilisateurNomFamilleCouverture.dejaInitialise(true);
+		return (UtilisateurSite)this;
 	}
 
 	///////////////////////////
@@ -287,16 +297,17 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 		return utilisateurNomComplet;
 	}
 
-	public void setUtilisateurNomComplet(String o) throws Exception {
+	public void setUtilisateurNomComplet(String o) {
 		this.utilisateurNomComplet = o;
 	}
-	protected void utilisateurNomCompletInit() throws Exception {
+	protected UtilisateurSite utilisateurNomCompletInit() throws Exception {
 		if(!utilisateurNomCompletCouverture.dejaInitialise) {
 			_utilisateurNomComplet(utilisateurNomCompletCouverture);
 			if(utilisateurNomComplet == null)
 				setUtilisateurNomComplet(utilisateurNomCompletCouverture.o);
 		}
 		utilisateurNomCompletCouverture.dejaInitialise(true);
+		return (UtilisateurSite)this;
 	}
 
 	/////////////////////
@@ -320,16 +331,17 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 		return utilisateurSite;
 	}
 
-	public void setUtilisateurSite(String o) throws Exception {
+	public void setUtilisateurSite(String o) {
 		this.utilisateurSite = o;
 	}
-	protected void utilisateurSiteInit() throws Exception {
+	protected UtilisateurSite utilisateurSiteInit() throws Exception {
 		if(!utilisateurSiteCouverture.dejaInitialise) {
 			_utilisateurSite(utilisateurSiteCouverture);
 			if(utilisateurSite == null)
 				setUtilisateurSite(utilisateurSiteCouverture.o);
 		}
 		utilisateurSiteCouverture.dejaInitialise(true);
+		return (UtilisateurSite)this;
 	}
 
 	//////////////////////////////////
@@ -353,7 +365,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 		return utilisateurRecevoirCourriels;
 	}
 
-	public void setUtilisateurRecevoirCourriels(Boolean o) throws Exception {
+	public void setUtilisateurRecevoirCourriels(Boolean o) {
 		this.utilisateurRecevoirCourriels = o;
 	}
 	public UtilisateurSite setUtilisateurRecevoirCourriels(String o) throws Exception {
@@ -361,13 +373,14 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 			this.utilisateurRecevoirCourriels = Boolean.parseBoolean(o);
 		return (UtilisateurSite)this;
 	}
-	protected void utilisateurRecevoirCourrielsInit() throws Exception {
+	protected UtilisateurSite utilisateurRecevoirCourrielsInit() throws Exception {
 		if(!utilisateurRecevoirCourrielsCouverture.dejaInitialise) {
 			_utilisateurRecevoirCourriels(utilisateurRecevoirCourrielsCouverture);
 			if(utilisateurRecevoirCourriels == null)
 				setUtilisateurRecevoirCourriels(utilisateurRecevoirCourrielsCouverture.o);
 		}
 		utilisateurRecevoirCourrielsCouverture.dejaInitialise(true);
+		return (UtilisateurSite)this;
 	}
 
 	////////////////////
@@ -391,7 +404,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 		return modeleSupprime;
 	}
 
-	public void setModeleSupprime(Boolean o) throws Exception {
+	public void setModeleSupprime(Boolean o) {
 		this.modeleSupprime = o;
 	}
 	public UtilisateurSite setModeleSupprime(String o) throws Exception {
@@ -399,13 +412,14 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 			this.modeleSupprime = Boolean.parseBoolean(o);
 		return (UtilisateurSite)this;
 	}
-	protected void modeleSupprimeInit() throws Exception {
+	protected UtilisateurSite modeleSupprimeInit() throws Exception {
 		if(!modeleSupprimeCouverture.dejaInitialise) {
 			_modeleSupprime(modeleSupprimeCouverture);
 			if(modeleSupprime == null)
 				setModeleSupprime(modeleSupprimeCouverture.o);
 		}
 		modeleSupprimeCouverture.dejaInitialise(true);
+		return (UtilisateurSite)this;
 	}
 
 	////////////////
@@ -429,16 +443,17 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 		return modeleCree;
 	}
 
-	public void setModeleCree(ZonedDateTime o) throws Exception {
+	public void setModeleCree(ZonedDateTime o) {
 		this.modeleCree = o;
 	}
-	protected void modeleCreeInit() throws Exception {
+	protected UtilisateurSite modeleCreeInit() throws Exception {
 		if(!modeleCreeCouverture.dejaInitialise) {
 			_modeleCree(modeleCreeCouverture);
 			if(modeleCree == null)
 				setModeleCree(modeleCreeCouverture.o);
 		}
 		modeleCreeCouverture.dejaInitialise(true);
+		return (UtilisateurSite)this;
 	}
 
 	///////////////////
@@ -462,16 +477,17 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 		return modeleModifie;
 	}
 
-	public void setModeleModifie(ZonedDateTime o) throws Exception {
+	public void setModeleModifie(ZonedDateTime o) {
 		this.modeleModifie = o;
 	}
-	protected void modeleModifieInit() throws Exception {
+	protected UtilisateurSite modeleModifieInit() throws Exception {
 		if(!modeleModifieCouverture.dejaInitialise) {
 			_modeleModifie(modeleModifieCouverture);
 			if(modeleModifie == null)
 				setModeleModifie(modeleModifieCouverture.o);
 		}
 		modeleModifieCouverture.dejaInitialise(true);
+		return (UtilisateurSite)this;
 	}
 
 	//////////////////////////////
@@ -495,16 +511,17 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 		return modeleClasseNomCanonique;
 	}
 
-	public void setModeleClasseNomCanonique(String o) throws Exception {
+	public void setModeleClasseNomCanonique(String o) {
 		this.modeleClasseNomCanonique = o;
 	}
-	protected void modeleClasseNomCanoniqueInit() throws Exception {
+	protected UtilisateurSite modeleClasseNomCanoniqueInit() throws Exception {
 		if(!modeleClasseNomCanoniqueCouverture.dejaInitialise) {
 			_modeleClasseNomCanonique(modeleClasseNomCanoniqueCouverture);
 			if(modeleClasseNomCanonique == null)
 				setModeleClasseNomCanonique(modeleClasseNomCanoniqueCouverture.o);
 		}
 		modeleClasseNomCanoniqueCouverture.dejaInitialise(true);
+		return (UtilisateurSite)this;
 	}
 
 	///////////////
@@ -528,7 +545,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 		return modeleCle;
 	}
 
-	public void setModeleCle(Long o) throws Exception {
+	public void setModeleCle(Long o) {
 		this.modeleCle = o;
 	}
 	public UtilisateurSite setModeleCle(String o) throws Exception {
@@ -536,13 +553,14 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 			this.modeleCle = Long.parseLong(o);
 		return (UtilisateurSite)this;
 	}
-	protected void modeleCleInit() throws Exception {
+	protected UtilisateurSite modeleCleInit() throws Exception {
 		if(!modeleCleCouverture.dejaInitialise) {
 			_modeleCle(modeleCleCouverture);
 			if(modeleCle == null)
 				setModeleCle(modeleCleCouverture.o);
 		}
 		modeleCleCouverture.dejaInitialise(true);
+		return (UtilisateurSite)this;
 	}
 
 	////////////////////////////
@@ -566,16 +584,17 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 		return modeleSuggestionStocke;
 	}
 
-	public void setModeleSuggestionStocke(String o) throws Exception {
+	public void setModeleSuggestionStocke(String o) {
 		this.modeleSuggestionStocke = o;
 	}
-	protected void modeleSuggestionStockeInit() throws Exception {
+	protected UtilisateurSite modeleSuggestionStockeInit() throws Exception {
 		if(!modeleSuggestionStockeCouverture.dejaInitialise) {
 			_modeleSuggestionStocke(modeleSuggestionStockeCouverture);
 			if(modeleSuggestionStocke == null)
 				setModeleSuggestionStocke(modeleSuggestionStockeCouverture.o);
 		}
 		modeleSuggestionStockeCouverture.dejaInitialise(true);
+		return (UtilisateurSite)this;
 	}
 
 	////////////////////////////
@@ -599,16 +618,17 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 		return modeleSuggestionIndexe;
 	}
 
-	public void setModeleSuggestionIndexe(String o) throws Exception {
+	public void setModeleSuggestionIndexe(String o) {
 		this.modeleSuggestionIndexe = o;
 	}
-	protected void modeleSuggestionIndexeInit() throws Exception {
+	protected UtilisateurSite modeleSuggestionIndexeInit() throws Exception {
 		if(!modeleSuggestionIndexeCouverture.dejaInitialise) {
 			_modeleSuggestionIndexe(modeleSuggestionIndexeCouverture);
 			if(modeleSuggestionIndexe == null)
 				setModeleSuggestionIndexe(modeleSuggestionIndexeCouverture.o);
 		}
 		modeleSuggestionIndexeCouverture.dejaInitialise(true);
+		return (UtilisateurSite)this;
 	}
 
 	/////////////////////
@@ -617,12 +637,13 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 
 	protected boolean dejaInitialiseUtilisateurSite = false;
 
-	public void initLoinUtilisateurSite(RequeteSite requeteSite) throws Exception {
+	public UtilisateurSite initLoinUtilisateurSite(RequeteSite requeteSite) throws Exception {
 		setRequeteSite_(requeteSite);
 		initLoinUtilisateurSite();
+		return (UtilisateurSite)this;
 	}
 
-	public void initLoinUtilisateurSite() throws Exception {
+	public UtilisateurSite initLoinUtilisateurSite() throws Exception {
 		if(!dejaInitialiseUtilisateurSite) {
 			requeteSite_Init();
 			equipeClesInit();
@@ -643,6 +664,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 			modeleSuggestionIndexeInit();
 			dejaInitialiseUtilisateurSite = true;
 		}
+		return (UtilisateurSite)this;
 	}
 
 	public void initLoinPourClasse(RequeteSite requeteSite) throws Exception {
@@ -658,6 +680,110 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 
 	public void requeteSitePourClasse(RequeteSite requeteSite) throws Exception {
 		requeteSiteUtilisateurSite(requeteSite);
+	}
+
+	/////////////
+	// indexer //
+	/////////////
+
+	public void indexerUtilisateurSite() throws Exception {
+		RequeteSite requeteSite = new RequeteSite();
+		requeteSite.initLoinRequeteSite();
+		SiteContexte SiteContexte = new SiteContexte();
+		SiteContexte.initLoinSiteContexte();
+		SiteContexte.setRequeteSite_(requeteSite);
+		requeteSite.setSiteContexte_(SiteContexte);
+		requeteSiteUtilisateurSite(requeteSite);
+		initLoinUtilisateurSite(requeteSite);
+		indexerUtilisateurSite(requeteSite);
+	}
+
+
+	public void indexerPourClasse(RequeteSite requeteSite) throws Exception {
+		indexerUtilisateurSite(requeteSite_);
+	}
+
+	public void indexerPourClasse(SolrInputDocument document) throws Exception {
+		indexerUtilisateurSite(document);
+	}
+	public void indexerUtilisateurSite(RequeteSite requeteSite) throws Exception {
+		SolrInputDocument document = new SolrInputDocument();
+		indexerUtilisateurSite(document);
+		document.addField("sauvegardesUtilisateurSite_stored_strings", sauvegardes);
+		SolrClient clientSolr = requeteSite_.getSiteContexte_().getClientSolr();
+		clientSolr.add(document);
+		clientSolr.commit();
+	}
+
+	public void indexerUtilisateurSite(SolrInputDocument document) throws Exception {
+		if(equipeCles != null) {
+			for(java.lang.Long o : equipeCles) {
+				document.addField("equipeCles_indexe_longs", o);
+			}
+			for(java.lang.Long o : equipeCles) {
+				document.addField("equipeCles_stocke_longs", o);
+			}
+		}
+		if(utilisateurNom != null) {
+			document.addField("utilisateurNom_indexe_string", utilisateurNom);
+			document.addField("utilisateurNom_stocke_string", utilisateurNom);
+		}
+		if(utilisateurMail != null) {
+			document.addField("utilisateurMail_indexe_string", utilisateurMail);
+			document.addField("utilisateurMail_stocke_string", utilisateurMail);
+		}
+		if(utilisateurId != null) {
+			document.addField("utilisateurId_indexe_string", utilisateurId);
+			document.addField("utilisateurId_stocke_string", utilisateurId);
+		}
+		if(utilisateurPrenom != null) {
+			document.addField("utilisateurPrenom_indexe_string", utilisateurPrenom);
+			document.addField("utilisateurPrenom_stocke_string", utilisateurPrenom);
+		}
+		if(utilisateurNomFamille != null) {
+			document.addField("utilisateurNomFamille_indexe_string", utilisateurNomFamille);
+			document.addField("utilisateurNomFamille_stocke_string", utilisateurNomFamille);
+		}
+		if(utilisateurNomComplet != null) {
+			document.addField("utilisateurNomComplet_indexe_string", utilisateurNomComplet);
+			document.addField("utilisateurNomComplet_stocke_string", utilisateurNomComplet);
+		}
+		if(utilisateurSite != null) {
+			document.addField("utilisateurSite_indexe_string", utilisateurSite);
+			document.addField("utilisateurSite_stocke_string", utilisateurSite);
+		}
+		if(utilisateurRecevoirCourriels != null) {
+			document.addField("utilisateurRecevoirCourriels_indexe_boolean", utilisateurRecevoirCourriels);
+			document.addField("utilisateurRecevoirCourriels_stocke_boolean", utilisateurRecevoirCourriels);
+		}
+		if(modeleSupprime != null) {
+			document.addField("modeleSupprime_indexe_boolean", modeleSupprime);
+			document.addField("modeleSupprime_stocke_boolean", modeleSupprime);
+		}
+		if(modeleCree != null) {
+			document.addField("modeleCree_indexenull", modeleCree);
+			document.addField("modeleCree_stockenull", modeleCree);
+		}
+		if(modeleModifie != null) {
+			document.addField("modeleModifie_indexenull", modeleModifie);
+			document.addField("modeleModifie_stockenull", modeleModifie);
+		}
+		if(modeleClasseNomCanonique != null) {
+			document.addField("modeleClasseNomCanonique_indexe_string", modeleClasseNomCanonique);
+			document.addField("modeleClasseNomCanonique_stocke_string", modeleClasseNomCanonique);
+		}
+		if(modeleCle != null) {
+			document.addField("modeleCle_indexe_long", modeleCle);
+			document.addField("modeleCle_stocke_long", modeleCle);
+		}
+		if(modeleSuggestionStocke != null) {
+			document.addField("modeleSuggestionStocke_indexe_string", modeleSuggestionStocke);
+			document.addField("modeleSuggestionStocke_stocke_string", modeleSuggestionStocke);
+		}
+		if(modeleSuggestionIndexe != null) {
+			document.addField("modeleSuggestionIndexe_indexe_string", modeleSuggestionIndexe);
+			document.addField("modeleSuggestionIndexe_stocke_string", modeleSuggestionIndexe);
+		}
 	}
 
 	/////////////
@@ -812,5 +938,185 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 			default:
 				return null;
 		}
+	}
+
+	/////////////
+	// peupler //
+	/////////////
+
+	@Override public void peuplerPourClasse(org.apache.solr.common.SolrDocument documentSolr) throws Exception {
+		sauvegardesUtilisateurSite = (java.util.ArrayList<String>)documentSolr.get("sauvegardesUtilisateurSite_stored_strings");
+		peuplerUtilisateurSite(documentSolr);
+	}
+	public void peuplerUtilisateurSite(org.apache.solr.common.SolrDocument documentSolr) throws Exception {
+		UtilisateurSite oUtilisateurSite = (UtilisateurSite)this;
+
+				java.util.List<java.lang.Long> equipeCles = (java.util.List<java.lang.Long>)documentSolr.get("equipeCles_stocke_longs");
+				if(equipeCles != null)
+					oUtilisateurSite.equipeCles.addAll(equipeCles);
+
+				java.lang.String utilisateurNom = (java.lang.String)documentSolr.get("utilisateurNom_stocke_string");
+				if(utilisateurNom != null)
+					oUtilisateurSite.setUtilisateurNom(utilisateurNom);
+
+				java.lang.String utilisateurMail = (java.lang.String)documentSolr.get("utilisateurMail_stocke_string");
+				if(utilisateurMail != null)
+					oUtilisateurSite.setUtilisateurMail(utilisateurMail);
+
+				java.lang.String utilisateurId = (java.lang.String)documentSolr.get("utilisateurId_stocke_string");
+				if(utilisateurId != null)
+					oUtilisateurSite.setUtilisateurId(utilisateurId);
+
+				java.lang.String utilisateurPrenom = (java.lang.String)documentSolr.get("utilisateurPrenom_stocke_string");
+				if(utilisateurPrenom != null)
+					oUtilisateurSite.setUtilisateurPrenom(utilisateurPrenom);
+
+				java.lang.String utilisateurNomFamille = (java.lang.String)documentSolr.get("utilisateurNomFamille_stocke_string");
+				if(utilisateurNomFamille != null)
+					oUtilisateurSite.setUtilisateurNomFamille(utilisateurNomFamille);
+
+				java.lang.String utilisateurNomComplet = (java.lang.String)documentSolr.get("utilisateurNomComplet_stocke_string");
+				if(utilisateurNomComplet != null)
+					oUtilisateurSite.setUtilisateurNomComplet(utilisateurNomComplet);
+
+				java.lang.String utilisateurSite = (java.lang.String)documentSolr.get("utilisateurSite_stocke_string");
+				if(utilisateurSite != null)
+					oUtilisateurSite.setUtilisateurSite(utilisateurSite);
+
+				java.lang.Boolean utilisateurRecevoirCourriels = (java.lang.Boolean)documentSolr.get("utilisateurRecevoirCourriels_stocke_boolean");
+				if(utilisateurRecevoirCourriels != null)
+					oUtilisateurSite.setUtilisateurRecevoirCourriels(utilisateurRecevoirCourriels);
+
+				java.lang.Boolean modeleSupprime = (java.lang.Boolean)documentSolr.get("modeleSupprime_stocke_boolean");
+				if(modeleSupprime != null)
+					oUtilisateurSite.setModeleSupprime(modeleSupprime);
+
+				 modeleCree = ()documentSolr.get("modeleCree_stockenull");
+				if(modeleCree != null)
+					oUtilisateurSite.setModeleCree(modeleCree);
+
+				 modeleModifie = ()documentSolr.get("modeleModifie_stockenull");
+				if(modeleModifie != null)
+					oUtilisateurSite.setModeleModifie(modeleModifie);
+
+				java.lang.String modeleClasseNomCanonique = (java.lang.String)documentSolr.get("modeleClasseNomCanonique_stocke_string");
+				if(modeleClasseNomCanonique != null)
+					oUtilisateurSite.setModeleClasseNomCanonique(modeleClasseNomCanonique);
+
+				java.lang.Long modeleCle = (java.lang.Long)documentSolr.get("modeleCle_stocke_long");
+				if(modeleCle != null)
+					oUtilisateurSite.setModeleCle(modeleCle);
+
+				java.lang.String modeleSuggestionStocke = (java.lang.String)documentSolr.get("modeleSuggestionStocke_stocke_string");
+				if(modeleSuggestionStocke != null)
+					oUtilisateurSite.setModeleSuggestionStocke(modeleSuggestionStocke);
+
+				java.lang.String modeleSuggestionIndexe = (java.lang.String)documentSolr.get("modeleSuggestionIndexe_stocke_string");
+				if(modeleSuggestionIndexe != null)
+					oUtilisateurSite.setModeleSuggestionIndexe(modeleSuggestionIndexe);
+
+		super.peuplerObject(documentSolr);
+	}
+
+	////////////
+	// existe //
+	////////////
+
+	@Override public Boolean existePourClasse() throws Exception {
+		String cleStr = requeteSite_.requete.getParameter("cle");
+		Long cle = org.apache.commons.lang3.StringUtils.isNumeric(cleStr) ? Long.parseLong(cleStr) : null;
+		Boolean existe = existePourClasse(cle);
+		return existe;
+	}
+	@Override public Boolean existePourClasse(Long cle) throws Exception {
+		org.apache.commons.dbutils.QueryRunner coureur = new org.apache.commons.dbutils.QueryRunner(requeteSite_.SiteContexte.sourceDonnees);
+		org.apache.commons.dbutils.handlers.ArrayListHandler gestionnaireListe = new org.apache.commons.dbutils.handlers.ArrayListHandler();
+		utilisateurId = requeteSite_.utilisateurId;
+		this.cle = cle;
+		String nomCanonique = getClass().getCanonicalName();
+		Boolean existe = false;
+		
+		if(cle == null) {
+			String sql = "select clep from objet where objet.id_utilisateur=? and objet.nom_canonique=?";
+			java.util.List<Object[]> resultats = coureur.query(sql, gestionnaireListe /*select count(*) from objet where objet.id_utilisateur=*/, requeteSite_.utilisateurId /* and objet.nom_canonique=*/, nomCanonique);
+			existe = resultats.size() > 0;
+			if(existe) {
+				cle = (Long)resultats.get(0)[0];
+				cle(cle);
+			}
+		}
+		else {
+			String sql = "select count(*) from objet where objet.clep=? and objet.id_utilisateur=? and objet.nom_canonique=?";
+			java.util.List<Object[]> resultats = coureur.query(sql, gestionnaireListe /*select count(*) from objet where objet.clep=*/, cle /* and objet.id_utilisateur=*/, requeteSite_.utilisateurId /* and objet.nom_canonique=*/, nomCanonique);
+			existe = ((Long)resultats.get(0)[0]) > 0L;
+		}
+		return existe;
+	}
+
+	/////////////////
+	// sauvegardes //
+	/////////////////
+
+	protected java.util.ArrayList<String> sauvegardesUtilisateurSite = new java.util.ArrayList<String>();
+	@Override public void sauvegardesPourClasse(RequeteSite requeteSite) throws Exception {
+		org.apache.commons.dbutils.QueryRunner coureur = new org.apache.commons.dbutils.QueryRunner(requeteSite.SiteContexte.sourceDonnees);
+		org.apache.commons.dbutils.handlers.ArrayListHandler gestionnaireListe = new org.apache.commons.dbutils.handlers.ArrayListHandler();
+		
+		if(cle != null) {
+			String sql = "select cree, modifie from objet where objet.clep=?";
+			java.util.List<Object[]> resultats = coureur.query(sql, gestionnaireListe /*select cree, modifie from objet where objet.clep=*/, cle);
+			if(resultats.size() > 0) {
+				cree((java.util.Date)resultats.get(0)[0]);
+				modifie((java.util.Date)resultats.get(0)[1]);
+			}
+			sql = "select chemin, valeur from p where p.cle_objet=? union select champ2, cle2::text from a where a.cle1=? union select champ1, cle1::text from a where a.cle2=? ";
+			resultats = coureur.query(sql, gestionnaireListe /*select chemin, valeur from p where p.cle_objet=*/, cle, cle, cle);
+			for(Object[] objets : resultats) {
+				String chemin = (String)objets[0];
+				String valeur = requeteSite.decrypterStr((String)objets[1]);
+				definirPourClasse(chemin, valeur);
+				sauvegardesUtilisateurSite.add(chemin);
+			}
+		}
+	}
+
+	/////////////////
+	// sauvegarder //
+	/////////////////
+
+	@Override public void sauvegarderPourClasse(RequeteSite requeteSite) throws Exception {
+		org.apache.commons.dbutils.QueryRunner coureur = new org.apache.commons.dbutils.QueryRunner(requeteSite.SiteContexte.sourceDonnees);
+		org.apache.commons.dbutils.handlers.ArrayListHandler gestionnaireListe = new org.apache.commons.dbutils.handlers.ArrayListHandler();
+		String cleStr = requeteSite.requete.getParameter("cle");
+		cle = org.apache.commons.lang3.StringUtils.isNumeric(cleStr) ? Long.parseLong(cleStr) : null;
+		utilisateurId = requeteSite.utilisateurId;
+		String nomCanonique = getClass().getCanonicalName();
+		modifie = java.time.LocalDateTime.now();
+		java.sql.Timestamp horodatage = java.sql.Timestamp.valueOf(modifie);
+		
+		if(cle == null) {
+			String sql = "insert into objet(nom_canonique, id_utilisateur, cree, modifie) values(?, ?, ?, ?) returning clep";
+			java.util.List<Object[]> resultats = coureur.insert(sql, gestionnaireListe /*insert into objet(nom_canonique, id_utilisateur, cree, modifie) values(*/, nomCanonique, requeteSite.utilisateurId, horodatage, horodatage /*) returning clep, cree*/);
+			cle = (Long)resultats.get(0)[0];
+			cree = modifie;
+		}
+		else {
+			String sql = "update objet set modifie=? where objet.clep=? and objet.id_utilisateur=? and objet.nom_canonique=? returning cree";
+			java.util.List<Object[]> resultats = coureur.query(sql, gestionnaireListe /*update objet set modifie=*/, horodatage /* where objet.clep=*/, cle /* and objet.id_utilisateur=*/, requeteSite.utilisateurId /* and objet.nom_canonique=*/, nomCanonique /* returning cree*/);
+			if(resultats.size() == 0)
+				throw new Exception("L'objet avec le cle " + cle + " et nom canonique " + cle + " pour utilisateur " + requeteSite.utilisateurId + " " + requeteSite.utilisateurNom + " n'existe pas dejà. ");
+			horodatage = (java.sql.Timestamp)resultats.get(0)[0];
+			cree = java.time.LocalDateTime.from(horodatage.toLocalDateTime());
+		}
+
+		String sqlInsertP = "insert into p(chemin, valeur, cle_objet) values(?, ?, ?) on conflict(chemin, cle_objet) do update set valeur=? where p.chemin=? and p.cle_objet=?";
+		String sqlInsertA = "insert into a(champ1, cle1, champ2, cle2) values(?, ?, ?, ?) on conflict  do nothing";
+		String sqlDeleteP = "delete from p where chemin=? and cle_objet=?";
+		String sqlDeleteA = "delete from a where champ1=? and cle1=? and champ2=? and cle2=?";
+		sauvegarderUtilisateurSite(requeteSite, sqlInsertP, sqlInsertA, sqlDeleteP, sqlDeleteA, gestionnaireListe, coureur);
+	}
+	public void sauvegarderUtilisateurSite(RequeteSite requeteSite, String sqlInsertP, String sqlInsertA, String sqlDeleteP, String sqlDeleteA, org.apache.commons.dbutils.handlers.ArrayListHandler gestionnaireListe, org.apache.commons.dbutils.QueryRunner coureur) throws Exception {
+
+		super.sauvegarderObject(requeteSite, sqlInsertP, sqlInsertA, sqlDeleteP, sqlDeleteA, gestionnaireListe, coureur);
 	}
 }

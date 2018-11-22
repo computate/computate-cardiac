@@ -60,25 +60,41 @@ public class CalculInrApiGen {
 	public static final String VAL_citationDeuxPointsEspaceGuillmets = "\": [";
 	public static final String VAL_guillmetsFin = "]";
 
-	public static final String ENTITE_VAR_inrDate = "inrDate";
-	public static final String ENTITE_VAR_INDEXE_inrDate = "inrDate_indexe_date";
-	public static final String ENTITE_VAR_STOCKE_inrDate = "inrDate_stocke_date";
+	public static final String ENTITE_VAR_dateInr = "dateInr";
+	public static final String ENTITE_VAR_INDEXE_dateInr = "dateInr_indexe_date";
+	public static final String ENTITE_VAR_STOCKE_dateInr = "dateInr_stocke_date";
 
-	public static final String ENTITE_VAR_doseActuelValeur = "doseActuelValeur";
-	public static final String ENTITE_VAR_INDEXE_doseActuelValeur = "doseActuelValeur_indexe_double";
-	public static final String ENTITE_VAR_STOCKE_doseActuelValeur = "doseActuelValeur_stocke_double";
+	public static final String ENTITE_VAR_dateReverifier = "dateReverifier";
+	public static final String ENTITE_VAR_INDEXE_dateReverifier = "dateReverifier_indexe_date";
+	public static final String ENTITE_VAR_STOCKE_dateReverifier = "dateReverifier_stocke_date";
 
-	public static final String ENTITE_VAR_doseActuelTexte = "doseActuelTexte";
-	public static final String ENTITE_VAR_INDEXE_doseActuelTexte = "doseActuelTexte_indexe_string";
-	public static final String ENTITE_VAR_STOCKE_doseActuelTexte = "doseActuelTexte_stocke_string";
+	public static final String ENTITE_VAR_patientPrendCoumadin = "patientPrendCoumadin";
+	public static final String ENTITE_VAR_INDEXE_patientPrendCoumadin = "patientPrendCoumadin_indexe_string";
+	public static final String ENTITE_VAR_STOCKE_patientPrendCoumadin = "patientPrendCoumadin_stocke_string";
 
-	public static final String ENTITE_VAR_changementDoseValeur = "changementDoseValeur";
-	public static final String ENTITE_VAR_INDEXE_changementDoseValeur = "changementDoseValeur_indexe_double";
-	public static final String ENTITE_VAR_STOCKE_changementDoseValeur = "changementDoseValeur_stocke_double";
+	public static final String ENTITE_VAR_butActuel = "butActuel";
+	public static final String ENTITE_VAR_INDEXE_butActuel = "butActuel_indexe_string";
+	public static final String ENTITE_VAR_STOCKE_butActuel = "butActuel_stocke_string";
 
-	public static final String ENTITE_VAR_changementDoseTexte = "changementDoseTexte";
-	public static final String ENTITE_VAR_INDEXE_changementDoseTexte = "changementDoseTexte_indexe_string";
-	public static final String ENTITE_VAR_STOCKE_changementDoseTexte = "changementDoseTexte_stocke_string";
+	public static final String ENTITE_VAR_doseActuel = "doseActuel";
+	public static final String ENTITE_VAR_INDEXE_doseActuel = "doseActuel_indexe_string";
+	public static final String ENTITE_VAR_STOCKE_doseActuel = "doseActuel_stocke_string";
+
+	public static final String ENTITE_VAR_medicamentActuel = "medicamentActuel";
+	public static final String ENTITE_VAR_INDEXE_medicamentActuel = "medicamentActuel_indexe_string";
+	public static final String ENTITE_VAR_STOCKE_medicamentActuel = "medicamentActuel_stocke_string";
+
+	public static final String ENTITE_VAR_changementDose = "changementDose";
+	public static final String ENTITE_VAR_INDEXE_changementDose = "changementDose_indexe_string";
+	public static final String ENTITE_VAR_STOCKE_changementDose = "changementDose_stocke_string";
+
+	public static final String ENTITE_VAR_notesComplementaires = "notesComplementaires";
+	public static final String ENTITE_VAR_INDEXE_notesComplementaires = "notesComplementaires_indexe_string";
+	public static final String ENTITE_VAR_STOCKE_notesComplementaires = "notesComplementaires_stocke_string";
+
+	public static final String ENTITE_VAR_infoContact = "infoContact";
+	public static final String ENTITE_VAR_INDEXE_infoContact = "infoContact_indexe_string";
+	public static final String ENTITE_VAR_STOCKE_infoContact = "infoContact_stocke_string";
 
 	public void handleGetCalculInr(SiteContexte siteContexte) {
 		OpenAPI3RouterFactory usineRouteur = siteContexte.getUsineRouteur_();
@@ -186,16 +202,24 @@ public class CalculInrApiGen {
 
 	public String varIndexeCalculInr(String entiteVar) throws Exception {
 		switch(entiteVar) {
-			case ENTITE_VAR_inrDate:
-				return ENTITE_VAR_INDEXE_inrDate;
-			case ENTITE_VAR_doseActuelValeur:
-				return ENTITE_VAR_INDEXE_doseActuelValeur;
-			case ENTITE_VAR_doseActuelTexte:
-				return ENTITE_VAR_INDEXE_doseActuelTexte;
-			case ENTITE_VAR_changementDoseValeur:
-				return ENTITE_VAR_INDEXE_changementDoseValeur;
-			case ENTITE_VAR_changementDoseTexte:
-				return ENTITE_VAR_INDEXE_changementDoseTexte;
+			case ENTITE_VAR_dateInr:
+				return ENTITE_VAR_INDEXE_dateInr;
+			case ENTITE_VAR_dateReverifier:
+				return ENTITE_VAR_INDEXE_dateReverifier;
+			case ENTITE_VAR_patientPrendCoumadin:
+				return ENTITE_VAR_INDEXE_patientPrendCoumadin;
+			case ENTITE_VAR_butActuel:
+				return ENTITE_VAR_INDEXE_butActuel;
+			case ENTITE_VAR_doseActuel:
+				return ENTITE_VAR_INDEXE_doseActuel;
+			case ENTITE_VAR_medicamentActuel:
+				return ENTITE_VAR_INDEXE_medicamentActuel;
+			case ENTITE_VAR_changementDose:
+				return ENTITE_VAR_INDEXE_changementDose;
+			case ENTITE_VAR_notesComplementaires:
+				return ENTITE_VAR_INDEXE_notesComplementaires;
+			case ENTITE_VAR_infoContact:
+				return ENTITE_VAR_INDEXE_infoContact;
 			default:
 				throw new Exception(String.format("\"%s\" n'est pas une entité indexé. ", entiteVar));
 		}
@@ -278,110 +302,198 @@ public class CalculInrApiGen {
 		if(!champValeurs.isEmpty()) {
 			Object champValeur = champValeurs.iterator().next();
 			if(champValeur != null) {
-				if(ENTITE_VAR_STOCKE_inrDate.equals(entiteVarStocke)) {
+				if(ENTITE_VAR_STOCKE_dateInr.equals(entiteVarStocke)) {
 					if(j > 0)
 						reponseServeur.write(VAL_citationVirguleEspaceCitation);
 					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_inrDate);
+					reponseServeur.write(ENTITE_VAR_dateInr);
 					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
 					reponseServeur.write(DateTimeFormatter.ISO_OFFSET_DATE.format(((Date)champValeur).toInstant().atZone(ZoneId.systemDefault()).toLocalDate()));
 					reponseServeur.write(VAL_citationLigne);
 					j++;
 					return j;
 				}
-				if(ENTITE_VAR_STOCKE_inrDate.equals(entiteVarStocke)) {
+				if(ENTITE_VAR_STOCKE_dateInr.equals(entiteVarStocke)) {
 					if(j > 0)
 						reponseServeur.write(VAL_citationVirguleEspaceCitation);
 					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_inrDate);
+					reponseServeur.write(ENTITE_VAR_dateInr);
 					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
 					reponseServeur.write(DateTimeFormatter.ISO_OFFSET_DATE.format(((Date)champValeur).toInstant().atZone(ZoneId.systemDefault()).toLocalDate()));
 					reponseServeur.write(VAL_citationLigne);
 					j++;
 					return j;
 				}
-				if(ENTITE_VAR_STOCKE_doseActuelValeur.equals(entiteVarStocke)) {
+				if(ENTITE_VAR_STOCKE_dateReverifier.equals(entiteVarStocke)) {
 					if(j > 0)
-						reponseServeur.write(VAL_virguleEspace);
+						reponseServeur.write(VAL_citationVirguleEspaceCitation);
 					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_doseActuelValeur);
-					reponseServeur.write(VAL_citationDeuxPointsEspace);
-					reponseServeur.write(BigDecimal.valueOf((Double)champValeur).toString());
-					reponseServeur.write(VAL_ligne);
+					reponseServeur.write(ENTITE_VAR_dateReverifier);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(DateTimeFormatter.ISO_OFFSET_DATE.format(((Date)champValeur).toInstant().atZone(ZoneId.systemDefault()).toLocalDate()));
+					reponseServeur.write(VAL_citationLigne);
 					j++;
 					return j;
 				}
-				if(ENTITE_VAR_STOCKE_doseActuelValeur.equals(entiteVarStocke)) {
+				if(ENTITE_VAR_STOCKE_dateReverifier.equals(entiteVarStocke)) {
 					if(j > 0)
-						reponseServeur.write(VAL_virguleEspace);
+						reponseServeur.write(VAL_citationVirguleEspaceCitation);
 					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_doseActuelValeur);
-					reponseServeur.write(VAL_citationDeuxPointsEspace);
-					reponseServeur.write(BigDecimal.valueOf((Double)champValeur).toString());
-					reponseServeur.write(VAL_ligne);
+					reponseServeur.write(ENTITE_VAR_dateReverifier);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(DateTimeFormatter.ISO_OFFSET_DATE.format(((Date)champValeur).toInstant().atZone(ZoneId.systemDefault()).toLocalDate()));
+					reponseServeur.write(VAL_citationLigne);
 					j++;
 					return j;
 				}
-				if(ENTITE_VAR_STOCKE_doseActuelTexte.equals(entiteVarStocke)) {
+				if(ENTITE_VAR_STOCKE_patientPrendCoumadin.equals(entiteVarStocke)) {
 					if(j > 0)
 						reponseServeur.write(VAL_virguleEspace);
 					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_doseActuelTexte);
+					reponseServeur.write(ENTITE_VAR_patientPrendCoumadin);
 					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
 					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
 					reponseServeur.write(VAL_citationLigne);
 					j++;
 					return j;
 				}
-				if(ENTITE_VAR_STOCKE_doseActuelTexte.equals(entiteVarStocke)) {
+				if(ENTITE_VAR_STOCKE_patientPrendCoumadin.equals(entiteVarStocke)) {
 					if(j > 0)
 						reponseServeur.write(VAL_virguleEspace);
 					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_doseActuelTexte);
+					reponseServeur.write(ENTITE_VAR_patientPrendCoumadin);
 					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
 					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
 					reponseServeur.write(VAL_citationLigne);
 					j++;
 					return j;
 				}
-				if(ENTITE_VAR_STOCKE_changementDoseValeur.equals(entiteVarStocke)) {
+				if(ENTITE_VAR_STOCKE_butActuel.equals(entiteVarStocke)) {
 					if(j > 0)
 						reponseServeur.write(VAL_virguleEspace);
 					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_changementDoseValeur);
-					reponseServeur.write(VAL_citationDeuxPointsEspace);
-					reponseServeur.write(BigDecimal.valueOf((Double)champValeur).toString());
-					reponseServeur.write(VAL_ligne);
-					j++;
-					return j;
-				}
-				if(ENTITE_VAR_STOCKE_changementDoseValeur.equals(entiteVarStocke)) {
-					if(j > 0)
-						reponseServeur.write(VAL_virguleEspace);
-					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_changementDoseValeur);
-					reponseServeur.write(VAL_citationDeuxPointsEspace);
-					reponseServeur.write(BigDecimal.valueOf((Double)champValeur).toString());
-					reponseServeur.write(VAL_ligne);
-					j++;
-					return j;
-				}
-				if(ENTITE_VAR_STOCKE_changementDoseTexte.equals(entiteVarStocke)) {
-					if(j > 0)
-						reponseServeur.write(VAL_virguleEspace);
-					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_changementDoseTexte);
+					reponseServeur.write(ENTITE_VAR_butActuel);
 					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
 					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
 					reponseServeur.write(VAL_citationLigne);
 					j++;
 					return j;
 				}
-				if(ENTITE_VAR_STOCKE_changementDoseTexte.equals(entiteVarStocke)) {
+				if(ENTITE_VAR_STOCKE_butActuel.equals(entiteVarStocke)) {
 					if(j > 0)
 						reponseServeur.write(VAL_virguleEspace);
 					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_changementDoseTexte);
+					reponseServeur.write(ENTITE_VAR_butActuel);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_doseActuel.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_virguleEspace);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_doseActuel);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_doseActuel.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_virguleEspace);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_doseActuel);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_medicamentActuel.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_virguleEspace);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_medicamentActuel);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_medicamentActuel.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_virguleEspace);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_medicamentActuel);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_changementDose.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_virguleEspace);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_changementDose);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_changementDose.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_virguleEspace);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_changementDose);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_notesComplementaires.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_virguleEspace);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_notesComplementaires);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_notesComplementaires.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_virguleEspace);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_notesComplementaires);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_infoContact.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_virguleEspace);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_infoContact);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_infoContact.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_virguleEspace);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_infoContact);
 					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
 					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
 					reponseServeur.write(VAL_citationLigne);
@@ -399,22 +511,12 @@ public class CalculInrApiGen {
 			try {
 				rc.response().putHeader("content-type", "application/json").setChunked(true);
 				RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte, rc);
-				SolrQuery rechercheSolr = requeteSite.getRechercheSolr_();
-				SolrDocumentList resultatsRecherche = requeteSite.getReponseRecherche().getResults();
-				Integer rechercheLignes = rechercheSolr.getRows();
 
 				genererPostDebutCalculInr(requeteSite);
-				for(long i = resultatsRecherche.getStart(); i < resultatsRecherche.getNumFound(); i+=rechercheLignes) {
-					for(int j = 0; j < resultatsRecherche.size(); j++) {
-						long resultatIndice = i + j;
-						SolrDocument documentSolr = resultatsRecherche.get(j);
-						ResultatRecherche resultatRecherche = new ResultatRecherche();
-						resultatRecherche.setRequeteSite_(requeteSite);
-						resultatRecherche.setDocumentSolr(documentSolr);
-						resultatRecherche.setResultatIndice(resultatIndice);
-						genererPostIndividuelCalculInr(resultatRecherche);
-					}
-				}
+				CalculInr nouveauCalculInr = new CalculInr();
+				 nouveauCalculInr.initLoinCalculInr(requeteSite);
+				 nouveauCalculInr.peuplerCalculInr();
+				postCalculInr();
 				genererPostFinCalculInr(requeteSite);
 				requeteSite.getReponseServeur().end();
 			} catch(Exception e) {
@@ -487,110 +589,198 @@ public class CalculInrApiGen {
 		if(!champValeurs.isEmpty()) {
 			Object champValeur = champValeurs.iterator().next();
 			if(champValeur != null) {
-				if(ENTITE_VAR_STOCKE_inrDate.equals(entiteVarStocke)) {
+				if(ENTITE_VAR_STOCKE_dateInr.equals(entiteVarStocke)) {
 					if(j > 0)
 						reponseServeur.write(VAL_citationVirguleEspaceCitation);
 					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_inrDate);
+					reponseServeur.write(ENTITE_VAR_dateInr);
 					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
 					reponseServeur.write(DateTimeFormatter.ISO_OFFSET_DATE.format(((Date)champValeur).toInstant().atZone(ZoneId.systemDefault()).toLocalDate()));
 					reponseServeur.write(VAL_citationLigne);
 					j++;
 					return j;
 				}
-				if(ENTITE_VAR_STOCKE_inrDate.equals(entiteVarStocke)) {
+				if(ENTITE_VAR_STOCKE_dateInr.equals(entiteVarStocke)) {
 					if(j > 0)
 						reponseServeur.write(VAL_citationVirguleEspaceCitation);
 					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_inrDate);
+					reponseServeur.write(ENTITE_VAR_dateInr);
 					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
 					reponseServeur.write(DateTimeFormatter.ISO_OFFSET_DATE.format(((Date)champValeur).toInstant().atZone(ZoneId.systemDefault()).toLocalDate()));
 					reponseServeur.write(VAL_citationLigne);
 					j++;
 					return j;
 				}
-				if(ENTITE_VAR_STOCKE_doseActuelValeur.equals(entiteVarStocke)) {
+				if(ENTITE_VAR_STOCKE_dateReverifier.equals(entiteVarStocke)) {
 					if(j > 0)
-						reponseServeur.write(VAL_virguleEspace);
+						reponseServeur.write(VAL_citationVirguleEspaceCitation);
 					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_doseActuelValeur);
-					reponseServeur.write(VAL_citationDeuxPointsEspace);
-					reponseServeur.write(BigDecimal.valueOf((Double)champValeur).toString());
-					reponseServeur.write(VAL_ligne);
+					reponseServeur.write(ENTITE_VAR_dateReverifier);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(DateTimeFormatter.ISO_OFFSET_DATE.format(((Date)champValeur).toInstant().atZone(ZoneId.systemDefault()).toLocalDate()));
+					reponseServeur.write(VAL_citationLigne);
 					j++;
 					return j;
 				}
-				if(ENTITE_VAR_STOCKE_doseActuelValeur.equals(entiteVarStocke)) {
+				if(ENTITE_VAR_STOCKE_dateReverifier.equals(entiteVarStocke)) {
 					if(j > 0)
-						reponseServeur.write(VAL_virguleEspace);
+						reponseServeur.write(VAL_citationVirguleEspaceCitation);
 					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_doseActuelValeur);
-					reponseServeur.write(VAL_citationDeuxPointsEspace);
-					reponseServeur.write(BigDecimal.valueOf((Double)champValeur).toString());
-					reponseServeur.write(VAL_ligne);
+					reponseServeur.write(ENTITE_VAR_dateReverifier);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(DateTimeFormatter.ISO_OFFSET_DATE.format(((Date)champValeur).toInstant().atZone(ZoneId.systemDefault()).toLocalDate()));
+					reponseServeur.write(VAL_citationLigne);
 					j++;
 					return j;
 				}
-				if(ENTITE_VAR_STOCKE_doseActuelTexte.equals(entiteVarStocke)) {
+				if(ENTITE_VAR_STOCKE_patientPrendCoumadin.equals(entiteVarStocke)) {
 					if(j > 0)
 						reponseServeur.write(VAL_virguleEspace);
 					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_doseActuelTexte);
+					reponseServeur.write(ENTITE_VAR_patientPrendCoumadin);
 					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
 					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
 					reponseServeur.write(VAL_citationLigne);
 					j++;
 					return j;
 				}
-				if(ENTITE_VAR_STOCKE_doseActuelTexte.equals(entiteVarStocke)) {
+				if(ENTITE_VAR_STOCKE_patientPrendCoumadin.equals(entiteVarStocke)) {
 					if(j > 0)
 						reponseServeur.write(VAL_virguleEspace);
 					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_doseActuelTexte);
+					reponseServeur.write(ENTITE_VAR_patientPrendCoumadin);
 					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
 					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
 					reponseServeur.write(VAL_citationLigne);
 					j++;
 					return j;
 				}
-				if(ENTITE_VAR_STOCKE_changementDoseValeur.equals(entiteVarStocke)) {
+				if(ENTITE_VAR_STOCKE_butActuel.equals(entiteVarStocke)) {
 					if(j > 0)
 						reponseServeur.write(VAL_virguleEspace);
 					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_changementDoseValeur);
-					reponseServeur.write(VAL_citationDeuxPointsEspace);
-					reponseServeur.write(BigDecimal.valueOf((Double)champValeur).toString());
-					reponseServeur.write(VAL_ligne);
-					j++;
-					return j;
-				}
-				if(ENTITE_VAR_STOCKE_changementDoseValeur.equals(entiteVarStocke)) {
-					if(j > 0)
-						reponseServeur.write(VAL_virguleEspace);
-					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_changementDoseValeur);
-					reponseServeur.write(VAL_citationDeuxPointsEspace);
-					reponseServeur.write(BigDecimal.valueOf((Double)champValeur).toString());
-					reponseServeur.write(VAL_ligne);
-					j++;
-					return j;
-				}
-				if(ENTITE_VAR_STOCKE_changementDoseTexte.equals(entiteVarStocke)) {
-					if(j > 0)
-						reponseServeur.write(VAL_virguleEspace);
-					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_changementDoseTexte);
+					reponseServeur.write(ENTITE_VAR_butActuel);
 					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
 					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
 					reponseServeur.write(VAL_citationLigne);
 					j++;
 					return j;
 				}
-				if(ENTITE_VAR_STOCKE_changementDoseTexte.equals(entiteVarStocke)) {
+				if(ENTITE_VAR_STOCKE_butActuel.equals(entiteVarStocke)) {
 					if(j > 0)
 						reponseServeur.write(VAL_virguleEspace);
 					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_changementDoseTexte);
+					reponseServeur.write(ENTITE_VAR_butActuel);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_doseActuel.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_virguleEspace);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_doseActuel);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_doseActuel.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_virguleEspace);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_doseActuel);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_medicamentActuel.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_virguleEspace);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_medicamentActuel);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_medicamentActuel.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_virguleEspace);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_medicamentActuel);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_changementDose.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_virguleEspace);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_changementDose);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_changementDose.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_virguleEspace);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_changementDose);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_notesComplementaires.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_virguleEspace);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_notesComplementaires);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_notesComplementaires.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_virguleEspace);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_notesComplementaires);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_infoContact.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_virguleEspace);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_infoContact);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_infoContact.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_virguleEspace);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_infoContact);
 					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
 					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
 					reponseServeur.write(VAL_citationLigne);
@@ -603,6 +793,309 @@ public class CalculInrApiGen {
 	}
 
 	public void genererPostFinCalculInr(RequeteSite requeteSite) {
+		HttpServerResponse reponseServeur = requeteSite.getReponseServeur();
+		reponseServeur.write("\t]\n");
+		reponseServeur.write("}\n");
+	}
+
+	protected void handlePatchCalculInr(SiteContexte siteContexte) {
+		OpenAPI3RouterFactory usineRouteur = siteContexte.getUsineRouteur_();
+		usineRouteur.addHandlerByOperationId("patchCalculInr", rc -> {
+			try {
+				rc.response().putHeader("content-type", "application/json").setChunked(true);
+				RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte, rc);
+				SolrQuery rechercheSolr = requeteSite.getRechercheSolr_();
+				SolrDocumentList resultatsRecherche = requeteSite.getReponseRecherche().getResults();
+				Integer rechercheLignes = rechercheSolr.getRows();
+
+				genererPatchDebutCalculInr(requeteSite);
+				for(long i = resultatsRecherche.getStart(); i < resultatsRecherche.getNumFound(); i+=rechercheLignes) {
+					for(int j = 0; j < resultatsRecherche.size(); j++) {
+						long resultatIndice = i + j;
+						SolrDocument documentSolr = resultatsRecherche.get(j);
+						ResultatRecherche resultatRecherche = new ResultatRecherche();
+						resultatRecherche.setRequeteSite_(requeteSite);
+						resultatRecherche.setDocumentSolr(documentSolr);
+						resultatRecherche.setResultatIndice(resultatIndice);
+						genererPatchIndividuelCalculInr(resultatRecherche);
+					}
+				}
+				genererPatchFinCalculInr(requeteSite);
+				requeteSite.getReponseServeur().end();
+			} catch(Exception e) {
+				LOGGER.error("Error: ", e.getMessage());
+				rc.fail(e);
+			}
+		});
+	}
+
+	public void genererPatchDebutCalculInr(RequeteSite requeteSite) {
+		HttpServerResponse reponseServeur = requeteSite.getReponseServeur();
+		QueryResponse reponseRecherche = requeteSite.getReponseRecherche();
+		reponseServeur.write("{\n");
+		Long millisRecherche = Long.valueOf(reponseRecherche.getQTime());
+		Long millisTransmission = reponseRecherche.getElapsedTime();
+		Long numCommence = reponseRecherche.getResults().getStart();
+		Long numTrouve = reponseRecherche.getResults().getNumFound();
+		Integer numRetourne = reponseRecherche.getResponse().size();
+		String tempsRecherche = String.format("%d.%03d sec", TimeUnit.MILLISECONDS.toSeconds(millisRecherche), TimeUnit.MILLISECONDS.toMillis(millisRecherche) - TimeUnit.SECONDS.toMillis(TimeUnit.MILLISECONDS.toSeconds(millisRecherche)));
+		String tempsTransmission = String.format("%d.%03d sec", TimeUnit.MILLISECONDS.toSeconds(millisTransmission), TimeUnit.MILLISECONDS.toMillis(millisTransmission) - TimeUnit.SECONDS.toSeconds(TimeUnit.MILLISECONDS.toSeconds(millisTransmission)));
+		Exception exceptionRecherche = reponseRecherche.getException();
+
+		reponseServeur.write("\t\"numCommence\": ");
+		reponseServeur.write(numCommence.toString());
+
+		reponseServeur.write(",\n\t\"numTrouve\": ");
+		reponseServeur.write(numTrouve.toString());
+
+		reponseServeur.write(",\n\t\"numRetourne\": ");
+		reponseServeur.write(numRetourne.toString());
+
+		reponseServeur.write(",\n\t\"tempsRecherche\": \"");
+		reponseServeur.write(tempsRecherche);
+		reponseServeur.write("\"");
+
+		reponseServeur.write(",\n\t\"tempsTransmission\": \"");
+		reponseServeur.write(tempsTransmission);
+		reponseServeur.write("\"");
+
+		if(exceptionRecherche != null) {
+			reponseServeur.write(",\n\t\"exceptionRecherche\": \"");
+			reponseServeur.write(exceptionRecherche.getMessage());
+			reponseServeur.write("\"");
+		}
+
+		reponseServeur.write(",\n\t\"resultats\": [\n");
+	}
+
+	public void genererPatchIndividuelCalculInr(ResultatRecherche resultatRecherche) throws Exception {
+		RequeteSite requeteSite = resultatRecherche.getRequeteSite_();
+		SolrDocument documentSolr = resultatRecherche.getDocumentSolr();
+		Long resultatIndice = resultatRecherche.getResultatIndice();
+		HttpServerResponse reponseServeur = requeteSite.getReponseServeur();
+		reponseServeur.write("\t\t");
+		if(resultatIndice > 0)
+			reponseServeur.write(", ");
+		reponseServeur.write("{\n");
+		Collection<String> champNoms = documentSolr.getFieldNames();
+		Integer j = 0;
+		for(String champNomStocke : champNoms) {
+			Collection<Object> champValeurs = documentSolr.getFieldValues(champNomStocke);
+			j = genererPatchCalculInr(j, resultatRecherche, champNomStocke, champValeurs);
+		}
+		reponseServeur.write("\t\t}\n");
+	}
+
+	public Integer genererPatchCalculInr(Integer j, ResultatRecherche resultatRecherche, String entiteVarStocke, Collection<Object> champValeurs) throws Exception {
+		RequeteSite requeteSite = resultatRecherche.getRequeteSite_();
+		HttpServerResponse reponseServeur = requeteSite.getReponseServeur();
+		if(!champValeurs.isEmpty()) {
+			Object champValeur = champValeurs.iterator().next();
+			if(champValeur != null) {
+				if(ENTITE_VAR_STOCKE_dateInr.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_citationVirguleEspaceCitation);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_dateInr);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(DateTimeFormatter.ISO_OFFSET_DATE.format(((Date)champValeur).toInstant().atZone(ZoneId.systemDefault()).toLocalDate()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_dateInr.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_citationVirguleEspaceCitation);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_dateInr);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(DateTimeFormatter.ISO_OFFSET_DATE.format(((Date)champValeur).toInstant().atZone(ZoneId.systemDefault()).toLocalDate()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_dateReverifier.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_citationVirguleEspaceCitation);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_dateReverifier);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(DateTimeFormatter.ISO_OFFSET_DATE.format(((Date)champValeur).toInstant().atZone(ZoneId.systemDefault()).toLocalDate()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_dateReverifier.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_citationVirguleEspaceCitation);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_dateReverifier);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(DateTimeFormatter.ISO_OFFSET_DATE.format(((Date)champValeur).toInstant().atZone(ZoneId.systemDefault()).toLocalDate()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_patientPrendCoumadin.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_virguleEspace);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_patientPrendCoumadin);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_patientPrendCoumadin.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_virguleEspace);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_patientPrendCoumadin);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_butActuel.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_virguleEspace);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_butActuel);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_butActuel.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_virguleEspace);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_butActuel);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_doseActuel.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_virguleEspace);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_doseActuel);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_doseActuel.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_virguleEspace);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_doseActuel);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_medicamentActuel.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_virguleEspace);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_medicamentActuel);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_medicamentActuel.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_virguleEspace);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_medicamentActuel);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_changementDose.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_virguleEspace);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_changementDose);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_changementDose.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_virguleEspace);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_changementDose);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_notesComplementaires.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_virguleEspace);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_notesComplementaires);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_notesComplementaires.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_virguleEspace);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_notesComplementaires);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_infoContact.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_virguleEspace);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_infoContact);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+				if(ENTITE_VAR_STOCKE_infoContact.equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(VAL_virguleEspace);
+					reponseServeur.write(VAL_citation);
+					reponseServeur.write(ENTITE_VAR_infoContact);
+					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write(VAL_citationLigne);
+					j++;
+					return j;
+				}
+			}
+		}
+		return j;
+	}
+
+	public void genererPatchFinCalculInr(RequeteSite requeteSite) {
 		HttpServerResponse reponseServeur = requeteSite.getReponseServeur();
 		reponseServeur.write("\t]\n");
 		reponseServeur.write("}\n");
