@@ -4,11 +4,11 @@ import org.computate.frFR.cardiaque.couverture.Couverture;
 import org.computate.frFR.cardiaque.config.ConfigSite;
 import org.computate.frFR.cardiaque.cluster.Cluster;
 import io.vertx.core.Vertx;
-import io.vertx.ext.web.Router;
 import java.lang.Integer;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
 import java.lang.Object;
+import io.vertx.ext.web.api.contract.openapi3.OpenAPI3RouterFactory;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.oauth2.OAuth2Auth;
 import java.lang.String;
@@ -37,7 +37,7 @@ public abstract class SiteContexteGen<DEV> extends Object {
 		return vertx_;
 	}
 
-	public void setVertx_(Vertx o) throws Exception {
+	public void setVertx_(Vertx o) {
 		this.vertx_ = o;
 	}
 	protected void vertx_Init() throws Exception {
@@ -70,7 +70,7 @@ public abstract class SiteContexteGen<DEV> extends Object {
 		return siteAuth_;
 	}
 
-	public void setSiteAuth_(OAuth2Auth o) throws Exception {
+	public void setSiteAuth_(OAuth2Auth o) {
 		this.siteAuth_ = o;
 	}
 	protected void siteAuth_Init() throws Exception {
@@ -82,37 +82,37 @@ public abstract class SiteContexteGen<DEV> extends Object {
 		siteAuth_Couverture.dejaInitialise(true);
 	}
 
-	//////////////////
-	// siteRouteur_ //
-	//////////////////
+	///////////////////
+	// usineRouteur_ //
+	///////////////////
 
-	/**	L'entité « siteRouteur_ »
+	/**	L'entité « usineRouteur_ »
 	 *	 est défini comme null avant d'être initialisé. 
 	 */
-	protected Router siteRouteur_;
-	public Couverture<Router> siteRouteur_Couverture = new Couverture<Router>().p(this).c(Router.class).var("siteRouteur_").o(siteRouteur_);
+	protected OpenAPI3RouterFactory usineRouteur_;
+	public Couverture<OpenAPI3RouterFactory> usineRouteur_Couverture = new Couverture<OpenAPI3RouterFactory>().p(this).c(OpenAPI3RouterFactory.class).var("usineRouteur_").o(usineRouteur_);
 
-	/**	L'entité « siteRouteur_ »
+	/**	L'entité « usineRouteur_ »
 	 *	 est défini comme null avant d'être initialisé. 
 	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
 	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
 	 */
-	protected abstract void _siteRouteur_(Couverture<Router> o) throws Exception;
+	protected abstract void _usineRouteur_(Couverture<OpenAPI3RouterFactory> o) throws Exception;
 
-	public Router getSiteRouteur_() {
-		return siteRouteur_;
+	public OpenAPI3RouterFactory getUsineRouteur_() {
+		return usineRouteur_;
 	}
 
-	public void setSiteRouteur_(Router o) throws Exception {
-		this.siteRouteur_ = o;
+	public void setUsineRouteur_(OpenAPI3RouterFactory o) {
+		this.usineRouteur_ = o;
 	}
-	protected void siteRouteur_Init() throws Exception {
-		if(!siteRouteur_Couverture.dejaInitialise) {
-			_siteRouteur_(siteRouteur_Couverture);
-			if(siteRouteur_ == null)
-				setSiteRouteur_(siteRouteur_Couverture.o);
+	protected void usineRouteur_Init() throws Exception {
+		if(!usineRouteur_Couverture.dejaInitialise) {
+			_usineRouteur_(usineRouteur_Couverture);
+			if(usineRouteur_ == null)
+				setUsineRouteur_(usineRouteur_Couverture.o);
 		}
-		siteRouteur_Couverture.dejaInitialise(true);
+		usineRouteur_Couverture.dejaInitialise(true);
 	}
 
 	////////////////
@@ -136,7 +136,7 @@ public abstract class SiteContexteGen<DEV> extends Object {
 		return configSite;
 	}
 
-	public void setConfigSite(ConfigSite o) throws Exception {
+	public void setConfigSite(ConfigSite o) {
 		this.configSite = o;
 	}
 	protected void configSiteInit() throws Exception {
@@ -168,7 +168,7 @@ public abstract class SiteContexteGen<DEV> extends Object {
 		return jdbcConfig;
 	}
 
-	public void setJdbcConfig(JsonObject o) throws Exception {
+	public void setJdbcConfig(JsonObject o) {
 		this.jdbcConfig = o;
 	}
 	protected void jdbcConfigInit() throws Exception {
@@ -199,7 +199,7 @@ public abstract class SiteContexteGen<DEV> extends Object {
 		return clientSql;
 	}
 
-	public void setClientSql(SQLClient o) throws Exception {
+	public void setClientSql(SQLClient o) {
 		this.clientSql = o;
 	}
 	protected void clientSqlInit() throws Exception {
@@ -232,7 +232,7 @@ public abstract class SiteContexteGen<DEV> extends Object {
 		return clientSolr;
 	}
 
-	public void setClientSolr(HttpSolrClient o) throws Exception {
+	public void setClientSolr(HttpSolrClient o) {
 		this.clientSolr = o;
 	}
 	protected void clientSolrInit() throws Exception {
@@ -242,6 +242,39 @@ public abstract class SiteContexteGen<DEV> extends Object {
 				setClientSolr(clientSolrCouverture.o);
 		}
 		clientSolrCouverture.dejaInitialise(true);
+	}
+
+	/////////////////////////
+	// clientSolrComputate //
+	/////////////////////////
+
+	/**	L'entité « clientSolrComputate »
+	 *	 est défini comme null avant d'être initialisé. 
+	 */
+	protected HttpSolrClient clientSolrComputate;
+	public Couverture<HttpSolrClient> clientSolrComputateCouverture = new Couverture<HttpSolrClient>().p(this).c(HttpSolrClient.class).var("clientSolrComputate").o(clientSolrComputate);
+
+	/**	L'entité « clientSolrComputate »
+	 *	 est défini comme null avant d'être initialisé. 
+	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
+	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
+	 */
+	protected abstract void _clientSolrComputate(Couverture<HttpSolrClient> o) throws Exception;
+
+	public HttpSolrClient getClientSolrComputate() {
+		return clientSolrComputate;
+	}
+
+	public void setClientSolrComputate(HttpSolrClient o) {
+		this.clientSolrComputate = o;
+	}
+	protected void clientSolrComputateInit() throws Exception {
+		if(!clientSolrComputateCouverture.dejaInitialise) {
+			_clientSolrComputate(clientSolrComputateCouverture);
+			if(clientSolrComputate == null)
+				setClientSolrComputate(clientSolrComputateCouverture.o);
+		}
+		clientSolrComputateCouverture.dejaInitialise(true);
 	}
 
 	/////////////////
@@ -265,7 +298,7 @@ public abstract class SiteContexteGen<DEV> extends Object {
 		return selCryptage;
 	}
 
-	public void setSelCryptage(String o) throws Exception {
+	public void setSelCryptage(String o) {
 		this.selCryptage = o;
 	}
 	protected void selCryptageInit() throws Exception {
@@ -298,7 +331,7 @@ public abstract class SiteContexteGen<DEV> extends Object {
 		return motDePasseCryptage;
 	}
 
-	public void setMotDePasseCryptage(String o) throws Exception {
+	public void setMotDePasseCryptage(String o) {
 		this.motDePasseCryptage = o;
 	}
 	protected void motDePasseCryptageInit() throws Exception {
@@ -331,7 +364,7 @@ public abstract class SiteContexteGen<DEV> extends Object {
 		return jetonIdentitePaypal;
 	}
 
-	public void setJetonIdentitePaypal(String o) throws Exception {
+	public void setJetonIdentitePaypal(String o) {
 		this.jetonIdentitePaypal = o;
 	}
 	protected void jetonIdentitePaypalInit() throws Exception {
@@ -364,7 +397,7 @@ public abstract class SiteContexteGen<DEV> extends Object {
 		return nombreExecuteurs;
 	}
 
-	public void setNombreExecuteurs(Integer o) throws Exception {
+	public void setNombreExecuteurs(Integer o) {
 		this.nombreExecuteurs = o;
 	}
 	public SiteContexte setNombreExecuteurs(String o) throws Exception {
@@ -402,7 +435,7 @@ public abstract class SiteContexteGen<DEV> extends Object {
 		return requeteSite_;
 	}
 
-	public void setRequeteSite_(RequeteSite o) throws Exception {
+	public void setRequeteSite_(RequeteSite o) {
 		this.requeteSite_ = o;
 	}
 	protected void requeteSite_Init() throws Exception {
@@ -427,11 +460,12 @@ public abstract class SiteContexteGen<DEV> extends Object {
 		if(!dejaInitialiseSiteContexte) {
 			vertx_Init();
 			siteAuth_Init();
-			siteRouteur_Init();
+			usineRouteur_Init();
 			configSiteInit();
 			jdbcConfigInit();
 			clientSqlInit();
 			clientSolrInit();
+			clientSolrComputateInit();
 			selCryptageInit();
 			motDePasseCryptageInit();
 			jetonIdentitePaypalInit();
@@ -481,8 +515,8 @@ public abstract class SiteContexteGen<DEV> extends Object {
 				return oSiteContexte.vertx_;
 			case "siteAuth_":
 				return oSiteContexte.siteAuth_;
-			case "siteRouteur_":
-				return oSiteContexte.siteRouteur_;
+			case "usineRouteur_":
+				return oSiteContexte.usineRouteur_;
 			case "configSite":
 				return oSiteContexte.configSite;
 			case "jdbcConfig":
@@ -491,6 +525,8 @@ public abstract class SiteContexteGen<DEV> extends Object {
 				return oSiteContexte.clientSql;
 			case "clientSolr":
 				return oSiteContexte.clientSolr;
+			case "clientSolrComputate":
+				return oSiteContexte.clientSolrComputate;
 			case "selCryptage":
 				return oSiteContexte.selCryptage;
 			case "motDePasseCryptage":

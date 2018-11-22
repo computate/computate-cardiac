@@ -36,7 +36,7 @@ public abstract class ClusterGen<DEV> extends Object {
 		return requeteSite_;
 	}
 
-	public void setRequeteSite_(RequeteSite o) throws Exception {
+	public void setRequeteSite_(RequeteSite o) {
 		this.requeteSite_ = o;
 	}
 	protected void requeteSite_Init() throws Exception {
@@ -69,7 +69,7 @@ public abstract class ClusterGen<DEV> extends Object {
 		return page_;
 	}
 
-	public void setPage_(MiseEnPage o) throws Exception {
+	public void setPage_(MiseEnPage o) {
 		this.page_ = o;
 	}
 	protected void page_Init() throws Exception {
@@ -102,7 +102,7 @@ public abstract class ClusterGen<DEV> extends Object {
 		return pk;
 	}
 
-	public void setPk(Long o) throws Exception {
+	public void setPk(Long o) {
 		this.pk = o;
 	}
 	public Cluster setPk(String o) throws Exception {
@@ -140,7 +140,7 @@ public abstract class ClusterGen<DEV> extends Object {
 		return id;
 	}
 
-	public void setId(String o) throws Exception {
+	public void setId(String o) {
 		this.id = o;
 	}
 	protected void idInit() throws Exception {
@@ -173,7 +173,7 @@ public abstract class ClusterGen<DEV> extends Object {
 		return cree;
 	}
 
-	public void setCree(LocalDateTime o) throws Exception {
+	public void setCree(LocalDateTime o) {
 		this.cree = o;
 	}
 	/** Example: 2011-12-03T10:15:30+01:00 **/
@@ -215,7 +215,7 @@ public abstract class ClusterGen<DEV> extends Object {
 		return modifie;
 	}
 
-	public void setModifie(LocalDateTime o) throws Exception {
+	public void setModifie(LocalDateTime o) {
 		this.modifie = o;
 	}
 	/** Example: 2011-12-03T10:15:30+01:00 **/
@@ -257,7 +257,7 @@ public abstract class ClusterGen<DEV> extends Object {
 		return utilisateurId;
 	}
 
-	public void setUtilisateurId(String o) throws Exception {
+	public void setUtilisateurId(String o) {
 		this.utilisateurId = o;
 	}
 	protected void utilisateurIdInit() throws Exception {
@@ -290,7 +290,7 @@ public abstract class ClusterGen<DEV> extends Object {
 		return clusterNomCanonique;
 	}
 
-	public void setClusterNomCanonique(String o) throws Exception {
+	public void setClusterNomCanonique(String o) {
 		this.clusterNomCanonique = o;
 	}
 	protected void clusterNomCanoniqueInit() throws Exception {
@@ -323,7 +323,7 @@ public abstract class ClusterGen<DEV> extends Object {
 		return clusterNomSimple;
 	}
 
-	public void setClusterNomSimple(String o) throws Exception {
+	public void setClusterNomSimple(String o) {
 		this.clusterNomSimple = o;
 	}
 	protected void clusterNomSimpleInit() throws Exception {
@@ -356,7 +356,7 @@ public abstract class ClusterGen<DEV> extends Object {
 		return supprime;
 	}
 
-	public void setSupprime(Boolean o) throws Exception {
+	public void setSupprime(Boolean o) {
 		this.supprime = o;
 	}
 	public Cluster setSupprime(String o) throws Exception {

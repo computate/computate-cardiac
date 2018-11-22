@@ -3,6 +3,7 @@ package org.computate.frFR.cardiaque.cluster;
 import io.vertx.core.http.HttpServerRequest;
 import org.computate.frFR.cardiaque.recherche.ResultatRecherche;
 import io.vertx.core.json.Json;
+import io.vertx.ext.web.api.validation.ParameterTypeValidator;
 import org.computate.frFR.cardiaque.config.ConfigSite;
 import org.apache.solr.common.SolrDocumentList;
 import java.util.Date;
@@ -16,8 +17,11 @@ import io.vertx.core.logging.LoggerFactory;
 import java.math.BigDecimal;
 import java.util.Map;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
+import io.vertx.ext.web.api.validation.HTTPRequestValidationHandler;
+import io.vertx.ext.web.api.contract.openapi3.OpenAPI3RouterFactory;
 import io.vertx.core.logging.Logger;
 import java.io.PrintWriter;
+import io.vertx.ext.web.api.validation.ValidationException;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import java.util.Collection;
 import io.vertx.core.Vertx;
@@ -88,10 +92,12 @@ public class ClusterApiGen {
 
 	public static final String ENTITE_VAR_supprime = "supprime";
 
-	public void handleGetCluster(SiteContexte siteContexte) {
-		Router siteRouteur = siteContexte.getSiteRouteur_();
-		siteRouteur.get("").handler(rc -> {
+	public void getCluster(SiteContexte siteContexte) {
+		OpenAPI3RouterFactory usineRouteur = siteContexte.getUsineRouteur_();
+
+		usineRouteur.addHandlerByOperationId("getCluster", rc -> {
 			try {
+
 				rc.response().putHeader("content-type", "application/json").setChunked(true);
 				RequeteSite requeteSite = genererRequeteSitePourCluster(siteContexte, rc);
 				SolrQuery rechercheSolr = requeteSite.getRechercheSolr_();
@@ -115,6 +121,14 @@ public class ClusterApiGen {
 			} catch(Exception e) {
 				LOGGER.error("Error: ", e.getMessage());
 				rc.fail(e);
+			}
+		});
+		usineRouteur.addFailureHandlerByOperationId("getCluster", rc -> {
+			Throwable failure = rc.failure();
+			if (failure instanceof ValidationException) {
+				String validationErrorMessage = failure.getMessage();
+				LOGGER.error("Error: ", validationErrorMessage);
+				rc.fail(failure);
 			}
 		});
 	}
@@ -415,9 +429,9 @@ public class ClusterApiGen {
 		return j;
 	}
 
-	protected void handlePostCluster(SiteContexte siteContexte) {
-		Router siteRouteur = siteContexte.getSiteRouteur_();
-		siteRouteur.get("").handler(rc -> {
+	protected void postCluster(SiteContexte siteContexte) {
+		OpenAPI3RouterFactory usineRouteur = siteContexte.getUsineRouteur_();
+		usineRouteur.addHandlerByOperationId("postCluster", rc -> {
 			try {
 				rc.response().putHeader("content-type", "application/json").setChunked(true);
 				RequeteSite requeteSite = genererRequeteSitePourCluster(siteContexte, rc);

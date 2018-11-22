@@ -325,8 +325,8 @@ public class RequeteSite extends RequeteSiteGen<Object> implements Serializable 
 //		requeteSite.initialiserLoinRequeteSite();
 //
 //		GenerateurClasse generateurClasse = new GenerateurClasse();
-//		generateurClasse.cheminConfiguration(SiteContexte.cheminConfig);
-//		String cheminRessource = SiteContexte.configSite.cheminProjet + "/src/main/java/" + getClass().getCanonicalName().replace(".", "/") + ".java";
+//		generateurClasse.configCheminuration(SiteContexte.configChemin);
+//		String cheminRessource = SiteContexte.configSite.appliChemin + "/src/main/java/" + getClass().getCanonicalName().replace(".", "/") + ".java";
 //		generateurClasse.requeteSite(requeteSite);
 //		generateurClasse.cheminRessource(cheminRessource);
 //		generateurClasse.initialiserLoinGenerateurClasse(requeteSite);

@@ -29,8 +29,8 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 	}
 
 	/**	Le chemin vers le fichier de config du site. **/
-	protected void _cheminConfig(Couverture<String> c) throws Exception {   
-		String o = System.getenv("cheminConfig");
+	protected void _configChemin(Couverture<String> c) throws Exception {   
+		String o = System.getenv("configChemin");
 		c.o(o);
 	}
 
@@ -42,8 +42,8 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 	 **/ 
 	protected void _config(Couverture<INIConfiguration> c) throws Exception {
 		Configurations configurations = new Configurations();
-		File fichierConfig = new File(cheminConfig);
-		if(cheminConfig != null && fichierConfig.exists()) {
+		File fichierConfig = new File(configChemin);
+		if(configChemin != null && fichierConfig.exists()) {
 			INIConfiguration o = configurations.ini(fichierConfig);
 			c.o(o);
 		}
@@ -66,13 +66,14 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 		c.o(o);
 	}
 
-	/**	Le chemin vers le projet du site cloné de git. **/
-	protected void _cheminProjet(Couverture<String> c) throws Exception {
+	/**	Le chemin vers le projet du site cloné de git. **/  
+	protected void _appliChemin(Couverture<String> c) throws Exception {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
 		else
-			o = config.getString(prefixeEchappe + c.var);
+			o = config.getString(prefixeEchappe + c.var, StringUtils.substringBefore(configChemin, "/config/"));
+
 		c.o(o);
 	}
 
@@ -225,7 +226,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 	}
 
 	/**	Le nom d'affichage du site. **/
-	protected void _nomAffichageSite(Couverture<String> c) throws Exception {
+	protected void _siteNomAffichage(Couverture<String> c) throws Exception {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -327,6 +328,16 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 
 	/**	L'URL vers le moteur de recherche SOLR. **/
 	protected void _solrUrl(Couverture<String> c) throws Exception {
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = config.getString(prefixeEchappe + c.var);
+		c.o(o);
+	}
+
+	/**	L'URL vers le moteur de recherche SOLR. **/
+	protected void _solrUrlComputate(Couverture<String> c) throws Exception {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -452,6 +463,96 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 			o = Integer.parseInt(System.getenv(c.var), 1);
 		else
 			o = config.getInt(prefixeEchappe + c.var, 1);
+		c.o(o);
+	}
+
+	protected void _openApiVersion(Couverture<String> c) throws Exception {
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = config.getString(prefixeEchappe + c.var, "3.0.0");
+		c.o(o);
+	}
+
+	protected void _apiDescription(Couverture<String> c) throws Exception {
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = config.getString(prefixeEchappe + c.var, "2.0");
+		c.o(o);
+	}
+
+	protected void _apiTitre(Couverture<String> c) throws Exception {
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = config.getString(prefixeEchappe + c.var, siteNomAffichage);
+		c.o(o);
+	}
+
+	protected void _apiTermsService(Couverture<String> c) throws Exception {
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = config.getString(prefixeEchappe + c.var, "http://swagger.io/terms/");
+		c.o(o);
+	}
+
+	protected void _apiVersion(Couverture<String> c) throws Exception {
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = config.getString(prefixeEchappe + c.var, "1");
+		c.o(o);
+	}
+
+	protected void _apiContactMail(Couverture<String> c) throws Exception {
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = config.getString(prefixeEchappe + c.var);
+		c.o(o);
+	}
+
+	protected void _apiLicenceNom(Couverture<String> c) throws Exception {
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = config.getString(prefixeEchappe + c.var, "Apache 2.0");
+		c.o(o);
+	}
+
+	protected void _apiLicenceUrl(Couverture<String> c) throws Exception {
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = config.getString(prefixeEchappe + c.var, "http://www.apache.org/licenses/LICENSE-2.0.html");
+		c.o(o);
+	}
+
+	protected void _apiNomHote(Couverture<String> c) throws Exception {
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = config.getString(prefixeEchappe + c.var, siteNomHote);
+		c.o(o);
+	}
+
+	protected void _apiCheminBase(Couverture<String> c) throws Exception {
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = config.getString(prefixeEchappe + c.var, "/api/v" + apiVersion);
 		c.o(o);
 	}
 }

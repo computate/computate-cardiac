@@ -33,7 +33,7 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 		return inrDate;
 	}
 
-	public void setInrDate(LocalDate o) throws Exception {
+	public void setInrDate(LocalDate o) {
 		this.inrDate = o;
 	}
 	/** Example: 2011-12-03+01:00 **/
@@ -75,11 +75,19 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 		return doseActuelValeur;
 	}
 
-	public void setDoseActuelValeur(BigDecimal o) throws Exception {
+	public void setDoseActuelValeur(BigDecimal o) {
 		this.doseActuelValeur = o;
 	}
 	public CalculInr setDoseActuelValeur(String o) throws Exception {
 		if(org.apache.commons.lang3.math.NumberUtils.isCreatable(o))
+			this.doseActuelValeur = new BigDecimal(o);
+		return (CalculInr)this;
+	}
+	public CalculInr setDoseActuelValeur(Double o) throws Exception {
+			this.doseActuelValeur = new BigDecimal(o);
+		return (CalculInr)this;
+	}
+	public CalculInr setDoseActuelValeur(Integer o) throws Exception {
 			this.doseActuelValeur = new BigDecimal(o);
 		return (CalculInr)this;
 	}
@@ -113,7 +121,7 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 		return doseActuelTexte;
 	}
 
-	public void setDoseActuelTexte(Chaine o) throws Exception {
+	public void setDoseActuelTexte(Chaine o) {
 		this.doseActuelTexte = o;
 	}
 	public CalculInr setDoseActuelTexte(String o) throws Exception {
@@ -149,11 +157,19 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 		return changementDoseValeur;
 	}
 
-	public void setChangementDoseValeur(BigDecimal o) throws Exception {
+	public void setChangementDoseValeur(BigDecimal o) {
 		this.changementDoseValeur = o;
 	}
 	public CalculInr setChangementDoseValeur(String o) throws Exception {
 		if(org.apache.commons.lang3.math.NumberUtils.isCreatable(o))
+			this.changementDoseValeur = new BigDecimal(o);
+		return (CalculInr)this;
+	}
+	public CalculInr setChangementDoseValeur(Double o) throws Exception {
+			this.changementDoseValeur = new BigDecimal(o);
+		return (CalculInr)this;
+	}
+	public CalculInr setChangementDoseValeur(Integer o) throws Exception {
 			this.changementDoseValeur = new BigDecimal(o);
 		return (CalculInr)this;
 	}
@@ -187,7 +203,7 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 		return changementDoseTexte;
 	}
 
-	public void setChangementDoseTexte(Chaine o) throws Exception {
+	public void setChangementDoseTexte(Chaine o) {
 		this.changementDoseTexte = o;
 	}
 	public CalculInr setChangementDoseTexte(String o) throws Exception {

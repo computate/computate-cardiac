@@ -14,10 +14,10 @@ import io.vertx.ext.auth.oauth2.OAuth2Auth;
 import io.vertx.ext.jdbc.JDBCClient;
 import io.vertx.ext.sql.SQLClient;
 import io.vertx.ext.web.Router;
+import io.vertx.ext.web.api.contract.openapi3.OpenAPI3RouterFactory;
 
 
-
-public class SiteContexte extends SiteContexteGen<Object> { 
+public class SiteContexte extends SiteContexteGen<Object> {  
 
 	protected Logger log = LoggerFactory.getLogger(getClass());
 
@@ -27,8 +27,11 @@ public class SiteContexte extends SiteContexteGen<Object> {
 	protected void _siteAuth_(Couverture<OAuth2Auth> c) throws Exception {
 	}
 
-	protected void _siteRouteur_(Couverture<Router> c) throws Exception {
+	protected void _usineRouteur_(Couverture<OpenAPI3RouterFactory> c) throws Exception {
 	}
+
+//	protected void _siteRouteur_(Couverture<Router> c) throws Exception {
+//	}
 
 	/**	Le config du site. **/
 	protected void _configSite(ConfigSite o) throws Exception { 
@@ -60,8 +63,10 @@ public class SiteContexte extends SiteContexteGen<Object> {
 
 	/**	Le source de données du site. **/
 	protected void _clientSql(Couverture<SQLClient> c) throws Exception {
-		SQLClient o = JDBCClient.createShared(vertx_, jdbcConfig);
-		c.o(o);
+		if(vertx_ != null) {
+			SQLClient o = JDBCClient.createShared(vertx_, jdbcConfig);
+			c.o(o);
+		}
 	}
 //
 //	/**	L'URL JNDI vers le source de courriels dans Tomcat. **/
@@ -87,6 +92,15 @@ public class SiteContexte extends SiteContexteGen<Object> {
 	protected void _clientSolr(Couverture<HttpSolrClient> c) throws Exception {
 		HttpSolrClient o = new HttpSolrClient.Builder(configSite.getSolrUrl()).build();
 		c.o(o);
+	}
+
+	/**	Le client du moteur de recherche SOLR. **/
+	protected void _clientSolrComputate(Couverture<HttpSolrClient> c) throws Exception {
+		String solrUrlComputate = configSite.getSolrUrlComputate();
+		if(StringUtils.isNotEmpty(solrUrlComputate)) {
+			HttpSolrClient o = new HttpSolrClient.Builder(solrUrlComputate).build();
+			c.o(o);
+		}
 	}
 
 	/**	Le sel de cryptage à utiliser pour tout cryptage. **/

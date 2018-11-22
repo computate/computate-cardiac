@@ -34,7 +34,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return requeteSite_;
 	}
 
-	public void setRequeteSite_(RequeteSite o) throws Exception {
+	public void setRequeteSite_(RequeteSite o) {
 		this.requeteSite_ = o;
 	}
 	protected void requeteSite_Init() throws Exception {
@@ -65,7 +65,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return siteContexte_;
 	}
 
-	public void setSiteContexte_(SiteContexte o) throws Exception {
+	public void setSiteContexte_(SiteContexte o) {
 		this.siteContexte_ = o;
 	}
 	protected void siteContexte_Init() throws Exception {
@@ -78,36 +78,36 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	}
 
 	//////////////////
-	// cheminConfig //
+	// configChemin //
 	//////////////////
 
-	/**	L'entité « cheminConfig »
+	/**	L'entité « configChemin »
 	 *	 est défini comme null avant d'être initialisé. 
 	 */
-	protected String cheminConfig;
-	public Couverture<String> cheminConfigCouverture = new Couverture<String>().p(this).c(String.class).var("cheminConfig").o(cheminConfig);
+	protected String configChemin;
+	public Couverture<String> configCheminCouverture = new Couverture<String>().p(this).c(String.class).var("configChemin").o(configChemin);
 
-	/**	L'entité « cheminConfig »
+	/**	L'entité « configChemin »
 	 *	 est défini comme null avant d'être initialisé. 
 	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
 	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
 	 */
-	protected abstract void _cheminConfig(Couverture<String> o) throws Exception;
+	protected abstract void _configChemin(Couverture<String> o) throws Exception;
 
-	public String getCheminConfig() {
-		return cheminConfig;
+	public String getConfigChemin() {
+		return configChemin;
 	}
 
-	public void setCheminConfig(String o) throws Exception {
-		this.cheminConfig = o;
+	public void setConfigChemin(String o) {
+		this.configChemin = o;
 	}
-	protected void cheminConfigInit() throws Exception {
-		if(!cheminConfigCouverture.dejaInitialise) {
-			_cheminConfig(cheminConfigCouverture);
-			if(cheminConfig == null)
-				setCheminConfig(cheminConfigCouverture.o);
+	protected void configCheminInit() throws Exception {
+		if(!configCheminCouverture.dejaInitialise) {
+			_configChemin(configCheminCouverture);
+			if(configChemin == null)
+				setConfigChemin(configCheminCouverture.o);
 		}
-		cheminConfigCouverture.dejaInitialise(true);
+		configCheminCouverture.dejaInitialise(true);
 	}
 
 	////////////
@@ -131,7 +131,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return config;
 	}
 
-	public void setConfig(INIConfiguration o) throws Exception {
+	public void setConfig(INIConfiguration o) {
 		this.config = o;
 	}
 	protected void configInit() throws Exception {
@@ -164,7 +164,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return identifiantSite;
 	}
 
-	public void setIdentifiantSite(String o) throws Exception {
+	public void setIdentifiantSite(String o) {
 		this.identifiantSite = o;
 	}
 	protected void identifiantSiteInit() throws Exception {
@@ -197,7 +197,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return prefixeEchappe;
 	}
 
-	public void setPrefixeEchappe(String o) throws Exception {
+	public void setPrefixeEchappe(String o) {
 		this.prefixeEchappe = o;
 	}
 	protected void prefixeEchappeInit() throws Exception {
@@ -209,37 +209,37 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		prefixeEchappeCouverture.dejaInitialise(true);
 	}
 
-	//////////////////
-	// cheminProjet //
-	//////////////////
+	/////////////////
+	// appliChemin //
+	/////////////////
 
-	/**	L'entité « cheminProjet »
+	/**	L'entité « appliChemin »
 	 *	 est défini comme null avant d'être initialisé. 
 	 */
-	protected String cheminProjet;
-	public Couverture<String> cheminProjetCouverture = new Couverture<String>().p(this).c(String.class).var("cheminProjet").o(cheminProjet);
+	protected String appliChemin;
+	public Couverture<String> appliCheminCouverture = new Couverture<String>().p(this).c(String.class).var("appliChemin").o(appliChemin);
 
-	/**	L'entité « cheminProjet »
+	/**	L'entité « appliChemin »
 	 *	 est défini comme null avant d'être initialisé. 
 	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
 	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
 	 */
-	protected abstract void _cheminProjet(Couverture<String> o) throws Exception;
+	protected abstract void _appliChemin(Couverture<String> o) throws Exception;
 
-	public String getCheminProjet() {
-		return cheminProjet;
+	public String getAppliChemin() {
+		return appliChemin;
 	}
 
-	public void setCheminProjet(String o) throws Exception {
-		this.cheminProjet = o;
+	public void setAppliChemin(String o) {
+		this.appliChemin = o;
 	}
-	protected void cheminProjetInit() throws Exception {
-		if(!cheminProjetCouverture.dejaInitialise) {
-			_cheminProjet(cheminProjetCouverture);
-			if(cheminProjet == null)
-				setCheminProjet(cheminProjetCouverture.o);
+	protected void appliCheminInit() throws Exception {
+		if(!appliCheminCouverture.dejaInitialise) {
+			_appliChemin(appliCheminCouverture);
+			if(appliChemin == null)
+				setAppliChemin(appliCheminCouverture.o);
 		}
-		cheminProjetCouverture.dejaInitialise(true);
+		appliCheminCouverture.dejaInitialise(true);
 	}
 
 	////////////////////
@@ -263,7 +263,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return racineDocument;
 	}
 
-	public void setRacineDocument(String o) throws Exception {
+	public void setRacineDocument(String o) {
 		this.racineDocument = o;
 	}
 	protected void racineDocumentInit() throws Exception {
@@ -296,7 +296,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return nomEntreprise;
 	}
 
-	public void setNomEntreprise(String o) throws Exception {
+	public void setNomEntreprise(String o) {
 		this.nomEntreprise = o;
 	}
 	protected void nomEntrepriseInit() throws Exception {
@@ -329,7 +329,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return nomDomaine;
 	}
 
-	public void setNomDomaine(String o) throws Exception {
+	public void setNomDomaine(String o) {
 		this.nomDomaine = o;
 	}
 	protected void nomDomaineInit() throws Exception {
@@ -362,7 +362,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return siteNomHote;
 	}
 
-	public void setSiteNomHote(String o) throws Exception {
+	public void setSiteNomHote(String o) {
 		this.siteNomHote = o;
 	}
 	protected void siteNomHoteInit() throws Exception {
@@ -395,7 +395,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return sitePort;
 	}
 
-	public void setSitePort(Integer o) throws Exception {
+	public void setSitePort(Integer o) {
 		this.sitePort = o;
 	}
 	public ConfigSite setSitePort(String o) throws Exception {
@@ -433,7 +433,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return authRoyaume;
 	}
 
-	public void setAuthRoyaume(String o) throws Exception {
+	public void setAuthRoyaume(String o) {
 		this.authRoyaume = o;
 	}
 	protected void authRoyaumeInit() throws Exception {
@@ -466,7 +466,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return authRessource;
 	}
 
-	public void setAuthRessource(String o) throws Exception {
+	public void setAuthRessource(String o) {
 		this.authRessource = o;
 	}
 	protected void authRessourceInit() throws Exception {
@@ -499,7 +499,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return authSecret;
 	}
 
-	public void setAuthSecret(String o) throws Exception {
+	public void setAuthSecret(String o) {
 		this.authSecret = o;
 	}
 	protected void authSecretInit() throws Exception {
@@ -532,7 +532,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return authSslRequis;
 	}
 
-	public void setAuthSslRequis(String o) throws Exception {
+	public void setAuthSslRequis(String o) {
 		this.authSslRequis = o;
 	}
 	protected void authSslRequisInit() throws Exception {
@@ -565,7 +565,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return sslJksChemin;
 	}
 
-	public void setSslJksChemin(String o) throws Exception {
+	public void setSslJksChemin(String o) {
 		this.sslJksChemin = o;
 	}
 	protected void sslJksCheminInit() throws Exception {
@@ -598,7 +598,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return sslJksMotDePasse;
 	}
 
-	public void setSslJksMotDePasse(String o) throws Exception {
+	public void setSslJksMotDePasse(String o) {
 		this.sslJksMotDePasse = o;
 	}
 	protected void sslJksMotDePasseInit() throws Exception {
@@ -631,7 +631,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return authUrl;
 	}
 
-	public void setAuthUrl(String o) throws Exception {
+	public void setAuthUrl(String o) {
 		this.authUrl = o;
 	}
 	protected void authUrlInit() throws Exception {
@@ -664,7 +664,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return selCryptage;
 	}
 
-	public void setSelCryptage(String o) throws Exception {
+	public void setSelCryptage(String o) {
 		this.selCryptage = o;
 	}
 	protected void selCryptageInit() throws Exception {
@@ -697,7 +697,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return motDePasseCryptage;
 	}
 
-	public void setMotDePasseCryptage(String o) throws Exception {
+	public void setMotDePasseCryptage(String o) {
 		this.motDePasseCryptage = o;
 	}
 	protected void motDePasseCryptageInit() throws Exception {
@@ -730,7 +730,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return urlDomaineBase;
 	}
 
-	public void setUrlDomaineBase(String o) throws Exception {
+	public void setUrlDomaineBase(String o) {
 		this.urlDomaineBase = o;
 	}
 	protected void urlDomaineBaseInit() throws Exception {
@@ -743,36 +743,36 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	}
 
 	//////////////////////
-	// nomAffichageSite //
+	// siteNomAffichage //
 	//////////////////////
 
-	/**	L'entité « nomAffichageSite »
+	/**	L'entité « siteNomAffichage »
 	 *	 est défini comme null avant d'être initialisé. 
 	 */
-	protected String nomAffichageSite;
-	public Couverture<String> nomAffichageSiteCouverture = new Couverture<String>().p(this).c(String.class).var("nomAffichageSite").o(nomAffichageSite);
+	protected String siteNomAffichage;
+	public Couverture<String> siteNomAffichageCouverture = new Couverture<String>().p(this).c(String.class).var("siteNomAffichage").o(siteNomAffichage);
 
-	/**	L'entité « nomAffichageSite »
+	/**	L'entité « siteNomAffichage »
 	 *	 est défini comme null avant d'être initialisé. 
 	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
 	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
 	 */
-	protected abstract void _nomAffichageSite(Couverture<String> o) throws Exception;
+	protected abstract void _siteNomAffichage(Couverture<String> o) throws Exception;
 
-	public String getNomAffichageSite() {
-		return nomAffichageSite;
+	public String getSiteNomAffichage() {
+		return siteNomAffichage;
 	}
 
-	public void setNomAffichageSite(String o) throws Exception {
-		this.nomAffichageSite = o;
+	public void setSiteNomAffichage(String o) {
+		this.siteNomAffichage = o;
 	}
-	protected void nomAffichageSiteInit() throws Exception {
-		if(!nomAffichageSiteCouverture.dejaInitialise) {
-			_nomAffichageSite(nomAffichageSiteCouverture);
-			if(nomAffichageSite == null)
-				setNomAffichageSite(nomAffichageSiteCouverture.o);
+	protected void siteNomAffichageInit() throws Exception {
+		if(!siteNomAffichageCouverture.dejaInitialise) {
+			_siteNomAffichage(siteNomAffichageCouverture);
+			if(siteNomAffichage == null)
+				setSiteNomAffichage(siteNomAffichageCouverture.o);
 		}
-		nomAffichageSiteCouverture.dejaInitialise(true);
+		siteNomAffichageCouverture.dejaInitialise(true);
 	}
 
 	//////////////////////
@@ -796,7 +796,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return jdbcClassePilote;
 	}
 
-	public void setJdbcClassePilote(String o) throws Exception {
+	public void setJdbcClassePilote(String o) {
 		this.jdbcClassePilote = o;
 	}
 	protected void jdbcClassePiloteInit() throws Exception {
@@ -829,7 +829,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return jdbcUtilisateur;
 	}
 
-	public void setJdbcUtilisateur(String o) throws Exception {
+	public void setJdbcUtilisateur(String o) {
 		this.jdbcUtilisateur = o;
 	}
 	protected void jdbcUtilisateurInit() throws Exception {
@@ -862,7 +862,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return jdbcMotDePasse;
 	}
 
-	public void setJdbcMotDePasse(String o) throws Exception {
+	public void setJdbcMotDePasse(String o) {
 		this.jdbcMotDePasse = o;
 	}
 	protected void jdbcMotDePasseInit() throws Exception {
@@ -895,7 +895,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return jdbcTailleMaxPiscine;
 	}
 
-	public void setJdbcTailleMaxPiscine(Integer o) throws Exception {
+	public void setJdbcTailleMaxPiscine(Integer o) {
 		this.jdbcTailleMaxPiscine = o;
 	}
 	public ConfigSite setJdbcTailleMaxPiscine(String o) throws Exception {
@@ -933,7 +933,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return jdbcTailleInitialePiscine;
 	}
 
-	public void setJdbcTailleInitialePiscine(Integer o) throws Exception {
+	public void setJdbcTailleInitialePiscine(Integer o) {
 		this.jdbcTailleInitialePiscine = o;
 	}
 	public ConfigSite setJdbcTailleInitialePiscine(String o) throws Exception {
@@ -971,7 +971,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return jdbcTailleMinPiscine;
 	}
 
-	public void setJdbcTailleMinPiscine(Integer o) throws Exception {
+	public void setJdbcTailleMinPiscine(Integer o) {
 		this.jdbcTailleMinPiscine = o;
 	}
 	public ConfigSite setJdbcTailleMinPiscine(String o) throws Exception {
@@ -1009,7 +1009,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return jdbcMaxDeclarations;
 	}
 
-	public void setJdbcMaxDeclarations(Integer o) throws Exception {
+	public void setJdbcMaxDeclarations(Integer o) {
 		this.jdbcMaxDeclarations = o;
 	}
 	public ConfigSite setJdbcMaxDeclarations(String o) throws Exception {
@@ -1047,7 +1047,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return jdbcMaxDeclarationsParConnexion;
 	}
 
-	public void setJdbcMaxDeclarationsParConnexion(Integer o) throws Exception {
+	public void setJdbcMaxDeclarationsParConnexion(Integer o) {
 		this.jdbcMaxDeclarationsParConnexion = o;
 	}
 	public ConfigSite setJdbcMaxDeclarationsParConnexion(String o) throws Exception {
@@ -1085,7 +1085,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return jdbcTempsInactiviteMax;
 	}
 
-	public void setJdbcTempsInactiviteMax(Integer o) throws Exception {
+	public void setJdbcTempsInactiviteMax(Integer o) {
 		this.jdbcTempsInactiviteMax = o;
 	}
 	public ConfigSite setJdbcTempsInactiviteMax(String o) throws Exception {
@@ -1123,7 +1123,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return jdbcUrl;
 	}
 
-	public void setJdbcUrl(String o) throws Exception {
+	public void setJdbcUrl(String o) {
 		this.jdbcUrl = o;
 	}
 	protected void jdbcUrlInit() throws Exception {
@@ -1156,7 +1156,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return solrUrl;
 	}
 
-	public void setSolrUrl(String o) throws Exception {
+	public void setSolrUrl(String o) {
 		this.solrUrl = o;
 	}
 	protected void solrUrlInit() throws Exception {
@@ -1166,6 +1166,39 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 				setSolrUrl(solrUrlCouverture.o);
 		}
 		solrUrlCouverture.dejaInitialise(true);
+	}
+
+	//////////////////////
+	// solrUrlComputate //
+	//////////////////////
+
+	/**	L'entité « solrUrlComputate »
+	 *	 est défini comme null avant d'être initialisé. 
+	 */
+	protected String solrUrlComputate;
+	public Couverture<String> solrUrlComputateCouverture = new Couverture<String>().p(this).c(String.class).var("solrUrlComputate").o(solrUrlComputate);
+
+	/**	L'entité « solrUrlComputate »
+	 *	 est défini comme null avant d'être initialisé. 
+	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
+	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
+	 */
+	protected abstract void _solrUrlComputate(Couverture<String> o) throws Exception;
+
+	public String getSolrUrlComputate() {
+		return solrUrlComputate;
+	}
+
+	public void setSolrUrlComputate(String o) {
+		this.solrUrlComputate = o;
+	}
+	protected void solrUrlComputateInit() throws Exception {
+		if(!solrUrlComputateCouverture.dejaInitialise) {
+			_solrUrlComputate(solrUrlComputateCouverture);
+			if(solrUrlComputate == null)
+				setSolrUrlComputate(solrUrlComputateCouverture.o);
+		}
+		solrUrlComputateCouverture.dejaInitialise(true);
 	}
 
 	/////////////////////////
@@ -1189,7 +1222,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return jetonIdentitePaypal;
 	}
 
-	public void setJetonIdentitePaypal(String o) throws Exception {
+	public void setJetonIdentitePaypal(String o) {
 		this.jetonIdentitePaypal = o;
 	}
 	protected void jetonIdentitePaypalInit() throws Exception {
@@ -1222,7 +1255,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return compteFacebook;
 	}
 
-	public void setCompteFacebook(String o) throws Exception {
+	public void setCompteFacebook(String o) {
 		this.compteFacebook = o;
 	}
 	protected void compteFacebookInit() throws Exception {
@@ -1255,7 +1288,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return compteTwitter;
 	}
 
-	public void setCompteTwitter(String o) throws Exception {
+	public void setCompteTwitter(String o) {
 		this.compteTwitter = o;
 	}
 	protected void compteTwitterInit() throws Exception {
@@ -1288,7 +1321,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return compteGooglePlus;
 	}
 
-	public void setCompteGooglePlus(String o) throws Exception {
+	public void setCompteGooglePlus(String o) {
 		this.compteGooglePlus = o;
 	}
 	protected void compteGooglePlusInit() throws Exception {
@@ -1321,7 +1354,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return compteInstagram;
 	}
 
-	public void setCompteInstagram(String o) throws Exception {
+	public void setCompteInstagram(String o) {
 		this.compteInstagram = o;
 	}
 	protected void compteInstagramInit() throws Exception {
@@ -1354,7 +1387,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return compteYoutube;
 	}
 
-	public void setCompteYoutube(String o) throws Exception {
+	public void setCompteYoutube(String o) {
 		this.compteYoutube = o;
 	}
 	protected void compteYoutubeInit() throws Exception {
@@ -1387,7 +1420,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return identifiantCanalYoutube;
 	}
 
-	public void setIdentifiantCanalYoutube(String o) throws Exception {
+	public void setIdentifiantCanalYoutube(String o) {
 		this.identifiantCanalYoutube = o;
 	}
 	protected void identifiantCanalYoutubeInit() throws Exception {
@@ -1420,7 +1453,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return comptePinterest;
 	}
 
-	public void setComptePinterest(String o) throws Exception {
+	public void setComptePinterest(String o) {
 		this.comptePinterest = o;
 	}
 	protected void comptePinterestInit() throws Exception {
@@ -1453,7 +1486,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return compteOpenclipart;
 	}
 
-	public void setCompteOpenclipart(String o) throws Exception {
+	public void setCompteOpenclipart(String o) {
 		this.compteOpenclipart = o;
 	}
 	protected void compteOpenclipartInit() throws Exception {
@@ -1486,7 +1519,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return compteMail;
 	}
 
-	public void setCompteMail(String o) throws Exception {
+	public void setCompteMail(String o) {
 		this.compteMail = o;
 	}
 	protected void compteMailInit() throws Exception {
@@ -1519,7 +1552,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return mailAdmin;
 	}
 
-	public void setMailAdmin(String o) throws Exception {
+	public void setMailAdmin(String o) {
 		this.mailAdmin = o;
 	}
 	protected void mailAdminInit() throws Exception {
@@ -1552,7 +1585,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return nombreExecuteurs;
 	}
 
-	public void setNombreExecuteurs(Integer o) throws Exception {
+	public void setNombreExecuteurs(Integer o) {
 		this.nombreExecuteurs = o;
 	}
 	public ConfigSite setNombreExecuteurs(String o) throws Exception {
@@ -1567,6 +1600,336 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 				setNombreExecuteurs(nombreExecuteursCouverture.o);
 		}
 		nombreExecuteursCouverture.dejaInitialise(true);
+	}
+
+	////////////////////
+	// openApiVersion //
+	////////////////////
+
+	/**	L'entité « openApiVersion »
+	 *	 est défini comme null avant d'être initialisé. 
+	 */
+	protected String openApiVersion;
+	public Couverture<String> openApiVersionCouverture = new Couverture<String>().p(this).c(String.class).var("openApiVersion").o(openApiVersion);
+
+	/**	L'entité « openApiVersion »
+	 *	 est défini comme null avant d'être initialisé. 
+	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
+	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
+	 */
+	protected abstract void _openApiVersion(Couverture<String> o) throws Exception;
+
+	public String getOpenApiVersion() {
+		return openApiVersion;
+	}
+
+	public void setOpenApiVersion(String o) {
+		this.openApiVersion = o;
+	}
+	protected void openApiVersionInit() throws Exception {
+		if(!openApiVersionCouverture.dejaInitialise) {
+			_openApiVersion(openApiVersionCouverture);
+			if(openApiVersion == null)
+				setOpenApiVersion(openApiVersionCouverture.o);
+		}
+		openApiVersionCouverture.dejaInitialise(true);
+	}
+
+	////////////////////
+	// apiDescription //
+	////////////////////
+
+	/**	L'entité « apiDescription »
+	 *	 est défini comme null avant d'être initialisé. 
+	 */
+	protected String apiDescription;
+	public Couverture<String> apiDescriptionCouverture = new Couverture<String>().p(this).c(String.class).var("apiDescription").o(apiDescription);
+
+	/**	L'entité « apiDescription »
+	 *	 est défini comme null avant d'être initialisé. 
+	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
+	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
+	 */
+	protected abstract void _apiDescription(Couverture<String> o) throws Exception;
+
+	public String getApiDescription() {
+		return apiDescription;
+	}
+
+	public void setApiDescription(String o) {
+		this.apiDescription = o;
+	}
+	protected void apiDescriptionInit() throws Exception {
+		if(!apiDescriptionCouverture.dejaInitialise) {
+			_apiDescription(apiDescriptionCouverture);
+			if(apiDescription == null)
+				setApiDescription(apiDescriptionCouverture.o);
+		}
+		apiDescriptionCouverture.dejaInitialise(true);
+	}
+
+	//////////////
+	// apiTitre //
+	//////////////
+
+	/**	L'entité « apiTitre »
+	 *	 est défini comme null avant d'être initialisé. 
+	 */
+	protected String apiTitre;
+	public Couverture<String> apiTitreCouverture = new Couverture<String>().p(this).c(String.class).var("apiTitre").o(apiTitre);
+
+	/**	L'entité « apiTitre »
+	 *	 est défini comme null avant d'être initialisé. 
+	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
+	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
+	 */
+	protected abstract void _apiTitre(Couverture<String> o) throws Exception;
+
+	public String getApiTitre() {
+		return apiTitre;
+	}
+
+	public void setApiTitre(String o) {
+		this.apiTitre = o;
+	}
+	protected void apiTitreInit() throws Exception {
+		if(!apiTitreCouverture.dejaInitialise) {
+			_apiTitre(apiTitreCouverture);
+			if(apiTitre == null)
+				setApiTitre(apiTitreCouverture.o);
+		}
+		apiTitreCouverture.dejaInitialise(true);
+	}
+
+	/////////////////////
+	// apiTermsService //
+	/////////////////////
+
+	/**	L'entité « apiTermsService »
+	 *	 est défini comme null avant d'être initialisé. 
+	 */
+	protected String apiTermsService;
+	public Couverture<String> apiTermsServiceCouverture = new Couverture<String>().p(this).c(String.class).var("apiTermsService").o(apiTermsService);
+
+	/**	L'entité « apiTermsService »
+	 *	 est défini comme null avant d'être initialisé. 
+	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
+	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
+	 */
+	protected abstract void _apiTermsService(Couverture<String> o) throws Exception;
+
+	public String getApiTermsService() {
+		return apiTermsService;
+	}
+
+	public void setApiTermsService(String o) {
+		this.apiTermsService = o;
+	}
+	protected void apiTermsServiceInit() throws Exception {
+		if(!apiTermsServiceCouverture.dejaInitialise) {
+			_apiTermsService(apiTermsServiceCouverture);
+			if(apiTermsService == null)
+				setApiTermsService(apiTermsServiceCouverture.o);
+		}
+		apiTermsServiceCouverture.dejaInitialise(true);
+	}
+
+	////////////////
+	// apiVersion //
+	////////////////
+
+	/**	L'entité « apiVersion »
+	 *	 est défini comme null avant d'être initialisé. 
+	 */
+	protected String apiVersion;
+	public Couverture<String> apiVersionCouverture = new Couverture<String>().p(this).c(String.class).var("apiVersion").o(apiVersion);
+
+	/**	L'entité « apiVersion »
+	 *	 est défini comme null avant d'être initialisé. 
+	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
+	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
+	 */
+	protected abstract void _apiVersion(Couverture<String> o) throws Exception;
+
+	public String getApiVersion() {
+		return apiVersion;
+	}
+
+	public void setApiVersion(String o) {
+		this.apiVersion = o;
+	}
+	protected void apiVersionInit() throws Exception {
+		if(!apiVersionCouverture.dejaInitialise) {
+			_apiVersion(apiVersionCouverture);
+			if(apiVersion == null)
+				setApiVersion(apiVersionCouverture.o);
+		}
+		apiVersionCouverture.dejaInitialise(true);
+	}
+
+	////////////////////
+	// apiContactMail //
+	////////////////////
+
+	/**	L'entité « apiContactMail »
+	 *	 est défini comme null avant d'être initialisé. 
+	 */
+	protected String apiContactMail;
+	public Couverture<String> apiContactMailCouverture = new Couverture<String>().p(this).c(String.class).var("apiContactMail").o(apiContactMail);
+
+	/**	L'entité « apiContactMail »
+	 *	 est défini comme null avant d'être initialisé. 
+	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
+	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
+	 */
+	protected abstract void _apiContactMail(Couverture<String> o) throws Exception;
+
+	public String getApiContactMail() {
+		return apiContactMail;
+	}
+
+	public void setApiContactMail(String o) {
+		this.apiContactMail = o;
+	}
+	protected void apiContactMailInit() throws Exception {
+		if(!apiContactMailCouverture.dejaInitialise) {
+			_apiContactMail(apiContactMailCouverture);
+			if(apiContactMail == null)
+				setApiContactMail(apiContactMailCouverture.o);
+		}
+		apiContactMailCouverture.dejaInitialise(true);
+	}
+
+	///////////////////
+	// apiLicenceNom //
+	///////////////////
+
+	/**	L'entité « apiLicenceNom »
+	 *	 est défini comme null avant d'être initialisé. 
+	 */
+	protected String apiLicenceNom;
+	public Couverture<String> apiLicenceNomCouverture = new Couverture<String>().p(this).c(String.class).var("apiLicenceNom").o(apiLicenceNom);
+
+	/**	L'entité « apiLicenceNom »
+	 *	 est défini comme null avant d'être initialisé. 
+	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
+	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
+	 */
+	protected abstract void _apiLicenceNom(Couverture<String> o) throws Exception;
+
+	public String getApiLicenceNom() {
+		return apiLicenceNom;
+	}
+
+	public void setApiLicenceNom(String o) {
+		this.apiLicenceNom = o;
+	}
+	protected void apiLicenceNomInit() throws Exception {
+		if(!apiLicenceNomCouverture.dejaInitialise) {
+			_apiLicenceNom(apiLicenceNomCouverture);
+			if(apiLicenceNom == null)
+				setApiLicenceNom(apiLicenceNomCouverture.o);
+		}
+		apiLicenceNomCouverture.dejaInitialise(true);
+	}
+
+	///////////////////
+	// apiLicenceUrl //
+	///////////////////
+
+	/**	L'entité « apiLicenceUrl »
+	 *	 est défini comme null avant d'être initialisé. 
+	 */
+	protected String apiLicenceUrl;
+	public Couverture<String> apiLicenceUrlCouverture = new Couverture<String>().p(this).c(String.class).var("apiLicenceUrl").o(apiLicenceUrl);
+
+	/**	L'entité « apiLicenceUrl »
+	 *	 est défini comme null avant d'être initialisé. 
+	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
+	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
+	 */
+	protected abstract void _apiLicenceUrl(Couverture<String> o) throws Exception;
+
+	public String getApiLicenceUrl() {
+		return apiLicenceUrl;
+	}
+
+	public void setApiLicenceUrl(String o) {
+		this.apiLicenceUrl = o;
+	}
+	protected void apiLicenceUrlInit() throws Exception {
+		if(!apiLicenceUrlCouverture.dejaInitialise) {
+			_apiLicenceUrl(apiLicenceUrlCouverture);
+			if(apiLicenceUrl == null)
+				setApiLicenceUrl(apiLicenceUrlCouverture.o);
+		}
+		apiLicenceUrlCouverture.dejaInitialise(true);
+	}
+
+	////////////////
+	// apiNomHote //
+	////////////////
+
+	/**	L'entité « apiNomHote »
+	 *	 est défini comme null avant d'être initialisé. 
+	 */
+	protected String apiNomHote;
+	public Couverture<String> apiNomHoteCouverture = new Couverture<String>().p(this).c(String.class).var("apiNomHote").o(apiNomHote);
+
+	/**	L'entité « apiNomHote »
+	 *	 est défini comme null avant d'être initialisé. 
+	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
+	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
+	 */
+	protected abstract void _apiNomHote(Couverture<String> o) throws Exception;
+
+	public String getApiNomHote() {
+		return apiNomHote;
+	}
+
+	public void setApiNomHote(String o) {
+		this.apiNomHote = o;
+	}
+	protected void apiNomHoteInit() throws Exception {
+		if(!apiNomHoteCouverture.dejaInitialise) {
+			_apiNomHote(apiNomHoteCouverture);
+			if(apiNomHote == null)
+				setApiNomHote(apiNomHoteCouverture.o);
+		}
+		apiNomHoteCouverture.dejaInitialise(true);
+	}
+
+	///////////////////
+	// apiCheminBase //
+	///////////////////
+
+	/**	L'entité « apiCheminBase »
+	 *	 est défini comme null avant d'être initialisé. 
+	 */
+	protected String apiCheminBase;
+	public Couverture<String> apiCheminBaseCouverture = new Couverture<String>().p(this).c(String.class).var("apiCheminBase").o(apiCheminBase);
+
+	/**	L'entité « apiCheminBase »
+	 *	 est défini comme null avant d'être initialisé. 
+	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
+	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
+	 */
+	protected abstract void _apiCheminBase(Couverture<String> o) throws Exception;
+
+	public String getApiCheminBase() {
+		return apiCheminBase;
+	}
+
+	public void setApiCheminBase(String o) {
+		this.apiCheminBase = o;
+	}
+	protected void apiCheminBaseInit() throws Exception {
+		if(!apiCheminBaseCouverture.dejaInitialise) {
+			_apiCheminBase(apiCheminBaseCouverture);
+			if(apiCheminBase == null)
+				setApiCheminBase(apiCheminBaseCouverture.o);
+		}
+		apiCheminBaseCouverture.dejaInitialise(true);
 	}
 
 	/////////////////////
@@ -1584,11 +1947,11 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		if(!dejaInitialiseConfigSite) {
 			requeteSite_Init();
 			siteContexte_Init();
-			cheminConfigInit();
+			configCheminInit();
 			configInit();
 			identifiantSiteInit();
 			prefixeEchappeInit();
-			cheminProjetInit();
+			appliCheminInit();
 			racineDocumentInit();
 			nomEntrepriseInit();
 			nomDomaineInit();
@@ -1604,7 +1967,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 			selCryptageInit();
 			motDePasseCryptageInit();
 			urlDomaineBaseInit();
-			nomAffichageSiteInit();
+			siteNomAffichageInit();
 			jdbcClassePiloteInit();
 			jdbcUtilisateurInit();
 			jdbcMotDePasseInit();
@@ -1616,6 +1979,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 			jdbcTempsInactiviteMaxInit();
 			jdbcUrlInit();
 			solrUrlInit();
+			solrUrlComputateInit();
 			jetonIdentitePaypalInit();
 			compteFacebookInit();
 			compteTwitterInit();
@@ -1628,6 +1992,16 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 			compteMailInit();
 			mailAdminInit();
 			nombreExecuteursInit();
+			openApiVersionInit();
+			apiDescriptionInit();
+			apiTitreInit();
+			apiTermsServiceInit();
+			apiVersionInit();
+			apiContactMailInit();
+			apiLicenceNomInit();
+			apiLicenceUrlInit();
+			apiNomHoteInit();
+			apiCheminBaseInit();
 			dejaInitialiseConfigSite = true;
 		}
 	}
@@ -1671,16 +2045,16 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 				return oConfigSite.requeteSite_;
 			case "siteContexte_":
 				return oConfigSite.siteContexte_;
-			case "cheminConfig":
-				return oConfigSite.cheminConfig;
+			case "configChemin":
+				return oConfigSite.configChemin;
 			case "config":
 				return oConfigSite.config;
 			case "identifiantSite":
 				return oConfigSite.identifiantSite;
 			case "prefixeEchappe":
 				return oConfigSite.prefixeEchappe;
-			case "cheminProjet":
-				return oConfigSite.cheminProjet;
+			case "appliChemin":
+				return oConfigSite.appliChemin;
 			case "racineDocument":
 				return oConfigSite.racineDocument;
 			case "nomEntreprise":
@@ -1711,8 +2085,8 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 				return oConfigSite.motDePasseCryptage;
 			case "urlDomaineBase":
 				return oConfigSite.urlDomaineBase;
-			case "nomAffichageSite":
-				return oConfigSite.nomAffichageSite;
+			case "siteNomAffichage":
+				return oConfigSite.siteNomAffichage;
 			case "jdbcClassePilote":
 				return oConfigSite.jdbcClassePilote;
 			case "jdbcUtilisateur":
@@ -1735,6 +2109,8 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 				return oConfigSite.jdbcUrl;
 			case "solrUrl":
 				return oConfigSite.solrUrl;
+			case "solrUrlComputate":
+				return oConfigSite.solrUrlComputate;
 			case "jetonIdentitePaypal":
 				return oConfigSite.jetonIdentitePaypal;
 			case "compteFacebook":
@@ -1759,6 +2135,26 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 				return oConfigSite.mailAdmin;
 			case "nombreExecuteurs":
 				return oConfigSite.nombreExecuteurs;
+			case "openApiVersion":
+				return oConfigSite.openApiVersion;
+			case "apiDescription":
+				return oConfigSite.apiDescription;
+			case "apiTitre":
+				return oConfigSite.apiTitre;
+			case "apiTermsService":
+				return oConfigSite.apiTermsService;
+			case "apiVersion":
+				return oConfigSite.apiVersion;
+			case "apiContactMail":
+				return oConfigSite.apiContactMail;
+			case "apiLicenceNom":
+				return oConfigSite.apiLicenceNom;
+			case "apiLicenceUrl":
+				return oConfigSite.apiLicenceUrl;
+			case "apiNomHote":
+				return oConfigSite.apiNomHote;
+			case "apiCheminBase":
+				return oConfigSite.apiCheminBase;
 			default:
 				return null;
 		}
@@ -1812,8 +2208,8 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	public Object definirConfigSite(String var, String val) throws Exception {
 		ConfigSite oConfigSite = (ConfigSite)this;
 		switch(var) {
-			case "cheminConfig":
-				oConfigSite.setCheminConfig(val);
+			case "configChemin":
+				oConfigSite.setConfigChemin(val);
 				return val;
 			case "identifiantSite":
 				oConfigSite.setIdentifiantSite(val);
@@ -1821,8 +2217,8 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 			case "prefixeEchappe":
 				oConfigSite.setPrefixeEchappe(val);
 				return val;
-			case "cheminProjet":
-				oConfigSite.setCheminProjet(val);
+			case "appliChemin":
+				oConfigSite.setAppliChemin(val);
 				return val;
 			case "racineDocument":
 				oConfigSite.setRacineDocument(val);
@@ -1869,8 +2265,8 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 			case "urlDomaineBase":
 				oConfigSite.setUrlDomaineBase(val);
 				return val;
-			case "nomAffichageSite":
-				oConfigSite.setNomAffichageSite(val);
+			case "siteNomAffichage":
+				oConfigSite.setSiteNomAffichage(val);
 				return val;
 			case "jdbcClassePilote":
 				oConfigSite.setJdbcClassePilote(val);
@@ -1904,6 +2300,9 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 				return val;
 			case "solrUrl":
 				oConfigSite.setSolrUrl(val);
+				return val;
+			case "solrUrlComputate":
+				oConfigSite.setSolrUrlComputate(val);
 				return val;
 			case "jetonIdentitePaypal":
 				oConfigSite.setJetonIdentitePaypal(val);
@@ -1940,6 +2339,36 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 				return val;
 			case "nombreExecuteurs":
 				oConfigSite.setNombreExecuteurs(val);
+				return val;
+			case "openApiVersion":
+				oConfigSite.setOpenApiVersion(val);
+				return val;
+			case "apiDescription":
+				oConfigSite.setApiDescription(val);
+				return val;
+			case "apiTitre":
+				oConfigSite.setApiTitre(val);
+				return val;
+			case "apiTermsService":
+				oConfigSite.setApiTermsService(val);
+				return val;
+			case "apiVersion":
+				oConfigSite.setApiVersion(val);
+				return val;
+			case "apiContactMail":
+				oConfigSite.setApiContactMail(val);
+				return val;
+			case "apiLicenceNom":
+				oConfigSite.setApiLicenceNom(val);
+				return val;
+			case "apiLicenceUrl":
+				oConfigSite.setApiLicenceUrl(val);
+				return val;
+			case "apiNomHote":
+				oConfigSite.setApiNomHote(val);
+				return val;
+			case "apiCheminBase":
+				oConfigSite.setApiCheminBase(val);
 				return val;
 			default:
 				return null;

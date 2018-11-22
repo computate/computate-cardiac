@@ -1,11 +1,15 @@
 package org.computate.frFR.cardiaque.vertx;
 
+import java.io.File;
+import java.io.PrintWriter;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.computate.frFR.cardiaque.config.ConfigSite;
 import org.computate.frFR.cardiaque.contexte.SiteContexte;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
 import org.computate.frFR.cardiaque.warfarin.CalculInrApiGen;
+import org.junit.Test;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
@@ -35,7 +39,8 @@ public class AppVertx extends AbstractVerticle {
 		CoureurVertx.run(AppVertx.class);
 	}
 
-	private Future<Void> preparerDonnees(ConfigSite configSite) {
+	private Future<Void> preparerDonnees(SiteContexte siteContexte) {
+		ConfigSite configSite = siteContexte.getConfigSite();
 		Future<Void> future = Future.future();
 
 		JsonObject jdbcConfig = new JsonObject();
@@ -74,7 +79,8 @@ public class AppVertx extends AbstractVerticle {
 		return future;
 	}
 
-	private Future<Void> configurerCluster(ConfigSite configSite) {
+	private Future<Void> configurerCluster(SiteContexte siteContexte) {
+		ConfigSite configSite = siteContexte.getConfigSite();
 		Future<Void> future = Future.future();
 		SharedData donneesPartagees = vertx.sharedData();
 		donneesPartagees.getClusterWideMap("donneesCluster", res -> {
@@ -101,14 +107,18 @@ public class AppVertx extends AbstractVerticle {
 		return future;
 	}
 
-	private Future<Void> configurerApi(ConfigSite configSite) {
+	private Future<Void> configurerOpenApi(SiteContexte siteContexte) {
+		ConfigSite configSite = siteContexte.getConfigSite();
 		Future<Void> future = Future.future();
-		OpenAPI3RouterFactory.create(vertx, "/swagger.yaml", ar -> {
+		OpenAPI3RouterFactory.create(vertx, "src/main/resources/openapi3.yaml", ar -> {
 			if (ar.succeeded()) {
-//				OpenAPI3RouterFactory routerFactory = ar.result();
+				OpenAPI3RouterFactory usineRouteur = ar.result();
+				siteContexte.setUsineRouteur_(usineRouteur);
 				// Create and mount options to router factory
 //				RouterFactoryOptions options = new RouterFactoryOptions().setMountNotImplementedHandler(true)
 //						.setMountValidationFailureHandler(false);
+				CalculInrApiGen apiCalculInr = new CalculInrApiGen();
+				apiCalculInr.handleGetCalculInr(siteContexte);
 				future.complete();
 			}
 			else {
@@ -119,7 +129,8 @@ public class AppVertx extends AbstractVerticle {
 		return future;
 	}
 
-	private Future<Void> demarrerServeur(ConfigSite configSite) {
+	private Future<Void> demarrerServeur(SiteContexte siteContexte) {
+		ConfigSite configSite = siteContexte.getConfigSite();
 		Future<Void> future = Future.future();
 
 		try {
@@ -136,6 +147,7 @@ public class AppVertx extends AbstractVerticle {
 	
 			// Initialize the OAuth2 Library
 			OAuth2Auth siteAuth = KeycloakAuth.create(vertx, OAuth2FlowType.PASSWORD, keycloakJson);
+			siteContexte.setSiteAuth_(siteAuth);
 
 			OpenAPI3RouterFactory.create(vertx, "src/main/resources/petstore.yaml", ar -> {
 				if (ar.succeeded()) {
@@ -148,20 +160,8 @@ public class AppVertx extends AbstractVerticle {
 				}
 			});
 	
-			Router siteRouteur = Router.router(vertx);
-	
-			SiteContexte siteContexte = new SiteContexte();
-			siteContexte.setVertx_(vertx);
-			siteContexte.setSiteAuth_(siteAuth);
-			siteContexte.setSiteRouteur_(siteRouteur);
-	
-			RequeteSite requeteSite = new RequeteSite();
-			requeteSite.setSiteContexte_(siteContexte);
-			requeteSite.initLoinRequeteSite();
-	
-			siteContexte.initLoinSiteContexte();
-	
-			moissoneurOaiApi.handleGetCalculInr(siteContexte);
+			Router siteRouteur = siteContexte.getUsineRouteur_().getRouter();
+//			siteContexte.setSiteRouteur_(siteRouteur);
 	
 			siteRouteur.route().handler(StaticHandler.create());
 	
@@ -169,8 +169,8 @@ public class AppVertx extends AbstractVerticle {
 			// options.setMaxWebsocketFrameSize(1000000);
 			options.setSsl(true);
 			options.setKeyStoreOptions(new JksOptions().setPath(configSite.getSslJksChemin()).setPassword(configSite.getSslJksMotDePasse()));
-			String siteNomHote = requeteSite.getConfigSite_().getSiteNomHote();
-			Integer sitePort = requeteSite.getConfigSite_().getSitePort();
+			String siteNomHote = configSite.getSiteNomHote();
+			Integer sitePort = configSite.getSitePort();
 	
 			LOGGER.info(String.format("HTTP server starting: %s://%s:%s", "https", siteNomHote, sitePort));
 			vertx.createHttpServer(options).requestHandler(siteRouteur::accept).listen(sitePort,
@@ -193,11 +193,21 @@ public class AppVertx extends AbstractVerticle {
 
 	@Override
 	public void start(Future<Void> demarrerFuture) throws Exception {
-		ConfigSite configSite = new ConfigSite();
-		configSite.initLoinConfigSite();
-		Future<Void> etapesFutures = preparerDonnees(configSite).compose(
-				a -> configurerCluster(configSite).compose(
-						b -> demarrerServeur(configSite)
+	
+		SiteContexte siteContexte = new SiteContexte();
+		siteContexte.setVertx_(vertx);
+
+		RequeteSite requeteSite = new RequeteSite();
+		requeteSite.setSiteContexte_(siteContexte);
+		requeteSite.initLoinRequeteSite();
+
+		siteContexte.initLoinSiteContexte();
+
+		Future<Void> etapesFutures = preparerDonnees(siteContexte).compose(
+				a -> configurerCluster(siteContexte).compose(
+						b -> configurerOpenApi(siteContexte).compose(
+							c -> demarrerServeur(siteContexte)
+						)
 				)
 		);
 		etapesFutures.setHandler(demarrerFuture.completer());

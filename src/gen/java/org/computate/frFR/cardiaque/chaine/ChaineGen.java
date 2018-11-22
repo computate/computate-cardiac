@@ -33,7 +33,7 @@ public abstract class ChaineGen<DEV> extends Object {
 		return requeteSite_;
 	}
 
-	public void setRequeteSite_(RequeteSite o) throws Exception {
+	public void setRequeteSite_(RequeteSite o) {
 		this.requeteSite_ = o;
 	}
 	protected void requeteSite_Init() throws Exception {
@@ -66,7 +66,7 @@ public abstract class ChaineGen<DEV> extends Object {
 		return police;
 	}
 
-	public void setPolice(String o) throws Exception {
+	public void setPolice(String o) {
 		this.police = o;
 	}
 	protected void policeInit() throws Exception {
@@ -99,7 +99,7 @@ public abstract class ChaineGen<DEV> extends Object {
 		return alignerCentre;
 	}
 
-	public void setAlignerCentre(Boolean o) throws Exception {
+	public void setAlignerCentre(Boolean o) {
 		this.alignerCentre = o;
 	}
 	public Chaine setAlignerCentre(String o) throws Exception {
@@ -137,7 +137,7 @@ public abstract class ChaineGen<DEV> extends Object {
 		return alignerGauche;
 	}
 
-	public void setAlignerGauche(Boolean o) throws Exception {
+	public void setAlignerGauche(Boolean o) {
 		this.alignerGauche = o;
 	}
 	public Chaine setAlignerGauche(String o) throws Exception {
@@ -175,7 +175,7 @@ public abstract class ChaineGen<DEV> extends Object {
 		return alignerDroit;
 	}
 
-	public void setAlignerDroit(Boolean o) throws Exception {
+	public void setAlignerDroit(Boolean o) {
 		this.alignerDroit = o;
 	}
 	public Chaine setAlignerDroit(String o) throws Exception {
@@ -213,7 +213,7 @@ public abstract class ChaineGen<DEV> extends Object {
 		return iconesAvant;
 	}
 
-	public void setIconesAvant(ArrayList<Icone> l) throws Exception {
+	public void setIconesAvant(ArrayList<Icone> l) {
 		this.iconesAvant = l;
 	}
 	public Chaine addIconesAvant(Icone...objets) throws Exception {
@@ -255,7 +255,7 @@ public abstract class ChaineGen<DEV> extends Object {
 		return iconesApres;
 	}
 
-	public void setIconesApres(ArrayList<Icone> l) throws Exception {
+	public void setIconesApres(ArrayList<Icone> l) {
 		this.iconesApres = l;
 	}
 	public Chaine addIconesApres(Icone...objets) throws Exception {
@@ -297,7 +297,7 @@ public abstract class ChaineGen<DEV> extends Object {
 		return xDecalage;
 	}
 
-	public void setXDecalage(Double o) throws Exception {
+	public void setXDecalage(Double o) {
 		this.xDecalage = o;
 	}
 	public Chaine setXDecalage(String o) throws Exception {
@@ -335,7 +335,7 @@ public abstract class ChaineGen<DEV> extends Object {
 		return yDecalage;
 	}
 
-	public void setYDecalage(Double o) throws Exception {
+	public void setYDecalage(Double o) {
 		this.yDecalage = o;
 	}
 	public Chaine setYDecalage(String o) throws Exception {
@@ -373,7 +373,7 @@ public abstract class ChaineGen<DEV> extends Object {
 		return hLigne;
 	}
 
-	public void setHLigne(Double o) throws Exception {
+	public void setHLigne(Double o) {
 		this.hLigne = o;
 	}
 	public Chaine setHLigne(String o) throws Exception {
@@ -411,7 +411,7 @@ public abstract class ChaineGen<DEV> extends Object {
 		return hEspace;
 	}
 
-	public void setHEspace(Double o) throws Exception {
+	public void setHEspace(Double o) {
 		this.hEspace = o;
 	}
 	public Chaine setHEspace(String o) throws Exception {
@@ -449,7 +449,7 @@ public abstract class ChaineGen<DEV> extends Object {
 		return tout;
 	}
 
-	public void setTout(ArrayList<Object> l) throws Exception {
+	public void setTout(ArrayList<Object> l) {
 		this.tout = l;
 	}
 	public Chaine addTout(Object...objets) throws Exception {

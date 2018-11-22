@@ -366,8 +366,8 @@ public class Chaine extends ChaineGen<Object> {
 //		requeteSite.initialiserLoinRequeteSite();
 //
 //		org.computate.site.java.classe.generateur.GenerateurClasse generateurClasse = new org.computate.site.java.classe.generateur.GenerateurClasse();
-//		generateurClasse.cheminConfiguration(SiteContexte.cheminConfig);
-//		String cheminRessource = SiteContexte.configSite.cheminProjet + "/src/main/java/" + getClass().getCanonicalName().replace(".", "/") + ".java";
+//		generateurClasse.configCheminuration(SiteContexte.configChemin);
+//		String cheminRessource = SiteContexte.configSite.appliChemin + "/src/main/java/" + getClass().getCanonicalName().replace(".", "/") + ".java";
 //		generateurClasse.requeteSite(requeteSite);
 //		generateurClasse.cheminRessource(cheminRessource);
 //		generateurClasse.initialiserLoinGenerateurClasse(requeteSite);

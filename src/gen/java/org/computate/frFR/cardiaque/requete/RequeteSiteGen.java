@@ -48,7 +48,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		return siteContexte_;
 	}
 
-	public void setSiteContexte_(SiteContexte o) throws Exception {
+	public void setSiteContexte_(SiteContexte o) {
 		this.siteContexte_ = o;
 	}
 	protected void siteContexte_Init() throws Exception {
@@ -81,7 +81,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		return vertx_;
 	}
 
-	public void setVertx_(Vertx o) throws Exception {
+	public void setVertx_(Vertx o) {
 		this.vertx_ = o;
 	}
 	protected void vertx_Init() throws Exception {
@@ -114,7 +114,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		return contexteItineraire_;
 	}
 
-	public void setContexteItineraire_(RoutingContext o) throws Exception {
+	public void setContexteItineraire_(RoutingContext o) {
 		this.contexteItineraire_ = o;
 	}
 	protected void contexteItineraire_Init() throws Exception {
@@ -147,7 +147,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		return rechercheSolr_;
 	}
 
-	public void setRechercheSolr_(SolrQuery o) throws Exception {
+	public void setRechercheSolr_(SolrQuery o) {
 		this.rechercheSolr_ = o;
 	}
 	protected void rechercheSolr_Init() throws Exception {
@@ -180,7 +180,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		return configSite_;
 	}
 
-	public void setConfigSite_(ConfigSite o) throws Exception {
+	public void setConfigSite_(ConfigSite o) {
 		this.configSite_ = o;
 	}
 	protected void configSite_Init() throws Exception {
@@ -213,7 +213,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		return reponseRecherche;
 	}
 
-	public void setReponseRecherche(QueryResponse o) throws Exception {
+	public void setReponseRecherche(QueryResponse o) {
 		this.reponseRecherche = o;
 	}
 	protected void reponseRechercheInit() throws Exception {
@@ -246,7 +246,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		return resultatsRecherche;
 	}
 
-	public void setResultatsRecherche(SolrDocumentList o) throws Exception {
+	public void setResultatsRecherche(SolrDocumentList o) {
 		this.resultatsRecherche = o;
 	}
 	protected void resultatsRechercheInit() throws Exception {
@@ -279,7 +279,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		return requeteSite_;
 	}
 
-	public void setRequeteSite_(RequeteSite o) throws Exception {
+	public void setRequeteSite_(RequeteSite o) {
 		this.requeteSite_ = o;
 	}
 	protected void requeteSite_Init() throws Exception {
@@ -312,7 +312,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		return requeteServeur;
 	}
 
-	public void setRequeteServeur(HttpServerRequest o) throws Exception {
+	public void setRequeteServeur(HttpServerRequest o) {
 		this.requeteServeur = o;
 	}
 	protected void requeteServeurInit() throws Exception {
@@ -345,7 +345,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		return reponseServeur;
 	}
 
-	public void setReponseServeur(HttpServerResponse o) throws Exception {
+	public void setReponseServeur(HttpServerResponse o) {
 		this.reponseServeur = o;
 	}
 	protected void reponseServeurInit() throws Exception {
@@ -378,7 +378,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		return utilisateurVertx;
 	}
 
-	public void setUtilisateurVertx(User o) throws Exception {
+	public void setUtilisateurVertx(User o) {
 		this.utilisateurVertx = o;
 	}
 	protected void utilisateurVertxInit() throws Exception {
@@ -411,7 +411,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		return principalJson;
 	}
 
-	public void setPrincipalJson(JsonObject o) throws Exception {
+	public void setPrincipalJson(JsonObject o) {
 		this.principalJson = o;
 	}
 	protected void principalJsonInit() throws Exception {
@@ -444,7 +444,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		return utilisateurNomDomaine;
 	}
 
-	public void setUtilisateurNomDomaine(String o) throws Exception {
+	public void setUtilisateurNomDomaine(String o) {
 		this.utilisateurNomDomaine = o;
 	}
 	protected void utilisateurNomDomaineInit() throws Exception {
@@ -477,7 +477,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		return utilisateurNomEnsemble;
 	}
 
-	public void setUtilisateurNomEnsemble(String o) throws Exception {
+	public void setUtilisateurNomEnsemble(String o) {
 		this.utilisateurNomEnsemble = o;
 	}
 	protected void utilisateurNomEnsembleInit() throws Exception {
@@ -510,7 +510,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		return utilisateurSite;
 	}
 
-	public void setUtilisateurSite(UtilisateurSite o) throws Exception {
+	public void setUtilisateurSite(UtilisateurSite o) {
 		this.utilisateurSite = o;
 	}
 	protected void utilisateurSiteInit() throws Exception {
@@ -545,7 +545,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		return utilisateurId;
 	}
 
-	public void setUtilisateurId(String o) throws Exception {
+	public void setUtilisateurId(String o) {
 		this.utilisateurId = o;
 	}
 	protected void utilisateurIdInit() throws Exception {
@@ -578,7 +578,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		return utilisateurNom;
 	}
 
-	public void setUtilisateurNom(String o) throws Exception {
+	public void setUtilisateurNom(String o) {
 		this.utilisateurNom = o;
 	}
 	protected void utilisateurNomInit() throws Exception {
@@ -611,7 +611,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		return utilisateurNomFamille;
 	}
 
-	public void setUtilisateurNomFamille(String o) throws Exception {
+	public void setUtilisateurNomFamille(String o) {
 		this.utilisateurNomFamille = o;
 	}
 	protected void utilisateurNomFamilleInit() throws Exception {
@@ -644,7 +644,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		return utilisateurPrenom;
 	}
 
-	public void setUtilisateurPrenom(String o) throws Exception {
+	public void setUtilisateurPrenom(String o) {
 		this.utilisateurPrenom = o;
 	}
 	protected void utilisateurPrenomInit() throws Exception {
@@ -677,7 +677,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		return utilisateurNomComplet;
 	}
 
-	public void setUtilisateurNomComplet(String o) throws Exception {
+	public void setUtilisateurNomComplet(String o) {
 		this.utilisateurNomComplet = o;
 	}
 	protected void utilisateurNomCompletInit() throws Exception {
@@ -710,7 +710,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		return xmlPile;
 	}
 
-	public void setXmlPile(Stack<String> o) throws Exception {
+	public void setXmlPile(Stack<String> o) {
 		this.xmlPile = o;
 	}
 	protected void xmlPileInit() throws Exception {
@@ -741,7 +741,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		return solrDocument;
 	}
 
-	public void setSolrDocument(SolrDocument o) throws Exception {
+	public void setSolrDocument(SolrDocument o) {
 		this.solrDocument = o;
 	}
 	protected void solrDocumentInit() throws Exception {
@@ -774,7 +774,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		return pageAchete;
 	}
 
-	public void setPageAchete(Boolean o) throws Exception {
+	public void setPageAchete(Boolean o) {
 		this.pageAchete = o;
 	}
 	public RequeteSite setPageAchete(String o) throws Exception {
@@ -812,7 +812,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		return pageAdmin;
 	}
 
-	public void setPageAdmin(Boolean o) throws Exception {
+	public void setPageAdmin(Boolean o) {
 		this.pageAdmin = o;
 	}
 	public RequeteSite setPageAdmin(String o) throws Exception {
@@ -850,7 +850,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		return h;
 	}
 
-	public void setH(String o) throws Exception {
+	public void setH(String o) {
 		this.h = o;
 	}
 	protected void hInit() throws Exception {
@@ -883,7 +883,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		return chiffrementCrypter;
 	}
 
-	public void setChiffrementCrypter(Cipher o) throws Exception {
+	public void setChiffrementCrypter(Cipher o) {
 		this.chiffrementCrypter = o;
 	}
 	protected void chiffrementCrypterInit() throws Exception {
@@ -916,7 +916,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		return chiffrementDecrypter;
 	}
 
-	public void setChiffrementDecrypter(Cipher o) throws Exception {
+	public void setChiffrementDecrypter(Cipher o) {
 		this.chiffrementDecrypter = o;
 	}
 	protected void chiffrementDecrypterInit() throws Exception {
@@ -949,7 +949,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		return digestMessage;
 	}
 
-	public void setDigestMessage(MessageDigest o) throws Exception {
+	public void setDigestMessage(MessageDigest o) {
 		this.digestMessage = o;
 	}
 	protected void digestMessageInit() throws Exception {
@@ -982,7 +982,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		return sel;
 	}
 
-	public void setSel(String o) throws Exception {
+	public void setSel(String o) {
 		this.sel = o;
 	}
 	protected void selInit() throws Exception {
@@ -1015,7 +1015,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		return cle;
 	}
 
-	public void setCle(byte[] o) throws Exception {
+	public void setCle(byte[] o) {
 		this.cle = o;
 	}
 	protected void cleInit() throws Exception {
@@ -1048,7 +1048,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		return aleatoireSecurise;
 	}
 
-	public void setAleatoireSecurise(SecureRandom o) throws Exception {
+	public void setAleatoireSecurise(SecureRandom o) {
 		this.aleatoireSecurise = o;
 	}
 	protected void aleatoireSecuriseInit() throws Exception {
@@ -1079,7 +1079,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		return specCleSecrete;
 	}
 
-	public void setSpecCleSecrete(SecretKeySpec o) throws Exception {
+	public void setSpecCleSecrete(SecretKeySpec o) {
 		this.specCleSecrete = o;
 	}
 	protected void specCleSecreteInit() throws Exception {

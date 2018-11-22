@@ -1,38 +1,49 @@
 package org.computate.frFR.cardiaque.warfarin;
 
-import java.math.BigDecimal;
-import java.time.ZoneId;
-import java.time.format.DateTimeFormatter;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import org.apache.commons.lang3.StringUtils;
-import org.apache.solr.client.solrj.SolrQuery;
-import org.apache.solr.client.solrj.SolrQuery.ORDER;
-import org.apache.solr.client.solrj.response.QueryResponse;
-import org.apache.solr.client.solrj.util.ClientUtils;
-import org.apache.solr.common.SolrDocument;
-import org.apache.solr.common.SolrDocumentList;
-import org.computate.frFR.cardiaque.contexte.SiteContexte;
-import org.computate.frFR.cardiaque.recherche.ResultatRecherche;
-import org.computate.frFR.cardiaque.requete.RequeteSite;
-import org.computate.frFR.cardiaque.utilisateur.UtilisateurSite;
-
-import io.vertx.core.MultiMap;
-import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpServerRequest;
-import io.vertx.core.http.HttpServerResponse;
+import org.computate.frFR.cardiaque.recherche.ResultatRecherche;
 import io.vertx.core.json.Json;
-import io.vertx.core.logging.Logger;
-import io.vertx.core.logging.LoggerFactory;
-import io.vertx.ext.web.Router;
-import io.vertx.ext.web.RoutingContext;
-import io.vertx.ext.web.api.contract.openapi3.OpenAPI3RouterFactory;
-import io.vertx.ext.web.api.validation.HTTPRequestValidationHandler;
 import io.vertx.ext.web.api.validation.ParameterTypeValidator;
+import org.computate.frFR.cardiaque.config.ConfigSite;
+import org.apache.solr.common.SolrDocumentList;
+import java.util.Date;
+import org.computate.frFR.cardiaque.utilisateur.UtilisateurSite;
+import io.vertx.core.MultiMap;
+import io.vertx.ext.web.Router;
+import io.vertx.ext.reactivestreams.ReactiveReadStream;
+import io.vertx.ext.web.RoutingContext;
+import org.apache.commons.lang3.StringUtils;
+import io.vertx.core.logging.LoggerFactory;
+import java.math.BigDecimal;
+import java.util.Map;
+import org.computate.frFR.cardiaque.requete.RequeteSite;
+import io.vertx.ext.web.api.validation.HTTPRequestValidationHandler;
+import io.vertx.ext.web.api.contract.openapi3.OpenAPI3RouterFactory;
+import io.vertx.core.logging.Logger;
+import java.io.PrintWriter;
 import io.vertx.ext.web.api.validation.ValidationException;
+import org.apache.solr.client.solrj.response.QueryResponse;
+import java.util.Collection;
+import io.vertx.core.Vertx;
+import java.io.IOException;
+import io.netty.handler.codec.http.HttpResponseStatus;
+import java.util.stream.Collectors;
+import java.time.ZoneId;
+import io.vertx.ext.reactivestreams.ReactiveWriteStream;
+import org.computate.frFR.cardiaque.contexte.SiteContexte;
+import java.util.concurrent.TimeUnit;
+import org.apache.solr.common.SolrDocument;
+import java.util.List;
+import java.security.Principal;
+import io.vertx.core.http.HttpServerResponse;
+import org.apache.solr.client.solrj.SolrQuery;
+import java.time.format.DateTimeFormatter;
+import io.vertx.ext.auth.oauth2.OAuth2Auth;
+import org.apache.solr.client.solrj.SolrQuery.ORDER;
+import org.apache.solr.client.solrj.util.ClientUtils;
+import io.vertx.core.Handler;
+import java.util.Collections;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 
 
 public class CalculInrApiGen {
@@ -70,29 +81,9 @@ public class CalculInrApiGen {
 	public static final String ENTITE_VAR_STOCKE_changementDoseTexte = "changementDoseTexte_stocke_string";
 
 	public void handleGetCalculInr(SiteContexte siteContexte) {
-		Router siteRouteur = siteContexte.getSiteRouteur_();
+		OpenAPI3RouterFactory usineRouteur = siteContexte.getUsineRouteur_();
 
-		HTTPRequestValidationHandler gestionnaireValidation = HTTPRequestValidationHandler.create();
-		gestionnaireValidation.addQueryParamWithCustomTypeValidator("q", ParameterTypeValidator.createStringTypeValidator("[^:]+:.*", "*:*"), false, false);
-		gestionnaireValidation.addQueryParamWithCustomTypeValidator("fq", ParameterTypeValidator.createStringTypeValidator("[^:]+:.*", null), false, false);
-		gestionnaireValidation.addQueryParamWithCustomTypeValidator("sort", ParameterTypeValidator.createStringTypeValidator("[^:]+:.*", null), false, false);
-		gestionnaireValidation.addQueryParamWithCustomTypeValidator("fl", ParameterTypeValidator.createStringTypeValidator("[^:]+:.*", null), false, false);
-		gestionnaireValidation.addQueryParamWithCustomTypeValidator("start", ParameterTypeValidator.createIntegerTypeValidator(null, 0D, null, 0), false, false);
-		gestionnaireValidation.addQueryParamWithCustomTypeValidator("rows", ParameterTypeValidator.createIntegerTypeValidator(null, 1D, null, 10), false, false);
-
-		OpenAPI3RouterFactory.create(siteContexte.vertx_, "src/main/resources/petstore.yaml", ar -> {
-			  if (ar.succeeded()) {
-			    // Spec loaded with success
-			    OpenAPI3RouterFactory routerFactory = ar.result();
-			  } else {
-			    // Something went wrong during router factory initialization
-			    Throwable exception = ar.cause();
-			  }
-			});
-
-		siteRouteur.get("/api/v1/warfarin/inr-entry")
-				.handler(gestionnaireValidation)
-				.handler(rc -> {
+		usineRouteur.addHandlerByOperationId("getCalculInr", rc -> {
 			try {
 
 				rc.response().putHeader("content-type", "application/json").setChunked(true);
@@ -119,8 +110,8 @@ public class CalculInrApiGen {
 				LOGGER.error("Error: ", e.getMessage());
 				rc.fail(e);
 			}
-		})
-		.failureHandler((rc) -> {
+		});
+		usineRouteur.addFailureHandlerByOperationId("getCalculInr", rc -> {
 			Throwable failure = rc.failure();
 			if (failure instanceof ValidationException) {
 				String validationErrorMessage = failure.getMessage();
@@ -403,8 +394,8 @@ public class CalculInrApiGen {
 	}
 
 	protected void handlePostCalculInr(SiteContexte siteContexte) {
-		Router siteRouteur = siteContexte.getSiteRouteur_();
-		siteRouteur.get("/api/v1/warfarin/inr-entry").handler(rc -> {
+		OpenAPI3RouterFactory usineRouteur = siteContexte.getUsineRouteur_();
+		usineRouteur.addHandlerByOperationId("postCalculInr", rc -> {
 			try {
 				rc.response().putHeader("content-type", "application/json").setChunked(true);
 				RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte, rc);
