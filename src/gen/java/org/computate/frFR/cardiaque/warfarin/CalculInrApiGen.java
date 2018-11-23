@@ -506,24 +506,6 @@ public class CalculInrApiGen {
 	}
 
 	protected void handlePostCalculInr(SiteContexte siteContexte) {
-		OpenAPI3RouterFactory usineRouteur = siteContexte.getUsineRouteur_();
-		usineRouteur.addHandlerByOperationId("postCalculInr", rc -> {
-			try {
-				rc.response().putHeader("content-type", "application/json").setChunked(true);
-				RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte, rc);
-
-				genererPostDebutCalculInr(requeteSite);
-				CalculInr nouveauCalculInr = new CalculInr();
-				 nouveauCalculInr.initLoinCalculInr(requeteSite);
-				 nouveauCalculInr.peuplerCalculInr();
-				postCalculInr();
-				genererPostFinCalculInr(requeteSite);
-				requeteSite.getReponseServeur().end();
-			} catch(Exception e) {
-				LOGGER.error("Error: ", e.getMessage());
-				rc.fail(e);
-			}
-		});
 	}
 
 	public void genererPostDebutCalculInr(RequeteSite requeteSite) {

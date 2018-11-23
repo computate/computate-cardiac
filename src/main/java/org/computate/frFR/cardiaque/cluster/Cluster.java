@@ -15,7 +15,7 @@ import org.computate.frFR.cardiaque.requete.RequeteSite;
  * modele: true
  * apiUri.frFR: /api/v1/warfarin/cluster
  */  
-public class Cluster extends ClusterGen<Object> {        
+public class Cluster extends ClusterGen<Object> {          
 
 	public static DateTimeFormatter FORMAT_dateMedicalCourt = DateTimeFormatter.ofPattern("M/d/yyyy", Locale.FRANCE);
 

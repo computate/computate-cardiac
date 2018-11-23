@@ -24,12 +24,20 @@ import io.vertx.ext.auth.oauth2.OAuth2Auth;
 import io.vertx.ext.auth.oauth2.OAuth2FlowType;
 import io.vertx.ext.auth.oauth2.providers.KeycloakAuth;
 import io.vertx.ext.jdbc.JDBCClient;
+import io.vertx.ext.sql.SQLConnection;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.web.api.contract.RouterFactoryOptions;
 import io.vertx.ext.web.api.contract.openapi3.OpenAPI3RouterFactory;
 import io.vertx.ext.web.handler.StaticHandler;
 
 public class AppVertx extends AbstractVerticle {
+	public static final String SQL_createTableC = "create table if not exists c(pk bigserial primary key, var text, nom_canonique text, cree timestamp with time zone default now(), modifie timestamp with time zone default now(), id_utilisateur text); ";
+	public static final String SQL_uniqueIndexC = "create unique index if not exists c_index_utilisateur on c(pk, nom_canonique, id_utilisateur); ";
+	public static final String SQL_createTableA = "create table if not exists a(pk bigserial primary key, pk1 bigint, pk2 bigint, champ1 text, champ2 text, foreign key(pk1) references c(pk), foreign key(pk2) references c(pk)); ";
+	public static final String SQL_uniqueIndexA = "create unique index if not exists c_unique_pks on a(pk1, champ1, pk2, champ2); ";
+	public static final String SQL_createTableP = "create table if not exists p(pk bigserial primary key, chemin text, valeur text, pk_c bigint, foreign key(pk_c) references c(pk)); ";
+	public static final String SQL_uniqueIndexP = "create unique index if not exists p_index_chemin_pk_o_fk on p(chemin, pk_c); ";
+	public static final String SQL_tout = SQL_createTableC + SQL_uniqueIndexC + SQL_createTableA + SQL_uniqueIndexA + SQL_createTableP + SQL_uniqueIndexP;
 
 	private JDBCClient jdbcClient;
 
@@ -72,7 +80,16 @@ public class AppVertx extends AbstractVerticle {
 				ExceptionUtils.printRootCauseStackTrace(ar.cause());
 				future.fail(ar.cause());
 			} else {
-				future.complete();
+				SQLConnection connection = ar.result();
+				connection.execute(SQL_tout, create -> {
+					connection.close();
+					if (create.failed()) {
+						LOGGER.error("Database preparation error", create.cause());
+						future.fail(create.cause());
+					} else {
+						future.complete();
+					}
+				});
 			}
 		});
 

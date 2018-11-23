@@ -6,6 +6,14 @@ import java.lang.Long;
 import org.computate.frFR.cardiaque.cluster.Cluster;
 import java.time.LocalDateTime;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
+import org.postgresql.ds.PGSimpleDataSource;
+
+import io.vertx.core.Vertx;
+import io.vertx.core.json.JsonArray;
+import io.vertx.core.json.JsonObject;
+import io.vertx.ext.jdbc.JDBCClient;
+import io.vertx.ext.sql.SQLConnection;
+
 import java.lang.Boolean;
 import java.lang.Object;
 import org.computate.frFR.cardiaque.page.MiseEnPage;
@@ -454,7 +462,6 @@ public abstract class ClusterGen<DEV> extends Object {
 	public void indexerCluster(RequeteSite requeteSite) throws Exception {
 		SolrInputDocument document = new SolrInputDocument();
 		indexerCluster(document);
-		document.addField("sauvegardesCluster_stored_strings", sauvegardesCluster);
 		SolrClient clientSolr = requeteSite_.getSiteContexte_().getClientSolr();
 		clientSolr.add(document);
 		clientSolr.commit();
@@ -614,136 +621,4 @@ public abstract class ClusterGen<DEV> extends Object {
 	/////////////
 	// peupler //
 	/////////////
-
-	public void peuplerPourClasse(org.apache.solr.common.SolrDocument documentSolr) throws Exception {
-		sauvegardesCluster = (java.util.ArrayList<String>)documentSolr.get("sauvegardesCluster_stored_strings");
-		peuplerCluster(documentSolr);
-	}
-	public void peuplerCluster(org.apache.solr.common.SolrDocument documentSolr) throws Exception {
-		Cluster oCluster = (Cluster)this;
-
-				java.lang.Long pk = (java.lang.Long)documentSolr.get("pk_stocke_long");
-				if(pk != null)
-					oCluster.setPk(pk);
-
-				java.util.Date cree = (java.util.Date)documentSolr.get("cree_stocke_date");
-				if(cree != null)
-					oCluster.setCree(cree);
-
-				java.util.Date modifie = (java.util.Date)documentSolr.get("modifie_stocke_date");
-				if(modifie != null)
-					oCluster.setModifie(modifie);
-
-				java.lang.String utilisateurId = (java.lang.String)documentSolr.get("utilisateurId_stocke_string");
-				if(utilisateurId != null)
-					oCluster.setUtilisateurId(utilisateurId);
-
-				java.lang.String clusterNomCanonique = (java.lang.String)documentSolr.get("clusterNomCanonique_stocke_string");
-				if(clusterNomCanonique != null)
-					oCluster.setClusterNomCanonique(clusterNomCanonique);
-
-				java.lang.String clusterNomSimple = (java.lang.String)documentSolr.get("clusterNomSimple_stocke_string");
-				if(clusterNomSimple != null)
-					oCluster.setClusterNomSimple(clusterNomSimple);
-	}
-
-	////////////
-	// existe //
-	////////////
-
-	public Boolean existePourClasse() throws Exception {
-		String cleStr = requeteSite_.getRequeteServeur().getParam("pk");
-		Long cle = org.apache.commons.lang3.StringUtils.isNumeric(cleStr) ? Long.parseLong(cleStr) : null;
-		Boolean existe = existePourClasse(cle);
-		return existe;
-	}
-	public Boolean existePourClasse(Long cle) throws Exception {
-		org.apache.commons.dbutils.QueryRunner coureur = new org.apache.commons.dbutils.QueryRunner(requeteSite_.SiteContexte.sourceDonnees);
-		org.apache.commons.dbutils.handlers.ArrayListHandler gestionnaireListe = new org.apache.commons.dbutils.handlers.ArrayListHandler();
-		utilisateurId = requeteSite_.utilisateurId;
-		this.cle = cle;
-		String nomCanonique = getClass().getCanonicalName();
-		Boolean existe = false;
-		
-		if(cle == null) {
-			String sql = "select clep from objet where objet.id_utilisateur=? and objet.nom_canonique=?";
-			java.util.List<Object[]> resultats = coureur.query(sql, gestionnaireListe /*select count(*) from objet where objet.id_utilisateur=*/, requeteSite_.utilisateurId /* and objet.nom_canonique=*/, nomCanonique);
-			existe = resultats.size() > 0;
-			if(existe) {
-				cle = (Long)resultats.get(0)[0];
-				cle(cle);
-			}
-		}
-		else {
-			String sql = "select count(*) from objet where objet.clep=? and objet.id_utilisateur=? and objet.nom_canonique=?";
-			java.util.List<Object[]> resultats = coureur.query(sql, gestionnaireListe /*select count(*) from objet where objet.clep=*/, cle /* and objet.id_utilisateur=*/, requeteSite_.utilisateurId /* and objet.nom_canonique=*/, nomCanonique);
-			existe = ((Long)resultats.get(0)[0]) > 0L;
-		}
-		return existe;
-	}
-
-	/////////////////
-	// sauvegardes //
-	/////////////////
-
-	protected java.util.ArrayList<String> sauvegardesCluster = new java.util.ArrayList<String>();
-	public void sauvegardesPourClasse(RequeteSite requeteSite) throws Exception {
-		org.apache.commons.dbutils.QueryRunner coureur = new org.apache.commons.dbutils.QueryRunner(requeteSite.SiteContexte.sourceDonnees);
-		org.apache.commons.dbutils.handlers.ArrayListHandler gestionnaireListe = new org.apache.commons.dbutils.handlers.ArrayListHandler();
-		
-		if(cle != null) {
-			String sql = "select cree, modifie from objet where objet.clep=?";
-			java.util.List<Object[]> resultats = coureur.query(sql, gestionnaireListe /*select cree, modifie from objet where objet.clep=*/, cle);
-			if(resultats.size() > 0) {
-				cree((java.util.Date)resultats.get(0)[0]);
-				modifie((java.util.Date)resultats.get(0)[1]);
-			}
-			sql = "select chemin, valeur from p where p.cle_objet=? union select champ2, cle2::text from a where a.cle1=? union select champ1, cle1::text from a where a.cle2=? ";
-			resultats = coureur.query(sql, gestionnaireListe /*select chemin, valeur from p where p.cle_objet=*/, cle, cle, cle);
-			for(Object[] objets : resultats) {
-				String chemin = (String)objets[0];
-				String valeur = requeteSite.decrypterStr((String)objets[1]);
-				definirPourClasse(chemin, valeur);
-				sauvegardesCluster.add(chemin);
-			}
-		}
-	}
-
-	/////////////////
-	// sauvegarder //
-	/////////////////
-
-	public void sauvegarderPourClasse(RequeteSite requeteSite) throws Exception {
-		org.apache.commons.dbutils.QueryRunner coureur = new org.apache.commons.dbutils.QueryRunner(requeteSite.SiteContexte.sourceDonnees);
-		org.apache.commons.dbutils.handlers.ArrayListHandler gestionnaireListe = new org.apache.commons.dbutils.handlers.ArrayListHandler();
-		String cleStr = requeteSite_.getRequeteServeur().getParam("pk");
-		cle = org.apache.commons.lang3.StringUtils.isNumeric(cleStr) ? Long.parseLong(cleStr) : null;
-		utilisateurId = requeteSite.utilisateurId;
-		String nomCanonique = getClass().getCanonicalName();
-		modifie = java.time.LocalDateTime.now();
-		java.sql.Timestamp horodatage = java.sql.Timestamp.valueOf(modifie);
-		
-		if(cle == null) {
-			String sql = "insert into objet(nom_canonique, id_utilisateur, cree, modifie) values(?, ?, ?, ?) returning clep";
-			java.util.List<Object[]> resultats = coureur.insert(sql, gestionnaireListe /*insert into objet(nom_canonique, id_utilisateur, cree, modifie) values(*/, nomCanonique, requeteSite.utilisateurId, horodatage, horodatage /*) returning clep, cree*/);
-			cle = (Long)resultats.get(0)[0];
-			cree = modifie;
-		}
-		else {
-			String sql = "update objet set modifie=? where objet.clep=? and objet.id_utilisateur=? and objet.nom_canonique=? returning cree";
-			java.util.List<Object[]> resultats = coureur.query(sql, gestionnaireListe /*update objet set modifie=*/, horodatage /* where objet.clep=*/, cle /* and objet.id_utilisateur=*/, requeteSite.utilisateurId /* and objet.nom_canonique=*/, nomCanonique /* returning cree*/);
-			if(resultats.size() == 0)
-				throw new Exception("L'objet avec le cle " + cle + " et nom canonique " + cle + " pour utilisateur " + requeteSite.utilisateurId + " " + requeteSite.utilisateurNom + " n'existe pas dejà. ");
-			horodatage = (java.sql.Timestamp)resultats.get(0)[0];
-			cree = java.time.LocalDateTime.from(horodatage.toLocalDateTime());
-		}
-
-		String sqlInsertP = "insert into p(chemin, valeur, cle_objet) values(?, ?, ?) on conflict(chemin, cle_objet) do update set valeur=? where p.chemin=? and p.cle_objet=?";
-		String sqlInsertA = "insert into a(champ1, cle1, champ2, cle2) values(?, ?, ?, ?) on conflict  do nothing";
-		String sqlDeleteP = "delete from p where chemin=? and cle_objet=?";
-		String sqlDeleteA = "delete from a where champ1=? and cle1=? and champ2=? and cle2=?";
-		sauvegarderCluster(requeteSite, sqlInsertP, sqlInsertA, sqlDeleteP, sqlDeleteA, gestionnaireListe, coureur);
-	}
-	public void sauvegarderCluster(RequeteSite requeteSite, String sqlInsertP, String sqlInsertA, String sqlDeleteP, String sqlDeleteA, org.apache.commons.dbutils.handlers.ArrayListHandler gestionnaireListe, org.apache.commons.dbutils.QueryRunner coureur) throws Exception {
-	}
 }
