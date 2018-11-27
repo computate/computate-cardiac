@@ -5,25 +5,26 @@ import org.computate.frFR.cardiaque.couverture.Couverture;
 import org.computate.frFR.cardiaque.config.ConfigSite;
 import org.apache.solr.common.SolrDocumentList;
 import java.security.MessageDigest;
-import org.computate.frFR.cardiaque.cluster.Cluster;
-import org.apache.solr.client.solrj.response.QueryResponse;
 import org.computate.frFR.cardiaque.utilisateur.UtilisateurSite;
-import io.vertx.core.Vertx;
 import javax.crypto.spec.SecretKeySpec;
 import io.vertx.ext.web.RoutingContext;
 import javax.crypto.Cipher;
 import java.util.Stack;
-import org.computate.frFR.cardiaque.contexte.SiteContexte;
 import java.security.SecureRandom;
+import java.lang.Long;
+import org.computate.frFR.cardiaque.requete.RequeteSite;
+import java.lang.Boolean;
+import io.vertx.core.json.JsonObject;
+import java.lang.String;
+import org.computate.frFR.cardiaque.cluster.Cluster;
+import org.apache.solr.client.solrj.response.QueryResponse;
+import io.vertx.core.Vertx;
+import org.computate.frFR.cardiaque.contexte.SiteContexte;
 import org.apache.solr.common.SolrDocument;
 import io.vertx.ext.auth.User;
 import io.vertx.core.http.HttpServerResponse;
 import org.apache.solr.client.solrj.SolrQuery;
-import org.computate.frFR.cardiaque.requete.RequeteSite;
-import java.lang.Boolean;
 import java.lang.Object;
-import io.vertx.core.json.JsonObject;
-import java.lang.String;
 
 public abstract class RequeteSiteGen<DEV> extends Object {
 
@@ -51,13 +52,14 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	public void setSiteContexte_(SiteContexte o) {
 		this.siteContexte_ = o;
 	}
-	protected void siteContexte_Init() throws Exception {
+	protected RequeteSite siteContexte_Init() throws Exception {
 		if(!siteContexte_Couverture.dejaInitialise) {
 			_siteContexte_(siteContexte_Couverture);
 			if(siteContexte_ == null)
 				setSiteContexte_(siteContexte_Couverture.o);
 		}
 		siteContexte_Couverture.dejaInitialise(true);
+		return (RequeteSite)this;
 	}
 
 	////////////
@@ -84,13 +86,14 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	public void setVertx_(Vertx o) {
 		this.vertx_ = o;
 	}
-	protected void vertx_Init() throws Exception {
+	protected RequeteSite vertx_Init() throws Exception {
 		if(!vertx_Couverture.dejaInitialise) {
 			_vertx_(vertx_Couverture);
 			if(vertx_ == null)
 				setVertx_(vertx_Couverture.o);
 		}
 		vertx_Couverture.dejaInitialise(true);
+		return (RequeteSite)this;
 	}
 
 	/////////////////////////
@@ -117,13 +120,14 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	public void setContexteItineraire_(RoutingContext o) {
 		this.contexteItineraire_ = o;
 	}
-	protected void contexteItineraire_Init() throws Exception {
+	protected RequeteSite contexteItineraire_Init() throws Exception {
 		if(!contexteItineraire_Couverture.dejaInitialise) {
 			_contexteItineraire_(contexteItineraire_Couverture);
 			if(contexteItineraire_ == null)
 				setContexteItineraire_(contexteItineraire_Couverture.o);
 		}
 		contexteItineraire_Couverture.dejaInitialise(true);
+		return (RequeteSite)this;
 	}
 
 	////////////////////
@@ -150,13 +154,14 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	public void setRechercheSolr_(SolrQuery o) {
 		this.rechercheSolr_ = o;
 	}
-	protected void rechercheSolr_Init() throws Exception {
+	protected RequeteSite rechercheSolr_Init() throws Exception {
 		if(!rechercheSolr_Couverture.dejaInitialise) {
 			_rechercheSolr_(rechercheSolr_Couverture);
 			if(rechercheSolr_ == null)
 				setRechercheSolr_(rechercheSolr_Couverture.o);
 		}
 		rechercheSolr_Couverture.dejaInitialise(true);
+		return (RequeteSite)this;
 	}
 
 	/////////////////
@@ -183,13 +188,14 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	public void setConfigSite_(ConfigSite o) {
 		this.configSite_ = o;
 	}
-	protected void configSite_Init() throws Exception {
+	protected RequeteSite configSite_Init() throws Exception {
 		if(!configSite_Couverture.dejaInitialise) {
 			_configSite_(configSite_Couverture);
 			if(configSite_ == null)
 				setConfigSite_(configSite_Couverture.o);
 		}
 		configSite_Couverture.dejaInitialise(true);
+		return (RequeteSite)this;
 	}
 
 	//////////////////////
@@ -216,13 +222,14 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	public void setReponseRecherche(QueryResponse o) {
 		this.reponseRecherche = o;
 	}
-	protected void reponseRechercheInit() throws Exception {
+	protected RequeteSite reponseRechercheInit() throws Exception {
 		if(!reponseRechercheCouverture.dejaInitialise) {
 			_reponseRecherche(reponseRechercheCouverture);
 			if(reponseRecherche == null)
 				setReponseRecherche(reponseRechercheCouverture.o);
 		}
 		reponseRechercheCouverture.dejaInitialise(true);
+		return (RequeteSite)this;
 	}
 
 	////////////////////////
@@ -249,13 +256,14 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	public void setResultatsRecherche(SolrDocumentList o) {
 		this.resultatsRecherche = o;
 	}
-	protected void resultatsRechercheInit() throws Exception {
+	protected RequeteSite resultatsRechercheInit() throws Exception {
 		if(!resultatsRechercheCouverture.dejaInitialise) {
 			_resultatsRecherche(resultatsRechercheCouverture);
 			if(resultatsRecherche == null)
 				setResultatsRecherche(resultatsRechercheCouverture.o);
 		}
 		resultatsRechercheCouverture.dejaInitialise(true);
+		return (RequeteSite)this;
 	}
 
 	//////////////////
@@ -282,13 +290,14 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	public void setRequeteSite_(RequeteSite o) {
 		this.requeteSite_ = o;
 	}
-	protected void requeteSite_Init() throws Exception {
+	protected RequeteSite requeteSite_Init() throws Exception {
 		if(!requeteSite_Couverture.dejaInitialise) {
 			_requeteSite_(requeteSite_Couverture);
 			if(requeteSite_ == null)
 				setRequeteSite_(requeteSite_Couverture.o);
 		}
 		requeteSite_Couverture.dejaInitialise(true);
+		return (RequeteSite)this;
 	}
 
 	////////////////////
@@ -315,13 +324,14 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	public void setRequeteServeur(HttpServerRequest o) {
 		this.requeteServeur = o;
 	}
-	protected void requeteServeurInit() throws Exception {
+	protected RequeteSite requeteServeurInit() throws Exception {
 		if(!requeteServeurCouverture.dejaInitialise) {
 			_requeteServeur(requeteServeurCouverture);
 			if(requeteServeur == null)
 				setRequeteServeur(requeteServeurCouverture.o);
 		}
 		requeteServeurCouverture.dejaInitialise(true);
+		return (RequeteSite)this;
 	}
 
 	////////////////////
@@ -348,13 +358,14 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	public void setReponseServeur(HttpServerResponse o) {
 		this.reponseServeur = o;
 	}
-	protected void reponseServeurInit() throws Exception {
+	protected RequeteSite reponseServeurInit() throws Exception {
 		if(!reponseServeurCouverture.dejaInitialise) {
 			_reponseServeur(reponseServeurCouverture);
 			if(reponseServeur == null)
 				setReponseServeur(reponseServeurCouverture.o);
 		}
 		reponseServeurCouverture.dejaInitialise(true);
+		return (RequeteSite)this;
 	}
 
 	//////////////////////
@@ -381,13 +392,14 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	public void setUtilisateurVertx(User o) {
 		this.utilisateurVertx = o;
 	}
-	protected void utilisateurVertxInit() throws Exception {
+	protected RequeteSite utilisateurVertxInit() throws Exception {
 		if(!utilisateurVertxCouverture.dejaInitialise) {
 			_utilisateurVertx(utilisateurVertxCouverture);
 			if(utilisateurVertx == null)
 				setUtilisateurVertx(utilisateurVertxCouverture.o);
 		}
 		utilisateurVertxCouverture.dejaInitialise(true);
+		return (RequeteSite)this;
 	}
 
 	///////////////////
@@ -414,13 +426,14 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	public void setPrincipalJson(JsonObject o) {
 		this.principalJson = o;
 	}
-	protected void principalJsonInit() throws Exception {
+	protected RequeteSite principalJsonInit() throws Exception {
 		if(!principalJsonCouverture.dejaInitialise) {
 			_principalJson(principalJsonCouverture);
 			if(principalJson == null)
 				setPrincipalJson(principalJsonCouverture.o);
 		}
 		principalJsonCouverture.dejaInitialise(true);
+		return (RequeteSite)this;
 	}
 
 	///////////////////////////
@@ -447,13 +460,14 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	public void setUtilisateurNomDomaine(String o) {
 		this.utilisateurNomDomaine = o;
 	}
-	protected void utilisateurNomDomaineInit() throws Exception {
+	protected RequeteSite utilisateurNomDomaineInit() throws Exception {
 		if(!utilisateurNomDomaineCouverture.dejaInitialise) {
 			_utilisateurNomDomaine(utilisateurNomDomaineCouverture);
 			if(utilisateurNomDomaine == null)
 				setUtilisateurNomDomaine(utilisateurNomDomaineCouverture.o);
 		}
 		utilisateurNomDomaineCouverture.dejaInitialise(true);
+		return (RequeteSite)this;
 	}
 
 	////////////////////////////
@@ -480,13 +494,14 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	public void setUtilisateurNomEnsemble(String o) {
 		this.utilisateurNomEnsemble = o;
 	}
-	protected void utilisateurNomEnsembleInit() throws Exception {
+	protected RequeteSite utilisateurNomEnsembleInit() throws Exception {
 		if(!utilisateurNomEnsembleCouverture.dejaInitialise) {
 			_utilisateurNomEnsemble(utilisateurNomEnsembleCouverture);
 			if(utilisateurNomEnsemble == null)
 				setUtilisateurNomEnsemble(utilisateurNomEnsembleCouverture.o);
 		}
 		utilisateurNomEnsembleCouverture.dejaInitialise(true);
+		return (RequeteSite)this;
 	}
 
 	/////////////////////
@@ -513,7 +528,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	public void setUtilisateurSite(UtilisateurSite o) {
 		this.utilisateurSite = o;
 	}
-	protected void utilisateurSiteInit() throws Exception {
+	protected RequeteSite utilisateurSiteInit() throws Exception {
 		if(!utilisateurSiteCouverture.dejaInitialise) {
 			_utilisateurSite(utilisateurSiteCouverture);
 			if(utilisateurSite == null)
@@ -522,6 +537,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		if(utilisateurSite != null)
 			utilisateurSite.initLoinPourClasse(requeteSite_);
 		utilisateurSiteCouverture.dejaInitialise(true);
+		return (RequeteSite)this;
 	}
 
 	///////////////////
@@ -548,13 +564,14 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	public void setUtilisateurId(String o) {
 		this.utilisateurId = o;
 	}
-	protected void utilisateurIdInit() throws Exception {
+	protected RequeteSite utilisateurIdInit() throws Exception {
 		if(!utilisateurIdCouverture.dejaInitialise) {
 			_utilisateurId(utilisateurIdCouverture);
 			if(utilisateurId == null)
 				setUtilisateurId(utilisateurIdCouverture.o);
 		}
 		utilisateurIdCouverture.dejaInitialise(true);
+		return (RequeteSite)this;
 	}
 
 	////////////////////
@@ -581,13 +598,14 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	public void setUtilisateurNom(String o) {
 		this.utilisateurNom = o;
 	}
-	protected void utilisateurNomInit() throws Exception {
+	protected RequeteSite utilisateurNomInit() throws Exception {
 		if(!utilisateurNomCouverture.dejaInitialise) {
 			_utilisateurNom(utilisateurNomCouverture);
 			if(utilisateurNom == null)
 				setUtilisateurNom(utilisateurNomCouverture.o);
 		}
 		utilisateurNomCouverture.dejaInitialise(true);
+		return (RequeteSite)this;
 	}
 
 	///////////////////////////
@@ -614,13 +632,14 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	public void setUtilisateurNomFamille(String o) {
 		this.utilisateurNomFamille = o;
 	}
-	protected void utilisateurNomFamilleInit() throws Exception {
+	protected RequeteSite utilisateurNomFamilleInit() throws Exception {
 		if(!utilisateurNomFamilleCouverture.dejaInitialise) {
 			_utilisateurNomFamille(utilisateurNomFamilleCouverture);
 			if(utilisateurNomFamille == null)
 				setUtilisateurNomFamille(utilisateurNomFamilleCouverture.o);
 		}
 		utilisateurNomFamilleCouverture.dejaInitialise(true);
+		return (RequeteSite)this;
 	}
 
 	///////////////////////
@@ -647,13 +666,14 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	public void setUtilisateurPrenom(String o) {
 		this.utilisateurPrenom = o;
 	}
-	protected void utilisateurPrenomInit() throws Exception {
+	protected RequeteSite utilisateurPrenomInit() throws Exception {
 		if(!utilisateurPrenomCouverture.dejaInitialise) {
 			_utilisateurPrenom(utilisateurPrenomCouverture);
 			if(utilisateurPrenom == null)
 				setUtilisateurPrenom(utilisateurPrenomCouverture.o);
 		}
 		utilisateurPrenomCouverture.dejaInitialise(true);
+		return (RequeteSite)this;
 	}
 
 	///////////////////////////
@@ -680,13 +700,14 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	public void setUtilisateurNomComplet(String o) {
 		this.utilisateurNomComplet = o;
 	}
-	protected void utilisateurNomCompletInit() throws Exception {
+	protected RequeteSite utilisateurNomCompletInit() throws Exception {
 		if(!utilisateurNomCompletCouverture.dejaInitialise) {
 			_utilisateurNomComplet(utilisateurNomCompletCouverture);
 			if(utilisateurNomComplet == null)
 				setUtilisateurNomComplet(utilisateurNomCompletCouverture.o);
 		}
 		utilisateurNomCompletCouverture.dejaInitialise(true);
+		return (RequeteSite)this;
 	}
 
 	/////////////
@@ -713,11 +734,12 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	public void setXmlPile(Stack<String> o) {
 		this.xmlPile = o;
 	}
-	protected void xmlPileInit() throws Exception {
+	protected RequeteSite xmlPileInit() throws Exception {
 		if(!xmlPileCouverture.dejaInitialise) {
 			_xmlPile(xmlPile);
 		}
 		xmlPileCouverture.dejaInitialise(true);
+		return (RequeteSite)this;
 	}
 
 	//////////////////
@@ -744,13 +766,14 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	public void setSolrDocument(SolrDocument o) {
 		this.solrDocument = o;
 	}
-	protected void solrDocumentInit() throws Exception {
+	protected RequeteSite solrDocumentInit() throws Exception {
 		if(!solrDocumentCouverture.dejaInitialise) {
 			_solrDocument(solrDocumentCouverture);
 			if(solrDocument == null)
 				setSolrDocument(solrDocumentCouverture.o);
 		}
 		solrDocumentCouverture.dejaInitialise(true);
+		return (RequeteSite)this;
 	}
 
 	////////////////
@@ -782,13 +805,14 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 			this.pageAchete = Boolean.parseBoolean(o);
 		return (RequeteSite)this;
 	}
-	protected void pageAcheteInit() throws Exception {
+	protected RequeteSite pageAcheteInit() throws Exception {
 		if(!pageAcheteCouverture.dejaInitialise) {
 			_pageAchete(pageAcheteCouverture);
 			if(pageAchete == null)
 				setPageAchete(pageAcheteCouverture.o);
 		}
 		pageAcheteCouverture.dejaInitialise(true);
+		return (RequeteSite)this;
 	}
 
 	///////////////
@@ -820,13 +844,14 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 			this.pageAdmin = Boolean.parseBoolean(o);
 		return (RequeteSite)this;
 	}
-	protected void pageAdminInit() throws Exception {
+	protected RequeteSite pageAdminInit() throws Exception {
 		if(!pageAdminCouverture.dejaInitialise) {
 			_pageAdmin(pageAdminCouverture);
 			if(pageAdmin == null)
 				setPageAdmin(pageAdminCouverture.o);
 		}
 		pageAdminCouverture.dejaInitialise(true);
+		return (RequeteSite)this;
 	}
 
 	///////
@@ -853,13 +878,14 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	public void setH(String o) {
 		this.h = o;
 	}
-	protected void hInit() throws Exception {
+	protected RequeteSite hInit() throws Exception {
 		if(!hCouverture.dejaInitialise) {
 			_h(hCouverture);
 			if(h == null)
 				setH(hCouverture.o);
 		}
 		hCouverture.dejaInitialise(true);
+		return (RequeteSite)this;
 	}
 
 	////////////////////////
@@ -886,13 +912,14 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	public void setChiffrementCrypter(Cipher o) {
 		this.chiffrementCrypter = o;
 	}
-	protected void chiffrementCrypterInit() throws Exception {
+	protected RequeteSite chiffrementCrypterInit() throws Exception {
 		if(!chiffrementCrypterCouverture.dejaInitialise) {
 			_chiffrementCrypter(chiffrementCrypterCouverture);
 			if(chiffrementCrypter == null)
 				setChiffrementCrypter(chiffrementCrypterCouverture.o);
 		}
 		chiffrementCrypterCouverture.dejaInitialise(true);
+		return (RequeteSite)this;
 	}
 
 	//////////////////////////
@@ -919,13 +946,14 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	public void setChiffrementDecrypter(Cipher o) {
 		this.chiffrementDecrypter = o;
 	}
-	protected void chiffrementDecrypterInit() throws Exception {
+	protected RequeteSite chiffrementDecrypterInit() throws Exception {
 		if(!chiffrementDecrypterCouverture.dejaInitialise) {
 			_chiffrementDecrypter(chiffrementDecrypterCouverture);
 			if(chiffrementDecrypter == null)
 				setChiffrementDecrypter(chiffrementDecrypterCouverture.o);
 		}
 		chiffrementDecrypterCouverture.dejaInitialise(true);
+		return (RequeteSite)this;
 	}
 
 	///////////////////
@@ -952,79 +980,121 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	public void setDigestMessage(MessageDigest o) {
 		this.digestMessage = o;
 	}
-	protected void digestMessageInit() throws Exception {
+	protected RequeteSite digestMessageInit() throws Exception {
 		if(!digestMessageCouverture.dejaInitialise) {
 			_digestMessage(digestMessageCouverture);
 			if(digestMessage == null)
 				setDigestMessage(digestMessageCouverture.o);
 		}
 		digestMessageCouverture.dejaInitialise(true);
+		return (RequeteSite)this;
 	}
 
-	/////////
-	// sel //
-	/////////
+	////////////////
+	// crypterSel //
+	////////////////
 
-	/**	L'entité « sel »
+	/**	L'entité « crypterSel »
 	 *	 est défini comme null avant d'être initialisé. 
 	 */
-	protected String sel;
-	public Couverture<String> selCouverture = new Couverture<String>().p(this).c(String.class).var("sel").o(sel);
+	protected String crypterSel;
+	public Couverture<String> crypterSelCouverture = new Couverture<String>().p(this).c(String.class).var("crypterSel").o(crypterSel);
 
-	/**	L'entité « sel »
-	 *	 est défini comme null avant d'être initialisé. 
-	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
-	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
-	 */
-	protected abstract void _sel(Couverture<String> o) throws Exception;
-
-	public String getSel() {
-		return sel;
-	}
-
-	public void setSel(String o) {
-		this.sel = o;
-	}
-	protected void selInit() throws Exception {
-		if(!selCouverture.dejaInitialise) {
-			_sel(selCouverture);
-			if(sel == null)
-				setSel(selCouverture.o);
-		}
-		selCouverture.dejaInitialise(true);
-	}
-
-	/////////
-	// cle //
-	/////////
-
-	/**	L'entité « cle »
-	 *	 est défini comme null avant d'être initialisé. 
-	 */
-	protected byte[] cle;
-	public Couverture<byte[]> cleCouverture = new Couverture<byte[]>().p(this).c(byte[].class).var("cle").o(cle);
-
-	/**	L'entité « cle »
+	/**	L'entité « crypterSel »
 	 *	 est défini comme null avant d'être initialisé. 
 	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
 	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
 	 */
-	protected abstract void _cle(Couverture<byte[]> o) throws Exception;
+	protected abstract void _crypterSel(Couverture<String> o) throws Exception;
 
-	public byte[] getCle() {
-		return cle;
+	public String getCrypterSel() {
+		return crypterSel;
 	}
 
-	public void setCle(byte[] o) {
-		this.cle = o;
+	public void setCrypterSel(String o) {
+		this.crypterSel = o;
 	}
-	protected void cleInit() throws Exception {
-		if(!cleCouverture.dejaInitialise) {
-			_cle(cleCouverture);
-			if(cle == null)
-				setCle(cleCouverture.o);
+	protected RequeteSite crypterSelInit() throws Exception {
+		if(!crypterSelCouverture.dejaInitialise) {
+			_crypterSel(crypterSelCouverture);
+			if(crypterSel == null)
+				setCrypterSel(crypterSelCouverture.o);
 		}
-		cleCouverture.dejaInitialise(true);
+		crypterSelCouverture.dejaInitialise(true);
+		return (RequeteSite)this;
+	}
+
+	///////////////
+	// requetePk //
+	///////////////
+
+	/**	L'entité « requetePk »
+	 *	 est défini comme null avant d'être initialisé. 
+	 */
+	protected Long requetePk;
+	public Couverture<Long> requetePkCouverture = new Couverture<Long>().p(this).c(Long.class).var("requetePk").o(requetePk);
+
+	/**	L'entité « requetePk »
+	 *	 est défini comme null avant d'être initialisé. 
+	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
+	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
+	 */
+	protected abstract void _requetePk(Couverture<Long> o) throws Exception;
+
+	public Long getRequetePk() {
+		return requetePk;
+	}
+
+	public void setRequetePk(Long o) {
+		this.requetePk = o;
+	}
+	public RequeteSite setRequetePk(String o) throws Exception {
+		if(org.apache.commons.lang3.math.NumberUtils.isCreatable(o))
+			this.requetePk = Long.parseLong(o);
+		return (RequeteSite)this;
+	}
+	protected RequeteSite requetePkInit() throws Exception {
+		if(!requetePkCouverture.dejaInitialise) {
+			_requetePk(requetePkCouverture);
+			if(requetePk == null)
+				setRequetePk(requetePkCouverture.o);
+		}
+		requetePkCouverture.dejaInitialise(true);
+		return (RequeteSite)this;
+	}
+
+	////////////////
+	// crypterCle //
+	////////////////
+
+	/**	L'entité « crypterCle »
+	 *	 est défini comme null avant d'être initialisé. 
+	 */
+	protected byte[] crypterCle;
+	public Couverture<byte[]> crypterCleCouverture = new Couverture<byte[]>().p(this).c(byte[].class).var("crypterCle").o(crypterCle);
+
+	/**	L'entité « crypterCle »
+	 *	 est défini comme null avant d'être initialisé. 
+	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
+	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
+	 */
+	protected abstract void _crypterCle(Couverture<byte[]> o) throws Exception;
+
+	public byte[] getCrypterCle() {
+		return crypterCle;
+	}
+
+	public void setCrypterCle(byte[] o) {
+		this.crypterCle = o;
+	}
+	protected RequeteSite crypterCleInit() throws Exception {
+		if(!crypterCleCouverture.dejaInitialise) {
+			_crypterCle(crypterCleCouverture);
+			if(crypterCle == null)
+				setCrypterCle(crypterCleCouverture.o);
+		}
+		crypterCleCouverture.dejaInitialise(true);
+		return (RequeteSite)this;
 	}
 
 	///////////////////////
@@ -1051,11 +1121,12 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	public void setAleatoireSecurise(SecureRandom o) {
 		this.aleatoireSecurise = o;
 	}
-	protected void aleatoireSecuriseInit() throws Exception {
+	protected RequeteSite aleatoireSecuriseInit() throws Exception {
 		if(!aleatoireSecuriseCouverture.dejaInitialise) {
 			_aleatoireSecurise(aleatoireSecurise);
 		}
 		aleatoireSecuriseCouverture.dejaInitialise(true);
+		return (RequeteSite)this;
 	}
 
 	////////////////////
@@ -1082,13 +1153,14 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	public void setSpecCleSecrete(SecretKeySpec o) {
 		this.specCleSecrete = o;
 	}
-	protected void specCleSecreteInit() throws Exception {
+	protected RequeteSite specCleSecreteInit() throws Exception {
 		if(!specCleSecreteCouverture.dejaInitialise) {
 			_specCleSecrete(specCleSecreteCouverture);
 			if(specCleSecrete == null)
 				setSpecCleSecrete(specCleSecreteCouverture.o);
 		}
 		specCleSecreteCouverture.dejaInitialise(true);
+		return (RequeteSite)this;
 	}
 
 	/////////////////////
@@ -1097,12 +1169,13 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 
 	protected boolean dejaInitialiseRequeteSite = false;
 
-	public void initLoinRequeteSite(RequeteSite requeteSite) throws Exception {
+	public RequeteSite initLoinRequeteSite(RequeteSite requeteSite) throws Exception {
 		setRequeteSite_(requeteSite);
 		initLoinRequeteSite();
+		return (RequeteSite)this;
 	}
 
-	public void initLoinRequeteSite() throws Exception {
+	public RequeteSite initLoinRequeteSite() throws Exception {
 		if(!dejaInitialiseRequeteSite) {
 			siteContexte_Init();
 			vertx_Init();
@@ -1132,12 +1205,14 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 			chiffrementCrypterInit();
 			chiffrementDecrypterInit();
 			digestMessageInit();
-			selInit();
-			cleInit();
+			crypterSelInit();
+			requetePkInit();
+			crypterCleInit();
 			aleatoireSecuriseInit();
 			specCleSecreteInit();
 			dejaInitialiseRequeteSite = true;
 		}
+		return (RequeteSite)this;
 	}
 
 	public void initLoinPourClasse(RequeteSite requeteSite) throws Exception {
@@ -1232,10 +1307,12 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 				return oRequeteSite.chiffrementDecrypter;
 			case "digestMessage":
 				return oRequeteSite.digestMessage;
-			case "sel":
-				return oRequeteSite.sel;
-			case "cle":
-				return oRequeteSite.cle;
+			case "crypterSel":
+				return oRequeteSite.crypterSel;
+			case "requetePk":
+				return oRequeteSite.requetePk;
+			case "crypterCle":
+				return oRequeteSite.crypterCle;
 			case "aleatoireSecurise":
 				return oRequeteSite.aleatoireSecurise;
 			case "specCleSecrete":
@@ -1265,67 +1342,6 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	public Object attribuerRequeteSite(String var, Object val) throws Exception {
 		RequeteSite oRequeteSite = (RequeteSite)this;
 		switch(var) {
-			default:
-				return null;
-		}
-	}
-
-	/////////////
-	// definir //
-	/////////////
-
-	public boolean definirPourClasse(String var, String...vals) throws Exception {
-		String[] vars = org.apache.commons.lang3.StringUtils.split(var, ".");
-		Object o = null;
-		String val = vals == null ? null : vals[vals.length - 1];
-		if(val != null) {
-			for(String v : vars) {
-				if(o == null)
-					o = definirRequeteSite(v, val);
-				else if(o instanceof Cluster) {
-					Cluster cluster = (Cluster)o;
-					o = cluster.definirPourClasse(v, val);
-				}
-			}
-		}
-		return o != null;
-	}
-	public Object definirRequeteSite(String var, String val) throws Exception {
-		RequeteSite oRequeteSite = (RequeteSite)this;
-		switch(var) {
-			case "utilisateurNomDomaine":
-				oRequeteSite.setUtilisateurNomDomaine(val);
-				return val;
-			case "utilisateurNomEnsemble":
-				oRequeteSite.setUtilisateurNomEnsemble(val);
-				return val;
-			case "utilisateurId":
-				oRequeteSite.setUtilisateurId(val);
-				return val;
-			case "utilisateurNom":
-				oRequeteSite.setUtilisateurNom(val);
-				return val;
-			case "utilisateurNomFamille":
-				oRequeteSite.setUtilisateurNomFamille(val);
-				return val;
-			case "utilisateurPrenom":
-				oRequeteSite.setUtilisateurPrenom(val);
-				return val;
-			case "utilisateurNomComplet":
-				oRequeteSite.setUtilisateurNomComplet(val);
-				return val;
-			case "pageAchete":
-				oRequeteSite.setPageAchete(val);
-				return val;
-			case "pageAdmin":
-				oRequeteSite.setPageAdmin(val);
-				return val;
-			case "h":
-				oRequeteSite.setH(val);
-				return val;
-			case "sel":
-				oRequeteSite.setSel(val);
-				return val;
 			default:
 				return null;
 		}

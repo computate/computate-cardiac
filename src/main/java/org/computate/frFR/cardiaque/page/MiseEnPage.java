@@ -16,7 +16,7 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 //	 * r.enUS: MMM d yyyy h:mm a
 //	 * r: Locale.FRANCE
 //	 * r.enUS: Locale.US
-//	 */
+//	 *
 //	public static DateTimeFormatter formatDateHeureCourt = DateTimeFormatter.ofPattern("d MMM yyyy H'h'mm", Locale.FRANCE);
 //
 //	/**

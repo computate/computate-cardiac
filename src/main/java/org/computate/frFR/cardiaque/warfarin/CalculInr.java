@@ -18,8 +18,17 @@ import org.computate.frFR.cardiaque.couverture.Couverture;
  * val.VAL_patientPrendCoumadinNon.frFR:No
  * val.VAL_patientPrendCoumadinOuiDosageInitial.frFR:Yes, initial dosing
  * val.VAL_patientPrendCoumadinOuiRecommence.frFR:Yes, restarted
- */           
-public class CalculInr extends CalculInrGen<Cluster> {      
+ * role.frFR: Doof
+ */                   
+public class CalculInr extends CalculInrGen<Cluster> {           
+
+	/**
+	 * indexe: true
+	 * stocke: true
+	 * attribuer.nomSimple: UtilisateurSite
+	 */
+	protected void _utilisateurPk(Couverture<Long> c) throws Exception {
+	}
 
 	/**
 	 * indexe: true

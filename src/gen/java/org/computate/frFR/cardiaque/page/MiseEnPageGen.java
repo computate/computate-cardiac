@@ -28,16 +28,17 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		return requeteSite_;
 	}
 
-	public void setRequeteSite_(RequeteSite o) throws Exception {
+	public void setRequeteSite_(RequeteSite o) {
 		this.requeteSite_ = o;
 	}
-	protected void requeteSite_Init() throws Exception {
+	protected MiseEnPage requeteSite_Init() throws Exception {
 		if(!requeteSite_Couverture.dejaInitialise) {
 			_requeteSite_(requeteSite_Couverture);
 			if(requeteSite_ == null)
 				setRequeteSite_(requeteSite_Couverture.o);
 		}
 		requeteSite_Couverture.dejaInitialise(true);
+		return (MiseEnPage)this;
 	}
 
 	/////////////////////
@@ -46,16 +47,18 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 
 	protected boolean dejaInitialiseMiseEnPage = false;
 
-	public void initLoinMiseEnPage(RequeteSite requeteSite) throws Exception {
+	public MiseEnPage initLoinMiseEnPage(RequeteSite requeteSite) throws Exception {
 		setRequeteSite_(requeteSite);
 		initLoinMiseEnPage();
+		return (MiseEnPage)this;
 	}
 
-	public void initLoinMiseEnPage() throws Exception {
+	public MiseEnPage initLoinMiseEnPage() throws Exception {
 		if(!dejaInitialiseMiseEnPage) {
 			requeteSite_Init();
 			dejaInitialiseMiseEnPage = true;
 		}
+		return (MiseEnPage)this;
 	}
 
 	public void initLoinPourClasse(RequeteSite requeteSite) throws Exception {
@@ -118,34 +121,6 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		return o != null;
 	}
 	public Object attribuerMiseEnPage(String var, Object val) throws Exception {
-		MiseEnPage oMiseEnPage = (MiseEnPage)this;
-		switch(var) {
-			default:
-				return null;
-		}
-	}
-
-	/////////////
-	// definir //
-	/////////////
-
-	public boolean definirPourClasse(String var, String...vals) throws Exception {
-		String[] vars = org.apache.commons.lang3.StringUtils.split(var, ".");
-		Object o = null;
-		String val = vals == null ? null : vals[vals.length - 1];
-		if(val != null) {
-			for(String v : vars) {
-				if(o == null)
-					o = definirMiseEnPage(v, val);
-				else if(o instanceof Cluster) {
-					Cluster cluster = (Cluster)o;
-					o = cluster.definirPourClasse(v, val);
-				}
-			}
-		}
-		return o != null;
-	}
-	public Object definirMiseEnPage(String var, String val) throws Exception {
 		MiseEnPage oMiseEnPage = (MiseEnPage)this;
 		switch(var) {
 			default:

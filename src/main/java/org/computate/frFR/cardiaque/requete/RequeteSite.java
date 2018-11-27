@@ -256,12 +256,15 @@ public class RequeteSite extends RequeteSiteGen<Object> implements Serializable 
 		}
 	}
 	
-	protected void _sel(Couverture<String> c) throws Exception {
+	protected void _crypterSel(Couverture<String> c) throws Exception {
 	}
 	
-	protected void _cle(Couverture<byte[]> c) throws Exception {
+	protected void _requetePk(Couverture<Long> c) throws Exception {
+	}
+	
+	protected void _crypterCle(Couverture<byte[]> c) throws Exception {
 		if(!StringUtils.isEmpty(h)) {
-			c.o(Arrays.copyOf(digestMessage.digest((sel + h).getBytes("UTF-8")), 16));
+			c.o(Arrays.copyOf(digestMessage.digest((crypterSel + h).getBytes("UTF-8")), 16));
 		}
 	}
 	
@@ -269,7 +272,7 @@ public class RequeteSite extends RequeteSiteGen<Object> implements Serializable 
 	
 	protected void _specCleSecrete(Couverture<SecretKeySpec> c) throws Exception {
 		if(!StringUtils.isEmpty(h)) {
-			SecretKeySpec specCleSecrete = new SecretKeySpec(cle, "AES");
+			SecretKeySpec specCleSecrete = new SecretKeySpec(crypterCle, "AES");
 			chiffrementCrypter.init(Cipher.ENCRYPT_MODE, specCleSecrete);
 			chiffrementDecrypter.init(Cipher.DECRYPT_MODE, specCleSecrete);
 			c.o(specCleSecrete);

@@ -33,11 +33,11 @@ import io.vertx.ext.web.handler.StaticHandler;
 public class AppVertx extends AbstractVerticle {
 	public static final String SQL_createTableC = "create table if not exists c(pk bigserial primary key, var text, nom_canonique text, cree timestamp with time zone default now(), modifie timestamp with time zone default now(), id_utilisateur text); ";
 	public static final String SQL_uniqueIndexC = "create unique index if not exists c_index_utilisateur on c(pk, nom_canonique, id_utilisateur); ";
-	public static final String SQL_createTableA = "create table if not exists a(pk bigserial primary key, pk1 bigint, pk2 bigint, champ1 text, champ2 text, foreign key(pk1) references c(pk), foreign key(pk2) references c(pk)); ";
-	public static final String SQL_uniqueIndexA = "create unique index if not exists c_unique_pks on a(pk1, champ1, pk2, champ2); ";
-	public static final String SQL_createTableP = "create table if not exists p(pk bigserial primary key, chemin text, valeur text, pk_c bigint, foreign key(pk_c) references c(pk)); ";
-	public static final String SQL_uniqueIndexP = "create unique index if not exists p_index_chemin_pk_o_fk on p(chemin, pk_c); ";
-	public static final String SQL_tout = SQL_createTableC + SQL_uniqueIndexC + SQL_createTableA + SQL_uniqueIndexA + SQL_createTableP + SQL_uniqueIndexP;
+	public static final String SQL_createTableA = "create table if not exists a(pk bigserial primary key, pk1 bigint, pk2 bigint, entite1 text, entite2 text, actuel boolean, cree timestamp with time zone default now(), modifie timestamp with time zone default now(), foreign key(pk1) references c(pk), foreign key(pk2) references c(pk)); ";
+//	public static final String SQL_uniqueIndexA = "create unique index if not exists c_unique_pks on a(pk1, entite1, pk2, entite2); ";
+	public static final String SQL_createTableP = "create table if not exists p(pk bigserial primary key, chemin text, valeur text, actuel boolean, cree timestamp with time zone default now(), modifie timestamp with time zone default now(), pk_c bigint, foreign key(pk_c) references c(pk)); ";
+//	public static final String SQL_uniqueIndexP = "create unique index if not exists p_index_chemin_pk_o_fk on p(chemin, pk_c); ";
+	public static final String SQL_initTout = SQL_createTableC + SQL_uniqueIndexC + SQL_createTableA + SQL_createTableP;
 
 	private JDBCClient jdbcClient;
 
@@ -81,7 +81,7 @@ public class AppVertx extends AbstractVerticle {
 				future.fail(ar.cause());
 			} else {
 				SQLConnection connection = ar.result();
-				connection.execute(SQL_tout, create -> {
+				connection.execute(SQL_initTout, create -> {
 					connection.close();
 					if (create.failed()) {
 						LOGGER.error("Database preparation error", create.cause());

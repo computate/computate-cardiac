@@ -12,6 +12,7 @@ import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonArray;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.jdbc.JDBCClient;
+import io.vertx.ext.sql.SQLClient;
 import io.vertx.ext.sql.SQLConnection;
 
 import java.lang.Boolean;
@@ -20,8 +21,11 @@ import org.computate.frFR.cardiaque.page.MiseEnPage;
 import java.lang.String;
 import org.apache.solr.common.SolrInputDocument;
 import org.apache.solr.client.solrj.SolrClient;
+import io.vertx.core.logging.LoggerFactory;
+import io.vertx.core.logging.Logger;
 
 public abstract class ClusterGen<DEV> extends Object {
+	private static final Logger LOGGER = LoggerFactory.getLogger(Cluster.class);
 
 	//////////////////
 	// requeteSite_ //
@@ -462,6 +466,7 @@ public abstract class ClusterGen<DEV> extends Object {
 	public void indexerCluster(RequeteSite requeteSite) throws Exception {
 		SolrInputDocument document = new SolrInputDocument();
 		indexerCluster(document);
+		document.addField("sauvegardesCluster_stored_strings", sauvegardesCluster);
 		SolrClient clientSolr = requeteSite_.getSiteContexte_().getClientSolr();
 		clientSolr.add(document);
 		clientSolr.commit();
@@ -621,4 +626,187 @@ public abstract class ClusterGen<DEV> extends Object {
 	/////////////
 	// peupler //
 	/////////////
+
+	public void peuplerPourClasse(org.apache.solr.common.SolrDocument documentSolr) throws Exception {
+		sauvegardesCluster = (java.util.ArrayList<String>)documentSolr.get("sauvegardesCluster_stored_strings");
+		peuplerCluster(documentSolr);
+	}
+	public void peuplerCluster(org.apache.solr.common.SolrDocument documentSolr) throws Exception {
+		Cluster oCluster = (Cluster)this;
+
+				java.lang.Long pk = (java.lang.Long)documentSolr.get("pk_stocke_long");
+				if(pk != null)
+					oCluster.setPk(pk);
+
+				java.util.Date cree = (java.util.Date)documentSolr.get("cree_stocke_date");
+				if(cree != null)
+					oCluster.setCree(cree);
+
+				java.util.Date modifie = (java.util.Date)documentSolr.get("modifie_stocke_date");
+				if(modifie != null)
+					oCluster.setModifie(modifie);
+
+				java.lang.String utilisateurId = (java.lang.String)documentSolr.get("utilisateurId_stocke_string");
+				if(utilisateurId != null)
+					oCluster.setUtilisateurId(utilisateurId);
+
+				java.lang.String clusterNomCanonique = (java.lang.String)documentSolr.get("clusterNomCanonique_stocke_string");
+				if(clusterNomCanonique != null)
+					oCluster.setClusterNomCanonique(clusterNomCanonique);
+
+				java.lang.String clusterNomSimple = (java.lang.String)documentSolr.get("clusterNomSimple_stocke_string");
+				if(clusterNomSimple != null)
+					oCluster.setClusterNomSimple(clusterNomSimple);
+	}
+
+	////////////
+	// existe //
+	////////////
+
+	public Boolean existePourClasse() throws Exception {
+		String pkStr = requeteSite_.getRequeteServeur().getParam("pk");
+		Long pk = org.apache.commons.lang3.StringUtils.isNumeric(pkStr) ? Long.parseLong(pkStr) : null;
+		Boolean existe = existePourClasse(pk);
+		return existe;
+	}
+	public Boolean existePourClasse(Long pk) throws Exception {
+		PGSimpleDataSource o = new PGSimpleDataSource();
+		o.setUrl(urlSourceDonneesSimple);
+		org.apache.commons.dbutils.QueryRunner coureur = new org.apache.commons.dbutils.QueryRunner(requeteSite_.SiteContexte.sourceDonnees);
+		org.apache.commons.dbutils.handlers.ArrayListHandler gestionnaireListe = new org.apache.commons.dbutils.handlers.ArrayListHandler();
+		utilisateurId = requeteSite_.utilisateurId;
+		this.pk = pk;
+		String nomCanonique = getClass().getCanonicalName();
+		Boolean existe = false;
+		
+		if(pk == null) {
+			String sql = "select pk from objet where objet.id_utilisateur=? and objet.nom_canonique=?";
+			java.util.List<Object[]> resultats = coureur.query(sql, gestionnaireListe /*select count(*) from objet where objet.id_utilisateur=*/, requeteSite_.utilisateurId /* and objet.nom_canonique=*/, nomCanonique);
+			existe = resultats.size() > 0;
+			if(existe) {
+				pk = (Long)resultats.get(0)[0];
+				setPk(pk);
+			}
+
+			Vertx vertx;
+			SQLClient clientSql = requeteSite_.getSiteContexte_().getClientSql();
+
+			dbClient.getConnection(ar -> {
+				if (ar.failed()) {
+					LOGGER.error("Could not open a database connection", ar.cause());
+					future.fail(ar.cause());
+				} else {
+					SQLConnection connection = ar.result();
+					connection.queryWithParams(sql, new JsonArray().add(/*select count(*) from objet where objet.id_utilisateur=*/, requeteSite_.utilisateurId /* and objet.nom_canonique=*/, nomCanonique), fetch -> {
+						connection.close();
+						if (fetch.succeeded()) {
+
+							JsonArray row = fetch.result().getResults().stream().findFirst()
+									.orElseGet(() -> new JsonArray().add(-1).add(EMPTY_PAGE_MARKDOWN));
+							Integer id = row.getInteger(0);
+							String rawContent = row.getString(1);
+
+							context.put("title", page);
+							context.put("id", id);
+							context.put("newPage", fetch.result().getResults().size() == 0 ? "yes" : "no");
+							context.put("rawContent", rawContent);
+							context.put("content", Processor.process(rawContent));
+							context.put("timestamp", new Date().toString());
+
+							templateEngine.render(context, "templates", "/page.ftl", ar -> {
+								if (ar.succeeded()) {
+									context.response().putHeader("Content-Type", "text/html");
+									context.response().end(ar.result());
+								} else {
+									context.fail(ar.cause());
+								}
+							});
+						} else {
+							context.fail(fetch.cause());
+						}
+					});
+					//					connection.execute(sql, create -> {
+//						connection.close();
+//						if (create.failed()) {
+//							LOGGER.error("Database preparation error", create.cause());
+//							future.fail(create.cause());
+//						} else {
+//							future.complete();
+//						}
+//					});
+				}
+			});
+		}
+		else {
+			String sql = "select count(*) from objet where objet.pk=? and objet.id_utilisateur=? and objet.nom_canonique=?";
+			java.util.List<Object[]> resultats = coureur.query(sql, gestionnaireListe /*select count(*) from objet where objet.pk=*/, pk /* and objet.id_utilisateur=*/, requeteSite_.utilisateurId /* and objet.nom_canonique=*/, nomCanonique);
+			existe = ((Long)resultats.get(0)[0]) > 0L;
+		}
+		return existe;
+	}
+
+	/////////////////
+	// sauvegardes //
+	/////////////////
+
+	protected java.util.ArrayList<String> sauvegardesCluster = new java.util.ArrayList<String>();
+	public void sauvegardesPourClasse(RequeteSite requeteSite) throws Exception {
+		org.apache.commons.dbutils.QueryRunner coureur = new org.apache.commons.dbutils.QueryRunner(requeteSite.SiteContexte.sourceDonnees);
+		org.apache.commons.dbutils.handlers.ArrayListHandler gestionnaireListe = new org.apache.commons.dbutils.handlers.ArrayListHandler();
+		
+		if(pk != null) {
+			String sql = "select cree, modifie from objet where objet.pk=?";
+			java.util.List<Object[]> resultats = coureur.query(sql, gestionnaireListe /*select cree, modifie from objet where objet.pk=*/, pk);
+			if(resultats.size() > 0) {
+				cree((java.util.Date)resultats.get(0)[0]);
+				modifie((java.util.Date)resultats.get(0)[1]);
+			}
+			sql = "select chemin, valeur from p where p.pk_objet=? union select champ2, pk2::text from a where a.pk1=? union select champ1, pk1::text from a where a.pk2=? ";
+			resultats = coureur.query(sql, gestionnaireListe /*select chemin, valeur from p where p.pk_objet=*/, pk, pk, pk);
+			for(Object[] objets : resultats) {
+				String chemin = (String)objets[0];
+				String valeur = requeteSite.decrypterStr((String)objets[1]);
+				definirPourClasse(chemin, valeur);
+				sauvegardesCluster.add(chemin);
+			}
+		}
+	}
+
+	/////////////////
+	// sauvegarder //
+	/////////////////
+
+	public void sauvegarderPourClasse(RequeteSite requeteSite) throws Exception {
+		org.apache.commons.dbutils.QueryRunner coureur = new org.apache.commons.dbutils.QueryRunner(requeteSite.SiteContexte.sourceDonnees);
+		org.apache.commons.dbutils.handlers.ArrayListHandler gestionnaireListe = new org.apache.commons.dbutils.handlers.ArrayListHandler();
+		String pkStr = requeteSite_.getRequeteServeur().getParam("pk");
+		pk = org.apache.commons.lang3.StringUtils.isNumeric(pkStr) ? Long.parseLong(pkStr) : null;
+		utilisateurId = requeteSite.utilisateurId;
+		String nomCanonique = getClass().getCanonicalName();
+		modifie = java.time.LocalDateTime.now();
+		java.sql.Timestamp horodatage = java.sql.Timestamp.valueOf(modifie);
+		
+		if(pk == null) {
+			String sql = "insert into objet(nom_canonique, id_utilisateur, cree, modifie) values(?, ?, ?, ?) returning pk";
+			java.util.List<Object[]> resultats = coureur.insert(sql, gestionnaireListe /*insert into objet(nom_canonique, id_utilisateur, cree, modifie) values(*/, nomCanonique, requeteSite.utilisateurId, horodatage, horodatage /*) returning pk, cree*/);
+			pk = (Long)resultats.get(0)[0];
+			cree = modifie;
+		}
+		else {
+			String sql = "update objet set modifie=? where objet.pk=? and objet.id_utilisateur=? and objet.nom_canonique=? returning cree";
+			java.util.List<Object[]> resultats = coureur.query(sql, gestionnaireListe /*update objet set modifie=*/, horodatage /* where objet.pk=*/, pk /* and objet.id_utilisateur=*/, requeteSite.utilisateurId /* and objet.nom_canonique=*/, nomCanonique /* returning cree*/);
+			if(resultats.size() == 0)
+				throw new Exception("L'objet avec le pk " + pk + " et nom canonique " + pk + " pour utilisateur " + requeteSite.utilisateurId + " " + requeteSite.utilisateurNom + " n'existe pas dejà. ");
+			horodatage = (java.sql.Timestamp)resultats.get(0)[0];
+			cree = java.time.LocalDateTime.from(horodatage.toLocalDateTime());
+		}
+
+		String sqlInsertP = "insert into p(chemin, valeur, pk_objet) values(?, ?, ?) on conflict(chemin, pk_objet) do update set valeur=? where p.chemin=? and p.pk_objet=?";
+		String sqlInsertA = "insert into a(champ1, pk1, champ2, pk2) values(?, ?, ?, ?) on conflict  do nothing";
+		String sqlDeleteP = "delete from p where chemin=? and pk_objet=?";
+		String sqlDeleteA = "delete from a where champ1=? and pk1=? and champ2=? and pk2=?";
+		sauvegarderCluster(requeteSite, sqlInsertP, sqlInsertA, sqlDeleteP, sqlDeleteA, gestionnaireListe, coureur);
+	}
+	public void sauvegarderCluster(RequeteSite requeteSite, String sqlInsertP, String sqlInsertA, String sqlDeleteP, String sqlDeleteA, org.apache.commons.dbutils.handlers.ArrayListHandler gestionnaireListe, org.apache.commons.dbutils.QueryRunner coureur) throws Exception {
+	}
 }
