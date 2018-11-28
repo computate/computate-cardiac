@@ -2,6 +2,7 @@ package org.computate.frFR.cardiaque.utilisateur;
 
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.computate.frFR.cardiaque.couverture.Couverture;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
@@ -10,22 +11,21 @@ import org.computate.frFR.cardiaque.requete.RequeteSite;
  * modele: true
  * apiUri.enUS: /api/v1/site/user
  * apiUri.frFR: /api/v1/site/utilisateur
- */
-public class UtilisateurSite extends UtilisateurSiteGen<Object> {    
+ */             
+public class UtilisateurSite extends UtilisateurSiteGen<Object> {   
+
+	/**
+	 * indexe: true
+	 * stocke: true
+	 * attribuer: CalculInr.utilisateurPk
+	 */ 
+	protected void _calculInrPks(List<Long> l) throws Exception {
+	}
 
 	/**
 	 * var.enUS: _siteRequest
 	 */
 	protected void _requeteSite_(Couverture<RequeteSite> c) throws Exception {}
-
-	/**	
-	 * var.enUS: _teamKeys
-	 * description.frFR: Les clés primaires qui liennent cet utilisateur à des équipes. 
-	 * indexe: true
-	 * stocke: true
-	 */
-	protected void _equipeCles(ArrayList<Long> o) throws Exception {
-	}
 
 	/**	
 	 * var.enUS: _userName

@@ -1,19 +1,78 @@
 package org.computate.frFR.cardiaque.utilisateur;
 
-import org.computate.frFR.cardiaque.contexte.SiteContexte;
 import org.computate.frFR.cardiaque.couverture.Couverture;
-import java.lang.Long;
+import java.util.Date;
 import org.computate.frFR.cardiaque.cluster.Cluster;
 import java.time.ZonedDateTime;
+import java.util.Set;
+import io.vertx.core.logging.LoggerFactory;
+import org.apache.solr.client.solrj.SolrClient;
+import org.computate.frFR.cardiaque.contexte.SiteContexte;
+import io.vertx.core.json.JsonArray;
+import java.util.List;
+import java.lang.Long;
+import io.vertx.ext.sql.SQLConnection;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
 import java.lang.Boolean;
+import io.vertx.core.json.JsonObject;
 import java.lang.Object;
 import java.lang.String;
+import io.vertx.core.logging.Logger;
+import io.vertx.ext.sql.SQLClient;
 import org.apache.solr.common.SolrInputDocument;
-import org.apache.solr.client.solrj.SolrClient;
-import java.util.ArrayList;
 
 public abstract class UtilisateurSiteGen<DEV> extends Object {
+	private static final Logger LOGGER = LoggerFactory.getLogger(UtilisateurSite.class);
+
+	//////////////////
+	// calculInrPks //
+	//////////////////
+
+	/**	L'entité « calculInrPks »
+	 *	Il est construit avant d'être initialisé avec le constructeur par défaut List<Long>(). 
+	 */
+	protected List<Long> calculInrPks = new java.util.ArrayList<java.lang.Long>();
+	public Couverture<List<Long>> calculInrPksCouverture = new Couverture<List<Long>>().p(this).c(List.class).var("calculInrPks").o(calculInrPks);
+
+	/**	L'entité « calculInrPks »
+	 *	Il est construit avant d'être initialisé avec le constructeur par défaut List<Long>(). 
+	 *	@param calculInrPks est le champ déjà construit. 
+	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
+	 */
+	protected abstract void _calculInrPks(List<Long> l) throws Exception;
+
+	public List<Long> getCalculInrPks() {
+		return calculInrPks;
+	}
+
+	public void setCalculInrPks(List<Long> l) {
+		this.calculInrPks = l;
+	}
+	public UtilisateurSite addCalculInrPks(Long...objets) throws Exception {
+		for(Long o : objets) {
+			addCalculInrPks(o);
+		}
+		return (UtilisateurSite)this;
+	}
+	public UtilisateurSite addCalculInrPks(Long o) throws Exception {
+		if(o != null && !calculInrPks.contains(o))
+			this.calculInrPks.add(o);
+		return (UtilisateurSite)this;
+	}
+	public UtilisateurSite addCalculInrPks(String o) throws Exception {
+		if(org.apache.commons.lang3.math.NumberUtils.isCreatable(o)) {
+			Long p = Long.parseLong(o);
+			addCalculInrPks(p);
+		}
+		return (UtilisateurSite)this;
+	}
+	protected UtilisateurSite calculInrPksInit() throws Exception {
+		if(!calculInrPksCouverture.dejaInitialise) {
+			_calculInrPks(calculInrPks);
+		}
+		calculInrPksCouverture.dejaInitialise(true);
+		return (UtilisateurSite)this;
+	}
 
 	//////////////////
 	// requeteSite_ //
@@ -46,63 +105,6 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 				setRequeteSite_(requeteSite_Couverture.o);
 		}
 		requeteSite_Couverture.dejaInitialise(true);
-		return (UtilisateurSite)this;
-	}
-
-	////////////////
-	// equipeCles //
-	////////////////
-
-	/**	L'entité « equipeCles »
-	 *	Il est construit avant d'être initialisé avec le constructeur par défaut ArrayList<Long>(). 
-	 */
-	protected ArrayList<Long> equipeCles = new ArrayList<Long>();
-	public Couverture<ArrayList<Long>> equipeClesCouverture = new Couverture<ArrayList<Long>>().p(this).c(ArrayList.class).var("equipeCles").o(equipeCles);
-
-	/**	L'entité « equipeCles »
-	 *	Il est construit avant d'être initialisé avec le constructeur par défaut ArrayList<Long>(). 
-	 *	@param equipeCles est le champ déjà construit. 
-	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
-	 */
-	protected abstract void _equipeCles(ArrayList<Long> l) throws Exception;
-
-	public ArrayList<Long> getEquipeCles() {
-		return equipeCles;
-	}
-
-	public void setEquipeCles(ArrayList<Long> l) {
-		this.equipeCles = l;
-	}
-	public UtilisateurSite setEquipeCles(String o) throws Exception {
-		if(org.apache.commons.lang3.math.NumberUtils.isCreatable(o)) {
-			Long l = Long.parseLong(o);
-			addEquipeCles(l);
-		}
-		return (UtilisateurSite)this;
-	}
-	public UtilisateurSite addEquipeCles(Long...objets) throws Exception {
-		for(Long o : objets) {
-			addEquipeCles(o);
-		}
-		return (UtilisateurSite)this;
-	}
-	public UtilisateurSite addEquipeCles(Long o) throws Exception {
-		if(o != null && !equipeCles.contains(o))
-			this.equipeCles.add(o);
-		return (UtilisateurSite)this;
-	}
-	public UtilisateurSite addEquipeCles(String o) throws Exception {
-		if(org.apache.commons.lang3.math.NumberUtils.isCreatable(o)) {
-			Long p = Long.parseLong(o);
-			addEquipeCles(p);
-		}
-		return (UtilisateurSite)this;
-	}
-	protected UtilisateurSite equipeClesInit() throws Exception {
-		if(!equipeClesCouverture.dejaInitialise) {
-			_equipeCles(equipeCles);
-		}
-		equipeClesCouverture.dejaInitialise(true);
 		return (UtilisateurSite)this;
 	}
 
@@ -645,8 +647,8 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 
 	public UtilisateurSite initLoinUtilisateurSite() throws Exception {
 		if(!dejaInitialiseUtilisateurSite) {
+			calculInrPksInit();
 			requeteSite_Init();
-			equipeClesInit();
 			utilisateurNomInit();
 			utilisateurMailInit();
 			utilisateurIdInit();
@@ -709,19 +711,19 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 	public void indexerUtilisateurSite(RequeteSite requeteSite) throws Exception {
 		SolrInputDocument document = new SolrInputDocument();
 		indexerUtilisateurSite(document);
-		document.addField("sauvegardesUtilisateurSite_stored_strings", sauvegardes);
+		document.addField("sauvegardesUtilisateurSite_stored_strings", sauvegardesUtilisateurSite);
 		SolrClient clientSolr = requeteSite_.getSiteContexte_().getClientSolr();
 		clientSolr.add(document);
 		clientSolr.commit();
 	}
 
 	public void indexerUtilisateurSite(SolrInputDocument document) throws Exception {
-		if(equipeCles != null) {
-			for(java.lang.Long o : equipeCles) {
-				document.addField("equipeCles_indexe_longs", o);
+		if(calculInrPks != null) {
+			for(java.lang.Long o : calculInrPks) {
+				document.addField("calculInrPks_indexe_longs", o);
 			}
-			for(java.lang.Long o : equipeCles) {
-				document.addField("equipeCles_stocke_longs", o);
+			for(java.lang.Long o : calculInrPks) {
+				document.addField("calculInrPks_stocke_longs", o);
 			}
 		}
 		if(utilisateurNom != null) {
@@ -806,10 +808,10 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 	public Object obtenirUtilisateurSite(String var) throws Exception {
 		UtilisateurSite oUtilisateurSite = (UtilisateurSite)this;
 		switch(var) {
+			case "calculInrPks":
+				return oUtilisateurSite.calculInrPks;
 			case "requeteSite_":
 				return oUtilisateurSite.requeteSite_;
-			case "equipeCles":
-				return oUtilisateurSite.equipeCles;
 			case "utilisateurNom":
 				return oUtilisateurSite.utilisateurNom;
 			case "utilisateurMail":
@@ -865,78 +867,71 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 	public Object attribuerUtilisateurSite(String var, Object val) throws Exception {
 		UtilisateurSite oUtilisateurSite = (UtilisateurSite)this;
 		switch(var) {
+			case "calculInrPks":
+				oUtilisateurSite.addCalculInrPks((Long)val);
+				return val;
 			default:
 				return null;
 		}
 	}
 
-	/////////////
-	// definir //
-	/////////////
+	/////////
+	// put //
+	/////////
 
-	public boolean definirPourClasse(String var, String...vals) throws Exception {
-		String[] vars = org.apache.commons.lang3.StringUtils.split(var, ".");
-		Object o = null;
-		String val = vals == null ? null : vals[vals.length - 1];
-		if(val != null) {
-			for(String v : vars) {
-				if(o == null)
-					o = definirUtilisateurSite(v, val);
-				else if(o instanceof Cluster) {
-					Cluster cluster = (Cluster)o;
-					o = cluster.definirPourClasse(v, val);
-				}
-			}
+	public boolean putPourClasse(JsonObject requeteJson) throws Exception {
+		Set<String> vars = requeteJson.fieldNames();
+		for(String var : vars) {
+			putUtilisateurSite(requeteJson, var);
 		}
-		return o != null;
 	}
-	public Object definirUtilisateurSite(String var, String val) throws Exception {
-		UtilisateurSite oUtilisateurSite = (UtilisateurSite)this;
+
+	public boolean putUtilisateurSite(JsonObject requeteJson, String var) throws Exception {
 		switch(var) {
-			case "equipeCles":
-				oUtilisateurSite.addEquipeCles(val);
-				return val;
+			case "calculInrPks":
+				addCalculInrPks(requeteJson.getJsonArray(var));
+				return true;
 			case "utilisateurNom":
-				oUtilisateurSite.setUtilisateurNom(val);
-				return val;
+				setUtilisateurNom(requeteJson.getString(var));
+				return true;
 			case "utilisateurMail":
-				oUtilisateurSite.setUtilisateurMail(val);
-				return val;
+				setUtilisateurMail(requeteJson.getString(var));
+				return true;
 			case "utilisateurId":
-				oUtilisateurSite.setUtilisateurId(val);
-				return val;
+				setUtilisateurId(requeteJson.getString(var));
+				return true;
 			case "utilisateurPrenom":
-				oUtilisateurSite.setUtilisateurPrenom(val);
-				return val;
+				setUtilisateurPrenom(requeteJson.getString(var));
+				return true;
 			case "utilisateurNomFamille":
-				oUtilisateurSite.setUtilisateurNomFamille(val);
-				return val;
+				setUtilisateurNomFamille(requeteJson.getString(var));
+				return true;
 			case "utilisateurNomComplet":
-				oUtilisateurSite.setUtilisateurNomComplet(val);
-				return val;
+				setUtilisateurNomComplet(requeteJson.getString(var));
+				return true;
 			case "utilisateurSite":
-				oUtilisateurSite.setUtilisateurSite(val);
-				return val;
+				setUtilisateurSite(requeteJson.getString(var));
+				return true;
 			case "utilisateurRecevoirCourriels":
-				oUtilisateurSite.setUtilisateurRecevoirCourriels(val);
-				return val;
+				setUtilisateurRecevoirCourriels(requeteJson.getBoolean(var));
+				return true;
 			case "modeleSupprime":
-				oUtilisateurSite.setModeleSupprime(val);
-				return val;
+				setModeleSupprime(requeteJson.getBoolean(var));
+				return true;
 			case "modeleClasseNomCanonique":
-				oUtilisateurSite.setModeleClasseNomCanonique(val);
-				return val;
+				setModeleClasseNomCanonique(requeteJson.getString(var));
+				return true;
 			case "modeleCle":
-				oUtilisateurSite.setModeleCle(val);
-				return val;
+				setModeleCle(requeteJson.getLong(var));
+				return true;
 			case "modeleSuggestionStocke":
-				oUtilisateurSite.setModeleSuggestionStocke(val);
-				return val;
+				setModeleSuggestionStocke(requeteJson.getString(var));
+				return true;
 			case "modeleSuggestionIndexe":
-				oUtilisateurSite.setModeleSuggestionIndexe(val);
-				return val;
+				setModeleSuggestionIndexe(requeteJson.getString(var));
+				return true;
 			default:
-				return null;
+				return false;
 		}
 	}
 
@@ -951,9 +946,9 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 	public void peuplerUtilisateurSite(org.apache.solr.common.SolrDocument documentSolr) throws Exception {
 		UtilisateurSite oUtilisateurSite = (UtilisateurSite)this;
 
-				java.util.List<java.lang.Long> equipeCles = (java.util.List<java.lang.Long>)documentSolr.get("equipeCles_stocke_longs");
-				if(equipeCles != null)
-					oUtilisateurSite.equipeCles.addAll(equipeCles);
+				java.util.List<java.lang.Long> calculInrPks = (java.util.List<java.lang.Long>)documentSolr.get("calculInrPks_stocke_longs");
+				if(calculInrPks != null)
+					oUtilisateurSite.calculInrPks.addAll(calculInrPks);
 
 				java.lang.String utilisateurNom = (java.lang.String)documentSolr.get("utilisateurNom_stocke_string");
 				if(utilisateurNom != null)
@@ -1023,31 +1018,51 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 	////////////
 
 	@Override public Boolean existePourClasse() throws Exception {
-		String cleStr = requeteSite_.requete.getParameter("cle");
-		Long cle = org.apache.commons.lang3.StringUtils.isNumeric(cleStr) ? Long.parseLong(cleStr) : null;
-		Boolean existe = existePourClasse(cle);
+		String pkStr = requeteSite_.getRequeteServeur().getParam("pk");
+		Long pk = org.apache.commons.lang3.StringUtils.isNumeric(pkStr) ? Long.parseLong(pkStr) : null;
+		Boolean existe = existePourClasse(pk);
 		return existe;
 	}
-	@Override public Boolean existePourClasse(Long cle) throws Exception {
+	@Override public Boolean existePourClasse(Long pk) throws Exception {
 		org.apache.commons.dbutils.QueryRunner coureur = new org.apache.commons.dbutils.QueryRunner(requeteSite_.SiteContexte.sourceDonnees);
 		org.apache.commons.dbutils.handlers.ArrayListHandler gestionnaireListe = new org.apache.commons.dbutils.handlers.ArrayListHandler();
 		utilisateurId = requeteSite_.utilisateurId;
-		this.cle = cle;
+		this.pk = pk;
 		String nomCanonique = getClass().getCanonicalName();
 		Boolean existe = false;
 		
-		if(cle == null) {
-			String sql = "select clep from objet where objet.id_utilisateur=? and objet.nom_canonique=?";
-			java.util.List<Object[]> resultats = coureur.query(sql, gestionnaireListe /*select count(*) from objet where objet.id_utilisateur=*/, requeteSite_.utilisateurId /* and objet.nom_canonique=*/, nomCanonique);
-			existe = resultats.size() > 0;
-			if(existe) {
-				cle = (Long)resultats.get(0)[0];
-				cle(cle);
-			}
+		if(pk == null) {
+			String sql = "select pk from objet where objet.id_utilisateur=? and objet.nom_canonique=?";
+			SQLClient clientSql = requeteSite_.getSiteContexte_().getClientSql();
+			clientSql.getConnection(ar -> {
+				if(ar.failed()) {
+					LOGGER.error("Impossible d'ouvrir une connexion à la base de données. ", ar.cause());
+					future.fail(ar.cause());
+				} else {
+					SQLConnection connexionSql = ar.result();
+					connectionSql.queryWithParams(SiteContexte.SQL_existe, new JsonArray().add(pk)), chercher -> {
+						connexionSql.close();
+						if(chercher.succeeded()) {
+							JsonArray ligneDonnees = chercher.result().getResults().stream().findFirst().orElseGet(() -> null);
+							if(ligneDonnees != null) {
+								Long pkDonnees = ligneDonnees.getLong(0);
+								if(ligneDonnees != null && ligne) {
+									
+								}
+							}
+						}
+					});
+				}
+			});
+							existe = resultats.size() > 0;
+							if(existe) {
+								pk = (Long)resultats.get(0)[0];
+								setPk(pk);
+							}
 		}
 		else {
-			String sql = "select count(*) from objet where objet.clep=? and objet.id_utilisateur=? and objet.nom_canonique=?";
-			java.util.List<Object[]> resultats = coureur.query(sql, gestionnaireListe /*select count(*) from objet where objet.clep=*/, cle /* and objet.id_utilisateur=*/, requeteSite_.utilisateurId /* and objet.nom_canonique=*/, nomCanonique);
+			String sql = "select count(*) from objet where objet.pk=? and objet.id_utilisateur=? and objet.nom_canonique=?";
+			java.util.List<Object[]> resultats = coureur.query(sql, gestionnaireListe /*select count(*) from objet where objet.pk=*/, pk /* and objet.id_utilisateur=*/, requeteSite_.utilisateurId /* and objet.nom_canonique=*/, nomCanonique);
 			existe = ((Long)resultats.get(0)[0]) > 0L;
 		}
 		return existe;
@@ -1062,15 +1077,15 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 		org.apache.commons.dbutils.QueryRunner coureur = new org.apache.commons.dbutils.QueryRunner(requeteSite.SiteContexte.sourceDonnees);
 		org.apache.commons.dbutils.handlers.ArrayListHandler gestionnaireListe = new org.apache.commons.dbutils.handlers.ArrayListHandler();
 		
-		if(cle != null) {
-			String sql = "select cree, modifie from objet where objet.clep=?";
-			java.util.List<Object[]> resultats = coureur.query(sql, gestionnaireListe /*select cree, modifie from objet where objet.clep=*/, cle);
+		if(pk != null) {
+			String sql = "select cree, modifie from objet where objet.pk=?";
+			java.util.List<Object[]> resultats = coureur.query(sql, gestionnaireListe /*select cree, modifie from objet where objet.pk=*/, pk);
 			if(resultats.size() > 0) {
-				cree((java.util.Date)resultats.get(0)[0]);
-				modifie((java.util.Date)resultats.get(0)[1]);
+				cree((Date)resultats.get(0)[0]);
+				modifie((Date)resultats.get(0)[1]);
 			}
-			sql = "select chemin, valeur from p where p.cle_objet=? union select champ2, cle2::text from a where a.cle1=? union select champ1, cle1::text from a where a.cle2=? ";
-			resultats = coureur.query(sql, gestionnaireListe /*select chemin, valeur from p where p.cle_objet=*/, cle, cle, cle);
+			sql = "select chemin, valeur from p where p.pk_objet=? union select champ2, pk2::text from a where a.pk1=? union select champ1, pk1::text from a where a.pk2=? ";
+			resultats = coureur.query(sql, gestionnaireListe /*select chemin, valeur from p where p.pk_objet=*/, pk, pk, pk);
 			for(Object[] objets : resultats) {
 				String chemin = (String)objets[0];
 				String valeur = requeteSite.decrypterStr((String)objets[1]);
@@ -1087,32 +1102,32 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 	@Override public void sauvegarderPourClasse(RequeteSite requeteSite) throws Exception {
 		org.apache.commons.dbutils.QueryRunner coureur = new org.apache.commons.dbutils.QueryRunner(requeteSite.SiteContexte.sourceDonnees);
 		org.apache.commons.dbutils.handlers.ArrayListHandler gestionnaireListe = new org.apache.commons.dbutils.handlers.ArrayListHandler();
-		String cleStr = requeteSite.requete.getParameter("cle");
-		cle = org.apache.commons.lang3.StringUtils.isNumeric(cleStr) ? Long.parseLong(cleStr) : null;
+		String pkStr = requeteSite_.getRequeteServeur().getParam("pk");
+		pk = org.apache.commons.lang3.StringUtils.isNumeric(pkStr) ? Long.parseLong(pkStr) : null;
 		utilisateurId = requeteSite.utilisateurId;
 		String nomCanonique = getClass().getCanonicalName();
 		modifie = java.time.LocalDateTime.now();
 		java.sql.Timestamp horodatage = java.sql.Timestamp.valueOf(modifie);
 		
-		if(cle == null) {
-			String sql = "insert into objet(nom_canonique, id_utilisateur, cree, modifie) values(?, ?, ?, ?) returning clep";
-			java.util.List<Object[]> resultats = coureur.insert(sql, gestionnaireListe /*insert into objet(nom_canonique, id_utilisateur, cree, modifie) values(*/, nomCanonique, requeteSite.utilisateurId, horodatage, horodatage /*) returning clep, cree*/);
-			cle = (Long)resultats.get(0)[0];
+		if(pk == null) {
+			String sql = "insert into objet(nom_canonique, id_utilisateur, cree, modifie) values(?, ?, ?, ?) returning pk";
+			java.util.List<Object[]> resultats = coureur.insert(sql, gestionnaireListe /*insert into objet(nom_canonique, id_utilisateur, cree, modifie) values(*/, nomCanonique, requeteSite.utilisateurId, horodatage, horodatage /*) returning pk, cree*/);
+			pk = (Long)resultats.get(0)[0];
 			cree = modifie;
 		}
 		else {
-			String sql = "update objet set modifie=? where objet.clep=? and objet.id_utilisateur=? and objet.nom_canonique=? returning cree";
-			java.util.List<Object[]> resultats = coureur.query(sql, gestionnaireListe /*update objet set modifie=*/, horodatage /* where objet.clep=*/, cle /* and objet.id_utilisateur=*/, requeteSite.utilisateurId /* and objet.nom_canonique=*/, nomCanonique /* returning cree*/);
+			String sql = "update objet set modifie=? where objet.pk=? and objet.id_utilisateur=? and objet.nom_canonique=? returning cree";
+			java.util.List<Object[]> resultats = coureur.query(sql, gestionnaireListe /*update objet set modifie=*/, horodatage /* where objet.pk=*/, pk /* and objet.id_utilisateur=*/, requeteSite.utilisateurId /* and objet.nom_canonique=*/, nomCanonique /* returning cree*/);
 			if(resultats.size() == 0)
-				throw new Exception("L'objet avec le cle " + cle + " et nom canonique " + cle + " pour utilisateur " + requeteSite.utilisateurId + " " + requeteSite.utilisateurNom + " n'existe pas dejà. ");
+				throw new Exception("L'objet avec le pk " + pk + " et nom canonique " + pk + " pour utilisateur " + requeteSite.utilisateurId + " " + requeteSite.utilisateurNom + " n'existe pas dejà. ");
 			horodatage = (java.sql.Timestamp)resultats.get(0)[0];
 			cree = java.time.LocalDateTime.from(horodatage.toLocalDateTime());
 		}
 
-		String sqlInsertP = "insert into p(chemin, valeur, cle_objet) values(?, ?, ?) on conflict(chemin, cle_objet) do update set valeur=? where p.chemin=? and p.cle_objet=?";
-		String sqlInsertA = "insert into a(champ1, cle1, champ2, cle2) values(?, ?, ?, ?) on conflict  do nothing";
-		String sqlDeleteP = "delete from p where chemin=? and cle_objet=?";
-		String sqlDeleteA = "delete from a where champ1=? and cle1=? and champ2=? and cle2=?";
+		String sqlInsertP = "insert into p(chemin, valeur, pk_objet) values(?, ?, ?) on conflict(chemin, pk_objet) do update set valeur=? where p.chemin=? and p.pk_objet=?";
+		String sqlInsertA = "insert into a(champ1, pk1, champ2, pk2) values(?, ?, ?, ?) on conflict  do nothing";
+		String sqlDeleteP = "delete from p where chemin=? and pk_objet=?";
+		String sqlDeleteA = "delete from a where champ1=? and pk1=? and champ2=? and pk2=?";
 		sauvegarderUtilisateurSite(requeteSite, sqlInsertP, sqlInsertA, sqlDeleteP, sqlDeleteA, gestionnaireListe, coureur);
 	}
 	public void sauvegarderUtilisateurSite(RequeteSite requeteSite, String sqlInsertP, String sqlInsertA, String sqlDeleteP, String sqlDeleteA, org.apache.commons.dbutils.handlers.ArrayListHandler gestionnaireListe, org.apache.commons.dbutils.QueryRunner coureur) throws Exception {

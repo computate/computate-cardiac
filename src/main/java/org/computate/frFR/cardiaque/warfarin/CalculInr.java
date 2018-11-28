@@ -1,4 +1,4 @@
-package org.computate.frFR.cardiaque.warfarin;  
+package org.computate.frFR.cardiaque.warfarin; 
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -19,13 +19,13 @@ import org.computate.frFR.cardiaque.couverture.Couverture;
  * val.VAL_patientPrendCoumadinOuiDosageInitial.frFR:Yes, initial dosing
  * val.VAL_patientPrendCoumadinOuiRecommence.frFR:Yes, restarted
  * role.frFR: Doof
- */                   
-public class CalculInr extends CalculInrGen<Cluster> {           
+*/                            
+public class CalculInr extends CalculInrGen<Cluster> {          
 
 	/**
 	 * indexe: true
 	 * stocke: true
-	 * attribuer.nomSimple: UtilisateurSite
+	 * attribuer: UtilisateurSite.calculInrPks
 	 */
 	protected void _utilisateurPk(Couverture<Long> c) throws Exception {
 	}
