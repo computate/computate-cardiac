@@ -14,8 +14,8 @@ import org.computate.frFR.cardiaque.requete.RequeteSite;
  * nomCanonique.enUS: org.computate.site.course.c000.cluster.Cluster
  * modele: true
  * apiUri.frFR: /api/v1/warfarin/cluster
- */  
-public class Cluster extends ClusterGen<Object> {          
+ */   
+public class Cluster extends ClusterGen<Object> {        
 
 	public static DateTimeFormatter FORMAT_dateMedicalCourt = DateTimeFormatter.ofPattern("M/d/yyyy", Locale.FRANCE);
 
@@ -26,27 +26,30 @@ public class Cluster extends ClusterGen<Object> {
 //	 * remplacer.enUS: requeteSite
 //	 * siteRequest
 //	 */
-//	@Override public void requeteSiteCluster(RequeteSite requeteSite) throws Exception {  
+//	@Override public void requeteSiteCluster(RequeteSite requeteSite) {  
 //		super.requeteSiteCluster(requeteSite);
 //		requeteSite(requeteSite);
 //	}
 
 	/**
+	 * {@inheritDoc}
 	 * var.enUS: _siteRequest
 	 */
-	protected void _requeteSite_(Couverture<RequeteSite> c) throws Exception {}
-	protected void _page_(Couverture<MiseEnPage> c) throws Exception {}
+	protected void _requeteSite_(Couverture<RequeteSite> c) {}
+	protected void _page_(Couverture<MiseEnPage> c) {}
 
 	/**
+	 * {@inheritDoc}
 	 * indexe: true
 	 * stocke: true
 	 */
-	protected void _pk(Couverture<Long> c) throws Exception {}
+	protected void _pk(Couverture<Long> c) {}
 
 	/**
-	 * cleUnique: true
+	 * {@inheritDoc}
+	 * clePrimaire: true
 	 */
-	protected void _id(Couverture<String> c) throws Exception {
+	protected void _id(Couverture<String> c) {
 		if(pk != null)
 			c.o(pk.toString());
 	}
@@ -56,28 +59,28 @@ public class Cluster extends ClusterGen<Object> {
 	 * stocke: true
 	 * var.enUS: _created
 	 */
-	protected void _cree(Couverture<LocalDateTime> c) throws Exception {}
+	protected void _cree(Couverture<LocalDateTime> c) {}
 
 	/**
 	 * indexe: true
 	 * stocke: true
 	 * var.enUS: _modified
 	 */
-	protected void _modifie(Couverture<LocalDateTime> c) throws Exception {}
+	protected void _modifie(Couverture<LocalDateTime> c) {}
 
 	/**
 	 * indexe: true
 	 * stocke: true
 	 * var.enUS: _userId
 	 */
-	protected void _utilisateurId(Couverture<String> c) throws Exception {}
+	protected void _utilisateurId(Couverture<String> c) {}
 
 	/**
 	 * indexe: true
 	 * stocke: true
 	 * var.enUS: _clusterCanonicalName
-	 */
-	protected void _clusterNomCanonique(Couverture<String> c) throws Exception {
+	 */ 
+	protected void _clusterNomCanonique(Couverture<String> c) {
 		String o = getClass().getCanonicalName();
 		c.o(o);
 	}
@@ -86,16 +89,16 @@ public class Cluster extends ClusterGen<Object> {
 	 * indexe: true
 	 * stocke: true
 	 * var.enUS: _clusterSimpleName
-	 */
-	protected void _clusterNomSimple(Couverture<String> c) throws Exception {
+	 */           
+	protected void _clusterNomSimple(Couverture<String> c) {
 		String o = getClass().getSimpleName();
 		c.o(o);
 	}
 
-	/** 
+	/**        
 	 * var.enUS: _deleted
 	 */
-	protected void _supprime(Couverture<Boolean> c) throws Exception {
+	protected void _supprime(Couverture<Boolean> c) {
 		Boolean o = false;
 		c.o(o);
 	}

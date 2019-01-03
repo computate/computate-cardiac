@@ -12,20 +12,20 @@ import org.computate.frFR.cardiaque.requete.RequeteSite;
  * apiUri.enUS: /api/v1/site/user
  * apiUri.frFR: /api/v1/site/utilisateur
  */             
-public class UtilisateurSite extends UtilisateurSiteGen<Object> {   
+public class UtilisateurSite extends UtilisateurSiteGen<Object> {  
 
 	/**
 	 * indexe: true
 	 * stocke: true
 	 * attribuer: CalculInr.utilisateurPk
 	 */ 
-	protected void _calculInrPks(List<Long> l) throws Exception {
+	protected void _calculInrPks(List<Long> l) {
 	}
 
 	/**
 	 * var.enUS: _siteRequest
 	 */
-	protected void _requeteSite_(Couverture<RequeteSite> c) throws Exception {}
+	protected void _requeteSite_(Couverture<RequeteSite> c) {}
 
 	/**	
 	 * var.enUS: _userName
@@ -33,7 +33,7 @@ public class UtilisateurSite extends UtilisateurSiteGen<Object> {
 	 * indexe: true
 	 * stocke: true
 	 */
-	protected void _utilisateurNom(Couverture<String> c) throws Exception {
+	protected void _utilisateurNom(Couverture<String> c) {
 		String o = requeteSite_.getUtilisateurNom();
 		c.o(o);
 	}
@@ -44,7 +44,7 @@ public class UtilisateurSite extends UtilisateurSiteGen<Object> {
 	 * indexe: true
 	 * stocke: true
 	 */
-	protected void _utilisateurMail(Couverture<String> c) throws Exception {
+	protected void _utilisateurMail(Couverture<String> c) {
 	}
 
 	/**	
@@ -53,7 +53,7 @@ public class UtilisateurSite extends UtilisateurSiteGen<Object> {
 	 * indexe: true
 	 * stocke: true
 	 */
-	protected void _utilisateurId(Couverture<String> c) throws Exception {
+	protected void _utilisateurId(Couverture<String> c) {
 		String o = requeteSite_.getUtilisateurId();
 		c.o(o);
 	}
@@ -64,7 +64,7 @@ public class UtilisateurSite extends UtilisateurSiteGen<Object> {
 	 * indexe: true
 	 * stocke: true
 	 */
-	protected void _utilisateurPrenom(Couverture<String> c) throws Exception {
+	protected void _utilisateurPrenom(Couverture<String> c) {
 		String o = requeteSite_.getUtilisateurPrenom();
 		c.o(o);
 	}
@@ -75,7 +75,7 @@ public class UtilisateurSite extends UtilisateurSiteGen<Object> {
 	 * indexe: true
 	 * stocke: true
 	 */
-	protected void _utilisateurNomFamille(Couverture<String> c) throws Exception {
+	protected void _utilisateurNomFamille(Couverture<String> c) {
 		String o = requeteSite_.getUtilisateurNomFamille();
 		c.o(o);
 	}
@@ -90,7 +90,7 @@ public class UtilisateurSite extends UtilisateurSiteGen<Object> {
 	 * r: utilisateurNomFamille
 	 * r.enUS: userLastName
 	 */
-	protected void _utilisateurNomComplet(Couverture<String> c) throws Exception {
+	protected void _utilisateurNomComplet(Couverture<String> c) {
 		String o = requeteSite_.getUtilisateurNomComplet();
 		c.o(o);
 	}
@@ -101,7 +101,7 @@ public class UtilisateurSite extends UtilisateurSiteGen<Object> {
 	 * indexe: true
 	 * stocke: true
 	 */
-	protected void _utilisateurSite(Couverture<String> c) throws Exception {
+	protected void _utilisateurSite(Couverture<String> c) {
 	}
 
 	/**	
@@ -110,7 +110,7 @@ public class UtilisateurSite extends UtilisateurSiteGen<Object> {
 	 * indexe: true
 	 * stocke: true
 	 */
-	protected void _utilisateurRecevoirCourriels(Couverture<Boolean> c) throws Exception {
+	protected void _utilisateurRecevoirCourriels(Couverture<Boolean> c) {
 		c.o(false);
 	}
 
@@ -121,7 +121,7 @@ public class UtilisateurSite extends UtilisateurSiteGen<Object> {
 	 * indexe: true
 	 * stocke: true
 	 */
-	protected void _modeleSupprime(Couverture<Boolean> c) throws Exception {
+	protected void _modeleSupprime(Couverture<Boolean> c) {
 		c.o(false);
 	}
 
@@ -131,7 +131,7 @@ public class UtilisateurSite extends UtilisateurSiteGen<Object> {
 	 * indexe: true
 	 * stocke: true
 	 */
-	protected void _modeleCree(Couverture<ZonedDateTime> c) throws Exception {
+	protected void _modeleCree(Couverture<ZonedDateTime> c) {
 		ZonedDateTime o = ZonedDateTime.now();
 		c.o(o);
 	}
@@ -142,7 +142,7 @@ public class UtilisateurSite extends UtilisateurSiteGen<Object> {
 	 * indexe: true
 	 * stocke: true
 	 */
-	protected void _modeleModifie(Couverture<ZonedDateTime> c) throws Exception {
+	protected void _modeleModifie(Couverture<ZonedDateTime> c) {
 		ZonedDateTime o = ZonedDateTime.now();
 		c.o(o);
 	}
@@ -153,7 +153,7 @@ public class UtilisateurSite extends UtilisateurSiteGen<Object> {
 	 * indexe: true
 	 * stocke: true
 	 */
-	protected void _modeleClasseNomCanonique(Couverture<String> c) throws Exception {
+	protected void _modeleClasseNomCanonique(Couverture<String> c) {
 		c.o(getClass().getCanonicalName());
 	}
 
@@ -163,7 +163,7 @@ public class UtilisateurSite extends UtilisateurSiteGen<Object> {
 	 * indexe: true
 	 * stocke: true
 	 */
-	protected void _modeleCle(Couverture<Long> c) throws Exception {
+	protected void _modeleCle(Couverture<Long> c) {
 	}
 
 	/**	
@@ -178,7 +178,7 @@ public class UtilisateurSite extends UtilisateurSiteGen<Object> {
 	 * r: utilisateurNom
 	 * r.enUS: userName
 	 */
-	protected void _modeleSuggestionStocke(Couverture<String> c) throws Exception {
+	protected void _modeleSuggestionStocke(Couverture<String> c) {
 		c.o(utilisateurPrenom + " " + utilisateurNomFamille + " " + utilisateurNom);
 	}
 
@@ -195,7 +195,7 @@ public class UtilisateurSite extends UtilisateurSiteGen<Object> {
 	 * r: utilisateurNom
 	 * r.enUS: userName
 	 */
-	protected void _modeleSuggestionIndexe(Couverture<String> c) throws Exception {
+	protected void _modeleSuggestionIndexe(Couverture<String> c) {
 		c.o(utilisateurPrenom + " " + utilisateurNomFamille + " " + utilisateurNom);
 	}
 }

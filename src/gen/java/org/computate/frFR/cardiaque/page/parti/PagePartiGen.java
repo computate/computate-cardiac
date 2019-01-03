@@ -1,10 +1,17 @@
 package org.computate.frFR.cardiaque.page.parti;
 
 import org.computate.frFR.cardiaque.couverture.Couverture;
+import io.vertx.core.http.HttpServerResponse;
 import org.computate.frFR.cardiaque.cluster.Cluster;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
+import org.apache.commons.text.StringEscapeUtils;
 import java.lang.String;
+import org.apache.commons.lang3.StringUtils;
 
+/**	
+ * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.parti.PageParti&fq=classeEtendGen_indexed_boolean:true">Trouver la classe  dans Solr</a>
+ * <br/>
+ **/
 public abstract class PagePartiGen<DEV> extends Cluster {
 
 	//////////////////
@@ -12,32 +19,35 @@ public abstract class PagePartiGen<DEV> extends Cluster {
 	//////////////////
 
 	/**	L'entité « requeteSite_ »
-	 *	 est défini comme null avant d'être initialisé. 
+	 *	 is defined as null before being initialized. 
 	 */
 	protected RequeteSite requeteSite_;
 	public Couverture<RequeteSite> requeteSite_Couverture = new Couverture<RequeteSite>().p(this).c(RequeteSite.class).var("requeteSite_").o(requeteSite_);
 
-	/**	L'entité « requeteSite_ »
-	 *	 est défini comme null avant d'être initialisé. 
-	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
-	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
-	 */
+	/**	<br/>L'entité « requeteSite_ »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.parti.PageParti&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:requeteSite_">Trouver l'entité requeteSite_ dans Solr</a>
+	 * <br/>
+	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
 	protected abstract void _requeteSite_(Couverture<RequeteSite> o) throws Exception;
 
 	public RequeteSite getRequeteSite_() {
 		return requeteSite_;
 	}
 
-	public void setRequeteSite_(RequeteSite o) throws Exception {
+	public void setRequeteSite_(RequeteSite o) {
 		this.requeteSite_ = o;
+		this.requeteSite_Couverture.dejaInitialise = true;
 	}
-	protected void requeteSite_Init() throws Exception {
+	protected PageParti requeteSite_Init() throws Exception {
 		if(!requeteSite_Couverture.dejaInitialise) {
 			_requeteSite_(requeteSite_Couverture);
 			if(requeteSite_ == null)
 				setRequeteSite_(requeteSite_Couverture.o);
 		}
 		requeteSite_Couverture.dejaInitialise(true);
+		return (PageParti)this;
 	}
 
 	//////////////
@@ -45,52 +55,77 @@ public abstract class PagePartiGen<DEV> extends Cluster {
 	//////////////
 
 	/**	L'entité « partiVar »
-	 *	 est défini comme null avant d'être initialisé. 
+	 *	 is defined as null before being initialized. 
 	 */
 	protected String partiVar;
 	public Couverture<String> partiVarCouverture = new Couverture<String>().p(this).c(String.class).var("partiVar").o(partiVar);
 
-	/**	L'entité « partiVar »
-	 *	 est défini comme null avant d'être initialisé. 
-	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
-	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
-	 */
-	protected abstract void _partiVar(Couverture<String> o) throws Exception;
+	/**	<br/>L'entité « partiVar »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.parti.PageParti&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:partiVar">Trouver l'entité partiVar dans Solr</a>
+	 * <br/>
+	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
+	protected abstract void _partiVar(Couverture<String> o);
 
 	public String getPartiVar() {
 		return partiVar;
 	}
 
-	public void setPartiVar(String o) throws Exception {
+	public void setPartiVar(String o) {
 		this.partiVar = o;
+		this.partiVarCouverture.dejaInitialise = true;
 	}
-	protected void partiVarInit() throws Exception {
+	protected PageParti partiVarInit() throws Exception {
 		if(!partiVarCouverture.dejaInitialise) {
 			_partiVar(partiVarCouverture);
 			if(partiVar == null)
 				setPartiVar(partiVarCouverture.o);
 		}
 		partiVarCouverture.dejaInitialise(true);
+		return (PageParti)this;
 	}
 
-	/////////////////////
-	// initialiserLoin //
-	/////////////////////
+	public String solrPartiVar() {
+		return partiVar;
+	}
+
+	public String strPartiVar() {
+		return partiVar == null ? "" : partiVar;
+	}
+
+	public String nomAffichagePartiVar() {
+		return null;
+	}
+
+	public String htmlTooltipPartiVar() {
+		return null;
+	}
+
+	public String htmlPartiVar() {
+		return partiVar == null ? "" : StringEscapeUtils.escapeHtml4(strPartiVar());
+	}
+
+	//////////////
+	// initLoin //
+	//////////////
 
 	protected boolean dejaInitialisePageParti = false;
 
-	public void initLoinPageParti(RequeteSite requeteSite) throws Exception {
+	public PageParti initLoinPageParti(RequeteSite requeteSite) throws Exception {
 		setRequeteSite_(requeteSite);
 		initLoinPageParti();
+		return (PageParti)this;
 	}
 
-	public void initLoinPageParti() throws Exception {
+	public PageParti initLoinPageParti() throws Exception {
 		if(!dejaInitialisePageParti) {
+			dejaInitialisePageParti = true;
 			super.initLoinCluster(requeteSite_);
 			requeteSite_Init();
 			partiVarInit();
-			dejaInitialisePageParti = true;
 		}
+		return (PageParti)this;
 	}
 
 	public void initLoinPourClasse(RequeteSite requeteSite) throws Exception {
@@ -114,7 +149,7 @@ public abstract class PagePartiGen<DEV> extends Cluster {
 	/////////////
 
 	@Override public Object obtenirPourClasse(String var) throws Exception {
-		String[] vars = org.apache.commons.lang3.StringUtils.split(var, ".");
+		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
 			if(o == null)
@@ -143,7 +178,7 @@ public abstract class PagePartiGen<DEV> extends Cluster {
 	///////////////
 
 	@Override public boolean attribuerPourClasse(String var, Object val) throws Exception {
-		String[] vars = org.apache.commons.lang3.StringUtils.split(var, ".");
+		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
 			if(o == null)
@@ -160,37 +195,6 @@ public abstract class PagePartiGen<DEV> extends Cluster {
 		switch(var) {
 			default:
 				return super.attribuerCluster(var, val);
-		}
-	}
-
-	/////////////
-	// definir //
-	/////////////
-
-	@Override public boolean definirPourClasse(String var, String...vals) throws Exception {
-		String[] vars = org.apache.commons.lang3.StringUtils.split(var, ".");
-		Object o = null;
-		String val = vals == null ? null : vals[vals.length - 1];
-		if(val != null) {
-			for(String v : vars) {
-				if(o == null)
-					o = definirPageParti(v, val);
-				else if(o instanceof Cluster) {
-					Cluster cluster = (Cluster)o;
-					o = cluster.definirPourClasse(v, val);
-				}
-			}
-		}
-		return o != null;
-	}
-	public Object definirPageParti(String var, String val) throws Exception {
-		PageParti oPageParti = (PageParti)this;
-		switch(var) {
-			case "partiVar":
-				oPageParti.setPartiVar(val);
-				return val;
-			default:
-				return super.definirCluster(var, val);
 		}
 	}
 }

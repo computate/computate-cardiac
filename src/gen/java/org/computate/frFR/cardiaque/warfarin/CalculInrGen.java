@@ -1,27 +1,38 @@
 package org.computate.frFR.cardiaque.warfarin;
 
-import org.computate.frFR.cardiaque.chaine.Chaine;
 import org.computate.frFR.cardiaque.couverture.Couverture;
 import java.util.Date;
-import org.computate.frFR.cardiaque.cluster.Cluster;
-import java.util.Set;
-import java.time.Instant;
+import org.apache.commons.lang3.StringUtils;
 import io.vertx.core.logging.LoggerFactory;
-import java.time.ZoneId;
-import org.apache.solr.client.solrj.SolrClient;
-import org.computate.frFR.cardiaque.contexte.SiteContexte;
-import io.vertx.core.json.JsonArray;
+import java.util.ArrayList;
 import java.lang.Long;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import io.vertx.ext.sql.SQLConnection;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
+import org.computate.frFR.cardiaque.ecrivain.ToutEcrivain;
 import io.vertx.core.json.JsonObject;
 import java.lang.String;
 import io.vertx.core.logging.Logger;
+import org.computate.frFR.cardiaque.chaine.Chaine;
+import org.computate.frFR.cardiaque.cluster.Cluster;
+import java.util.Set;
+import org.apache.commons.text.StringEscapeUtils;
+import java.time.Instant;
+import java.time.ZoneId;
+import org.apache.solr.client.solrj.SolrClient;
+import org.computate.frFR.cardiaque.contexte.SiteContexte;
+import java.util.Objects;
+import org.apache.solr.common.SolrDocument;
+import io.vertx.core.json.JsonArray;
+import java.util.List;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import io.vertx.ext.sql.SQLConnection;
 import io.vertx.ext.sql.SQLClient;
 import org.apache.solr.common.SolrInputDocument;
 
+/**	
+ * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.warfarin.CalculInr&fq=classeEtendGen_indexed_boolean:true">Trouver la classe  dans Solr</a>
+ * <br/>
+ **/
 public abstract class CalculInrGen<DEV> extends Cluster {
 	private static final Logger LOGGER = LoggerFactory.getLogger(CalculInr.class);
 	public static final String VAL_patientPrendCoumadinOui = "Yes";
@@ -34,17 +45,18 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	///////////////////
 
 	/**	L'entité « utilisateurPk »
-	 *	 est défini comme null avant d'être initialisé. 
+	 *	 is defined as null before being initialized. 
 	 */
 	protected Long utilisateurPk;
 	public Couverture<Long> utilisateurPkCouverture = new Couverture<Long>().p(this).c(Long.class).var("utilisateurPk").o(utilisateurPk);
 
-	/**	L'entité « utilisateurPk »
-	 *	 est défini comme null avant d'être initialisé. 
-	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
-	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
-	 */
-	protected abstract void _utilisateurPk(Couverture<Long> o) throws Exception;
+	/**	<br/>L'entité « utilisateurPk »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.warfarin.CalculInr&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:utilisateurPk">Trouver l'entité utilisateurPk dans Solr</a>
+	 * <br/>
+	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
+	protected abstract void _utilisateurPk(Couverture<Long> o);
 
 	public Long getUtilisateurPk() {
 		return utilisateurPk;
@@ -52,13 +64,16 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 
 	public void setUtilisateurPk(Long o) {
 		this.utilisateurPk = o;
+		this.utilisateurPkCouverture.dejaInitialise = true;
 	}
-	public CalculInr setUtilisateurPk(String o) throws Exception {
+	public CalculInr setUtilisateurPk(String o) {
 		if(org.apache.commons.lang3.math.NumberUtils.isCreatable(o))
 			this.utilisateurPk = Long.parseLong(o);
+		this.utilisateurPkCouverture.dejaInitialise = true;
 		return (CalculInr)this;
 	}
-	protected CalculInr utilisateurPkInit() throws Exception {
+	protected CalculInr utilisateurPkInit()
+ {
 		if(!utilisateurPkCouverture.dejaInitialise) {
 			_utilisateurPk(utilisateurPkCouverture);
 			if(utilisateurPk == null)
@@ -68,22 +83,84 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 		return (CalculInr)this;
 	}
 
+	public Long solrUtilisateurPk() {
+		return utilisateurPk;
+	}
+
+	public String strUtilisateurPk() {
+		return utilisateurPk == null ? "" : utilisateurPk.toString();
+	}
+
+	public String nomAffichageUtilisateurPk() {
+		return null;
+	}
+
+	public String htmTooltipUtilisateurPk() {
+		return null;
+	}
+
+	public String htmUtilisateurPk() {
+		return utilisateurPk == null ? "" : StringEscapeUtils.escapeHtml4(strUtilisateurPk());
+	}
+
+	public void htmUtilisateurPk(ToutEcrivain r, Boolean patchDroits) {
+		if(id!= null) {
+			r.s("<div id=\"patchCalculInr", strId(), "UtilisateurPk\">");
+			if(patchDroits) {
+				r.l();
+				r.l("	<script>//<![CDATA[");
+				r.l("		function patchCalculInr", strId(), "UtilisateurPk() {");
+				r.l("			$.ajax({");
+				r.l("				url: '/api/v1/warfarin/calcul-inr?fq=id:", strId(), "',");
+				r.l("				dataType: 'json',");
+				r.l("				type: 'patch',");
+				r.l("				contentType: 'application/json',");
+				r.l("				processData: false,");
+				r.l("				success: function( data, textStatus, jQxhr ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				error: function( jqXhr, textStatus, errorThrown ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				data: {\"setUtilisateurPk\": this.value },");
+				r.l("				");
+				r.l("			});");
+				r.l("		}");
+				r.l("	//]]></script>");
+				r.l("	<div class=\"\">");
+				r.l("		<label class=\"w3-tooltip \">");
+				r.l("			<span>", StringEscapeUtils.escapeHtml4(nomAffichageUtilisateurPk()), "</span>");
+				r.s("			<input");
+							r.s(" name=\"utilisateurPk\"");
+							r.s(" value=\"", htmUtilisateurPk(), "\");");
+							r.s(" onchange=\"\"");
+							r.l("/>");
+				r.l("		</label>");
+				r.l("	</div>");
+			} else {
+				r.s(htmUtilisateurPk());
+			}
+			r.l("</div>");
+		}
+	}
+
 	/////////////
 	// dateInr //
 	/////////////
 
 	/**	L'entité « dateInr »
-	 *	 est défini comme null avant d'être initialisé. 
+	 *	 is defined as null before being initialized. 
 	 */
 	protected LocalDate dateInr;
 	public Couverture<LocalDate> dateInrCouverture = new Couverture<LocalDate>().p(this).c(LocalDate.class).var("dateInr").o(dateInr);
 
-	/**	L'entité « dateInr »
-	 *	 est défini comme null avant d'être initialisé. 
-	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
-	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
-	 */
-	protected abstract void _dateInr(Couverture<LocalDate> o) throws Exception;
+	/**	<br/>L'entité « dateInr »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.warfarin.CalculInr&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:dateInr">Trouver l'entité dateInr dans Solr</a>
+	 * <br/>
+	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
+	protected abstract void _dateInr(Couverture<LocalDate> o);
 
 	public LocalDate getDateInr() {
 		return dateInr;
@@ -91,21 +168,26 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 
 	public void setDateInr(LocalDate o) {
 		this.dateInr = o;
+		this.dateInrCouverture.dejaInitialise = true;
 	}
-	public CalculInr setDateInr(Instant o) throws Exception {
+	public CalculInr setDateInr(Instant o) {
 		this.dateInr = LocalDate.from(o);
+		this.dateInrCouverture.dejaInitialise = true;
 		return (CalculInr)this;
 	}
 	/** Example: 2011-12-03+01:00 **/
-	public CalculInr setDateInr(String o) throws Exception {
+	public CalculInr setDateInr(String o) {
 		this.dateInr = LocalDate.parse(o, DateTimeFormatter.ISO_OFFSET_DATE);
+		this.dateInrCouverture.dejaInitialise = true;
 		return (CalculInr)this;
 	}
-	public CalculInr setDateInr(Date o) throws Exception {
+	public CalculInr setDateInr(Date o) {
 		this.dateInr = o.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		this.dateInrCouverture.dejaInitialise = true;
 		return (CalculInr)this;
 	}
-	protected CalculInr dateInrInit() throws Exception {
+	protected CalculInr dateInrInit()
+ {
 		if(!dateInrCouverture.dejaInitialise) {
 			_dateInr(dateInrCouverture);
 			if(dateInr == null)
@@ -115,22 +197,84 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 		return (CalculInr)this;
 	}
 
+	public Date solrDateInr() {
+		return dateInr == null ? null : Date.from(dateInr.atStartOfDay(ZoneId.systemDefault()).toInstant());
+	}
+
+	public String strDateInr() {
+		return dateInr == null ? "" : dateInr.toString();
+	}
+
+	public String nomAffichageDateInr() {
+		return null;
+	}
+
+	public String htmTooltipDateInr() {
+		return null;
+	}
+
+	public String htmDateInr() {
+		return dateInr == null ? "" : StringEscapeUtils.escapeHtml4(strDateInr());
+	}
+
+	public void htmDateInr(ToutEcrivain r, Boolean patchDroits) {
+		if(id!= null) {
+			r.s("<div id=\"patchCalculInr", strId(), "DateInr\">");
+			if(patchDroits) {
+				r.l();
+				r.l("	<script>//<![CDATA[");
+				r.l("		function patchCalculInr", strId(), "DateInr() {");
+				r.l("			$.ajax({");
+				r.l("				url: '/api/v1/warfarin/calcul-inr?fq=id:", strId(), "',");
+				r.l("				dataType: 'json',");
+				r.l("				type: 'patch',");
+				r.l("				contentType: 'application/json',");
+				r.l("				processData: false,");
+				r.l("				success: function( data, textStatus, jQxhr ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				error: function( jqXhr, textStatus, errorThrown ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				data: {\"setDateInr\": this.value },");
+				r.l("				");
+				r.l("			});");
+				r.l("		}");
+				r.l("	//]]></script>");
+				r.l("	<div class=\"\">");
+				r.l("		<label class=\"w3-tooltip \">");
+				r.l("			<span>", StringEscapeUtils.escapeHtml4(nomAffichageDateInr()), "</span>");
+				r.s("			<input");
+							r.s(" name=\"dateInr\"");
+							r.s(" value=\"", htmDateInr(), "\");");
+							r.s(" onchange=\"\"");
+							r.l("/>");
+				r.l("		</label>");
+				r.l("	</div>");
+			} else {
+				r.s(htmDateInr());
+			}
+			r.l("</div>");
+		}
+	}
+
 	////////////////////
 	// dateReverifier //
 	////////////////////
 
 	/**	L'entité « dateReverifier »
-	 *	 est défini comme null avant d'être initialisé. 
+	 *	 is defined as null before being initialized. 
 	 */
 	protected LocalDate dateReverifier;
 	public Couverture<LocalDate> dateReverifierCouverture = new Couverture<LocalDate>().p(this).c(LocalDate.class).var("dateReverifier").o(dateReverifier);
 
-	/**	L'entité « dateReverifier »
-	 *	 est défini comme null avant d'être initialisé. 
-	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
-	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
-	 */
-	protected abstract void _dateReverifier(Couverture<LocalDate> o) throws Exception;
+	/**	<br/>L'entité « dateReverifier »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.warfarin.CalculInr&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:dateReverifier">Trouver l'entité dateReverifier dans Solr</a>
+	 * <br/>
+	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
+	protected abstract void _dateReverifier(Couverture<LocalDate> o);
 
 	public LocalDate getDateReverifier() {
 		return dateReverifier;
@@ -138,21 +282,26 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 
 	public void setDateReverifier(LocalDate o) {
 		this.dateReverifier = o;
+		this.dateReverifierCouverture.dejaInitialise = true;
 	}
-	public CalculInr setDateReverifier(Instant o) throws Exception {
+	public CalculInr setDateReverifier(Instant o) {
 		this.dateReverifier = LocalDate.from(o);
+		this.dateReverifierCouverture.dejaInitialise = true;
 		return (CalculInr)this;
 	}
 	/** Example: 2011-12-03+01:00 **/
-	public CalculInr setDateReverifier(String o) throws Exception {
+	public CalculInr setDateReverifier(String o) {
 		this.dateReverifier = LocalDate.parse(o, DateTimeFormatter.ISO_OFFSET_DATE);
+		this.dateReverifierCouverture.dejaInitialise = true;
 		return (CalculInr)this;
 	}
-	public CalculInr setDateReverifier(Date o) throws Exception {
+	public CalculInr setDateReverifier(Date o) {
 		this.dateReverifier = o.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		this.dateReverifierCouverture.dejaInitialise = true;
 		return (CalculInr)this;
 	}
-	protected CalculInr dateReverifierInit() throws Exception {
+	protected CalculInr dateReverifierInit()
+ {
 		if(!dateReverifierCouverture.dejaInitialise) {
 			_dateReverifier(dateReverifierCouverture);
 			if(dateReverifier == null)
@@ -160,6 +309,67 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 		}
 		dateReverifierCouverture.dejaInitialise(true);
 		return (CalculInr)this;
+	}
+
+	public Date solrDateReverifier() {
+		return dateReverifier == null ? null : Date.from(dateReverifier.atStartOfDay(ZoneId.systemDefault()).toInstant());
+	}
+
+	public String strDateReverifier() {
+		return dateReverifier == null ? "" : dateReverifier.toString();
+	}
+
+	public String nomAffichageDateReverifier() {
+		return null;
+	}
+
+	public String htmTooltipDateReverifier() {
+		return null;
+	}
+
+	public String htmDateReverifier() {
+		return dateReverifier == null ? "" : StringEscapeUtils.escapeHtml4(strDateReverifier());
+	}
+
+	public void htmDateReverifier(ToutEcrivain r, Boolean patchDroits) {
+		if(id!= null) {
+			r.s("<div id=\"patchCalculInr", strId(), "DateReverifier\">");
+			if(patchDroits) {
+				r.l();
+				r.l("	<script>//<![CDATA[");
+				r.l("		function patchCalculInr", strId(), "DateReverifier() {");
+				r.l("			$.ajax({");
+				r.l("				url: '/api/v1/warfarin/calcul-inr?fq=id:", strId(), "',");
+				r.l("				dataType: 'json',");
+				r.l("				type: 'patch',");
+				r.l("				contentType: 'application/json',");
+				r.l("				processData: false,");
+				r.l("				success: function( data, textStatus, jQxhr ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				error: function( jqXhr, textStatus, errorThrown ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				data: {\"setDateReverifier\": this.value },");
+				r.l("				");
+				r.l("			});");
+				r.l("		}");
+				r.l("	//]]></script>");
+				r.l("	<div class=\"\">");
+				r.l("		<label class=\"w3-tooltip \">");
+				r.l("			<span>", StringEscapeUtils.escapeHtml4(nomAffichageDateReverifier()), "</span>");
+				r.s("			<input");
+							r.s(" name=\"dateReverifier\"");
+							r.s(" value=\"", htmDateReverifier(), "\");");
+							r.s(" onchange=\"\"");
+							r.l("/>");
+				r.l("		</label>");
+				r.l("	</div>");
+			} else {
+				r.s(htmDateReverifier());
+			}
+			r.l("</div>");
+		}
 	}
 
 	//////////////////////////
@@ -172,12 +382,13 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	protected Chaine patientPrendCoumadin = new Chaine();
 	public Couverture<Chaine> patientPrendCoumadinCouverture = new Couverture<Chaine>().p(this).c(Chaine.class).var("patientPrendCoumadin").o(patientPrendCoumadin);
 
-	/**	L'entité « patientPrendCoumadin »
-	 *	Il est construit avant d'être initialisé avec le constructeur par défaut Chaine(). 
-	 *	@param patientPrendCoumadin est le champ déjà construit. 
-	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
-	 */
-	protected abstract void _patientPrendCoumadin(Chaine o) throws Exception;
+	/**	<br/>L'entité « patientPrendCoumadin »
+	 * Il est construit avant d'être initialisé avec le constructeur par défaut Chaine(). 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.warfarin.CalculInr&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:patientPrendCoumadin">Trouver l'entité patientPrendCoumadin dans Solr</a>
+	 * <br/>
+	 * @param patientPrendCoumadin est l'entité déjà construit. 
+	 **/
+	protected abstract void _patientPrendCoumadin(Chaine o);
 
 	public Chaine getPatientPrendCoumadin() {
 		return patientPrendCoumadin;
@@ -185,18 +396,82 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 
 	public void setPatientPrendCoumadin(Chaine o) {
 		this.patientPrendCoumadin = o;
+		this.patientPrendCoumadinCouverture.dejaInitialise = true;
 	}
-	public CalculInr setPatientPrendCoumadin(String o) throws Exception {
+	public CalculInr setPatientPrendCoumadin(String o) {
 		patientPrendCoumadin.tout(o);
+		this.patientPrendCoumadinCouverture.dejaInitialise = true;
 		return (CalculInr)this;
 	}
-	protected CalculInr patientPrendCoumadinInit() throws Exception {
+	protected CalculInr patientPrendCoumadinInit()
+ {
 		if(!patientPrendCoumadinCouverture.dejaInitialise) {
 			_patientPrendCoumadin(patientPrendCoumadin);
 		}
 		patientPrendCoumadin.initLoinPourClasse(requeteSite_);
 		patientPrendCoumadinCouverture.dejaInitialise(true);
 		return (CalculInr)this;
+	}
+
+	public String solrPatientPrendCoumadin() {
+		return patientPrendCoumadin == null ? null : patientPrendCoumadin.toString();
+	}
+
+	public String strPatientPrendCoumadin() {
+		return patientPrendCoumadin == null ? "" : patientPrendCoumadin.toString();
+	}
+
+	public String nomAffichagePatientPrendCoumadin() {
+		return null;
+	}
+
+	public String htmTooltipPatientPrendCoumadin() {
+		return null;
+	}
+
+	public String htmPatientPrendCoumadin() {
+		return patientPrendCoumadin == null ? "" : StringEscapeUtils.escapeHtml4(strPatientPrendCoumadin());
+	}
+
+	public void htmPatientPrendCoumadin(ToutEcrivain r, Boolean patchDroits) {
+		if(id!= null) {
+			r.s("<div id=\"patchCalculInr", strId(), "PatientPrendCoumadin\">");
+			if(patchDroits) {
+				r.l();
+				r.l("	<script>//<![CDATA[");
+				r.l("		function patchCalculInr", strId(), "PatientPrendCoumadin() {");
+				r.l("			$.ajax({");
+				r.l("				url: '/api/v1/warfarin/calcul-inr?fq=id:", strId(), "',");
+				r.l("				dataType: 'json',");
+				r.l("				type: 'patch',");
+				r.l("				contentType: 'application/json',");
+				r.l("				processData: false,");
+				r.l("				success: function( data, textStatus, jQxhr ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				error: function( jqXhr, textStatus, errorThrown ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				data: {\"setPatientPrendCoumadin\": this.value },");
+				r.l("				");
+				r.l("			});");
+				r.l("		}");
+				r.l("	//]]></script>");
+				r.l("	<div class=\"\">");
+				r.l("		<label class=\"w3-tooltip \">");
+				r.l("			<span>", StringEscapeUtils.escapeHtml4(nomAffichagePatientPrendCoumadin()), "</span>");
+				r.s("			<input");
+							r.s(" name=\"patientPrendCoumadin\"");
+							r.s(" value=\"", htmPatientPrendCoumadin(), "\");");
+							r.s(" onchange=\"\"");
+							r.l("/>");
+				r.l("		</label>");
+				r.l("	</div>");
+			} else {
+				r.s(htmPatientPrendCoumadin());
+			}
+			r.l("</div>");
+		}
 	}
 
 	///////////////
@@ -209,12 +484,13 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	protected Chaine butActuel = new Chaine();
 	public Couverture<Chaine> butActuelCouverture = new Couverture<Chaine>().p(this).c(Chaine.class).var("butActuel").o(butActuel);
 
-	/**	L'entité « butActuel »
-	 *	Il est construit avant d'être initialisé avec le constructeur par défaut Chaine(). 
-	 *	@param butActuel est le champ déjà construit. 
-	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
-	 */
-	protected abstract void _butActuel(Chaine o) throws Exception;
+	/**	<br/>L'entité « butActuel »
+	 * Il est construit avant d'être initialisé avec le constructeur par défaut Chaine(). 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.warfarin.CalculInr&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:butActuel">Trouver l'entité butActuel dans Solr</a>
+	 * <br/>
+	 * @param butActuel est l'entité déjà construit. 
+	 **/
+	protected abstract void _butActuel(Chaine o);
 
 	public Chaine getButActuel() {
 		return butActuel;
@@ -222,18 +498,82 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 
 	public void setButActuel(Chaine o) {
 		this.butActuel = o;
+		this.butActuelCouverture.dejaInitialise = true;
 	}
-	public CalculInr setButActuel(String o) throws Exception {
+	public CalculInr setButActuel(String o) {
 		butActuel.tout(o);
+		this.butActuelCouverture.dejaInitialise = true;
 		return (CalculInr)this;
 	}
-	protected CalculInr butActuelInit() throws Exception {
+	protected CalculInr butActuelInit()
+ {
 		if(!butActuelCouverture.dejaInitialise) {
 			_butActuel(butActuel);
 		}
 		butActuel.initLoinPourClasse(requeteSite_);
 		butActuelCouverture.dejaInitialise(true);
 		return (CalculInr)this;
+	}
+
+	public String solrButActuel() {
+		return butActuel == null ? null : butActuel.toString();
+	}
+
+	public String strButActuel() {
+		return butActuel == null ? "" : butActuel.toString();
+	}
+
+	public String nomAffichageButActuel() {
+		return null;
+	}
+
+	public String htmTooltipButActuel() {
+		return null;
+	}
+
+	public String htmButActuel() {
+		return butActuel == null ? "" : StringEscapeUtils.escapeHtml4(strButActuel());
+	}
+
+	public void htmButActuel(ToutEcrivain r, Boolean patchDroits) {
+		if(id!= null) {
+			r.s("<div id=\"patchCalculInr", strId(), "ButActuel\">");
+			if(patchDroits) {
+				r.l();
+				r.l("	<script>//<![CDATA[");
+				r.l("		function patchCalculInr", strId(), "ButActuel() {");
+				r.l("			$.ajax({");
+				r.l("				url: '/api/v1/warfarin/calcul-inr?fq=id:", strId(), "',");
+				r.l("				dataType: 'json',");
+				r.l("				type: 'patch',");
+				r.l("				contentType: 'application/json',");
+				r.l("				processData: false,");
+				r.l("				success: function( data, textStatus, jQxhr ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				error: function( jqXhr, textStatus, errorThrown ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				data: {\"setButActuel\": this.value },");
+				r.l("				");
+				r.l("			});");
+				r.l("		}");
+				r.l("	//]]></script>");
+				r.l("	<div class=\"\">");
+				r.l("		<label class=\"w3-tooltip \">");
+				r.l("			<span>", StringEscapeUtils.escapeHtml4(nomAffichageButActuel()), "</span>");
+				r.s("			<input");
+							r.s(" name=\"butActuel\"");
+							r.s(" value=\"", htmButActuel(), "\");");
+							r.s(" onchange=\"\"");
+							r.l("/>");
+				r.l("		</label>");
+				r.l("	</div>");
+			} else {
+				r.s(htmButActuel());
+			}
+			r.l("</div>");
+		}
 	}
 
 	////////////////
@@ -246,12 +586,13 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	protected Chaine doseActuel = new Chaine();
 	public Couverture<Chaine> doseActuelCouverture = new Couverture<Chaine>().p(this).c(Chaine.class).var("doseActuel").o(doseActuel);
 
-	/**	L'entité « doseActuel »
-	 *	Il est construit avant d'être initialisé avec le constructeur par défaut Chaine(). 
-	 *	@param doseActuel est le champ déjà construit. 
-	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
-	 */
-	protected abstract void _doseActuel(Chaine o) throws Exception;
+	/**	<br/>L'entité « doseActuel »
+	 * Il est construit avant d'être initialisé avec le constructeur par défaut Chaine(). 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.warfarin.CalculInr&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:doseActuel">Trouver l'entité doseActuel dans Solr</a>
+	 * <br/>
+	 * @param doseActuel est l'entité déjà construit. 
+	 **/
+	protected abstract void _doseActuel(Chaine o);
 
 	public Chaine getDoseActuel() {
 		return doseActuel;
@@ -259,18 +600,82 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 
 	public void setDoseActuel(Chaine o) {
 		this.doseActuel = o;
+		this.doseActuelCouverture.dejaInitialise = true;
 	}
-	public CalculInr setDoseActuel(String o) throws Exception {
+	public CalculInr setDoseActuel(String o) {
 		doseActuel.tout(o);
+		this.doseActuelCouverture.dejaInitialise = true;
 		return (CalculInr)this;
 	}
-	protected CalculInr doseActuelInit() throws Exception {
+	protected CalculInr doseActuelInit()
+ {
 		if(!doseActuelCouverture.dejaInitialise) {
 			_doseActuel(doseActuel);
 		}
 		doseActuel.initLoinPourClasse(requeteSite_);
 		doseActuelCouverture.dejaInitialise(true);
 		return (CalculInr)this;
+	}
+
+	public String solrDoseActuel() {
+		return doseActuel == null ? null : doseActuel.toString();
+	}
+
+	public String strDoseActuel() {
+		return doseActuel == null ? "" : doseActuel.toString();
+	}
+
+	public String nomAffichageDoseActuel() {
+		return null;
+	}
+
+	public String htmTooltipDoseActuel() {
+		return null;
+	}
+
+	public String htmDoseActuel() {
+		return doseActuel == null ? "" : StringEscapeUtils.escapeHtml4(strDoseActuel());
+	}
+
+	public void htmDoseActuel(ToutEcrivain r, Boolean patchDroits) {
+		if(id!= null) {
+			r.s("<div id=\"patchCalculInr", strId(), "DoseActuel\">");
+			if(patchDroits) {
+				r.l();
+				r.l("	<script>//<![CDATA[");
+				r.l("		function patchCalculInr", strId(), "DoseActuel() {");
+				r.l("			$.ajax({");
+				r.l("				url: '/api/v1/warfarin/calcul-inr?fq=id:", strId(), "',");
+				r.l("				dataType: 'json',");
+				r.l("				type: 'patch',");
+				r.l("				contentType: 'application/json',");
+				r.l("				processData: false,");
+				r.l("				success: function( data, textStatus, jQxhr ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				error: function( jqXhr, textStatus, errorThrown ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				data: {\"setDoseActuel\": this.value },");
+				r.l("				");
+				r.l("			});");
+				r.l("		}");
+				r.l("	//]]></script>");
+				r.l("	<div class=\"\">");
+				r.l("		<label class=\"w3-tooltip \">");
+				r.l("			<span>", StringEscapeUtils.escapeHtml4(nomAffichageDoseActuel()), "</span>");
+				r.s("			<input");
+							r.s(" name=\"doseActuel\"");
+							r.s(" value=\"", htmDoseActuel(), "\");");
+							r.s(" onchange=\"\"");
+							r.l("/>");
+				r.l("		</label>");
+				r.l("	</div>");
+			} else {
+				r.s(htmDoseActuel());
+			}
+			r.l("</div>");
+		}
 	}
 
 	//////////////////////
@@ -283,12 +688,13 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	protected Chaine medicamentActuel = new Chaine();
 	public Couverture<Chaine> medicamentActuelCouverture = new Couverture<Chaine>().p(this).c(Chaine.class).var("medicamentActuel").o(medicamentActuel);
 
-	/**	L'entité « medicamentActuel »
-	 *	Il est construit avant d'être initialisé avec le constructeur par défaut Chaine(). 
-	 *	@param medicamentActuel est le champ déjà construit. 
-	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
-	 */
-	protected abstract void _medicamentActuel(Chaine o) throws Exception;
+	/**	<br/>L'entité « medicamentActuel »
+	 * Il est construit avant d'être initialisé avec le constructeur par défaut Chaine(). 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.warfarin.CalculInr&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:medicamentActuel">Trouver l'entité medicamentActuel dans Solr</a>
+	 * <br/>
+	 * @param medicamentActuel est l'entité déjà construit. 
+	 **/
+	protected abstract void _medicamentActuel(Chaine o);
 
 	public Chaine getMedicamentActuel() {
 		return medicamentActuel;
@@ -296,18 +702,82 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 
 	public void setMedicamentActuel(Chaine o) {
 		this.medicamentActuel = o;
+		this.medicamentActuelCouverture.dejaInitialise = true;
 	}
-	public CalculInr setMedicamentActuel(String o) throws Exception {
+	public CalculInr setMedicamentActuel(String o) {
 		medicamentActuel.tout(o);
+		this.medicamentActuelCouverture.dejaInitialise = true;
 		return (CalculInr)this;
 	}
-	protected CalculInr medicamentActuelInit() throws Exception {
+	protected CalculInr medicamentActuelInit()
+ {
 		if(!medicamentActuelCouverture.dejaInitialise) {
 			_medicamentActuel(medicamentActuel);
 		}
 		medicamentActuel.initLoinPourClasse(requeteSite_);
 		medicamentActuelCouverture.dejaInitialise(true);
 		return (CalculInr)this;
+	}
+
+	public String solrMedicamentActuel() {
+		return medicamentActuel == null ? null : medicamentActuel.toString();
+	}
+
+	public String strMedicamentActuel() {
+		return medicamentActuel == null ? "" : medicamentActuel.toString();
+	}
+
+	public String nomAffichageMedicamentActuel() {
+		return null;
+	}
+
+	public String htmTooltipMedicamentActuel() {
+		return null;
+	}
+
+	public String htmMedicamentActuel() {
+		return medicamentActuel == null ? "" : StringEscapeUtils.escapeHtml4(strMedicamentActuel());
+	}
+
+	public void htmMedicamentActuel(ToutEcrivain r, Boolean patchDroits) {
+		if(id!= null) {
+			r.s("<div id=\"patchCalculInr", strId(), "MedicamentActuel\">");
+			if(patchDroits) {
+				r.l();
+				r.l("	<script>//<![CDATA[");
+				r.l("		function patchCalculInr", strId(), "MedicamentActuel() {");
+				r.l("			$.ajax({");
+				r.l("				url: '/api/v1/warfarin/calcul-inr?fq=id:", strId(), "',");
+				r.l("				dataType: 'json',");
+				r.l("				type: 'patch',");
+				r.l("				contentType: 'application/json',");
+				r.l("				processData: false,");
+				r.l("				success: function( data, textStatus, jQxhr ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				error: function( jqXhr, textStatus, errorThrown ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				data: {\"setMedicamentActuel\": this.value },");
+				r.l("				");
+				r.l("			});");
+				r.l("		}");
+				r.l("	//]]></script>");
+				r.l("	<div class=\"\">");
+				r.l("		<label class=\"w3-tooltip \">");
+				r.l("			<span>", StringEscapeUtils.escapeHtml4(nomAffichageMedicamentActuel()), "</span>");
+				r.s("			<input");
+							r.s(" name=\"medicamentActuel\"");
+							r.s(" value=\"", htmMedicamentActuel(), "\");");
+							r.s(" onchange=\"\"");
+							r.l("/>");
+				r.l("		</label>");
+				r.l("	</div>");
+			} else {
+				r.s(htmMedicamentActuel());
+			}
+			r.l("</div>");
+		}
 	}
 
 	////////////////////
@@ -320,12 +790,13 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	protected Chaine changementDose = new Chaine();
 	public Couverture<Chaine> changementDoseCouverture = new Couverture<Chaine>().p(this).c(Chaine.class).var("changementDose").o(changementDose);
 
-	/**	L'entité « changementDose »
-	 *	Il est construit avant d'être initialisé avec le constructeur par défaut Chaine(). 
-	 *	@param changementDose est le champ déjà construit. 
-	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
-	 */
-	protected abstract void _changementDose(Chaine o) throws Exception;
+	/**	<br/>L'entité « changementDose »
+	 * Il est construit avant d'être initialisé avec le constructeur par défaut Chaine(). 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.warfarin.CalculInr&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:changementDose">Trouver l'entité changementDose dans Solr</a>
+	 * <br/>
+	 * @param changementDose est l'entité déjà construit. 
+	 **/
+	protected abstract void _changementDose(Chaine o);
 
 	public Chaine getChangementDose() {
 		return changementDose;
@@ -333,18 +804,82 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 
 	public void setChangementDose(Chaine o) {
 		this.changementDose = o;
+		this.changementDoseCouverture.dejaInitialise = true;
 	}
-	public CalculInr setChangementDose(String o) throws Exception {
+	public CalculInr setChangementDose(String o) {
 		changementDose.tout(o);
+		this.changementDoseCouverture.dejaInitialise = true;
 		return (CalculInr)this;
 	}
-	protected CalculInr changementDoseInit() throws Exception {
+	protected CalculInr changementDoseInit()
+ {
 		if(!changementDoseCouverture.dejaInitialise) {
 			_changementDose(changementDose);
 		}
 		changementDose.initLoinPourClasse(requeteSite_);
 		changementDoseCouverture.dejaInitialise(true);
 		return (CalculInr)this;
+	}
+
+	public String solrChangementDose() {
+		return changementDose == null ? null : changementDose.toString();
+	}
+
+	public String strChangementDose() {
+		return changementDose == null ? "" : changementDose.toString();
+	}
+
+	public String nomAffichageChangementDose() {
+		return null;
+	}
+
+	public String htmTooltipChangementDose() {
+		return null;
+	}
+
+	public String htmChangementDose() {
+		return changementDose == null ? "" : StringEscapeUtils.escapeHtml4(strChangementDose());
+	}
+
+	public void htmChangementDose(ToutEcrivain r, Boolean patchDroits) {
+		if(id!= null) {
+			r.s("<div id=\"patchCalculInr", strId(), "ChangementDose\">");
+			if(patchDroits) {
+				r.l();
+				r.l("	<script>//<![CDATA[");
+				r.l("		function patchCalculInr", strId(), "ChangementDose() {");
+				r.l("			$.ajax({");
+				r.l("				url: '/api/v1/warfarin/calcul-inr?fq=id:", strId(), "',");
+				r.l("				dataType: 'json',");
+				r.l("				type: 'patch',");
+				r.l("				contentType: 'application/json',");
+				r.l("				processData: false,");
+				r.l("				success: function( data, textStatus, jQxhr ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				error: function( jqXhr, textStatus, errorThrown ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				data: {\"setChangementDose\": this.value },");
+				r.l("				");
+				r.l("			});");
+				r.l("		}");
+				r.l("	//]]></script>");
+				r.l("	<div class=\"\">");
+				r.l("		<label class=\"w3-tooltip \">");
+				r.l("			<span>", StringEscapeUtils.escapeHtml4(nomAffichageChangementDose()), "</span>");
+				r.s("			<input");
+							r.s(" name=\"changementDose\"");
+							r.s(" value=\"", htmChangementDose(), "\");");
+							r.s(" onchange=\"\"");
+							r.l("/>");
+				r.l("		</label>");
+				r.l("	</div>");
+			} else {
+				r.s(htmChangementDose());
+			}
+			r.l("</div>");
+		}
 	}
 
 	//////////////////////////
@@ -357,12 +892,13 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	protected Chaine notesComplementaires = new Chaine();
 	public Couverture<Chaine> notesComplementairesCouverture = new Couverture<Chaine>().p(this).c(Chaine.class).var("notesComplementaires").o(notesComplementaires);
 
-	/**	L'entité « notesComplementaires »
-	 *	Il est construit avant d'être initialisé avec le constructeur par défaut Chaine(). 
-	 *	@param notesComplementaires est le champ déjà construit. 
-	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
-	 */
-	protected abstract void _notesComplementaires(Chaine o) throws Exception;
+	/**	<br/>L'entité « notesComplementaires »
+	 * Il est construit avant d'être initialisé avec le constructeur par défaut Chaine(). 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.warfarin.CalculInr&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:notesComplementaires">Trouver l'entité notesComplementaires dans Solr</a>
+	 * <br/>
+	 * @param notesComplementaires est l'entité déjà construit. 
+	 **/
+	protected abstract void _notesComplementaires(Chaine o);
 
 	public Chaine getNotesComplementaires() {
 		return notesComplementaires;
@@ -370,18 +906,82 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 
 	public void setNotesComplementaires(Chaine o) {
 		this.notesComplementaires = o;
+		this.notesComplementairesCouverture.dejaInitialise = true;
 	}
-	public CalculInr setNotesComplementaires(String o) throws Exception {
+	public CalculInr setNotesComplementaires(String o) {
 		notesComplementaires.tout(o);
+		this.notesComplementairesCouverture.dejaInitialise = true;
 		return (CalculInr)this;
 	}
-	protected CalculInr notesComplementairesInit() throws Exception {
+	protected CalculInr notesComplementairesInit()
+ {
 		if(!notesComplementairesCouverture.dejaInitialise) {
 			_notesComplementaires(notesComplementaires);
 		}
 		notesComplementaires.initLoinPourClasse(requeteSite_);
 		notesComplementairesCouverture.dejaInitialise(true);
 		return (CalculInr)this;
+	}
+
+	public String solrNotesComplementaires() {
+		return notesComplementaires == null ? null : notesComplementaires.toString();
+	}
+
+	public String strNotesComplementaires() {
+		return notesComplementaires == null ? "" : notesComplementaires.toString();
+	}
+
+	public String nomAffichageNotesComplementaires() {
+		return null;
+	}
+
+	public String htmTooltipNotesComplementaires() {
+		return null;
+	}
+
+	public String htmNotesComplementaires() {
+		return notesComplementaires == null ? "" : StringEscapeUtils.escapeHtml4(strNotesComplementaires());
+	}
+
+	public void htmNotesComplementaires(ToutEcrivain r, Boolean patchDroits) {
+		if(id!= null) {
+			r.s("<div id=\"patchCalculInr", strId(), "NotesComplementaires\">");
+			if(patchDroits) {
+				r.l();
+				r.l("	<script>//<![CDATA[");
+				r.l("		function patchCalculInr", strId(), "NotesComplementaires() {");
+				r.l("			$.ajax({");
+				r.l("				url: '/api/v1/warfarin/calcul-inr?fq=id:", strId(), "',");
+				r.l("				dataType: 'json',");
+				r.l("				type: 'patch',");
+				r.l("				contentType: 'application/json',");
+				r.l("				processData: false,");
+				r.l("				success: function( data, textStatus, jQxhr ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				error: function( jqXhr, textStatus, errorThrown ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				data: {\"setNotesComplementaires\": this.value },");
+				r.l("				");
+				r.l("			});");
+				r.l("		}");
+				r.l("	//]]></script>");
+				r.l("	<div class=\"\">");
+				r.l("		<label class=\"w3-tooltip \">");
+				r.l("			<span>", StringEscapeUtils.escapeHtml4(nomAffichageNotesComplementaires()), "</span>");
+				r.s("			<input");
+							r.s(" name=\"notesComplementaires\"");
+							r.s(" value=\"", htmNotesComplementaires(), "\");");
+							r.s(" onchange=\"\"");
+							r.l("/>");
+				r.l("		</label>");
+				r.l("	</div>");
+			} else {
+				r.s(htmNotesComplementaires());
+			}
+			r.l("</div>");
+		}
 	}
 
 	/////////////////
@@ -394,12 +994,13 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	protected Chaine infoContact = new Chaine();
 	public Couverture<Chaine> infoContactCouverture = new Couverture<Chaine>().p(this).c(Chaine.class).var("infoContact").o(infoContact);
 
-	/**	L'entité « infoContact »
-	 *	Il est construit avant d'être initialisé avec le constructeur par défaut Chaine(). 
-	 *	@param infoContact est le champ déjà construit. 
-	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
-	 */
-	protected abstract void _infoContact(Chaine o) throws Exception;
+	/**	<br/>L'entité « infoContact »
+	 * Il est construit avant d'être initialisé avec le constructeur par défaut Chaine(). 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.warfarin.CalculInr&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:infoContact">Trouver l'entité infoContact dans Solr</a>
+	 * <br/>
+	 * @param infoContact est l'entité déjà construit. 
+	 **/
+	protected abstract void _infoContact(Chaine o);
 
 	public Chaine getInfoContact() {
 		return infoContact;
@@ -407,12 +1008,15 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 
 	public void setInfoContact(Chaine o) {
 		this.infoContact = o;
+		this.infoContactCouverture.dejaInitialise = true;
 	}
-	public CalculInr setInfoContact(String o) throws Exception {
+	public CalculInr setInfoContact(String o) {
 		infoContact.tout(o);
+		this.infoContactCouverture.dejaInitialise = true;
 		return (CalculInr)this;
 	}
-	protected CalculInr infoContactInit() throws Exception {
+	protected CalculInr infoContactInit()
+ {
 		if(!infoContactCouverture.dejaInitialise) {
 			_infoContact(infoContact);
 		}
@@ -421,20 +1025,82 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 		return (CalculInr)this;
 	}
 
-	/////////////////////
-	// initialiserLoin //
-	/////////////////////
+	public String solrInfoContact() {
+		return infoContact == null ? null : infoContact.toString();
+	}
+
+	public String strInfoContact() {
+		return infoContact == null ? "" : infoContact.toString();
+	}
+
+	public String nomAffichageInfoContact() {
+		return null;
+	}
+
+	public String htmTooltipInfoContact() {
+		return null;
+	}
+
+	public String htmInfoContact() {
+		return infoContact == null ? "" : StringEscapeUtils.escapeHtml4(strInfoContact());
+	}
+
+	public void htmInfoContact(ToutEcrivain r, Boolean patchDroits) {
+		if(id!= null) {
+			r.s("<div id=\"patchCalculInr", strId(), "InfoContact\">");
+			if(patchDroits) {
+				r.l();
+				r.l("	<script>//<![CDATA[");
+				r.l("		function patchCalculInr", strId(), "InfoContact() {");
+				r.l("			$.ajax({");
+				r.l("				url: '/api/v1/warfarin/calcul-inr?fq=id:", strId(), "',");
+				r.l("				dataType: 'json',");
+				r.l("				type: 'patch',");
+				r.l("				contentType: 'application/json',");
+				r.l("				processData: false,");
+				r.l("				success: function( data, textStatus, jQxhr ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				error: function( jqXhr, textStatus, errorThrown ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				data: {\"setInfoContact\": this.value },");
+				r.l("				");
+				r.l("			});");
+				r.l("		}");
+				r.l("	//]]></script>");
+				r.l("	<div class=\"\">");
+				r.l("		<label class=\"w3-tooltip \">");
+				r.l("			<span>", StringEscapeUtils.escapeHtml4(nomAffichageInfoContact()), "</span>");
+				r.s("			<input");
+							r.s(" name=\"infoContact\"");
+							r.s(" value=\"", htmInfoContact(), "\");");
+							r.s(" onchange=\"\"");
+							r.l("/>");
+				r.l("		</label>");
+				r.l("	</div>");
+			} else {
+				r.s(htmInfoContact());
+			}
+			r.l("</div>");
+		}
+	}
+
+	//////////////
+	// initLoin //
+	//////////////
 
 	protected boolean dejaInitialiseCalculInr = false;
 
-	public CalculInr initLoinCalculInr(RequeteSite requeteSite) throws Exception {
+	public CalculInr initLoinCalculInr(RequeteSite requeteSite) {
 		setRequeteSite_(requeteSite);
 		initLoinCalculInr();
 		return (CalculInr)this;
 	}
 
-	public CalculInr initLoinCalculInr() throws Exception {
+	public CalculInr initLoinCalculInr() {
 		if(!dejaInitialiseCalculInr) {
+			dejaInitialiseCalculInr = true;
 			super.initLoinCluster(requeteSite_);
 			utilisateurPkInit();
 			dateInrInit();
@@ -446,12 +1112,11 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 			changementDoseInit();
 			notesComplementairesInit();
 			infoContactInit();
-			dejaInitialiseCalculInr = true;
 		}
 		return (CalculInr)this;
 	}
 
-	public void initLoinPourClasse(RequeteSite requeteSite) throws Exception {
+	@Override public void initLoinPourClasse(RequeteSite requeteSite) {
 		initLoinCalculInr(requeteSite);
 	}
 
@@ -459,7 +1124,7 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	// requeteSite //
 	/////////////////
 
-	public void requeteSiteCalculInr(RequeteSite requeteSite) throws Exception {
+	public void requeteSiteCalculInr(RequeteSite requeteSite) {
 			super.requeteSiteCluster(requeteSite);
 		patientPrendCoumadin.setRequeteSite_(requeteSite);
 		butActuel.setRequeteSite_(requeteSite);
@@ -470,7 +1135,7 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 		infoContact.setRequeteSite_(requeteSite);
 	}
 
-	public void requeteSitePourClasse(RequeteSite requeteSite) throws Exception {
+	public void requeteSitePourClasse(RequeteSite requeteSite) {
 		requeteSiteCalculInr(requeteSite);
 	}
 
@@ -481,10 +1146,10 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	public void indexerCalculInr() throws Exception {
 		RequeteSite requeteSite = new RequeteSite();
 		requeteSite.initLoinRequeteSite();
-		SiteContexte SiteContexte = new SiteContexte();
-		SiteContexte.initLoinSiteContexte();
-		SiteContexte.setRequeteSite_(requeteSite);
-		requeteSite.setSiteContexte_(SiteContexte);
+		SiteContexte siteContexte = new SiteContexte();
+		siteContexte.initLoinSiteContexte();
+		siteContexte.setRequeteSite_(requeteSite);
+		requeteSite.setSiteContexte_(siteContexte);
 		requeteSiteCalculInr(requeteSite);
 		initLoinCalculInr(requeteSite);
 		indexerCalculInr(requeteSite);
@@ -501,7 +1166,6 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	public void indexerCalculInr(RequeteSite requeteSite) throws Exception {
 		SolrInputDocument document = new SolrInputDocument();
 		indexerCalculInr(document);
-		document.addField("sauvegardesCalculInr_stored_strings", sauvegardesCalculInr);
 		SolrClient clientSolr = requeteSite_.getSiteContexte_().getClientSolr();
 		clientSolr.add(document);
 		clientSolr.commit();
@@ -509,47 +1173,61 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 
 	public void indexerCalculInr(SolrInputDocument document) throws Exception {
 		if(utilisateurPk != null) {
-			document.addField("utilisateurPk_indexe_long", utilisateurPk);
-			document.addField("utilisateurPk_stocke_long", utilisateurPk);
+			document.addField("utilisateurPk_indexed_long", utilisateurPk);
+			document.addField("utilisateurPk_stored_long", utilisateurPk);
 		}
 		if(dateInr != null) {
-			document.addField("dateInr_indexe_date", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(dateInr.atStartOfDay(ZoneId.of("UTC"))));
-			document.addField("dateInr_stocke_date", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(dateInr.atStartOfDay(ZoneId.of("UTC"))));
+			document.addField("dateInr_indexed_date", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(dateInr.atStartOfDay(ZoneId.systemDefault())));
+			document.addField("dateInr_stored_date", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(dateInr.atStartOfDay(ZoneId.systemDefault())));
 		}
 		if(dateReverifier != null) {
-			document.addField("dateReverifier_indexe_date", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(dateReverifier.atStartOfDay(ZoneId.of("UTC"))));
-			document.addField("dateReverifier_stocke_date", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(dateReverifier.atStartOfDay(ZoneId.of("UTC"))));
+			document.addField("dateReverifier_indexed_date", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(dateReverifier.atStartOfDay(ZoneId.systemDefault())));
+			document.addField("dateReverifier_stored_date", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(dateReverifier.atStartOfDay(ZoneId.systemDefault())));
 		}
 		if(patientPrendCoumadin != null) {
-			document.addField("patientPrendCoumadin_indexe_string", patientPrendCoumadin);
-			document.addField("patientPrendCoumadin_stocke_string", patientPrendCoumadin);
+			document.addField("patientPrendCoumadin_indexed_string", patientPrendCoumadin);
+			document.addField("patientPrendCoumadin_stored_string", patientPrendCoumadin);
 		}
 		if(butActuel != null) {
-			document.addField("butActuel_indexe_string", butActuel);
-			document.addField("butActuel_stocke_string", butActuel);
+			document.addField("butActuel_indexed_string", butActuel);
+			document.addField("butActuel_stored_string", butActuel);
 		}
 		if(doseActuel != null) {
-			document.addField("doseActuel_indexe_string", doseActuel);
-			document.addField("doseActuel_stocke_string", doseActuel);
+			document.addField("doseActuel_indexed_string", doseActuel);
+			document.addField("doseActuel_stored_string", doseActuel);
 		}
 		if(medicamentActuel != null) {
-			document.addField("medicamentActuel_indexe_string", medicamentActuel);
-			document.addField("medicamentActuel_stocke_string", medicamentActuel);
+			document.addField("medicamentActuel_indexed_string", medicamentActuel);
+			document.addField("medicamentActuel_stored_string", medicamentActuel);
 		}
 		if(changementDose != null) {
-			document.addField("changementDose_indexe_string", changementDose);
-			document.addField("changementDose_stocke_string", changementDose);
+			document.addField("changementDose_indexed_string", changementDose);
+			document.addField("changementDose_stored_string", changementDose);
 		}
 		if(notesComplementaires != null) {
-			document.addField("notesComplementaires_indexe_string", notesComplementaires);
-			document.addField("notesComplementaires_stocke_string", notesComplementaires);
+			document.addField("notesComplementaires_indexed_string", notesComplementaires);
+			document.addField("notesComplementaires_stored_string", notesComplementaires);
 		}
 		if(infoContact != null) {
-			document.addField("infoContact_indexe_string", infoContact);
-			document.addField("infoContact_stocke_string", infoContact);
+			document.addField("infoContact_indexed_string", infoContact);
+			document.addField("infoContact_stored_string", infoContact);
 		}
 		super.indexerCluster(document);
 
+	}
+
+	public void desindexerCalculInr() throws Exception {
+		RequeteSite requeteSite = new RequeteSite();
+		requeteSite.initLoinRequeteSite();
+		SiteContexte siteContexte = new SiteContexte();
+		siteContexte.initLoinSiteContexte();
+		siteContexte.setRequeteSite_(requeteSite);
+		requeteSite.setSiteContexte_(siteContexte);
+		requeteSite.setConfigSite_(siteContexte.getConfigSite());
+		initLoinCalculInr(siteContexte.getRequeteSite_());
+		SolrClient clientSolr = siteContexte.getClientSolr();
+		clientSolr.deleteById(id.toString());
+		clientSolr.commit();
 	}
 
 	/////////////
@@ -557,7 +1235,7 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	/////////////
 
 	@Override public Object obtenirPourClasse(String var) throws Exception {
-		String[] vars = org.apache.commons.lang3.StringUtils.split(var, ".");
+		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
 			if(o == null)
@@ -602,7 +1280,7 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	///////////////
 
 	@Override public boolean attribuerPourClasse(String var, Object val) throws Exception {
-		String[] vars = org.apache.commons.lang3.StringUtils.split(var, ".");
+		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
 			if(o == null)
@@ -625,227 +1303,136 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 		}
 	}
 
-	/////////
-	// put //
-	/////////
-
-	@Override public boolean putPourClasse(JsonObject requeteJson) throws Exception {
-		Set<String> vars = requeteJson.fieldNames();
-		for(String var : vars) {
-			putCalculInr(requeteJson, var);
-		}
-	}
-
-	@Override public boolean putCalculInr(JsonObject requeteJson, String var) throws Exception {
-		switch(var) {
-			case "utilisateurPk":
-				setUtilisateurPk(requeteJson.getLong(var));
-				return true;
-			case "dateInr":
-				setDateInr(requeteJson.getInstant(var));
-				return true;
-			case "dateReverifier":
-				setDateReverifier(requeteJson.getInstant(var));
-				return true;
-			case "patientPrendCoumadin":
-				setPatientPrendCoumadin(requeteJson.getString(var));
-				return true;
-			case "butActuel":
-				setButActuel(requeteJson.getString(var));
-				return true;
-			case "doseActuel":
-				setDoseActuel(requeteJson.getString(var));
-				return true;
-			case "medicamentActuel":
-				setMedicamentActuel(requeteJson.getString(var));
-				return true;
-			case "changementDose":
-				setChangementDose(requeteJson.getString(var));
-				return true;
-			case "notesComplementaires":
-				setNotesComplementaires(requeteJson.getString(var));
-				return true;
-			case "infoContact":
-				setInfoContact(requeteJson.getString(var));
-				return true;
-			default:
-				return super.putCluster(requeteJson, var);
-		}
-	}
-
 	/////////////
 	// peupler //
 	/////////////
 
-	@Override public void peuplerPourClasse(org.apache.solr.common.SolrDocument documentSolr) throws Exception {
-		sauvegardesCalculInr = (java.util.ArrayList<String>)documentSolr.get("sauvegardesCalculInr_stored_strings");
-		peuplerCalculInr(documentSolr);
+	@Override public void peuplerPourClasse(SolrDocument solrDocument) {
+		sauvegardesCalculInr = (List<String>)solrDocument.get("sauvegardesCalculInr_stored_strings");
+		peuplerCalculInr(solrDocument);
 	}
-	public void peuplerCalculInr(org.apache.solr.common.SolrDocument documentSolr) throws Exception {
+	public void peuplerCalculInr(SolrDocument solrDocument) {
 		CalculInr oCalculInr = (CalculInr)this;
 
-				java.lang.Long utilisateurPk = (java.lang.Long)documentSolr.get("utilisateurPk_stocke_long");
-				if(utilisateurPk != null)
-					oCalculInr.setUtilisateurPk(utilisateurPk);
-
-				java.util.Date dateInr = (java.util.Date)documentSolr.get("dateInr_stocke_date");
-				if(dateInr != null)
-					oCalculInr.setDateInr(dateInr);
-
-				java.util.Date dateReverifier = (java.util.Date)documentSolr.get("dateReverifier_stocke_date");
-				if(dateReverifier != null)
-					oCalculInr.setDateReverifier(dateReverifier);
-
-				java.lang.String patientPrendCoumadin = (java.lang.String)documentSolr.get("patientPrendCoumadin_stocke_string");
-				if(patientPrendCoumadin != null)
-					oCalculInr.setPatientPrendCoumadin(patientPrendCoumadin);
-
-				java.lang.String butActuel = (java.lang.String)documentSolr.get("butActuel_stocke_string");
-				if(butActuel != null)
-					oCalculInr.setButActuel(butActuel);
-
-				java.lang.String doseActuel = (java.lang.String)documentSolr.get("doseActuel_stocke_string");
-				if(doseActuel != null)
-					oCalculInr.setDoseActuel(doseActuel);
-
-				java.lang.String medicamentActuel = (java.lang.String)documentSolr.get("medicamentActuel_stocke_string");
-				if(medicamentActuel != null)
-					oCalculInr.setMedicamentActuel(medicamentActuel);
-
-				java.lang.String changementDose = (java.lang.String)documentSolr.get("changementDose_stocke_string");
-				if(changementDose != null)
-					oCalculInr.setChangementDose(changementDose);
-
-				java.lang.String notesComplementaires = (java.lang.String)documentSolr.get("notesComplementaires_stocke_string");
-				if(notesComplementaires != null)
-					oCalculInr.setNotesComplementaires(notesComplementaires);
-
-				java.lang.String infoContact = (java.lang.String)documentSolr.get("infoContact_stocke_string");
-				if(infoContact != null)
-					oCalculInr.setInfoContact(infoContact);
-
-		super.peuplerCluster(documentSolr);
-	}
-
-	////////////
-	// existe //
-	////////////
-
-	@Override public Boolean existePourClasse() throws Exception {
-		String pkStr = requeteSite_.getRequeteServeur().getParam("pk");
-		Long pk = org.apache.commons.lang3.StringUtils.isNumeric(pkStr) ? Long.parseLong(pkStr) : null;
-		Boolean existe = existePourClasse(pk);
-		return existe;
-	}
-	@Override public Boolean existePourClasse(Long pk) throws Exception {
-		org.apache.commons.dbutils.QueryRunner coureur = new org.apache.commons.dbutils.QueryRunner(requeteSite_.SiteContexte.sourceDonnees);
-		org.apache.commons.dbutils.handlers.ArrayListHandler gestionnaireListe = new org.apache.commons.dbutils.handlers.ArrayListHandler();
-		utilisateurId = requeteSite_.utilisateurId;
-		this.pk = pk;
-		String nomCanonique = getClass().getCanonicalName();
-		Boolean existe = false;
-		
-		if(pk == null) {
-			String sql = "select pk from objet where objet.id_utilisateur=? and objet.nom_canonique=?";
-			SQLClient clientSql = requeteSite_.getSiteContexte_().getClientSql();
-			clientSql.getConnection(ar -> {
-				if(ar.failed()) {
-					LOGGER.error("Impossible d'ouvrir une connexion à la base de données. ", ar.cause());
-					future.fail(ar.cause());
-				} else {
-					SQLConnection connexionSql = ar.result();
-					connectionSql.queryWithParams(SiteContexte.SQL_existe, new JsonArray().add(pk)), chercher -> {
-						connexionSql.close();
-						if(chercher.succeeded()) {
-							JsonArray ligneDonnees = chercher.result().getResults().stream().findFirst().orElseGet(() -> null);
-							if(ligneDonnees != null) {
-								Long pkDonnees = ligneDonnees.getLong(0);
-								if(ligneDonnees != null && ligne) {
-									
-								}
-							}
-						}
-					});
-				}
-			});
-							existe = resultats.size() > 0;
-							if(existe) {
-								pk = (Long)resultats.get(0)[0];
-								setPk(pk);
-							}
+		if(sauvegardesCalculInr.contains("utilisateurPk")) {
+			Long utilisateurPk = (Long)solrDocument.get("utilisateurPk_stored_long");
+			if(utilisateurPk != null)
+				oCalculInr.setUtilisateurPk(utilisateurPk);
 		}
-		else {
-			String sql = "select count(*) from objet where objet.pk=? and objet.id_utilisateur=? and objet.nom_canonique=?";
-			java.util.List<Object[]> resultats = coureur.query(sql, gestionnaireListe /*select count(*) from objet where objet.pk=*/, pk /* and objet.id_utilisateur=*/, requeteSite_.utilisateurId /* and objet.nom_canonique=*/, nomCanonique);
-			existe = ((Long)resultats.get(0)[0]) > 0L;
+
+		if(sauvegardesCalculInr.contains("dateInr")) {
+			Date dateInr = (Date)solrDocument.get("dateInr_stored_date");
+			if(dateInr != null)
+				oCalculInr.setDateInr(dateInr);
 		}
-		return existe;
+
+		if(sauvegardesCalculInr.contains("dateReverifier")) {
+			Date dateReverifier = (Date)solrDocument.get("dateReverifier_stored_date");
+			if(dateReverifier != null)
+				oCalculInr.setDateReverifier(dateReverifier);
+		}
+
+		if(sauvegardesCalculInr.contains("patientPrendCoumadin")) {
+			String patientPrendCoumadin = (String)solrDocument.get("patientPrendCoumadin_stored_string");
+			if(patientPrendCoumadin != null)
+				oCalculInr.setPatientPrendCoumadin(patientPrendCoumadin);
+		}
+
+		if(sauvegardesCalculInr.contains("butActuel")) {
+			String butActuel = (String)solrDocument.get("butActuel_stored_string");
+			if(butActuel != null)
+				oCalculInr.setButActuel(butActuel);
+		}
+
+		if(sauvegardesCalculInr.contains("doseActuel")) {
+			String doseActuel = (String)solrDocument.get("doseActuel_stored_string");
+			if(doseActuel != null)
+				oCalculInr.setDoseActuel(doseActuel);
+		}
+
+		if(sauvegardesCalculInr.contains("medicamentActuel")) {
+			String medicamentActuel = (String)solrDocument.get("medicamentActuel_stored_string");
+			if(medicamentActuel != null)
+				oCalculInr.setMedicamentActuel(medicamentActuel);
+		}
+
+		if(sauvegardesCalculInr.contains("changementDose")) {
+			String changementDose = (String)solrDocument.get("changementDose_stored_string");
+			if(changementDose != null)
+				oCalculInr.setChangementDose(changementDose);
+		}
+
+		if(sauvegardesCalculInr.contains("notesComplementaires")) {
+			String notesComplementaires = (String)solrDocument.get("notesComplementaires_stored_string");
+			if(notesComplementaires != null)
+				oCalculInr.setNotesComplementaires(notesComplementaires);
+		}
+
+		if(sauvegardesCalculInr.contains("infoContact")) {
+			String infoContact = (String)solrDocument.get("infoContact_stored_string");
+			if(infoContact != null)
+				oCalculInr.setInfoContact(infoContact);
+		}
+
+		super.peuplerCluster(solrDocument);
 	}
 
 	/////////////////
 	// sauvegardes //
 	/////////////////
 
-	protected java.util.ArrayList<String> sauvegardesCalculInr = new java.util.ArrayList<String>();
-	@Override public void sauvegardesPourClasse(RequeteSite requeteSite) throws Exception {
-		org.apache.commons.dbutils.QueryRunner coureur = new org.apache.commons.dbutils.QueryRunner(requeteSite.SiteContexte.sourceDonnees);
-		org.apache.commons.dbutils.handlers.ArrayListHandler gestionnaireListe = new org.apache.commons.dbutils.handlers.ArrayListHandler();
-		
-		if(pk != null) {
-			String sql = "select cree, modifie from objet where objet.pk=?";
-			java.util.List<Object[]> resultats = coureur.query(sql, gestionnaireListe /*select cree, modifie from objet where objet.pk=*/, pk);
-			if(resultats.size() > 0) {
-				cree((Date)resultats.get(0)[0]);
-				modifie((Date)resultats.get(0)[1]);
-			}
-			sql = "select chemin, valeur from p where p.pk_objet=? union select champ2, pk2::text from a where a.pk1=? union select champ1, pk1::text from a where a.pk2=? ";
-			resultats = coureur.query(sql, gestionnaireListe /*select chemin, valeur from p where p.pk_objet=*/, pk, pk, pk);
-			for(Object[] objets : resultats) {
-				String chemin = (String)objets[0];
-				String valeur = requeteSite.decrypterStr((String)objets[1]);
-				definirPourClasse(chemin, valeur);
-				sauvegardesCalculInr.add(chemin);
-			}
-		}
+	protected List<String> sauvegardesCalculInr = new ArrayList<String>();
+
+	//////////////
+	// hashCode //
+	//////////////
+
+	@Override public int hashCode() {
+		return Objects.hash(super.hashCode(), utilisateurPk, dateInr, dateReverifier, patientPrendCoumadin, butActuel, doseActuel, medicamentActuel, changementDose, notesComplementaires, infoContact);
 	}
 
-	/////////////////
-	// sauvegarder //
-	/////////////////
+	////////////
+	// equals //
+	////////////
 
-	@Override public void sauvegarderPourClasse(RequeteSite requeteSite) throws Exception {
-		org.apache.commons.dbutils.QueryRunner coureur = new org.apache.commons.dbutils.QueryRunner(requeteSite.SiteContexte.sourceDonnees);
-		org.apache.commons.dbutils.handlers.ArrayListHandler gestionnaireListe = new org.apache.commons.dbutils.handlers.ArrayListHandler();
-		String pkStr = requeteSite_.getRequeteServeur().getParam("pk");
-		pk = org.apache.commons.lang3.StringUtils.isNumeric(pkStr) ? Long.parseLong(pkStr) : null;
-		utilisateurId = requeteSite.utilisateurId;
-		String nomCanonique = getClass().getCanonicalName();
-		modifie = java.time.LocalDateTime.now();
-		java.sql.Timestamp horodatage = java.sql.Timestamp.valueOf(modifie);
-		
-		if(pk == null) {
-			String sql = "insert into objet(nom_canonique, id_utilisateur, cree, modifie) values(?, ?, ?, ?) returning pk";
-			java.util.List<Object[]> resultats = coureur.insert(sql, gestionnaireListe /*insert into objet(nom_canonique, id_utilisateur, cree, modifie) values(*/, nomCanonique, requeteSite.utilisateurId, horodatage, horodatage /*) returning pk, cree*/);
-			pk = (Long)resultats.get(0)[0];
-			cree = modifie;
-		}
-		else {
-			String sql = "update objet set modifie=? where objet.pk=? and objet.id_utilisateur=? and objet.nom_canonique=? returning cree";
-			java.util.List<Object[]> resultats = coureur.query(sql, gestionnaireListe /*update objet set modifie=*/, horodatage /* where objet.pk=*/, pk /* and objet.id_utilisateur=*/, requeteSite.utilisateurId /* and objet.nom_canonique=*/, nomCanonique /* returning cree*/);
-			if(resultats.size() == 0)
-				throw new Exception("L'objet avec le pk " + pk + " et nom canonique " + pk + " pour utilisateur " + requeteSite.utilisateurId + " " + requeteSite.utilisateurNom + " n'existe pas dejà. ");
-			horodatage = (java.sql.Timestamp)resultats.get(0)[0];
-			cree = java.time.LocalDateTime.from(horodatage.toLocalDateTime());
-		}
-
-		String sqlInsertP = "insert into p(chemin, valeur, pk_objet) values(?, ?, ?) on conflict(chemin, pk_objet) do update set valeur=? where p.chemin=? and p.pk_objet=?";
-		String sqlInsertA = "insert into a(champ1, pk1, champ2, pk2) values(?, ?, ?, ?) on conflict  do nothing";
-		String sqlDeleteP = "delete from p where chemin=? and pk_objet=?";
-		String sqlDeleteA = "delete from a where champ1=? and pk1=? and champ2=? and pk2=?";
-		sauvegarderCalculInr(requeteSite, sqlInsertP, sqlInsertA, sqlDeleteP, sqlDeleteA, gestionnaireListe, coureur);
+	@Override public boolean equals(Object o) {
+		if(this == o)
+			return true;
+		if(!(o instanceof CalculInr))
+			return false;
+		CalculInr that = (CalculInr)o;
+		return super.equals(o)
+				&& Objects.equals( utilisateurPk, that.utilisateurPk )
+				&& Objects.equals( dateInr, that.dateInr )
+				&& Objects.equals( dateReverifier, that.dateReverifier )
+				&& Objects.equals( patientPrendCoumadin, that.patientPrendCoumadin )
+				&& Objects.equals( butActuel, that.butActuel )
+				&& Objects.equals( doseActuel, that.doseActuel )
+				&& Objects.equals( medicamentActuel, that.medicamentActuel )
+				&& Objects.equals( changementDose, that.changementDose )
+				&& Objects.equals( notesComplementaires, that.notesComplementaires )
+				&& Objects.equals( infoContact, that.infoContact );
 	}
-	public void sauvegarderCalculInr(RequeteSite requeteSite, String sqlInsertP, String sqlInsertA, String sqlDeleteP, String sqlDeleteA, org.apache.commons.dbutils.handlers.ArrayListHandler gestionnaireListe, org.apache.commons.dbutils.QueryRunner coureur) throws Exception {
 
-		super.sauvegarderCluster(requeteSite, sqlInsertP, sqlInsertA, sqlDeleteP, sqlDeleteA, gestionnaireListe, coureur);
+	//////////////
+	// toString //
+	//////////////
+
+	@Override public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString() + "\n");
+		sb.append("CalculInr {");
+		sb.append( "utilisateurPk: " ).append(utilisateurPk);
+		sb.append( ", dateInr: " ).append(dateInr);
+		sb.append( ", dateReverifier: " ).append(dateReverifier);
+		sb.append( ", patientPrendCoumadin: " ).append(patientPrendCoumadin);
+		sb.append( ", butActuel: " ).append(butActuel);
+		sb.append( ", doseActuel: " ).append(doseActuel);
+		sb.append( ", medicamentActuel: " ).append(medicamentActuel);
+		sb.append( ", changementDose: " ).append(changementDose);
+		sb.append( ", notesComplementaires: " ).append(notesComplementaires);
+		sb.append( ", infoContact: " ).append(infoContact);
+		sb.append(" }");
+		return sb.toString();
 	}
 }

@@ -71,51 +71,51 @@ public class CalculInrApiGen {
 	public static final String VAL_guillmetsFin = "]";
 
 	public static final String ENTITE_VAR_utilisateurPk = "utilisateurPk";
-	public static final String ENTITE_VAR_INDEXE_utilisateurPk = "utilisateurPk_indexe_long";
-	public static final String ENTITE_VAR_STOCKE_utilisateurPk = "utilisateurPk_stocke_long";
+	public static final String ENTITE_VAR_INDEXE_utilisateurPk = "utilisateurPk_indexed_long";
+	public static final String ENTITE_VAR_STOCKE_utilisateurPk = "utilisateurPk_stored_long";
 	public static final String ENTITE_VAR_utilisateurPk_ATTRIBUER_UtilisateurSite_calculInrPks = "calculInrPks";
 
 	public static final String ENTITE_VAR_dateInr = "dateInr";
-	public static final String ENTITE_VAR_INDEXE_dateInr = "dateInr_indexe_date";
-	public static final String ENTITE_VAR_STOCKE_dateInr = "dateInr_stocke_date";
+	public static final String ENTITE_VAR_INDEXE_dateInr = "dateInr_indexed_date";
+	public static final String ENTITE_VAR_STOCKE_dateInr = "dateInr_stored_date";
 
 	public static final String ENTITE_VAR_dateReverifier = "dateReverifier";
-	public static final String ENTITE_VAR_INDEXE_dateReverifier = "dateReverifier_indexe_date";
-	public static final String ENTITE_VAR_STOCKE_dateReverifier = "dateReverifier_stocke_date";
+	public static final String ENTITE_VAR_INDEXE_dateReverifier = "dateReverifier_indexed_date";
+	public static final String ENTITE_VAR_STOCKE_dateReverifier = "dateReverifier_stored_date";
 
 	public static final String ENTITE_VAR_patientPrendCoumadin = "patientPrendCoumadin";
-	public static final String ENTITE_VAR_INDEXE_patientPrendCoumadin = "patientPrendCoumadin_indexe_string";
-	public static final String ENTITE_VAR_STOCKE_patientPrendCoumadin = "patientPrendCoumadin_stocke_string";
+	public static final String ENTITE_VAR_INDEXE_patientPrendCoumadin = "patientPrendCoumadin_indexed_string";
+	public static final String ENTITE_VAR_STOCKE_patientPrendCoumadin = "patientPrendCoumadin_stored_string";
 
 	public static final String ENTITE_VAR_butActuel = "butActuel";
-	public static final String ENTITE_VAR_INDEXE_butActuel = "butActuel_indexe_string";
-	public static final String ENTITE_VAR_STOCKE_butActuel = "butActuel_stocke_string";
+	public static final String ENTITE_VAR_INDEXE_butActuel = "butActuel_indexed_string";
+	public static final String ENTITE_VAR_STOCKE_butActuel = "butActuel_stored_string";
 
 	public static final String ENTITE_VAR_doseActuel = "doseActuel";
-	public static final String ENTITE_VAR_INDEXE_doseActuel = "doseActuel_indexe_string";
-	public static final String ENTITE_VAR_STOCKE_doseActuel = "doseActuel_stocke_string";
+	public static final String ENTITE_VAR_INDEXE_doseActuel = "doseActuel_indexed_string";
+	public static final String ENTITE_VAR_STOCKE_doseActuel = "doseActuel_stored_string";
 
 	public static final String ENTITE_VAR_medicamentActuel = "medicamentActuel";
-	public static final String ENTITE_VAR_INDEXE_medicamentActuel = "medicamentActuel_indexe_string";
-	public static final String ENTITE_VAR_STOCKE_medicamentActuel = "medicamentActuel_stocke_string";
+	public static final String ENTITE_VAR_INDEXE_medicamentActuel = "medicamentActuel_indexed_string";
+	public static final String ENTITE_VAR_STOCKE_medicamentActuel = "medicamentActuel_stored_string";
 
 	public static final String ENTITE_VAR_changementDose = "changementDose";
-	public static final String ENTITE_VAR_INDEXE_changementDose = "changementDose_indexe_string";
-	public static final String ENTITE_VAR_STOCKE_changementDose = "changementDose_stocke_string";
+	public static final String ENTITE_VAR_INDEXE_changementDose = "changementDose_indexed_string";
+	public static final String ENTITE_VAR_STOCKE_changementDose = "changementDose_stored_string";
 
 	public static final String ENTITE_VAR_notesComplementaires = "notesComplementaires";
-	public static final String ENTITE_VAR_INDEXE_notesComplementaires = "notesComplementaires_indexe_string";
-	public static final String ENTITE_VAR_STOCKE_notesComplementaires = "notesComplementaires_stocke_string";
+	public static final String ENTITE_VAR_INDEXE_notesComplementaires = "notesComplementaires_indexed_string";
+	public static final String ENTITE_VAR_STOCKE_notesComplementaires = "notesComplementaires_stored_string";
 
 	public static final String ENTITE_VAR_infoContact = "infoContact";
-	public static final String ENTITE_VAR_INDEXE_infoContact = "infoContact_indexe_string";
-	public static final String ENTITE_VAR_STOCKE_infoContact = "infoContact_stocke_string";
+	public static final String ENTITE_VAR_INDEXE_infoContact = "infoContact_indexed_string";
+	public static final String ENTITE_VAR_STOCKE_infoContact = "infoContact_stored_string";
 
 	public void handleGetCalculInr(SiteContexte siteContexte) {
 		OpenAPI3RouterFactory usineRouteur = siteContexte.getUsineRouteur_();
 
 		usineRouteur.addHandlerByOperationId("getCalculInr", contexteRoutage -> {
-			contexteRoutage.user().isAuthorized("Doof", authRes -> {
+			contexteRoutage.user().isAuthorized("Something", authRes -> {
 				try {
 					if (authRes.result() == Boolean.TRUE) {
 
@@ -328,111 +328,91 @@ public class CalculInrApiGen {
 			if(champValeur != null) {
 				if(ENTITE_VAR_STOCKE_utilisateurPk.equals(entiteVarStocke)) {
 					if(j > 0)
-						reponseServeur.write(VAL_virguleEspace);
-					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_utilisateurPk);
-					reponseServeur.write(VAL_citationDeuxPointsEspace);
+						reponseServeur.write(", ");
+					reponseServeur.write("\"utilisateurPk\": ");
 					reponseServeur.write(((Long)champValeur).toString());
-					reponseServeur.write(VAL_ligne);
+					reponseServeur.write("\n");
 					j++;
 					return j;
 				}
 				if(ENTITE_VAR_STOCKE_dateInr.equals(entiteVarStocke)) {
 					if(j > 0)
-						reponseServeur.write(VAL_citationVirguleEspaceCitation);
-					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_dateInr);
-					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+						reponseServeur.write(", ");
+					reponseServeur.write("\"dateInr\": \"");
 					reponseServeur.write(DateTimeFormatter.ISO_OFFSET_DATE.format(((Date)champValeur).toInstant().atZone(ZoneId.systemDefault()).toLocalDate()));
-					reponseServeur.write(VAL_citationLigne);
+					reponseServeur.write("\"\n");
 					j++;
 					return j;
 				}
 				if(ENTITE_VAR_STOCKE_dateReverifier.equals(entiteVarStocke)) {
 					if(j > 0)
-						reponseServeur.write(VAL_citationVirguleEspaceCitation);
-					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_dateReverifier);
-					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+						reponseServeur.write(", ");
+					reponseServeur.write("\"dateReverifier\": \"");
 					reponseServeur.write(DateTimeFormatter.ISO_OFFSET_DATE.format(((Date)champValeur).toInstant().atZone(ZoneId.systemDefault()).toLocalDate()));
-					reponseServeur.write(VAL_citationLigne);
+					reponseServeur.write("\"\n");
 					j++;
 					return j;
 				}
 				if(ENTITE_VAR_STOCKE_patientPrendCoumadin.equals(entiteVarStocke)) {
 					if(j > 0)
-						reponseServeur.write(VAL_virguleEspace);
-					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_patientPrendCoumadin);
-					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+						reponseServeur.write(", ");
+					reponseServeur.write("\"patientPrendCoumadin\": \"");
 					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
-					reponseServeur.write(VAL_citationLigne);
+					reponseServeur.write("\"\n");
 					j++;
 					return j;
 				}
 				if(ENTITE_VAR_STOCKE_butActuel.equals(entiteVarStocke)) {
 					if(j > 0)
-						reponseServeur.write(VAL_virguleEspace);
-					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_butActuel);
-					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+						reponseServeur.write(", ");
+					reponseServeur.write("\"butActuel\": \"");
 					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
-					reponseServeur.write(VAL_citationLigne);
+					reponseServeur.write("\"\n");
 					j++;
 					return j;
 				}
 				if(ENTITE_VAR_STOCKE_doseActuel.equals(entiteVarStocke)) {
 					if(j > 0)
-						reponseServeur.write(VAL_virguleEspace);
-					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_doseActuel);
-					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+						reponseServeur.write(", ");
+					reponseServeur.write("\"doseActuel\": \"");
 					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
-					reponseServeur.write(VAL_citationLigne);
+					reponseServeur.write("\"\n");
 					j++;
 					return j;
 				}
 				if(ENTITE_VAR_STOCKE_medicamentActuel.equals(entiteVarStocke)) {
 					if(j > 0)
-						reponseServeur.write(VAL_virguleEspace);
-					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_medicamentActuel);
-					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+						reponseServeur.write(", ");
+					reponseServeur.write("\"medicamentActuel\": \"");
 					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
-					reponseServeur.write(VAL_citationLigne);
+					reponseServeur.write("\"\n");
 					j++;
 					return j;
 				}
 				if(ENTITE_VAR_STOCKE_changementDose.equals(entiteVarStocke)) {
 					if(j > 0)
-						reponseServeur.write(VAL_virguleEspace);
-					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_changementDose);
-					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+						reponseServeur.write(", ");
+					reponseServeur.write("\"changementDose\": \"");
 					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
-					reponseServeur.write(VAL_citationLigne);
+					reponseServeur.write("\"\n");
 					j++;
 					return j;
 				}
 				if(ENTITE_VAR_STOCKE_notesComplementaires.equals(entiteVarStocke)) {
 					if(j > 0)
-						reponseServeur.write(VAL_virguleEspace);
-					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_notesComplementaires);
-					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+						reponseServeur.write(", ");
+					reponseServeur.write("\"notesComplementaires\": \"");
 					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
-					reponseServeur.write(VAL_citationLigne);
+					reponseServeur.write("\"\n");
 					j++;
 					return j;
 				}
 				if(ENTITE_VAR_STOCKE_infoContact.equals(entiteVarStocke)) {
 					if(j > 0)
-						reponseServeur.write(VAL_virguleEspace);
-					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_infoContact);
-					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+						reponseServeur.write(", ");
+					reponseServeur.write("\"infoContact\": \"");
 					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
-					reponseServeur.write(VAL_citationLigne);
+					reponseServeur.write("\"\n");
 					j++;
 					return j;
 				}
@@ -441,134 +421,10 @@ public class CalculInrApiGen {
 		return j;
 	}
 
-	protected void postCalculInr(SiteContexte siteContexte) {
-		OpenAPI3RouterFactory usineRouteur = siteContexte.getUsineRouteur_();
-		usineRouteur.addHandlerByOperationId("postCalculInr", contexteRoutage -> {
-			contexteRoutage.user().isAuthorized("Doof", authRes -> {
-				try {
-					if (authRes.result() == Boolean.TRUE) {
-						RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte, contexteRoutage);
-						HttpServerResponse reponseServeur = requeteSite.getReponseServeur();
-						QueryResponse reponseRecherche = requeteSite.getReponseRecherche();
-						JsonObject requeteJson = contexteRoutage.getBodyAsJson();
-						SQLClient clientSql = requeteSite.getSiteContexte_().getClientSql();
-
-						clientSql.getConnection(resultatAsync -> {
-							if(resultatAsync.succeeded()) {
-								LocalDateTime modifie = java.time.LocalDateTime.now();
-								String horodatageStr = Timestamp.valueOf(modifie).toString();
-								String utilisateurId = requeteSite.getUtilisateurId();
-								SQLConnection connexionSql = resultatAsync.result();
-
-								connexionSql.queryWithParams(
-										SiteContexte.SQL_creer
-										, new JsonArray(Arrays.asList(VAL_nomCanoniqueCalculInr, utilisateurId))
-										, asyncCreer
-										-> {
-									if(asyncCreer.succeeded()) {
-										List<Object> postSqlParams = Arrays.asList();
-										JsonArray postLigne = asyncCreer.result().getResults().stream().findFirst().orElseGet(() -> null);
-										Long postPk = postLigne.getLong(0);
-										StringBuilder postSql = new StringBuilder();
-										postSqlParams = new ArrayList<Object>();
-										Set<String> entiteVars = requeteJson.fieldNames();
-										for(String entiteVar : entiteVars) {
-											switch(entiteVar) {
-												case "utilisateurPk":
-													postSql.append(SiteContexte.SQL_setP);
-													postSqlParams.addAll(Arrays.asList(ENTITE_VAR_utilisateurPk, requeteJson.getLong(entiteVar), postPk));
-													break;
-												case "dateInr":
-													postSql.append(SiteContexte.SQL_setP);
-													postSqlParams.addAll(Arrays.asList(ENTITE_VAR_dateInr, requeteJson.getInstant(entiteVar), postPk));
-													break;
-												case "dateReverifier":
-													postSql.append(SiteContexte.SQL_setP);
-													postSqlParams.addAll(Arrays.asList(ENTITE_VAR_dateReverifier, requeteJson.getInstant(entiteVar), postPk));
-													break;
-												case "patientPrendCoumadin":
-													postSql.append(SiteContexte.SQL_setP);
-													postSqlParams.addAll(Arrays.asList(ENTITE_VAR_patientPrendCoumadin, requeteJson.getString(entiteVar), postPk));
-													break;
-												case "butActuel":
-													postSql.append(SiteContexte.SQL_setP);
-													postSqlParams.addAll(Arrays.asList(ENTITE_VAR_butActuel, requeteJson.getString(entiteVar), postPk));
-													break;
-												case "doseActuel":
-													postSql.append(SiteContexte.SQL_setP);
-													postSqlParams.addAll(Arrays.asList(ENTITE_VAR_doseActuel, requeteJson.getString(entiteVar), postPk));
-													break;
-												case "medicamentActuel":
-													postSql.append(SiteContexte.SQL_setP);
-													postSqlParams.addAll(Arrays.asList(ENTITE_VAR_medicamentActuel, requeteJson.getString(entiteVar), postPk));
-													break;
-												case "changementDose":
-													postSql.append(SiteContexte.SQL_setP);
-													postSqlParams.addAll(Arrays.asList(ENTITE_VAR_changementDose, requeteJson.getString(entiteVar), postPk));
-													break;
-												case "notesComplementaires":
-													postSql.append(SiteContexte.SQL_setP);
-													postSqlParams.addAll(Arrays.asList(ENTITE_VAR_notesComplementaires, requeteJson.getString(entiteVar), postPk));
-													break;
-												case "infoContact":
-													postSql.append(SiteContexte.SQL_setP);
-													postSqlParams.addAll(Arrays.asList(ENTITE_VAR_infoContact, requeteJson.getString(entiteVar), postPk));
-													break;
-											}
-										}
-										connexionSql.queryWithParams(postSql.toString(), new JsonArray(postSqlParams), asyncParams -> {
-											connexionSql.close();
-											if(asyncParams.succeeded()) {
-												CalculInr o = new CalculInr();
-												o.putPourClasse(requeteJson);
-												o.sauvegarderPourClasse();
-												o.sauvegardesPourClasse();
-												o.initialiserLoinPourClasse();
-												o.indexerPourClasse();
-												requeteSite.setRequetePk(o.getPk());
-
-											}
-										});
-									} else {
-										connexionSql.close();
-										contexteRoutage.fail(resultatAsync.cause());
-									}
-								});
-							} else {
-								LOGGER.error("Impossible d'ouvrir une connexion à la base de données. ", resultatAsync.cause());
-								contexteRoutage.fail(resultatAsync.cause());
-							}
-						});
-
-						contexteRoutage.response().putHeader("content-type", "application/json").setChunked(true);
-
-						genererPostDebutCalculInr(requeteSite);
-						CalculInr nouveauCalculInr = new CalculInr();
-						nouveauCalculInr.initLoinCalculInr(requeteSite);
-						nouveauCalculInr.peuplerCalculInr();
-						postCalculInr();
-						genererPostFinCalculInr(requeteSite);
-						requeteSite.getReponseServeur().end();
-
-
-						reponseServeur.write("\t]\n");
-						reponseServeur.write("}\n");
-					}
-					else {
-						contexteRoutage.response().setStatusCode(HttpResponseStatus.UNAUTHORIZED.code()).end();
-					}
-				} catch(Exception e) {
-					LOGGER.error("Error: ", e.getMessage());
-					contexteRoutage.fail(e);
-				}
-			});
-		});
-	}
-
 	protected void patchCalculInr(SiteContexte siteContexte) {
 		OpenAPI3RouterFactory usineRouteur = siteContexte.getUsineRouteur_();
 		usineRouteur.addHandlerByOperationId("patchCalculInr", contexteRoutage -> {
-			contexteRoutage.user().isAuthorized("Doof", authRes -> {
+			contexteRoutage.user().isAuthorized("Something", authRes -> {
 				try {
 					if (authRes.result() == Boolean.TRUE) {
 						RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte, contexteRoutage);
@@ -649,11 +505,6 @@ public class CalculInrApiGen {
 											connexionSql.close();
 											if(asyncParams.succeeded()) {
 												CalculInr o = new CalculInr();
-												o.putPourClasse(requeteJson);
-												o.sauvegarderPourClasse();
-												o.sauvegardesPourClasse();
-												o.initialiserLoinPourClasse();
-												o.indexerPourClasse();
 												requeteSite.setRequetePk(o.getPk());
 
 											}
@@ -671,12 +522,6 @@ public class CalculInrApiGen {
 
 						contexteRoutage.response().putHeader("content-type", "application/json").setChunked(true);
 
-						genererPatchDebutCalculInr(requeteSite);
-						CalculInr nouveauCalculInr = new CalculInr();
-						nouveauCalculInr.initLoinCalculInr(requeteSite);
-						nouveauCalculInr.peuplerCalculInr();
-						patchCalculInr();
-						genererPatchFinCalculInr(requeteSite);
 						requeteSite.getReponseServeur().end();
 
 

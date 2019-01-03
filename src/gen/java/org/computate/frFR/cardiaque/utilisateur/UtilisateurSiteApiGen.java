@@ -71,71 +71,71 @@ public class UtilisateurSiteApiGen {
 	public static final String VAL_guillmetsFin = "]";
 
 	public static final String ENTITE_VAR_calculInrPks = "calculInrPks";
-	public static final String ENTITE_VAR_INDEXE_calculInrPks = "calculInrPks_indexe_longs";
-	public static final String ENTITE_VAR_STOCKE_calculInrPks = "calculInrPks_stocke_longs";
+	public static final String ENTITE_VAR_INDEXE_calculInrPks = "calculInrPks_indexed_longs";
+	public static final String ENTITE_VAR_STOCKE_calculInrPks = "calculInrPks_stored_longs";
 	public static final String ENTITE_VAR_calculInrPks_ATTRIBUER_CalculInr_utilisateurPk = "utilisateurPk";
 
 	public static final String ENTITE_VAR_requeteSite_ = "requeteSite_";
 
 	public static final String ENTITE_VAR_utilisateurNom = "utilisateurNom";
-	public static final String ENTITE_VAR_INDEXE_utilisateurNom = "utilisateurNom_indexe_string";
-	public static final String ENTITE_VAR_STOCKE_utilisateurNom = "utilisateurNom_stocke_string";
+	public static final String ENTITE_VAR_INDEXE_utilisateurNom = "utilisateurNom_indexed_string";
+	public static final String ENTITE_VAR_STOCKE_utilisateurNom = "utilisateurNom_stored_string";
 
 	public static final String ENTITE_VAR_utilisateurMail = "utilisateurMail";
-	public static final String ENTITE_VAR_INDEXE_utilisateurMail = "utilisateurMail_indexe_string";
-	public static final String ENTITE_VAR_STOCKE_utilisateurMail = "utilisateurMail_stocke_string";
+	public static final String ENTITE_VAR_INDEXE_utilisateurMail = "utilisateurMail_indexed_string";
+	public static final String ENTITE_VAR_STOCKE_utilisateurMail = "utilisateurMail_stored_string";
 
 	public static final String ENTITE_VAR_utilisateurId = "utilisateurId";
-	public static final String ENTITE_VAR_INDEXE_utilisateurId = "utilisateurId_indexe_string";
-	public static final String ENTITE_VAR_STOCKE_utilisateurId = "utilisateurId_stocke_string";
+	public static final String ENTITE_VAR_INDEXE_utilisateurId = "utilisateurId_indexed_string";
+	public static final String ENTITE_VAR_STOCKE_utilisateurId = "utilisateurId_stored_string";
 
 	public static final String ENTITE_VAR_utilisateurPrenom = "utilisateurPrenom";
-	public static final String ENTITE_VAR_INDEXE_utilisateurPrenom = "utilisateurPrenom_indexe_string";
-	public static final String ENTITE_VAR_STOCKE_utilisateurPrenom = "utilisateurPrenom_stocke_string";
+	public static final String ENTITE_VAR_INDEXE_utilisateurPrenom = "utilisateurPrenom_indexed_string";
+	public static final String ENTITE_VAR_STOCKE_utilisateurPrenom = "utilisateurPrenom_stored_string";
 
 	public static final String ENTITE_VAR_utilisateurNomFamille = "utilisateurNomFamille";
-	public static final String ENTITE_VAR_INDEXE_utilisateurNomFamille = "utilisateurNomFamille_indexe_string";
-	public static final String ENTITE_VAR_STOCKE_utilisateurNomFamille = "utilisateurNomFamille_stocke_string";
+	public static final String ENTITE_VAR_INDEXE_utilisateurNomFamille = "utilisateurNomFamille_indexed_string";
+	public static final String ENTITE_VAR_STOCKE_utilisateurNomFamille = "utilisateurNomFamille_stored_string";
 
 	public static final String ENTITE_VAR_utilisateurNomComplet = "utilisateurNomComplet";
-	public static final String ENTITE_VAR_INDEXE_utilisateurNomComplet = "utilisateurNomComplet_indexe_string";
-	public static final String ENTITE_VAR_STOCKE_utilisateurNomComplet = "utilisateurNomComplet_stocke_string";
+	public static final String ENTITE_VAR_INDEXE_utilisateurNomComplet = "utilisateurNomComplet_indexed_string";
+	public static final String ENTITE_VAR_STOCKE_utilisateurNomComplet = "utilisateurNomComplet_stored_string";
 
 	public static final String ENTITE_VAR_utilisateurSite = "utilisateurSite";
-	public static final String ENTITE_VAR_INDEXE_utilisateurSite = "utilisateurSite_indexe_string";
-	public static final String ENTITE_VAR_STOCKE_utilisateurSite = "utilisateurSite_stocke_string";
+	public static final String ENTITE_VAR_INDEXE_utilisateurSite = "utilisateurSite_indexed_string";
+	public static final String ENTITE_VAR_STOCKE_utilisateurSite = "utilisateurSite_stored_string";
 
 	public static final String ENTITE_VAR_utilisateurRecevoirCourriels = "utilisateurRecevoirCourriels";
-	public static final String ENTITE_VAR_INDEXE_utilisateurRecevoirCourriels = "utilisateurRecevoirCourriels_indexe_boolean";
-	public static final String ENTITE_VAR_STOCKE_utilisateurRecevoirCourriels = "utilisateurRecevoirCourriels_stocke_boolean";
+	public static final String ENTITE_VAR_INDEXE_utilisateurRecevoirCourriels = "utilisateurRecevoirCourriels_indexed_boolean";
+	public static final String ENTITE_VAR_STOCKE_utilisateurRecevoirCourriels = "utilisateurRecevoirCourriels_stored_boolean";
 
 	public static final String ENTITE_VAR_modeleSupprime = "modeleSupprime";
-	public static final String ENTITE_VAR_INDEXE_modeleSupprime = "modeleSupprime_indexe_boolean";
-	public static final String ENTITE_VAR_STOCKE_modeleSupprime = "modeleSupprime_stocke_boolean";
+	public static final String ENTITE_VAR_INDEXE_modeleSupprime = "modeleSupprime_indexed_boolean";
+	public static final String ENTITE_VAR_STOCKE_modeleSupprime = "modeleSupprime_stored_boolean";
 
 	public static final String ENTITE_VAR_modeleCree = "modeleCree";
-	public static final String ENTITE_VAR_INDEXE_modeleCree = "modeleCree_indexenull";
-	public static final String ENTITE_VAR_STOCKE_modeleCree = "modeleCree_stockenull";
+	public static final String ENTITE_VAR_INDEXE_modeleCree = "modeleCree_indexed";
+	public static final String ENTITE_VAR_STOCKE_modeleCree = "modeleCree_stored";
 
 	public static final String ENTITE_VAR_modeleModifie = "modeleModifie";
-	public static final String ENTITE_VAR_INDEXE_modeleModifie = "modeleModifie_indexenull";
-	public static final String ENTITE_VAR_STOCKE_modeleModifie = "modeleModifie_stockenull";
+	public static final String ENTITE_VAR_INDEXE_modeleModifie = "modeleModifie_indexed";
+	public static final String ENTITE_VAR_STOCKE_modeleModifie = "modeleModifie_stored";
 
 	public static final String ENTITE_VAR_modeleClasseNomCanonique = "modeleClasseNomCanonique";
-	public static final String ENTITE_VAR_INDEXE_modeleClasseNomCanonique = "modeleClasseNomCanonique_indexe_string";
-	public static final String ENTITE_VAR_STOCKE_modeleClasseNomCanonique = "modeleClasseNomCanonique_stocke_string";
+	public static final String ENTITE_VAR_INDEXE_modeleClasseNomCanonique = "modeleClasseNomCanonique_indexed_string";
+	public static final String ENTITE_VAR_STOCKE_modeleClasseNomCanonique = "modeleClasseNomCanonique_stored_string";
 
 	public static final String ENTITE_VAR_modeleCle = "modeleCle";
-	public static final String ENTITE_VAR_INDEXE_modeleCle = "modeleCle_indexe_long";
-	public static final String ENTITE_VAR_STOCKE_modeleCle = "modeleCle_stocke_long";
+	public static final String ENTITE_VAR_INDEXE_modeleCle = "modeleCle_indexed_long";
+	public static final String ENTITE_VAR_STOCKE_modeleCle = "modeleCle_stored_long";
 
 	public static final String ENTITE_VAR_modeleSuggestionStocke = "modeleSuggestionStocke";
-	public static final String ENTITE_VAR_INDEXE_modeleSuggestionStocke = "modeleSuggestionStocke_indexe_string";
-	public static final String ENTITE_VAR_STOCKE_modeleSuggestionStocke = "modeleSuggestionStocke_stocke_string";
+	public static final String ENTITE_VAR_INDEXE_modeleSuggestionStocke = "modeleSuggestionStocke_indexed_string";
+	public static final String ENTITE_VAR_STOCKE_modeleSuggestionStocke = "modeleSuggestionStocke_stored_string";
 
 	public static final String ENTITE_VAR_modeleSuggestionIndexe = "modeleSuggestionIndexe";
-	public static final String ENTITE_VAR_INDEXE_modeleSuggestionIndexe = "modeleSuggestionIndexe_indexe_string";
-	public static final String ENTITE_VAR_STOCKE_modeleSuggestionIndexe = "modeleSuggestionIndexe_stocke_string";
+	public static final String ENTITE_VAR_INDEXE_modeleSuggestionIndexe = "modeleSuggestionIndexe_indexed_string";
+	public static final String ENTITE_VAR_STOCKE_modeleSuggestionIndexe = "modeleSuggestionIndexe_stored_string";
 
 	public void handleGetUtilisateurSite(SiteContexte siteContexte) {
 		OpenAPI3RouterFactory usineRouteur = siteContexte.getUsineRouteur_();
@@ -359,14 +359,14 @@ public class UtilisateurSiteApiGen {
 			if(champValeur != null) {
 				if(ENTITE_VAR_STOCKE_calculInrPks.equals(entiteVarStocke)) {
 					if(j > 0)
-						reponseServeur.write(VAL_citationVirguleEspaceCitation);
+						reponseServeur.write(", ");
 					reponseServeur.write(VAL_citation);
 					reponseServeur.write(ENTITE_VAR_calculInrPks);
 					reponseServeur.write(VAL_citationDeuxPointsEspaceGuillmets);
 					int k = 0;
 					while(champValeur != null) {
 						if(k > 0)
-							reponseServeur.write(VAL_virguleEspace);
+							reponseServeur.write(", ");
 						reponseServeur.write(((Long)champValeur).toString());
 						champValeur = champValeurs.iterator().next();
 					}
@@ -376,305 +376,142 @@ public class UtilisateurSiteApiGen {
 				}
 				if(ENTITE_VAR_STOCKE_utilisateurNom.equals(entiteVarStocke)) {
 					if(j > 0)
-						reponseServeur.write(VAL_virguleEspace);
-					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_utilisateurNom);
-					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+						reponseServeur.write(", ");
+					reponseServeur.write("\"utilisateurNom\": \"");
 					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
-					reponseServeur.write(VAL_citationLigne);
+					reponseServeur.write("\"\n");
 					j++;
 					return j;
 				}
 				if(ENTITE_VAR_STOCKE_utilisateurMail.equals(entiteVarStocke)) {
 					if(j > 0)
-						reponseServeur.write(VAL_virguleEspace);
-					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_utilisateurMail);
-					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+						reponseServeur.write(", ");
+					reponseServeur.write("\"utilisateurMail\": \"");
 					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
-					reponseServeur.write(VAL_citationLigne);
+					reponseServeur.write("\"\n");
 					j++;
 					return j;
 				}
 				if(ENTITE_VAR_STOCKE_utilisateurId.equals(entiteVarStocke)) {
 					if(j > 0)
-						reponseServeur.write(VAL_virguleEspace);
-					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_utilisateurId);
-					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+						reponseServeur.write(", ");
+					reponseServeur.write("\"utilisateurId\": \"");
 					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
-					reponseServeur.write(VAL_citationLigne);
+					reponseServeur.write("\"\n");
 					j++;
 					return j;
 				}
 				if(ENTITE_VAR_STOCKE_utilisateurPrenom.equals(entiteVarStocke)) {
 					if(j > 0)
-						reponseServeur.write(VAL_virguleEspace);
-					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_utilisateurPrenom);
-					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+						reponseServeur.write(", ");
+					reponseServeur.write("\"utilisateurPrenom\": \"");
 					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
-					reponseServeur.write(VAL_citationLigne);
+					reponseServeur.write("\"\n");
 					j++;
 					return j;
 				}
 				if(ENTITE_VAR_STOCKE_utilisateurNomFamille.equals(entiteVarStocke)) {
 					if(j > 0)
-						reponseServeur.write(VAL_virguleEspace);
-					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_utilisateurNomFamille);
-					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+						reponseServeur.write(", ");
+					reponseServeur.write("\"utilisateurNomFamille\": \"");
 					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
-					reponseServeur.write(VAL_citationLigne);
+					reponseServeur.write("\"\n");
 					j++;
 					return j;
 				}
 				if(ENTITE_VAR_STOCKE_utilisateurNomComplet.equals(entiteVarStocke)) {
 					if(j > 0)
-						reponseServeur.write(VAL_virguleEspace);
-					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_utilisateurNomComplet);
-					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+						reponseServeur.write(", ");
+					reponseServeur.write("\"utilisateurNomComplet\": \"");
 					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
-					reponseServeur.write(VAL_citationLigne);
+					reponseServeur.write("\"\n");
 					j++;
 					return j;
 				}
 				if(ENTITE_VAR_STOCKE_utilisateurSite.equals(entiteVarStocke)) {
 					if(j > 0)
-						reponseServeur.write(VAL_virguleEspace);
-					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_utilisateurSite);
-					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+						reponseServeur.write(", ");
+					reponseServeur.write("\"utilisateurSite\": \"");
 					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
-					reponseServeur.write(VAL_citationLigne);
+					reponseServeur.write("\"\n");
 					j++;
 					return j;
 				}
 				if(ENTITE_VAR_STOCKE_utilisateurRecevoirCourriels.equals(entiteVarStocke)) {
 					if(j > 0)
-						reponseServeur.write(VAL_virguleEspace);
-					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_utilisateurRecevoirCourriels);
-					reponseServeur.write(VAL_citationDeuxPointsEspace);
+						reponseServeur.write(", ");
+					reponseServeur.write("\"utilisateurRecevoirCourriels\": ");
 					reponseServeur.write(((Boolean)champValeur).toString());
-					reponseServeur.write(VAL_ligne);
+					reponseServeur.write("\n");
 					j++;
 					return j;
 				}
 				if(ENTITE_VAR_STOCKE_modeleSupprime.equals(entiteVarStocke)) {
 					if(j > 0)
-						reponseServeur.write(VAL_virguleEspace);
-					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_modeleSupprime);
-					reponseServeur.write(VAL_citationDeuxPointsEspace);
+						reponseServeur.write(", ");
+					reponseServeur.write("\"modeleSupprime\": ");
 					reponseServeur.write(((Boolean)champValeur).toString());
-					reponseServeur.write(VAL_ligne);
+					reponseServeur.write("\n");
 					j++;
 					return j;
 				}
 				if(ENTITE_VAR_STOCKE_modeleCree.equals(entiteVarStocke)) {
 					if(j > 0)
-						reponseServeur.write(VAL_virguleEspace);
-					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_modeleCree);
-					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+						reponseServeur.write(", ");
+					reponseServeur.write("\"modeleCree\": \"");
 					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
-					reponseServeur.write(VAL_citationLigne);
+					reponseServeur.write("\"\n");
 					j++;
 					return j;
 				}
 				if(ENTITE_VAR_STOCKE_modeleModifie.equals(entiteVarStocke)) {
 					if(j > 0)
-						reponseServeur.write(VAL_virguleEspace);
-					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_modeleModifie);
-					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+						reponseServeur.write(", ");
+					reponseServeur.write("\"modeleModifie\": \"");
 					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
-					reponseServeur.write(VAL_citationLigne);
+					reponseServeur.write("\"\n");
 					j++;
 					return j;
 				}
 				if(ENTITE_VAR_STOCKE_modeleClasseNomCanonique.equals(entiteVarStocke)) {
 					if(j > 0)
-						reponseServeur.write(VAL_virguleEspace);
-					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_modeleClasseNomCanonique);
-					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+						reponseServeur.write(", ");
+					reponseServeur.write("\"modeleClasseNomCanonique\": \"");
 					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
-					reponseServeur.write(VAL_citationLigne);
+					reponseServeur.write("\"\n");
 					j++;
 					return j;
 				}
 				if(ENTITE_VAR_STOCKE_modeleCle.equals(entiteVarStocke)) {
 					if(j > 0)
-						reponseServeur.write(VAL_virguleEspace);
-					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_modeleCle);
-					reponseServeur.write(VAL_citationDeuxPointsEspace);
+						reponseServeur.write(", ");
+					reponseServeur.write("\"modeleCle\": ");
 					reponseServeur.write(((Long)champValeur).toString());
-					reponseServeur.write(VAL_ligne);
+					reponseServeur.write("\n");
 					j++;
 					return j;
 				}
 				if(ENTITE_VAR_STOCKE_modeleSuggestionStocke.equals(entiteVarStocke)) {
 					if(j > 0)
-						reponseServeur.write(VAL_virguleEspace);
-					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_modeleSuggestionStocke);
-					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+						reponseServeur.write(", ");
+					reponseServeur.write("\"modeleSuggestionStocke\": \"");
 					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
-					reponseServeur.write(VAL_citationLigne);
+					reponseServeur.write("\"\n");
 					j++;
 					return j;
 				}
 				if(ENTITE_VAR_STOCKE_modeleSuggestionIndexe.equals(entiteVarStocke)) {
 					if(j > 0)
-						reponseServeur.write(VAL_virguleEspace);
-					reponseServeur.write(VAL_citation);
-					reponseServeur.write(ENTITE_VAR_modeleSuggestionIndexe);
-					reponseServeur.write(VAL_citationDeuxPointsEspaceCitation);
+						reponseServeur.write(", ");
+					reponseServeur.write("\"modeleSuggestionIndexe\": \"");
 					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
-					reponseServeur.write(VAL_citationLigne);
+					reponseServeur.write("\"\n");
 					j++;
 					return j;
 				}
 			}
 		}
 		return j;
-	}
-
-	protected void postUtilisateurSite(SiteContexte siteContexte) {
-		OpenAPI3RouterFactory usineRouteur = siteContexte.getUsineRouteur_();
-		usineRouteur.addHandlerByOperationId("postUtilisateurSite", contexteRoutage -> {
-			try {
-				RequeteSite requeteSite = genererRequeteSitePourUtilisateurSite(siteContexte, contexteRoutage);
-				HttpServerResponse reponseServeur = requeteSite.getReponseServeur();
-				QueryResponse reponseRecherche = requeteSite.getReponseRecherche();
-				JsonObject requeteJson = contexteRoutage.getBodyAsJson();
-				SQLClient clientSql = requeteSite.getSiteContexte_().getClientSql();
-
-				clientSql.getConnection(resultatAsync -> {
-					if(resultatAsync.succeeded()) {
-						LocalDateTime modifie = java.time.LocalDateTime.now();
-						String horodatageStr = Timestamp.valueOf(modifie).toString();
-						String utilisateurId = requeteSite.getUtilisateurId();
-						SQLConnection connexionSql = resultatAsync.result();
-
-						connexionSql.queryWithParams(
-								SiteContexte.SQL_creer
-								, new JsonArray(Arrays.asList(VAL_nomCanoniqueUtilisateurSite, utilisateurId))
-								, asyncCreer
-								-> {
-							if(asyncCreer.succeeded()) {
-								List<Object> postSqlParams = Arrays.asList();
-								JsonArray postLigne = asyncCreer.result().getResults().stream().findFirst().orElseGet(() -> null);
-								Long postPk = postLigne.getLong(0);
-								StringBuilder postSql = new StringBuilder();
-								postSqlParams = new ArrayList<Object>();
-								Set<String> entiteVars = requeteJson.fieldNames();
-								for(String entiteVar : entiteVars) {
-									switch(entiteVar) {
-										case "calculInrPks":
-											postSql.append(SiteContexte.SQL_setP);
-											postSqlParams.addAll(Arrays.asList(ENTITE_VAR_calculInrPks, requeteJson.getJsonArray(entiteVar), postPk));
-											break;
-										case "utilisateurNom":
-											postSql.append(SiteContexte.SQL_setP);
-											postSqlParams.addAll(Arrays.asList(ENTITE_VAR_utilisateurNom, requeteJson.getString(entiteVar), postPk));
-											break;
-										case "utilisateurMail":
-											postSql.append(SiteContexte.SQL_setP);
-											postSqlParams.addAll(Arrays.asList(ENTITE_VAR_utilisateurMail, requeteJson.getString(entiteVar), postPk));
-											break;
-										case "utilisateurId":
-											postSql.append(SiteContexte.SQL_setP);
-											postSqlParams.addAll(Arrays.asList(ENTITE_VAR_utilisateurId, requeteJson.getString(entiteVar), postPk));
-											break;
-										case "utilisateurPrenom":
-											postSql.append(SiteContexte.SQL_setP);
-											postSqlParams.addAll(Arrays.asList(ENTITE_VAR_utilisateurPrenom, requeteJson.getString(entiteVar), postPk));
-											break;
-										case "utilisateurNomFamille":
-											postSql.append(SiteContexte.SQL_setP);
-											postSqlParams.addAll(Arrays.asList(ENTITE_VAR_utilisateurNomFamille, requeteJson.getString(entiteVar), postPk));
-											break;
-										case "utilisateurNomComplet":
-											postSql.append(SiteContexte.SQL_setP);
-											postSqlParams.addAll(Arrays.asList(ENTITE_VAR_utilisateurNomComplet, requeteJson.getString(entiteVar), postPk));
-											break;
-										case "utilisateurSite":
-											postSql.append(SiteContexte.SQL_setP);
-											postSqlParams.addAll(Arrays.asList(ENTITE_VAR_utilisateurSite, requeteJson.getString(entiteVar), postPk));
-											break;
-										case "utilisateurRecevoirCourriels":
-											postSql.append(SiteContexte.SQL_setP);
-											postSqlParams.addAll(Arrays.asList(ENTITE_VAR_utilisateurRecevoirCourriels, requeteJson.getBoolean(entiteVar), postPk));
-											break;
-										case "modeleSupprime":
-											postSql.append(SiteContexte.SQL_setP);
-											postSqlParams.addAll(Arrays.asList(ENTITE_VAR_modeleSupprime, requeteJson.getBoolean(entiteVar), postPk));
-											break;
-										case "modeleClasseNomCanonique":
-											postSql.append(SiteContexte.SQL_setP);
-											postSqlParams.addAll(Arrays.asList(ENTITE_VAR_modeleClasseNomCanonique, requeteJson.getString(entiteVar), postPk));
-											break;
-										case "modeleCle":
-											postSql.append(SiteContexte.SQL_setP);
-											postSqlParams.addAll(Arrays.asList(ENTITE_VAR_modeleCle, requeteJson.getLong(entiteVar), postPk));
-											break;
-										case "modeleSuggestionStocke":
-											postSql.append(SiteContexte.SQL_setP);
-											postSqlParams.addAll(Arrays.asList(ENTITE_VAR_modeleSuggestionStocke, requeteJson.getString(entiteVar), postPk));
-											break;
-										case "modeleSuggestionIndexe":
-											postSql.append(SiteContexte.SQL_setP);
-											postSqlParams.addAll(Arrays.asList(ENTITE_VAR_modeleSuggestionIndexe, requeteJson.getString(entiteVar), postPk));
-											break;
-									}
-								}
-								connexionSql.queryWithParams(postSql.toString(), new JsonArray(postSqlParams), asyncParams -> {
-									connexionSql.close();
-									if(asyncParams.succeeded()) {
-										UtilisateurSite o = new UtilisateurSite();
-										o.putPourClasse(requeteJson);
-										o.sauvegarderPourClasse();
-										o.sauvegardesPourClasse();
-										o.initialiserLoinPourClasse();
-										o.indexerPourClasse();
-										requeteSite.setRequetePk(o.getPk());
-
-									}
-								});
-							} else {
-								connexionSql.close();
-								contexteRoutage.fail(resultatAsync.cause());
-							}
-						});
-					} else {
-						LOGGER.error("Impossible d'ouvrir une connexion à la base de données. ", resultatAsync.cause());
-						contexteRoutage.fail(resultatAsync.cause());
-					}
-				});
-
-				contexteRoutage.response().putHeader("content-type", "application/json").setChunked(true);
-
-				genererPostDebutUtilisateurSite(requeteSite);
-				UtilisateurSite nouveauUtilisateurSite = new UtilisateurSite();
-				nouveauUtilisateurSite.initLoinUtilisateurSite(requeteSite);
-				nouveauUtilisateurSite.peuplerUtilisateurSite();
-				postUtilisateurSite();
-				genererPostFinUtilisateurSite(requeteSite);
-				requeteSite.getReponseServeur().end();
-
-
-				reponseServeur.write("\t]\n");
-				reponseServeur.write("}\n");
-			} catch(Exception e) {
-				LOGGER.error("Error: ", e.getMessage());
-				contexteRoutage.fail(e);
-			}
-		});
 	}
 
 	protected void patchUtilisateurSite(SiteContexte siteContexte) {
@@ -804,11 +641,6 @@ public class UtilisateurSiteApiGen {
 									connexionSql.close();
 									if(asyncParams.succeeded()) {
 										UtilisateurSite o = new UtilisateurSite();
-										o.putPourClasse(requeteJson);
-										o.sauvegarderPourClasse();
-										o.sauvegardesPourClasse();
-										o.initialiserLoinPourClasse();
-										o.indexerPourClasse();
 										requeteSite.setRequetePk(o.getPk());
 
 									}
@@ -826,12 +658,6 @@ public class UtilisateurSiteApiGen {
 
 				contexteRoutage.response().putHeader("content-type", "application/json").setChunked(true);
 
-				genererPatchDebutUtilisateurSite(requeteSite);
-				UtilisateurSite nouveauUtilisateurSite = new UtilisateurSite();
-				nouveauUtilisateurSite.initLoinUtilisateurSite(requeteSite);
-				nouveauUtilisateurSite.peuplerUtilisateurSite();
-				patchUtilisateurSite();
-				genererPatchFinUtilisateurSite(requeteSite);
 				requeteSite.getReponseServeur().end();
 
 

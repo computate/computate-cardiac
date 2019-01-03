@@ -1,11 +1,18 @@
 package org.computate.frFR.cardiaque.page.accueil;
 
 import org.computate.frFR.cardiaque.couverture.Couverture;
+import io.vertx.core.http.HttpServerResponse;
 import org.computate.frFR.cardiaque.cluster.Cluster;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
+import org.apache.commons.text.StringEscapeUtils;
 import org.computate.frFR.cardiaque.page.MiseEnPage;
 import java.lang.String;
+import org.apache.commons.lang3.StringUtils;
 
+/**	
+ * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.accueil.PageAccueil&fq=classeEtendGen_indexed_boolean:true">Trouver la classe  dans Solr</a>
+ * <br/>
+ **/
 public abstract class PageAccueilGen<DEV> extends MiseEnPage {
 
 	///////////////
@@ -13,32 +20,55 @@ public abstract class PageAccueilGen<DEV> extends MiseEnPage {
 	///////////////
 
 	/**	L'entité « pageTitre »
-	 *	 est défini comme null avant d'être initialisé. 
+	 *	 is defined as null before being initialized. 
 	 */
 	protected String pageTitre;
 	public Couverture<String> pageTitreCouverture = new Couverture<String>().p(this).c(String.class).var("pageTitre").o(pageTitre);
 
-	/**	L'entité « pageTitre »
-	 *	 est défini comme null avant d'être initialisé. 
-	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
-	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
-	 */
+	/**	<br/>L'entité « pageTitre »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.accueil.PageAccueil&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:pageTitre">Trouver l'entité pageTitre dans Solr</a>
+	 * <br/>
+	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
 	protected abstract void _pageTitre(Couverture<String> o) throws Exception;
 
 	public String getPageTitre() {
 		return pageTitre;
 	}
 
-	public void setPageTitre(String o) throws Exception {
+	public void setPageTitre(String o) {
 		this.pageTitre = o;
+		this.pageTitreCouverture.dejaInitialise = true;
 	}
-	protected void pageTitreInit() throws Exception {
+	protected PageAccueil pageTitreInit() throws Exception {
 		if(!pageTitreCouverture.dejaInitialise) {
 			_pageTitre(pageTitreCouverture);
 			if(pageTitre == null)
 				setPageTitre(pageTitreCouverture.o);
 		}
 		pageTitreCouverture.dejaInitialise(true);
+		return (PageAccueil)this;
+	}
+
+	public String solrPageTitre() {
+		return pageTitre;
+	}
+
+	public String strPageTitre() {
+		return pageTitre == null ? "" : pageTitre;
+	}
+
+	public String nomAffichagePageTitre() {
+		return null;
+	}
+
+	public String htmlTooltipPageTitre() {
+		return null;
+	}
+
+	public String htmlPageTitre() {
+		return pageTitre == null ? "" : StringEscapeUtils.escapeHtml4(strPageTitre());
 	}
 
 	/////////////
@@ -46,52 +76,77 @@ public abstract class PageAccueilGen<DEV> extends MiseEnPage {
 	/////////////
 
 	/**	L'entité « pageUri »
-	 *	 est défini comme null avant d'être initialisé. 
+	 *	 is defined as null before being initialized. 
 	 */
 	protected String pageUri;
 	public Couverture<String> pageUriCouverture = new Couverture<String>().p(this).c(String.class).var("pageUri").o(pageUri);
 
-	/**	L'entité « pageUri »
-	 *	 est défini comme null avant d'être initialisé. 
-	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
-	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
-	 */
+	/**	<br/>L'entité « pageUri »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.accueil.PageAccueil&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:pageUri">Trouver l'entité pageUri dans Solr</a>
+	 * <br/>
+	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
 	protected abstract void _pageUri(Couverture<String> o) throws Exception;
 
 	public String getPageUri() {
 		return pageUri;
 	}
 
-	public void setPageUri(String o) throws Exception {
+	public void setPageUri(String o) {
 		this.pageUri = o;
+		this.pageUriCouverture.dejaInitialise = true;
 	}
-	protected void pageUriInit() throws Exception {
+	protected PageAccueil pageUriInit() throws Exception {
 		if(!pageUriCouverture.dejaInitialise) {
 			_pageUri(pageUriCouverture);
 			if(pageUri == null)
 				setPageUri(pageUriCouverture.o);
 		}
 		pageUriCouverture.dejaInitialise(true);
+		return (PageAccueil)this;
 	}
 
-	/////////////////////
-	// initialiserLoin //
-	/////////////////////
+	public String solrPageUri() {
+		return pageUri;
+	}
+
+	public String strPageUri() {
+		return pageUri == null ? "" : pageUri;
+	}
+
+	public String nomAffichagePageUri() {
+		return null;
+	}
+
+	public String htmlTooltipPageUri() {
+		return null;
+	}
+
+	public String htmlPageUri() {
+		return pageUri == null ? "" : StringEscapeUtils.escapeHtml4(strPageUri());
+	}
+
+	//////////////
+	// initLoin //
+	//////////////
 
 	protected boolean dejaInitialisePageAccueil = false;
 
-	public void initLoinPageAccueil(RequeteSite requeteSite) throws Exception {
+	public PageAccueil initLoinPageAccueil(RequeteSite requeteSite) throws Exception {
 		setRequeteSite_(requeteSite);
 		initLoinPageAccueil();
+		return (PageAccueil)this;
 	}
 
-	public void initLoinPageAccueil() throws Exception {
+	public PageAccueil initLoinPageAccueil() throws Exception {
 		if(!dejaInitialisePageAccueil) {
+			dejaInitialisePageAccueil = true;
 			super.initLoinMiseEnPage(requeteSite_);
 			pageTitreInit();
 			pageUriInit();
-			dejaInitialisePageAccueil = true;
 		}
+		return (PageAccueil)this;
 	}
 
 	public void initLoinPourClasse(RequeteSite requeteSite) throws Exception {
@@ -115,7 +170,7 @@ public abstract class PageAccueilGen<DEV> extends MiseEnPage {
 	/////////////
 
 	@Override public Object obtenirPourClasse(String var) throws Exception {
-		String[] vars = org.apache.commons.lang3.StringUtils.split(var, ".");
+		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
 			if(o == null)
@@ -144,7 +199,7 @@ public abstract class PageAccueilGen<DEV> extends MiseEnPage {
 	///////////////
 
 	@Override public boolean attribuerPourClasse(String var, Object val) throws Exception {
-		String[] vars = org.apache.commons.lang3.StringUtils.split(var, ".");
+		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
 			if(o == null)
@@ -161,40 +216,6 @@ public abstract class PageAccueilGen<DEV> extends MiseEnPage {
 		switch(var) {
 			default:
 				return super.attribuerMiseEnPage(var, val);
-		}
-	}
-
-	/////////////
-	// definir //
-	/////////////
-
-	@Override public boolean definirPourClasse(String var, String...vals) throws Exception {
-		String[] vars = org.apache.commons.lang3.StringUtils.split(var, ".");
-		Object o = null;
-		String val = vals == null ? null : vals[vals.length - 1];
-		if(val != null) {
-			for(String v : vars) {
-				if(o == null)
-					o = definirPageAccueil(v, val);
-				else if(o instanceof Cluster) {
-					Cluster cluster = (Cluster)o;
-					o = cluster.definirPourClasse(v, val);
-				}
-			}
-		}
-		return o != null;
-	}
-	public Object definirPageAccueil(String var, String val) throws Exception {
-		PageAccueil oPageAccueil = (PageAccueil)this;
-		switch(var) {
-			case "pageTitre":
-				oPageAccueil.setPageTitre(val);
-				return val;
-			case "pageUri":
-				oPageAccueil.setPageUri(val);
-				return val;
-			default:
-				return super.definirMiseEnPage(var, val);
 		}
 	}
 }

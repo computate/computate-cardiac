@@ -36,7 +36,7 @@ public class Chaine extends ChaineGen<Object> {
 	protected void _hLigne(Couverture<Double> c) {}
 	protected void _hEspace(Couverture<Double> c) {}
 //
-//	public Chaine iconeAvant(MiseEnPage page, String type, String nom) throws Exception {
+//	public Chaine iconeAvant(MiseEnPage page, String type, String nom) {
 //		Icone o = new Icone();
 //		o.type.tout(type);
 //		o.nom.tout(nom);
@@ -46,7 +46,7 @@ public class Chaine extends ChaineGen<Object> {
 ////		iconesAvantAjouter(o);
 //		return this;
 //	}
-//	public Chaine iconeApres(MiseEnPage page, String type, String nom) throws Exception {
+//	public Chaine iconeApres(MiseEnPage page, String type, String nom) {
 //		Icone o = new Icone();
 //		o.type.tout(type);
 //		o.nom.tout(nom);
@@ -353,7 +353,7 @@ public class Chaine extends ChaineGen<Object> {
 		}
 	}
 //
-//	@org.junit.Test public void genererClasseChaine() throws Exception {
+//	@org.junit.Test public void genererClasseChaine() {
 //		org.computate.site.SiteContexte.SiteContexte SiteContexte = new org.computate.site.SiteContexte.SiteContexte();
 //		SiteContexte.initialiserLoinSiteContexte();
 //

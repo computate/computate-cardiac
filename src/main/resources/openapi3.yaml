@@ -13,133 +13,6 @@ servers:
   - url: "https://cardiac.heytate.com"
     description: ""
 paths:
-  /api/v1/warfarin/inr-entry:
-    get:
-      operationId: "getCalculInr"
-      summary: ""
-      description: ""
-      parameters:
-      - in: "query"
-        name: "q"
-        description: ""
-        required: false
-        schema:
-          type: string
-          default: "**:**"
-        examples:
-          default:
-            value: "&ast;:&ast;"
-            summary: "This is the default solr query. "
-      - in: "query"
-        name: "fq"
-        description: ""
-        required: false
-        schema:
-          type: array
-          items:
-            type: string
-      - in: "query"
-        name: "fl"
-        description: ""
-        required: false
-        schema:
-          type: string
-      - in: "query"
-        name: "start"
-        description: ""
-        required: false
-        schema:
-          type: integer
-          default: 0
-          minimum: 0
-      - in: "query"
-        name: "rows"
-        description: ""
-        required: false
-        schema:
-          type: integer
-          default: 10
-          minimum: 1
-      responses:
-        '200':
-          description: ""
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getCalculInr'
-    post:
-      operationId: "postCalculInr"
-      summary: ""
-      description: ""
-      requestBody:
-        description: ""
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/postCalculInr'
-      responses:
-        '201':
-          description: ""
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getCalculInr'
-    patch:
-      operationId: "patchCalculInr"
-      summary: ""
-      description: ""
-      parameters:
-      - in: "query"
-        name: "q"
-        description: ""
-        required: false
-        schema:
-          type: string
-        examples:
-          default:
-            value: "*:*"
-            summary: "This is the default solr query. "
-      - in: "query"
-        name: "fq"
-        description: ""
-        required: false
-        schema:
-          type: string
-      - in: "query"
-        name: "fl"
-        description: ""
-        required: false
-        schema:
-          type: string
-      - in: "query"
-        name: "start"
-        description: ""
-        required: false
-        schema:
-          type: integer
-          minimum: 0
-      - in: "query"
-        name: "rows"
-        description: ""
-        required: false
-        schema:
-          type: integer
-          minimum: 1
-      requestBody:
-        description: ""
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/patchCalculInr'
-      responses:
-        '200':
-          description: ""
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getCalculInr'
   /api/v1/warfarin/cluster:
     get:
       operationId: "getCluster"
@@ -267,29 +140,262 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/schemas/getCluster'
+  /api/v1/site/utilisateur:
+    get:
+      operationId: "getUtilisateurSite"
+      summary: ""
+      description: ""
+      parameters:
+      - in: "query"
+        name: "q"
+        description: ""
+        required: false
+        schema:
+          type: string
+          default: "**:**"
+        examples:
+          default:
+            value: "&ast;:&ast;"
+            summary: "This is the default solr query. "
+      - in: "query"
+        name: "fq"
+        description: ""
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - in: "query"
+        name: "fl"
+        description: ""
+        required: false
+        schema:
+          type: string
+      - in: "query"
+        name: "start"
+        description: ""
+        required: false
+        schema:
+          type: integer
+          default: 0
+          minimum: 0
+      - in: "query"
+        name: "rows"
+        description: ""
+        required: false
+        schema:
+          type: integer
+          default: 10
+          minimum: 1
+      responses:
+        '200':
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getUtilisateurSite'
+    post:
+      operationId: "postUtilisateurSite"
+      summary: ""
+      description: ""
+      requestBody:
+        description: ""
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postUtilisateurSite'
+      responses:
+        '201':
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getUtilisateurSite'
+    patch:
+      operationId: "patchUtilisateurSite"
+      summary: ""
+      description: ""
+      parameters:
+      - in: "query"
+        name: "q"
+        description: ""
+        required: false
+        schema:
+          type: string
+        examples:
+          default:
+            value: "*:*"
+            summary: "This is the default solr query. "
+      - in: "query"
+        name: "fq"
+        description: ""
+        required: false
+        schema:
+          type: string
+      - in: "query"
+        name: "fl"
+        description: ""
+        required: false
+        schema:
+          type: string
+      - in: "query"
+        name: "start"
+        description: ""
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+      - in: "query"
+        name: "rows"
+        description: ""
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+      requestBody:
+        description: ""
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/patchUtilisateurSite'
+      responses:
+        '200':
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getUtilisateurSite'
+  /api/v1/warfarin/calcul-inr:
+    get:
+      operationId: "getCalculInr"
+      summary: ""
+      description: ""
+      parameters:
+      - in: "query"
+        name: "q"
+        description: ""
+        required: false
+        schema:
+          type: string
+          default: "**:**"
+        examples:
+          default:
+            value: "&ast;:&ast;"
+            summary: "This is the default solr query. "
+      - in: "query"
+        name: "fq"
+        description: ""
+        required: false
+        schema:
+          type: array
+          items:
+            type: string
+      - in: "query"
+        name: "fl"
+        description: ""
+        required: false
+        schema:
+          type: string
+      - in: "query"
+        name: "start"
+        description: ""
+        required: false
+        schema:
+          type: integer
+          default: 0
+          minimum: 0
+      - in: "query"
+        name: "rows"
+        description: ""
+        required: false
+        schema:
+          type: integer
+          default: 10
+          minimum: 1
+      responses:
+        '200':
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getCalculInr'
+    post:
+      operationId: "postCalculInr"
+      summary: ""
+      description: ""
+      requestBody:
+        description: ""
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/postCalculInr'
+      responses:
+        '201':
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getCalculInr'
+    patch:
+      operationId: "patchCalculInr"
+      summary: ""
+      description: ""
+      parameters:
+      - in: "query"
+        name: "q"
+        description: ""
+        required: false
+        schema:
+          type: string
+        examples:
+          default:
+            value: "*:*"
+            summary: "This is the default solr query. "
+      - in: "query"
+        name: "fq"
+        description: ""
+        required: false
+        schema:
+          type: string
+      - in: "query"
+        name: "fl"
+        description: ""
+        required: false
+        schema:
+          type: string
+      - in: "query"
+        name: "start"
+        description: ""
+        required: false
+        schema:
+          type: integer
+          minimum: 0
+      - in: "query"
+        name: "rows"
+        description: ""
+        required: false
+        schema:
+          type: integer
+          minimum: 1
+      requestBody:
+        description: ""
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/patchCalculInr'
+      responses:
+        '200':
+          description: ""
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/getCalculInr'
 components:
   requestBodies:
-    getCalculInr:
-      required: true
-      description: ""
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/getCalculInr'
-    postCalculInr:
-      required: true
-      description: ""
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/postCalculInr'
-    patchCalculInr:
-      required: true
-      description: ""
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/patchCalculInr'
     getCluster:
       required: true
       description: ""
@@ -311,74 +417,49 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/patchCluster'
-  schemas:
+    getUtilisateurSite:
+      required: true
+      description: ""
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/getUtilisateurSite'
+    postUtilisateurSite:
+      required: true
+      description: ""
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/postUtilisateurSite'
+    patchUtilisateurSite:
+      required: true
+      description: ""
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/patchUtilisateurSite'
     getCalculInr:
-      allOf:
-      - $ref: "#/components/schemas/getCluster"
-      - type: object
-        properties:
-          numFound:
-            type: number
-            default: 1
-          start:
-            type: number
-            default: 0
-          rows:
-            type: number
-            default: 10
-          docs:
-            type: array
-            items:
-              type: object
-              properties:
-                inrDate:
-                  type: string
-                  format: date
-                doseActuelValeur:
-                  type: number
-                doseActuelTexte:
-                  type: string
-                changementDoseValeur:
-                  type: number
-                changementDoseTexte:
-                  type: string
+      required: true
+      description: ""
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/getCalculInr'
     postCalculInr:
-      allOf:
-      - $ref: "#/components/schemas/postCluster"
-      - type: object
-        properties:
-          inrDate:
-            type: string
-            format: date
-          doseActuelValeur:
-            type: number
-          doseActuelTexte:
-            type: string
-          changementDoseValeur:
-            type: number
-          changementDoseTexte:
-            type: string
+      required: true
+      description: ""
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/postCalculInr'
     patchCalculInr:
-      allOf:
-      - $ref: "#/components/schemas/patchCluster"
-      - type: object
-        properties:
-          setInrDate:
-            type: string
-            nullable: true
-            format: date
-          setDoseActuelValeur:
-            type: number
-            nullable: true
-          setDoseActuelTexte:
-            type: string
-            nullable: true
-          setChangementDoseValeur:
-            type: number
-            nullable: true
-          setChangementDoseTexte:
-            type: string
-            nullable: true
+      required: true
+      description: ""
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/patchCalculInr'
+  schemas:
     getCluster:
       allOf:
       - type: object
@@ -461,4 +542,239 @@ components:
             nullable: true
           setSupprime:
             type: boolean
+            nullable: true
+    getUtilisateurSite:
+      allOf:
+      - type: object
+        properties:
+          numFound:
+            type: number
+            default: 1
+          start:
+            type: number
+            default: 0
+          rows:
+            type: number
+            default: 10
+          docs:
+            type: array
+            items:
+              type: object
+              properties:
+                calculInrPks:
+                  type: java.util.List<java.lang.Long>
+                items:
+                  type: number
+                utilisateurNom:
+                  type: string
+                utilisateurMail:
+                  type: string
+                utilisateurId:
+                  type: string
+                utilisateurPrenom:
+                  type: string
+                utilisateurNomFamille:
+                  type: string
+                utilisateurNomComplet:
+                  type: string
+                utilisateurSite:
+                  type: string
+                utilisateurRecevoirCourriels:
+                  type: boolean
+                modeleSupprime:
+                  type: boolean
+                modeleClasseNomCanonique:
+                  type: string
+                modeleCle:
+                  type: number
+                modeleSuggestionStocke:
+                  type: string
+                modeleSuggestionIndexe:
+                  type: string
+    postUtilisateurSite:
+      allOf:
+      - type: object
+        properties:
+          calculInrPks:
+            type: java.util.List<java.lang.Long>
+            items:
+              type: number
+          utilisateurNom:
+            type: string
+          utilisateurMail:
+            type: string
+          utilisateurId:
+            type: string
+          utilisateurPrenom:
+            type: string
+          utilisateurNomFamille:
+            type: string
+          utilisateurNomComplet:
+            type: string
+          utilisateurSite:
+            type: string
+          utilisateurRecevoirCourriels:
+            type: boolean
+          modeleSupprime:
+            type: boolean
+          modeleClasseNomCanonique:
+            type: string
+          modeleCle:
+            type: number
+          modeleSuggestionStocke:
+            type: string
+          modeleSuggestionIndexe:
+            type: string
+    patchUtilisateurSite:
+      allOf:
+      - type: object
+        properties:
+          setCalculInrPks:
+            type: java.util.List<java.lang.Long>
+            nullable: true
+            items:
+              type: number
+          setUtilisateurNom:
+            type: string
+            nullable: true
+          setUtilisateurMail:
+            type: string
+            nullable: true
+          setUtilisateurId:
+            type: string
+            nullable: true
+          setUtilisateurPrenom:
+            type: string
+            nullable: true
+          setUtilisateurNomFamille:
+            type: string
+            nullable: true
+          setUtilisateurNomComplet:
+            type: string
+            nullable: true
+          setUtilisateurSite:
+            type: string
+            nullable: true
+          setUtilisateurRecevoirCourriels:
+            type: boolean
+            nullable: true
+          setModeleSupprime:
+            type: boolean
+            nullable: true
+          setModeleClasseNomCanonique:
+            type: string
+            nullable: true
+          setModeleCle:
+            type: number
+            nullable: true
+          setModeleSuggestionStocke:
+            type: string
+            nullable: true
+          setModeleSuggestionIndexe:
+            type: string
+            nullable: true
+    getCalculInr:
+      allOf:
+      - $ref: "#/components/schemas/getCluster"
+      - type: object
+        properties:
+          numFound:
+            type: number
+            default: 1
+          start:
+            type: number
+            default: 0
+          rows:
+            type: number
+            default: 10
+          docs:
+            type: array
+            items:
+              type: object
+              properties:
+                utilisateurPk:
+                  type: number
+                dateInr:
+                  type: string
+                  format: date
+                dateReverifier:
+                  type: string
+                  format: date
+                patientPrendCoumadin:
+                  type: string
+                butActuel:
+                  type: string
+                doseActuel:
+                  type: string
+                medicamentActuel:
+                  type: string
+                changementDose:
+                  type: string
+                notesComplementaires:
+                  type: string
+                infoContact:
+                  type: string
+    postCalculInr:
+      allOf:
+      - $ref: "#/components/schemas/postCluster"
+      - type: object
+        properties:
+          utilisateurPk:
+            type: number
+          dateInr:
+            type: string
+            format: date
+          dateReverifier:
+            type: string
+            format: date
+          patientPrendCoumadin:
+            type: string
+          butActuel:
+            type: string
+          doseActuel:
+            type: string
+          medicamentActuel:
+            type: string
+          changementDose:
+            type: string
+          notesComplementaires:
+            type: string
+          infoContact:
+            type: string
+    patchCalculInr:
+      allOf:
+      - $ref: "#/components/schemas/patchCluster"
+      - type: object
+        properties:
+          setUtilisateurPk:
+            type: number
+            nullable: true
+          setDateInr:
+            type: string
+            nullable: true
+            format: date
+          setDateReverifier:
+            type: string
+            nullable: true
+            format: date
+          setPatientPrendCoumadin:
+            type: string
+            nullable: true
+          setButActuel:
+            type: string
+            nullable: true
+          setDoseActuel:
+            type: string
+            nullable: true
+          setMedicamentActuel:
+            type: string
+            nullable: true
+          setChangementDose:
+            type: string
+            nullable: true
+          setNotesComplementaires:
+            type: string
+            nullable: true
+          setInfoContact:
+            type: string
             nullable: true

@@ -18,35 +18,39 @@ import org.computate.frFR.cardiaque.couverture.Couverture;
  * val.VAL_patientPrendCoumadinNon.frFR:No
  * val.VAL_patientPrendCoumadinOuiDosageInitial.frFR:Yes, initial dosing
  * val.VAL_patientPrendCoumadinOuiRecommence.frFR:Yes, restarted
- * role.frFR: Doof
-*/                            
-public class CalculInr extends CalculInrGen<Cluster> {          
+ * role.frFR: Something
+*/               
+public class CalculInr extends CalculInrGen<Cluster> {   
 
 	/**
+	 * {@inheritDoc}
 	 * indexe: true
 	 * stocke: true
 	 * attribuer: UtilisateurSite.calculInrPks
 	 */
-	protected void _utilisateurPk(Couverture<Long> c) throws Exception {
+	protected void _utilisateurPk(Couverture<Long> c) {
 	}
 
 	/**
+	 * {@inheritDoc}
 	 * indexe: true
 	 * stocke: true
 	 */
-	protected void _dateInr(Couverture<LocalDate> c) throws Exception {
+	protected void _dateInr(Couverture<LocalDate> c) {
 		c.o(LocalDate.now());
 	}
 
 	/**
+	 * {@inheritDoc}
 	 * indexe: true
 	 * stocke: true
 	 */
-	protected void _dateReverifier(Couverture<LocalDate> c) throws Exception {
+	protected void _dateReverifier(Couverture<LocalDate> c) {
 
 	}
 
 	/**
+	 * {@inheritDoc}
 	 * var.enUS: currentDosageText
 	 * indexe: true
 	 * stocke: true
@@ -56,55 +60,61 @@ public class CalculInr extends CalculInrGen<Cluster> {
 	 * option.ouiDosageInitial.frFR:CalculInr.VAL_patientPrendCoumadinOuiDosageInitial
 	 * option.ouiRecommence.frFR:CalculInr.VAL_patientPrendCoumadinOuiRecommence
 	 */ 
-	protected void _patientPrendCoumadin(Chaine o) throws Exception {
+	protected void _patientPrendCoumadin(Chaine o) {
 	}
 
 	/**
+	 * {@inheritDoc}
 	 * var.enUS: currentGoal
 	 * indexe: true
 	 * stocke: true
 	 */ 
-	protected void _butActuel(Chaine o) throws Exception {
+	protected void _butActuel(Chaine o) {
 	}
 
 	/**
+	 * {@inheritDoc}
 	 * var.enUS: currentDosage
 	 * indexe: true
 	 * stocke: true
 	 */ 
-	protected void _doseActuel(Chaine o) throws Exception {
+	protected void _doseActuel(Chaine o) {
 	}
 
 	/**
+	 * {@inheritDoc}
 	 * var.enUS: currentMedication
 	 * indexe: true
 	 * stocke: true
 	 */ 
-	protected void _medicamentActuel(Chaine o) throws Exception {
+	protected void _medicamentActuel(Chaine o) {
 	}
 
 	/**
+	 * {@inheritDoc}
 	 * var.enUS: dosageChange
 	 * indexe: true
 	 * stocke: true
 	 */
-	protected void _changementDose(Chaine o) throws Exception {
+	protected void _changementDose(Chaine o) {
 		o.tout(dateInr.format(FORMAT_dateMedicalCourt), " INR @ ");
 	}
 
 	/**
+	 * {@inheritDoc}
 	 * var.enUS: additionalNotes
 	 * indexe: true
 	 * stocke: true
 	 */
-	protected void _notesComplementaires(Chaine o) throws Exception {
+	protected void _notesComplementaires(Chaine o) {
 	}
 
 	/**
+	 * {@inheritDoc}
 	 * var.enUS: contactInfo
 	 * indexe: true
 	 * stocke: true
-	 */
-	protected void _infoContact(Chaine o) throws Exception {
+	 */ 
+	protected void _infoContact(Chaine o) {
 	}
 }

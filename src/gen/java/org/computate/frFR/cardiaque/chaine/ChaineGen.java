@@ -4,12 +4,20 @@ import org.computate.frFR.cardiaque.page.parti.Icone;
 import org.computate.frFR.cardiaque.couverture.Couverture;
 import java.lang.Double;
 import org.computate.frFR.cardiaque.cluster.Cluster;
+import org.apache.commons.text.StringEscapeUtils;
+import org.apache.commons.lang3.StringUtils;
+import java.util.ArrayList;
+import java.util.Objects;
+import io.vertx.core.http.HttpServerResponse;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
 import java.lang.Boolean;
 import java.lang.Object;
 import java.lang.String;
-import java.util.ArrayList;
 
+/**	
+ * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.chaine.Chaine&fq=classeEtendGen_indexed_boolean:true">Trouver la classe  dans Solr</a>
+ * <br/>
+ **/
 public abstract class ChaineGen<DEV> extends Object {
 
 	//////////////////
@@ -17,17 +25,18 @@ public abstract class ChaineGen<DEV> extends Object {
 	//////////////////
 
 	/**	L'entité « requeteSite_ »
-	 *	 est défini comme null avant d'être initialisé. 
+	 *	 is defined as null before being initialized. 
 	 */
 	protected RequeteSite requeteSite_;
 	public Couverture<RequeteSite> requeteSite_Couverture = new Couverture<RequeteSite>().p(this).c(RequeteSite.class).var("requeteSite_").o(requeteSite_);
 
-	/**	L'entité « requeteSite_ »
-	 *	 est défini comme null avant d'être initialisé. 
-	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
-	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
-	 */
-	protected abstract void _requeteSite_(Couverture<RequeteSite> o) throws Exception;
+	/**	<br/>L'entité « requeteSite_ »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.chaine.Chaine&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:requeteSite_">Trouver l'entité requeteSite_ dans Solr</a>
+	 * <br/>
+	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
+	protected abstract void _requeteSite_(Couverture<RequeteSite> o);
 
 	public RequeteSite getRequeteSite_() {
 		return requeteSite_;
@@ -35,14 +44,17 @@ public abstract class ChaineGen<DEV> extends Object {
 
 	public void setRequeteSite_(RequeteSite o) {
 		this.requeteSite_ = o;
+		this.requeteSite_Couverture.dejaInitialise = true;
 	}
-	protected void requeteSite_Init() throws Exception {
+	protected Chaine requeteSite_Init()
+ {
 		if(!requeteSite_Couverture.dejaInitialise) {
 			_requeteSite_(requeteSite_Couverture);
 			if(requeteSite_ == null)
 				setRequeteSite_(requeteSite_Couverture.o);
 		}
 		requeteSite_Couverture.dejaInitialise(true);
+		return (Chaine)this;
 	}
 
 	////////////
@@ -50,17 +62,18 @@ public abstract class ChaineGen<DEV> extends Object {
 	////////////
 
 	/**	L'entité « police »
-	 *	 est défini comme null avant d'être initialisé. 
+	 *	 is defined as null before being initialized. 
 	 */
 	protected String police;
 	public Couverture<String> policeCouverture = new Couverture<String>().p(this).c(String.class).var("police").o(police);
 
-	/**	L'entité « police »
-	 *	 est défini comme null avant d'être initialisé. 
-	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
-	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
-	 */
-	protected abstract void _police(Couverture<String> o) throws Exception;
+	/**	<br/>L'entité « police »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.chaine.Chaine&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:police">Trouver l'entité police dans Solr</a>
+	 * <br/>
+	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
+	protected abstract void _police(Couverture<String> o);
 
 	public String getPolice() {
 		return police;
@@ -68,14 +81,37 @@ public abstract class ChaineGen<DEV> extends Object {
 
 	public void setPolice(String o) {
 		this.police = o;
+		this.policeCouverture.dejaInitialise = true;
 	}
-	protected void policeInit() throws Exception {
+	protected Chaine policeInit()
+ {
 		if(!policeCouverture.dejaInitialise) {
 			_police(policeCouverture);
 			if(police == null)
 				setPolice(policeCouverture.o);
 		}
 		policeCouverture.dejaInitialise(true);
+		return (Chaine)this;
+	}
+
+	public String solrPolice() {
+		return police;
+	}
+
+	public String strPolice() {
+		return police == null ? "" : police;
+	}
+
+	public String nomAffichagePolice() {
+		return null;
+	}
+
+	public String htmlTooltipPolice() {
+		return null;
+	}
+
+	public String htmlPolice() {
+		return police == null ? "" : StringEscapeUtils.escapeHtml4(strPolice());
 	}
 
 	///////////////////
@@ -83,17 +119,18 @@ public abstract class ChaineGen<DEV> extends Object {
 	///////////////////
 
 	/**	L'entité « alignerCentre »
-	 *	 est défini comme null avant d'être initialisé. 
+	 *	 is defined as null before being initialized. 
 	 */
 	protected Boolean alignerCentre;
 	public Couverture<Boolean> alignerCentreCouverture = new Couverture<Boolean>().p(this).c(Boolean.class).var("alignerCentre").o(alignerCentre);
 
-	/**	L'entité « alignerCentre »
-	 *	 est défini comme null avant d'être initialisé. 
-	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
-	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
-	 */
-	protected abstract void _alignerCentre(Couverture<Boolean> o) throws Exception;
+	/**	<br/>L'entité « alignerCentre »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.chaine.Chaine&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:alignerCentre">Trouver l'entité alignerCentre dans Solr</a>
+	 * <br/>
+	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
+	protected abstract void _alignerCentre(Couverture<Boolean> o);
 
 	public Boolean getAlignerCentre() {
 		return alignerCentre;
@@ -101,19 +138,43 @@ public abstract class ChaineGen<DEV> extends Object {
 
 	public void setAlignerCentre(Boolean o) {
 		this.alignerCentre = o;
+		this.alignerCentreCouverture.dejaInitialise = true;
 	}
 	public Chaine setAlignerCentre(String o) throws Exception {
 		if(org.apache.commons.lang3.BooleanUtils.isTrue(org.apache.commons.lang3.BooleanUtils.toBoolean(o)))
 			this.alignerCentre = Boolean.parseBoolean(o);
+		this.alignerCentreCouverture.dejaInitialise = true;
 		return (Chaine)this;
 	}
-	protected void alignerCentreInit() throws Exception {
+	protected Chaine alignerCentreInit()
+ {
 		if(!alignerCentreCouverture.dejaInitialise) {
 			_alignerCentre(alignerCentreCouverture);
 			if(alignerCentre == null)
 				setAlignerCentre(alignerCentreCouverture.o);
 		}
 		alignerCentreCouverture.dejaInitialise(true);
+		return (Chaine)this;
+	}
+
+	public Boolean solrAlignerCentre() {
+		return alignerCentre;
+	}
+
+	public String strAlignerCentre() {
+		return alignerCentre == null ? "" : alignerCentre.toString();
+	}
+
+	public String nomAffichageAlignerCentre() {
+		return null;
+	}
+
+	public String htmlTooltipAlignerCentre() {
+		return null;
+	}
+
+	public String htmlAlignerCentre() {
+		return alignerCentre == null ? "" : StringEscapeUtils.escapeHtml4(strAlignerCentre());
 	}
 
 	///////////////////
@@ -121,17 +182,18 @@ public abstract class ChaineGen<DEV> extends Object {
 	///////////////////
 
 	/**	L'entité « alignerGauche »
-	 *	 est défini comme null avant d'être initialisé. 
+	 *	 is defined as null before being initialized. 
 	 */
 	protected Boolean alignerGauche;
 	public Couverture<Boolean> alignerGaucheCouverture = new Couverture<Boolean>().p(this).c(Boolean.class).var("alignerGauche").o(alignerGauche);
 
-	/**	L'entité « alignerGauche »
-	 *	 est défini comme null avant d'être initialisé. 
-	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
-	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
-	 */
-	protected abstract void _alignerGauche(Couverture<Boolean> o) throws Exception;
+	/**	<br/>L'entité « alignerGauche »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.chaine.Chaine&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:alignerGauche">Trouver l'entité alignerGauche dans Solr</a>
+	 * <br/>
+	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
+	protected abstract void _alignerGauche(Couverture<Boolean> o);
 
 	public Boolean getAlignerGauche() {
 		return alignerGauche;
@@ -139,19 +201,43 @@ public abstract class ChaineGen<DEV> extends Object {
 
 	public void setAlignerGauche(Boolean o) {
 		this.alignerGauche = o;
+		this.alignerGaucheCouverture.dejaInitialise = true;
 	}
 	public Chaine setAlignerGauche(String o) throws Exception {
 		if(org.apache.commons.lang3.BooleanUtils.isTrue(org.apache.commons.lang3.BooleanUtils.toBoolean(o)))
 			this.alignerGauche = Boolean.parseBoolean(o);
+		this.alignerGaucheCouverture.dejaInitialise = true;
 		return (Chaine)this;
 	}
-	protected void alignerGaucheInit() throws Exception {
+	protected Chaine alignerGaucheInit()
+ {
 		if(!alignerGaucheCouverture.dejaInitialise) {
 			_alignerGauche(alignerGaucheCouverture);
 			if(alignerGauche == null)
 				setAlignerGauche(alignerGaucheCouverture.o);
 		}
 		alignerGaucheCouverture.dejaInitialise(true);
+		return (Chaine)this;
+	}
+
+	public Boolean solrAlignerGauche() {
+		return alignerGauche;
+	}
+
+	public String strAlignerGauche() {
+		return alignerGauche == null ? "" : alignerGauche.toString();
+	}
+
+	public String nomAffichageAlignerGauche() {
+		return null;
+	}
+
+	public String htmlTooltipAlignerGauche() {
+		return null;
+	}
+
+	public String htmlAlignerGauche() {
+		return alignerGauche == null ? "" : StringEscapeUtils.escapeHtml4(strAlignerGauche());
 	}
 
 	//////////////////
@@ -159,17 +245,18 @@ public abstract class ChaineGen<DEV> extends Object {
 	//////////////////
 
 	/**	L'entité « alignerDroit »
-	 *	 est défini comme null avant d'être initialisé. 
+	 *	 is defined as null before being initialized. 
 	 */
 	protected Boolean alignerDroit;
 	public Couverture<Boolean> alignerDroitCouverture = new Couverture<Boolean>().p(this).c(Boolean.class).var("alignerDroit").o(alignerDroit);
 
-	/**	L'entité « alignerDroit »
-	 *	 est défini comme null avant d'être initialisé. 
-	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
-	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
-	 */
-	protected abstract void _alignerDroit(Couverture<Boolean> o) throws Exception;
+	/**	<br/>L'entité « alignerDroit »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.chaine.Chaine&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:alignerDroit">Trouver l'entité alignerDroit dans Solr</a>
+	 * <br/>
+	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
+	protected abstract void _alignerDroit(Couverture<Boolean> o);
 
 	public Boolean getAlignerDroit() {
 		return alignerDroit;
@@ -177,19 +264,43 @@ public abstract class ChaineGen<DEV> extends Object {
 
 	public void setAlignerDroit(Boolean o) {
 		this.alignerDroit = o;
+		this.alignerDroitCouverture.dejaInitialise = true;
 	}
 	public Chaine setAlignerDroit(String o) throws Exception {
 		if(org.apache.commons.lang3.BooleanUtils.isTrue(org.apache.commons.lang3.BooleanUtils.toBoolean(o)))
 			this.alignerDroit = Boolean.parseBoolean(o);
+		this.alignerDroitCouverture.dejaInitialise = true;
 		return (Chaine)this;
 	}
-	protected void alignerDroitInit() throws Exception {
+	protected Chaine alignerDroitInit()
+ {
 		if(!alignerDroitCouverture.dejaInitialise) {
 			_alignerDroit(alignerDroitCouverture);
 			if(alignerDroit == null)
 				setAlignerDroit(alignerDroitCouverture.o);
 		}
 		alignerDroitCouverture.dejaInitialise(true);
+		return (Chaine)this;
+	}
+
+	public Boolean solrAlignerDroit() {
+		return alignerDroit;
+	}
+
+	public String strAlignerDroit() {
+		return alignerDroit == null ? "" : alignerDroit.toString();
+	}
+
+	public String nomAffichageAlignerDroit() {
+		return null;
+	}
+
+	public String htmlTooltipAlignerDroit() {
+		return null;
+	}
+
+	public String htmlAlignerDroit() {
+		return alignerDroit == null ? "" : StringEscapeUtils.escapeHtml4(strAlignerDroit());
 	}
 
 	/////////////////
@@ -202,12 +313,13 @@ public abstract class ChaineGen<DEV> extends Object {
 	protected ArrayList<Icone> iconesAvant = new ArrayList<Icone>();
 	public Couverture<ArrayList<Icone>> iconesAvantCouverture = new Couverture<ArrayList<Icone>>().p(this).c(ArrayList.class).var("iconesAvant").o(iconesAvant);
 
-	/**	L'entité « iconesAvant »
-	 *	Il est construit avant d'être initialisé avec le constructeur par défaut ArrayList<Icone>(). 
-	 *	@param iconesAvant est le champ déjà construit. 
-	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
-	 */
-	protected abstract void _iconesAvant(ArrayList<Icone> l) throws Exception;
+	/**	<br/>L'entité « iconesAvant »
+	 * Il est construit avant d'être initialisé avec le constructeur par défaut ArrayList<Icone>(). 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.chaine.Chaine&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:iconesAvant">Trouver l'entité iconesAvant dans Solr</a>
+	 * <br/>
+	 * @param iconesAvant est l'entité déjà construit. 
+	 **/
+	protected abstract void _iconesAvant(ArrayList<Icone> l);
 
 	public ArrayList<Icone> getIconesAvant() {
 		return iconesAvant;
@@ -215,23 +327,26 @@ public abstract class ChaineGen<DEV> extends Object {
 
 	public void setIconesAvant(ArrayList<Icone> l) {
 		this.iconesAvant = l;
+		this.iconesAvantCouverture.dejaInitialise = true;
 	}
-	public Chaine addIconesAvant(Icone...objets) throws Exception {
+	public Chaine addIconesAvant(Icone...objets) {
 		for(Icone o : objets) {
 			addIconesAvant(o);
 		}
 		return (Chaine)this;
 	}
-	public Chaine addIconesAvant(Icone o) throws Exception {
+	public Chaine addIconesAvant(Icone o) {
 		if(o != null && !iconesAvant.contains(o))
 			this.iconesAvant.add(o);
 		return (Chaine)this;
 	}
-	protected void iconesAvantInit() throws Exception {
+	protected Chaine iconesAvantInit()
+ {
 		if(!iconesAvantCouverture.dejaInitialise) {
 			_iconesAvant(iconesAvant);
 		}
 		iconesAvantCouverture.dejaInitialise(true);
+		return (Chaine)this;
 	}
 
 	/////////////////
@@ -244,12 +359,13 @@ public abstract class ChaineGen<DEV> extends Object {
 	protected ArrayList<Icone> iconesApres = new ArrayList<Icone>();
 	public Couverture<ArrayList<Icone>> iconesApresCouverture = new Couverture<ArrayList<Icone>>().p(this).c(ArrayList.class).var("iconesApres").o(iconesApres);
 
-	/**	L'entité « iconesApres »
-	 *	Il est construit avant d'être initialisé avec le constructeur par défaut ArrayList<Icone>(). 
-	 *	@param iconesApres est le champ déjà construit. 
-	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
-	 */
-	protected abstract void _iconesApres(ArrayList<Icone> l) throws Exception;
+	/**	<br/>L'entité « iconesApres »
+	 * Il est construit avant d'être initialisé avec le constructeur par défaut ArrayList<Icone>(). 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.chaine.Chaine&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:iconesApres">Trouver l'entité iconesApres dans Solr</a>
+	 * <br/>
+	 * @param iconesApres est l'entité déjà construit. 
+	 **/
+	protected abstract void _iconesApres(ArrayList<Icone> l);
 
 	public ArrayList<Icone> getIconesApres() {
 		return iconesApres;
@@ -257,23 +373,26 @@ public abstract class ChaineGen<DEV> extends Object {
 
 	public void setIconesApres(ArrayList<Icone> l) {
 		this.iconesApres = l;
+		this.iconesApresCouverture.dejaInitialise = true;
 	}
-	public Chaine addIconesApres(Icone...objets) throws Exception {
+	public Chaine addIconesApres(Icone...objets) {
 		for(Icone o : objets) {
 			addIconesApres(o);
 		}
 		return (Chaine)this;
 	}
-	public Chaine addIconesApres(Icone o) throws Exception {
+	public Chaine addIconesApres(Icone o) {
 		if(o != null && !iconesApres.contains(o))
 			this.iconesApres.add(o);
 		return (Chaine)this;
 	}
-	protected void iconesApresInit() throws Exception {
+	protected Chaine iconesApresInit()
+ {
 		if(!iconesApresCouverture.dejaInitialise) {
 			_iconesApres(iconesApres);
 		}
 		iconesApresCouverture.dejaInitialise(true);
+		return (Chaine)this;
 	}
 
 	///////////////
@@ -281,17 +400,18 @@ public abstract class ChaineGen<DEV> extends Object {
 	///////////////
 
 	/**	L'entité « xDecalage »
-	 *	 est défini comme null avant d'être initialisé. 
+	 *	 is defined as null before being initialized. 
 	 */
 	protected Double xDecalage;
 	public Couverture<Double> xDecalageCouverture = new Couverture<Double>().p(this).c(Double.class).var("xDecalage").o(xDecalage);
 
-	/**	L'entité « xDecalage »
-	 *	 est défini comme null avant d'être initialisé. 
-	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
-	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
-	 */
-	protected abstract void _xDecalage(Couverture<Double> o) throws Exception;
+	/**	<br/>L'entité « xDecalage »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.chaine.Chaine&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:xDecalage">Trouver l'entité xDecalage dans Solr</a>
+	 * <br/>
+	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
+	protected abstract void _xDecalage(Couverture<Double> o);
 
 	public Double getXDecalage() {
 		return xDecalage;
@@ -299,19 +419,43 @@ public abstract class ChaineGen<DEV> extends Object {
 
 	public void setXDecalage(Double o) {
 		this.xDecalage = o;
+		this.xDecalageCouverture.dejaInitialise = true;
 	}
 	public Chaine setXDecalage(String o) throws Exception {
 		if(org.apache.commons.lang3.math.NumberUtils.isCreatable(o))
 			this.xDecalage = Double.parseDouble(o);
+		this.xDecalageCouverture.dejaInitialise = true;
 		return (Chaine)this;
 	}
-	protected void xDecalageInit() throws Exception {
+	protected Chaine xDecalageInit()
+ {
 		if(!xDecalageCouverture.dejaInitialise) {
 			_xDecalage(xDecalageCouverture);
 			if(xDecalage == null)
 				setXDecalage(xDecalageCouverture.o);
 		}
 		xDecalageCouverture.dejaInitialise(true);
+		return (Chaine)this;
+	}
+
+	public Double solrXDecalage() {
+		return xDecalage;
+	}
+
+	public String strXDecalage() {
+		return xDecalage == null ? "" : xDecalage.toString();
+	}
+
+	public String nomAffichageXDecalage() {
+		return null;
+	}
+
+	public String htmlTooltipXDecalage() {
+		return null;
+	}
+
+	public String htmlXDecalage() {
+		return xDecalage == null ? "" : StringEscapeUtils.escapeHtml4(strXDecalage());
 	}
 
 	///////////////
@@ -319,17 +463,18 @@ public abstract class ChaineGen<DEV> extends Object {
 	///////////////
 
 	/**	L'entité « yDecalage »
-	 *	 est défini comme null avant d'être initialisé. 
+	 *	 is defined as null before being initialized. 
 	 */
 	protected Double yDecalage;
 	public Couverture<Double> yDecalageCouverture = new Couverture<Double>().p(this).c(Double.class).var("yDecalage").o(yDecalage);
 
-	/**	L'entité « yDecalage »
-	 *	 est défini comme null avant d'être initialisé. 
-	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
-	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
-	 */
-	protected abstract void _yDecalage(Couverture<Double> o) throws Exception;
+	/**	<br/>L'entité « yDecalage »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.chaine.Chaine&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:yDecalage">Trouver l'entité yDecalage dans Solr</a>
+	 * <br/>
+	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
+	protected abstract void _yDecalage(Couverture<Double> o);
 
 	public Double getYDecalage() {
 		return yDecalage;
@@ -337,19 +482,43 @@ public abstract class ChaineGen<DEV> extends Object {
 
 	public void setYDecalage(Double o) {
 		this.yDecalage = o;
+		this.yDecalageCouverture.dejaInitialise = true;
 	}
 	public Chaine setYDecalage(String o) throws Exception {
 		if(org.apache.commons.lang3.math.NumberUtils.isCreatable(o))
 			this.yDecalage = Double.parseDouble(o);
+		this.yDecalageCouverture.dejaInitialise = true;
 		return (Chaine)this;
 	}
-	protected void yDecalageInit() throws Exception {
+	protected Chaine yDecalageInit()
+ {
 		if(!yDecalageCouverture.dejaInitialise) {
 			_yDecalage(yDecalageCouverture);
 			if(yDecalage == null)
 				setYDecalage(yDecalageCouverture.o);
 		}
 		yDecalageCouverture.dejaInitialise(true);
+		return (Chaine)this;
+	}
+
+	public Double solrYDecalage() {
+		return yDecalage;
+	}
+
+	public String strYDecalage() {
+		return yDecalage == null ? "" : yDecalage.toString();
+	}
+
+	public String nomAffichageYDecalage() {
+		return null;
+	}
+
+	public String htmlTooltipYDecalage() {
+		return null;
+	}
+
+	public String htmlYDecalage() {
+		return yDecalage == null ? "" : StringEscapeUtils.escapeHtml4(strYDecalage());
 	}
 
 	////////////
@@ -357,17 +526,18 @@ public abstract class ChaineGen<DEV> extends Object {
 	////////////
 
 	/**	L'entité « hLigne »
-	 *	 est défini comme null avant d'être initialisé. 
+	 *	 is defined as null before being initialized. 
 	 */
 	protected Double hLigne;
 	public Couverture<Double> hLigneCouverture = new Couverture<Double>().p(this).c(Double.class).var("hLigne").o(hLigne);
 
-	/**	L'entité « hLigne »
-	 *	 est défini comme null avant d'être initialisé. 
-	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
-	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
-	 */
-	protected abstract void _hLigne(Couverture<Double> o) throws Exception;
+	/**	<br/>L'entité « hLigne »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.chaine.Chaine&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:hLigne">Trouver l'entité hLigne dans Solr</a>
+	 * <br/>
+	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
+	protected abstract void _hLigne(Couverture<Double> o);
 
 	public Double getHLigne() {
 		return hLigne;
@@ -375,19 +545,43 @@ public abstract class ChaineGen<DEV> extends Object {
 
 	public void setHLigne(Double o) {
 		this.hLigne = o;
+		this.hLigneCouverture.dejaInitialise = true;
 	}
 	public Chaine setHLigne(String o) throws Exception {
 		if(org.apache.commons.lang3.math.NumberUtils.isCreatable(o))
 			this.hLigne = Double.parseDouble(o);
+		this.hLigneCouverture.dejaInitialise = true;
 		return (Chaine)this;
 	}
-	protected void hLigneInit() throws Exception {
+	protected Chaine hLigneInit()
+ {
 		if(!hLigneCouverture.dejaInitialise) {
 			_hLigne(hLigneCouverture);
 			if(hLigne == null)
 				setHLigne(hLigneCouverture.o);
 		}
 		hLigneCouverture.dejaInitialise(true);
+		return (Chaine)this;
+	}
+
+	public Double solrHLigne() {
+		return hLigne;
+	}
+
+	public String strHLigne() {
+		return hLigne == null ? "" : hLigne.toString();
+	}
+
+	public String nomAffichageHLigne() {
+		return null;
+	}
+
+	public String htmlTooltipHLigne() {
+		return null;
+	}
+
+	public String htmlHLigne() {
+		return hLigne == null ? "" : StringEscapeUtils.escapeHtml4(strHLigne());
 	}
 
 	/////////////
@@ -395,17 +589,18 @@ public abstract class ChaineGen<DEV> extends Object {
 	/////////////
 
 	/**	L'entité « hEspace »
-	 *	 est défini comme null avant d'être initialisé. 
+	 *	 is defined as null before being initialized. 
 	 */
 	protected Double hEspace;
 	public Couverture<Double> hEspaceCouverture = new Couverture<Double>().p(this).c(Double.class).var("hEspace").o(hEspace);
 
-	/**	L'entité « hEspace »
-	 *	 est défini comme null avant d'être initialisé. 
-	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
-	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
-	 */
-	protected abstract void _hEspace(Couverture<Double> o) throws Exception;
+	/**	<br/>L'entité « hEspace »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.chaine.Chaine&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:hEspace">Trouver l'entité hEspace dans Solr</a>
+	 * <br/>
+	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
+	protected abstract void _hEspace(Couverture<Double> o);
 
 	public Double getHEspace() {
 		return hEspace;
@@ -413,19 +608,43 @@ public abstract class ChaineGen<DEV> extends Object {
 
 	public void setHEspace(Double o) {
 		this.hEspace = o;
+		this.hEspaceCouverture.dejaInitialise = true;
 	}
 	public Chaine setHEspace(String o) throws Exception {
 		if(org.apache.commons.lang3.math.NumberUtils.isCreatable(o))
 			this.hEspace = Double.parseDouble(o);
+		this.hEspaceCouverture.dejaInitialise = true;
 		return (Chaine)this;
 	}
-	protected void hEspaceInit() throws Exception {
+	protected Chaine hEspaceInit()
+ {
 		if(!hEspaceCouverture.dejaInitialise) {
 			_hEspace(hEspaceCouverture);
 			if(hEspace == null)
 				setHEspace(hEspaceCouverture.o);
 		}
 		hEspaceCouverture.dejaInitialise(true);
+		return (Chaine)this;
+	}
+
+	public Double solrHEspace() {
+		return hEspace;
+	}
+
+	public String strHEspace() {
+		return hEspace == null ? "" : hEspace.toString();
+	}
+
+	public String nomAffichageHEspace() {
+		return null;
+	}
+
+	public String htmlTooltipHEspace() {
+		return null;
+	}
+
+	public String htmlHEspace() {
+		return hEspace == null ? "" : StringEscapeUtils.escapeHtml4(strHEspace());
 	}
 
 	//////////
@@ -438,12 +657,13 @@ public abstract class ChaineGen<DEV> extends Object {
 	protected ArrayList<Object> tout = new ArrayList<Object>();
 	public Couverture<ArrayList<Object>> toutCouverture = new Couverture<ArrayList<Object>>().p(this).c(ArrayList.class).var("tout").o(tout);
 
-	/**	L'entité « tout »
-	 *	Il est construit avant d'être initialisé avec le constructeur par défaut ArrayList<Object>(). 
-	 *	@param tout est le champ déjà construit. 
-	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
-	 */
-	protected abstract void _tout(ArrayList<Object> l) throws Exception;
+	/**	<br/>L'entité « tout »
+	 * Il est construit avant d'être initialisé avec le constructeur par défaut ArrayList<Object>(). 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.chaine.Chaine&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:tout">Trouver l'entité tout dans Solr</a>
+	 * <br/>
+	 * @param tout est l'entité déjà construit. 
+	 **/
+	protected abstract void _tout(ArrayList<Object> l);
 
 	public ArrayList<Object> getTout() {
 		return tout;
@@ -451,38 +671,43 @@ public abstract class ChaineGen<DEV> extends Object {
 
 	public void setTout(ArrayList<Object> l) {
 		this.tout = l;
+		this.toutCouverture.dejaInitialise = true;
 	}
-	public Chaine addTout(Object...objets) throws Exception {
+	public Chaine addTout(Object...objets) {
 		for(Object o : objets) {
 			addTout(o);
 		}
 		return (Chaine)this;
 	}
-	public Chaine addTout(Object o) throws Exception {
+	public Chaine addTout(Object o) {
 		if(o != null && !tout.contains(o))
 			this.tout.add(o);
 		return (Chaine)this;
 	}
-	protected void toutInit() throws Exception {
+	protected Chaine toutInit()
+ {
 		if(!toutCouverture.dejaInitialise) {
 			_tout(tout);
 		}
 		toutCouverture.dejaInitialise(true);
+		return (Chaine)this;
 	}
 
-	/////////////////////
-	// initialiserLoin //
-	/////////////////////
+	//////////////
+	// initLoin //
+	//////////////
 
 	protected boolean dejaInitialiseChaine = false;
 
-	public void initLoinChaine(RequeteSite requeteSite) throws Exception {
+	public Chaine initLoinChaine(RequeteSite requeteSite) {
 		setRequeteSite_(requeteSite);
 		initLoinChaine();
+		return (Chaine)this;
 	}
 
-	public void initLoinChaine() throws Exception {
+	public Chaine initLoinChaine() {
 		if(!dejaInitialiseChaine) {
+			dejaInitialiseChaine = true;
 			requeteSite_Init();
 			policeInit();
 			alignerCentreInit();
@@ -495,11 +720,11 @@ public abstract class ChaineGen<DEV> extends Object {
 			hLigneInit();
 			hEspaceInit();
 			toutInit();
-			dejaInitialiseChaine = true;
 		}
+		return (Chaine)this;
 	}
 
-	public void initLoinPourClasse(RequeteSite requeteSite) throws Exception {
+	public void initLoinPourClasse(RequeteSite requeteSite) {
 		initLoinChaine(requeteSite);
 	}
 
@@ -507,10 +732,10 @@ public abstract class ChaineGen<DEV> extends Object {
 	// requeteSite //
 	/////////////////
 
-	public void requeteSiteChaine(RequeteSite requeteSite) throws Exception {
+	public void requeteSiteChaine(RequeteSite requeteSite) {
 	}
 
-	public void requeteSitePourClasse(RequeteSite requeteSite) throws Exception {
+	public void requeteSitePourClasse(RequeteSite requeteSite) {
 		requeteSiteChaine(requeteSite);
 	}
 
@@ -519,7 +744,7 @@ public abstract class ChaineGen<DEV> extends Object {
 	/////////////
 
 	public Object obtenirPourClasse(String var) throws Exception {
-		String[] vars = org.apache.commons.lang3.StringUtils.split(var, ".");
+		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
 			if(o == null)
@@ -568,7 +793,7 @@ public abstract class ChaineGen<DEV> extends Object {
 	///////////////
 
 	public boolean attribuerPourClasse(String var, Object val) throws Exception {
-		String[] vars = org.apache.commons.lang3.StringUtils.split(var, ".");
+		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
 			if(o == null)
@@ -588,55 +813,50 @@ public abstract class ChaineGen<DEV> extends Object {
 		}
 	}
 
-	/////////////
-	// definir //
-	/////////////
+	//////////////
+	// hashCode //
+	//////////////
 
-	public boolean definirPourClasse(String var, String...vals) throws Exception {
-		String[] vars = org.apache.commons.lang3.StringUtils.split(var, ".");
-		Object o = null;
-		String val = vals == null ? null : vals[vals.length - 1];
-		if(val != null) {
-			for(String v : vars) {
-				if(o == null)
-					o = definirChaine(v, val);
-				else if(o instanceof Cluster) {
-					Cluster cluster = (Cluster)o;
-					o = cluster.definirPourClasse(v, val);
-				}
-			}
-		}
-		return o != null;
+	@Override public int hashCode() {
+		return Objects.hash(police, alignerCentre, alignerGauche, alignerDroit, xDecalage, yDecalage, hLigne, hEspace);
 	}
-	public Object definirChaine(String var, String val) throws Exception {
-		Chaine oChaine = (Chaine)this;
-		switch(var) {
-			case "police":
-				oChaine.setPolice(val);
-				return val;
-			case "alignerCentre":
-				oChaine.setAlignerCentre(val);
-				return val;
-			case "alignerGauche":
-				oChaine.setAlignerGauche(val);
-				return val;
-			case "alignerDroit":
-				oChaine.setAlignerDroit(val);
-				return val;
-			case "xDecalage":
-				oChaine.setXDecalage(val);
-				return val;
-			case "yDecalage":
-				oChaine.setYDecalage(val);
-				return val;
-			case "hLigne":
-				oChaine.setHLigne(val);
-				return val;
-			case "hEspace":
-				oChaine.setHEspace(val);
-				return val;
-			default:
-				return null;
-		}
+
+	////////////
+	// equals //
+	////////////
+
+	@Override public boolean equals(Object o) {
+		if(this == o)
+			return true;
+		if(!(o instanceof Chaine))
+			return false;
+		Chaine that = (Chaine)o;
+		return Objects.equals( police, that.police )
+				&& Objects.equals( alignerCentre, that.alignerCentre )
+				&& Objects.equals( alignerGauche, that.alignerGauche )
+				&& Objects.equals( alignerDroit, that.alignerDroit )
+				&& Objects.equals( xDecalage, that.xDecalage )
+				&& Objects.equals( yDecalage, that.yDecalage )
+				&& Objects.equals( hLigne, that.hLigne )
+				&& Objects.equals( hEspace, that.hEspace );
+	}
+
+	//////////////
+	// toString //
+	//////////////
+
+	@Override public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Chaine {");
+		sb.append( "police: \"" ).append(police).append( "\"" );
+		sb.append( ", alignerCentre: " ).append(alignerCentre);
+		sb.append( ", alignerGauche: " ).append(alignerGauche);
+		sb.append( ", alignerDroit: " ).append(alignerDroit);
+		sb.append( ", xDecalage: " ).append(xDecalage);
+		sb.append( ", yDecalage: " ).append(yDecalage);
+		sb.append( ", hLigne: " ).append(hLigne);
+		sb.append( ", hEspace: " ).append(hEspace);
+		sb.append(" }");
+		return sb.toString();
 	}
 }

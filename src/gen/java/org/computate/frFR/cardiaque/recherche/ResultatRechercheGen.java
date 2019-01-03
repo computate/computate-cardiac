@@ -1,12 +1,21 @@
 package org.computate.frFR.cardiaque.recherche;
 
+import java.util.Objects;
 import org.apache.solr.common.SolrDocument;
 import org.computate.frFR.cardiaque.couverture.Couverture;
 import java.lang.Long;
 import org.computate.frFR.cardiaque.cluster.Cluster;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
+import org.computate.frFR.cardiaque.ecrivain.ToutEcrivain;
+import org.apache.commons.text.StringEscapeUtils;
 import java.lang.Object;
+import org.apache.commons.lang3.StringUtils;
+import java.lang.Exception;
 
+/**	
+ * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.recherche.ResultatRecherche&fq=classeEtendGen_indexed_boolean:true">Trouver la classe  dans Solr</a>
+ * <br/>
+ **/
 public abstract class ResultatRechercheGen<DEV> extends Object {
 
 	//////////////////
@@ -14,32 +23,36 @@ public abstract class ResultatRechercheGen<DEV> extends Object {
 	//////////////////
 
 	/**	L'entité « requeteSite_ »
-	 *	 est défini comme null avant d'être initialisé. 
+	 *	 is defined as null before being initialized. 
 	 */
 	protected RequeteSite requeteSite_;
 	public Couverture<RequeteSite> requeteSite_Couverture = new Couverture<RequeteSite>().p(this).c(RequeteSite.class).var("requeteSite_").o(requeteSite_);
 
-	/**	L'entité « requeteSite_ »
-	 *	 est défini comme null avant d'être initialisé. 
-	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
-	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
-	 */
+	/**	<br/>L'entité « requeteSite_ »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.recherche.ResultatRecherche&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:requeteSite_">Trouver l'entité requeteSite_ dans Solr</a>
+	 * <br/>
+	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
 	protected abstract void _requeteSite_(Couverture<RequeteSite> o) throws Exception;
 
 	public RequeteSite getRequeteSite_() {
 		return requeteSite_;
 	}
 
-	public void setRequeteSite_(RequeteSite o) throws Exception {
+	public void setRequeteSite_(RequeteSite o) {
 		this.requeteSite_ = o;
+		this.requeteSite_Couverture.dejaInitialise = true;
 	}
-	protected void requeteSite_Init() throws Exception {
+	protected ResultatRecherche requeteSite_Init()
+ throws Exception {
 		if(!requeteSite_Couverture.dejaInitialise) {
 			_requeteSite_(requeteSite_Couverture);
 			if(requeteSite_ == null)
 				setRequeteSite_(requeteSite_Couverture.o);
 		}
 		requeteSite_Couverture.dejaInitialise(true);
+		return (ResultatRecherche)this;
 	}
 
 	//////////////////
@@ -47,32 +60,36 @@ public abstract class ResultatRechercheGen<DEV> extends Object {
 	//////////////////
 
 	/**	L'entité « documentSolr »
-	 *	 est défini comme null avant d'être initialisé. 
+	 *	 is defined as null before being initialized. 
 	 */
 	protected SolrDocument documentSolr;
 	public Couverture<SolrDocument> documentSolrCouverture = new Couverture<SolrDocument>().p(this).c(SolrDocument.class).var("documentSolr").o(documentSolr);
 
-	/**	L'entité « documentSolr »
-	 *	 est défini comme null avant d'être initialisé. 
-	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
-	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
-	 */
+	/**	<br/>L'entité « documentSolr »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.recherche.ResultatRecherche&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:documentSolr">Trouver l'entité documentSolr dans Solr</a>
+	 * <br/>
+	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
 	protected abstract void _documentSolr(Couverture<SolrDocument> o) throws Exception;
 
 	public SolrDocument getDocumentSolr() {
 		return documentSolr;
 	}
 
-	public void setDocumentSolr(SolrDocument o) throws Exception {
+	public void setDocumentSolr(SolrDocument o) {
 		this.documentSolr = o;
+		this.documentSolrCouverture.dejaInitialise = true;
 	}
-	protected void documentSolrInit() throws Exception {
+	protected ResultatRecherche documentSolrInit()
+ throws Exception {
 		if(!documentSolrCouverture.dejaInitialise) {
 			_documentSolr(documentSolrCouverture);
 			if(documentSolr == null)
 				setDocumentSolr(documentSolrCouverture.o);
 		}
 		documentSolrCouverture.dejaInitialise(true);
+		return (ResultatRecherche)this;
 	}
 
 	////////////////////
@@ -80,57 +97,84 @@ public abstract class ResultatRechercheGen<DEV> extends Object {
 	////////////////////
 
 	/**	L'entité « resultatIndice »
-	 *	 est défini comme null avant d'être initialisé. 
+	 *	 is defined as null before being initialized. 
 	 */
 	protected Long resultatIndice;
 	public Couverture<Long> resultatIndiceCouverture = new Couverture<Long>().p(this).c(Long.class).var("resultatIndice").o(resultatIndice);
 
-	/**	L'entité « resultatIndice »
-	 *	 est défini comme null avant d'être initialisé. 
-	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
-	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
-	 */
+	/**	<br/>L'entité « resultatIndice »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.recherche.ResultatRecherche&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:resultatIndice">Trouver l'entité resultatIndice dans Solr</a>
+	 * <br/>
+	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
 	protected abstract void _resultatIndice(Couverture<Long> o) throws Exception;
 
 	public Long getResultatIndice() {
 		return resultatIndice;
 	}
 
-	public void setResultatIndice(Long o) throws Exception {
+	public void setResultatIndice(Long o) {
 		this.resultatIndice = o;
+		this.resultatIndiceCouverture.dejaInitialise = true;
 	}
 	public ResultatRecherche setResultatIndice(String o) throws Exception {
 		if(org.apache.commons.lang3.math.NumberUtils.isCreatable(o))
 			this.resultatIndice = Long.parseLong(o);
+		this.resultatIndiceCouverture.dejaInitialise = true;
 		return (ResultatRecherche)this;
 	}
-	protected void resultatIndiceInit() throws Exception {
+	protected ResultatRecherche resultatIndiceInit()
+ throws Exception {
 		if(!resultatIndiceCouverture.dejaInitialise) {
 			_resultatIndice(resultatIndiceCouverture);
 			if(resultatIndice == null)
 				setResultatIndice(resultatIndiceCouverture.o);
 		}
 		resultatIndiceCouverture.dejaInitialise(true);
+		return (ResultatRecherche)this;
 	}
 
-	/////////////////////
-	// initialiserLoin //
-	/////////////////////
+	public Long solrResultatIndice() {
+		return resultatIndice;
+	}
+
+	public String strResultatIndice() {
+		return resultatIndice == null ? "" : resultatIndice.toString();
+	}
+
+	public String nomAffichageResultatIndice() {
+		return null;
+	}
+
+	public String htmTooltipResultatIndice() {
+		return null;
+	}
+
+	public String htmResultatIndice() {
+		return resultatIndice == null ? "" : StringEscapeUtils.escapeHtml4(strResultatIndice());
+	}
+
+	//////////////
+	// initLoin //
+	//////////////
 
 	protected boolean dejaInitialiseResultatRecherche = false;
 
-	public void initLoinResultatRecherche(RequeteSite requeteSite) throws Exception {
+	public ResultatRecherche initLoinResultatRecherche(RequeteSite requeteSite) throws Exception {
 		setRequeteSite_(requeteSite);
 		initLoinResultatRecherche();
+		return (ResultatRecherche)this;
 	}
 
-	public void initLoinResultatRecherche() throws Exception {
+	public ResultatRecherche initLoinResultatRecherche() throws Exception {
 		if(!dejaInitialiseResultatRecherche) {
+			dejaInitialiseResultatRecherche = true;
 			requeteSite_Init();
 			documentSolrInit();
 			resultatIndiceInit();
-			dejaInitialiseResultatRecherche = true;
 		}
+		return (ResultatRecherche)this;
 	}
 
 	public void initLoinPourClasse(RequeteSite requeteSite) throws Exception {
@@ -141,10 +185,10 @@ public abstract class ResultatRechercheGen<DEV> extends Object {
 	// requeteSite //
 	/////////////////
 
-	public void requeteSiteResultatRecherche(RequeteSite requeteSite) throws Exception {
+	public void requeteSiteResultatRecherche(RequeteSite requeteSite) {
 	}
 
-	public void requeteSitePourClasse(RequeteSite requeteSite) throws Exception {
+	public void requeteSitePourClasse(RequeteSite requeteSite) {
 		requeteSiteResultatRecherche(requeteSite);
 	}
 
@@ -153,7 +197,7 @@ public abstract class ResultatRechercheGen<DEV> extends Object {
 	/////////////
 
 	public Object obtenirPourClasse(String var) throws Exception {
-		String[] vars = org.apache.commons.lang3.StringUtils.split(var, ".");
+		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
 			if(o == null)
@@ -184,7 +228,7 @@ public abstract class ResultatRechercheGen<DEV> extends Object {
 	///////////////
 
 	public boolean attribuerPourClasse(String var, Object val) throws Exception {
-		String[] vars = org.apache.commons.lang3.StringUtils.split(var, ".");
+		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
 			if(o == null)
@@ -204,34 +248,36 @@ public abstract class ResultatRechercheGen<DEV> extends Object {
 		}
 	}
 
-	/////////////
-	// definir //
-	/////////////
+	//////////////
+	// hashCode //
+	//////////////
 
-	public boolean definirPourClasse(String var, String...vals) throws Exception {
-		String[] vars = org.apache.commons.lang3.StringUtils.split(var, ".");
-		Object o = null;
-		String val = vals == null ? null : vals[vals.length - 1];
-		if(val != null) {
-			for(String v : vars) {
-				if(o == null)
-					o = definirResultatRecherche(v, val);
-				else if(o instanceof Cluster) {
-					Cluster cluster = (Cluster)o;
-					o = cluster.definirPourClasse(v, val);
-				}
-			}
-		}
-		return o != null;
+	@Override public int hashCode() {
+		return Objects.hash(resultatIndice);
 	}
-	public Object definirResultatRecherche(String var, String val) throws Exception {
-		ResultatRecherche oResultatRecherche = (ResultatRecherche)this;
-		switch(var) {
-			case "resultatIndice":
-				oResultatRecherche.setResultatIndice(val);
-				return val;
-			default:
-				return null;
-		}
+
+	////////////
+	// equals //
+	////////////
+
+	@Override public boolean equals(Object o) {
+		if(this == o)
+			return true;
+		if(!(o instanceof ResultatRecherche))
+			return false;
+		ResultatRecherche that = (ResultatRecherche)o;
+		return Objects.equals( resultatIndice, that.resultatIndice );
+	}
+
+	//////////////
+	// toString //
+	//////////////
+
+	@Override public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("ResultatRecherche {");
+		sb.append( "resultatIndice: " ).append(resultatIndice);
+		sb.append(" }");
+		return sb.toString();
 	}
 }

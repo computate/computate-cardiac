@@ -19,6 +19,7 @@ import org.apache.solr.common.SolrDocumentList;
 import org.computate.frFR.cardiaque.config.ConfigSite;
 import org.computate.frFR.cardiaque.contexte.SiteContexte;
 import org.computate.frFR.cardiaque.couverture.Couverture;
+import org.computate.frFR.cardiaque.ecrivain.ToutEcrivain;
 import org.computate.frFR.cardiaque.utilisateur.UtilisateurSite;
 
 import io.vertx.core.Vertx;
@@ -64,7 +65,7 @@ public class RequeteSite extends RequeteSiteGen<Object> implements Serializable 
 			SolrDocumentList o = reponseRecherche.getResults();
 			c.o(o);
 		}
-	}
+	} 
 
 	protected void _requeteSite_(Couverture<RequeteSite> c) throws Exception { 
 		c.o(this);
@@ -84,6 +85,16 @@ public class RequeteSite extends RequeteSiteGen<Object> implements Serializable 
 			HttpServerResponse o = contexteItineraire_.response();
 			c.o(o);
 		}
+	}
+
+	/**
+	 * frFR: L'écrivain pour écrirer le résultat du réponse. 
+	 * r.enUS: requeteSite_
+	 * siteRequest
+	 * r.enUS: ecrivain
+	 * writer
+	 */  
+	protected void _w(Couverture<ToutEcrivain> c) throws Exception {
 	}
 //
 //	protected void _siteIdKeycloak(Couverture<String> c) throws Exception {

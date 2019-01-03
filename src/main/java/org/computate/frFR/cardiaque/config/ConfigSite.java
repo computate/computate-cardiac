@@ -446,6 +446,16 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 		c.o(o);
 	}
 
+	/**	Le rôle OpenID Connect pour un administrateur. **/
+	protected void _roleAdmin(Couverture<String> c) throws Exception {
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = config.getString(prefixeEchappe + c.var);
+		c.o(o);
+	}
+
 	/**	L'addresse mail pour l'administrateur du site pour les rapports d'erreur. **/
 	protected void _mailAdmin(Couverture<String> c) throws Exception {
 		String o;

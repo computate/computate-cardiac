@@ -1,29 +1,40 @@
 package org.computate.frFR.cardiaque.cluster;
 
-import org.computate.frFR.cardiaque.contexte.SiteContexte;
 import org.computate.frFR.cardiaque.couverture.Couverture;
-import java.lang.Long;
-import org.computate.frFR.cardiaque.cluster.Cluster;
+import java.util.Date;
 import java.time.LocalDateTime;
+import org.apache.commons.lang3.StringUtils;
+import io.vertx.core.logging.LoggerFactory;
+import java.util.ArrayList;
+import java.lang.Long;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
-import org.postgresql.ds.PGSimpleDataSource;
-
-import io.vertx.core.Vertx;
-import io.vertx.core.json.JsonArray;
-import io.vertx.core.json.JsonObject;
-import io.vertx.ext.jdbc.JDBCClient;
-import io.vertx.ext.sql.SQLClient;
-import io.vertx.ext.sql.SQLConnection;
-
 import java.lang.Boolean;
+import org.computate.frFR.cardiaque.ecrivain.ToutEcrivain;
+import io.vertx.core.json.JsonObject;
+import java.lang.String;
+import io.vertx.core.logging.Logger;
+import org.computate.frFR.cardiaque.cluster.Cluster;
+import java.util.Set;
+import org.apache.commons.text.StringEscapeUtils;
+import java.time.Instant;
+import java.time.ZoneId;
+import org.apache.solr.client.solrj.SolrClient;
+import org.computate.frFR.cardiaque.contexte.SiteContexte;
+import java.util.Objects;
+import org.apache.solr.common.SolrDocument;
+import io.vertx.core.json.JsonArray;
+import java.util.List;
+import java.time.format.DateTimeFormatter;
+import io.vertx.ext.sql.SQLConnection;
 import java.lang.Object;
 import org.computate.frFR.cardiaque.page.MiseEnPage;
-import java.lang.String;
+import io.vertx.ext.sql.SQLClient;
 import org.apache.solr.common.SolrInputDocument;
-import org.apache.solr.client.solrj.SolrClient;
-import io.vertx.core.logging.LoggerFactory;
-import io.vertx.core.logging.Logger;
 
+/**	
+ * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.cluster.Cluster&fq=classeEtendGen_indexed_boolean:true">Trouver la classe  dans Solr</a>
+ * <br/>
+ **/
 public abstract class ClusterGen<DEV> extends Object {
 	private static final Logger LOGGER = LoggerFactory.getLogger(Cluster.class);
 
@@ -32,17 +43,18 @@ public abstract class ClusterGen<DEV> extends Object {
 	//////////////////
 
 	/**	L'entité « requeteSite_ »
-	 *	 est défini comme null avant d'être initialisé. 
+	 *	 is defined as null before being initialized. 
 	 */
 	protected RequeteSite requeteSite_;
 	public Couverture<RequeteSite> requeteSite_Couverture = new Couverture<RequeteSite>().p(this).c(RequeteSite.class).var("requeteSite_").o(requeteSite_);
 
-	/**	L'entité « requeteSite_ »
-	 *	 est défini comme null avant d'être initialisé. 
-	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
-	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
-	 */
-	protected abstract void _requeteSite_(Couverture<RequeteSite> o) throws Exception;
+	/**	<br/>L'entité « requeteSite_ »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.cluster.Cluster&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:requeteSite_">Trouver l'entité requeteSite_ dans Solr</a>
+	 * <br/>
+	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
+	protected abstract void _requeteSite_(Couverture<RequeteSite> o);
 
 	public RequeteSite getRequeteSite_() {
 		return requeteSite_;
@@ -50,8 +62,10 @@ public abstract class ClusterGen<DEV> extends Object {
 
 	public void setRequeteSite_(RequeteSite o) {
 		this.requeteSite_ = o;
+		this.requeteSite_Couverture.dejaInitialise = true;
 	}
-	protected Cluster requeteSite_Init() throws Exception {
+	protected Cluster requeteSite_Init()
+ {
 		if(!requeteSite_Couverture.dejaInitialise) {
 			_requeteSite_(requeteSite_Couverture);
 			if(requeteSite_ == null)
@@ -66,17 +80,18 @@ public abstract class ClusterGen<DEV> extends Object {
 	///////////
 
 	/**	L'entité « page_ »
-	 *	 est défini comme null avant d'être initialisé. 
+	 *	 is defined as null before being initialized. 
 	 */
 	protected MiseEnPage page_;
 	public Couverture<MiseEnPage> page_Couverture = new Couverture<MiseEnPage>().p(this).c(MiseEnPage.class).var("page_").o(page_);
 
-	/**	L'entité « page_ »
-	 *	 est défini comme null avant d'être initialisé. 
-	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
-	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
-	 */
-	protected abstract void _page_(Couverture<MiseEnPage> o) throws Exception;
+	/**	<br/>L'entité « page_ »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.cluster.Cluster&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:page_">Trouver l'entité page_ dans Solr</a>
+	 * <br/>
+	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
+	protected abstract void _page_(Couverture<MiseEnPage> o);
 
 	public MiseEnPage getPage_() {
 		return page_;
@@ -84,8 +99,10 @@ public abstract class ClusterGen<DEV> extends Object {
 
 	public void setPage_(MiseEnPage o) {
 		this.page_ = o;
+		this.page_Couverture.dejaInitialise = true;
 	}
-	protected Cluster page_Init() throws Exception {
+	protected Cluster page_Init()
+ {
 		if(!page_Couverture.dejaInitialise) {
 			_page_(page_Couverture);
 			if(page_ == null)
@@ -100,17 +117,18 @@ public abstract class ClusterGen<DEV> extends Object {
 	////////
 
 	/**	L'entité « pk »
-	 *	 est défini comme null avant d'être initialisé. 
+	 *	 is defined as null before being initialized. 
 	 */
 	protected Long pk;
 	public Couverture<Long> pkCouverture = new Couverture<Long>().p(this).c(Long.class).var("pk").o(pk);
 
-	/**	L'entité « pk »
-	 *	 est défini comme null avant d'être initialisé. 
-	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
-	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
-	 */
-	protected abstract void _pk(Couverture<Long> o) throws Exception;
+	/**	<br/>L'entité « pk »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.cluster.Cluster&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:pk">Trouver l'entité pk dans Solr</a>
+	 * <br/>
+	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
+	protected abstract void _pk(Couverture<Long> o);
 
 	public Long getPk() {
 		return pk;
@@ -118,13 +136,16 @@ public abstract class ClusterGen<DEV> extends Object {
 
 	public void setPk(Long o) {
 		this.pk = o;
+		this.pkCouverture.dejaInitialise = true;
 	}
-	public Cluster setPk(String o) throws Exception {
+	public Cluster setPk(String o) {
 		if(org.apache.commons.lang3.math.NumberUtils.isCreatable(o))
 			this.pk = Long.parseLong(o);
+		this.pkCouverture.dejaInitialise = true;
 		return (Cluster)this;
 	}
-	protected Cluster pkInit() throws Exception {
+	protected Cluster pkInit()
+ {
 		if(!pkCouverture.dejaInitialise) {
 			_pk(pkCouverture);
 			if(pk == null)
@@ -134,22 +155,84 @@ public abstract class ClusterGen<DEV> extends Object {
 		return (Cluster)this;
 	}
 
+	public Long solrPk() {
+		return pk;
+	}
+
+	public String strPk() {
+		return pk == null ? "" : pk.toString();
+	}
+
+	public String nomAffichagePk() {
+		return null;
+	}
+
+	public String htmTooltipPk() {
+		return null;
+	}
+
+	public String htmPk() {
+		return pk == null ? "" : StringEscapeUtils.escapeHtml4(strPk());
+	}
+
+	public void htmPk(ToutEcrivain r, Boolean patchDroits) {
+		if(id!= null) {
+			r.s("<div id=\"patchCluster", strId(), "Pk\">");
+			if(patchDroits) {
+				r.l();
+				r.l("	<script>//<![CDATA[");
+				r.l("		function patchCluster", strId(), "Pk() {");
+				r.l("			$.ajax({");
+				r.l("				url: '/api/v1/warfarin/cluster?fq=id:", strId(), "',");
+				r.l("				dataType: 'json',");
+				r.l("				type: 'patch',");
+				r.l("				contentType: 'application/json',");
+				r.l("				processData: false,");
+				r.l("				success: function( data, textStatus, jQxhr ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				error: function( jqXhr, textStatus, errorThrown ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				data: {\"setPk\": this.value },");
+				r.l("				");
+				r.l("			});");
+				r.l("		}");
+				r.l("	//]]></script>");
+				r.l("	<div class=\"\">");
+				r.l("		<label class=\"w3-tooltip \">");
+				r.l("			<span>", StringEscapeUtils.escapeHtml4(nomAffichagePk()), "</span>");
+				r.s("			<input");
+							r.s(" name=\"pk\"");
+							r.s(" value=\"", htmPk(), "\");");
+							r.s(" onchange=\"\"");
+							r.l("/>");
+				r.l("		</label>");
+				r.l("	</div>");
+			} else {
+				r.s(htmPk());
+			}
+			r.l("</div>");
+		}
+	}
+
 	////////
 	// id //
 	////////
 
 	/**	L'entité « id »
-	 *	 est défini comme null avant d'être initialisé. 
+	 *	 is defined as null before being initialized. 
 	 */
 	protected String id;
 	public Couverture<String> idCouverture = new Couverture<String>().p(this).c(String.class).var("id").o(id);
 
-	/**	L'entité « id »
-	 *	 est défini comme null avant d'être initialisé. 
-	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
-	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
-	 */
-	protected abstract void _id(Couverture<String> o) throws Exception;
+	/**	<br/>L'entité « id »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.cluster.Cluster&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:id">Trouver l'entité id dans Solr</a>
+	 * <br/>
+	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
+	protected abstract void _id(Couverture<String> o);
 
 	public String getId() {
 		return id;
@@ -157,8 +240,10 @@ public abstract class ClusterGen<DEV> extends Object {
 
 	public void setId(String o) {
 		this.id = o;
+		this.idCouverture.dejaInitialise = true;
 	}
-	protected Cluster idInit() throws Exception {
+	protected Cluster idInit()
+ {
 		if(!idCouverture.dejaInitialise) {
 			_id(idCouverture);
 			if(id == null)
@@ -168,22 +253,84 @@ public abstract class ClusterGen<DEV> extends Object {
 		return (Cluster)this;
 	}
 
+	public String solrId() {
+		return id;
+	}
+
+	public String strId() {
+		return id == null ? "" : id;
+	}
+
+	public String nomAffichageId() {
+		return null;
+	}
+
+	public String htmTooltipId() {
+		return null;
+	}
+
+	public String htmId() {
+		return id == null ? "" : StringEscapeUtils.escapeHtml4(strId());
+	}
+
+	public void htmId(ToutEcrivain r, Boolean patchDroits) {
+		if(id!= null) {
+			r.s("<div id=\"patchCluster", strId(), "Id\">");
+			if(patchDroits) {
+				r.l();
+				r.l("	<script>//<![CDATA[");
+				r.l("		function patchCluster", strId(), "Id() {");
+				r.l("			$.ajax({");
+				r.l("				url: '/api/v1/warfarin/cluster?fq=id:", strId(), "',");
+				r.l("				dataType: 'json',");
+				r.l("				type: 'patch',");
+				r.l("				contentType: 'application/json',");
+				r.l("				processData: false,");
+				r.l("				success: function( data, textStatus, jQxhr ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				error: function( jqXhr, textStatus, errorThrown ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				data: {\"setId\": this.value },");
+				r.l("				");
+				r.l("			});");
+				r.l("		}");
+				r.l("	//]]></script>");
+				r.l("	<div class=\"\">");
+				r.l("		<label class=\"w3-tooltip \">");
+				r.l("			<span>", StringEscapeUtils.escapeHtml4(nomAffichageId()), "</span>");
+				r.s("			<input");
+							r.s(" name=\"id\"");
+							r.s(" value=\"", htmId(), "\");");
+							r.s(" onchange=\"\"");
+							r.l("/>");
+				r.l("		</label>");
+				r.l("	</div>");
+			} else {
+				r.s(htmId());
+			}
+			r.l("</div>");
+		}
+	}
+
 	//////////
 	// cree //
 	//////////
 
 	/**	L'entité « cree »
-	 *	 est défini comme null avant d'être initialisé. 
+	 *	 is defined as null before being initialized. 
 	 */
 	protected LocalDateTime cree;
 	public Couverture<LocalDateTime> creeCouverture = new Couverture<LocalDateTime>().p(this).c(LocalDateTime.class).var("cree").o(cree);
 
-	/**	L'entité « cree »
-	 *	 est défini comme null avant d'être initialisé. 
-	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
-	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
-	 */
-	protected abstract void _cree(Couverture<LocalDateTime> o) throws Exception;
+	/**	<br/>L'entité « cree »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.cluster.Cluster&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:cree">Trouver l'entité cree dans Solr</a>
+	 * <br/>
+	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
+	protected abstract void _cree(Couverture<LocalDateTime> o);
 
 	public LocalDateTime getCree() {
 		return cree;
@@ -191,17 +338,26 @@ public abstract class ClusterGen<DEV> extends Object {
 
 	public void setCree(LocalDateTime o) {
 		this.cree = o;
+		this.creeCouverture.dejaInitialise = true;
+	}
+	public Cluster setCree(Instant o) {
+		this.cree = LocalDateTime.from(o);
+		this.creeCouverture.dejaInitialise = true;
+		return (Cluster)this;
 	}
 	/** Example: 2011-12-03T10:15:30+01:00 **/
-	public Cluster setCree(String o) throws Exception {
-		this.cree = java.time.LocalDateTime.parse(o, java.time.format.DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+	public Cluster setCree(String o) {
+		this.cree = LocalDateTime.parse(o, DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+		this.creeCouverture.dejaInitialise = true;
 		return (Cluster)this;
 	}
-	public Cluster setCree(java.util.Date o) throws Exception {
-		this.cree = java.time.LocalDateTime.ofInstant(o.toInstant(), java.time.ZoneId.systemDefault());
+	public Cluster setCree(Date o) {
+		this.cree = LocalDateTime.ofInstant(o.toInstant(), ZoneId.systemDefault());
+		this.creeCouverture.dejaInitialise = true;
 		return (Cluster)this;
 	}
-	protected Cluster creeInit() throws Exception {
+	protected Cluster creeInit()
+ {
 		if(!creeCouverture.dejaInitialise) {
 			_cree(creeCouverture);
 			if(cree == null)
@@ -211,22 +367,84 @@ public abstract class ClusterGen<DEV> extends Object {
 		return (Cluster)this;
 	}
 
+	public Date solrCree() {
+		return cree == null ? null : Date.from(cree.atZone(ZoneId.systemDefault()).toInstant());
+	}
+
+	public String strCree() {
+		return cree == null ? "" : cree.toString();
+	}
+
+	public String nomAffichageCree() {
+		return null;
+	}
+
+	public String htmTooltipCree() {
+		return null;
+	}
+
+	public String htmCree() {
+		return cree == null ? "" : StringEscapeUtils.escapeHtml4(strCree());
+	}
+
+	public void htmCree(ToutEcrivain r, Boolean patchDroits) {
+		if(id!= null) {
+			r.s("<div id=\"patchCluster", strId(), "Cree\">");
+			if(patchDroits) {
+				r.l();
+				r.l("	<script>//<![CDATA[");
+				r.l("		function patchCluster", strId(), "Cree() {");
+				r.l("			$.ajax({");
+				r.l("				url: '/api/v1/warfarin/cluster?fq=id:", strId(), "',");
+				r.l("				dataType: 'json',");
+				r.l("				type: 'patch',");
+				r.l("				contentType: 'application/json',");
+				r.l("				processData: false,");
+				r.l("				success: function( data, textStatus, jQxhr ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				error: function( jqXhr, textStatus, errorThrown ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				data: {\"setCree\": this.value },");
+				r.l("				");
+				r.l("			});");
+				r.l("		}");
+				r.l("	//]]></script>");
+				r.l("	<div class=\"\">");
+				r.l("		<label class=\"w3-tooltip \">");
+				r.l("			<span>", StringEscapeUtils.escapeHtml4(nomAffichageCree()), "</span>");
+				r.s("			<input");
+							r.s(" name=\"cree\"");
+							r.s(" value=\"", htmCree(), "\");");
+							r.s(" onchange=\"\"");
+							r.l("/>");
+				r.l("		</label>");
+				r.l("	</div>");
+			} else {
+				r.s(htmCree());
+			}
+			r.l("</div>");
+		}
+	}
+
 	/////////////
 	// modifie //
 	/////////////
 
 	/**	L'entité « modifie »
-	 *	 est défini comme null avant d'être initialisé. 
+	 *	 is defined as null before being initialized. 
 	 */
 	protected LocalDateTime modifie;
 	public Couverture<LocalDateTime> modifieCouverture = new Couverture<LocalDateTime>().p(this).c(LocalDateTime.class).var("modifie").o(modifie);
 
-	/**	L'entité « modifie »
-	 *	 est défini comme null avant d'être initialisé. 
-	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
-	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
-	 */
-	protected abstract void _modifie(Couverture<LocalDateTime> o) throws Exception;
+	/**	<br/>L'entité « modifie »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.cluster.Cluster&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:modifie">Trouver l'entité modifie dans Solr</a>
+	 * <br/>
+	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
+	protected abstract void _modifie(Couverture<LocalDateTime> o);
 
 	public LocalDateTime getModifie() {
 		return modifie;
@@ -234,17 +452,26 @@ public abstract class ClusterGen<DEV> extends Object {
 
 	public void setModifie(LocalDateTime o) {
 		this.modifie = o;
+		this.modifieCouverture.dejaInitialise = true;
+	}
+	public Cluster setModifie(Instant o) {
+		this.modifie = LocalDateTime.from(o);
+		this.modifieCouverture.dejaInitialise = true;
+		return (Cluster)this;
 	}
 	/** Example: 2011-12-03T10:15:30+01:00 **/
-	public Cluster setModifie(String o) throws Exception {
-		this.modifie = java.time.LocalDateTime.parse(o, java.time.format.DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+	public Cluster setModifie(String o) {
+		this.modifie = LocalDateTime.parse(o, DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+		this.modifieCouverture.dejaInitialise = true;
 		return (Cluster)this;
 	}
-	public Cluster setModifie(java.util.Date o) throws Exception {
-		this.modifie = java.time.LocalDateTime.ofInstant(o.toInstant(), java.time.ZoneId.systemDefault());
+	public Cluster setModifie(Date o) {
+		this.modifie = LocalDateTime.ofInstant(o.toInstant(), ZoneId.systemDefault());
+		this.modifieCouverture.dejaInitialise = true;
 		return (Cluster)this;
 	}
-	protected Cluster modifieInit() throws Exception {
+	protected Cluster modifieInit()
+ {
 		if(!modifieCouverture.dejaInitialise) {
 			_modifie(modifieCouverture);
 			if(modifie == null)
@@ -254,22 +481,84 @@ public abstract class ClusterGen<DEV> extends Object {
 		return (Cluster)this;
 	}
 
+	public Date solrModifie() {
+		return modifie == null ? null : Date.from(modifie.atZone(ZoneId.systemDefault()).toInstant());
+	}
+
+	public String strModifie() {
+		return modifie == null ? "" : modifie.toString();
+	}
+
+	public String nomAffichageModifie() {
+		return null;
+	}
+
+	public String htmTooltipModifie() {
+		return null;
+	}
+
+	public String htmModifie() {
+		return modifie == null ? "" : StringEscapeUtils.escapeHtml4(strModifie());
+	}
+
+	public void htmModifie(ToutEcrivain r, Boolean patchDroits) {
+		if(id!= null) {
+			r.s("<div id=\"patchCluster", strId(), "Modifie\">");
+			if(patchDroits) {
+				r.l();
+				r.l("	<script>//<![CDATA[");
+				r.l("		function patchCluster", strId(), "Modifie() {");
+				r.l("			$.ajax({");
+				r.l("				url: '/api/v1/warfarin/cluster?fq=id:", strId(), "',");
+				r.l("				dataType: 'json',");
+				r.l("				type: 'patch',");
+				r.l("				contentType: 'application/json',");
+				r.l("				processData: false,");
+				r.l("				success: function( data, textStatus, jQxhr ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				error: function( jqXhr, textStatus, errorThrown ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				data: {\"setModifie\": this.value },");
+				r.l("				");
+				r.l("			});");
+				r.l("		}");
+				r.l("	//]]></script>");
+				r.l("	<div class=\"\">");
+				r.l("		<label class=\"w3-tooltip \">");
+				r.l("			<span>", StringEscapeUtils.escapeHtml4(nomAffichageModifie()), "</span>");
+				r.s("			<input");
+							r.s(" name=\"modifie\"");
+							r.s(" value=\"", htmModifie(), "\");");
+							r.s(" onchange=\"\"");
+							r.l("/>");
+				r.l("		</label>");
+				r.l("	</div>");
+			} else {
+				r.s(htmModifie());
+			}
+			r.l("</div>");
+		}
+	}
+
 	///////////////////
 	// utilisateurId //
 	///////////////////
 
 	/**	L'entité « utilisateurId »
-	 *	 est défini comme null avant d'être initialisé. 
+	 *	 is defined as null before being initialized. 
 	 */
 	protected String utilisateurId;
 	public Couverture<String> utilisateurIdCouverture = new Couverture<String>().p(this).c(String.class).var("utilisateurId").o(utilisateurId);
 
-	/**	L'entité « utilisateurId »
-	 *	 est défini comme null avant d'être initialisé. 
-	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
-	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
-	 */
-	protected abstract void _utilisateurId(Couverture<String> o) throws Exception;
+	/**	<br/>L'entité « utilisateurId »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.cluster.Cluster&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:utilisateurId">Trouver l'entité utilisateurId dans Solr</a>
+	 * <br/>
+	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
+	protected abstract void _utilisateurId(Couverture<String> o);
 
 	public String getUtilisateurId() {
 		return utilisateurId;
@@ -277,8 +566,10 @@ public abstract class ClusterGen<DEV> extends Object {
 
 	public void setUtilisateurId(String o) {
 		this.utilisateurId = o;
+		this.utilisateurIdCouverture.dejaInitialise = true;
 	}
-	protected Cluster utilisateurIdInit() throws Exception {
+	protected Cluster utilisateurIdInit()
+ {
 		if(!utilisateurIdCouverture.dejaInitialise) {
 			_utilisateurId(utilisateurIdCouverture);
 			if(utilisateurId == null)
@@ -288,22 +579,84 @@ public abstract class ClusterGen<DEV> extends Object {
 		return (Cluster)this;
 	}
 
+	public String solrUtilisateurId() {
+		return utilisateurId;
+	}
+
+	public String strUtilisateurId() {
+		return utilisateurId == null ? "" : utilisateurId;
+	}
+
+	public String nomAffichageUtilisateurId() {
+		return null;
+	}
+
+	public String htmTooltipUtilisateurId() {
+		return null;
+	}
+
+	public String htmUtilisateurId() {
+		return utilisateurId == null ? "" : StringEscapeUtils.escapeHtml4(strUtilisateurId());
+	}
+
+	public void htmUtilisateurId(ToutEcrivain r, Boolean patchDroits) {
+		if(id!= null) {
+			r.s("<div id=\"patchCluster", strId(), "UtilisateurId\">");
+			if(patchDroits) {
+				r.l();
+				r.l("	<script>//<![CDATA[");
+				r.l("		function patchCluster", strId(), "UtilisateurId() {");
+				r.l("			$.ajax({");
+				r.l("				url: '/api/v1/warfarin/cluster?fq=id:", strId(), "',");
+				r.l("				dataType: 'json',");
+				r.l("				type: 'patch',");
+				r.l("				contentType: 'application/json',");
+				r.l("				processData: false,");
+				r.l("				success: function( data, textStatus, jQxhr ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				error: function( jqXhr, textStatus, errorThrown ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				data: {\"setUtilisateurId\": this.value },");
+				r.l("				");
+				r.l("			});");
+				r.l("		}");
+				r.l("	//]]></script>");
+				r.l("	<div class=\"\">");
+				r.l("		<label class=\"w3-tooltip \">");
+				r.l("			<span>", StringEscapeUtils.escapeHtml4(nomAffichageUtilisateurId()), "</span>");
+				r.s("			<input");
+							r.s(" name=\"utilisateurId\"");
+							r.s(" value=\"", htmUtilisateurId(), "\");");
+							r.s(" onchange=\"\"");
+							r.l("/>");
+				r.l("		</label>");
+				r.l("	</div>");
+			} else {
+				r.s(htmUtilisateurId());
+			}
+			r.l("</div>");
+		}
+	}
+
 	/////////////////////////
 	// clusterNomCanonique //
 	/////////////////////////
 
 	/**	L'entité « clusterNomCanonique »
-	 *	 est défini comme null avant d'être initialisé. 
+	 *	 is defined as null before being initialized. 
 	 */
 	protected String clusterNomCanonique;
 	public Couverture<String> clusterNomCanoniqueCouverture = new Couverture<String>().p(this).c(String.class).var("clusterNomCanonique").o(clusterNomCanonique);
 
-	/**	L'entité « clusterNomCanonique »
-	 *	 est défini comme null avant d'être initialisé. 
-	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
-	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
-	 */
-	protected abstract void _clusterNomCanonique(Couverture<String> o) throws Exception;
+	/**	<br/>L'entité « clusterNomCanonique »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.cluster.Cluster&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:clusterNomCanonique">Trouver l'entité clusterNomCanonique dans Solr</a>
+	 * <br/>
+	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
+	protected abstract void _clusterNomCanonique(Couverture<String> o);
 
 	public String getClusterNomCanonique() {
 		return clusterNomCanonique;
@@ -311,8 +664,10 @@ public abstract class ClusterGen<DEV> extends Object {
 
 	public void setClusterNomCanonique(String o) {
 		this.clusterNomCanonique = o;
+		this.clusterNomCanoniqueCouverture.dejaInitialise = true;
 	}
-	protected Cluster clusterNomCanoniqueInit() throws Exception {
+	protected Cluster clusterNomCanoniqueInit()
+ {
 		if(!clusterNomCanoniqueCouverture.dejaInitialise) {
 			_clusterNomCanonique(clusterNomCanoniqueCouverture);
 			if(clusterNomCanonique == null)
@@ -322,22 +677,84 @@ public abstract class ClusterGen<DEV> extends Object {
 		return (Cluster)this;
 	}
 
+	public String solrClusterNomCanonique() {
+		return clusterNomCanonique;
+	}
+
+	public String strClusterNomCanonique() {
+		return clusterNomCanonique == null ? "" : clusterNomCanonique;
+	}
+
+	public String nomAffichageClusterNomCanonique() {
+		return null;
+	}
+
+	public String htmTooltipClusterNomCanonique() {
+		return null;
+	}
+
+	public String htmClusterNomCanonique() {
+		return clusterNomCanonique == null ? "" : StringEscapeUtils.escapeHtml4(strClusterNomCanonique());
+	}
+
+	public void htmClusterNomCanonique(ToutEcrivain r, Boolean patchDroits) {
+		if(id!= null) {
+			r.s("<div id=\"patchCluster", strId(), "ClusterNomCanonique\">");
+			if(patchDroits) {
+				r.l();
+				r.l("	<script>//<![CDATA[");
+				r.l("		function patchCluster", strId(), "ClusterNomCanonique() {");
+				r.l("			$.ajax({");
+				r.l("				url: '/api/v1/warfarin/cluster?fq=id:", strId(), "',");
+				r.l("				dataType: 'json',");
+				r.l("				type: 'patch',");
+				r.l("				contentType: 'application/json',");
+				r.l("				processData: false,");
+				r.l("				success: function( data, textStatus, jQxhr ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				error: function( jqXhr, textStatus, errorThrown ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				data: {\"setClusterNomCanonique\": this.value },");
+				r.l("				");
+				r.l("			});");
+				r.l("		}");
+				r.l("	//]]></script>");
+				r.l("	<div class=\"\">");
+				r.l("		<label class=\"w3-tooltip \">");
+				r.l("			<span>", StringEscapeUtils.escapeHtml4(nomAffichageClusterNomCanonique()), "</span>");
+				r.s("			<input");
+							r.s(" name=\"clusterNomCanonique\"");
+							r.s(" value=\"", htmClusterNomCanonique(), "\");");
+							r.s(" onchange=\"\"");
+							r.l("/>");
+				r.l("		</label>");
+				r.l("	</div>");
+			} else {
+				r.s(htmClusterNomCanonique());
+			}
+			r.l("</div>");
+		}
+	}
+
 	//////////////////////
 	// clusterNomSimple //
 	//////////////////////
 
 	/**	L'entité « clusterNomSimple »
-	 *	 est défini comme null avant d'être initialisé. 
+	 *	 is defined as null before being initialized. 
 	 */
 	protected String clusterNomSimple;
 	public Couverture<String> clusterNomSimpleCouverture = new Couverture<String>().p(this).c(String.class).var("clusterNomSimple").o(clusterNomSimple);
 
-	/**	L'entité « clusterNomSimple »
-	 *	 est défini comme null avant d'être initialisé. 
-	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
-	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
-	 */
-	protected abstract void _clusterNomSimple(Couverture<String> o) throws Exception;
+	/**	<br/>L'entité « clusterNomSimple »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.cluster.Cluster&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:clusterNomSimple">Trouver l'entité clusterNomSimple dans Solr</a>
+	 * <br/>
+	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
+	protected abstract void _clusterNomSimple(Couverture<String> o);
 
 	public String getClusterNomSimple() {
 		return clusterNomSimple;
@@ -345,8 +762,10 @@ public abstract class ClusterGen<DEV> extends Object {
 
 	public void setClusterNomSimple(String o) {
 		this.clusterNomSimple = o;
+		this.clusterNomSimpleCouverture.dejaInitialise = true;
 	}
-	protected Cluster clusterNomSimpleInit() throws Exception {
+	protected Cluster clusterNomSimpleInit()
+ {
 		if(!clusterNomSimpleCouverture.dejaInitialise) {
 			_clusterNomSimple(clusterNomSimpleCouverture);
 			if(clusterNomSimple == null)
@@ -356,22 +775,84 @@ public abstract class ClusterGen<DEV> extends Object {
 		return (Cluster)this;
 	}
 
+	public String solrClusterNomSimple() {
+		return clusterNomSimple;
+	}
+
+	public String strClusterNomSimple() {
+		return clusterNomSimple == null ? "" : clusterNomSimple;
+	}
+
+	public String nomAffichageClusterNomSimple() {
+		return null;
+	}
+
+	public String htmTooltipClusterNomSimple() {
+		return null;
+	}
+
+	public String htmClusterNomSimple() {
+		return clusterNomSimple == null ? "" : StringEscapeUtils.escapeHtml4(strClusterNomSimple());
+	}
+
+	public void htmClusterNomSimple(ToutEcrivain r, Boolean patchDroits) {
+		if(id!= null) {
+			r.s("<div id=\"patchCluster", strId(), "ClusterNomSimple\">");
+			if(patchDroits) {
+				r.l();
+				r.l("	<script>//<![CDATA[");
+				r.l("		function patchCluster", strId(), "ClusterNomSimple() {");
+				r.l("			$.ajax({");
+				r.l("				url: '/api/v1/warfarin/cluster?fq=id:", strId(), "',");
+				r.l("				dataType: 'json',");
+				r.l("				type: 'patch',");
+				r.l("				contentType: 'application/json',");
+				r.l("				processData: false,");
+				r.l("				success: function( data, textStatus, jQxhr ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				error: function( jqXhr, textStatus, errorThrown ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				data: {\"setClusterNomSimple\": this.value },");
+				r.l("				");
+				r.l("			});");
+				r.l("		}");
+				r.l("	//]]></script>");
+				r.l("	<div class=\"\">");
+				r.l("		<label class=\"w3-tooltip \">");
+				r.l("			<span>", StringEscapeUtils.escapeHtml4(nomAffichageClusterNomSimple()), "</span>");
+				r.s("			<input");
+							r.s(" name=\"clusterNomSimple\"");
+							r.s(" value=\"", htmClusterNomSimple(), "\");");
+							r.s(" onchange=\"\"");
+							r.l("/>");
+				r.l("		</label>");
+				r.l("	</div>");
+			} else {
+				r.s(htmClusterNomSimple());
+			}
+			r.l("</div>");
+		}
+	}
+
 	//////////////
 	// supprime //
 	//////////////
 
 	/**	L'entité « supprime »
-	 *	 est défini comme null avant d'être initialisé. 
+	 *	 is defined as null before being initialized. 
 	 */
 	protected Boolean supprime;
 	public Couverture<Boolean> supprimeCouverture = new Couverture<Boolean>().p(this).c(Boolean.class).var("supprime").o(supprime);
 
-	/**	L'entité « supprime »
-	 *	 est défini comme null avant d'être initialisé. 
-	 *	@param o est pour envelopper une valeur à assigner à ce champ lors de l'initialisation. 
-	 *	@throws java.lang.Exception afin que toute exception lors de l'initialisation est gérée par le servlet. 
-	 */
-	protected abstract void _supprime(Couverture<Boolean> o) throws Exception;
+	/**	<br/>L'entité « supprime »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.cluster.Cluster&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:supprime">Trouver l'entité supprime dans Solr</a>
+	 * <br/>
+	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
+	protected abstract void _supprime(Couverture<Boolean> o);
 
 	public Boolean getSupprime() {
 		return supprime;
@@ -379,13 +860,16 @@ public abstract class ClusterGen<DEV> extends Object {
 
 	public void setSupprime(Boolean o) {
 		this.supprime = o;
+		this.supprimeCouverture.dejaInitialise = true;
 	}
-	public Cluster setSupprime(String o) throws Exception {
+	public Cluster setSupprime(String o) {
 		if(org.apache.commons.lang3.BooleanUtils.isTrue(org.apache.commons.lang3.BooleanUtils.toBoolean(o)))
 			this.supprime = Boolean.parseBoolean(o);
+		this.supprimeCouverture.dejaInitialise = true;
 		return (Cluster)this;
 	}
-	protected Cluster supprimeInit() throws Exception {
+	protected Cluster supprimeInit()
+ {
 		if(!supprimeCouverture.dejaInitialise) {
 			_supprime(supprimeCouverture);
 			if(supprime == null)
@@ -395,20 +879,82 @@ public abstract class ClusterGen<DEV> extends Object {
 		return (Cluster)this;
 	}
 
-	/////////////////////
-	// initialiserLoin //
-	/////////////////////
+	public Boolean solrSupprime() {
+		return supprime;
+	}
+
+	public String strSupprime() {
+		return supprime == null ? "" : supprime.toString();
+	}
+
+	public String nomAffichageSupprime() {
+		return null;
+	}
+
+	public String htmTooltipSupprime() {
+		return null;
+	}
+
+	public String htmSupprime() {
+		return supprime == null ? "" : StringEscapeUtils.escapeHtml4(strSupprime());
+	}
+
+	public void htmSupprime(ToutEcrivain r, Boolean patchDroits) {
+		if(id!= null) {
+			r.s("<div id=\"patchCluster", strId(), "Supprime\">");
+			if(patchDroits) {
+				r.l();
+				r.l("	<script>//<![CDATA[");
+				r.l("		function patchCluster", strId(), "Supprime() {");
+				r.l("			$.ajax({");
+				r.l("				url: '/api/v1/warfarin/cluster?fq=id:", strId(), "',");
+				r.l("				dataType: 'json',");
+				r.l("				type: 'patch',");
+				r.l("				contentType: 'application/json',");
+				r.l("				processData: false,");
+				r.l("				success: function( data, textStatus, jQxhr ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				error: function( jqXhr, textStatus, errorThrown ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				data: {\"setSupprime\": this.value },");
+				r.l("				");
+				r.l("			});");
+				r.l("		}");
+				r.l("	//]]></script>");
+				r.l("	<div class=\"\">");
+				r.l("		<label class=\"w3-tooltip \">");
+				r.l("			<span>", StringEscapeUtils.escapeHtml4(nomAffichageSupprime()), "</span>");
+				r.s("			<input");
+							r.s(" name=\"supprime\"");
+							r.s(" value=\"", htmSupprime(), "\");");
+							r.s(" onchange=\"\"");
+							r.l("/>");
+				r.l("		</label>");
+				r.l("	</div>");
+			} else {
+				r.s(htmSupprime());
+			}
+			r.l("</div>");
+		}
+	}
+
+	//////////////
+	// initLoin //
+	//////////////
 
 	protected boolean dejaInitialiseCluster = false;
 
-	public Cluster initLoinCluster(RequeteSite requeteSite) throws Exception {
+	public Cluster initLoinCluster(RequeteSite requeteSite) {
 		setRequeteSite_(requeteSite);
 		initLoinCluster();
 		return (Cluster)this;
 	}
 
-	public Cluster initLoinCluster() throws Exception {
+	public Cluster initLoinCluster() {
 		if(!dejaInitialiseCluster) {
+			dejaInitialiseCluster = true;
 			requeteSite_Init();
 			page_Init();
 			pkInit();
@@ -419,12 +965,11 @@ public abstract class ClusterGen<DEV> extends Object {
 			clusterNomCanoniqueInit();
 			clusterNomSimpleInit();
 			supprimeInit();
-			dejaInitialiseCluster = true;
 		}
 		return (Cluster)this;
 	}
 
-	public void initLoinPourClasse(RequeteSite requeteSite) throws Exception {
+	public void initLoinPourClasse(RequeteSite requeteSite) {
 		initLoinCluster(requeteSite);
 	}
 
@@ -432,10 +977,10 @@ public abstract class ClusterGen<DEV> extends Object {
 	// requeteSite //
 	/////////////////
 
-	public void requeteSiteCluster(RequeteSite requeteSite) throws Exception {
+	public void requeteSiteCluster(RequeteSite requeteSite) {
 	}
 
-	public void requeteSitePourClasse(RequeteSite requeteSite) throws Exception {
+	public void requeteSitePourClasse(RequeteSite requeteSite) {
 		requeteSiteCluster(requeteSite);
 	}
 
@@ -446,10 +991,10 @@ public abstract class ClusterGen<DEV> extends Object {
 	public void indexerCluster() throws Exception {
 		RequeteSite requeteSite = new RequeteSite();
 		requeteSite.initLoinRequeteSite();
-		SiteContexte SiteContexte = new SiteContexte();
-		SiteContexte.initLoinSiteContexte();
-		SiteContexte.setRequeteSite_(requeteSite);
-		requeteSite.setSiteContexte_(SiteContexte);
+		SiteContexte siteContexte = new SiteContexte();
+		siteContexte.initLoinSiteContexte();
+		siteContexte.setRequeteSite_(requeteSite);
+		requeteSite.setSiteContexte_(siteContexte);
 		requeteSiteCluster(requeteSite);
 		initLoinCluster(requeteSite);
 		indexerCluster(requeteSite);
@@ -466,7 +1011,6 @@ public abstract class ClusterGen<DEV> extends Object {
 	public void indexerCluster(RequeteSite requeteSite) throws Exception {
 		SolrInputDocument document = new SolrInputDocument();
 		indexerCluster(document);
-		document.addField("sauvegardesCluster_stored_strings", sauvegardesCluster);
 		SolrClient clientSolr = requeteSite_.getSiteContexte_().getClientSolr();
 		clientSolr.add(document);
 		clientSolr.commit();
@@ -474,31 +1018,46 @@ public abstract class ClusterGen<DEV> extends Object {
 
 	public void indexerCluster(SolrInputDocument document) throws Exception {
 		if(pk != null) {
-			document.addField("pk_indexe_long", pk);
-			document.addField("pk_stocke_long", pk);
+			document.addField("pk_indexed_long", pk);
+			document.addField("pk_stored_long", pk);
 		}
 		if(id != null) {
+			document.addField("id", id);
 		}
 		if(cree != null) {
-			document.addField("cree_indexe_date", java.time.format.DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(java.time.ZonedDateTime.ofInstant(cree, java.time.OffsetDateTime.now().getOffset(), java.time.ZoneId.of("UTC"))));
-			document.addField("cree_stocke_date", java.time.format.DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(java.time.ZonedDateTime.ofInstant(cree, java.time.OffsetDateTime.now().getOffset(), java.time.ZoneId.of("UTC"))));
+			document.addField("cree_indexed_date", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(java.time.ZonedDateTime.ofInstant(cree, java.time.OffsetDateTime.now().getOffset(), ZoneId.systemDefault())));
+			document.addField("cree_stored_date", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(java.time.ZonedDateTime.ofInstant(cree, java.time.OffsetDateTime.now().getOffset(), ZoneId.systemDefault())));
 		}
 		if(modifie != null) {
-			document.addField("modifie_indexe_date", java.time.format.DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(java.time.ZonedDateTime.ofInstant(modifie, java.time.OffsetDateTime.now().getOffset(), java.time.ZoneId.of("UTC"))));
-			document.addField("modifie_stocke_date", java.time.format.DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(java.time.ZonedDateTime.ofInstant(modifie, java.time.OffsetDateTime.now().getOffset(), java.time.ZoneId.of("UTC"))));
+			document.addField("modifie_indexed_date", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(java.time.ZonedDateTime.ofInstant(modifie, java.time.OffsetDateTime.now().getOffset(), ZoneId.systemDefault())));
+			document.addField("modifie_stored_date", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(java.time.ZonedDateTime.ofInstant(modifie, java.time.OffsetDateTime.now().getOffset(), ZoneId.systemDefault())));
 		}
 		if(utilisateurId != null) {
-			document.addField("utilisateurId_indexe_string", utilisateurId);
-			document.addField("utilisateurId_stocke_string", utilisateurId);
+			document.addField("utilisateurId_indexed_string", utilisateurId);
+			document.addField("utilisateurId_stored_string", utilisateurId);
 		}
 		if(clusterNomCanonique != null) {
-			document.addField("clusterNomCanonique_indexe_string", clusterNomCanonique);
-			document.addField("clusterNomCanonique_stocke_string", clusterNomCanonique);
+			document.addField("clusterNomCanonique_indexed_string", clusterNomCanonique);
+			document.addField("clusterNomCanonique_stored_string", clusterNomCanonique);
 		}
 		if(clusterNomSimple != null) {
-			document.addField("clusterNomSimple_indexe_string", clusterNomSimple);
-			document.addField("clusterNomSimple_stocke_string", clusterNomSimple);
+			document.addField("clusterNomSimple_indexed_string", clusterNomSimple);
+			document.addField("clusterNomSimple_stored_string", clusterNomSimple);
 		}
+	}
+
+	public void desindexerCluster() throws Exception {
+		RequeteSite requeteSite = new RequeteSite();
+		requeteSite.initLoinRequeteSite();
+		SiteContexte siteContexte = new SiteContexte();
+		siteContexte.initLoinSiteContexte();
+		siteContexte.setRequeteSite_(requeteSite);
+		requeteSite.setSiteContexte_(siteContexte);
+		requeteSite.setConfigSite_(siteContexte.getConfigSite());
+		initLoinCluster(siteContexte.getRequeteSite_());
+		SolrClient clientSolr = siteContexte.getClientSolr();
+		clientSolr.deleteById(id.toString());
+		clientSolr.commit();
 	}
 
 	/////////////
@@ -506,7 +1065,7 @@ public abstract class ClusterGen<DEV> extends Object {
 	/////////////
 
 	public Object obtenirPourClasse(String var) throws Exception {
-		String[] vars = org.apache.commons.lang3.StringUtils.split(var, ".");
+		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
 			if(o == null)
@@ -551,7 +1110,7 @@ public abstract class ClusterGen<DEV> extends Object {
 	///////////////
 
 	public boolean attribuerPourClasse(String var, Object val) throws Exception {
-		String[] vars = org.apache.commons.lang3.StringUtils.split(var, ".");
+		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
 			if(o == null)
@@ -572,241 +1131,108 @@ public abstract class ClusterGen<DEV> extends Object {
 	}
 
 	/////////////
-	// definir //
-	/////////////
-
-	public boolean definirPourClasse(String var, String...vals) throws Exception {
-		String[] vars = org.apache.commons.lang3.StringUtils.split(var, ".");
-		Object o = null;
-		String val = vals == null ? null : vals[vals.length - 1];
-		if(val != null) {
-			for(String v : vars) {
-				if(o == null)
-					o = definirCluster(v, val);
-				else if(o instanceof Cluster) {
-					Cluster cluster = (Cluster)o;
-					o = cluster.definirPourClasse(v, val);
-				}
-			}
-		}
-		return o != null;
-	}
-	public Object definirCluster(String var, String val) throws Exception {
-		Cluster oCluster = (Cluster)this;
-		switch(var) {
-			case "pk":
-				oCluster.setPk(val);
-				return val;
-			case "id":
-				oCluster.setId(val);
-				return val;
-			case "cree":
-				oCluster.setCree(val);
-				return val;
-			case "modifie":
-				oCluster.setModifie(val);
-				return val;
-			case "utilisateurId":
-				oCluster.setUtilisateurId(val);
-				return val;
-			case "clusterNomCanonique":
-				oCluster.setClusterNomCanonique(val);
-				return val;
-			case "clusterNomSimple":
-				oCluster.setClusterNomSimple(val);
-				return val;
-			case "supprime":
-				oCluster.setSupprime(val);
-				return val;
-			default:
-				return null;
-		}
-	}
-
-	/////////////
 	// peupler //
 	/////////////
 
-	public void peuplerPourClasse(org.apache.solr.common.SolrDocument documentSolr) throws Exception {
-		sauvegardesCluster = (java.util.ArrayList<String>)documentSolr.get("sauvegardesCluster_stored_strings");
-		peuplerCluster(documentSolr);
+	public void peuplerPourClasse(SolrDocument solrDocument) {
+		sauvegardesCluster = (List<String>)solrDocument.get("sauvegardesCluster_stored_strings");
+		peuplerCluster(solrDocument);
 	}
-	public void peuplerCluster(org.apache.solr.common.SolrDocument documentSolr) throws Exception {
+	public void peuplerCluster(SolrDocument solrDocument) {
 		Cluster oCluster = (Cluster)this;
 
-				java.lang.Long pk = (java.lang.Long)documentSolr.get("pk_stocke_long");
-				if(pk != null)
-					oCluster.setPk(pk);
-
-				java.util.Date cree = (java.util.Date)documentSolr.get("cree_stocke_date");
-				if(cree != null)
-					oCluster.setCree(cree);
-
-				java.util.Date modifie = (java.util.Date)documentSolr.get("modifie_stocke_date");
-				if(modifie != null)
-					oCluster.setModifie(modifie);
-
-				java.lang.String utilisateurId = (java.lang.String)documentSolr.get("utilisateurId_stocke_string");
-				if(utilisateurId != null)
-					oCluster.setUtilisateurId(utilisateurId);
-
-				java.lang.String clusterNomCanonique = (java.lang.String)documentSolr.get("clusterNomCanonique_stocke_string");
-				if(clusterNomCanonique != null)
-					oCluster.setClusterNomCanonique(clusterNomCanonique);
-
-				java.lang.String clusterNomSimple = (java.lang.String)documentSolr.get("clusterNomSimple_stocke_string");
-				if(clusterNomSimple != null)
-					oCluster.setClusterNomSimple(clusterNomSimple);
-	}
-
-	////////////
-	// existe //
-	////////////
-
-	public Boolean existePourClasse() throws Exception {
-		String pkStr = requeteSite_.getRequeteServeur().getParam("pk");
-		Long pk = org.apache.commons.lang3.StringUtils.isNumeric(pkStr) ? Long.parseLong(pkStr) : null;
-		Boolean existe = existePourClasse(pk);
-		return existe;
-	}
-	public Boolean existePourClasse(Long pk) throws Exception {
-		PGSimpleDataSource o = new PGSimpleDataSource();
-		o.setUrl(urlSourceDonneesSimple);
-		org.apache.commons.dbutils.QueryRunner coureur = new org.apache.commons.dbutils.QueryRunner(requeteSite_.SiteContexte.sourceDonnees);
-		org.apache.commons.dbutils.handlers.ArrayListHandler gestionnaireListe = new org.apache.commons.dbutils.handlers.ArrayListHandler();
-		utilisateurId = requeteSite_.utilisateurId;
-		this.pk = pk;
-		String nomCanonique = getClass().getCanonicalName();
-		Boolean existe = false;
-		
-		if(pk == null) {
-			String sql = "select pk from objet where objet.id_utilisateur=? and objet.nom_canonique=?";
-			java.util.List<Object[]> resultats = coureur.query(sql, gestionnaireListe /*select count(*) from objet where objet.id_utilisateur=*/, requeteSite_.utilisateurId /* and objet.nom_canonique=*/, nomCanonique);
-			existe = resultats.size() > 0;
-			if(existe) {
-				pk = (Long)resultats.get(0)[0];
-				setPk(pk);
-			}
-
-			Vertx vertx;
-			SQLClient clientSql = requeteSite_.getSiteContexte_().getClientSql();
-
-			dbClient.getConnection(ar -> {
-				if (ar.failed()) {
-					LOGGER.error("Could not open a database connection", ar.cause());
-					future.fail(ar.cause());
-				} else {
-					SQLConnection connection = ar.result();
-					connection.queryWithParams(sql, new JsonArray().add(/*select count(*) from objet where objet.id_utilisateur=*/, requeteSite_.utilisateurId /* and objet.nom_canonique=*/, nomCanonique), fetch -> {
-						connection.close();
-						if (fetch.succeeded()) {
-
-							JsonArray row = fetch.result().getResults().stream().findFirst()
-									.orElseGet(() -> new JsonArray().add(-1).add(EMPTY_PAGE_MARKDOWN));
-							Integer id = row.getInteger(0);
-							String rawContent = row.getString(1);
-
-							context.put("title", page);
-							context.put("id", id);
-							context.put("newPage", fetch.result().getResults().size() == 0 ? "yes" : "no");
-							context.put("rawContent", rawContent);
-							context.put("content", Processor.process(rawContent));
-							context.put("timestamp", new Date().toString());
-
-							templateEngine.render(context, "templates", "/page.ftl", ar -> {
-								if (ar.succeeded()) {
-									context.response().putHeader("Content-Type", "text/html");
-									context.response().end(ar.result());
-								} else {
-									context.fail(ar.cause());
-								}
-							});
-						} else {
-							context.fail(fetch.cause());
-						}
-					});
-					//					connection.execute(sql, create -> {
-//						connection.close();
-//						if (create.failed()) {
-//							LOGGER.error("Database preparation error", create.cause());
-//							future.fail(create.cause());
-//						} else {
-//							future.complete();
-//						}
-//					});
-				}
-			});
+		if(sauvegardesCluster.contains("pk")) {
+			Long pk = (Long)solrDocument.get("pk_stored_long");
+			if(pk != null)
+				oCluster.setPk(pk);
 		}
-		else {
-			String sql = "select count(*) from objet where objet.pk=? and objet.id_utilisateur=? and objet.nom_canonique=?";
-			java.util.List<Object[]> resultats = coureur.query(sql, gestionnaireListe /*select count(*) from objet where objet.pk=*/, pk /* and objet.id_utilisateur=*/, requeteSite_.utilisateurId /* and objet.nom_canonique=*/, nomCanonique);
-			existe = ((Long)resultats.get(0)[0]) > 0L;
+
+		if(sauvegardesCluster.contains("id")) {
+			String id = (String)solrDocument.get("id_stored_string");
+			oCluster.setId(id);
 		}
-		return existe;
+
+		if(sauvegardesCluster.contains("cree")) {
+			Date cree = (Date)solrDocument.get("cree_stored_date");
+			if(cree != null)
+				oCluster.setCree(cree);
+		}
+
+		if(sauvegardesCluster.contains("modifie")) {
+			Date modifie = (Date)solrDocument.get("modifie_stored_date");
+			if(modifie != null)
+				oCluster.setModifie(modifie);
+		}
+
+		if(sauvegardesCluster.contains("utilisateurId")) {
+			String utilisateurId = (String)solrDocument.get("utilisateurId_stored_string");
+			if(utilisateurId != null)
+				oCluster.setUtilisateurId(utilisateurId);
+		}
+
+		if(sauvegardesCluster.contains("clusterNomCanonique")) {
+			String clusterNomCanonique = (String)solrDocument.get("clusterNomCanonique_stored_string");
+			if(clusterNomCanonique != null)
+				oCluster.setClusterNomCanonique(clusterNomCanonique);
+		}
+
+		if(sauvegardesCluster.contains("clusterNomSimple")) {
+			String clusterNomSimple = (String)solrDocument.get("clusterNomSimple_stored_string");
+			if(clusterNomSimple != null)
+				oCluster.setClusterNomSimple(clusterNomSimple);
+		}
 	}
 
 	/////////////////
 	// sauvegardes //
 	/////////////////
 
-	protected java.util.ArrayList<String> sauvegardesCluster = new java.util.ArrayList<String>();
-	public void sauvegardesPourClasse(RequeteSite requeteSite) throws Exception {
-		org.apache.commons.dbutils.QueryRunner coureur = new org.apache.commons.dbutils.QueryRunner(requeteSite.SiteContexte.sourceDonnees);
-		org.apache.commons.dbutils.handlers.ArrayListHandler gestionnaireListe = new org.apache.commons.dbutils.handlers.ArrayListHandler();
-		
-		if(pk != null) {
-			String sql = "select cree, modifie from objet where objet.pk=?";
-			java.util.List<Object[]> resultats = coureur.query(sql, gestionnaireListe /*select cree, modifie from objet where objet.pk=*/, pk);
-			if(resultats.size() > 0) {
-				cree((java.util.Date)resultats.get(0)[0]);
-				modifie((java.util.Date)resultats.get(0)[1]);
-			}
-			sql = "select chemin, valeur from p where p.pk_objet=? union select champ2, pk2::text from a where a.pk1=? union select champ1, pk1::text from a where a.pk2=? ";
-			resultats = coureur.query(sql, gestionnaireListe /*select chemin, valeur from p where p.pk_objet=*/, pk, pk, pk);
-			for(Object[] objets : resultats) {
-				String chemin = (String)objets[0];
-				String valeur = requeteSite.decrypterStr((String)objets[1]);
-				definirPourClasse(chemin, valeur);
-				sauvegardesCluster.add(chemin);
-			}
-		}
+	protected List<String> sauvegardesCluster = new ArrayList<String>();
+
+	//////////////
+	// hashCode //
+	//////////////
+
+	@Override public int hashCode() {
+		return Objects.hash(pk, id, cree, modifie, utilisateurId, clusterNomCanonique, clusterNomSimple, supprime);
 	}
 
-	/////////////////
-	// sauvegarder //
-	/////////////////
+	////////////
+	// equals //
+	////////////
 
-	public void sauvegarderPourClasse(RequeteSite requeteSite) throws Exception {
-		org.apache.commons.dbutils.QueryRunner coureur = new org.apache.commons.dbutils.QueryRunner(requeteSite.SiteContexte.sourceDonnees);
-		org.apache.commons.dbutils.handlers.ArrayListHandler gestionnaireListe = new org.apache.commons.dbutils.handlers.ArrayListHandler();
-		String pkStr = requeteSite_.getRequeteServeur().getParam("pk");
-		pk = org.apache.commons.lang3.StringUtils.isNumeric(pkStr) ? Long.parseLong(pkStr) : null;
-		utilisateurId = requeteSite.utilisateurId;
-		String nomCanonique = getClass().getCanonicalName();
-		modifie = java.time.LocalDateTime.now();
-		java.sql.Timestamp horodatage = java.sql.Timestamp.valueOf(modifie);
-		
-		if(pk == null) {
-			String sql = "insert into objet(nom_canonique, id_utilisateur, cree, modifie) values(?, ?, ?, ?) returning pk";
-			java.util.List<Object[]> resultats = coureur.insert(sql, gestionnaireListe /*insert into objet(nom_canonique, id_utilisateur, cree, modifie) values(*/, nomCanonique, requeteSite.utilisateurId, horodatage, horodatage /*) returning pk, cree*/);
-			pk = (Long)resultats.get(0)[0];
-			cree = modifie;
-		}
-		else {
-			String sql = "update objet set modifie=? where objet.pk=? and objet.id_utilisateur=? and objet.nom_canonique=? returning cree";
-			java.util.List<Object[]> resultats = coureur.query(sql, gestionnaireListe /*update objet set modifie=*/, horodatage /* where objet.pk=*/, pk /* and objet.id_utilisateur=*/, requeteSite.utilisateurId /* and objet.nom_canonique=*/, nomCanonique /* returning cree*/);
-			if(resultats.size() == 0)
-				throw new Exception("L'objet avec le pk " + pk + " et nom canonique " + pk + " pour utilisateur " + requeteSite.utilisateurId + " " + requeteSite.utilisateurNom + " n'existe pas dejà. ");
-			horodatage = (java.sql.Timestamp)resultats.get(0)[0];
-			cree = java.time.LocalDateTime.from(horodatage.toLocalDateTime());
-		}
-
-		String sqlInsertP = "insert into p(chemin, valeur, pk_objet) values(?, ?, ?) on conflict(chemin, pk_objet) do update set valeur=? where p.chemin=? and p.pk_objet=?";
-		String sqlInsertA = "insert into a(champ1, pk1, champ2, pk2) values(?, ?, ?, ?) on conflict  do nothing";
-		String sqlDeleteP = "delete from p where chemin=? and pk_objet=?";
-		String sqlDeleteA = "delete from a where champ1=? and pk1=? and champ2=? and pk2=?";
-		sauvegarderCluster(requeteSite, sqlInsertP, sqlInsertA, sqlDeleteP, sqlDeleteA, gestionnaireListe, coureur);
+	@Override public boolean equals(Object o) {
+		if(this == o)
+			return true;
+		if(!(o instanceof Cluster))
+			return false;
+		Cluster that = (Cluster)o;
+		return Objects.equals( pk, that.pk )
+				&& Objects.equals( id, that.id )
+				&& Objects.equals( cree, that.cree )
+				&& Objects.equals( modifie, that.modifie )
+				&& Objects.equals( utilisateurId, that.utilisateurId )
+				&& Objects.equals( clusterNomCanonique, that.clusterNomCanonique )
+				&& Objects.equals( clusterNomSimple, that.clusterNomSimple )
+				&& Objects.equals( supprime, that.supprime );
 	}
-	public void sauvegarderCluster(RequeteSite requeteSite, String sqlInsertP, String sqlInsertA, String sqlDeleteP, String sqlDeleteA, org.apache.commons.dbutils.handlers.ArrayListHandler gestionnaireListe, org.apache.commons.dbutils.QueryRunner coureur) throws Exception {
+
+	//////////////
+	// toString //
+	//////////////
+
+	@Override public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Cluster {");
+		sb.append( "pk: " ).append(pk);
+		sb.append( ", id: \"" ).append(id).append( "\"" );
+		sb.append( ", cree: " ).append(cree);
+		sb.append( ", modifie: " ).append(modifie);
+		sb.append( ", utilisateurId: \"" ).append(utilisateurId).append( "\"" );
+		sb.append( ", clusterNomCanonique: \"" ).append(clusterNomCanonique).append( "\"" );
+		sb.append( ", clusterNomSimple: \"" ).append(clusterNomSimple).append( "\"" );
+		sb.append( ", supprime: " ).append(supprime);
+		sb.append(" }");
+		return sb.toString();
 	}
 }
