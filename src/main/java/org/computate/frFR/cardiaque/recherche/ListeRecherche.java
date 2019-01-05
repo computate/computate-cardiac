@@ -68,6 +68,8 @@ public class ListeRecherche<DEV> extends ListeRechercheGen<DEV> {
 			try {
 				DEV o = c.newInstance();
 				MethodUtils.invokeMethod(o, "peuplerPourClasse", solrDocument);
+				MethodUtils.invokeMethod(o, "initLoinPourClasse", requeteSite_);
+				l.add(o);
 			} catch (InstantiationException e) {
 				System.err.println(ExceptionUtils.getStackTrace(e));
 			} catch (IllegalAccessException e) {

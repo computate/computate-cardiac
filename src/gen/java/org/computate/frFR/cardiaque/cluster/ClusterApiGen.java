@@ -2,6 +2,7 @@ package org.computate.frFR.cardiaque.cluster;
 
 import org.computate.frFR.cardiaque.recherche.ResultatRecherche;
 import java.util.Arrays;
+import org.computate.frFR.cardiaque.recherche.ListeRecherche;
 import io.vertx.ext.web.api.validation.ParameterTypeValidator;
 import org.computate.frFR.cardiaque.config.ConfigSite;
 import org.apache.solr.common.SolrDocumentList;
@@ -42,6 +43,7 @@ import io.vertx.core.json.Json;
 import java.time.LocalDateTime;
 import io.vertx.core.logging.LoggerFactory;
 import java.util.ArrayList;
+import io.vertx.core.CompositeFuture;
 import io.vertx.ext.web.api.validation.HTTPRequestValidationHandler;
 import io.vertx.core.AsyncResult;
 import io.vertx.ext.web.api.validation.ValidationException;
@@ -195,17 +197,17 @@ public class ClusterApiGen implements ClusterApiService {
 		}
 	}
 
-	public Future<List<Cluster>> rechercheCluster(RequeteSite requeteSite) {
+	public Future<ListeRecherche<Cluster>> rechercheCluster(RequeteSite requeteSite) {
 		String entiteVar = null;
 		String valeurIndexe = null;
 		String varIndexe = null;
 		String valeurTri = null;
 		Integer rechercheDebut = null;
 		Integer rechercheNum = null;
-		SolrQuery rechercheSolr = new SolrQuery();
-		rechercheSolr.setQuery("*:*");
-		rechercheSolr.setRows(1000000);
-		rechercheSolr.addSort("partNumero_indexed_int", ORDER.asc);
+		ListeRecherche<Cluster> listeRecherche = new ListeRecherche<Cluster>();
+		listeRecherche.setQuery("*:*");
+		listeRecherche.setRows(1000000);
+		listeRecherche.addSort("partNumero_indexed_int", ORDER.asc);
 		MultiMap paramMap = requeteSite.getRequeteServeur().params();
 		for(String paramCle : paramMap.names()) {
 			List<String> paramValeurs = paramMap.getAll(paramCle);
@@ -216,32 +218,32 @@ public class ClusterApiGen implements ClusterApiService {
 							entiteVar = StringUtils.trim(StringUtils.substringBefore(paramValeur, ":"));
 							valeurIndexe = StringUtils.trim(StringUtils.substringAfter(paramValeur, ":"));
 							varIndexe = varIndexeCluster(paramCle);
-							rechercheSolr.setQuery(varIndexe + ":" + ClientUtils.escapeQueryChars(valeurIndexe));
+							listeRecherche.setQuery(varIndexe + ":" + ClientUtils.escapeQueryChars(valeurIndexe));
 							break;
 						case "fq":
 							entiteVar = StringUtils.trim(StringUtils.substringBefore(paramValeur, ":"));
 							valeurIndexe = StringUtils.trim(StringUtils.substringAfter(paramValeur, ":"));
 							varIndexe = varIndexeCluster(paramCle);
-							rechercheSolr.addFilterQuery(varIndexe + ":" + ClientUtils.escapeQueryChars(valeurIndexe));
+							listeRecherche.addFilterQuery(varIndexe + ":" + ClientUtils.escapeQueryChars(valeurIndexe));
 							break;
 						case "sort":
 							entiteVar = StringUtils.trim(StringUtils.substringBefore(paramValeur, " "));
 							valeurTri = StringUtils.trim(StringUtils.substringAfter(paramValeur, " "));
 							varIndexe = varIndexeCluster(paramCle);
-							rechercheSolr.addSort(varIndexe, ORDER.valueOf(valeurTri));
+							listeRecherche.addSort(varIndexe, ORDER.valueOf(valeurTri));
 							break;
 						case "fl":
 							entiteVar = StringUtils.trim(paramValeur);
 							varIndexe = varIndexeCluster(paramCle);
-							rechercheSolr.addField(varIndexe);
+							listeRecherche.addField(varIndexe);
 							break;
 						case "start":
 							rechercheDebut = Integer.parseInt(paramValeur);
-							rechercheSolr.setStart(rechercheDebut);
+							listeRecherche.setStart(rechercheDebut);
 							break;
 						case "rows":
 							rechercheNum = Integer.parseInt(paramValeur);
-							rechercheSolr.setRows(rechercheNum);
+							listeRecherche.setRows(rechercheNum);
 							break;
 					}
 				} catch(Exception e) {
@@ -249,18 +251,8 @@ public class ClusterApiGen implements ClusterApiService {
 				}
 			}
 		}
-		List<Cluster> listeCluster = new ArrayList<Cluster>();
-		try {
-			QueryResponse reponseRecherche = requeteSite.getSiteContexte_().getClientSolr().query(rechercheSolr);
-			for(SolrDocument documentSolr : reponseRecherche.getResults()) {
-				Cluster o = new Cluster();
-				o.peuplerPourClasse(documentSolr);
-				listeCluster.add(o);
-			}
-		} catch(Exception e) {
-			return Future.failedFuture(e);
-		}
-		return Future.succeededFuture(listeCluster);
+		listeRecherche.initLoinPourClasse(requeteSite);
+		return Future.succeededFuture(listeRecherche);
 	}
 
 	public RequeteSite genererRequeteSitePourCluster(SiteContexte siteContexte) throws Exception {
@@ -344,7 +336,12 @@ public class ClusterApiGen implements ClusterApiService {
 
 	@Override
 	public void postCluster(JsonObject document, Handler<AsyncResult<OperationResponse>> resultHandler) {
-		RequeteSite requeteSite = genererRequeteSitePourCluster(siteContexte);
+		RequeteSite requeteSite;
+		try {
+			requeteSite = genererRequeteSitePourCluster(siteContexte);
+		} catch(Exception e) {
+			resultHandler.handle(Future.failedFuture(e));
+		}
 		Future<OperationResponse> etapesFutures = sqlCluster(requeteSite).compose(
 			a -> creerCluster(requeteSite).compose(
 				cluster -> definirCluster(cluster).compose(
@@ -361,7 +358,12 @@ public class ClusterApiGen implements ClusterApiService {
 
 	@Override
 	public void patchCluster(JsonObject document, Handler<AsyncResult<OperationResponse>> resultHandler) {
-		RequeteSite requeteSite = genererRequeteSitePourCluster(siteContexte);
+		RequeteSite requeteSite;
+		try {
+			requeteSite = genererRequeteSitePourCluster(siteContexte);
+		} catch(Exception e) {
+			resultHandler.handle(Future.failedFuture(e));
+		}
 		Future<OperationResponse> etapesFutures = sqlCluster(requeteSite).compose(
 			a -> rechercheCluster(requeteSite).compose(
 				listeCluster -> patchCluster(requeteSite).compose(
@@ -467,6 +469,18 @@ public class ClusterApiGen implements ClusterApiService {
 		return future;
 	}
 
+	public Future<Void> patchListeCluster(RequeteSite requeteSite, List<Cluster> listeCluster) {
+		List<Future> futures = new ArrayList<>();
+		listeCluster.forEach(o -> { futures.add(indexerCluster(o)); });
+		CompositeFuture.all(futures).setHandler(ar -> {
+			if(ar.succeeded()) {
+				patchJsonCluster(listeCluster);
+				future.complete();
+			} else {
+			}
+		});
+	}
+
 	public Future<Void> patchCluster(RequeteSite requeteSite) {
 		Future<Void> future = Future.future();
 		RequeteSite requeteSite = o.getRequeteSite_();
@@ -524,8 +538,8 @@ public class ClusterApiGen implements ClusterApiService {
 		return future;
 	}
 
-	public Future<Cluster> definirCluster(Cluster o) {
-		Future<Cluster> future = Future.future();
+	public Future<Void> definirCluster(Cluster o) {
+		Future<Void> future = Future.future();
 		RequeteSite requeteSite = o.getRequeteSite_();
 		SQLConnection connexionSql = requeteSite.getConnexionSql();
 		Long pk = o.getPk();
@@ -542,8 +556,8 @@ public class ClusterApiGen implements ClusterApiService {
 		return future;
 	}
 
-	public Future<Cluster> attribuerCluster(Cluster o) {
-		Future<Cluster> future = Future.future();
+	public Future<Void> attribuerCluster(Cluster o) {
+		Future<Void> future = Future.future();
 		RequeteSite requeteSite = o.getRequeteSite_();
 		SQLConnection connexionSql = requeteSite.getConnexionSql();
 		Long pk = o.getPk();
@@ -560,8 +574,8 @@ public class ClusterApiGen implements ClusterApiService {
 		return future;
 	}
 
-	public Future<Cluster> indexerCluster(Cluster o) {
-		Future<Cluster> future = Future.future();
+	public Future<Void> indexerCluster(Cluster o) {
+		Future<Void> future = Future.future();
 		RequeteSite requeteSite = o.getRequeteSite_();
 		try {
 			o.initLoinPourClasse(requeteSite);
@@ -580,7 +594,7 @@ public class ClusterApiGen implements ClusterApiService {
 		return Future.succeededFuture(OperationResponse.completedWithJson(buffer));
 	}
 
-	public Future<OperationResponse> patchJsonCluster(RequeteSite requeteSite) {
+	public Future<OperationResponse> patchJsonCluster(List<Cluster> listeCluster) {
 		Buffer buffer = Buffer.buffer();
 		return Future.succeededFuture(OperationResponse.completedWithJson(buffer));
 	}
