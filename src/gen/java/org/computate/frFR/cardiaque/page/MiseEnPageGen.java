@@ -8,6 +8,7 @@ import org.apache.commons.text.StringEscapeUtils;
 import java.time.Instant;
 import org.apache.commons.lang3.StringUtils;
 import java.lang.Integer;
+import java.lang.Exception;
 import java.time.ZoneId;
 import java.util.Objects;
 import org.apache.solr.common.SolrDocument;
@@ -115,7 +116,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _w(Couverture<ToutEcrivain> o);
+	protected abstract void _w(Couverture<ToutEcrivain> o) throws Exception;
 
 	public ToutEcrivain getW() {
 		return w;
@@ -126,7 +127,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		this.wCouverture.dejaInitialise = true;
 	}
 	protected MiseEnPage wInit()
- {
+ throws Exception {
 		if(!wCouverture.dejaInitialise) {
 			_w(wCouverture);
 			if(w == null)
@@ -164,7 +165,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		this.pageVisibleAuxBots = o;
 		this.pageVisibleAuxBotsCouverture.dejaInitialise = true;
 	}
-	public MiseEnPage setPageVisibleAuxBots(String o) throws Exception {
+	public MiseEnPage setPageVisibleAuxBots(String o) {
 		if(org.apache.commons.lang3.BooleanUtils.isTrue(org.apache.commons.lang3.BooleanUtils.toBoolean(o)))
 			this.pageVisibleAuxBots = Boolean.parseBoolean(o);
 		this.pageVisibleAuxBotsCouverture.dejaInitialise = true;
@@ -977,7 +978,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		this.pageImageLargeur = o;
 		this.pageImageLargeurCouverture.dejaInitialise = true;
 	}
-	public MiseEnPage setPageImageLargeur(String o) throws Exception {
+	public MiseEnPage setPageImageLargeur(String o) {
 		if(org.apache.commons.lang3.math.NumberUtils.isCreatable(o))
 			this.pageImageLargeur = Integer.parseInt(o);
 		this.pageImageLargeurCouverture.dejaInitialise = true;
@@ -1040,7 +1041,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		this.pageImageHauteur = o;
 		this.pageImageHauteurCouverture.dejaInitialise = true;
 	}
-	public MiseEnPage setPageImageHauteur(String o) throws Exception {
+	public MiseEnPage setPageImageHauteur(String o) {
 		if(org.apache.commons.lang3.math.NumberUtils.isCreatable(o))
 			this.pageImageHauteur = Integer.parseInt(o);
 		this.pageImageHauteurCouverture.dejaInitialise = true;
@@ -1274,18 +1275,18 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		this.pageCree = o;
 		this.pageCreeCouverture.dejaInitialise = true;
 	}
-	public MiseEnPage setPageCree(Instant o) throws Exception {
+	public MiseEnPage setPageCree(Instant o) {
 		this.pageCree = LocalDateTime.from(o);
 		this.pageCreeCouverture.dejaInitialise = true;
 		return (MiseEnPage)this;
 	}
 	/** Example: 2011-12-03T10:15:30+01:00 **/
-	public MiseEnPage setPageCree(String o) throws Exception {
+	public MiseEnPage setPageCree(String o) {
 		this.pageCree = LocalDateTime.parse(o, DateTimeFormatter.ISO_OFFSET_DATE_TIME);
 		this.pageCreeCouverture.dejaInitialise = true;
 		return (MiseEnPage)this;
 	}
-	public MiseEnPage setPageCree(Date o) throws Exception {
+	public MiseEnPage setPageCree(Date o) {
 		this.pageCree = LocalDateTime.ofInstant(o.toInstant(), ZoneId.systemDefault());
 		this.pageCreeCouverture.dejaInitialise = true;
 		return (MiseEnPage)this;
@@ -1347,18 +1348,18 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		this.pageModifiee = o;
 		this.pageModifieeCouverture.dejaInitialise = true;
 	}
-	public MiseEnPage setPageModifiee(Instant o) throws Exception {
+	public MiseEnPage setPageModifiee(Instant o) {
 		this.pageModifiee = LocalDateTime.from(o);
 		this.pageModifieeCouverture.dejaInitialise = true;
 		return (MiseEnPage)this;
 	}
 	/** Example: 2011-12-03T10:15:30+01:00 **/
-	public MiseEnPage setPageModifiee(String o) throws Exception {
+	public MiseEnPage setPageModifiee(String o) {
 		this.pageModifiee = LocalDateTime.parse(o, DateTimeFormatter.ISO_OFFSET_DATE_TIME);
 		this.pageModifieeCouverture.dejaInitialise = true;
 		return (MiseEnPage)this;
 	}
-	public MiseEnPage setPageModifiee(Date o) throws Exception {
+	public MiseEnPage setPageModifiee(Date o) {
 		this.pageModifiee = LocalDateTime.ofInstant(o.toInstant(), ZoneId.systemDefault());
 		this.pageModifieeCouverture.dejaInitialise = true;
 		return (MiseEnPage)this;
@@ -1685,49 +1686,52 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 
 	protected boolean dejaInitialiseMiseEnPage = false;
 
-	public MiseEnPage initLoinMiseEnPage(RequeteSite requeteSite) {
+	public MiseEnPage initLoinMiseEnPage(RequeteSite requeteSite) throws Exception {
 		setRequeteSite_(requeteSite);
-		initLoinMiseEnPage();
-		return (MiseEnPage)this;
-	}
-
-	public MiseEnPage initLoinMiseEnPage() {
 		if(!dejaInitialiseMiseEnPage) {
 			dejaInitialiseMiseEnPage = true;
-			requeteSite_Init();
-			solrDocumentInit();
-			wInit();
-			pageVisibleAuxBotsInit();
-			pageH1Init();
-			pageH2Init();
-			pageH1CourtInit();
-			pageH2CourtInit();
-			pageTitreInit();
-			pageUriInit();
-			pageUrisInit();
-			pageUrlInit();
-			pageImageUriInit();
-			pageImageUrlInit();
-			pageVideoIdInit();
-			pageVideoUrlInit();
-			pageVideoUrlEmbedInit();
-			pageImageLargeurInit();
-			pageImageHauteurInit();
-			pageImageTypeContenuInit();
-			pageMethodeInit();
-			pageTypeContenuInit();
-			pageCreeInit();
-			pageModifieeInit();
-			pageAccueilUriInit();
-			pageAProposUriInit();
-			pageFaqUriInit();
-			pageUtilisateurUriInit();
-			pageDeconnexionUriInit();
+			initLoinMiseEnPage();
 		}
 		return (MiseEnPage)this;
 	}
 
-	public void initLoinPourClasse(RequeteSite requeteSite) {
+	public void initLoinMiseEnPage() throws Exception {
+		initMiseEnPage();
+	}
+
+	public void initMiseEnPage() throws Exception {
+		requeteSite_Init();
+		solrDocumentInit();
+		wInit();
+		pageVisibleAuxBotsInit();
+		pageH1Init();
+		pageH2Init();
+		pageH1CourtInit();
+		pageH2CourtInit();
+		pageTitreInit();
+		pageUriInit();
+		pageUrisInit();
+		pageUrlInit();
+		pageImageUriInit();
+		pageImageUrlInit();
+		pageVideoIdInit();
+		pageVideoUrlInit();
+		pageVideoUrlEmbedInit();
+		pageImageLargeurInit();
+		pageImageHauteurInit();
+		pageImageTypeContenuInit();
+		pageMethodeInit();
+		pageTypeContenuInit();
+		pageCreeInit();
+		pageModifieeInit();
+		pageAccueilUriInit();
+		pageAProposUriInit();
+		pageFaqUriInit();
+		pageUtilisateurUriInit();
+		pageDeconnexionUriInit();
+	}
+
+	public void initLoinPourClasse(RequeteSite requeteSite) throws Exception {
 		initLoinMiseEnPage(requeteSite);
 	}
 
@@ -1830,7 +1834,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 	// attribuer //
 	///////////////
 
-	public boolean attribuerPourClasse(String var, Object val) throws Exception {
+	public boolean attribuerPourClasse(String var, Object val) {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
@@ -1843,8 +1847,34 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		}
 		return o != null;
 	}
-	public Object attribuerMiseEnPage(String var, Object val) throws Exception {
+	public Object attribuerMiseEnPage(String var, Object val) {
 		MiseEnPage oMiseEnPage = (MiseEnPage)this;
+		switch(var) {
+			default:
+				return null;
+		}
+	}
+
+	/////////////
+	// definir //
+	/////////////
+
+	public boolean definirPourClasse(String var, String val) {
+		String[] vars = StringUtils.split(var, ".");
+		Object o = null;
+		if(val != null) {
+			for(String v : vars) {
+				if(o == null)
+					o = definirMiseEnPage(v, val);
+				else if(o instanceof Cluster) {
+					Cluster cluster = (Cluster)o;
+					o = cluster.definirPourClasse(v, val);
+				}
+			}
+		}
+		return o != null;
+	}
+	public Object definirMiseEnPage(String var, String val) {
 		switch(var) {
 			default:
 				return null;

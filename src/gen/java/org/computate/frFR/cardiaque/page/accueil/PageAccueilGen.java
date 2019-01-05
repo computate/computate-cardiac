@@ -1,9 +1,10 @@
 package org.computate.frFR.cardiaque.page.accueil;
 
+import java.util.Objects;
 import org.computate.frFR.cardiaque.couverture.Couverture;
-import io.vertx.core.http.HttpServerResponse;
 import org.computate.frFR.cardiaque.cluster.Cluster;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
+import org.computate.frFR.cardiaque.ecrivain.ToutEcrivain;
 import org.apache.commons.text.StringEscapeUtils;
 import org.computate.frFR.cardiaque.page.MiseEnPage;
 import java.lang.String;
@@ -31,7 +32,7 @@ public abstract class PageAccueilGen<DEV> extends MiseEnPage {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _pageTitre(Couverture<String> o) throws Exception;
+	protected abstract void _pageTitre(Couverture<String> o);
 
 	public String getPageTitre() {
 		return pageTitre;
@@ -41,7 +42,8 @@ public abstract class PageAccueilGen<DEV> extends MiseEnPage {
 		this.pageTitre = o;
 		this.pageTitreCouverture.dejaInitialise = true;
 	}
-	protected PageAccueil pageTitreInit() throws Exception {
+	protected PageAccueil pageTitreInit()
+ {
 		if(!pageTitreCouverture.dejaInitialise) {
 			_pageTitre(pageTitreCouverture);
 			if(pageTitre == null)
@@ -63,11 +65,11 @@ public abstract class PageAccueilGen<DEV> extends MiseEnPage {
 		return null;
 	}
 
-	public String htmlTooltipPageTitre() {
+	public String htmTooltipPageTitre() {
 		return null;
 	}
 
-	public String htmlPageTitre() {
+	public String htmPageTitre() {
 		return pageTitre == null ? "" : StringEscapeUtils.escapeHtml4(strPageTitre());
 	}
 
@@ -87,7 +89,7 @@ public abstract class PageAccueilGen<DEV> extends MiseEnPage {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _pageUri(Couverture<String> o) throws Exception;
+	protected abstract void _pageUri(Couverture<String> o);
 
 	public String getPageUri() {
 		return pageUri;
@@ -97,7 +99,8 @@ public abstract class PageAccueilGen<DEV> extends MiseEnPage {
 		this.pageUri = o;
 		this.pageUriCouverture.dejaInitialise = true;
 	}
-	protected PageAccueil pageUriInit() throws Exception {
+	protected PageAccueil pageUriInit()
+ {
 		if(!pageUriCouverture.dejaInitialise) {
 			_pageUri(pageUriCouverture);
 			if(pageUri == null)
@@ -119,11 +122,11 @@ public abstract class PageAccueilGen<DEV> extends MiseEnPage {
 		return null;
 	}
 
-	public String htmlTooltipPageUri() {
+	public String htmTooltipPageUri() {
 		return null;
 	}
 
-	public String htmlPageUri() {
+	public String htmPageUri() {
 		return pageUri == null ? "" : StringEscapeUtils.escapeHtml4(strPageUri());
 	}
 
@@ -135,21 +138,24 @@ public abstract class PageAccueilGen<DEV> extends MiseEnPage {
 
 	public PageAccueil initLoinPageAccueil(RequeteSite requeteSite) throws Exception {
 		setRequeteSite_(requeteSite);
-		initLoinPageAccueil();
-		return (PageAccueil)this;
-	}
-
-	public PageAccueil initLoinPageAccueil() throws Exception {
 		if(!dejaInitialisePageAccueil) {
 			dejaInitialisePageAccueil = true;
-			super.initLoinMiseEnPage(requeteSite_);
-			pageTitreInit();
-			pageUriInit();
+			initLoinPageAccueil();
 		}
 		return (PageAccueil)this;
 	}
 
-	public void initLoinPourClasse(RequeteSite requeteSite) throws Exception {
+	public void initLoinPageAccueil() throws Exception {
+		super.initLoinMiseEnPage(requeteSite_);
+		initPageAccueil();
+	}
+
+	public void initPageAccueil() {
+		pageTitreInit();
+		pageUriInit();
+	}
+
+	@Override public void initLoinPourClasse(RequeteSite requeteSite) throws Exception {
 		initLoinPageAccueil(requeteSite);
 	}
 
@@ -157,11 +163,11 @@ public abstract class PageAccueilGen<DEV> extends MiseEnPage {
 	// requeteSite //
 	/////////////////
 
-	public void requeteSitePageAccueil(RequeteSite requeteSite) throws Exception {
+	public void requeteSitePageAccueil(RequeteSite requeteSite) {
 			super.requeteSiteMiseEnPage(requeteSite);
 	}
 
-	public void requeteSitePourClasse(RequeteSite requeteSite) throws Exception {
+	public void requeteSitePourClasse(RequeteSite requeteSite) {
 		requeteSitePageAccueil(requeteSite);
 	}
 
@@ -198,7 +204,7 @@ public abstract class PageAccueilGen<DEV> extends MiseEnPage {
 	// attribuer //
 	///////////////
 
-	@Override public boolean attribuerPourClasse(String var, Object val) throws Exception {
+	@Override public boolean attribuerPourClasse(String var, Object val) {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
@@ -211,11 +217,74 @@ public abstract class PageAccueilGen<DEV> extends MiseEnPage {
 		}
 		return o != null;
 	}
-	public Object attribuerPageAccueil(String var, Object val) throws Exception {
+	public Object attribuerPageAccueil(String var, Object val) {
 		PageAccueil oPageAccueil = (PageAccueil)this;
 		switch(var) {
 			default:
 				return super.attribuerMiseEnPage(var, val);
 		}
+	}
+
+	/////////////
+	// definir //
+	/////////////
+
+	@Override public boolean definirPourClasse(String var, String val) {
+		String[] vars = StringUtils.split(var, ".");
+		Object o = null;
+		if(val != null) {
+			for(String v : vars) {
+				if(o == null)
+					o = definirPageAccueil(v, val);
+				else if(o instanceof Cluster) {
+					Cluster cluster = (Cluster)o;
+					o = cluster.definirPourClasse(v, val);
+				}
+			}
+		}
+		return o != null;
+	}
+	public Object definirPageAccueil(String var, String val) {
+		switch(var) {
+			default:
+				return super.definirMiseEnPage(var, val);
+		}
+	}
+
+	//////////////
+	// hashCode //
+	//////////////
+
+	@Override public int hashCode() {
+		return Objects.hash(super.hashCode(), pageTitre, pageUri);
+	}
+
+	////////////
+	// equals //
+	////////////
+
+	@Override public boolean equals(Object o) {
+		if(this == o)
+			return true;
+		if(!(o instanceof PageAccueil))
+			return false;
+		PageAccueil that = (PageAccueil)o;
+		return super.equals(o)
+				&& Objects.equals( pageTitre, that.pageTitre )
+				&& Objects.equals( pageUri, that.pageUri );
+	}
+
+	//////////////
+	// toString //
+	//////////////
+
+	@Override public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString() + "\n");
+		sb.append("PageAccueil {");
+		sb.append( "pageTitre: \"" ).append(pageTitre).append( "\"" );
+		sb.append( ", pageUri: \"" ).append(pageUri).append( "\"" );
+		sb.append(" }");
+		return sb.toString();
 	}
 }

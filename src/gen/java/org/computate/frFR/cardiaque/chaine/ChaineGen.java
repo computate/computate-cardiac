@@ -8,9 +8,9 @@ import org.apache.commons.text.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import java.util.ArrayList;
 import java.util.Objects;
-import io.vertx.core.http.HttpServerResponse;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
 import java.lang.Boolean;
+import org.computate.frFR.cardiaque.ecrivain.ToutEcrivain;
 import java.lang.Object;
 import java.lang.String;
 
@@ -106,11 +106,11 @@ public abstract class ChaineGen<DEV> extends Object {
 		return null;
 	}
 
-	public String htmlTooltipPolice() {
+	public String htmTooltipPolice() {
 		return null;
 	}
 
-	public String htmlPolice() {
+	public String htmPolice() {
 		return police == null ? "" : StringEscapeUtils.escapeHtml4(strPolice());
 	}
 
@@ -140,7 +140,7 @@ public abstract class ChaineGen<DEV> extends Object {
 		this.alignerCentre = o;
 		this.alignerCentreCouverture.dejaInitialise = true;
 	}
-	public Chaine setAlignerCentre(String o) throws Exception {
+	public Chaine setAlignerCentre(String o) {
 		if(org.apache.commons.lang3.BooleanUtils.isTrue(org.apache.commons.lang3.BooleanUtils.toBoolean(o)))
 			this.alignerCentre = Boolean.parseBoolean(o);
 		this.alignerCentreCouverture.dejaInitialise = true;
@@ -169,11 +169,11 @@ public abstract class ChaineGen<DEV> extends Object {
 		return null;
 	}
 
-	public String htmlTooltipAlignerCentre() {
+	public String htmTooltipAlignerCentre() {
 		return null;
 	}
 
-	public String htmlAlignerCentre() {
+	public String htmAlignerCentre() {
 		return alignerCentre == null ? "" : StringEscapeUtils.escapeHtml4(strAlignerCentre());
 	}
 
@@ -203,7 +203,7 @@ public abstract class ChaineGen<DEV> extends Object {
 		this.alignerGauche = o;
 		this.alignerGaucheCouverture.dejaInitialise = true;
 	}
-	public Chaine setAlignerGauche(String o) throws Exception {
+	public Chaine setAlignerGauche(String o) {
 		if(org.apache.commons.lang3.BooleanUtils.isTrue(org.apache.commons.lang3.BooleanUtils.toBoolean(o)))
 			this.alignerGauche = Boolean.parseBoolean(o);
 		this.alignerGaucheCouverture.dejaInitialise = true;
@@ -232,11 +232,11 @@ public abstract class ChaineGen<DEV> extends Object {
 		return null;
 	}
 
-	public String htmlTooltipAlignerGauche() {
+	public String htmTooltipAlignerGauche() {
 		return null;
 	}
 
-	public String htmlAlignerGauche() {
+	public String htmAlignerGauche() {
 		return alignerGauche == null ? "" : StringEscapeUtils.escapeHtml4(strAlignerGauche());
 	}
 
@@ -266,7 +266,7 @@ public abstract class ChaineGen<DEV> extends Object {
 		this.alignerDroit = o;
 		this.alignerDroitCouverture.dejaInitialise = true;
 	}
-	public Chaine setAlignerDroit(String o) throws Exception {
+	public Chaine setAlignerDroit(String o) {
 		if(org.apache.commons.lang3.BooleanUtils.isTrue(org.apache.commons.lang3.BooleanUtils.toBoolean(o)))
 			this.alignerDroit = Boolean.parseBoolean(o);
 		this.alignerDroitCouverture.dejaInitialise = true;
@@ -295,11 +295,11 @@ public abstract class ChaineGen<DEV> extends Object {
 		return null;
 	}
 
-	public String htmlTooltipAlignerDroit() {
+	public String htmTooltipAlignerDroit() {
 		return null;
 	}
 
-	public String htmlAlignerDroit() {
+	public String htmAlignerDroit() {
 		return alignerDroit == null ? "" : StringEscapeUtils.escapeHtml4(strAlignerDroit());
 	}
 
@@ -421,7 +421,7 @@ public abstract class ChaineGen<DEV> extends Object {
 		this.xDecalage = o;
 		this.xDecalageCouverture.dejaInitialise = true;
 	}
-	public Chaine setXDecalage(String o) throws Exception {
+	public Chaine setXDecalage(String o) {
 		if(org.apache.commons.lang3.math.NumberUtils.isCreatable(o))
 			this.xDecalage = Double.parseDouble(o);
 		this.xDecalageCouverture.dejaInitialise = true;
@@ -450,11 +450,11 @@ public abstract class ChaineGen<DEV> extends Object {
 		return null;
 	}
 
-	public String htmlTooltipXDecalage() {
+	public String htmTooltipXDecalage() {
 		return null;
 	}
 
-	public String htmlXDecalage() {
+	public String htmXDecalage() {
 		return xDecalage == null ? "" : StringEscapeUtils.escapeHtml4(strXDecalage());
 	}
 
@@ -484,7 +484,7 @@ public abstract class ChaineGen<DEV> extends Object {
 		this.yDecalage = o;
 		this.yDecalageCouverture.dejaInitialise = true;
 	}
-	public Chaine setYDecalage(String o) throws Exception {
+	public Chaine setYDecalage(String o) {
 		if(org.apache.commons.lang3.math.NumberUtils.isCreatable(o))
 			this.yDecalage = Double.parseDouble(o);
 		this.yDecalageCouverture.dejaInitialise = true;
@@ -513,11 +513,11 @@ public abstract class ChaineGen<DEV> extends Object {
 		return null;
 	}
 
-	public String htmlTooltipYDecalage() {
+	public String htmTooltipYDecalage() {
 		return null;
 	}
 
-	public String htmlYDecalage() {
+	public String htmYDecalage() {
 		return yDecalage == null ? "" : StringEscapeUtils.escapeHtml4(strYDecalage());
 	}
 
@@ -547,7 +547,7 @@ public abstract class ChaineGen<DEV> extends Object {
 		this.hLigne = o;
 		this.hLigneCouverture.dejaInitialise = true;
 	}
-	public Chaine setHLigne(String o) throws Exception {
+	public Chaine setHLigne(String o) {
 		if(org.apache.commons.lang3.math.NumberUtils.isCreatable(o))
 			this.hLigne = Double.parseDouble(o);
 		this.hLigneCouverture.dejaInitialise = true;
@@ -576,11 +576,11 @@ public abstract class ChaineGen<DEV> extends Object {
 		return null;
 	}
 
-	public String htmlTooltipHLigne() {
+	public String htmTooltipHLigne() {
 		return null;
 	}
 
-	public String htmlHLigne() {
+	public String htmHLigne() {
 		return hLigne == null ? "" : StringEscapeUtils.escapeHtml4(strHLigne());
 	}
 
@@ -610,7 +610,7 @@ public abstract class ChaineGen<DEV> extends Object {
 		this.hEspace = o;
 		this.hEspaceCouverture.dejaInitialise = true;
 	}
-	public Chaine setHEspace(String o) throws Exception {
+	public Chaine setHEspace(String o) {
 		if(org.apache.commons.lang3.math.NumberUtils.isCreatable(o))
 			this.hEspace = Double.parseDouble(o);
 		this.hEspaceCouverture.dejaInitialise = true;
@@ -639,11 +639,11 @@ public abstract class ChaineGen<DEV> extends Object {
 		return null;
 	}
 
-	public String htmlTooltipHEspace() {
+	public String htmTooltipHEspace() {
 		return null;
 	}
 
-	public String htmlHEspace() {
+	public String htmHEspace() {
 		return hEspace == null ? "" : StringEscapeUtils.escapeHtml4(strHEspace());
 	}
 
@@ -701,27 +701,30 @@ public abstract class ChaineGen<DEV> extends Object {
 
 	public Chaine initLoinChaine(RequeteSite requeteSite) {
 		setRequeteSite_(requeteSite);
-		initLoinChaine();
+		if(!dejaInitialiseChaine) {
+			dejaInitialiseChaine = true;
+			initLoinChaine();
+		}
 		return (Chaine)this;
 	}
 
-	public Chaine initLoinChaine() {
-		if(!dejaInitialiseChaine) {
-			dejaInitialiseChaine = true;
-			requeteSite_Init();
-			policeInit();
-			alignerCentreInit();
-			alignerGaucheInit();
-			alignerDroitInit();
-			iconesAvantInit();
-			iconesApresInit();
-			xDecalageInit();
-			yDecalageInit();
-			hLigneInit();
-			hEspaceInit();
-			toutInit();
-		}
-		return (Chaine)this;
+	public void initLoinChaine() {
+		initChaine();
+	}
+
+	public void initChaine() {
+		requeteSite_Init();
+		policeInit();
+		alignerCentreInit();
+		alignerGaucheInit();
+		alignerDroitInit();
+		iconesAvantInit();
+		iconesApresInit();
+		xDecalageInit();
+		yDecalageInit();
+		hLigneInit();
+		hEspaceInit();
+		toutInit();
 	}
 
 	public void initLoinPourClasse(RequeteSite requeteSite) {
@@ -792,7 +795,7 @@ public abstract class ChaineGen<DEV> extends Object {
 	// attribuer //
 	///////////////
 
-	public boolean attribuerPourClasse(String var, Object val) throws Exception {
+	public boolean attribuerPourClasse(String var, Object val) {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
@@ -805,8 +808,34 @@ public abstract class ChaineGen<DEV> extends Object {
 		}
 		return o != null;
 	}
-	public Object attribuerChaine(String var, Object val) throws Exception {
+	public Object attribuerChaine(String var, Object val) {
 		Chaine oChaine = (Chaine)this;
+		switch(var) {
+			default:
+				return null;
+		}
+	}
+
+	/////////////
+	// definir //
+	/////////////
+
+	public boolean definirPourClasse(String var, String val) {
+		String[] vars = StringUtils.split(var, ".");
+		Object o = null;
+		if(val != null) {
+			for(String v : vars) {
+				if(o == null)
+					o = definirChaine(v, val);
+				else if(o instanceof Cluster) {
+					Cluster cluster = (Cluster)o;
+					o = cluster.definirPourClasse(v, val);
+				}
+			}
+		}
+		return o != null;
+	}
+	public Object definirChaine(String var, String val) {
 		switch(var) {
 			default:
 				return null;

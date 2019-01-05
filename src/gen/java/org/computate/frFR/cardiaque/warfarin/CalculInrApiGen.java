@@ -11,6 +11,7 @@ import io.vertx.core.MultiMap;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.reactivestreams.ReactiveReadStream;
 import io.vertx.ext.web.RoutingContext;
+import io.vertx.ext.web.api.OperationResponse;
 import org.apache.commons.lang3.StringUtils;
 import java.math.BigDecimal;
 import java.util.Map;
@@ -24,10 +25,12 @@ import java.sql.Timestamp;
 import java.util.Set;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import java.util.stream.Collectors;
+import io.vertx.core.Future;
 import java.time.ZoneId;
 import org.computate.frFR.cardiaque.contexte.SiteContexte;
 import java.util.List;
 import java.security.Principal;
+import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.HttpServerResponse;
 import org.apache.solr.client.solrj.SolrQuery;
 import io.vertx.ext.auth.oauth2.OAuth2Auth;
@@ -40,6 +43,7 @@ import java.time.LocalDateTime;
 import io.vertx.core.logging.LoggerFactory;
 import java.util.ArrayList;
 import io.vertx.ext.web.api.validation.HTTPRequestValidationHandler;
+import io.vertx.core.AsyncResult;
 import io.vertx.ext.web.api.validation.ValidationException;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import io.vertx.core.Vertx;
@@ -55,73 +59,30 @@ import io.vertx.core.Handler;
 import java.util.Collections;
 
 
-public class CalculInrApiGen {
+public class CalculInrApiGen implements CalculInrApiService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(CalculInrApiGen.class);
 
-	public static final String VAL_nomCanoniqueCalculInr = "org.computate.frFR.cardiaque.warfarin.CalculInr";
-	public static final String VAL_virguleEspace = ", ";
-	public static final String VAL_citation = "\"";
-	public static final String VAL_citationDeuxPointsEspaceCitation = "\": \"";
-	public static final String VAL_citationDeuxPointsEspace = "\": ";
-	public static final String VAL_citationLigne = "\"\n";
-	public static final String VAL_ligne = "\n";
-	public static final String VAL_citationVirguleEspaceCitation = "\", \"";
-	public static final String VAL_citationDeuxPointsEspaceGuillmets = "\": [";
-	public static final String VAL_guillmetsFin = "]";
+	private static final String SERVICE_ADDRESS = "CalculInrApi";
 
-	public static final String ENTITE_VAR_utilisateurPk = "utilisateurPk";
-	public static final String ENTITE_VAR_INDEXE_utilisateurPk = "utilisateurPk_indexed_long";
-	public static final String ENTITE_VAR_STOCKE_utilisateurPk = "utilisateurPk_stored_long";
-	public static final String ENTITE_VAR_utilisateurPk_ATTRIBUER_UtilisateurSite_calculInrPks = "calculInrPks";
+	protected SiteContexte siteContexte;
 
-	public static final String ENTITE_VAR_dateInr = "dateInr";
-	public static final String ENTITE_VAR_INDEXE_dateInr = "dateInr_indexed_date";
-	public static final String ENTITE_VAR_STOCKE_dateInr = "dateInr_stored_date";
-
-	public static final String ENTITE_VAR_dateReverifier = "dateReverifier";
-	public static final String ENTITE_VAR_INDEXE_dateReverifier = "dateReverifier_indexed_date";
-	public static final String ENTITE_VAR_STOCKE_dateReverifier = "dateReverifier_stored_date";
-
-	public static final String ENTITE_VAR_patientPrendCoumadin = "patientPrendCoumadin";
-	public static final String ENTITE_VAR_INDEXE_patientPrendCoumadin = "patientPrendCoumadin_indexed_string";
-	public static final String ENTITE_VAR_STOCKE_patientPrendCoumadin = "patientPrendCoumadin_stored_string";
-
-	public static final String ENTITE_VAR_butActuel = "butActuel";
-	public static final String ENTITE_VAR_INDEXE_butActuel = "butActuel_indexed_string";
-	public static final String ENTITE_VAR_STOCKE_butActuel = "butActuel_stored_string";
-
-	public static final String ENTITE_VAR_doseActuel = "doseActuel";
-	public static final String ENTITE_VAR_INDEXE_doseActuel = "doseActuel_indexed_string";
-	public static final String ENTITE_VAR_STOCKE_doseActuel = "doseActuel_stored_string";
-
-	public static final String ENTITE_VAR_medicamentActuel = "medicamentActuel";
-	public static final String ENTITE_VAR_INDEXE_medicamentActuel = "medicamentActuel_indexed_string";
-	public static final String ENTITE_VAR_STOCKE_medicamentActuel = "medicamentActuel_stored_string";
-
-	public static final String ENTITE_VAR_changementDose = "changementDose";
-	public static final String ENTITE_VAR_INDEXE_changementDose = "changementDose_indexed_string";
-	public static final String ENTITE_VAR_STOCKE_changementDose = "changementDose_stored_string";
-
-	public static final String ENTITE_VAR_notesComplementaires = "notesComplementaires";
-	public static final String ENTITE_VAR_INDEXE_notesComplementaires = "notesComplementaires_indexed_string";
-	public static final String ENTITE_VAR_STOCKE_notesComplementaires = "notesComplementaires_stored_string";
-
-	public static final String ENTITE_VAR_infoContact = "infoContact";
-	public static final String ENTITE_VAR_INDEXE_infoContact = "infoContact_indexed_string";
-	public static final String ENTITE_VAR_STOCKE_infoContact = "infoContact_stored_string";
+	public CalculInrApiGen(SiteContexte siteContexte) {
+		this.siteContexte = siteContexte;
+		CalculInrApiService service = CalculInrApiService.createProxy(siteContexte.getVertx(), SERVICE_ADDRESS);
+	}
 
 	public void handleGetCalculInr(SiteContexte siteContexte) {
-		OpenAPI3RouterFactory usineRouteur = siteContexte.getUsineRouteur_();
+		OpenAPI3RouterFactory usineRouteur = siteContexte.getUsineRouteur();
 
-		usineRouteur.addHandlerByOperationId("getCalculInr", contexteRoutage -> {
-			contexteRoutage.user().isAuthorized("Something", authRes -> {
+		usineRouteur.addHandlerByOperationId("getCalculInr", contexteItineraire -> {
+			contexteItineraire.user().isAuthorized("Something", authRes -> {
 				try {
 					if (authRes.result() == Boolean.TRUE) {
 
-						contexteRoutage.response().putHeader("content-type", "application/json").setChunked(true);
-						RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte, contexteRoutage);
-						SolrQuery rechercheSolr = requeteSite.getRechercheSolr_();
+						contexteItineraire.response().putHeader("content-type", "application/json").setChunked(true);
+						RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte, contexteItineraire);
+						SolrQuery rechercheSolr = requeteSite.getRechercheSolr();
 						SolrDocumentList resultatsRecherche = requeteSite.getReponseRecherche().getResults();
 						Integer rechercheLignes = rechercheSolr.getRows();
 
@@ -141,20 +102,20 @@ public class CalculInrApiGen {
 						requeteSite.getReponseServeur().end();
 					}
 					else {
-						contexteRoutage.response().setStatusCode(HttpResponseStatus.UNAUTHORIZED.code()).end();
+						contexteItineraire.response().setStatusCode(HttpResponseStatus.UNAUTHORIZED.code()).end();
 					}
 				} catch(Exception e) {
 					LOGGER.error("Error: ", e.getMessage());
-					contexteRoutage.fail(e);
+					contexteItineraire.fail(e);
 				}
 			});
 		});
-		usineRouteur.addFailureHandlerByOperationId("getCalculInr", contexteRoutage -> {
-			Throwable failure = contexteRoutage.failure();
+		usineRouteur.addFailureHandlerByOperationId("getCalculInr", contexteItineraire -> {
+			Throwable failure = contexteItineraire.failure();
 			if (failure instanceof ValidationException) {
 				String validationErrorMessage = failure.getMessage();
 				LOGGER.error("Error: ", validationErrorMessage);
-				contexteRoutage.fail(failure);
+				contexteItineraire.fail(failure);
 			}
 		});
 	}
@@ -224,32 +185,32 @@ public class CalculInrApiGen {
 
 	public String varIndexeCalculInr(String entiteVar) throws Exception {
 		switch(entiteVar) {
-			case ENTITE_VAR_utilisateurPk:
-				return ENTITE_VAR_INDEXE_utilisateurPk;
-			case ENTITE_VAR_dateInr:
-				return ENTITE_VAR_INDEXE_dateInr;
-			case ENTITE_VAR_dateReverifier:
-				return ENTITE_VAR_INDEXE_dateReverifier;
-			case ENTITE_VAR_patientPrendCoumadin:
-				return ENTITE_VAR_INDEXE_patientPrendCoumadin;
-			case ENTITE_VAR_butActuel:
-				return ENTITE_VAR_INDEXE_butActuel;
-			case ENTITE_VAR_doseActuel:
-				return ENTITE_VAR_INDEXE_doseActuel;
-			case ENTITE_VAR_medicamentActuel:
-				return ENTITE_VAR_INDEXE_medicamentActuel;
-			case ENTITE_VAR_changementDose:
-				return ENTITE_VAR_INDEXE_changementDose;
-			case ENTITE_VAR_notesComplementaires:
-				return ENTITE_VAR_INDEXE_notesComplementaires;
-			case ENTITE_VAR_infoContact:
-				return ENTITE_VAR_INDEXE_infoContact;
+			case "utilisateurPk":
+				return "utilisateurPk_indexed_long";
+			case "dateInr":
+				return "dateInr_indexed_date";
+			case "dateReverifier":
+				return "dateReverifier_indexed_date";
+			case "patientPrendCoumadin":
+				return "patientPrendCoumadin_indexed_string";
+			case "butActuel":
+				return "butActuel_indexed_string";
+			case "doseActuel":
+				return "doseActuel_indexed_string";
+			case "medicamentActuel":
+				return "medicamentActuel_indexed_string";
+			case "changementDose":
+				return "changementDose_indexed_string";
+			case "notesComplementaires":
+				return "notesComplementaires_indexed_string";
+			case "infoContact":
+				return "infoContact_indexed_string";
 			default:
 				throw new Exception(String.format("\"%s\" n'est pas une entité indexé. ", entiteVar));
 		}
 	}
 
-	public SolrQuery genererRechercheCalculInr(HttpServerRequest requeteServeur) throws Exception {
+	public SolrQuery genererRechercheCalculInr(RequeteSite requeteSite, HttpServerRequest requeteServeur) throws Exception {
 		String entiteVar = null;
 		String valeurIndexe = null;
 		String varIndexe = null;
@@ -299,18 +260,15 @@ public class CalculInrApiGen {
 				}
 			}
 		}
+		requeteSite.setRechercheSolr(rechercheSolr);
 		return rechercheSolr;
 	}
 
-	public RequeteSite genererRequeteSitePourCalculInr(SiteContexte siteContexte, RoutingContext contexteItineraire) throws Exception {
-		Vertx vertx = siteContexte.getVertx_();
-		SolrQuery rechercheSolr = genererRechercheCalculInr(contexteItineraire.request());
-
+	public RequeteSite genererRequeteSitePourCalculInr(SiteContexte siteContexte) throws Exception {
+		Vertx vertx = siteContexte.getVertx();
 		RequeteSite requeteSite = new RequeteSite();
-		requeteSite.setVertx_(vertx);
-		requeteSite.setContexteItineraire_(contexteItineraire);
+		requeteSite.setVertx(vertx);
 		requeteSite.setSiteContexte_(siteContexte);
-		requeteSite.setRechercheSolr_(rechercheSolr);
 		requeteSite.initLoinRequeteSite(requeteSite);
 
 		UtilisateurSite utilisateurSite = new UtilisateurSite();
@@ -421,121 +379,273 @@ public class CalculInrApiGen {
 		return j;
 	}
 
-	protected void patchCalculInr(SiteContexte siteContexte) {
-		OpenAPI3RouterFactory usineRouteur = siteContexte.getUsineRouteur_();
-		usineRouteur.addHandlerByOperationId("patchCalculInr", contexteRoutage -> {
-			contexteRoutage.user().isAuthorized("Something", authRes -> {
-				try {
-					if (authRes.result() == Boolean.TRUE) {
-						RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte, contexteRoutage);
-						HttpServerResponse reponseServeur = requeteSite.getReponseServeur();
-						QueryResponse reponseRecherche = requeteSite.getReponseRecherche();
-						JsonObject requeteJson = contexteRoutage.getBodyAsJson();
-						SQLClient clientSql = requeteSite.getSiteContexte_().getClientSql();
-
-						clientSql.getConnection(resultatAsync -> {
-							if(resultatAsync.succeeded()) {
-								LocalDateTime modifie = java.time.LocalDateTime.now();
-								String horodatageStr = Timestamp.valueOf(modifie).toString();
-								String utilisateurId = requeteSite.getUtilisateurId();
-								SQLConnection connexionSql = resultatAsync.result();
-
-								connexionSql.queryWithParams(
-										SiteContexte.SQL_creer
-										, new JsonArray(Arrays.asList(VAL_nomCanoniqueCalculInr, utilisateurId))
-										, asyncCreer
-										-> {
-									if(asyncCreer.succeeded()) {
-										List<Object> patchSqlParams = Arrays.asList();
-										JsonArray patchLigne = asyncCreer.result().getResults().stream().findFirst().orElseGet(() -> null);
-										Long patchPk = patchLigne.getLong(0);
-										StringBuilder patchSql = new StringBuilder();
-										patchSqlParams = new ArrayList<Object>();
-										Set<String> methodeNoms = requeteJson.fieldNames();
-										for(String methodeNom : methodeNoms) {
-											switch(methodeNom) {
-												case "setUtilisateurPk":
-													patchSql.append(SiteContexte.SQL_setA2);
-													patchSqlParams.addAll(Arrays.asList(
-															ENTITE_VAR_utilisateurPk_ATTRIBUER_UtilisateurSite_calculInrPks
-															, requeteJson.getLong(methodeNom)
-															, ENTITE_VAR_utilisateurPk
-															, patchPk
-															));
-													break;
-												case "setDateInr":
-													patchSql.append(SiteContexte.SQL_setP);
-													patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_dateInr, requeteJson.getInstant(methodeNom), patchPk));
-													break;
-												case "setDateReverifier":
-													patchSql.append(SiteContexte.SQL_setP);
-													patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_dateReverifier, requeteJson.getInstant(methodeNom), patchPk));
-													break;
-												case "setPatientPrendCoumadin":
-													patchSql.append(SiteContexte.SQL_setP);
-													patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_patientPrendCoumadin, requeteJson.getString(methodeNom), patchPk));
-													break;
-												case "setButActuel":
-													patchSql.append(SiteContexte.SQL_setP);
-													patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_butActuel, requeteJson.getString(methodeNom), patchPk));
-													break;
-												case "setDoseActuel":
-													patchSql.append(SiteContexte.SQL_setP);
-													patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_doseActuel, requeteJson.getString(methodeNom), patchPk));
-													break;
-												case "setMedicamentActuel":
-													patchSql.append(SiteContexte.SQL_setP);
-													patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_medicamentActuel, requeteJson.getString(methodeNom), patchPk));
-													break;
-												case "setChangementDose":
-													patchSql.append(SiteContexte.SQL_setP);
-													patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_changementDose, requeteJson.getString(methodeNom), patchPk));
-													break;
-												case "setNotesComplementaires":
-													patchSql.append(SiteContexte.SQL_setP);
-													patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_notesComplementaires, requeteJson.getString(methodeNom), patchPk));
-													break;
-												case "setInfoContact":
-													patchSql.append(SiteContexte.SQL_setP);
-													patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_infoContact, requeteJson.getString(methodeNom), patchPk));
-													break;
-											}
-										}
-										connexionSql.queryWithParams(patchSql.toString(), new JsonArray(patchSqlParams), asyncParams -> {
-											connexionSql.close();
-											if(asyncParams.succeeded()) {
-												CalculInr o = new CalculInr();
-												requeteSite.setRequetePk(o.getPk());
-
-											}
-										});
-									} else {
-										connexionSql.close();
-										contexteRoutage.fail(resultatAsync.cause());
-									}
-								});
-							} else {
-								LOGGER.error("Impossible d'ouvrir une connexion à la base de données. ", resultatAsync.cause());
-								contexteRoutage.fail(resultatAsync.cause());
-							}
-						});
-
-						contexteRoutage.response().putHeader("content-type", "application/json").setChunked(true);
-
-						requeteSite.getReponseServeur().end();
-
-
-						reponseServeur.write("\t]\n");
-						reponseServeur.write("}\n");
-					}
-					else {
-						contexteRoutage.response().setStatusCode(HttpResponseStatus.UNAUTHORIZED.code()).end();
-					}
-				} catch(Exception e) {
-					LOGGER.error("Error: ", e.getMessage());
-					contexteRoutage.fail(e);
-				}
-			});
+	@Override
+	public void postCalculInr(JsonObject document, Handler<AsyncResult<OperationResponse>> resultHandler) {
+		contexteItineraire.user().isAuthorized("Something", authRes -> {
+			if (authRes.result() == Boolean.TRUE) {
+				RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte);
+				Future<OperationResponse> etapesFutures = sqlCalculInr(requeteSite).compose(
+					a -> creerCalculInr(requeteSite).compose(
+						cluster -> definirCalculInr(calculInr).compose(
+							c -> attribuerCalculInr(calculInr).compose(
+								d -> indexerCalculInr(calculInr).compose(
+									operationResponse -> postJsonCalculInr(calculInr)
+								)
+							)
+						)
+					)
+				);
+				etapesFutures.setHandler(resultHandler);
+			}
+			else {
+				contexteItineraire.response().setStatusCode(HttpResponseStatus.UNAUTHORIZED.code()).end();
+			}
 		});
+	}
+		usineRouteur.addHandlerByOperationId("patchCalculInr", contexteItineraire -> {
+		});
+	}
+
+	@Override
+	public void patchCalculInr(JsonObject document, Handler<AsyncResult<OperationResponse>> resultHandler) {
+		contexteItineraire.user().isAuthorized("Something", authRes -> {
+			if (authRes.result() == Boolean.TRUE) {
+				RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte);
+				Future<OperationResponse> etapesFutures = sqlCalculInr(requeteSite).compose(
+					a -> patchCalculInr(requeteSite).compose(
+						b -> definirCalculInr(requeteSite).compose(
+							c -> attribuerCalculInr(requeteSite).compose(
+								d -> indexerCalculInr(requeteSite).compose(
+									operationResponse -> patchJsonCalculInr(requeteSite)
+								)
+							)
+						)
+					)
+				);
+				etapesFutures.setHandler(resultHandler);
+			}
+			else {
+				contexteItineraire.response().setStatusCode(HttpResponseStatus.UNAUTHORIZED.code()).end();
+			}
+		});
+	}
+
+	public Future<Void> sqlCalculInr(RequeteSite requeteSite) {
+		Future<Void> future = Future.future();
+		SQLClient clientSql = requeteSite.getSiteContexte_().getClientSql();
+
+		clientSql.getConnection(sqlAsync -> {
+			if(sqlAsync.succeeded()) {
+				requeteSite.setConnexionSql(sqlAsync.result());
+				future.complete();
+			}
+		});
+		return future;
+	}
+
+	public Future<CalculInr> creerCalculInr(RequeteSite requeteSite) {
+		Future<CalculInr> future = Future.future();
+		SQLConnection connexionSql = requeteSite.getConnexionSql();
+		String utilisateurId = requeteSite.getUtilisateurId();
+
+		connexionSql.queryWithParams(
+				SiteContexte.SQL_creer
+				, new JsonArray(Arrays.asList(CalculInr.class.getCanonicalName(), utilisateurId))
+				, creerAsync
+		-> {
+			JsonArray patchLigne = creerAsync.result().getResults().stream().findFirst().orElseGet(() -> null);
+			Long pk = patchLigne.getLong(0);
+			CalculInr o = new CalculInr();
+			o.setPk(pk);
+			future.complete(o);
+		});
+		return future;
+	}
+
+	public Future<Void> postCalculInr(CalculInr o) {
+		Future<Void> future = Future.future();
+		RequeteSite requeteSite = o.getRequeteSite_();
+		SQLConnection connexionSql = requeteSite.getConnexionSql();
+		Long pk = o.getPk();
+		RoutingContext contexteItineraire = requeteSite.getContexteItineraire();
+		JsonObject jsonObject = contexteItineraire.getBodyAsJson();
+		StringBuilder postSql = new StringBuilder();
+		List<Object> postSqlParams = new ArrayList<Object>();
+		Set<String> entiteVars = jsonObject.fieldNames();
+
+		for(String entiteVar : entiteVars) {
+			switch(entiteVar) {
+				case "utilisateurPk":
+					postSql.append(SiteContexte.SQL_addA);
+					postSqlParams.addAll(Arrays.asList("calculInrPks", pk, "utilisateurPk", jsonObject.getLong(entiteVar)));
+					break;
+				case "dateInr":
+					postSql.append(SiteContexte.SQL_setP);
+					postSqlParams.addAll(Arrays.asList("dateInr", jsonObject.getInstant(entiteVar), pk));
+					break;
+				case "dateReverifier":
+					postSql.append(SiteContexte.SQL_setP);
+					postSqlParams.addAll(Arrays.asList("dateReverifier", jsonObject.getInstant(entiteVar), pk));
+					break;
+				case "patientPrendCoumadin":
+					postSql.append(SiteContexte.SQL_setP);
+					postSqlParams.addAll(Arrays.asList("patientPrendCoumadin", jsonObject.getString(entiteVar), pk));
+					break;
+				case "butActuel":
+					postSql.append(SiteContexte.SQL_setP);
+					postSqlParams.addAll(Arrays.asList("butActuel", jsonObject.getString(entiteVar), pk));
+					break;
+				case "doseActuel":
+					postSql.append(SiteContexte.SQL_setP);
+					postSqlParams.addAll(Arrays.asList("doseActuel", jsonObject.getString(entiteVar), pk));
+					break;
+				case "medicamentActuel":
+					postSql.append(SiteContexte.SQL_setP);
+					postSqlParams.addAll(Arrays.asList("medicamentActuel", jsonObject.getString(entiteVar), pk));
+					break;
+				case "changementDose":
+					postSql.append(SiteContexte.SQL_setP);
+					postSqlParams.addAll(Arrays.asList("changementDose", jsonObject.getString(entiteVar), pk));
+					break;
+				case "notesComplementaires":
+					postSql.append(SiteContexte.SQL_setP);
+					postSqlParams.addAll(Arrays.asList("notesComplementaires", jsonObject.getString(entiteVar), pk));
+					break;
+				case "infoContact":
+					postSql.append(SiteContexte.SQL_setP);
+					postSqlParams.addAll(Arrays.asList("infoContact", jsonObject.getString(entiteVar), pk));
+					break;
+			}
+		}
+		connexionSql.queryWithParams(
+				postSql.toString()
+				, new JsonArray(postSqlParams)
+				, postAsync
+		-> {
+			future.complete();
+		});
+		return future;
+	}
+
+	public Future<Void> patchCalculInr(RequeteSite requeteSite) {
+		Future<Void> future = Future.future();
+		RequeteSite requeteSite = o.getRequeteSite_();
+		SQLConnection connexionSql = requeteSite.getConnexionSql();
+		Long pk = o.getPk();
+		RoutingContext contexteItineraire = requeteSite.getContexteItineraire();
+		JsonObject requeteJson = contexteItineraire.getBodyAsJson();
+		StringBuilder patchSql = new StringBuilder();
+		List<Object> patchSqlParams = new ArrayList<Object>();
+		Set<String> methodeNoms = requeteJson.fieldNames();
+
+		for(String methodeNom : methodeNoms) {
+			switch(methodeNom) {
+				case "setDateInr":
+					patchSql.append(SiteContexte.SQL_setP);
+					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_dateInr, requeteJson.getInstant(methodeNom), pk));
+					break;
+				case "setDateReverifier":
+					patchSql.append(SiteContexte.SQL_setP);
+					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_dateReverifier, requeteJson.getInstant(methodeNom), pk));
+					break;
+				case "setPatientPrendCoumadin":
+					patchSql.append(SiteContexte.SQL_setP);
+					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_patientPrendCoumadin, requeteJson.getString(methodeNom), pk));
+					break;
+				case "setButActuel":
+					patchSql.append(SiteContexte.SQL_setP);
+					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_butActuel, requeteJson.getString(methodeNom), pk));
+					break;
+				case "setDoseActuel":
+					patchSql.append(SiteContexte.SQL_setP);
+					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_doseActuel, requeteJson.getString(methodeNom), pk));
+					break;
+				case "setMedicamentActuel":
+					patchSql.append(SiteContexte.SQL_setP);
+					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_medicamentActuel, requeteJson.getString(methodeNom), pk));
+					break;
+				case "setChangementDose":
+					patchSql.append(SiteContexte.SQL_setP);
+					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_changementDose, requeteJson.getString(methodeNom), pk));
+					break;
+				case "setNotesComplementaires":
+					patchSql.append(SiteContexte.SQL_setP);
+					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_notesComplementaires, requeteJson.getString(methodeNom), pk));
+					break;
+				case "setInfoContact":
+					patchSql.append(SiteContexte.SQL_setP);
+					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_infoContact, requeteJson.getString(methodeNom), pk));
+					break;
+			}
+		}
+		connexionSql.queryWithParams(
+				patchSql.toString()
+				, new JsonArray(patchSqlParams)
+				, patchAsync
+		-> {
+			future.complete();
+		});
+		return future;
+	}
+
+	public Future<CalculInr> definirCalculInr(CalculInr o) {
+		Future<CalculInr> future = Future.future();
+		RequeteSite requeteSite = o.getRequeteSite_();
+		SQLConnection connexionSql = requeteSite.getConnexionSql();
+		Long pk = o.getPk();
+		connexionSql.queryWithParams(
+				SiteContexte.SQL_definir
+				, new JsonArray(Arrays.asList(pk))
+				, definirAsync
+		-> {
+			for(JsonArray definition : definirAsync.result().getResults()) {
+				o.definirPourClasse(definition.getString(0), definition.getString(1));
+			}
+			future.complete();
+		});
+		return future;
+	}
+
+	public Future<CalculInr> attribuerCalculInr(CalculInr o) {
+		Future<CalculInr> future = Future.future();
+		RequeteSite requeteSite = o.getRequeteSite_();
+		SQLConnection connexionSql = requeteSite.getConnexionSql();
+		Long pk = o.getPk();
+		connexionSql.queryWithParams(
+				SiteContexte.SQL_attribuer
+				, new JsonArray(Arrays.asList(pk))
+				, attribuerAsync
+		-> {
+			for(JsonArray definition : attribuerAsync.result().getResults()) {
+				o.attribuerPourClasse(definition.getString(0), definition.getString(1));
+			}
+			future.complete();
+		});
+		return future;
+	}
+
+	public Future<CalculInr> indexerCalculInr(CalculInr o) {
+		Future<CalculInr> future = Future.future();
+		RequeteSite requeteSite = o.getRequeteSite_();
+		try {
+			o.initLoinPourClasse(requeteSite);
+			o.indexerPourClasse();
+			future.complete();
+		} catch(Exception e) {
+			requeteSite.getConnexionSql().close();
+			future.fail(e.getCause());
+		}
+		return future;
+	}
+
+	public Future<OperationResponse> postJsonCalculInr(CalculInr o) {
+		Buffer buffer = Buffer.buffer();
+		RequeteSite requeteSite = o.getRequeteSite_();
+		return Future.succeededFuture(OperationResponse.completedWithJson(buffer));
+	}
+
+	public Future<OperationResponse> patchJsonCalculInr(RequeteSite requeteSite) {
+		Buffer buffer = Buffer.buffer();
+		return Future.succeededFuture(OperationResponse.completedWithJson(buffer));
 	}
 }

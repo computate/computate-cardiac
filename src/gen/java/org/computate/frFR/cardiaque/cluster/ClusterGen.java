@@ -176,14 +176,14 @@ public abstract class ClusterGen<DEV> extends Object {
 	}
 
 	public void htmPk(ToutEcrivain r, Boolean patchDroits) {
-		if(id!= null) {
-			r.s("<div id=\"patchCluster", strId(), "Pk\">");
+		if(pk!= null) {
+			r.s("<div id=\"patchCluster", strPk(), "Pk\">");
 			if(patchDroits) {
 				r.l();
 				r.l("	<script>//<![CDATA[");
-				r.l("		function patchCluster", strId(), "Pk() {");
+				r.l("		function patchCluster", strPk(), "Pk() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/warfarin/cluster?fq=id:", strId(), "',");
+				r.l("				url: '/api/v1/warfarin/cluster?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -274,14 +274,14 @@ public abstract class ClusterGen<DEV> extends Object {
 	}
 
 	public void htmId(ToutEcrivain r, Boolean patchDroits) {
-		if(id!= null) {
-			r.s("<div id=\"patchCluster", strId(), "Id\">");
+		if(pk!= null) {
+			r.s("<div id=\"patchCluster", strPk(), "Id\">");
 			if(patchDroits) {
 				r.l();
 				r.l("	<script>//<![CDATA[");
-				r.l("		function patchCluster", strId(), "Id() {");
+				r.l("		function patchCluster", strPk(), "Id() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/warfarin/cluster?fq=id:", strId(), "',");
+				r.l("				url: '/api/v1/warfarin/cluster?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -388,14 +388,14 @@ public abstract class ClusterGen<DEV> extends Object {
 	}
 
 	public void htmCree(ToutEcrivain r, Boolean patchDroits) {
-		if(id!= null) {
-			r.s("<div id=\"patchCluster", strId(), "Cree\">");
+		if(pk!= null) {
+			r.s("<div id=\"patchCluster", strPk(), "Cree\">");
 			if(patchDroits) {
 				r.l();
 				r.l("	<script>//<![CDATA[");
-				r.l("		function patchCluster", strId(), "Cree() {");
+				r.l("		function patchCluster", strPk(), "Cree() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/warfarin/cluster?fq=id:", strId(), "',");
+				r.l("				url: '/api/v1/warfarin/cluster?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -502,14 +502,14 @@ public abstract class ClusterGen<DEV> extends Object {
 	}
 
 	public void htmModifie(ToutEcrivain r, Boolean patchDroits) {
-		if(id!= null) {
-			r.s("<div id=\"patchCluster", strId(), "Modifie\">");
+		if(pk!= null) {
+			r.s("<div id=\"patchCluster", strPk(), "Modifie\">");
 			if(patchDroits) {
 				r.l();
 				r.l("	<script>//<![CDATA[");
-				r.l("		function patchCluster", strId(), "Modifie() {");
+				r.l("		function patchCluster", strPk(), "Modifie() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/warfarin/cluster?fq=id:", strId(), "',");
+				r.l("				url: '/api/v1/warfarin/cluster?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -600,14 +600,14 @@ public abstract class ClusterGen<DEV> extends Object {
 	}
 
 	public void htmUtilisateurId(ToutEcrivain r, Boolean patchDroits) {
-		if(id!= null) {
-			r.s("<div id=\"patchCluster", strId(), "UtilisateurId\">");
+		if(pk!= null) {
+			r.s("<div id=\"patchCluster", strPk(), "UtilisateurId\">");
 			if(patchDroits) {
 				r.l();
 				r.l("	<script>//<![CDATA[");
-				r.l("		function patchCluster", strId(), "UtilisateurId() {");
+				r.l("		function patchCluster", strPk(), "UtilisateurId() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/warfarin/cluster?fq=id:", strId(), "',");
+				r.l("				url: '/api/v1/warfarin/cluster?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -698,14 +698,14 @@ public abstract class ClusterGen<DEV> extends Object {
 	}
 
 	public void htmClusterNomCanonique(ToutEcrivain r, Boolean patchDroits) {
-		if(id!= null) {
-			r.s("<div id=\"patchCluster", strId(), "ClusterNomCanonique\">");
+		if(pk!= null) {
+			r.s("<div id=\"patchCluster", strPk(), "ClusterNomCanonique\">");
 			if(patchDroits) {
 				r.l();
 				r.l("	<script>//<![CDATA[");
-				r.l("		function patchCluster", strId(), "ClusterNomCanonique() {");
+				r.l("		function patchCluster", strPk(), "ClusterNomCanonique() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/warfarin/cluster?fq=id:", strId(), "',");
+				r.l("				url: '/api/v1/warfarin/cluster?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -796,14 +796,14 @@ public abstract class ClusterGen<DEV> extends Object {
 	}
 
 	public void htmClusterNomSimple(ToutEcrivain r, Boolean patchDroits) {
-		if(id!= null) {
-			r.s("<div id=\"patchCluster", strId(), "ClusterNomSimple\">");
+		if(pk!= null) {
+			r.s("<div id=\"patchCluster", strPk(), "ClusterNomSimple\">");
 			if(patchDroits) {
 				r.l();
 				r.l("	<script>//<![CDATA[");
-				r.l("		function patchCluster", strId(), "ClusterNomSimple() {");
+				r.l("		function patchCluster", strPk(), "ClusterNomSimple() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/warfarin/cluster?fq=id:", strId(), "',");
+				r.l("				url: '/api/v1/warfarin/cluster?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -900,14 +900,14 @@ public abstract class ClusterGen<DEV> extends Object {
 	}
 
 	public void htmSupprime(ToutEcrivain r, Boolean patchDroits) {
-		if(id!= null) {
-			r.s("<div id=\"patchCluster", strId(), "Supprime\">");
+		if(pk!= null) {
+			r.s("<div id=\"patchCluster", strPk(), "Supprime\">");
 			if(patchDroits) {
 				r.l();
 				r.l("	<script>//<![CDATA[");
-				r.l("		function patchCluster", strId(), "Supprime() {");
+				r.l("		function patchCluster", strPk(), "Supprime() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/warfarin/cluster?fq=id:", strId(), "',");
+				r.l("				url: '/api/v1/warfarin/cluster?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -948,25 +948,28 @@ public abstract class ClusterGen<DEV> extends Object {
 
 	public Cluster initLoinCluster(RequeteSite requeteSite) {
 		setRequeteSite_(requeteSite);
-		initLoinCluster();
+		if(!dejaInitialiseCluster) {
+			dejaInitialiseCluster = true;
+			initLoinCluster();
+		}
 		return (Cluster)this;
 	}
 
-	public Cluster initLoinCluster() {
-		if(!dejaInitialiseCluster) {
-			dejaInitialiseCluster = true;
-			requeteSite_Init();
-			page_Init();
-			pkInit();
-			idInit();
-			creeInit();
-			modifieInit();
-			utilisateurIdInit();
-			clusterNomCanoniqueInit();
-			clusterNomSimpleInit();
-			supprimeInit();
-		}
-		return (Cluster)this;
+	public void initLoinCluster() {
+		initCluster();
+	}
+
+	public void initCluster() {
+		requeteSite_Init();
+		page_Init();
+		pkInit();
+		idInit();
+		creeInit();
+		modifieInit();
+		utilisateurIdInit();
+		clusterNomCanoniqueInit();
+		clusterNomSimpleInit();
+		supprimeInit();
 	}
 
 	public void initLoinPourClasse(RequeteSite requeteSite) {
@@ -988,27 +991,27 @@ public abstract class ClusterGen<DEV> extends Object {
 	// indexer //
 	/////////////
 
-	public void indexerCluster() throws Exception {
-		RequeteSite requeteSite = new RequeteSite();
-		requeteSite.initLoinRequeteSite();
-		SiteContexte siteContexte = new SiteContexte();
-		siteContexte.initLoinSiteContexte();
-		siteContexte.setRequeteSite_(requeteSite);
-		requeteSite.setSiteContexte_(siteContexte);
-		requeteSiteCluster(requeteSite);
-		initLoinCluster(requeteSite);
-		indexerCluster(requeteSite);
-	}
+	//public void indexerCluster() throws Exception {
+		//RequeteSite requeteSite = new RequeteSite();
+		//requeteSite.initLoinRequeteSite();
+		//SiteContexte siteContexte = new SiteContexte();
+		//siteContexte.initLoinSiteContexte();
+		//siteContexte.setRequeteSite_(requeteSite);
+		//requeteSite.setSiteContexte_(siteContexte);
+		//requeteSiteCluster(requeteSite);
+		//initLoinCluster(requeteSite);
+		//indexerCluster();
+	//}
 
 
-	public void indexerPourClasse(RequeteSite requeteSite) throws Exception {
-		indexerCluster(requeteSite_);
+	public void indexerPourClasse() throws Exception {
+		indexerCluster();
 	}
 
 	public void indexerPourClasse(SolrInputDocument document) throws Exception {
 		indexerCluster(document);
 	}
-	public void indexerCluster(RequeteSite requeteSite) throws Exception {
+	public void indexerCluster() throws Exception {
 		SolrInputDocument document = new SolrInputDocument();
 		indexerCluster(document);
 		SolrClient clientSolr = requeteSite_.getSiteContexte_().getClientSolr();
@@ -1022,7 +1025,6 @@ public abstract class ClusterGen<DEV> extends Object {
 			document.addField("pk_stored_long", pk);
 		}
 		if(id != null) {
-			document.addField("id", id);
 		}
 		if(cree != null) {
 			document.addField("cree_indexed_date", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(java.time.ZonedDateTime.ofInstant(cree, java.time.OffsetDateTime.now().getOffset(), ZoneId.systemDefault())));
@@ -1044,20 +1046,6 @@ public abstract class ClusterGen<DEV> extends Object {
 			document.addField("clusterNomSimple_indexed_string", clusterNomSimple);
 			document.addField("clusterNomSimple_stored_string", clusterNomSimple);
 		}
-	}
-
-	public void desindexerCluster() throws Exception {
-		RequeteSite requeteSite = new RequeteSite();
-		requeteSite.initLoinRequeteSite();
-		SiteContexte siteContexte = new SiteContexte();
-		siteContexte.initLoinSiteContexte();
-		siteContexte.setRequeteSite_(requeteSite);
-		requeteSite.setSiteContexte_(siteContexte);
-		requeteSite.setConfigSite_(siteContexte.getConfigSite());
-		initLoinCluster(siteContexte.getRequeteSite_());
-		SolrClient clientSolr = siteContexte.getClientSolr();
-		clientSolr.deleteById(id.toString());
-		clientSolr.commit();
 	}
 
 	/////////////
@@ -1109,7 +1097,7 @@ public abstract class ClusterGen<DEV> extends Object {
 	// attribuer //
 	///////////////
 
-	public boolean attribuerPourClasse(String var, Object val) throws Exception {
+	public boolean attribuerPourClasse(String var, Object val) {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
@@ -1122,7 +1110,7 @@ public abstract class ClusterGen<DEV> extends Object {
 		}
 		return o != null;
 	}
-	public Object attribuerCluster(String var, Object val) throws Exception {
+	public Object attribuerCluster(String var, Object val) {
 		Cluster oCluster = (Cluster)this;
 		switch(var) {
 			default:
@@ -1131,15 +1119,79 @@ public abstract class ClusterGen<DEV> extends Object {
 	}
 
 	/////////////
+	// definir //
+	/////////////
+
+	public boolean definirPourClasse(String var, String val) {
+		String[] vars = StringUtils.split(var, ".");
+		Object o = null;
+		if(val != null) {
+			for(String v : vars) {
+				if(o == null)
+					o = definirCluster(v, val);
+				else if(o instanceof Cluster) {
+					Cluster cluster = (Cluster)o;
+					o = cluster.definirPourClasse(v, val);
+				}
+			}
+		}
+		return o != null;
+	}
+	public Object definirCluster(String var, String val) {
+		switch(var) {
+			case "pk":
+				setPk(val);
+				sauvegardesCluster.add(var);
+				return val;
+			case "id":
+				setId(val);
+				sauvegardesCluster.add(var);
+				return val;
+			case "cree":
+				setCree(val);
+				sauvegardesCluster.add(var);
+				return val;
+			case "modifie":
+				setModifie(val);
+				sauvegardesCluster.add(var);
+				return val;
+			case "utilisateurId":
+				setUtilisateurId(val);
+				sauvegardesCluster.add(var);
+				return val;
+			case "clusterNomCanonique":
+				setClusterNomCanonique(val);
+				sauvegardesCluster.add(var);
+				return val;
+			case "clusterNomSimple":
+				setClusterNomSimple(val);
+				sauvegardesCluster.add(var);
+				return val;
+			case "supprime":
+				setSupprime(val);
+				sauvegardesCluster.add(var);
+				return val;
+			default:
+				return null;
+		}
+	}
+
+	/////////////////
+	// sauvegardes //
+	/////////////////
+
+	protected List<String> sauvegardesCluster = new ArrayList<String>();
+
+	/////////////
 	// peupler //
 	/////////////
 
 	public void peuplerPourClasse(SolrDocument solrDocument) {
-		sauvegardesCluster = (List<String>)solrDocument.get("sauvegardesCluster_stored_strings");
 		peuplerCluster(solrDocument);
 	}
 	public void peuplerCluster(SolrDocument solrDocument) {
 		Cluster oCluster = (Cluster)this;
+		sauvegardesCluster = (List<String>)solrDocument.get("sauvegardesCluster_stored_strings");
 
 		if(sauvegardesCluster.contains("pk")) {
 			Long pk = (Long)solrDocument.get("pk_stored_long");
@@ -1182,12 +1234,6 @@ public abstract class ClusterGen<DEV> extends Object {
 				oCluster.setClusterNomSimple(clusterNomSimple);
 		}
 	}
-
-	/////////////////
-	// sauvegardes //
-	/////////////////
-
-	protected List<String> sauvegardesCluster = new ArrayList<String>();
 
 	//////////////
 	// hashCode //

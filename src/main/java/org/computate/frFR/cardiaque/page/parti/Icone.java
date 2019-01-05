@@ -11,7 +11,7 @@ public class Icone extends IconeGen<PageParti> {
 	protected void _nom(Chaine o) throws Exception {
 	}
 
-	protected void _page_(Couverture<MiseEnPage> c) throws Exception {}
+	protected void _page_(Couverture<MiseEnPage> c) {}
 
 	public void htmlAvant() {
 //		page_.e("svg").a("class", "fa-icon w3-padding-4 w3-margin-right-4 ").f();

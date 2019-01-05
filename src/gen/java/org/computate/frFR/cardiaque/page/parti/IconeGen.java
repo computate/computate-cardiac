@@ -1,15 +1,17 @@
 package org.computate.frFR.cardiaque.page.parti;
 
+import java.util.Objects;
 import org.computate.frFR.cardiaque.page.parti.PageParti;
 import org.computate.frFR.cardiaque.chaine.Chaine;
 import org.computate.frFR.cardiaque.couverture.Couverture;
-import io.vertx.core.http.HttpServerResponse;
 import org.computate.frFR.cardiaque.cluster.Cluster;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
+import org.computate.frFR.cardiaque.ecrivain.ToutEcrivain;
 import org.apache.commons.text.StringEscapeUtils;
 import java.lang.String;
 import org.computate.frFR.cardiaque.page.MiseEnPage;
 import org.apache.commons.lang3.StringUtils;
+import java.lang.Exception;
 
 /**	
  * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.parti.Icone&fq=classeEtendGen_indexed_boolean:true">Trouver la classe  dans Solr</a>
@@ -43,12 +45,13 @@ public abstract class IconeGen<DEV> extends PageParti {
 		this.type = o;
 		this.typeCouverture.dejaInitialise = true;
 	}
-	public Icone setType(String o) throws Exception {
+	public Icone setType(String o) {
 		type.tout(o);
 		this.typeCouverture.dejaInitialise = true;
 		return (Icone)this;
 	}
-	protected Icone typeInit() throws Exception {
+	protected Icone typeInit()
+ throws Exception {
 		if(!typeCouverture.dejaInitialise) {
 			_type(type);
 		}
@@ -69,11 +72,11 @@ public abstract class IconeGen<DEV> extends PageParti {
 		return null;
 	}
 
-	public String htmlTooltipType() {
+	public String htmTooltipType() {
 		return null;
 	}
 
-	public String htmlType() {
+	public String htmType() {
 		return type == null ? "" : StringEscapeUtils.escapeHtml4(strType());
 	}
 
@@ -103,12 +106,13 @@ public abstract class IconeGen<DEV> extends PageParti {
 		this.nom = o;
 		this.nomCouverture.dejaInitialise = true;
 	}
-	public Icone setNom(String o) throws Exception {
+	public Icone setNom(String o) {
 		nom.tout(o);
 		this.nomCouverture.dejaInitialise = true;
 		return (Icone)this;
 	}
-	protected Icone nomInit() throws Exception {
+	protected Icone nomInit()
+ throws Exception {
 		if(!nomCouverture.dejaInitialise) {
 			_nom(nom);
 		}
@@ -129,11 +133,11 @@ public abstract class IconeGen<DEV> extends PageParti {
 		return null;
 	}
 
-	public String htmlTooltipNom() {
+	public String htmTooltipNom() {
 		return null;
 	}
 
-	public String htmlNom() {
+	public String htmNom() {
 		return nom == null ? "" : StringEscapeUtils.escapeHtml4(strNom());
 	}
 
@@ -153,7 +157,7 @@ public abstract class IconeGen<DEV> extends PageParti {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _page_(Couverture<MiseEnPage> o) throws Exception;
+	protected abstract void _page_(Couverture<MiseEnPage> o);
 
 	public MiseEnPage getPage_() {
 		return page_;
@@ -163,7 +167,8 @@ public abstract class IconeGen<DEV> extends PageParti {
 		this.page_ = o;
 		this.page_Couverture.dejaInitialise = true;
 	}
-	protected Icone page_Init() throws Exception {
+	protected Icone page_Init()
+ {
 		if(!page_Couverture.dejaInitialise) {
 			_page_(page_Couverture);
 			if(page_ == null)
@@ -179,24 +184,32 @@ public abstract class IconeGen<DEV> extends PageParti {
 
 	protected boolean dejaInitialiseIcone = false;
 
-	public Icone initLoinIcone(RequeteSite requeteSite) throws Exception {
+	public Icone initLoinIcone(RequeteSite requeteSite) {
 		setRequeteSite_(requeteSite);
-		initLoinIcone();
-		return (Icone)this;
-	}
-
-	public Icone initLoinIcone() throws Exception {
 		if(!dejaInitialiseIcone) {
 			dejaInitialiseIcone = true;
-			super.initLoinPageParti(requeteSite_);
-			typeInit();
-			nomInit();
-			page_Init();
+			initLoinIcone();
 		}
 		return (Icone)this;
 	}
 
-	public void initLoinPourClasse(RequeteSite requeteSite) throws Exception {
+	public void initLoinIcone() {
+		super.initLoinPageParti(requeteSite_);
+		initIcone();
+	}
+
+	public void initIcone() {
+		try {
+			typeInit();
+			nomInit();
+			page_Init();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+
+	@Override public void initLoinPourClasse(RequeteSite requeteSite) {
 		initLoinIcone(requeteSite);
 	}
 
@@ -204,13 +217,13 @@ public abstract class IconeGen<DEV> extends PageParti {
 	// requeteSite //
 	/////////////////
 
-	public void requeteSiteIcone(RequeteSite requeteSite) throws Exception {
+	public void requeteSiteIcone(RequeteSite requeteSite) {
 			super.requeteSitePageParti(requeteSite);
 		type.setRequeteSite_(requeteSite);
 		nom.setRequeteSite_(requeteSite);
 	}
 
-	public void requeteSitePourClasse(RequeteSite requeteSite) throws Exception {
+	public void requeteSitePourClasse(RequeteSite requeteSite) {
 		requeteSiteIcone(requeteSite);
 	}
 
@@ -249,7 +262,7 @@ public abstract class IconeGen<DEV> extends PageParti {
 	// attribuer //
 	///////////////
 
-	@Override public boolean attribuerPourClasse(String var, Object val) throws Exception {
+	@Override public boolean attribuerPourClasse(String var, Object val) {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
@@ -262,11 +275,74 @@ public abstract class IconeGen<DEV> extends PageParti {
 		}
 		return o != null;
 	}
-	public Object attribuerIcone(String var, Object val) throws Exception {
+	public Object attribuerIcone(String var, Object val) {
 		Icone oIcone = (Icone)this;
 		switch(var) {
 			default:
 				return super.attribuerPageParti(var, val);
 		}
+	}
+
+	/////////////
+	// definir //
+	/////////////
+
+	@Override public boolean definirPourClasse(String var, String val) {
+		String[] vars = StringUtils.split(var, ".");
+		Object o = null;
+		if(val != null) {
+			for(String v : vars) {
+				if(o == null)
+					o = definirIcone(v, val);
+				else if(o instanceof Cluster) {
+					Cluster cluster = (Cluster)o;
+					o = cluster.definirPourClasse(v, val);
+				}
+			}
+		}
+		return o != null;
+	}
+	public Object definirIcone(String var, String val) {
+		switch(var) {
+			default:
+				return super.definirPageParti(var, val);
+		}
+	}
+
+	//////////////
+	// hashCode //
+	//////////////
+
+	@Override public int hashCode() {
+		return Objects.hash(super.hashCode(), type, nom);
+	}
+
+	////////////
+	// equals //
+	////////////
+
+	@Override public boolean equals(Object o) {
+		if(this == o)
+			return true;
+		if(!(o instanceof Icone))
+			return false;
+		Icone that = (Icone)o;
+		return super.equals(o)
+				&& Objects.equals( type, that.type )
+				&& Objects.equals( nom, that.nom );
+	}
+
+	//////////////
+	// toString //
+	//////////////
+
+	@Override public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString() + "\n");
+		sb.append("Icone {");
+		sb.append( "type: " ).append(type);
+		sb.append( ", nom: " ).append(nom);
+		sb.append(" }");
+		return sb.toString();
 	}
 }

@@ -1,14 +1,16 @@
 package org.computate.frFR.cardiaque.vertx;
 
+import java.util.Objects;
 import org.computate.frFR.cardiaque.contexte.SiteContexte;
 import org.computate.frFR.cardiaque.couverture.Couverture;
-import io.vertx.core.http.HttpServerResponse;
 import org.computate.frFR.cardiaque.config.ConfigSite;
 import org.computate.frFR.cardiaque.cluster.Cluster;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
+import org.computate.frFR.cardiaque.ecrivain.ToutEcrivain;
 import org.apache.commons.text.StringEscapeUtils;
 import java.lang.Object;
 import org.apache.commons.lang3.StringUtils;
+import java.lang.Exception;
 
 /**	
  * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.vertx.AppSwagger2&fq=classeEtendGen_indexed_boolean:true">Trouver la classe  dans Solr</a>
@@ -42,7 +44,8 @@ public abstract class AppSwagger2Gen<DEV> extends Object {
 		this.requeteSite_ = o;
 		this.requeteSite_Couverture.dejaInitialise = true;
 	}
-	protected AppSwagger2 requeteSite_Init() throws Exception {
+	protected AppSwagger2 requeteSite_Init()
+ throws Exception {
 		if(!requeteSite_Couverture.dejaInitialise) {
 			_requeteSite_(requeteSite_Couverture);
 			if(requeteSite_ == null)
@@ -78,7 +81,8 @@ public abstract class AppSwagger2Gen<DEV> extends Object {
 		this.siteContexte = o;
 		this.siteContexteCouverture.dejaInitialise = true;
 	}
-	protected AppSwagger2 siteContexteInit() throws Exception {
+	protected AppSwagger2 siteContexteInit()
+ throws Exception {
 		if(!siteContexteCouverture.dejaInitialise) {
 			_siteContexte(siteContexte);
 		}
@@ -113,7 +117,8 @@ public abstract class AppSwagger2Gen<DEV> extends Object {
 		this.configSite = o;
 		this.configSiteCouverture.dejaInitialise = true;
 	}
-	protected AppSwagger2 configSiteInit() throws Exception {
+	protected AppSwagger2 configSiteInit()
+ throws Exception {
 		if(!configSiteCouverture.dejaInitialise) {
 			_configSite(configSiteCouverture);
 			if(configSite == null)
@@ -133,18 +138,21 @@ public abstract class AppSwagger2Gen<DEV> extends Object {
 
 	public AppSwagger2 initLoinAppSwagger2(RequeteSite requeteSite) throws Exception {
 		setRequeteSite_(requeteSite);
-		initLoinAppSwagger2();
+		if(!dejaInitialiseAppSwagger2) {
+			dejaInitialiseAppSwagger2 = true;
+			initLoinAppSwagger2();
+		}
 		return (AppSwagger2)this;
 	}
 
-	public AppSwagger2 initLoinAppSwagger2() throws Exception {
-		if(!dejaInitialiseAppSwagger2) {
-			dejaInitialiseAppSwagger2 = true;
-			requeteSite_Init();
-			siteContexteInit();
-			configSiteInit();
-		}
-		return (AppSwagger2)this;
+	public void initLoinAppSwagger2() throws Exception {
+		initAppSwagger2();
+	}
+
+	public void initAppSwagger2() throws Exception {
+		requeteSite_Init();
+		siteContexteInit();
+		configSiteInit();
 	}
 
 	public void initLoinPourClasse(RequeteSite requeteSite) throws Exception {
@@ -155,12 +163,12 @@ public abstract class AppSwagger2Gen<DEV> extends Object {
 	// requeteSite //
 	/////////////////
 
-	public void requeteSiteAppSwagger2(RequeteSite requeteSite) throws Exception {
+	public void requeteSiteAppSwagger2(RequeteSite requeteSite) {
 		siteContexte.setRequeteSite_(requeteSite);
 		configSite.setRequeteSite_(requeteSite);
 	}
 
-	public void requeteSitePourClasse(RequeteSite requeteSite) throws Exception {
+	public void requeteSitePourClasse(RequeteSite requeteSite) {
 		requeteSiteAppSwagger2(requeteSite);
 	}
 
@@ -199,7 +207,7 @@ public abstract class AppSwagger2Gen<DEV> extends Object {
 	// attribuer //
 	///////////////
 
-	public boolean attribuerPourClasse(String var, Object val) throws Exception {
+	public boolean attribuerPourClasse(String var, Object val) {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
@@ -212,11 +220,69 @@ public abstract class AppSwagger2Gen<DEV> extends Object {
 		}
 		return o != null;
 	}
-	public Object attribuerAppSwagger2(String var, Object val) throws Exception {
+	public Object attribuerAppSwagger2(String var, Object val) {
 		AppSwagger2 oAppSwagger2 = (AppSwagger2)this;
 		switch(var) {
 			default:
 				return null;
 		}
+	}
+
+	/////////////
+	// definir //
+	/////////////
+
+	public boolean definirPourClasse(String var, String val) {
+		String[] vars = StringUtils.split(var, ".");
+		Object o = null;
+		if(val != null) {
+			for(String v : vars) {
+				if(o == null)
+					o = definirAppSwagger2(v, val);
+				else if(o instanceof Cluster) {
+					Cluster cluster = (Cluster)o;
+					o = cluster.definirPourClasse(v, val);
+				}
+			}
+		}
+		return o != null;
+	}
+	public Object definirAppSwagger2(String var, String val) {
+		switch(var) {
+			default:
+				return null;
+		}
+	}
+
+	//////////////
+	// hashCode //
+	//////////////
+
+	@Override public int hashCode() {
+		return Objects.hash();
+	}
+
+	////////////
+	// equals //
+	////////////
+
+	@Override public boolean equals(Object o) {
+		if(this == o)
+			return true;
+		if(!(o instanceof AppSwagger2))
+			return false;
+		AppSwagger2 that = (AppSwagger2)o;
+		return true;
+	}
+
+	//////////////
+	// toString //
+	//////////////
+
+	@Override public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("AppSwagger2 {");
+		sb.append(" }");
+		return sb.toString();
 	}
 }

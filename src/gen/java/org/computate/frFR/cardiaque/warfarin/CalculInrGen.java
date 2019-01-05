@@ -104,14 +104,14 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	}
 
 	public void htmUtilisateurPk(ToutEcrivain r, Boolean patchDroits) {
-		if(id!= null) {
-			r.s("<div id=\"patchCalculInr", strId(), "UtilisateurPk\">");
+		if(pk!= null) {
+			r.s("<div id=\"patchCalculInr", strPk(), "UtilisateurPk\">");
 			if(patchDroits) {
 				r.l();
 				r.l("	<script>//<![CDATA[");
-				r.l("		function patchCalculInr", strId(), "UtilisateurPk() {");
+				r.l("		function patchCalculInr", strPk(), "UtilisateurPk() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/warfarin/calcul-inr?fq=id:", strId(), "',");
+				r.l("				url: '/api/v1/warfarin/calcul-inr?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -218,14 +218,14 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	}
 
 	public void htmDateInr(ToutEcrivain r, Boolean patchDroits) {
-		if(id!= null) {
-			r.s("<div id=\"patchCalculInr", strId(), "DateInr\">");
+		if(pk!= null) {
+			r.s("<div id=\"patchCalculInr", strPk(), "DateInr\">");
 			if(patchDroits) {
 				r.l();
 				r.l("	<script>//<![CDATA[");
-				r.l("		function patchCalculInr", strId(), "DateInr() {");
+				r.l("		function patchCalculInr", strPk(), "DateInr() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/warfarin/calcul-inr?fq=id:", strId(), "',");
+				r.l("				url: '/api/v1/warfarin/calcul-inr?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -332,14 +332,14 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	}
 
 	public void htmDateReverifier(ToutEcrivain r, Boolean patchDroits) {
-		if(id!= null) {
-			r.s("<div id=\"patchCalculInr", strId(), "DateReverifier\">");
+		if(pk!= null) {
+			r.s("<div id=\"patchCalculInr", strPk(), "DateReverifier\">");
 			if(patchDroits) {
 				r.l();
 				r.l("	<script>//<![CDATA[");
-				r.l("		function patchCalculInr", strId(), "DateReverifier() {");
+				r.l("		function patchCalculInr", strPk(), "DateReverifier() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/warfarin/calcul-inr?fq=id:", strId(), "',");
+				r.l("				url: '/api/v1/warfarin/calcul-inr?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -434,14 +434,14 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	}
 
 	public void htmPatientPrendCoumadin(ToutEcrivain r, Boolean patchDroits) {
-		if(id!= null) {
-			r.s("<div id=\"patchCalculInr", strId(), "PatientPrendCoumadin\">");
+		if(pk!= null) {
+			r.s("<div id=\"patchCalculInr", strPk(), "PatientPrendCoumadin\">");
 			if(patchDroits) {
 				r.l();
 				r.l("	<script>//<![CDATA[");
-				r.l("		function patchCalculInr", strId(), "PatientPrendCoumadin() {");
+				r.l("		function patchCalculInr", strPk(), "PatientPrendCoumadin() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/warfarin/calcul-inr?fq=id:", strId(), "',");
+				r.l("				url: '/api/v1/warfarin/calcul-inr?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -536,14 +536,14 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	}
 
 	public void htmButActuel(ToutEcrivain r, Boolean patchDroits) {
-		if(id!= null) {
-			r.s("<div id=\"patchCalculInr", strId(), "ButActuel\">");
+		if(pk!= null) {
+			r.s("<div id=\"patchCalculInr", strPk(), "ButActuel\">");
 			if(patchDroits) {
 				r.l();
 				r.l("	<script>//<![CDATA[");
-				r.l("		function patchCalculInr", strId(), "ButActuel() {");
+				r.l("		function patchCalculInr", strPk(), "ButActuel() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/warfarin/calcul-inr?fq=id:", strId(), "',");
+				r.l("				url: '/api/v1/warfarin/calcul-inr?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -638,14 +638,14 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	}
 
 	public void htmDoseActuel(ToutEcrivain r, Boolean patchDroits) {
-		if(id!= null) {
-			r.s("<div id=\"patchCalculInr", strId(), "DoseActuel\">");
+		if(pk!= null) {
+			r.s("<div id=\"patchCalculInr", strPk(), "DoseActuel\">");
 			if(patchDroits) {
 				r.l();
 				r.l("	<script>//<![CDATA[");
-				r.l("		function patchCalculInr", strId(), "DoseActuel() {");
+				r.l("		function patchCalculInr", strPk(), "DoseActuel() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/warfarin/calcul-inr?fq=id:", strId(), "',");
+				r.l("				url: '/api/v1/warfarin/calcul-inr?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -740,14 +740,14 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	}
 
 	public void htmMedicamentActuel(ToutEcrivain r, Boolean patchDroits) {
-		if(id!= null) {
-			r.s("<div id=\"patchCalculInr", strId(), "MedicamentActuel\">");
+		if(pk!= null) {
+			r.s("<div id=\"patchCalculInr", strPk(), "MedicamentActuel\">");
 			if(patchDroits) {
 				r.l();
 				r.l("	<script>//<![CDATA[");
-				r.l("		function patchCalculInr", strId(), "MedicamentActuel() {");
+				r.l("		function patchCalculInr", strPk(), "MedicamentActuel() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/warfarin/calcul-inr?fq=id:", strId(), "',");
+				r.l("				url: '/api/v1/warfarin/calcul-inr?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -842,14 +842,14 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	}
 
 	public void htmChangementDose(ToutEcrivain r, Boolean patchDroits) {
-		if(id!= null) {
-			r.s("<div id=\"patchCalculInr", strId(), "ChangementDose\">");
+		if(pk!= null) {
+			r.s("<div id=\"patchCalculInr", strPk(), "ChangementDose\">");
 			if(patchDroits) {
 				r.l();
 				r.l("	<script>//<![CDATA[");
-				r.l("		function patchCalculInr", strId(), "ChangementDose() {");
+				r.l("		function patchCalculInr", strPk(), "ChangementDose() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/warfarin/calcul-inr?fq=id:", strId(), "',");
+				r.l("				url: '/api/v1/warfarin/calcul-inr?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -944,14 +944,14 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	}
 
 	public void htmNotesComplementaires(ToutEcrivain r, Boolean patchDroits) {
-		if(id!= null) {
-			r.s("<div id=\"patchCalculInr", strId(), "NotesComplementaires\">");
+		if(pk!= null) {
+			r.s("<div id=\"patchCalculInr", strPk(), "NotesComplementaires\">");
 			if(patchDroits) {
 				r.l();
 				r.l("	<script>//<![CDATA[");
-				r.l("		function patchCalculInr", strId(), "NotesComplementaires() {");
+				r.l("		function patchCalculInr", strPk(), "NotesComplementaires() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/warfarin/calcul-inr?fq=id:", strId(), "',");
+				r.l("				url: '/api/v1/warfarin/calcul-inr?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -1046,14 +1046,14 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	}
 
 	public void htmInfoContact(ToutEcrivain r, Boolean patchDroits) {
-		if(id!= null) {
-			r.s("<div id=\"patchCalculInr", strId(), "InfoContact\">");
+		if(pk!= null) {
+			r.s("<div id=\"patchCalculInr", strPk(), "InfoContact\">");
 			if(patchDroits) {
 				r.l();
 				r.l("	<script>//<![CDATA[");
-				r.l("		function patchCalculInr", strId(), "InfoContact() {");
+				r.l("		function patchCalculInr", strPk(), "InfoContact() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/warfarin/calcul-inr?fq=id:", strId(), "',");
+				r.l("				url: '/api/v1/warfarin/calcul-inr?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -1094,26 +1094,29 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 
 	public CalculInr initLoinCalculInr(RequeteSite requeteSite) {
 		setRequeteSite_(requeteSite);
-		initLoinCalculInr();
+		if(!dejaInitialiseCalculInr) {
+			dejaInitialiseCalculInr = true;
+			initLoinCalculInr();
+		}
 		return (CalculInr)this;
 	}
 
-	public CalculInr initLoinCalculInr() {
-		if(!dejaInitialiseCalculInr) {
-			dejaInitialiseCalculInr = true;
-			super.initLoinCluster(requeteSite_);
-			utilisateurPkInit();
-			dateInrInit();
-			dateReverifierInit();
-			patientPrendCoumadinInit();
-			butActuelInit();
-			doseActuelInit();
-			medicamentActuelInit();
-			changementDoseInit();
-			notesComplementairesInit();
-			infoContactInit();
-		}
-		return (CalculInr)this;
+	public void initLoinCalculInr() {
+		super.initLoinCluster(requeteSite_);
+		initCalculInr();
+	}
+
+	public void initCalculInr() {
+		utilisateurPkInit();
+		dateInrInit();
+		dateReverifierInit();
+		patientPrendCoumadinInit();
+		butActuelInit();
+		doseActuelInit();
+		medicamentActuelInit();
+		changementDoseInit();
+		notesComplementairesInit();
+		infoContactInit();
 	}
 
 	@Override public void initLoinPourClasse(RequeteSite requeteSite) {
@@ -1143,27 +1146,27 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	// indexer //
 	/////////////
 
-	public void indexerCalculInr() throws Exception {
-		RequeteSite requeteSite = new RequeteSite();
-		requeteSite.initLoinRequeteSite();
-		SiteContexte siteContexte = new SiteContexte();
-		siteContexte.initLoinSiteContexte();
-		siteContexte.setRequeteSite_(requeteSite);
-		requeteSite.setSiteContexte_(siteContexte);
-		requeteSiteCalculInr(requeteSite);
-		initLoinCalculInr(requeteSite);
-		indexerCalculInr(requeteSite);
-	}
+	//public void indexerCalculInr() throws Exception {
+		//RequeteSite requeteSite = new RequeteSite();
+		//requeteSite.initLoinRequeteSite();
+		//SiteContexte siteContexte = new SiteContexte();
+		//siteContexte.initLoinSiteContexte();
+		//siteContexte.setRequeteSite_(requeteSite);
+		//requeteSite.setSiteContexte_(siteContexte);
+		//requeteSiteCalculInr(requeteSite);
+		//initLoinCalculInr(requeteSite);
+		//indexerCalculInr();
+	//}
 
 
-	@Override public void indexerPourClasse(RequeteSite requeteSite) throws Exception {
-		indexerCalculInr(requeteSite_);
+	@Override public void indexerPourClasse() throws Exception {
+		indexerCalculInr();
 	}
 
 	@Override public void indexerPourClasse(SolrInputDocument document) throws Exception {
 		indexerCalculInr(document);
 	}
-	public void indexerCalculInr(RequeteSite requeteSite) throws Exception {
+	public void indexerCalculInr() throws Exception {
 		SolrInputDocument document = new SolrInputDocument();
 		indexerCalculInr(document);
 		SolrClient clientSolr = requeteSite_.getSiteContexte_().getClientSolr();
@@ -1216,20 +1219,6 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 
 	}
 
-	public void desindexerCalculInr() throws Exception {
-		RequeteSite requeteSite = new RequeteSite();
-		requeteSite.initLoinRequeteSite();
-		SiteContexte siteContexte = new SiteContexte();
-		siteContexte.initLoinSiteContexte();
-		siteContexte.setRequeteSite_(requeteSite);
-		requeteSite.setSiteContexte_(siteContexte);
-		requeteSite.setConfigSite_(siteContexte.getConfigSite());
-		initLoinCalculInr(siteContexte.getRequeteSite_());
-		SolrClient clientSolr = siteContexte.getClientSolr();
-		clientSolr.deleteById(id.toString());
-		clientSolr.commit();
-	}
-
 	/////////////
 	// obtenir //
 	/////////////
@@ -1279,7 +1268,7 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	// attribuer //
 	///////////////
 
-	@Override public boolean attribuerPourClasse(String var, Object val) throws Exception {
+	@Override public boolean attribuerPourClasse(String var, Object val) {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
@@ -1292,7 +1281,7 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 		}
 		return o != null;
 	}
-	public Object attribuerCalculInr(String var, Object val) throws Exception {
+	public Object attribuerCalculInr(String var, Object val) {
 		CalculInr oCalculInr = (CalculInr)this;
 		switch(var) {
 			case "utilisateurPk":
@@ -1304,15 +1293,83 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	}
 
 	/////////////
+	// definir //
+	/////////////
+
+	@Override public boolean definirPourClasse(String var, String val) {
+		String[] vars = StringUtils.split(var, ".");
+		Object o = null;
+		if(val != null) {
+			for(String v : vars) {
+				if(o == null)
+					o = definirCalculInr(v, val);
+				else if(o instanceof Cluster) {
+					Cluster cluster = (Cluster)o;
+					o = cluster.definirPourClasse(v, val);
+				}
+			}
+		}
+		return o != null;
+	}
+	public Object definirCalculInr(String var, String val) {
+		switch(var) {
+			case "dateInr":
+				setDateInr(val);
+				sauvegardesCalculInr.add(var);
+				return val;
+			case "dateReverifier":
+				setDateReverifier(val);
+				sauvegardesCalculInr.add(var);
+				return val;
+			case "patientPrendCoumadin":
+				setPatientPrendCoumadin(val);
+				sauvegardesCalculInr.add(var);
+				return val;
+			case "butActuel":
+				setButActuel(val);
+				sauvegardesCalculInr.add(var);
+				return val;
+			case "doseActuel":
+				setDoseActuel(val);
+				sauvegardesCalculInr.add(var);
+				return val;
+			case "medicamentActuel":
+				setMedicamentActuel(val);
+				sauvegardesCalculInr.add(var);
+				return val;
+			case "changementDose":
+				setChangementDose(val);
+				sauvegardesCalculInr.add(var);
+				return val;
+			case "notesComplementaires":
+				setNotesComplementaires(val);
+				sauvegardesCalculInr.add(var);
+				return val;
+			case "infoContact":
+				setInfoContact(val);
+				sauvegardesCalculInr.add(var);
+				return val;
+			default:
+				return super.definirCluster(var, val);
+		}
+	}
+
+	/////////////////
+	// sauvegardes //
+	/////////////////
+
+	protected List<String> sauvegardesCalculInr = new ArrayList<String>();
+
+	/////////////
 	// peupler //
 	/////////////
 
 	@Override public void peuplerPourClasse(SolrDocument solrDocument) {
-		sauvegardesCalculInr = (List<String>)solrDocument.get("sauvegardesCalculInr_stored_strings");
 		peuplerCalculInr(solrDocument);
 	}
 	public void peuplerCalculInr(SolrDocument solrDocument) {
 		CalculInr oCalculInr = (CalculInr)this;
+		sauvegardesCalculInr = (List<String>)solrDocument.get("sauvegardesCalculInr_stored_strings");
 
 		if(sauvegardesCalculInr.contains("utilisateurPk")) {
 			Long utilisateurPk = (Long)solrDocument.get("utilisateurPk_stored_long");
@@ -1377,18 +1434,12 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 		super.peuplerCluster(solrDocument);
 	}
 
-	/////////////////
-	// sauvegardes //
-	/////////////////
-
-	protected List<String> sauvegardesCalculInr = new ArrayList<String>();
-
 	//////////////
 	// hashCode //
 	//////////////
 
 	@Override public int hashCode() {
-		return Objects.hash(super.hashCode(), utilisateurPk, dateInr, dateReverifier, patientPrendCoumadin, butActuel, doseActuel, medicamentActuel, changementDose, notesComplementaires, infoContact);
+		return Objects.hash(super.hashCode(), dateInr, dateReverifier, patientPrendCoumadin, butActuel, doseActuel, medicamentActuel, changementDose, notesComplementaires, infoContact);
 	}
 
 	////////////
@@ -1402,7 +1453,6 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 			return false;
 		CalculInr that = (CalculInr)o;
 		return super.equals(o)
-				&& Objects.equals( utilisateurPk, that.utilisateurPk )
 				&& Objects.equals( dateInr, that.dateInr )
 				&& Objects.equals( dateReverifier, that.dateReverifier )
 				&& Objects.equals( patientPrendCoumadin, that.patientPrendCoumadin )
@@ -1422,8 +1472,7 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 		StringBuilder sb = new StringBuilder();
 		sb.append(super.toString() + "\n");
 		sb.append("CalculInr {");
-		sb.append( "utilisateurPk: " ).append(utilisateurPk);
-		sb.append( ", dateInr: " ).append(dateInr);
+		sb.append( "dateInr: " ).append(dateInr);
 		sb.append( ", dateReverifier: " ).append(dateReverifier);
 		sb.append( ", patientPrendCoumadin: " ).append(patientPrendCoumadin);
 		sb.append( ", butActuel: " ).append(butActuel);

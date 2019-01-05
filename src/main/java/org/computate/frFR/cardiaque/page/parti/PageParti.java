@@ -8,7 +8,7 @@ import org.computate.frFR.cardiaque.requete.RequeteSite;
 public abstract class PageParti extends PagePartiGen<Cluster> { 
 
 	/**	Tous les infos importants à propos de la requête actuelle. **/
-	protected void _requeteSite_(Couverture<RequeteSite> c) throws Exception {}  
+	protected void _requeteSite_(Couverture<RequeteSite> c) {}  
 
 	public abstract Chaine partiH3();
 	public abstract Chaine partiH3Court();
@@ -16,20 +16,20 @@ public abstract class PageParti extends PagePartiGen<Cluster> {
 	public abstract Chaine partiH4();
 	public abstract Chaine partiH4Court();
 
-	public abstract void html() throws Exception;
-	public abstract void htmlCourt() throws Exception;
+	public abstract void html();
+	public abstract void htmlCourt();
 
 	protected void _partiVar(Couverture<String> c) {}
 
-	public void shAvantClasseJavaChamp() throws Exception {
+	public void shAvantClasseJavaChamp() {
 	}
 
-	public void shAvantPageParti() throws Exception {}
-	public void shApresPageParti() throws Exception {}
-	public void shHtmlAvantPageParti() throws Exception {}
-	public void shHtmlApresPageParti() throws Exception {}
-	public void htmlAvantPageParti() throws Exception {}
-	public void htmlApresPageParti() throws Exception {}
+	public void shAvantPageParti() {}
+	public void shApresPageParti() {}
+	public void shHtmlAvantPageParti() {}
+	public void shHtmlApresPageParti() {}
+	public void htmlAvantPageParti() {}
+	public void htmlApresPageParti() {}
 //
 //	public void shCmd() {
 //		if(requeteSite.pageAchete) {

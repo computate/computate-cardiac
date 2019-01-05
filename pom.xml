@@ -7,8 +7,8 @@
 	<groupId>com.heytate</groupId>
 	<artifactId>computate-cardiac</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
-	<name>Fabric8 :: Quickstarts :: Spring-Boot :: Camel XML</name>
-	<description>Spring Boot example running a Camel route defined in XML</description>
+	<name>computate-cardiac</name>
+	<description>Cardiac health application</description>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
@@ -20,36 +20,13 @@
 		<maven-compiler-plugin.version>3.6.0</maven-compiler-plugin.version>
 		<maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
 		<vertx.verticle>org.computate.frFR.cardiaque.AppVertx</vertx.verticle>
+		<!--<vertx.version>3.5.4</vertx.version> -->
+		<vertx.version>3.6.2</vertx.version>
 	</properties>
-
-	<dependencyManagement>
-		<dependencies>
-			<dependency>
-				<groupId>io.fabric8</groupId>
-				<artifactId>fabric8-project-bom-camel-spring-boot</artifactId>
-				<version>${fabric8.version}</version>
-				<type>pom</type>
-				<scope>import</scope>
-			</dependency>
-		</dependencies>
-	</dependencyManagement>
 
 	<dependencies>
 		<!-- <dependency> <groupId>ch.qos.logback</groupId> <artifactId>logback-classic</artifactId> 
 			<version>1.2.3</version> </dependency> -->
-
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>io.fabric8</groupId>
-			<artifactId>kubernetes-assertions</artifactId>
-			<scope>test</scope>
-		</dependency>
-
-
 
 		<dependency>
 			<groupId>commons-beanutils</groupId>
@@ -140,7 +117,7 @@
 		<dependency>
 			<groupId>io.vertx</groupId>
 			<artifactId>vertx-web</artifactId>
-			<version>3.5.4</version>
+			<version>${vertx.version}</version>
 			<exclusions>
 				<exclusion>
 					<groupId>io.netty</groupId>
@@ -171,54 +148,60 @@
 		<dependency>
 			<groupId>io.vertx</groupId>
 			<artifactId>vertx-zookeeper</artifactId>
-			<version>3.5.4</version>
+			<version>${vertx.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>io.vertx</groupId>
 			<artifactId>vertx-jdbc-client</artifactId>
-			<version>3.5.4</version>
+			<version>${vertx.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>io.vertx</groupId>
 			<artifactId>vertx-auth-oauth2</artifactId>
-			<version>3.5.4</version>
+			<version>${vertx.version}</version>
 		</dependency>
 		<!-- <dependency> <groupId>io.vertx</groupId> <artifactId>vertx-web-templ-freemarker</artifactId> 
-			<version>3.5.4</version> </dependency> <dependency> <groupId>com.github.rjeschke</groupId> 
+			<version>${vertx.version}</version> </dependency> <dependency> <groupId>com.github.rjeschke</groupId> 
 			<artifactId>txtmark</artifactId> <version>0.13</version> </dependency> -->
 		<dependency>
 			<groupId>io.vertx</groupId>
 			<artifactId>vertx-reactive-streams</artifactId>
-			<version>3.5.4</version>
+			<version>${vertx.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>io.vertx</groupId>
 			<artifactId>vertx-sql-common</artifactId>
-			<version>3.5.4</version>
+			<version>${vertx.version}</version>
 		</dependency>
 		<dependency>
 			<groupId>io.vertx</groupId>
 			<artifactId>vertx-web-api-contract</artifactId>
-			<version>3.5.4</version>
-		</dependency>
-		<!--
-		<dependency>
-			<groupId>com.github.phiz71</groupId>
-			<artifactId>vertx-swagger-parent</artifactId>
-			<version>1.6.0</version>
-			<type>pom</type>
+			<version>${vertx.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.github.phiz71</groupId>
-			<artifactId>vertx-swagger-router</artifactId>
-			<version>1.6.0</version>
+			<groupId>io.vertx</groupId>
+			<artifactId>vertx-codegen</artifactId>
+			<version>${vertx.version}</version>
+			<scope>provided</scope>
+			<!--<classifier>processor</classifier>-->
 		</dependency>
 		<dependency>
-			<groupId>com.github.phiz71</groupId>
-			<artifactId>vertx-swagger-codegen</artifactId>
-			<version>1.6.0</version>
+			<groupId>io.vertx</groupId>
+			<artifactId>vertx-service-proxy</artifactId>
+			<version>${vertx.version}</version>
 		</dependency>
-		-->
+		<dependency>
+			<groupId>io.vertx</groupId>
+			<artifactId>vertx-web-api-service</artifactId>
+			<version>${vertx.version}</version>
+		</dependency>
+
+
+		<!-- <dependency> <groupId>com.github.phiz71</groupId> <artifactId>vertx-swagger-parent</artifactId> 
+			<version>1.6.0</version> <type>pom</type> </dependency> <dependency> <groupId>com.github.phiz71</groupId> 
+			<artifactId>vertx-swagger-router</artifactId> <version>1.6.0</version> </dependency> 
+			<dependency> <groupId>com.github.phiz71</groupId> <artifactId>vertx-swagger-codegen</artifactId> 
+			<version>1.6.0</version> </dependency> -->
 	</dependencies>
 
 	<build>
@@ -272,6 +255,9 @@
 				<configuration>
 					<source>1.8</source>
 					<target>1.8</target>
+					<annotationProcessors>
+						<annotationProcessor>io.vertx.codegen.CodeGenProcessor</annotationProcessor>
+					</annotationProcessors>
 				</configuration>
 			</plugin>
 

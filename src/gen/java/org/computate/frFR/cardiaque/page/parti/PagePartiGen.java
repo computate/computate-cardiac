@@ -1,9 +1,10 @@
 package org.computate.frFR.cardiaque.page.parti;
 
+import java.util.Objects;
 import org.computate.frFR.cardiaque.couverture.Couverture;
-import io.vertx.core.http.HttpServerResponse;
 import org.computate.frFR.cardiaque.cluster.Cluster;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
+import org.computate.frFR.cardiaque.ecrivain.ToutEcrivain;
 import org.apache.commons.text.StringEscapeUtils;
 import java.lang.String;
 import org.apache.commons.lang3.StringUtils;
@@ -30,7 +31,7 @@ public abstract class PagePartiGen<DEV> extends Cluster {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _requeteSite_(Couverture<RequeteSite> o) throws Exception;
+	protected abstract void _requeteSite_(Couverture<RequeteSite> o);
 
 	public RequeteSite getRequeteSite_() {
 		return requeteSite_;
@@ -40,7 +41,8 @@ public abstract class PagePartiGen<DEV> extends Cluster {
 		this.requeteSite_ = o;
 		this.requeteSite_Couverture.dejaInitialise = true;
 	}
-	protected PageParti requeteSite_Init() throws Exception {
+	protected PageParti requeteSite_Init()
+ {
 		if(!requeteSite_Couverture.dejaInitialise) {
 			_requeteSite_(requeteSite_Couverture);
 			if(requeteSite_ == null)
@@ -76,7 +78,8 @@ public abstract class PagePartiGen<DEV> extends Cluster {
 		this.partiVar = o;
 		this.partiVarCouverture.dejaInitialise = true;
 	}
-	protected PageParti partiVarInit() throws Exception {
+	protected PageParti partiVarInit()
+ {
 		if(!partiVarCouverture.dejaInitialise) {
 			_partiVar(partiVarCouverture);
 			if(partiVar == null)
@@ -98,11 +101,11 @@ public abstract class PagePartiGen<DEV> extends Cluster {
 		return null;
 	}
 
-	public String htmlTooltipPartiVar() {
+	public String htmTooltipPartiVar() {
 		return null;
 	}
 
-	public String htmlPartiVar() {
+	public String htmPartiVar() {
 		return partiVar == null ? "" : StringEscapeUtils.escapeHtml4(strPartiVar());
 	}
 
@@ -112,23 +115,26 @@ public abstract class PagePartiGen<DEV> extends Cluster {
 
 	protected boolean dejaInitialisePageParti = false;
 
-	public PageParti initLoinPageParti(RequeteSite requeteSite) throws Exception {
+	public PageParti initLoinPageParti(RequeteSite requeteSite) {
 		setRequeteSite_(requeteSite);
-		initLoinPageParti();
-		return (PageParti)this;
-	}
-
-	public PageParti initLoinPageParti() throws Exception {
 		if(!dejaInitialisePageParti) {
 			dejaInitialisePageParti = true;
-			super.initLoinCluster(requeteSite_);
-			requeteSite_Init();
-			partiVarInit();
+			initLoinPageParti();
 		}
 		return (PageParti)this;
 	}
 
-	public void initLoinPourClasse(RequeteSite requeteSite) throws Exception {
+	public void initLoinPageParti() {
+		super.initLoinCluster(requeteSite_);
+		initPageParti();
+	}
+
+	public void initPageParti() {
+		requeteSite_Init();
+		partiVarInit();
+	}
+
+	@Override public void initLoinPourClasse(RequeteSite requeteSite) {
 		initLoinPageParti(requeteSite);
 	}
 
@@ -136,11 +142,11 @@ public abstract class PagePartiGen<DEV> extends Cluster {
 	// requeteSite //
 	/////////////////
 
-	public void requeteSitePageParti(RequeteSite requeteSite) throws Exception {
+	public void requeteSitePageParti(RequeteSite requeteSite) {
 			super.requeteSiteCluster(requeteSite);
 	}
 
-	public void requeteSitePourClasse(RequeteSite requeteSite) throws Exception {
+	public void requeteSitePourClasse(RequeteSite requeteSite) {
 		requeteSitePageParti(requeteSite);
 	}
 
@@ -177,7 +183,7 @@ public abstract class PagePartiGen<DEV> extends Cluster {
 	// attribuer //
 	///////////////
 
-	@Override public boolean attribuerPourClasse(String var, Object val) throws Exception {
+	@Override public boolean attribuerPourClasse(String var, Object val) {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
@@ -190,11 +196,72 @@ public abstract class PagePartiGen<DEV> extends Cluster {
 		}
 		return o != null;
 	}
-	public Object attribuerPageParti(String var, Object val) throws Exception {
+	public Object attribuerPageParti(String var, Object val) {
 		PageParti oPageParti = (PageParti)this;
 		switch(var) {
 			default:
 				return super.attribuerCluster(var, val);
 		}
+	}
+
+	/////////////
+	// definir //
+	/////////////
+
+	@Override public boolean definirPourClasse(String var, String val) {
+		String[] vars = StringUtils.split(var, ".");
+		Object o = null;
+		if(val != null) {
+			for(String v : vars) {
+				if(o == null)
+					o = definirPageParti(v, val);
+				else if(o instanceof Cluster) {
+					Cluster cluster = (Cluster)o;
+					o = cluster.definirPourClasse(v, val);
+				}
+			}
+		}
+		return o != null;
+	}
+	public Object definirPageParti(String var, String val) {
+		switch(var) {
+			default:
+				return super.definirCluster(var, val);
+		}
+	}
+
+	//////////////
+	// hashCode //
+	//////////////
+
+	@Override public int hashCode() {
+		return Objects.hash(super.hashCode(), partiVar);
+	}
+
+	////////////
+	// equals //
+	////////////
+
+	@Override public boolean equals(Object o) {
+		if(this == o)
+			return true;
+		if(!(o instanceof PageParti))
+			return false;
+		PageParti that = (PageParti)o;
+		return super.equals(o)
+				&& Objects.equals( partiVar, that.partiVar );
+	}
+
+	//////////////
+	// toString //
+	//////////////
+
+	@Override public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString() + "\n");
+		sb.append("PageParti {");
+		sb.append( "partiVar: \"" ).append(partiVar).append( "\"" );
+		sb.append(" }");
+		return sb.toString();
 	}
 }

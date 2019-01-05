@@ -19,7 +19,7 @@ import org.computate.frFR.cardiaque.couverture.Couverture;
 import org.computate.frFR.cardiaque.recherche.ResultatRecherche;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
 
-public class AppOpenApi3 extends AppOpenApiGen<Object> {
+public class AppOpenApi3 extends AppOpenApi3Gen<Object> { 
 
 	protected void _requeteSite_(Couverture<RequeteSite> c) throws Exception {
 	}
@@ -33,7 +33,7 @@ public class AppOpenApi3 extends AppOpenApiGen<Object> {
 
 	public static void main(String[] args) throws Exception {
 		AppOpenApi3 api = new AppOpenApi3();
-		api.initLoinAppOpenApi();
+		api.initLoinAppOpenApi3();
 		api.genererOpenApi();
 	}
 

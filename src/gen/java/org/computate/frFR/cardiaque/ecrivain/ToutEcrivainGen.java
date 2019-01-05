@@ -7,11 +7,12 @@ import java.io.StringWriter;
 import org.apache.commons.text.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.lang.Exception;
 import java.util.Objects;
 import io.vertx.core.http.HttpServerResponse;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
 import java.lang.Boolean;
+import org.computate.frFR.cardiaque.ecrivain.ToutEcrivain;
 import java.lang.Object;
 
 /**	
@@ -182,7 +183,7 @@ public abstract class ToutEcrivainGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _printWriter(Couverture<PrintWriter> o) throws FileNotFoundException;
+	protected abstract void _printWriter(Couverture<PrintWriter> o) throws Exception;
 
 	public PrintWriter getPrintWriter() {
 		return printWriter;
@@ -193,7 +194,7 @@ public abstract class ToutEcrivainGen<DEV> extends Object {
 		this.printWriterCouverture.dejaInitialise = true;
 	}
 	protected ToutEcrivain printWriterInit()
- throws FileNotFoundException {
+ throws Exception {
 		if(!printWriterCouverture.dejaInitialise) {
 			_printWriter(printWriterCouverture);
 			if(printWriter == null)
@@ -229,7 +230,7 @@ public abstract class ToutEcrivainGen<DEV> extends Object {
 		this.empty = o;
 		this.emptyCouverture.dejaInitialise = true;
 	}
-	public ToutEcrivain setEmpty(String o) throws Exception {
+	public ToutEcrivain setEmpty(String o) {
 		if(org.apache.commons.lang3.BooleanUtils.isTrue(org.apache.commons.lang3.BooleanUtils.toBoolean(o)))
 			this.empty = Boolean.parseBoolean(o);
 		this.emptyCouverture.dejaInitialise = true;
@@ -258,11 +259,11 @@ public abstract class ToutEcrivainGen<DEV> extends Object {
 		return null;
 	}
 
-	public String htmlTooltipEmpty() {
+	public String htmTooltipEmpty() {
 		return null;
 	}
 
-	public String htmlEmpty() {
+	public String htmEmpty() {
 		return empty == null ? "" : StringEscapeUtils.escapeHtml4(strEmpty());
 	}
 
@@ -272,26 +273,29 @@ public abstract class ToutEcrivainGen<DEV> extends Object {
 
 	protected boolean dejaInitialiseToutEcrivain = false;
 
-	public ToutEcrivain initLoinToutEcrivain(RequeteSite requeteSite) throws FileNotFoundException {
+	public ToutEcrivain initLoinToutEcrivain(RequeteSite requeteSite) throws Exception {
 		setRequeteSite_(requeteSite);
-		initLoinToutEcrivain();
-		return (ToutEcrivain)this;
-	}
-
-	public ToutEcrivain initLoinToutEcrivain() throws FileNotFoundException {
 		if(!dejaInitialiseToutEcrivain) {
 			dejaInitialiseToutEcrivain = true;
-			requeteSite_Init();
-			fileInit();
-			stringWriterInit();
-			httpServerResponseInit();
-			printWriterInit();
-			emptyInit();
+			initLoinToutEcrivain();
 		}
 		return (ToutEcrivain)this;
 	}
 
-	public void initLoinPourClasse(RequeteSite requeteSite) throws FileNotFoundException {
+	public void initLoinToutEcrivain() throws Exception {
+		initToutEcrivain();
+	}
+
+	public void initToutEcrivain() throws Exception {
+		requeteSite_Init();
+		fileInit();
+		stringWriterInit();
+		httpServerResponseInit();
+		printWriterInit();
+		emptyInit();
+	}
+
+	public void initLoinPourClasse(RequeteSite requeteSite) throws Exception {
 		initLoinToutEcrivain(requeteSite);
 	}
 
@@ -347,7 +351,7 @@ public abstract class ToutEcrivainGen<DEV> extends Object {
 	// attribuer //
 	///////////////
 
-	public boolean attribuerPourClasse(String var, Object val) throws Exception {
+	public boolean attribuerPourClasse(String var, Object val) {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
@@ -360,8 +364,34 @@ public abstract class ToutEcrivainGen<DEV> extends Object {
 		}
 		return o != null;
 	}
-	public Object attribuerToutEcrivain(String var, Object val) throws Exception {
+	public Object attribuerToutEcrivain(String var, Object val) {
 		ToutEcrivain oToutEcrivain = (ToutEcrivain)this;
+		switch(var) {
+			default:
+				return null;
+		}
+	}
+
+	/////////////
+	// definir //
+	/////////////
+
+	public boolean definirPourClasse(String var, String val) {
+		String[] vars = StringUtils.split(var, ".");
+		Object o = null;
+		if(val != null) {
+			for(String v : vars) {
+				if(o == null)
+					o = definirToutEcrivain(v, val);
+				else if(o instanceof Cluster) {
+					Cluster cluster = (Cluster)o;
+					o = cluster.definirPourClasse(v, val);
+				}
+			}
+		}
+		return o != null;
+	}
+	public Object definirToutEcrivain(String var, String val) {
 		switch(var) {
 			default:
 				return null;

@@ -7,11 +7,11 @@ import org.computate.frFR.cardiaque.page.MiseEnPage;
 import org.computate.frFR.cardiaque.recherche.ListeRecherche;
 import org.computate.frFR.cardiaque.utilisateur.UtilisateurSite;
 
-public class CalculInrPage extends CalculInrPageGen<MiseEnPage> { 
+public class CalculInrPage extends CalculInrPageGen<MiseEnPage> {  
 
 	@Override public void initLoinCalculInrPage() {
 		initCalculInrPage();
-		super.initLoinMiseEnPage(requeteSite_);
+//		super.initLoinMiseEnPage(requeteSite_);
 	}
 
 	/** 

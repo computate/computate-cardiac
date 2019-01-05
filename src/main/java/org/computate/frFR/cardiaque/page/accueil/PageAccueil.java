@@ -15,11 +15,11 @@ public class PageAccueil extends PageAccueilGen<MiseEnPage> {
 //		pageVisibleAuxBotsCouverture.valeurIndexéStocké(true);
 //	}
 
-	protected void _pageTitre(Couverture<String> c) throws Exception {
+	protected void _pageTitre(Couverture<String> c) {
 //		c.o(requeteSite.configSite.nomEntreprise);
 	}
 	
-	protected void _pageUri(Couverture<String> c) throws Exception {
+	protected void _pageUri(Couverture<String> c) {
 		c.o("");
 	}
 

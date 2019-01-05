@@ -42,14 +42,14 @@ public class AppPeupler extends AppPeuplerGen<Object> {
 			setUtilisateurMail("employee.jones@mailinator.com");
 			setUtilisateurId("43c229ce-87ec-5bc2-9ae1-3321d1f88321");
 		}}.initLoinUtilisateurSite(requeteSite_);
-		apiUtilisateurSite.postUtilisateurSite(patientWarfarin);
+//		apiUtilisateurSite.postUtilisateurSite(patientWarfarin);
 
 		patientWarfarin = new UtilisateurSite() {{
 			setUtilisateurPrenom("Jane");
 			setUtilisateurNomFamille("Doe");
 			setUtilisateurMail("jane.doe@mailinator.com");
 		}}.initLoinUtilisateurSite(requeteSite_);
-		apiUtilisateurSite.postUtilisateurSite(patientWarfarin);
+//		apiUtilisateurSite.postUtilisateurSite(patientWarfarin);
 
 		calculInr = new CalculInr() {{
 			setPatientPrendCoumadin(CalculInr.VAL_patientPrendCoumadinOui);
@@ -62,6 +62,6 @@ public class AppPeupler extends AppPeuplerGen<Object> {
 			setDateInr(LocalDate.of(2018, 11, 15));
 			setDateReverifier(LocalDate.of(2018,  11,  26));
 		}}.initLoinCalculInr(requeteSite_);
-		apiCalculInr.postCalculInr(calculInr);
+//		apiCalculInr.postCalculInr(calculInr);
 	}
 }

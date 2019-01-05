@@ -612,7 +612,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.sitePort = o;
 		this.sitePortCouverture.dejaInitialise = true;
 	}
-	public ConfigSite setSitePort(String o) throws Exception {
+	public ConfigSite setSitePort(String o) {
 		if(org.apache.commons.lang3.math.NumberUtils.isCreatable(o))
 			this.sitePort = Integer.parseInt(o);
 		this.sitePortCouverture.dejaInitialise = true;
@@ -1473,7 +1473,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.jdbcTailleMaxPiscine = o;
 		this.jdbcTailleMaxPiscineCouverture.dejaInitialise = true;
 	}
-	public ConfigSite setJdbcTailleMaxPiscine(String o) throws Exception {
+	public ConfigSite setJdbcTailleMaxPiscine(String o) {
 		if(org.apache.commons.lang3.math.NumberUtils.isCreatable(o))
 			this.jdbcTailleMaxPiscine = Integer.parseInt(o);
 		this.jdbcTailleMaxPiscineCouverture.dejaInitialise = true;
@@ -1536,7 +1536,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.jdbcTailleInitialePiscine = o;
 		this.jdbcTailleInitialePiscineCouverture.dejaInitialise = true;
 	}
-	public ConfigSite setJdbcTailleInitialePiscine(String o) throws Exception {
+	public ConfigSite setJdbcTailleInitialePiscine(String o) {
 		if(org.apache.commons.lang3.math.NumberUtils.isCreatable(o))
 			this.jdbcTailleInitialePiscine = Integer.parseInt(o);
 		this.jdbcTailleInitialePiscineCouverture.dejaInitialise = true;
@@ -1599,7 +1599,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.jdbcTailleMinPiscine = o;
 		this.jdbcTailleMinPiscineCouverture.dejaInitialise = true;
 	}
-	public ConfigSite setJdbcTailleMinPiscine(String o) throws Exception {
+	public ConfigSite setJdbcTailleMinPiscine(String o) {
 		if(org.apache.commons.lang3.math.NumberUtils.isCreatable(o))
 			this.jdbcTailleMinPiscine = Integer.parseInt(o);
 		this.jdbcTailleMinPiscineCouverture.dejaInitialise = true;
@@ -1662,7 +1662,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.jdbcMaxDeclarations = o;
 		this.jdbcMaxDeclarationsCouverture.dejaInitialise = true;
 	}
-	public ConfigSite setJdbcMaxDeclarations(String o) throws Exception {
+	public ConfigSite setJdbcMaxDeclarations(String o) {
 		if(org.apache.commons.lang3.math.NumberUtils.isCreatable(o))
 			this.jdbcMaxDeclarations = Integer.parseInt(o);
 		this.jdbcMaxDeclarationsCouverture.dejaInitialise = true;
@@ -1725,7 +1725,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.jdbcMaxDeclarationsParConnexion = o;
 		this.jdbcMaxDeclarationsParConnexionCouverture.dejaInitialise = true;
 	}
-	public ConfigSite setJdbcMaxDeclarationsParConnexion(String o) throws Exception {
+	public ConfigSite setJdbcMaxDeclarationsParConnexion(String o) {
 		if(org.apache.commons.lang3.math.NumberUtils.isCreatable(o))
 			this.jdbcMaxDeclarationsParConnexion = Integer.parseInt(o);
 		this.jdbcMaxDeclarationsParConnexionCouverture.dejaInitialise = true;
@@ -1788,7 +1788,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.jdbcTempsInactiviteMax = o;
 		this.jdbcTempsInactiviteMaxCouverture.dejaInitialise = true;
 	}
-	public ConfigSite setJdbcTempsInactiviteMax(String o) throws Exception {
+	public ConfigSite setJdbcTempsInactiviteMax(String o) {
 		if(org.apache.commons.lang3.math.NumberUtils.isCreatable(o))
 			this.jdbcTempsInactiviteMax = Integer.parseInt(o);
 		this.jdbcTempsInactiviteMaxCouverture.dejaInitialise = true;
@@ -2706,7 +2706,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.nombreExecuteurs = o;
 		this.nombreExecuteursCouverture.dejaInitialise = true;
 	}
-	public ConfigSite setNombreExecuteurs(String o) throws Exception {
+	public ConfigSite setNombreExecuteurs(String o) {
 		if(org.apache.commons.lang3.math.NumberUtils.isCreatable(o))
 			this.nombreExecuteurs = Integer.parseInt(o);
 		this.nombreExecuteursCouverture.dejaInitialise = true;
@@ -3321,73 +3321,76 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 
 	public ConfigSite initLoinConfigSite(RequeteSite requeteSite) throws Exception {
 		setRequeteSite_(requeteSite);
-		initLoinConfigSite();
+		if(!dejaInitialiseConfigSite) {
+			dejaInitialiseConfigSite = true;
+			initLoinConfigSite();
+		}
 		return (ConfigSite)this;
 	}
 
-	public ConfigSite initLoinConfigSite() throws Exception {
-		if(!dejaInitialiseConfigSite) {
-			dejaInitialiseConfigSite = true;
-			requeteSite_Init();
-			siteContexte_Init();
-			configCheminInit();
-			configInit();
-			identifiantSiteInit();
-			prefixeEchappeInit();
-			appliCheminInit();
-			racineDocumentInit();
-			nomEntrepriseInit();
-			nomDomaineInit();
-			siteNomHoteInit();
-			sitePortInit();
-			authRoyaumeInit();
-			authRessourceInit();
-			authSecretInit();
-			authSslRequisInit();
-			sslJksCheminInit();
-			sslJksMotDePasseInit();
-			authUrlInit();
-			selCryptageInit();
-			motDePasseCryptageInit();
-			urlDomaineBaseInit();
-			siteNomAffichageInit();
-			jdbcClassePiloteInit();
-			jdbcUtilisateurInit();
-			jdbcMotDePasseInit();
-			jdbcTailleMaxPiscineInit();
-			jdbcTailleInitialePiscineInit();
-			jdbcTailleMinPiscineInit();
-			jdbcMaxDeclarationsInit();
-			jdbcMaxDeclarationsParConnexionInit();
-			jdbcTempsInactiviteMaxInit();
-			jdbcUrlInit();
-			solrUrlInit();
-			solrUrlComputateInit();
-			jetonIdentitePaypalInit();
-			compteFacebookInit();
-			compteTwitterInit();
-			compteGooglePlusInit();
-			compteInstagramInit();
-			compteYoutubeInit();
-			identifiantCanalYoutubeInit();
-			comptePinterestInit();
-			compteOpenclipartInit();
-			compteMailInit();
-			roleAdminInit();
-			mailAdminInit();
-			nombreExecuteursInit();
-			openApiVersionInit();
-			apiDescriptionInit();
-			apiTitreInit();
-			apiTermsServiceInit();
-			apiVersionInit();
-			apiContactMailInit();
-			apiLicenceNomInit();
-			apiLicenceUrlInit();
-			apiNomHoteInit();
-			apiCheminBaseInit();
-		}
-		return (ConfigSite)this;
+	public void initLoinConfigSite() throws Exception {
+		initConfigSite();
+	}
+
+	public void initConfigSite() throws Exception {
+		requeteSite_Init();
+		siteContexte_Init();
+		configCheminInit();
+		configInit();
+		identifiantSiteInit();
+		prefixeEchappeInit();
+		appliCheminInit();
+		racineDocumentInit();
+		nomEntrepriseInit();
+		nomDomaineInit();
+		siteNomHoteInit();
+		sitePortInit();
+		authRoyaumeInit();
+		authRessourceInit();
+		authSecretInit();
+		authSslRequisInit();
+		sslJksCheminInit();
+		sslJksMotDePasseInit();
+		authUrlInit();
+		selCryptageInit();
+		motDePasseCryptageInit();
+		urlDomaineBaseInit();
+		siteNomAffichageInit();
+		jdbcClassePiloteInit();
+		jdbcUtilisateurInit();
+		jdbcMotDePasseInit();
+		jdbcTailleMaxPiscineInit();
+		jdbcTailleInitialePiscineInit();
+		jdbcTailleMinPiscineInit();
+		jdbcMaxDeclarationsInit();
+		jdbcMaxDeclarationsParConnexionInit();
+		jdbcTempsInactiviteMaxInit();
+		jdbcUrlInit();
+		solrUrlInit();
+		solrUrlComputateInit();
+		jetonIdentitePaypalInit();
+		compteFacebookInit();
+		compteTwitterInit();
+		compteGooglePlusInit();
+		compteInstagramInit();
+		compteYoutubeInit();
+		identifiantCanalYoutubeInit();
+		comptePinterestInit();
+		compteOpenclipartInit();
+		compteMailInit();
+		roleAdminInit();
+		mailAdminInit();
+		nombreExecuteursInit();
+		openApiVersionInit();
+		apiDescriptionInit();
+		apiTitreInit();
+		apiTermsServiceInit();
+		apiVersionInit();
+		apiContactMailInit();
+		apiLicenceNomInit();
+		apiLicenceUrlInit();
+		apiNomHoteInit();
+		apiCheminBaseInit();
 	}
 
 	public void initLoinPourClasse(RequeteSite requeteSite) throws Exception {
@@ -3550,7 +3553,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	// attribuer //
 	///////////////
 
-	public boolean attribuerPourClasse(String var, Object val) throws Exception {
+	public boolean attribuerPourClasse(String var, Object val) {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
@@ -3563,8 +3566,34 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		}
 		return o != null;
 	}
-	public Object attribuerConfigSite(String var, Object val) throws Exception {
+	public Object attribuerConfigSite(String var, Object val) {
 		ConfigSite oConfigSite = (ConfigSite)this;
+		switch(var) {
+			default:
+				return null;
+		}
+	}
+
+	/////////////
+	// definir //
+	/////////////
+
+	public boolean definirPourClasse(String var, String val) {
+		String[] vars = StringUtils.split(var, ".");
+		Object o = null;
+		if(val != null) {
+			for(String v : vars) {
+				if(o == null)
+					o = definirConfigSite(v, val);
+				else if(o instanceof Cluster) {
+					Cluster cluster = (Cluster)o;
+					o = cluster.definirPourClasse(v, val);
+				}
+			}
+		}
+		return o != null;
+	}
+	public Object definirConfigSite(String var, String val) {
 		switch(var) {
 			default:
 				return null;

@@ -16,11 +16,7 @@ import org.apache.solr.common.SolrDocumentList;
 import org.computate.frFR.cardiaque.config.ConfigSite;
 import org.computate.frFR.cardiaque.contexte.SiteContexte;
 import org.computate.frFR.cardiaque.couverture.Couverture;
-import org.computate.frFR.cardiaque.recherche.ResultatRecherche;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
-
-import com.citi.computate.vertx.AppSwagger2;
-import com.citi.computate.vertx.AppSwagger2Gen;
 
 public class AppSwagger2 extends AppSwagger2Gen<Object> {
 

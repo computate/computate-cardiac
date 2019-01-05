@@ -7,9 +7,11 @@ import io.vertx.core.Vertx;
 import org.apache.commons.text.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import java.lang.Integer;
-import io.vertx.core.http.HttpServerResponse;
+import java.lang.Exception;
+import java.util.Objects;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
+import org.computate.frFR.cardiaque.ecrivain.ToutEcrivain;
 import java.lang.Object;
 import io.vertx.ext.web.api.contract.openapi3.OpenAPI3RouterFactory;
 import io.vertx.core.json.JsonObject;
@@ -23,111 +25,114 @@ import io.vertx.ext.sql.SQLClient;
  **/
 public abstract class SiteContexteGen<DEV> extends Object {
 
-	////////////
-	// vertx_ //
-	////////////
+	///////////
+	// vertx //
+	///////////
 
-	/**	L'entité « vertx_ »
+	/**	L'entité « vertx »
 	 *	 is defined as null before being initialized. 
 	 */
-	protected Vertx vertx_;
-	public Couverture<Vertx> vertx_Couverture = new Couverture<Vertx>().p(this).c(Vertx.class).var("vertx_").o(vertx_);
+	protected Vertx vertx;
+	public Couverture<Vertx> vertxCouverture = new Couverture<Vertx>().p(this).c(Vertx.class).var("vertx").o(vertx);
 
-	/**	<br/>L'entité « vertx_ »
+	/**	<br/>L'entité « vertx »
 	 *  est défini comme null avant d'être initialisé. 
-	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.contexte.SiteContexte&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:vertx_">Trouver l'entité vertx_ dans Solr</a>
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.contexte.SiteContexte&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:vertx">Trouver l'entité vertx dans Solr</a>
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _vertx_(Couverture<Vertx> o) throws Exception;
+	protected abstract void _vertx(Couverture<Vertx> o) throws Exception;
 
-	public Vertx getVertx_() {
-		return vertx_;
+	public Vertx getVertx() {
+		return vertx;
 	}
 
-	public void setVertx_(Vertx o) {
-		this.vertx_ = o;
-		this.vertx_Couverture.dejaInitialise = true;
+	public void setVertx(Vertx o) {
+		this.vertx = o;
+		this.vertxCouverture.dejaInitialise = true;
 	}
-	protected SiteContexte vertx_Init() throws Exception {
-		if(!vertx_Couverture.dejaInitialise) {
-			_vertx_(vertx_Couverture);
-			if(vertx_ == null)
-				setVertx_(vertx_Couverture.o);
+	protected SiteContexte vertxInit()
+ throws Exception {
+		if(!vertxCouverture.dejaInitialise) {
+			_vertx(vertxCouverture);
+			if(vertx == null)
+				setVertx(vertxCouverture.o);
 		}
-		vertx_Couverture.dejaInitialise(true);
+		vertxCouverture.dejaInitialise(true);
 		return (SiteContexte)this;
 	}
 
-	///////////////
-	// siteAuth_ //
-	///////////////
+	//////////////
+	// siteAuth //
+	//////////////
 
-	/**	L'entité « siteAuth_ »
+	/**	L'entité « siteAuth »
 	 *	 is defined as null before being initialized. 
 	 */
-	protected OAuth2Auth siteAuth_;
-	public Couverture<OAuth2Auth> siteAuth_Couverture = new Couverture<OAuth2Auth>().p(this).c(OAuth2Auth.class).var("siteAuth_").o(siteAuth_);
+	protected OAuth2Auth siteAuth;
+	public Couverture<OAuth2Auth> siteAuthCouverture = new Couverture<OAuth2Auth>().p(this).c(OAuth2Auth.class).var("siteAuth").o(siteAuth);
 
-	/**	<br/>L'entité « siteAuth_ »
+	/**	<br/>L'entité « siteAuth »
 	 *  est défini comme null avant d'être initialisé. 
-	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.contexte.SiteContexte&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:siteAuth_">Trouver l'entité siteAuth_ dans Solr</a>
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.contexte.SiteContexte&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:siteAuth">Trouver l'entité siteAuth dans Solr</a>
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _siteAuth_(Couverture<OAuth2Auth> o) throws Exception;
+	protected abstract void _siteAuth(Couverture<OAuth2Auth> o) throws Exception;
 
-	public OAuth2Auth getSiteAuth_() {
-		return siteAuth_;
+	public OAuth2Auth getSiteAuth() {
+		return siteAuth;
 	}
 
-	public void setSiteAuth_(OAuth2Auth o) {
-		this.siteAuth_ = o;
-		this.siteAuth_Couverture.dejaInitialise = true;
+	public void setSiteAuth(OAuth2Auth o) {
+		this.siteAuth = o;
+		this.siteAuthCouverture.dejaInitialise = true;
 	}
-	protected SiteContexte siteAuth_Init() throws Exception {
-		if(!siteAuth_Couverture.dejaInitialise) {
-			_siteAuth_(siteAuth_Couverture);
-			if(siteAuth_ == null)
-				setSiteAuth_(siteAuth_Couverture.o);
+	protected SiteContexte siteAuthInit()
+ throws Exception {
+		if(!siteAuthCouverture.dejaInitialise) {
+			_siteAuth(siteAuthCouverture);
+			if(siteAuth == null)
+				setSiteAuth(siteAuthCouverture.o);
 		}
-		siteAuth_Couverture.dejaInitialise(true);
+		siteAuthCouverture.dejaInitialise(true);
 		return (SiteContexte)this;
 	}
 
-	///////////////////
-	// usineRouteur_ //
-	///////////////////
+	//////////////////
+	// usineRouteur //
+	//////////////////
 
-	/**	L'entité « usineRouteur_ »
+	/**	L'entité « usineRouteur »
 	 *	 is defined as null before being initialized. 
 	 */
-	protected OpenAPI3RouterFactory usineRouteur_;
-	public Couverture<OpenAPI3RouterFactory> usineRouteur_Couverture = new Couverture<OpenAPI3RouterFactory>().p(this).c(OpenAPI3RouterFactory.class).var("usineRouteur_").o(usineRouteur_);
+	protected OpenAPI3RouterFactory usineRouteur;
+	public Couverture<OpenAPI3RouterFactory> usineRouteurCouverture = new Couverture<OpenAPI3RouterFactory>().p(this).c(OpenAPI3RouterFactory.class).var("usineRouteur").o(usineRouteur);
 
-	/**	<br/>L'entité « usineRouteur_ »
+	/**	<br/>L'entité « usineRouteur »
 	 *  est défini comme null avant d'être initialisé. 
-	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.contexte.SiteContexte&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:usineRouteur_">Trouver l'entité usineRouteur_ dans Solr</a>
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.contexte.SiteContexte&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:usineRouteur">Trouver l'entité usineRouteur dans Solr</a>
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _usineRouteur_(Couverture<OpenAPI3RouterFactory> o) throws Exception;
+	protected abstract void _usineRouteur(Couverture<OpenAPI3RouterFactory> o) throws Exception;
 
-	public OpenAPI3RouterFactory getUsineRouteur_() {
-		return usineRouteur_;
+	public OpenAPI3RouterFactory getUsineRouteur() {
+		return usineRouteur;
 	}
 
-	public void setUsineRouteur_(OpenAPI3RouterFactory o) {
-		this.usineRouteur_ = o;
-		this.usineRouteur_Couverture.dejaInitialise = true;
+	public void setUsineRouteur(OpenAPI3RouterFactory o) {
+		this.usineRouteur = o;
+		this.usineRouteurCouverture.dejaInitialise = true;
 	}
-	protected SiteContexte usineRouteur_Init() throws Exception {
-		if(!usineRouteur_Couverture.dejaInitialise) {
-			_usineRouteur_(usineRouteur_Couverture);
-			if(usineRouteur_ == null)
-				setUsineRouteur_(usineRouteur_Couverture.o);
+	protected SiteContexte usineRouteurInit()
+ throws Exception {
+		if(!usineRouteurCouverture.dejaInitialise) {
+			_usineRouteur(usineRouteurCouverture);
+			if(usineRouteur == null)
+				setUsineRouteur(usineRouteurCouverture.o);
 		}
-		usineRouteur_Couverture.dejaInitialise(true);
+		usineRouteurCouverture.dejaInitialise(true);
 		return (SiteContexte)this;
 	}
 
@@ -157,7 +162,8 @@ public abstract class SiteContexteGen<DEV> extends Object {
 		this.configSite = o;
 		this.configSiteCouverture.dejaInitialise = true;
 	}
-	protected SiteContexte configSiteInit() throws Exception {
+	protected SiteContexte configSiteInit()
+ throws Exception {
 		if(!configSiteCouverture.dejaInitialise) {
 			_configSite(configSite);
 		}
@@ -192,7 +198,8 @@ public abstract class SiteContexteGen<DEV> extends Object {
 		this.jdbcConfig = o;
 		this.jdbcConfigCouverture.dejaInitialise = true;
 	}
-	protected SiteContexte jdbcConfigInit() throws Exception {
+	protected SiteContexte jdbcConfigInit()
+ throws Exception {
 		if(!jdbcConfigCouverture.dejaInitialise) {
 			_jdbcConfig(jdbcConfig);
 		}
@@ -226,7 +233,8 @@ public abstract class SiteContexteGen<DEV> extends Object {
 		this.clientSql = o;
 		this.clientSqlCouverture.dejaInitialise = true;
 	}
-	protected SiteContexte clientSqlInit() throws Exception {
+	protected SiteContexte clientSqlInit()
+ throws Exception {
 		if(!clientSqlCouverture.dejaInitialise) {
 			_clientSql(clientSqlCouverture);
 			if(clientSql == null)
@@ -262,7 +270,8 @@ public abstract class SiteContexteGen<DEV> extends Object {
 		this.clientSolr = o;
 		this.clientSolrCouverture.dejaInitialise = true;
 	}
-	protected SiteContexte clientSolrInit() throws Exception {
+	protected SiteContexte clientSolrInit()
+ throws Exception {
 		if(!clientSolrCouverture.dejaInitialise) {
 			_clientSolr(clientSolrCouverture);
 			if(clientSolr == null)
@@ -298,7 +307,8 @@ public abstract class SiteContexteGen<DEV> extends Object {
 		this.clientSolrComputate = o;
 		this.clientSolrComputateCouverture.dejaInitialise = true;
 	}
-	protected SiteContexte clientSolrComputateInit() throws Exception {
+	protected SiteContexte clientSolrComputateInit()
+ throws Exception {
 		if(!clientSolrComputateCouverture.dejaInitialise) {
 			_clientSolrComputate(clientSolrComputateCouverture);
 			if(clientSolrComputate == null)
@@ -334,7 +344,8 @@ public abstract class SiteContexteGen<DEV> extends Object {
 		this.selCryptage = o;
 		this.selCryptageCouverture.dejaInitialise = true;
 	}
-	protected SiteContexte selCryptageInit() throws Exception {
+	protected SiteContexte selCryptageInit()
+ throws Exception {
 		if(!selCryptageCouverture.dejaInitialise) {
 			_selCryptage(selCryptageCouverture);
 			if(selCryptage == null)
@@ -356,11 +367,11 @@ public abstract class SiteContexteGen<DEV> extends Object {
 		return null;
 	}
 
-	public String htmlTooltipSelCryptage() {
+	public String htmTooltipSelCryptage() {
 		return null;
 	}
 
-	public String htmlSelCryptage() {
+	public String htmSelCryptage() {
 		return selCryptage == null ? "" : StringEscapeUtils.escapeHtml4(strSelCryptage());
 	}
 
@@ -390,7 +401,8 @@ public abstract class SiteContexteGen<DEV> extends Object {
 		this.motDePasseCryptage = o;
 		this.motDePasseCryptageCouverture.dejaInitialise = true;
 	}
-	protected SiteContexte motDePasseCryptageInit() throws Exception {
+	protected SiteContexte motDePasseCryptageInit()
+ throws Exception {
 		if(!motDePasseCryptageCouverture.dejaInitialise) {
 			_motDePasseCryptage(motDePasseCryptageCouverture);
 			if(motDePasseCryptage == null)
@@ -412,11 +424,11 @@ public abstract class SiteContexteGen<DEV> extends Object {
 		return null;
 	}
 
-	public String htmlTooltipMotDePasseCryptage() {
+	public String htmTooltipMotDePasseCryptage() {
 		return null;
 	}
 
-	public String htmlMotDePasseCryptage() {
+	public String htmMotDePasseCryptage() {
 		return motDePasseCryptage == null ? "" : StringEscapeUtils.escapeHtml4(strMotDePasseCryptage());
 	}
 
@@ -446,7 +458,8 @@ public abstract class SiteContexteGen<DEV> extends Object {
 		this.jetonIdentitePaypal = o;
 		this.jetonIdentitePaypalCouverture.dejaInitialise = true;
 	}
-	protected SiteContexte jetonIdentitePaypalInit() throws Exception {
+	protected SiteContexte jetonIdentitePaypalInit()
+ throws Exception {
 		if(!jetonIdentitePaypalCouverture.dejaInitialise) {
 			_jetonIdentitePaypal(jetonIdentitePaypalCouverture);
 			if(jetonIdentitePaypal == null)
@@ -468,11 +481,11 @@ public abstract class SiteContexteGen<DEV> extends Object {
 		return null;
 	}
 
-	public String htmlTooltipJetonIdentitePaypal() {
+	public String htmTooltipJetonIdentitePaypal() {
 		return null;
 	}
 
-	public String htmlJetonIdentitePaypal() {
+	public String htmJetonIdentitePaypal() {
 		return jetonIdentitePaypal == null ? "" : StringEscapeUtils.escapeHtml4(strJetonIdentitePaypal());
 	}
 
@@ -502,13 +515,14 @@ public abstract class SiteContexteGen<DEV> extends Object {
 		this.nombreExecuteurs = o;
 		this.nombreExecuteursCouverture.dejaInitialise = true;
 	}
-	public SiteContexte setNombreExecuteurs(String o) throws Exception {
+	public SiteContexte setNombreExecuteurs(String o) {
 		if(org.apache.commons.lang3.math.NumberUtils.isCreatable(o))
 			this.nombreExecuteurs = Integer.parseInt(o);
 		this.nombreExecuteursCouverture.dejaInitialise = true;
 		return (SiteContexte)this;
 	}
-	protected SiteContexte nombreExecuteursInit() throws Exception {
+	protected SiteContexte nombreExecuteursInit()
+ throws Exception {
 		if(!nombreExecuteursCouverture.dejaInitialise) {
 			_nombreExecuteurs(nombreExecuteursCouverture);
 			if(nombreExecuteurs == null)
@@ -530,11 +544,11 @@ public abstract class SiteContexteGen<DEV> extends Object {
 		return null;
 	}
 
-	public String htmlTooltipNombreExecuteurs() {
+	public String htmTooltipNombreExecuteurs() {
 		return null;
 	}
 
-	public String htmlNombreExecuteurs() {
+	public String htmNombreExecuteurs() {
 		return nombreExecuteurs == null ? "" : StringEscapeUtils.escapeHtml4(strNombreExecuteurs());
 	}
 
@@ -564,7 +578,8 @@ public abstract class SiteContexteGen<DEV> extends Object {
 		this.requeteSite_ = o;
 		this.requeteSite_Couverture.dejaInitialise = true;
 	}
-	protected SiteContexte requeteSite_Init() throws Exception {
+	protected SiteContexte requeteSite_Init()
+ throws Exception {
 		if(!requeteSite_Couverture.dejaInitialise) {
 			_requeteSite_(requeteSite_);
 		}
@@ -580,28 +595,31 @@ public abstract class SiteContexteGen<DEV> extends Object {
 
 	public SiteContexte initLoinSiteContexte(RequeteSite requeteSite) throws Exception {
 		setRequeteSite_(requeteSite);
-		initLoinSiteContexte();
+		if(!dejaInitialiseSiteContexte) {
+			dejaInitialiseSiteContexte = true;
+			initLoinSiteContexte();
+		}
 		return (SiteContexte)this;
 	}
 
-	public SiteContexte initLoinSiteContexte() throws Exception {
-		if(!dejaInitialiseSiteContexte) {
-			dejaInitialiseSiteContexte = true;
-			vertx_Init();
-			siteAuth_Init();
-			usineRouteur_Init();
-			configSiteInit();
-			jdbcConfigInit();
-			clientSqlInit();
-			clientSolrInit();
-			clientSolrComputateInit();
-			selCryptageInit();
-			motDePasseCryptageInit();
-			jetonIdentitePaypalInit();
-			nombreExecuteursInit();
-			requeteSite_Init();
-		}
-		return (SiteContexte)this;
+	public void initLoinSiteContexte() throws Exception {
+		initSiteContexte();
+	}
+
+	public void initSiteContexte() throws Exception {
+		vertxInit();
+		siteAuthInit();
+		usineRouteurInit();
+		configSiteInit();
+		jdbcConfigInit();
+		clientSqlInit();
+		clientSolrInit();
+		clientSolrComputateInit();
+		selCryptageInit();
+		motDePasseCryptageInit();
+		jetonIdentitePaypalInit();
+		nombreExecuteursInit();
+		requeteSite_Init();
 	}
 
 	public void initLoinPourClasse(RequeteSite requeteSite) throws Exception {
@@ -612,11 +630,11 @@ public abstract class SiteContexteGen<DEV> extends Object {
 	// requeteSite //
 	/////////////////
 
-	public void requeteSiteSiteContexte(RequeteSite requeteSite) throws Exception {
+	public void requeteSiteSiteContexte(RequeteSite requeteSite) {
 		configSite.setRequeteSite_(requeteSite);
 	}
 
-	public void requeteSitePourClasse(RequeteSite requeteSite) throws Exception {
+	public void requeteSitePourClasse(RequeteSite requeteSite) {
 		requeteSiteSiteContexte(requeteSite);
 	}
 
@@ -640,12 +658,12 @@ public abstract class SiteContexteGen<DEV> extends Object {
 	public Object obtenirSiteContexte(String var) throws Exception {
 		SiteContexte oSiteContexte = (SiteContexte)this;
 		switch(var) {
-			case "vertx_":
-				return oSiteContexte.vertx_;
-			case "siteAuth_":
-				return oSiteContexte.siteAuth_;
-			case "usineRouteur_":
-				return oSiteContexte.usineRouteur_;
+			case "vertx":
+				return oSiteContexte.vertx;
+			case "siteAuth":
+				return oSiteContexte.siteAuth;
+			case "usineRouteur":
+				return oSiteContexte.usineRouteur;
 			case "configSite":
 				return oSiteContexte.configSite;
 			case "jdbcConfig":
@@ -675,7 +693,7 @@ public abstract class SiteContexteGen<DEV> extends Object {
 	// attribuer //
 	///////////////
 
-	public boolean attribuerPourClasse(String var, Object val) throws Exception {
+	public boolean attribuerPourClasse(String var, Object val) {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
@@ -688,11 +706,76 @@ public abstract class SiteContexteGen<DEV> extends Object {
 		}
 		return o != null;
 	}
-	public Object attribuerSiteContexte(String var, Object val) throws Exception {
+	public Object attribuerSiteContexte(String var, Object val) {
 		SiteContexte oSiteContexte = (SiteContexte)this;
 		switch(var) {
 			default:
 				return null;
 		}
+	}
+
+	/////////////
+	// definir //
+	/////////////
+
+	public boolean definirPourClasse(String var, String val) {
+		String[] vars = StringUtils.split(var, ".");
+		Object o = null;
+		if(val != null) {
+			for(String v : vars) {
+				if(o == null)
+					o = definirSiteContexte(v, val);
+				else if(o instanceof Cluster) {
+					Cluster cluster = (Cluster)o;
+					o = cluster.definirPourClasse(v, val);
+				}
+			}
+		}
+		return o != null;
+	}
+	public Object definirSiteContexte(String var, String val) {
+		switch(var) {
+			default:
+				return null;
+		}
+	}
+
+	//////////////
+	// hashCode //
+	//////////////
+
+	@Override public int hashCode() {
+		return Objects.hash(selCryptage, motDePasseCryptage, jetonIdentitePaypal, nombreExecuteurs);
+	}
+
+	////////////
+	// equals //
+	////////////
+
+	@Override public boolean equals(Object o) {
+		if(this == o)
+			return true;
+		if(!(o instanceof SiteContexte))
+			return false;
+		SiteContexte that = (SiteContexte)o;
+		return Objects.equals( selCryptage, that.selCryptage )
+				&& Objects.equals( motDePasseCryptage, that.motDePasseCryptage )
+				&& Objects.equals( jetonIdentitePaypal, that.jetonIdentitePaypal )
+				&& Objects.equals( nombreExecuteurs, that.nombreExecuteurs );
+	}
+
+	//////////////
+	// toString //
+	//////////////
+
+	@Override public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("SiteContexte {");
+		sb.append( "selCryptage: \"" ).append(selCryptage).append( "\"" );
+		sb.append( ", motDePasseCryptage: \"" ).append(motDePasseCryptage).append( "\"" );
+		sb.append( ", jetonIdentitePaypal: \"" ).append(jetonIdentitePaypal).append( "\"" );
+		sb.append( ", nombreExecuteurs: " ).append(nombreExecuteurs);
+		sb.append(" }");
+		return sb.toString();
 	}
 }

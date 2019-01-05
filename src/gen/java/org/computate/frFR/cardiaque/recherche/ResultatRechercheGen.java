@@ -118,7 +118,7 @@ public abstract class ResultatRechercheGen<DEV> extends Object {
 		this.resultatIndice = o;
 		this.resultatIndiceCouverture.dejaInitialise = true;
 	}
-	public ResultatRecherche setResultatIndice(String o) throws Exception {
+	public ResultatRecherche setResultatIndice(String o) {
 		if(org.apache.commons.lang3.math.NumberUtils.isCreatable(o))
 			this.resultatIndice = Long.parseLong(o);
 		this.resultatIndiceCouverture.dejaInitialise = true;
@@ -163,18 +163,21 @@ public abstract class ResultatRechercheGen<DEV> extends Object {
 
 	public ResultatRecherche initLoinResultatRecherche(RequeteSite requeteSite) throws Exception {
 		setRequeteSite_(requeteSite);
-		initLoinResultatRecherche();
+		if(!dejaInitialiseResultatRecherche) {
+			dejaInitialiseResultatRecherche = true;
+			initLoinResultatRecherche();
+		}
 		return (ResultatRecherche)this;
 	}
 
-	public ResultatRecherche initLoinResultatRecherche() throws Exception {
-		if(!dejaInitialiseResultatRecherche) {
-			dejaInitialiseResultatRecherche = true;
-			requeteSite_Init();
-			documentSolrInit();
-			resultatIndiceInit();
-		}
-		return (ResultatRecherche)this;
+	public void initLoinResultatRecherche() throws Exception {
+		initResultatRecherche();
+	}
+
+	public void initResultatRecherche() throws Exception {
+		requeteSite_Init();
+		documentSolrInit();
+		resultatIndiceInit();
 	}
 
 	public void initLoinPourClasse(RequeteSite requeteSite) throws Exception {
@@ -227,7 +230,7 @@ public abstract class ResultatRechercheGen<DEV> extends Object {
 	// attribuer //
 	///////////////
 
-	public boolean attribuerPourClasse(String var, Object val) throws Exception {
+	public boolean attribuerPourClasse(String var, Object val) {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
@@ -240,8 +243,34 @@ public abstract class ResultatRechercheGen<DEV> extends Object {
 		}
 		return o != null;
 	}
-	public Object attribuerResultatRecherche(String var, Object val) throws Exception {
+	public Object attribuerResultatRecherche(String var, Object val) {
 		ResultatRecherche oResultatRecherche = (ResultatRecherche)this;
+		switch(var) {
+			default:
+				return null;
+		}
+	}
+
+	/////////////
+	// definir //
+	/////////////
+
+	public boolean definirPourClasse(String var, String val) {
+		String[] vars = StringUtils.split(var, ".");
+		Object o = null;
+		if(val != null) {
+			for(String v : vars) {
+				if(o == null)
+					o = definirResultatRecherche(v, val);
+				else if(o instanceof Cluster) {
+					Cluster cluster = (Cluster)o;
+					o = cluster.definirPourClasse(v, val);
+				}
+			}
+		}
+		return o != null;
+	}
+	public Object definirResultatRecherche(String var, String val) {
 		switch(var) {
 			default:
 				return null;

@@ -1,9 +1,9 @@
 package org.computate.frFR.cardiaque.utilisateur; 
 
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
+import org.computate.frFR.cardiaque.cluster.Cluster;
 import org.computate.frFR.cardiaque.couverture.Couverture;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
 
@@ -12,7 +12,7 @@ import org.computate.frFR.cardiaque.requete.RequeteSite;
  * apiUri.enUS: /api/v1/site/user
  * apiUri.frFR: /api/v1/site/utilisateur
  */             
-public class UtilisateurSite extends UtilisateurSiteGen<Object> {  
+public class UtilisateurSite extends UtilisateurSiteGen<Cluster> {  
 
 	/**
 	 * indexe: true

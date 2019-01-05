@@ -23,7 +23,6 @@ import org.apache.solr.common.SolrDocument;
 import io.vertx.core.json.JsonArray;
 import java.util.List;
 import io.vertx.ext.sql.SQLConnection;
-import java.lang.Object;
 import io.vertx.ext.sql.SQLClient;
 import org.apache.solr.common.SolrInputDocument;
 
@@ -31,7 +30,7 @@ import org.apache.solr.common.SolrInputDocument;
  * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.utilisateur.UtilisateurSite&fq=classeEtendGen_indexed_boolean:true">Trouver la classe  dans Solr</a>
  * <br/>
  **/
-public abstract class UtilisateurSiteGen<DEV> extends Object {
+public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 	private static final Logger LOGGER = LoggerFactory.getLogger(UtilisateurSite.class);
 
 	//////////////////
@@ -108,14 +107,14 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 	}
 
 	public void htmCalculInrPks(ToutEcrivain r, Boolean patchDroits) {
-		if(!= null) {
-			r.s("<div id=\"patchUtilisateurSite", str(), "CalculInrPks\">");
+		if(pk!= null) {
+			r.s("<div id=\"patchUtilisateurSite", strPk(), "CalculInrPks\">");
 			if(patchDroits) {
 				r.l();
 				r.l("	<script>//<![CDATA[");
-				r.l("		function patchUtilisateurSite", str(), "CalculInrPks() {");
+				r.l("		function patchUtilisateurSite", strPk(), "CalculInrPks() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/site/utilisateur?fq=:", str(), "',");
+				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -243,14 +242,14 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 	}
 
 	public void htmUtilisateurNom(ToutEcrivain r, Boolean patchDroits) {
-		if(!= null) {
-			r.s("<div id=\"patchUtilisateurSite", str(), "UtilisateurNom\">");
+		if(pk!= null) {
+			r.s("<div id=\"patchUtilisateurSite", strPk(), "UtilisateurNom\">");
 			if(patchDroits) {
 				r.l();
 				r.l("	<script>//<![CDATA[");
-				r.l("		function patchUtilisateurSite", str(), "UtilisateurNom() {");
+				r.l("		function patchUtilisateurSite", strPk(), "UtilisateurNom() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/site/utilisateur?fq=:", str(), "',");
+				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -341,14 +340,14 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 	}
 
 	public void htmUtilisateurMail(ToutEcrivain r, Boolean patchDroits) {
-		if(!= null) {
-			r.s("<div id=\"patchUtilisateurSite", str(), "UtilisateurMail\">");
+		if(pk!= null) {
+			r.s("<div id=\"patchUtilisateurSite", strPk(), "UtilisateurMail\">");
 			if(patchDroits) {
 				r.l();
 				r.l("	<script>//<![CDATA[");
-				r.l("		function patchUtilisateurSite", str(), "UtilisateurMail() {");
+				r.l("		function patchUtilisateurSite", strPk(), "UtilisateurMail() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/site/utilisateur?fq=:", str(), "',");
+				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -439,14 +438,14 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 	}
 
 	public void htmUtilisateurId(ToutEcrivain r, Boolean patchDroits) {
-		if(!= null) {
-			r.s("<div id=\"patchUtilisateurSite", str(), "UtilisateurId\">");
+		if(pk!= null) {
+			r.s("<div id=\"patchUtilisateurSite", strPk(), "UtilisateurId\">");
 			if(patchDroits) {
 				r.l();
 				r.l("	<script>//<![CDATA[");
-				r.l("		function patchUtilisateurSite", str(), "UtilisateurId() {");
+				r.l("		function patchUtilisateurSite", strPk(), "UtilisateurId() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/site/utilisateur?fq=:", str(), "',");
+				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -537,14 +536,14 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 	}
 
 	public void htmUtilisateurPrenom(ToutEcrivain r, Boolean patchDroits) {
-		if(!= null) {
-			r.s("<div id=\"patchUtilisateurSite", str(), "UtilisateurPrenom\">");
+		if(pk!= null) {
+			r.s("<div id=\"patchUtilisateurSite", strPk(), "UtilisateurPrenom\">");
 			if(patchDroits) {
 				r.l();
 				r.l("	<script>//<![CDATA[");
-				r.l("		function patchUtilisateurSite", str(), "UtilisateurPrenom() {");
+				r.l("		function patchUtilisateurSite", strPk(), "UtilisateurPrenom() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/site/utilisateur?fq=:", str(), "',");
+				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -635,14 +634,14 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 	}
 
 	public void htmUtilisateurNomFamille(ToutEcrivain r, Boolean patchDroits) {
-		if(!= null) {
-			r.s("<div id=\"patchUtilisateurSite", str(), "UtilisateurNomFamille\">");
+		if(pk!= null) {
+			r.s("<div id=\"patchUtilisateurSite", strPk(), "UtilisateurNomFamille\">");
 			if(patchDroits) {
 				r.l();
 				r.l("	<script>//<![CDATA[");
-				r.l("		function patchUtilisateurSite", str(), "UtilisateurNomFamille() {");
+				r.l("		function patchUtilisateurSite", strPk(), "UtilisateurNomFamille() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/site/utilisateur?fq=:", str(), "',");
+				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -733,14 +732,14 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 	}
 
 	public void htmUtilisateurNomComplet(ToutEcrivain r, Boolean patchDroits) {
-		if(!= null) {
-			r.s("<div id=\"patchUtilisateurSite", str(), "UtilisateurNomComplet\">");
+		if(pk!= null) {
+			r.s("<div id=\"patchUtilisateurSite", strPk(), "UtilisateurNomComplet\">");
 			if(patchDroits) {
 				r.l();
 				r.l("	<script>//<![CDATA[");
-				r.l("		function patchUtilisateurSite", str(), "UtilisateurNomComplet() {");
+				r.l("		function patchUtilisateurSite", strPk(), "UtilisateurNomComplet() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/site/utilisateur?fq=:", str(), "',");
+				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -831,14 +830,14 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 	}
 
 	public void htmUtilisateurSite(ToutEcrivain r, Boolean patchDroits) {
-		if(!= null) {
-			r.s("<div id=\"patchUtilisateurSite", str(), "UtilisateurSite\">");
+		if(pk!= null) {
+			r.s("<div id=\"patchUtilisateurSite", strPk(), "UtilisateurSite\">");
 			if(patchDroits) {
 				r.l();
 				r.l("	<script>//<![CDATA[");
-				r.l("		function patchUtilisateurSite", str(), "UtilisateurSite() {");
+				r.l("		function patchUtilisateurSite", strPk(), "UtilisateurSite() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/site/utilisateur?fq=:", str(), "',");
+				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -935,14 +934,14 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 	}
 
 	public void htmUtilisateurRecevoirCourriels(ToutEcrivain r, Boolean patchDroits) {
-		if(!= null) {
-			r.s("<div id=\"patchUtilisateurSite", str(), "UtilisateurRecevoirCourriels\">");
+		if(pk!= null) {
+			r.s("<div id=\"patchUtilisateurSite", strPk(), "UtilisateurRecevoirCourriels\">");
 			if(patchDroits) {
 				r.l();
 				r.l("	<script>//<![CDATA[");
-				r.l("		function patchUtilisateurSite", str(), "UtilisateurRecevoirCourriels() {");
+				r.l("		function patchUtilisateurSite", strPk(), "UtilisateurRecevoirCourriels() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/site/utilisateur?fq=:", str(), "',");
+				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -1039,14 +1038,14 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 	}
 
 	public void htmModeleSupprime(ToutEcrivain r, Boolean patchDroits) {
-		if(!= null) {
-			r.s("<div id=\"patchUtilisateurSite", str(), "ModeleSupprime\">");
+		if(pk!= null) {
+			r.s("<div id=\"patchUtilisateurSite", strPk(), "ModeleSupprime\">");
 			if(patchDroits) {
 				r.l();
 				r.l("	<script>//<![CDATA[");
-				r.l("		function patchUtilisateurSite", str(), "ModeleSupprime() {");
+				r.l("		function patchUtilisateurSite", strPk(), "ModeleSupprime() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/site/utilisateur?fq=:", str(), "',");
+				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -1211,14 +1210,14 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 	}
 
 	public void htmModeleClasseNomCanonique(ToutEcrivain r, Boolean patchDroits) {
-		if(!= null) {
-			r.s("<div id=\"patchUtilisateurSite", str(), "ModeleClasseNomCanonique\">");
+		if(pk!= null) {
+			r.s("<div id=\"patchUtilisateurSite", strPk(), "ModeleClasseNomCanonique\">");
 			if(patchDroits) {
 				r.l();
 				r.l("	<script>//<![CDATA[");
-				r.l("		function patchUtilisateurSite", str(), "ModeleClasseNomCanonique() {");
+				r.l("		function patchUtilisateurSite", strPk(), "ModeleClasseNomCanonique() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/site/utilisateur?fq=:", str(), "',");
+				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -1315,14 +1314,14 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 	}
 
 	public void htmModeleCle(ToutEcrivain r, Boolean patchDroits) {
-		if(!= null) {
-			r.s("<div id=\"patchUtilisateurSite", str(), "ModeleCle\">");
+		if(pk!= null) {
+			r.s("<div id=\"patchUtilisateurSite", strPk(), "ModeleCle\">");
 			if(patchDroits) {
 				r.l();
 				r.l("	<script>//<![CDATA[");
-				r.l("		function patchUtilisateurSite", str(), "ModeleCle() {");
+				r.l("		function patchUtilisateurSite", strPk(), "ModeleCle() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/site/utilisateur?fq=:", str(), "',");
+				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -1413,14 +1412,14 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 	}
 
 	public void htmModeleSuggestionStocke(ToutEcrivain r, Boolean patchDroits) {
-		if(!= null) {
-			r.s("<div id=\"patchUtilisateurSite", str(), "ModeleSuggestionStocke\">");
+		if(pk!= null) {
+			r.s("<div id=\"patchUtilisateurSite", strPk(), "ModeleSuggestionStocke\">");
 			if(patchDroits) {
 				r.l();
 				r.l("	<script>//<![CDATA[");
-				r.l("		function patchUtilisateurSite", str(), "ModeleSuggestionStocke() {");
+				r.l("		function patchUtilisateurSite", strPk(), "ModeleSuggestionStocke() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/site/utilisateur?fq=:", str(), "',");
+				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -1511,14 +1510,14 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 	}
 
 	public void htmModeleSuggestionIndexe(ToutEcrivain r, Boolean patchDroits) {
-		if(!= null) {
-			r.s("<div id=\"patchUtilisateurSite", str(), "ModeleSuggestionIndexe\">");
+		if(pk!= null) {
+			r.s("<div id=\"patchUtilisateurSite", strPk(), "ModeleSuggestionIndexe\">");
 			if(patchDroits) {
 				r.l();
 				r.l("	<script>//<![CDATA[");
-				r.l("		function patchUtilisateurSite", str(), "ModeleSuggestionIndexe() {");
+				r.l("		function patchUtilisateurSite", strPk(), "ModeleSuggestionIndexe() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/site/utilisateur?fq=:", str(), "',");
+				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -1559,35 +1558,39 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 
 	public UtilisateurSite initLoinUtilisateurSite(RequeteSite requeteSite) {
 		setRequeteSite_(requeteSite);
-		initLoinUtilisateurSite();
-		return (UtilisateurSite)this;
-	}
-
-	public UtilisateurSite initLoinUtilisateurSite() {
 		if(!dejaInitialiseUtilisateurSite) {
 			dejaInitialiseUtilisateurSite = true;
-			calculInrPksInit();
-			requeteSite_Init();
-			utilisateurNomInit();
-			utilisateurMailInit();
-			utilisateurIdInit();
-			utilisateurPrenomInit();
-			utilisateurNomFamilleInit();
-			utilisateurNomCompletInit();
-			utilisateurSiteInit();
-			utilisateurRecevoirCourrielsInit();
-			modeleSupprimeInit();
-			modeleCreeInit();
-			modeleModifieInit();
-			modeleClasseNomCanoniqueInit();
-			modeleCleInit();
-			modeleSuggestionStockeInit();
-			modeleSuggestionIndexeInit();
+			initLoinUtilisateurSite();
 		}
 		return (UtilisateurSite)this;
 	}
 
-	public void initLoinPourClasse(RequeteSite requeteSite) {
+	public void initLoinUtilisateurSite() {
+		super.initLoinCluster(requeteSite_);
+		initUtilisateurSite();
+	}
+
+	public void initUtilisateurSite() {
+		calculInrPksInit();
+		requeteSite_Init();
+		utilisateurNomInit();
+		utilisateurMailInit();
+		utilisateurIdInit();
+		utilisateurPrenomInit();
+		utilisateurNomFamilleInit();
+		utilisateurNomCompletInit();
+		utilisateurSiteInit();
+		utilisateurRecevoirCourrielsInit();
+		modeleSupprimeInit();
+		modeleCreeInit();
+		modeleModifieInit();
+		modeleClasseNomCanoniqueInit();
+		modeleCleInit();
+		modeleSuggestionStockeInit();
+		modeleSuggestionIndexeInit();
+	}
+
+	@Override public void initLoinPourClasse(RequeteSite requeteSite) {
 		initLoinUtilisateurSite(requeteSite);
 	}
 
@@ -1596,6 +1599,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 	/////////////////
 
 	public void requeteSiteUtilisateurSite(RequeteSite requeteSite) {
+			super.requeteSiteCluster(requeteSite);
 	}
 
 	public void requeteSitePourClasse(RequeteSite requeteSite) {
@@ -1606,27 +1610,27 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 	// indexer //
 	/////////////
 
-	public void indexerUtilisateurSite() throws Exception {
-		RequeteSite requeteSite = new RequeteSite();
-		requeteSite.initLoinRequeteSite();
-		SiteContexte siteContexte = new SiteContexte();
-		siteContexte.initLoinSiteContexte();
-		siteContexte.setRequeteSite_(requeteSite);
-		requeteSite.setSiteContexte_(siteContexte);
-		requeteSiteUtilisateurSite(requeteSite);
-		initLoinUtilisateurSite(requeteSite);
-		indexerUtilisateurSite(requeteSite);
+	//public void indexerUtilisateurSite() throws Exception {
+		//RequeteSite requeteSite = new RequeteSite();
+		//requeteSite.initLoinRequeteSite();
+		//SiteContexte siteContexte = new SiteContexte();
+		//siteContexte.initLoinSiteContexte();
+		//siteContexte.setRequeteSite_(requeteSite);
+		//requeteSite.setSiteContexte_(siteContexte);
+		//requeteSiteUtilisateurSite(requeteSite);
+		//initLoinUtilisateurSite(requeteSite);
+		//indexerUtilisateurSite();
+	//}
+
+
+	@Override public void indexerPourClasse() throws Exception {
+		indexerUtilisateurSite();
 	}
 
-
-	public void indexerPourClasse(RequeteSite requeteSite) throws Exception {
-		indexerUtilisateurSite(requeteSite_);
-	}
-
-	public void indexerPourClasse(SolrInputDocument document) throws Exception {
+	@Override public void indexerPourClasse(SolrInputDocument document) throws Exception {
 		indexerUtilisateurSite(document);
 	}
-	public void indexerUtilisateurSite(RequeteSite requeteSite) throws Exception {
+	public void indexerUtilisateurSite() throws Exception {
 		SolrInputDocument document = new SolrInputDocument();
 		indexerUtilisateurSite(document);
 		SolrClient clientSolr = requeteSite_.getSiteContexte_().getClientSolr();
@@ -1703,13 +1707,15 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 			document.addField("modeleSuggestionIndexe_indexed_string", modeleSuggestionIndexe);
 			document.addField("modeleSuggestionIndexe_stored_string", modeleSuggestionIndexe);
 		}
+		super.indexerCluster(document);
+
 	}
 
 	/////////////
 	// obtenir //
 	/////////////
 
-	public Object obtenirPourClasse(String var) throws Exception {
+	@Override public Object obtenirPourClasse(String var) throws Exception {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
@@ -1760,7 +1766,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 			case "modeleSuggestionIndexe":
 				return oUtilisateurSite.modeleSuggestionIndexe;
 			default:
-				return null;
+				return super.obtenirCluster(var);
 		}
 	}
 
@@ -1768,7 +1774,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 	// attribuer //
 	///////////////
 
-	public boolean attribuerPourClasse(String var, Object val) throws Exception {
+	@Override public boolean attribuerPourClasse(String var, Object val) {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
@@ -1781,27 +1787,116 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 		}
 		return o != null;
 	}
-	public Object attribuerUtilisateurSite(String var, Object val) throws Exception {
+	public Object attribuerUtilisateurSite(String var, Object val) {
 		UtilisateurSite oUtilisateurSite = (UtilisateurSite)this;
 		switch(var) {
 			case "calculInrPks":
 				oUtilisateurSite.addCalculInrPks((Long)val);
 				return val;
 			default:
-				return null;
+				return super.attribuerCluster(var, val);
 		}
 	}
+
+	/////////////
+	// definir //
+	/////////////
+
+	@Override public boolean definirPourClasse(String var, String val) {
+		String[] vars = StringUtils.split(var, ".");
+		Object o = null;
+		if(val != null) {
+			for(String v : vars) {
+				if(o == null)
+					o = definirUtilisateurSite(v, val);
+				else if(o instanceof Cluster) {
+					Cluster cluster = (Cluster)o;
+					o = cluster.definirPourClasse(v, val);
+				}
+			}
+		}
+		return o != null;
+	}
+	public Object definirUtilisateurSite(String var, String val) {
+		switch(var) {
+			case "calculInrPks":
+				addCalculInrPks(val);
+				if(!sauvegardesUtilisateurSite.contains(var))
+					sauvegardesUtilisateurSite.add(var);
+				return val;
+			case "utilisateurNom":
+				setUtilisateurNom(val);
+				sauvegardesUtilisateurSite.add(var);
+				return val;
+			case "utilisateurMail":
+				setUtilisateurMail(val);
+				sauvegardesUtilisateurSite.add(var);
+				return val;
+			case "utilisateurId":
+				setUtilisateurId(val);
+				sauvegardesUtilisateurSite.add(var);
+				return val;
+			case "utilisateurPrenom":
+				setUtilisateurPrenom(val);
+				sauvegardesUtilisateurSite.add(var);
+				return val;
+			case "utilisateurNomFamille":
+				setUtilisateurNomFamille(val);
+				sauvegardesUtilisateurSite.add(var);
+				return val;
+			case "utilisateurNomComplet":
+				setUtilisateurNomComplet(val);
+				sauvegardesUtilisateurSite.add(var);
+				return val;
+			case "utilisateurSite":
+				setUtilisateurSite(val);
+				sauvegardesUtilisateurSite.add(var);
+				return val;
+			case "utilisateurRecevoirCourriels":
+				setUtilisateurRecevoirCourriels(val);
+				sauvegardesUtilisateurSite.add(var);
+				return val;
+			case "modeleSupprime":
+				setModeleSupprime(val);
+				sauvegardesUtilisateurSite.add(var);
+				return val;
+			case "modeleClasseNomCanonique":
+				setModeleClasseNomCanonique(val);
+				sauvegardesUtilisateurSite.add(var);
+				return val;
+			case "modeleCle":
+				setModeleCle(val);
+				sauvegardesUtilisateurSite.add(var);
+				return val;
+			case "modeleSuggestionStocke":
+				setModeleSuggestionStocke(val);
+				sauvegardesUtilisateurSite.add(var);
+				return val;
+			case "modeleSuggestionIndexe":
+				setModeleSuggestionIndexe(val);
+				sauvegardesUtilisateurSite.add(var);
+				return val;
+			default:
+				return super.definirCluster(var, val);
+		}
+	}
+
+	/////////////////
+	// sauvegardes //
+	/////////////////
+
+	protected List<String> sauvegardesUtilisateurSite = new ArrayList<String>();
 
 	/////////////
 	// peupler //
 	/////////////
 
 	@Override public void peuplerPourClasse(SolrDocument solrDocument) {
-		sauvegardesUtilisateurSite = (List<String>)solrDocument.get("sauvegardesUtilisateurSite_stored_strings");
 		peuplerUtilisateurSite(solrDocument);
 	}
 	public void peuplerUtilisateurSite(SolrDocument solrDocument) {
 		UtilisateurSite oUtilisateurSite = (UtilisateurSite)this;
+		sauvegardesUtilisateurSite = (List<String>)solrDocument.get("sauvegardesUtilisateurSite_stored_strings");
 
 		if(sauvegardesUtilisateurSite.contains("calculInrPks")) {
 			List<Long> calculInrPks = (List<Long>)solrDocument.get("calculInrPks_stored_longs");
@@ -1863,18 +1958,6 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 				oUtilisateurSite.setModeleSupprime(modeleSupprime);
 		}
 
-		if(sauvegardesUtilisateurSite.contains("modeleCree")) {
-			 modeleCree = ()solrDocument.get("modeleCree_stored");
-			if(modeleCree != null)
-				oUtilisateurSite.setModeleCree(modeleCree);
-		}
-
-		if(sauvegardesUtilisateurSite.contains("modeleModifie")) {
-			 modeleModifie = ()solrDocument.get("modeleModifie_stored");
-			if(modeleModifie != null)
-				oUtilisateurSite.setModeleModifie(modeleModifie);
-		}
-
 		if(sauvegardesUtilisateurSite.contains("modeleClasseNomCanonique")) {
 			String modeleClasseNomCanonique = (String)solrDocument.get("modeleClasseNomCanonique_stored_string");
 			if(modeleClasseNomCanonique != null)
@@ -1899,21 +1982,15 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 				oUtilisateurSite.setModeleSuggestionIndexe(modeleSuggestionIndexe);
 		}
 
-		super.peuplerObject(solrDocument);
+		super.peuplerCluster(solrDocument);
 	}
-
-	/////////////////
-	// sauvegardes //
-	/////////////////
-
-	protected List<String> sauvegardesUtilisateurSite = new ArrayList<String>();
 
 	//////////////
 	// hashCode //
 	//////////////
 
 	@Override public int hashCode() {
-		return Objects.hash(calculInrPks, utilisateurNom, utilisateurMail, utilisateurId, utilisateurPrenom, utilisateurNomFamille, utilisateurNomComplet, utilisateurSite, utilisateurRecevoirCourriels, modeleSupprime, modeleClasseNomCanonique, modeleCle, modeleSuggestionStocke, modeleSuggestionIndexe);
+		return Objects.hash(super.hashCode(), calculInrPks, utilisateurNom, utilisateurMail, utilisateurId, utilisateurPrenom, utilisateurNomFamille, utilisateurNomComplet, utilisateurSite, utilisateurRecevoirCourriels, modeleSupprime, modeleClasseNomCanonique, modeleCle, modeleSuggestionStocke, modeleSuggestionIndexe);
 	}
 
 	////////////
@@ -1926,7 +2003,8 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 		if(!(o instanceof UtilisateurSite))
 			return false;
 		UtilisateurSite that = (UtilisateurSite)o;
-		return Objects.equals( calculInrPks, that.calculInrPks )
+		return super.equals(o)
+				&& Objects.equals( calculInrPks, that.calculInrPks )
 				&& Objects.equals( utilisateurNom, that.utilisateurNom )
 				&& Objects.equals( utilisateurMail, that.utilisateurMail )
 				&& Objects.equals( utilisateurId, that.utilisateurId )
@@ -1948,6 +2026,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Object {
 
 	@Override public String toString() {
 		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString() + "\n");
 		sb.append("UtilisateurSite {");
 		sb.append( "calculInrPks: " ).append(calculInrPks);
 		sb.append( ", utilisateurNom: \"" ).append(utilisateurNom).append( "\"" );

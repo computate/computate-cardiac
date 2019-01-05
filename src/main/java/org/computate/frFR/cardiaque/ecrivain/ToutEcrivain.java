@@ -1,7 +1,6 @@
 package org.computate.frFR.cardiaque.ecrivain;   
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
@@ -26,13 +25,13 @@ public class ToutEcrivain extends ToutEcrivainGen<Object> {
 	protected void _requeteSite_(Couverture<RequeteSite> c) {
 	}
 
-	public static ToutEcrivain create(RequeteSite requeteSite) throws FileNotFoundException {
+	public static ToutEcrivain create(RequeteSite requeteSite) throws Exception {
 		ToutEcrivain o = new ToutEcrivain();
 		o.initLoinPourClasse(requeteSite);
 		return o;
 	}
 
-	public static ToutEcrivain create(RequeteSite requeteSite, File file) throws FileNotFoundException {
+	public static ToutEcrivain create(RequeteSite requeteSite, File file) throws Exception {
 		ToutEcrivain o = new ToutEcrivain();
 		o.setFile(file);
 		o.initLoinPourClasse(requeteSite);
@@ -58,7 +57,7 @@ public class ToutEcrivain extends ToutEcrivainGen<Object> {
 	protected void _httpServerResponse(Couverture<HttpServerResponse> c) {
 	}
 
-	protected void _printWriter(Couverture<PrintWriter> c) throws FileNotFoundException {
+	protected void _printWriter(Couverture<PrintWriter> c) throws Exception {
 		if(httpServerResponse == null) {
 			if(file == null)
 				this.printWriter = new PrintWriter(stringWriter);

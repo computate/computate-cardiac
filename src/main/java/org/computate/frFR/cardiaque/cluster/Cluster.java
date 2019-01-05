@@ -15,7 +15,7 @@ import org.computate.frFR.cardiaque.requete.RequeteSite;
  * modele: true
  * apiUri.frFR: /api/v1/warfarin/cluster
  */   
-public class Cluster extends ClusterGen<Object> {        
+public class Cluster extends ClusterGen<Object> {          
 
 	public static DateTimeFormatter FORMAT_dateMedicalCourt = DateTimeFormatter.ofPattern("M/d/yyyy", Locale.FRANCE);
 
@@ -34,7 +34,7 @@ public class Cluster extends ClusterGen<Object> {
 	/**
 	 * {@inheritDoc}
 	 * var.enUS: _siteRequest
-	 */
+	 */       
 	protected void _requeteSite_(Couverture<RequeteSite> c) {}
 	protected void _page_(Couverture<MiseEnPage> c) {}
 
@@ -42,12 +42,13 @@ public class Cluster extends ClusterGen<Object> {
 	 * {@inheritDoc}
 	 * indexe: true
 	 * stocke: true
-	 */
+	 * clePrimaire: true
+	 */                           
 	protected void _pk(Couverture<Long> c) {}
 
 	/**
 	 * {@inheritDoc}
-	 * clePrimaire: true
+	 * cleUnique: true
 	 */
 	protected void _id(Couverture<String> c) {
 		if(pk != null)
@@ -79,7 +80,7 @@ public class Cluster extends ClusterGen<Object> {
 	 * indexe: true
 	 * stocke: true
 	 * var.enUS: _clusterCanonicalName
-	 */ 
+	 */      
 	protected void _clusterNomCanonique(Couverture<String> c) {
 		String o = getClass().getCanonicalName();
 		c.o(o);
@@ -89,7 +90,7 @@ public class Cluster extends ClusterGen<Object> {
 	 * indexe: true
 	 * stocke: true
 	 * var.enUS: _clusterSimpleName
-	 */           
+	 */          
 	protected void _clusterNomSimple(Couverture<String> c) {
 		String o = getClass().getSimpleName();
 		c.o(o);

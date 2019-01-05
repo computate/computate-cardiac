@@ -11,6 +11,7 @@ import io.vertx.core.MultiMap;
 import io.vertx.ext.web.Router;
 import io.vertx.ext.reactivestreams.ReactiveReadStream;
 import io.vertx.ext.web.RoutingContext;
+import io.vertx.ext.web.api.OperationResponse;
 import org.apache.commons.lang3.StringUtils;
 import java.math.BigDecimal;
 import java.util.Map;
@@ -24,10 +25,12 @@ import java.sql.Timestamp;
 import java.util.Set;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import java.util.stream.Collectors;
+import io.vertx.core.Future;
 import java.time.ZoneId;
 import org.computate.frFR.cardiaque.contexte.SiteContexte;
 import java.util.List;
 import java.security.Principal;
+import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.HttpServerResponse;
 import org.apache.solr.client.solrj.SolrQuery;
 import io.vertx.ext.auth.oauth2.OAuth2Auth;
@@ -40,6 +43,7 @@ import java.time.LocalDateTime;
 import io.vertx.core.logging.LoggerFactory;
 import java.util.ArrayList;
 import io.vertx.ext.web.api.validation.HTTPRequestValidationHandler;
+import io.vertx.core.AsyncResult;
 import io.vertx.ext.web.api.validation.ValidationException;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import io.vertx.core.Vertx;
@@ -55,62 +59,28 @@ import io.vertx.core.Handler;
 import java.util.Collections;
 
 
-public class ClusterApiGen {
+public class ClusterApiGen implements ClusterApiService {
 
 	private static final Logger LOGGER = LoggerFactory.getLogger(ClusterApiGen.class);
 
-	public static final String VAL_nomCanoniqueCluster = "org.computate.frFR.cardiaque.cluster.Cluster";
-	public static final String VAL_virguleEspace = ", ";
-	public static final String VAL_citation = "\"";
-	public static final String VAL_citationDeuxPointsEspaceCitation = "\": \"";
-	public static final String VAL_citationDeuxPointsEspace = "\": ";
-	public static final String VAL_citationLigne = "\"\n";
-	public static final String VAL_ligne = "\n";
-	public static final String VAL_citationVirguleEspaceCitation = "\", \"";
-	public static final String VAL_citationDeuxPointsEspaceGuillmets = "\": [";
-	public static final String VAL_guillmetsFin = "]";
+	private static final String SERVICE_ADDRESS = "ClusterApi";
 
-	public static final String ENTITE_VAR_requeteSite_ = "requeteSite_";
+	protected SiteContexte siteContexte;
 
-	public static final String ENTITE_VAR_page_ = "page_";
-
-	public static final String ENTITE_VAR_pk = "pk";
-	public static final String ENTITE_VAR_INDEXE_pk = "pk_indexed_long";
-	public static final String ENTITE_VAR_STOCKE_pk = "pk_stored_long";
-
-	public static final String ENTITE_VAR_id = "id";
-
-	public static final String ENTITE_VAR_cree = "cree";
-	public static final String ENTITE_VAR_INDEXE_cree = "cree_indexed_date";
-	public static final String ENTITE_VAR_STOCKE_cree = "cree_stored_date";
-
-	public static final String ENTITE_VAR_modifie = "modifie";
-	public static final String ENTITE_VAR_INDEXE_modifie = "modifie_indexed_date";
-	public static final String ENTITE_VAR_STOCKE_modifie = "modifie_stored_date";
-
-	public static final String ENTITE_VAR_utilisateurId = "utilisateurId";
-	public static final String ENTITE_VAR_INDEXE_utilisateurId = "utilisateurId_indexed_string";
-	public static final String ENTITE_VAR_STOCKE_utilisateurId = "utilisateurId_stored_string";
-
-	public static final String ENTITE_VAR_clusterNomCanonique = "clusterNomCanonique";
-	public static final String ENTITE_VAR_INDEXE_clusterNomCanonique = "clusterNomCanonique_indexed_string";
-	public static final String ENTITE_VAR_STOCKE_clusterNomCanonique = "clusterNomCanonique_stored_string";
-
-	public static final String ENTITE_VAR_clusterNomSimple = "clusterNomSimple";
-	public static final String ENTITE_VAR_INDEXE_clusterNomSimple = "clusterNomSimple_indexed_string";
-	public static final String ENTITE_VAR_STOCKE_clusterNomSimple = "clusterNomSimple_stored_string";
-
-	public static final String ENTITE_VAR_supprime = "supprime";
+	public ClusterApiGen(SiteContexte siteContexte) {
+		this.siteContexte = siteContexte;
+		ClusterApiService service = ClusterApiService.createProxy(siteContexte.getVertx(), SERVICE_ADDRESS);
+	}
 
 	public void handleGetCluster(SiteContexte siteContexte) {
-		OpenAPI3RouterFactory usineRouteur = siteContexte.getUsineRouteur_();
+		OpenAPI3RouterFactory usineRouteur = siteContexte.getUsineRouteur();
 
-		usineRouteur.addHandlerByOperationId("getCluster", contexteRoutage -> {
+		usineRouteur.addHandlerByOperationId("getCluster", contexteItineraire -> {
 			try {
 
-				contexteRoutage.response().putHeader("content-type", "application/json").setChunked(true);
-				RequeteSite requeteSite = genererRequeteSitePourCluster(siteContexte, contexteRoutage);
-				SolrQuery rechercheSolr = requeteSite.getRechercheSolr_();
+				contexteItineraire.response().putHeader("content-type", "application/json").setChunked(true);
+				RequeteSite requeteSite = genererRequeteSitePourCluster(siteContexte);
+				SolrQuery rechercheSolr = requeteSite.getRechercheSolr();
 				SolrDocumentList resultatsRecherche = requeteSite.getReponseRecherche().getResults();
 				Integer rechercheLignes = rechercheSolr.getRows();
 
@@ -130,15 +100,15 @@ public class ClusterApiGen {
 				requeteSite.getReponseServeur().end();
 			} catch(Exception e) {
 				LOGGER.error("Error: ", e.getMessage());
-				contexteRoutage.fail(e);
+				contexteItineraire.fail(e);
 			}
 		});
-		usineRouteur.addFailureHandlerByOperationId("getCluster", contexteRoutage -> {
-			Throwable failure = contexteRoutage.failure();
+		usineRouteur.addFailureHandlerByOperationId("getCluster", contexteItineraire -> {
+			Throwable failure = contexteItineraire.failure();
 			if (failure instanceof ValidationException) {
 				String validationErrorMessage = failure.getMessage();
 				LOGGER.error("Error: ", validationErrorMessage);
-				contexteRoutage.fail(failure);
+				contexteItineraire.fail(failure);
 			}
 		});
 	}
@@ -208,24 +178,24 @@ public class ClusterApiGen {
 
 	public String varIndexeCluster(String entiteVar) throws Exception {
 		switch(entiteVar) {
-			case ENTITE_VAR_pk:
-				return ENTITE_VAR_INDEXE_pk;
-			case ENTITE_VAR_cree:
-				return ENTITE_VAR_INDEXE_cree;
-			case ENTITE_VAR_modifie:
-				return ENTITE_VAR_INDEXE_modifie;
-			case ENTITE_VAR_utilisateurId:
-				return ENTITE_VAR_INDEXE_utilisateurId;
-			case ENTITE_VAR_clusterNomCanonique:
-				return ENTITE_VAR_INDEXE_clusterNomCanonique;
-			case ENTITE_VAR_clusterNomSimple:
-				return ENTITE_VAR_INDEXE_clusterNomSimple;
+			case "pk":
+				return "pk_indexed_long";
+			case "cree":
+				return "cree_indexed_date";
+			case "modifie":
+				return "modifie_indexed_date";
+			case "utilisateurId":
+				return "utilisateurId_indexed_string";
+			case "clusterNomCanonique":
+				return "clusterNomCanonique_indexed_string";
+			case "clusterNomSimple":
+				return "clusterNomSimple_indexed_string";
 			default:
 				throw new Exception(String.format("\"%s\" n'est pas une entité indexé. ", entiteVar));
 		}
 	}
 
-	public SolrQuery genererRechercheCluster(HttpServerRequest requeteServeur) throws Exception {
+	public Future<List<Cluster>> rechercheCluster(RequeteSite requeteSite) {
 		String entiteVar = null;
 		String valeurIndexe = null;
 		String varIndexe = null;
@@ -236,57 +206,68 @@ public class ClusterApiGen {
 		rechercheSolr.setQuery("*:*");
 		rechercheSolr.setRows(1000000);
 		rechercheSolr.addSort("partNumero_indexed_int", ORDER.asc);
-		MultiMap paramMap = requeteServeur.params();
+		MultiMap paramMap = requeteSite.getRequeteServeur().params();
 		for(String paramCle : paramMap.names()) {
 			List<String> paramValeurs = paramMap.getAll(paramCle);
 			for(String paramValeur : paramValeurs) {
-				switch(paramCle) {
-					case "q":
-						entiteVar = StringUtils.trim(StringUtils.substringBefore(paramValeur, ":"));
-						valeurIndexe = StringUtils.trim(StringUtils.substringAfter(paramValeur, ":"));
-						varIndexe = varIndexeCluster(paramCle);
-						rechercheSolr.setQuery(varIndexe + ":" + ClientUtils.escapeQueryChars(valeurIndexe));
-						break;
-					case "fq":
-						entiteVar = StringUtils.trim(StringUtils.substringBefore(paramValeur, ":"));
-						valeurIndexe = StringUtils.trim(StringUtils.substringAfter(paramValeur, ":"));
-						varIndexe = varIndexeCluster(paramCle);
-						rechercheSolr.addFilterQuery(varIndexe + ":" + ClientUtils.escapeQueryChars(valeurIndexe));
-						break;
-					case "sort":
-						entiteVar = StringUtils.trim(StringUtils.substringBefore(paramValeur, " "));
-						valeurTri = StringUtils.trim(StringUtils.substringAfter(paramValeur, " "));
-						varIndexe = varIndexeCluster(paramCle);
-						rechercheSolr.addSort(varIndexe, ORDER.valueOf(valeurTri));
-						break;
-					case "fl":
-						entiteVar = StringUtils.trim(paramValeur);
-						varIndexe = varIndexeCluster(paramCle);
-						rechercheSolr.addField(varIndexe);
-						break;
-					case "start":
-						rechercheDebut = Integer.parseInt(paramValeur);
-						rechercheSolr.setStart(rechercheDebut);
-						break;
-					case "rows":
-						rechercheNum = Integer.parseInt(paramValeur);
-						rechercheSolr.setRows(rechercheNum);
-						break;
+				try {
+					switch(paramCle) {
+						case "q":
+							entiteVar = StringUtils.trim(StringUtils.substringBefore(paramValeur, ":"));
+							valeurIndexe = StringUtils.trim(StringUtils.substringAfter(paramValeur, ":"));
+							varIndexe = varIndexeCluster(paramCle);
+							rechercheSolr.setQuery(varIndexe + ":" + ClientUtils.escapeQueryChars(valeurIndexe));
+							break;
+						case "fq":
+							entiteVar = StringUtils.trim(StringUtils.substringBefore(paramValeur, ":"));
+							valeurIndexe = StringUtils.trim(StringUtils.substringAfter(paramValeur, ":"));
+							varIndexe = varIndexeCluster(paramCle);
+							rechercheSolr.addFilterQuery(varIndexe + ":" + ClientUtils.escapeQueryChars(valeurIndexe));
+							break;
+						case "sort":
+							entiteVar = StringUtils.trim(StringUtils.substringBefore(paramValeur, " "));
+							valeurTri = StringUtils.trim(StringUtils.substringAfter(paramValeur, " "));
+							varIndexe = varIndexeCluster(paramCle);
+							rechercheSolr.addSort(varIndexe, ORDER.valueOf(valeurTri));
+							break;
+						case "fl":
+							entiteVar = StringUtils.trim(paramValeur);
+							varIndexe = varIndexeCluster(paramCle);
+							rechercheSolr.addField(varIndexe);
+							break;
+						case "start":
+							rechercheDebut = Integer.parseInt(paramValeur);
+							rechercheSolr.setStart(rechercheDebut);
+							break;
+						case "rows":
+							rechercheNum = Integer.parseInt(paramValeur);
+							rechercheSolr.setRows(rechercheNum);
+							break;
+					}
+				} catch(Exception e) {
+					return Future.failedFuture(e);
 				}
 			}
 		}
-		return rechercheSolr;
+		List<Cluster> listeCluster = new ArrayList<Cluster>();
+		try {
+			QueryResponse reponseRecherche = requeteSite.getSiteContexte_().getClientSolr().query(rechercheSolr);
+			for(SolrDocument documentSolr : reponseRecherche.getResults()) {
+				Cluster o = new Cluster();
+				o.peuplerPourClasse(documentSolr);
+				listeCluster.add(o);
+			}
+		} catch(Exception e) {
+			return Future.failedFuture(e);
+		}
+		return Future.succeededFuture(listeCluster);
 	}
 
-	public RequeteSite genererRequeteSitePourCluster(SiteContexte siteContexte, RoutingContext contexteItineraire) throws Exception {
-		Vertx vertx = siteContexte.getVertx_();
-		SolrQuery rechercheSolr = genererRechercheCluster(contexteItineraire.request());
-
+	public RequeteSite genererRequeteSitePourCluster(SiteContexte siteContexte) throws Exception {
+		Vertx vertx = siteContexte.getVertx();
 		RequeteSite requeteSite = new RequeteSite();
-		requeteSite.setVertx_(vertx);
-		requeteSite.setContexteItineraire_(contexteItineraire);
+		requeteSite.setVertx(vertx);
 		requeteSite.setSiteContexte_(siteContexte);
-		requeteSite.setRechercheSolr_(rechercheSolr);
 		requeteSite.initLoinRequeteSite(requeteSite);
 
 		UtilisateurSite utilisateurSite = new UtilisateurSite();
@@ -302,7 +283,7 @@ public class ClusterApiGen {
 		if(!champValeurs.isEmpty()) {
 			Object champValeur = champValeurs.iterator().next();
 			if(champValeur != null) {
-				if(ENTITE_VAR_STOCKE_pk.equals(entiteVarStocke)) {
+				if("pk".equals(entiteVarStocke)) {
 					if(j > 0)
 						reponseServeur.write(", ");
 					reponseServeur.write("\"pk\": ");
@@ -311,7 +292,7 @@ public class ClusterApiGen {
 					j++;
 					return j;
 				}
-				if(ENTITE_VAR_STOCKE_cree.equals(entiteVarStocke)) {
+				if("cree".equals(entiteVarStocke)) {
 					if(j > 0)
 						reponseServeur.write(", ");
 					reponseServeur.write("\"cree\": \"");
@@ -320,7 +301,7 @@ public class ClusterApiGen {
 					j++;
 					return j;
 				}
-				if(ENTITE_VAR_STOCKE_modifie.equals(entiteVarStocke)) {
+				if("modifie".equals(entiteVarStocke)) {
 					if(j > 0)
 						reponseServeur.write(", ");
 					reponseServeur.write("\"modifie\": \"");
@@ -329,7 +310,7 @@ public class ClusterApiGen {
 					j++;
 					return j;
 				}
-				if(ENTITE_VAR_STOCKE_utilisateurId.equals(entiteVarStocke)) {
+				if("utilisateurId".equals(entiteVarStocke)) {
 					if(j > 0)
 						reponseServeur.write(", ");
 					reponseServeur.write("\"utilisateurId\": \"");
@@ -338,7 +319,7 @@ public class ClusterApiGen {
 					j++;
 					return j;
 				}
-				if(ENTITE_VAR_STOCKE_clusterNomCanonique.equals(entiteVarStocke)) {
+				if("clusterNomCanonique".equals(entiteVarStocke)) {
 					if(j > 0)
 						reponseServeur.write(", ");
 					reponseServeur.write("\"clusterNomCanonique\": \"");
@@ -347,7 +328,7 @@ public class ClusterApiGen {
 					j++;
 					return j;
 				}
-				if(ENTITE_VAR_STOCKE_clusterNomSimple.equals(entiteVarStocke)) {
+				if("clusterNomSimple".equals(entiteVarStocke)) {
 					if(j > 0)
 						reponseServeur.write(", ");
 					reponseServeur.write("\"clusterNomSimple\": \"");
@@ -361,101 +342,246 @@ public class ClusterApiGen {
 		return j;
 	}
 
-	protected void patchCluster(SiteContexte siteContexte) {
-		OpenAPI3RouterFactory usineRouteur = siteContexte.getUsineRouteur_();
-		usineRouteur.addHandlerByOperationId("patchCluster", contexteRoutage -> {
-			try {
-				RequeteSite requeteSite = genererRequeteSitePourCluster(siteContexte, contexteRoutage);
-				HttpServerResponse reponseServeur = requeteSite.getReponseServeur();
-				QueryResponse reponseRecherche = requeteSite.getReponseRecherche();
-				JsonObject requeteJson = contexteRoutage.getBodyAsJson();
-				SQLClient clientSql = requeteSite.getSiteContexte_().getClientSql();
+	@Override
+	public void postCluster(JsonObject document, Handler<AsyncResult<OperationResponse>> resultHandler) {
+		RequeteSite requeteSite = genererRequeteSitePourCluster(siteContexte);
+		Future<OperationResponse> etapesFutures = sqlCluster(requeteSite).compose(
+			a -> creerCluster(requeteSite).compose(
+				cluster -> definirCluster(cluster).compose(
+					c -> attribuerCluster(cluster).compose(
+						d -> indexerCluster(cluster).compose(
+							operationResponse -> postJsonCluster(cluster)
+						)
+					)
+				)
+			)
+		);
+		etapesFutures.setHandler(resultHandler);
+	}
 
-				clientSql.getConnection(resultatAsync -> {
-					if(resultatAsync.succeeded()) {
-						LocalDateTime modifie = java.time.LocalDateTime.now();
-						String horodatageStr = Timestamp.valueOf(modifie).toString();
-						String utilisateurId = requeteSite.getUtilisateurId();
-						SQLConnection connexionSql = resultatAsync.result();
+	@Override
+	public void patchCluster(JsonObject document, Handler<AsyncResult<OperationResponse>> resultHandler) {
+		RequeteSite requeteSite = genererRequeteSitePourCluster(siteContexte);
+		Future<OperationResponse> etapesFutures = sqlCluster(requeteSite).compose(
+			a -> rechercheCluster(requeteSite).compose(
+				listeCluster -> patchCluster(requeteSite).compose(
+					c -> definirCluster(requeteSite).compose(
+						d -> attribuerCluster(requeteSite).compose(
+							e -> indexerCluster(requeteSite).compose(
+								operationResponse -> patchJsonCluster(requeteSite)
+							)
+						)
+					)
+				)
+			)
+		);
+		etapesFutures.setHandler(resultHandler);
+	}
 
-						connexionSql.queryWithParams(
-								SiteContexte.SQL_creer
-								, new JsonArray(Arrays.asList(VAL_nomCanoniqueCluster, utilisateurId))
-								, asyncCreer
-								-> {
-							if(asyncCreer.succeeded()) {
-								List<Object> patchSqlParams = Arrays.asList();
-								JsonArray patchLigne = asyncCreer.result().getResults().stream().findFirst().orElseGet(() -> null);
-								Long patchPk = patchLigne.getLong(0);
-								StringBuilder patchSql = new StringBuilder();
-								patchSqlParams = new ArrayList<Object>();
-								Set<String> methodeNoms = requeteJson.fieldNames();
-								for(String methodeNom : methodeNoms) {
-									switch(methodeNom) {
-										case "setPk":
-											patchSql.append(SiteContexte.SQL_setP);
-											patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_pk, requeteJson.getLong(methodeNom), patchPk));
-											break;
-										case "setId":
-											patchSql.append(SiteContexte.SQL_setP);
-											patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_id, requeteJson.getString(methodeNom), patchPk));
-											break;
-										case "setCree":
-											patchSql.append(SiteContexte.SQL_setP);
-											patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_cree, requeteJson.getInstant(methodeNom), patchPk));
-											break;
-										case "setModifie":
-											patchSql.append(SiteContexte.SQL_setP);
-											patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_modifie, requeteJson.getInstant(methodeNom), patchPk));
-											break;
-										case "setUtilisateurId":
-											patchSql.append(SiteContexte.SQL_setP);
-											patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_utilisateurId, requeteJson.getString(methodeNom), patchPk));
-											break;
-										case "setClusterNomCanonique":
-											patchSql.append(SiteContexte.SQL_setP);
-											patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_clusterNomCanonique, requeteJson.getString(methodeNom), patchPk));
-											break;
-										case "setClusterNomSimple":
-											patchSql.append(SiteContexte.SQL_setP);
-											patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_clusterNomSimple, requeteJson.getString(methodeNom), patchPk));
-											break;
-										case "setSupprime":
-											patchSql.append(SiteContexte.SQL_setP);
-											patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_supprime, requeteJson.getBoolean(methodeNom), patchPk));
-											break;
-									}
-								}
-								connexionSql.queryWithParams(patchSql.toString(), new JsonArray(patchSqlParams), asyncParams -> {
-									connexionSql.close();
-									if(asyncParams.succeeded()) {
-										Cluster o = new Cluster();
-										requeteSite.setRequetePk(o.getPk());
+	public Future<Void> sqlCluster(RequeteSite requeteSite) {
+		Future<Void> future = Future.future();
+		SQLClient clientSql = requeteSite.getSiteContexte_().getClientSql();
 
-									}
-								});
-							} else {
-								connexionSql.close();
-								contexteRoutage.fail(resultatAsync.cause());
-							}
-						});
-					} else {
-						LOGGER.error("Impossible d'ouvrir une connexion à la base de données. ", resultatAsync.cause());
-						contexteRoutage.fail(resultatAsync.cause());
-					}
-				});
-
-				contexteRoutage.response().putHeader("content-type", "application/json").setChunked(true);
-
-				requeteSite.getReponseServeur().end();
-
-
-				reponseServeur.write("\t]\n");
-				reponseServeur.write("}\n");
-			} catch(Exception e) {
-				LOGGER.error("Error: ", e.getMessage());
-				contexteRoutage.fail(e);
+		clientSql.getConnection(sqlAsync -> {
+			if(sqlAsync.succeeded()) {
+				requeteSite.setConnexionSql(sqlAsync.result());
+				future.complete();
 			}
 		});
+		return future;
+	}
+
+	public Future<Cluster> creerCluster(RequeteSite requeteSite) {
+		Future<Cluster> future = Future.future();
+		SQLConnection connexionSql = requeteSite.getConnexionSql();
+		String utilisateurId = requeteSite.getUtilisateurId();
+
+		connexionSql.queryWithParams(
+				SiteContexte.SQL_creer
+				, new JsonArray(Arrays.asList(Cluster.class.getCanonicalName(), utilisateurId))
+				, creerAsync
+		-> {
+			JsonArray patchLigne = creerAsync.result().getResults().stream().findFirst().orElseGet(() -> null);
+			Long pk = patchLigne.getLong(0);
+			Cluster o = new Cluster();
+			o.setPk(pk);
+			future.complete(o);
+		});
+		return future;
+	}
+
+	public Future<Void> postCluster(Cluster o) {
+		Future<Void> future = Future.future();
+		RequeteSite requeteSite = o.getRequeteSite_();
+		SQLConnection connexionSql = requeteSite.getConnexionSql();
+		Long pk = o.getPk();
+		RoutingContext contexteItineraire = requeteSite.getContexteItineraire();
+		JsonObject jsonObject = contexteItineraire.getBodyAsJson();
+		StringBuilder postSql = new StringBuilder();
+		List<Object> postSqlParams = new ArrayList<Object>();
+		Set<String> entiteVars = jsonObject.fieldNames();
+
+		for(String entiteVar : entiteVars) {
+			switch(entiteVar) {
+				case "pk":
+					postSql.append(SiteContexte.SQL_setP);
+					postSqlParams.addAll(Arrays.asList("pk", jsonObject.getLong(entiteVar), pk));
+					break;
+				case "id":
+					postSql.append(SiteContexte.SQL_setP);
+					postSqlParams.addAll(Arrays.asList("id", jsonObject.getString(entiteVar), pk));
+					break;
+				case "cree":
+					postSql.append(SiteContexte.SQL_setP);
+					postSqlParams.addAll(Arrays.asList("cree", jsonObject.getInstant(entiteVar), pk));
+					break;
+				case "modifie":
+					postSql.append(SiteContexte.SQL_setP);
+					postSqlParams.addAll(Arrays.asList("modifie", jsonObject.getInstant(entiteVar), pk));
+					break;
+				case "utilisateurId":
+					postSql.append(SiteContexte.SQL_setP);
+					postSqlParams.addAll(Arrays.asList("utilisateurId", jsonObject.getString(entiteVar), pk));
+					break;
+				case "clusterNomCanonique":
+					postSql.append(SiteContexte.SQL_setP);
+					postSqlParams.addAll(Arrays.asList("clusterNomCanonique", jsonObject.getString(entiteVar), pk));
+					break;
+				case "clusterNomSimple":
+					postSql.append(SiteContexte.SQL_setP);
+					postSqlParams.addAll(Arrays.asList("clusterNomSimple", jsonObject.getString(entiteVar), pk));
+					break;
+				case "supprime":
+					postSql.append(SiteContexte.SQL_setP);
+					postSqlParams.addAll(Arrays.asList("supprime", jsonObject.getBoolean(entiteVar), pk));
+					break;
+			}
+		}
+		connexionSql.queryWithParams(
+				postSql.toString()
+				, new JsonArray(postSqlParams)
+				, postAsync
+		-> {
+			future.complete();
+		});
+		return future;
+	}
+
+	public Future<Void> patchCluster(RequeteSite requeteSite) {
+		Future<Void> future = Future.future();
+		RequeteSite requeteSite = o.getRequeteSite_();
+		SQLConnection connexionSql = requeteSite.getConnexionSql();
+		Long pk = o.getPk();
+		RoutingContext contexteItineraire = requeteSite.getContexteItineraire();
+		JsonObject requeteJson = contexteItineraire.getBodyAsJson();
+		StringBuilder patchSql = new StringBuilder();
+		List<Object> patchSqlParams = new ArrayList<Object>();
+		Set<String> methodeNoms = requeteJson.fieldNames();
+
+		for(String methodeNom : methodeNoms) {
+			switch(methodeNom) {
+				case "setPk":
+					patchSql.append(SiteContexte.SQL_setP);
+					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_pk, requeteJson.getLong(methodeNom), pk));
+					break;
+				case "setId":
+					patchSql.append(SiteContexte.SQL_setP);
+					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_id, requeteJson.getString(methodeNom), pk));
+					break;
+				case "setCree":
+					patchSql.append(SiteContexte.SQL_setP);
+					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_cree, requeteJson.getInstant(methodeNom), pk));
+					break;
+				case "setModifie":
+					patchSql.append(SiteContexte.SQL_setP);
+					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_modifie, requeteJson.getInstant(methodeNom), pk));
+					break;
+				case "setUtilisateurId":
+					patchSql.append(SiteContexte.SQL_setP);
+					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_utilisateurId, requeteJson.getString(methodeNom), pk));
+					break;
+				case "setClusterNomCanonique":
+					patchSql.append(SiteContexte.SQL_setP);
+					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_clusterNomCanonique, requeteJson.getString(methodeNom), pk));
+					break;
+				case "setClusterNomSimple":
+					patchSql.append(SiteContexte.SQL_setP);
+					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_clusterNomSimple, requeteJson.getString(methodeNom), pk));
+					break;
+				case "setSupprime":
+					patchSql.append(SiteContexte.SQL_setP);
+					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_supprime, requeteJson.getBoolean(methodeNom), pk));
+					break;
+			}
+		}
+		connexionSql.queryWithParams(
+				patchSql.toString()
+				, new JsonArray(patchSqlParams)
+				, patchAsync
+		-> {
+			future.complete();
+		});
+		return future;
+	}
+
+	public Future<Cluster> definirCluster(Cluster o) {
+		Future<Cluster> future = Future.future();
+		RequeteSite requeteSite = o.getRequeteSite_();
+		SQLConnection connexionSql = requeteSite.getConnexionSql();
+		Long pk = o.getPk();
+		connexionSql.queryWithParams(
+				SiteContexte.SQL_definir
+				, new JsonArray(Arrays.asList(pk))
+				, definirAsync
+		-> {
+			for(JsonArray definition : definirAsync.result().getResults()) {
+				o.definirPourClasse(definition.getString(0), definition.getString(1));
+			}
+			future.complete();
+		});
+		return future;
+	}
+
+	public Future<Cluster> attribuerCluster(Cluster o) {
+		Future<Cluster> future = Future.future();
+		RequeteSite requeteSite = o.getRequeteSite_();
+		SQLConnection connexionSql = requeteSite.getConnexionSql();
+		Long pk = o.getPk();
+		connexionSql.queryWithParams(
+				SiteContexte.SQL_attribuer
+				, new JsonArray(Arrays.asList(pk))
+				, attribuerAsync
+		-> {
+			for(JsonArray definition : attribuerAsync.result().getResults()) {
+				o.attribuerPourClasse(definition.getString(0), definition.getString(1));
+			}
+			future.complete();
+		});
+		return future;
+	}
+
+	public Future<Cluster> indexerCluster(Cluster o) {
+		Future<Cluster> future = Future.future();
+		RequeteSite requeteSite = o.getRequeteSite_();
+		try {
+			o.initLoinPourClasse(requeteSite);
+			o.indexerPourClasse();
+			future.complete();
+		} catch(Exception e) {
+			requeteSite.getConnexionSql().close();
+			future.fail(e.getCause());
+		}
+		return future;
+	}
+
+	public Future<OperationResponse> postJsonCluster(Cluster o) {
+		Buffer buffer = Buffer.buffer();
+		RequeteSite requeteSite = o.getRequeteSite_();
+		return Future.succeededFuture(OperationResponse.completedWithJson(buffer));
+	}
+
+	public Future<OperationResponse> patchJsonCluster(RequeteSite requeteSite) {
+		Buffer buffer = Buffer.buffer();
+		return Future.succeededFuture(OperationResponse.completedWithJson(buffer));
 	}
 }

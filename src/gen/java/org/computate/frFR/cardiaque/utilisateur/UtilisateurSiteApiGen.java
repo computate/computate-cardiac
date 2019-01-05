@@ -24,6 +24,7 @@ import java.sql.Timestamp;
 import java.util.Set;
 import io.netty.handler.codec.http.HttpResponseStatus;
 import java.util.stream.Collectors;
+import io.vertx.core.Future;
 import java.time.ZoneId;
 import org.computate.frFR.cardiaque.contexte.SiteContexte;
 import java.util.List;
@@ -138,14 +139,14 @@ public class UtilisateurSiteApiGen {
 	public static final String ENTITE_VAR_STOCKE_modeleSuggestionIndexe = "modeleSuggestionIndexe_stored_string";
 
 	public void handleGetUtilisateurSite(SiteContexte siteContexte) {
-		OpenAPI3RouterFactory usineRouteur = siteContexte.getUsineRouteur_();
+		OpenAPI3RouterFactory usineRouteur = siteContexte.getUsineRouteur();
 
-		usineRouteur.addHandlerByOperationId("getUtilisateurSite", contexteRoutage -> {
+		usineRouteur.addHandlerByOperationId("getUtilisateurSite", contexteItineraire -> {
 			try {
 
-				contexteRoutage.response().putHeader("content-type", "application/json").setChunked(true);
-				RequeteSite requeteSite = genererRequeteSitePourUtilisateurSite(siteContexte, contexteRoutage);
-				SolrQuery rechercheSolr = requeteSite.getRechercheSolr_();
+				contexteItineraire.response().putHeader("content-type", "application/json").setChunked(true);
+				RequeteSite requeteSite = genererRequeteSitePourUtilisateurSite(siteContexte, contexteItineraire);
+				SolrQuery rechercheSolr = requeteSite.getRechercheSolr();
 				SolrDocumentList resultatsRecherche = requeteSite.getReponseRecherche().getResults();
 				Integer rechercheLignes = rechercheSolr.getRows();
 
@@ -165,15 +166,15 @@ public class UtilisateurSiteApiGen {
 				requeteSite.getReponseServeur().end();
 			} catch(Exception e) {
 				LOGGER.error("Error: ", e.getMessage());
-				contexteRoutage.fail(e);
+				contexteItineraire.fail(e);
 			}
 		});
-		usineRouteur.addFailureHandlerByOperationId("getUtilisateurSite", contexteRoutage -> {
-			Throwable failure = contexteRoutage.failure();
+		usineRouteur.addFailureHandlerByOperationId("getUtilisateurSite", contexteItineraire -> {
+			Throwable failure = contexteItineraire.failure();
 			if (failure instanceof ValidationException) {
 				String validationErrorMessage = failure.getMessage();
 				LOGGER.error("Error: ", validationErrorMessage);
-				contexteRoutage.fail(failure);
+				contexteItineraire.fail(failure);
 			}
 		});
 	}
@@ -334,14 +335,14 @@ public class UtilisateurSiteApiGen {
 	}
 
 	public RequeteSite genererRequeteSitePourUtilisateurSite(SiteContexte siteContexte, RoutingContext contexteItineraire) throws Exception {
-		Vertx vertx = siteContexte.getVertx_();
+		Vertx vertx = siteContexte.getVertx();
 		SolrQuery rechercheSolr = genererRechercheUtilisateurSite(contexteItineraire.request());
 
 		RequeteSite requeteSite = new RequeteSite();
-		requeteSite.setVertx_(vertx);
-		requeteSite.setContexteItineraire_(contexteItineraire);
+		requeteSite.setVertx(vertx);
+		requeteSite.setContexteItineraire(contexteItineraire);
 		requeteSite.setSiteContexte_(siteContexte);
-		requeteSite.setRechercheSolr_(rechercheSolr);
+		requeteSite.setRechercheSolr(rechercheSolr);
 		requeteSite.initLoinRequeteSite(requeteSite);
 
 		UtilisateurSite utilisateurSite = new UtilisateurSite();
@@ -515,148 +516,31 @@ public class UtilisateurSiteApiGen {
 	}
 
 	protected void patchUtilisateurSite(SiteContexte siteContexte) {
-		OpenAPI3RouterFactory usineRouteur = siteContexte.getUsineRouteur_();
-		usineRouteur.addHandlerByOperationId("patchUtilisateurSite", contexteRoutage -> {
+		OpenAPI3RouterFactory usineRouteur = siteContexte.getUsineRouteur();
+		usineRouteur.addHandlerByOperationId("patchUtilisateurSite", contexteItineraire -> {
 			try {
-				RequeteSite requeteSite = genererRequeteSitePourUtilisateurSite(siteContexte, contexteRoutage);
+				RequeteSite requeteSite = genererRequeteSitePourUtilisateurSite(siteContexte, contexteItineraire);
 				HttpServerResponse reponseServeur = requeteSite.getReponseServeur();
 				QueryResponse reponseRecherche = requeteSite.getReponseRecherche();
-				JsonObject requeteJson = contexteRoutage.getBodyAsJson();
+				JsonObject requeteJson = contexteItineraire.getBodyAsJson();
 				SQLClient clientSql = requeteSite.getSiteContexte_().getClientSql();
+//				Future<Void> etapesFutures = sqlUtilisateurSite(requeteSite).compose(
+//					a -> creerUtilisateurSite(requeteSite).compose(
+//						b -> patchUtilisateurSite(creerUtilisateurSite.result()).compose(
+//							c -> definirUtilisateurSite(creerUtilisateurSite.result()).compose(
+//								d -> attribuerUtilisateurSite(creerUtilisateurSite.result()).compose(
+//									e -> indexerUtilisateurSite(creerUtilisateurSite.result()).compose(
+//										f -> htmUtilisateurSite(creerUtilisateurSite.result()).compose(
+//										)
+//									)
+//								)
+//							)
+//						)
+//					)
+//				);
+//				etapesFutures.setHandler(demarrerFuture.completer());
 
-				clientSql.getConnection(resultatAsync -> {
-					if(resultatAsync.succeeded()) {
-						LocalDateTime modifie = java.time.LocalDateTime.now();
-						String horodatageStr = Timestamp.valueOf(modifie).toString();
-						String utilisateurId = requeteSite.getUtilisateurId();
-						SQLConnection connexionSql = resultatAsync.result();
-
-						connexionSql.queryWithParams(
-								SiteContexte.SQL_creer
-								, new JsonArray(Arrays.asList(VAL_nomCanoniqueUtilisateurSite, utilisateurId))
-								, asyncCreer
-								-> {
-							if(asyncCreer.succeeded()) {
-								List<Object> patchSqlParams = Arrays.asList();
-								JsonArray patchLigne = asyncCreer.result().getResults().stream().findFirst().orElseGet(() -> null);
-								Long patchPk = patchLigne.getLong(0);
-								StringBuilder patchSql = new StringBuilder();
-								patchSqlParams = new ArrayList<Object>();
-								Set<String> methodeNoms = requeteJson.fieldNames();
-								for(String methodeNom : methodeNoms) {
-									switch(methodeNom) {
-										case "addCalculInrPks":
-											patchSql.append(SiteContexte.SQL_addA);
-											patchSqlParams.addAll(Arrays.asList(
-													ENTITE_VAR_calculInrPks
-													, patchPk
-													, ENTITE_VAR_calculInrPks_ATTRIBUER_CalculInr_utilisateurPk
-													, requeteJson.getLong(methodeNom)
-													));
-										case "addAllCalculInrPks":
-											JsonArray addAllCalculInrPksValeurs = requeteJson.getJsonArray(methodeNom);
-											for(Integer i = 0; i <  addAllCalculInrPksValeurs.size(); i++) {
-												patchSql.append(SiteContexte.SQL_addA);
-												patchSqlParams.addAll(Arrays.asList(
-														ENTITE_VAR_calculInrPks
-														, patchPk
-														, ENTITE_VAR_calculInrPks_ATTRIBUER_CalculInr_utilisateurPk
-														, addAllCalculInrPksValeurs.getLong(i)
-														));
-											}
-										case "setCalculInrPks":
-											JsonArray setCalculInrPksValeurs = requeteJson.getJsonArray(methodeNom);
-											patchSql.append(SiteContexte.SQL_clearA1);
-											patchSqlParams.addAll(Arrays.asList(
-													ENTITE_VAR_calculInrPks
-													, patchPk
-													, ENTITE_VAR_calculInrPks_ATTRIBUER_CalculInr_utilisateurPk
-													, requeteJson.getJsonArray(methodeNom)
-													));
-											for(Integer i = 0; i <  setCalculInrPksValeurs.size(); i++) {
-												patchSql.append(SiteContexte.SQL_addA);
-												patchSqlParams.addAll(Arrays.asList(
-														ENTITE_VAR_calculInrPks
-														, patchPk
-														, ENTITE_VAR_calculInrPks_ATTRIBUER_CalculInr_utilisateurPk
-														, setCalculInrPksValeurs.getLong(i)
-														));
-											}
-											break;
-										case "setUtilisateurNom":
-											patchSql.append(SiteContexte.SQL_setP);
-											patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_utilisateurNom, requeteJson.getString(methodeNom), patchPk));
-											break;
-										case "setUtilisateurMail":
-											patchSql.append(SiteContexte.SQL_setP);
-											patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_utilisateurMail, requeteJson.getString(methodeNom), patchPk));
-											break;
-										case "setUtilisateurId":
-											patchSql.append(SiteContexte.SQL_setP);
-											patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_utilisateurId, requeteJson.getString(methodeNom), patchPk));
-											break;
-										case "setUtilisateurPrenom":
-											patchSql.append(SiteContexte.SQL_setP);
-											patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_utilisateurPrenom, requeteJson.getString(methodeNom), patchPk));
-											break;
-										case "setUtilisateurNomFamille":
-											patchSql.append(SiteContexte.SQL_setP);
-											patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_utilisateurNomFamille, requeteJson.getString(methodeNom), patchPk));
-											break;
-										case "setUtilisateurNomComplet":
-											patchSql.append(SiteContexte.SQL_setP);
-											patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_utilisateurNomComplet, requeteJson.getString(methodeNom), patchPk));
-											break;
-										case "setUtilisateurSite":
-											patchSql.append(SiteContexte.SQL_setP);
-											patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_utilisateurSite, requeteJson.getString(methodeNom), patchPk));
-											break;
-										case "setUtilisateurRecevoirCourriels":
-											patchSql.append(SiteContexte.SQL_setP);
-											patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_utilisateurRecevoirCourriels, requeteJson.getBoolean(methodeNom), patchPk));
-											break;
-										case "setModeleSupprime":
-											patchSql.append(SiteContexte.SQL_setP);
-											patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_modeleSupprime, requeteJson.getBoolean(methodeNom), patchPk));
-											break;
-										case "setModeleClasseNomCanonique":
-											patchSql.append(SiteContexte.SQL_setP);
-											patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_modeleClasseNomCanonique, requeteJson.getString(methodeNom), patchPk));
-											break;
-										case "setModeleCle":
-											patchSql.append(SiteContexte.SQL_setP);
-											patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_modeleCle, requeteJson.getLong(methodeNom), patchPk));
-											break;
-										case "setModeleSuggestionStocke":
-											patchSql.append(SiteContexte.SQL_setP);
-											patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_modeleSuggestionStocke, requeteJson.getString(methodeNom), patchPk));
-											break;
-										case "setModeleSuggestionIndexe":
-											patchSql.append(SiteContexte.SQL_setP);
-											patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_modeleSuggestionIndexe, requeteJson.getString(methodeNom), patchPk));
-											break;
-									}
-								}
-								connexionSql.queryWithParams(patchSql.toString(), new JsonArray(patchSqlParams), asyncParams -> {
-									connexionSql.close();
-									if(asyncParams.succeeded()) {
-										UtilisateurSite o = new UtilisateurSite();
-										requeteSite.setRequetePk(o.getPk());
-
-									}
-								});
-							} else {
-								connexionSql.close();
-								contexteRoutage.fail(resultatAsync.cause());
-							}
-						});
-					} else {
-						LOGGER.error("Impossible d'ouvrir une connexion à la base de données. ", resultatAsync.cause());
-						contexteRoutage.fail(resultatAsync.cause());
-					}
-				});
-
-				contexteRoutage.response().putHeader("content-type", "application/json").setChunked(true);
+				contexteItineraire.response().putHeader("content-type", "application/json").setChunked(true);
 
 				requeteSite.getReponseServeur().end();
 
@@ -665,8 +549,194 @@ public class UtilisateurSiteApiGen {
 				reponseServeur.write("}\n");
 			} catch(Exception e) {
 				LOGGER.error("Error: ", e.getMessage());
-				contexteRoutage.fail(e);
+				contexteItineraire.fail(e);
 			}
 		});
+	}
+
+	public Future<Void> sqlUtilisateurSite(RequeteSite requeteSite) {
+		Future<Void> future = Future.future();
+		SQLClient clientSql = requeteSite.getSiteContexte_().getClientSql();
+
+		clientSql.getConnection(sqlAsync -> {
+			if(sqlAsync.succeeded()) {
+				requeteSite.setConnexionSql(sqlAsync.result());
+				future.complete();
+			}
+		});
+		return future;
+	}
+
+	public Future<UtilisateurSite> creerUtilisateurSite(RequeteSite requeteSite) {
+		Future<UtilisateurSite> future = Future.future();
+		SQLConnection connexionSql = requeteSite.getConnexionSql();
+		String utilisateurId = requeteSite.getUtilisateurId();
+
+		connexionSql.queryWithParams(
+				SiteContexte.SQL_creer
+				, new JsonArray(Arrays.asList(UtilisateurSite.class.getCanonicalName(), utilisateurId))
+				, creerAsync
+		-> {
+			JsonArray patchLigne = creerAsync.result().getResults().stream().findFirst().orElseGet(() -> null);
+			Long pk = patchLigne.getLong(0);
+			UtilisateurSite o = new UtilisateurSite();
+			o.setPk(pk);
+			future.complete(o);
+		});
+		return future;
+	}
+
+	public Future<Void> patchUtilisateurSite(UtilisateurSite o) {
+		Future<Void> future = Future.future();
+		RequeteSite requeteSite = o.getRequeteSite_();
+		SQLConnection connexionSql = requeteSite.getConnexionSql();
+		Long pk = o.getPk();
+		RoutingContext contexteItineraire = requeteSite.getContexteItineraire();
+		JsonObject requeteJson = contexteItineraire.getBodyAsJson();
+		StringBuilder patchSql = new StringBuilder();
+		List<Object> patchSqlParams = new ArrayList<Object>();
+		Set<String> methodeNoms = requeteJson.fieldNames();
+
+		for(String methodeNom : methodeNoms) {
+			switch(methodeNom) {
+				case "addCalculInrPks":
+					patchSql.append(SiteContexte.SQL_addA);
+					patchSqlParams.addAll(Arrays.asList(
+							ENTITE_VAR_calculInrPks
+							, pk
+							, ENTITE_VAR_calculInrPks_ATTRIBUER_CalculInr_utilisateurPk
+							, requeteJson.getLong(methodeNom)
+							));
+				case "addAllCalculInrPks":
+					JsonArray addAllCalculInrPksValeurs = requeteJson.getJsonArray(methodeNom);
+					for(Integer i = 0; i <  addAllCalculInrPksValeurs.size(); i++) {
+						patchSql.append(SiteContexte.SQL_addA);
+						patchSqlParams.addAll(Arrays.asList(
+							ENTITE_VAR_calculInrPks
+							, pk
+							, ENTITE_VAR_calculInrPks_ATTRIBUER_CalculInr_utilisateurPk
+							, addAllCalculInrPksValeurs.getLong(i)
+							));
+					}
+				case "setCalculInrPks":
+					JsonArray setCalculInrPksValeurs = requeteJson.getJsonArray(methodeNom);
+					patchSql.append(SiteContexte.SQL_clearA1);
+					patchSqlParams.addAll(Arrays.asList(
+								ENTITE_VAR_calculInrPks
+								, pk
+								, ENTITE_VAR_calculInrPks_ATTRIBUER_CalculInr_utilisateurPk
+								, requeteJson.getJsonArray(methodeNom)
+								));
+					for(Integer i = 0; i <  setCalculInrPksValeurs.size(); i++) {
+						patchSql.append(SiteContexte.SQL_addA);
+						patchSqlParams.addAll(Arrays.asList(
+								ENTITE_VAR_calculInrPks
+								, pk
+								, ENTITE_VAR_calculInrPks_ATTRIBUER_CalculInr_utilisateurPk
+								, setCalculInrPksValeurs.getLong(i)
+								));
+					}
+									break;
+				case "setUtilisateurNom":
+					patchSql.append(SiteContexte.SQL_setP);
+					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_utilisateurNom, requeteJson.getString(methodeNom), pk));
+					break;
+				case "setUtilisateurMail":
+					patchSql.append(SiteContexte.SQL_setP);
+					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_utilisateurMail, requeteJson.getString(methodeNom), pk));
+					break;
+				case "setUtilisateurId":
+					patchSql.append(SiteContexte.SQL_setP);
+					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_utilisateurId, requeteJson.getString(methodeNom), pk));
+					break;
+				case "setUtilisateurPrenom":
+					patchSql.append(SiteContexte.SQL_setP);
+					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_utilisateurPrenom, requeteJson.getString(methodeNom), pk));
+					break;
+				case "setUtilisateurNomFamille":
+					patchSql.append(SiteContexte.SQL_setP);
+					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_utilisateurNomFamille, requeteJson.getString(methodeNom), pk));
+					break;
+				case "setUtilisateurNomComplet":
+					patchSql.append(SiteContexte.SQL_setP);
+					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_utilisateurNomComplet, requeteJson.getString(methodeNom), pk));
+					break;
+				case "setUtilisateurSite":
+					patchSql.append(SiteContexte.SQL_setP);
+					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_utilisateurSite, requeteJson.getString(methodeNom), pk));
+					break;
+				case "setUtilisateurRecevoirCourriels":
+					patchSql.append(SiteContexte.SQL_setP);
+					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_utilisateurRecevoirCourriels, requeteJson.getBoolean(methodeNom), pk));
+					break;
+				case "setModeleSupprime":
+					patchSql.append(SiteContexte.SQL_setP);
+					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_modeleSupprime, requeteJson.getBoolean(methodeNom), pk));
+					break;
+				case "setModeleClasseNomCanonique":
+					patchSql.append(SiteContexte.SQL_setP);
+					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_modeleClasseNomCanonique, requeteJson.getString(methodeNom), pk));
+					break;
+				case "setModeleCle":
+					patchSql.append(SiteContexte.SQL_setP);
+					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_modeleCle, requeteJson.getLong(methodeNom), pk));
+					break;
+				case "setModeleSuggestionStocke":
+					patchSql.append(SiteContexte.SQL_setP);
+					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_modeleSuggestionStocke, requeteJson.getString(methodeNom), pk));
+					break;
+				case "setModeleSuggestionIndexe":
+					patchSql.append(SiteContexte.SQL_setP);
+					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_modeleSuggestionIndexe, requeteJson.getString(methodeNom), pk));
+					break;
+			}
+		}
+		connexionSql.queryWithParams(
+				patchSql.toString()
+				, new JsonArray(patchSqlParams)
+				, patchAsync
+		-> {
+			future.complete();
+		});
+		return future;
+	}
+
+	public Future<Void> definirUtilisateurSite(UtilisateurSite o) {
+		Future<Void> future = Future.future();
+		RequeteSite requeteSite = o.getRequeteSite_();
+		SQLConnection connexionSql = requeteSite.getConnexionSql();
+		Long pk = o.getPk();
+		connexionSql.queryWithParams(
+				SiteContexte.SQL_definir
+				, new JsonArray(Arrays.asList(pk))
+				, definirAsync
+		-> {
+			for(JsonArray definition : definirAsync.result().getResults()) {
+				o.definirPourClasse(definition.getString(0), definition.getString(1));
+			}
+			future.complete();
+		});
+		return future;
+	}
+
+	public Future<Void> indexerUtilisateurSite(UtilisateurSite o) {
+		Future<Void> future = Future.future();
+		RequeteSite requeteSite = o.getRequeteSite_();
+		try {
+			o.initLoinPourClasse(requeteSite);
+			o.indexerPourClasse();
+			future.complete();
+		} catch(Exception e) {
+			requeteSite.getConnexionSql().close();
+			future.fail(e.getCause());
+		}
+		return future;
+	}
+
+	public Future<Void> htmUtilisateurSite(UtilisateurSite o) {
+		Future<Void> future = Future.future();
+		RequeteSite requeteSite = o.getRequeteSite_();
+		future.complete();
+		return future;
 	}
 }

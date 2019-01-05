@@ -256,21 +256,24 @@ public abstract class ListeRechercheGen<DEV> {
 
 	public ListeRecherche initLoinListeRecherche(RequeteSite requeteSite) {
 		setRequeteSite_(requeteSite);
-		initLoinListeRecherche();
+		if(!dejaInitialiseListeRecherche) {
+			dejaInitialiseListeRecherche = true;
+			initLoinListeRecherche();
+		}
 		return (ListeRecherche)this;
 	}
 
-	public ListeRecherche initLoinListeRecherche() {
-		if(!dejaInitialiseListeRecherche) {
-			dejaInitialiseListeRecherche = true;
-			cInit();
-			requeteSite_Init();
-			solrQueryInit();
-			queryResponseInit();
-			solrDocumentListInit();
-			listInit();
-		}
-		return (ListeRecherche)this;
+	public void initLoinListeRecherche() {
+		initListeRecherche();
+	}
+
+	public void initListeRecherche() {
+		cInit();
+		requeteSite_Init();
+		solrQueryInit();
+		queryResponseInit();
+		solrDocumentListInit();
+		listInit();
 	}
 
 	public void initLoinPourClasse(RequeteSite requeteSite) {
@@ -329,7 +332,7 @@ public abstract class ListeRechercheGen<DEV> {
 	// attribuer //
 	///////////////
 
-	public boolean attribuerPourClasse(String var, Object val) throws Exception {
+	public boolean attribuerPourClasse(String var, Object val) {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
@@ -342,8 +345,34 @@ public abstract class ListeRechercheGen<DEV> {
 		}
 		return o != null;
 	}
-	public Object attribuerListeRecherche(String var, Object val) throws Exception {
+	public Object attribuerListeRecherche(String var, Object val) {
 		ListeRecherche oListeRecherche = (ListeRecherche)this;
+		switch(var) {
+			default:
+				return null;
+		}
+	}
+
+	/////////////
+	// definir //
+	/////////////
+
+	public boolean definirPourClasse(String var, String val) {
+		String[] vars = StringUtils.split(var, ".");
+		Object o = null;
+		if(val != null) {
+			for(String v : vars) {
+				if(o == null)
+					o = definirListeRecherche(v, val);
+				else if(o instanceof Cluster) {
+					Cluster cluster = (Cluster)o;
+					o = cluster.definirPourClasse(v, val);
+				}
+			}
+		}
+		return o != null;
+	}
+	public Object definirListeRecherche(String var, String val) {
 		switch(var) {
 			default:
 				return null;
