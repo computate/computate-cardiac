@@ -11,6 +11,7 @@ import org.computate.frFR.cardiaque.couverture.Couverture;
 
 /** 
  * modele: true
+ * nomCanonique.enUS: org.computate.enUS.cardiac.warfarin.InrEntry
  * apiUri.enUS: /api/v1/warfarin/inr-entry
  * apiUri.frFR: /api/v1/warfarin/calcul-inr
  * 
@@ -19,7 +20,10 @@ import org.computate.frFR.cardiaque.couverture.Couverture;
  * val.VAL_patientPrendCoumadinOuiDosageInitial.frFR:Yes, initial dosing
  * val.VAL_patientPrendCoumadinOuiRecommence.frFR:Yes, restarted
  * role.frFR: Something
-*/                        
+ * keyword: something
+ * keyword: somethingelse
+ * map.this.Integer: 1
+*/                       
 public class CalculInr extends CalculInrGen<Cluster> {   
 
 	/**

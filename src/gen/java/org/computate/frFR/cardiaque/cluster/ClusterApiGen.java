@@ -1,64 +1,47 @@
 package org.computate.frFR.cardiaque.cluster;
 
-import org.computate.frFR.cardiaque.recherche.ResultatRecherche;
-import java.util.Arrays;
-import org.computate.frFR.cardiaque.recherche.ListeRecherche;
-import io.vertx.ext.web.api.validation.ParameterTypeValidator;
-import org.computate.frFR.cardiaque.config.ConfigSite;
-import org.apache.solr.common.SolrDocumentList;
-import java.util.Date;
-import org.computate.frFR.cardiaque.utilisateur.UtilisateurSite;
-import io.vertx.core.MultiMap;
-import io.vertx.ext.web.Router;
-import io.vertx.ext.reactivestreams.ReactiveReadStream;
-import io.vertx.ext.web.RoutingContext;
-import io.vertx.ext.web.api.OperationResponse;
-import org.apache.commons.lang3.StringUtils;
-import java.math.BigDecimal;
-import java.util.Map;
-import org.computate.frFR.cardiaque.requete.RequeteSite;
-import io.vertx.ext.web.api.contract.openapi3.OpenAPI3RouterFactory;
-import io.vertx.core.json.JsonObject;
-import io.vertx.core.logging.Logger;
-import java.io.PrintWriter;
-import java.util.Collection;
-import java.sql.Timestamp;
-import java.util.Set;
-import io.netty.handler.codec.http.HttpResponseStatus;
-import java.util.stream.Collectors;
-import io.vertx.core.Future;
 import java.time.ZoneId;
-import org.computate.frFR.cardiaque.contexte.SiteContexte;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Date;
 import java.util.List;
-import java.security.Principal;
+import java.util.Set;
+import java.util.concurrent.TimeUnit;
+
+import org.apache.commons.lang3.StringUtils;
+import org.apache.solr.client.solrj.SolrQuery;
+import org.apache.solr.client.solrj.SolrQuery.ORDER;
+import org.apache.solr.client.solrj.response.QueryResponse;
+import org.apache.solr.client.solrj.util.ClientUtils;
+import org.apache.solr.common.SolrDocument;
+import org.apache.solr.common.SolrDocumentList;
+import org.computate.frFR.cardiaque.contexte.SiteContexte;
+import org.computate.frFR.cardiaque.recherche.ListeRecherche;
+import org.computate.frFR.cardiaque.recherche.ResultatRecherche;
+import org.computate.frFR.cardiaque.requete.RequeteSite;
+import org.computate.frFR.cardiaque.utilisateur.UtilisateurSite;
+
+import io.vertx.core.AsyncResult;
+import io.vertx.core.CompositeFuture;
+import io.vertx.core.Future;
+import io.vertx.core.Handler;
+import io.vertx.core.MultiMap;
+import io.vertx.core.Vertx;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.HttpServerResponse;
-import org.apache.solr.client.solrj.SolrQuery;
-import io.vertx.ext.auth.oauth2.OAuth2Auth;
-import org.apache.solr.client.solrj.util.ClientUtils;
-import io.vertx.ext.sql.SQLClient;
-import org.apache.commons.lang3.exception.ExceptionUtils;
-import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.json.Json;
-import java.time.LocalDateTime;
-import io.vertx.core.logging.LoggerFactory;
-import java.util.ArrayList;
-import io.vertx.core.CompositeFuture;
-import io.vertx.ext.web.api.validation.HTTPRequestValidationHandler;
-import io.vertx.core.AsyncResult;
-import io.vertx.ext.web.api.validation.ValidationException;
-import org.apache.solr.client.solrj.response.QueryResponse;
-import io.vertx.core.Vertx;
-import java.io.IOException;
-import io.vertx.ext.reactivestreams.ReactiveWriteStream;
-import java.util.concurrent.TimeUnit;
-import org.apache.solr.common.SolrDocument;
 import io.vertx.core.json.JsonArray;
-import java.time.format.DateTimeFormatter;
+import io.vertx.core.json.JsonObject;
+import io.vertx.core.logging.Logger;
+import io.vertx.core.logging.LoggerFactory;
+import io.vertx.ext.sql.SQLClient;
 import io.vertx.ext.sql.SQLConnection;
-import org.apache.solr.client.solrj.SolrQuery.ORDER;
-import io.vertx.core.Handler;
-import java.util.Collections;
+import io.vertx.ext.web.RoutingContext;
+import io.vertx.ext.web.api.OperationResponse;
+import io.vertx.ext.web.api.contract.openapi3.OpenAPI3RouterFactory;
+import io.vertx.ext.web.api.validation.ValidationException;
 
 
 public class ClusterApiGen implements ClusterApiService {
@@ -336,48 +319,38 @@ public class ClusterApiGen implements ClusterApiService {
 
 	@Override
 	public void postCluster(JsonObject document, Handler<AsyncResult<OperationResponse>> resultHandler) {
-		RequeteSite requeteSite;
 		try {
-			requeteSite = genererRequeteSitePourCluster(siteContexte);
-		} catch(Exception e) {
-			resultHandler.handle(Future.failedFuture(e));
-		}
-		Future<OperationResponse> etapesFutures = sqlCluster(requeteSite).compose(
-			a -> creerCluster(requeteSite).compose(
-				cluster -> definirCluster(cluster).compose(
-					c -> attribuerCluster(cluster).compose(
-						d -> indexerCluster(cluster).compose(
-							operationResponse -> postJsonCluster(cluster)
-						)
-					)
-				)
-			)
-		);
-		etapesFutures.setHandler(resultHandler);
-	}
-
-	@Override
-	public void patchCluster(JsonObject document, Handler<AsyncResult<OperationResponse>> resultHandler) {
-		RequeteSite requeteSite;
-		try {
-			requeteSite = genererRequeteSitePourCluster(siteContexte);
-		} catch(Exception e) {
-			resultHandler.handle(Future.failedFuture(e));
-		}
-		Future<OperationResponse> etapesFutures = sqlCluster(requeteSite).compose(
-			a -> rechercheCluster(requeteSite).compose(
-				listeCluster -> patchCluster(requeteSite).compose(
-					c -> definirCluster(requeteSite).compose(
-						d -> attribuerCluster(requeteSite).compose(
-							e -> indexerCluster(requeteSite).compose(
-								operationResponse -> patchJsonCluster(requeteSite)
+			RequeteSite requeteSite = genererRequeteSitePourCluster(siteContexte);
+			Future<OperationResponse> etapesFutures = sqlCluster(requeteSite).compose(
+				a -> creerCluster(requeteSite).compose(
+					cluster -> definirCluster(cluster).compose(
+						c -> attribuerCluster(cluster).compose(
+							d -> indexerCluster(cluster).compose(
+								operationResponse -> postJsonCluster(cluster)
 							)
 						)
 					)
 				)
-			)
-		);
-		etapesFutures.setHandler(resultHandler);
+			);
+			etapesFutures.setHandler(resultHandler);
+		} catch(Exception e) {
+			resultHandler.handle(Future.failedFuture(e));
+		}
+	}
+
+	@Override
+	public void patchCluster(JsonObject document, Handler<AsyncResult<OperationResponse>> resultHandler) {
+		try {
+			RequeteSite requeteSite = genererRequeteSitePourCluster(siteContexte);
+			Future<OperationResponse> etapesFutures = sqlCluster(requeteSite).compose(
+				a -> rechercheCluster(requeteSite).compose(
+					listeCluster -> patchListeCluster(listeCluster)
+				)
+			);
+			etapesFutures.setHandler(resultHandler);
+		} catch(Exception e) {
+			resultHandler.handle(Future.failedFuture(e));
+		}
 	}
 
 	public Future<Void> sqlCluster(RequeteSite requeteSite) {
@@ -469,19 +442,30 @@ public class ClusterApiGen implements ClusterApiService {
 		return future;
 	}
 
-	public Future<Void> patchListeCluster(RequeteSite requeteSite, List<Cluster> listeCluster) {
+	public Future<OperationResponse> patchListeCluster(ListeRecherche<Cluster> listeCluster) {
 		List<Future> futures = new ArrayList<>();
-		listeCluster.forEach(o -> { futures.add(indexerCluster(o)); });
-		CompositeFuture.all(futures).setHandler(ar -> {
+		listeCluster.getList().forEach(o -> {
+			futures.add(
+				patchCluster(o).compose(
+					b -> indexerCluster(o)
+				)
+			);
+		});
+		CompositeFuture compositeFuture = CompositeFuture.all(futures).setHandler(ar -> {
 			if(ar.succeeded()) {
 				patchJsonCluster(listeCluster);
-				future.complete();
 			} else {
 			}
 		});
+		Future<OperationResponse> future = Future.future().compose(
+			a -> compositeFuture.compose(
+				b -> patchJsonCluster(listeCluster)
+			)
+		);
+		return future;
 	}
 
-	public Future<Void> patchCluster(RequeteSite requeteSite) {
+	public Future<Void> patchCluster(Cluster o) {
 		Future<Void> future = Future.future();
 		RequeteSite requeteSite = o.getRequeteSite_();
 		SQLConnection connexionSql = requeteSite.getConnexionSql();
@@ -496,35 +480,35 @@ public class ClusterApiGen implements ClusterApiService {
 			switch(methodeNom) {
 				case "setPk":
 					patchSql.append(SiteContexte.SQL_setP);
-					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_pk, requeteJson.getLong(methodeNom), pk));
+					patchSqlParams.addAll(Arrays.asList("pk", requeteJson.getLong(methodeNom), pk));
 					break;
 				case "setId":
 					patchSql.append(SiteContexte.SQL_setP);
-					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_id, requeteJson.getString(methodeNom), pk));
+					patchSqlParams.addAll(Arrays.asList("id", requeteJson.getString(methodeNom), pk));
 					break;
 				case "setCree":
 					patchSql.append(SiteContexte.SQL_setP);
-					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_cree, requeteJson.getInstant(methodeNom), pk));
+					patchSqlParams.addAll(Arrays.asList("cree", requeteJson.getInstant(methodeNom), pk));
 					break;
 				case "setModifie":
 					patchSql.append(SiteContexte.SQL_setP);
-					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_modifie, requeteJson.getInstant(methodeNom), pk));
+					patchSqlParams.addAll(Arrays.asList("modifie", requeteJson.getInstant(methodeNom), pk));
 					break;
 				case "setUtilisateurId":
 					patchSql.append(SiteContexte.SQL_setP);
-					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_utilisateurId, requeteJson.getString(methodeNom), pk));
+					patchSqlParams.addAll(Arrays.asList("utilisateurId", requeteJson.getString(methodeNom), pk));
 					break;
 				case "setClusterNomCanonique":
 					patchSql.append(SiteContexte.SQL_setP);
-					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_clusterNomCanonique, requeteJson.getString(methodeNom), pk));
+					patchSqlParams.addAll(Arrays.asList("clusterNomCanonique", requeteJson.getString(methodeNom), pk));
 					break;
 				case "setClusterNomSimple":
 					patchSql.append(SiteContexte.SQL_setP);
-					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_clusterNomSimple, requeteJson.getString(methodeNom), pk));
+					patchSqlParams.addAll(Arrays.asList("clusterNomSimple", requeteJson.getString(methodeNom), pk));
 					break;
 				case "setSupprime":
 					patchSql.append(SiteContexte.SQL_setP);
-					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_supprime, requeteJson.getBoolean(methodeNom), pk));
+					patchSqlParams.addAll(Arrays.asList("supprime", requeteJson.getBoolean(methodeNom), pk));
 					break;
 			}
 		}
@@ -594,7 +578,7 @@ public class ClusterApiGen implements ClusterApiService {
 		return Future.succeededFuture(OperationResponse.completedWithJson(buffer));
 	}
 
-	public Future<OperationResponse> patchJsonCluster(List<Cluster> listeCluster) {
+	public Future<OperationResponse> patchJsonCluster(ListeRecherche<Cluster> listeCluster) {
 		Buffer buffer = Buffer.buffer();
 		return Future.succeededFuture(OperationResponse.completedWithJson(buffer));
 	}
