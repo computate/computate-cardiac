@@ -37,7 +37,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param requeteSite_ est l'entité déjà construit. 
 	 **/
-	protected abstract void _requeteSite_(RequeteSite o) throws Exception;
+	protected abstract void _requeteSite_(RequeteSite o) throws Exception, Exception;
 
 	public RequeteSite getRequeteSite_() {
 		return requeteSite_;
@@ -48,7 +48,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.requeteSite_Couverture.dejaInitialise = true;
 	}
 	protected ConfigSite requeteSite_Init()
- throws Exception {
+ throws Exception, Exception {
 		if(!requeteSite_Couverture.dejaInitialise) {
 			_requeteSite_(requeteSite_);
 		}
@@ -72,7 +72,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _siteContexte_(Couverture<SiteContexte> o) throws Exception;
+	protected abstract void _siteContexte_(Couverture<SiteContexte> o) throws Exception, Exception;
 
 	public SiteContexte getSiteContexte_() {
 		return siteContexte_;
@@ -83,7 +83,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.siteContexte_Couverture.dejaInitialise = true;
 	}
 	protected ConfigSite siteContexte_Init()
- throws Exception {
+ throws Exception, Exception {
 		if(!siteContexte_Couverture.dejaInitialise) {
 			_siteContexte_(siteContexte_Couverture);
 			if(siteContexte_ == null)
@@ -109,7 +109,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _configChemin(Couverture<String> o) throws Exception;
+	protected abstract void _configChemin(Couverture<String> o) throws Exception, Exception;
 
 	public String getConfigChemin() {
 		return configChemin;
@@ -120,7 +120,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.configCheminCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite configCheminInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!configCheminCouverture.dejaInitialise) {
 			_configChemin(configCheminCouverture);
 			if(configChemin == null)
@@ -166,7 +166,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _config(Couverture<INIConfiguration> o) throws Exception;
+	protected abstract void _config(Couverture<INIConfiguration> o) throws Exception, Exception;
 
 	public INIConfiguration getConfig() {
 		return config;
@@ -177,7 +177,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.configCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite configInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!configCouverture.dejaInitialise) {
 			_config(configCouverture);
 			if(config == null)
@@ -203,7 +203,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _identifiantSite(Couverture<String> o) throws Exception;
+	protected abstract void _identifiantSite(Couverture<String> o) throws Exception, Exception;
 
 	public String getIdentifiantSite() {
 		return identifiantSite;
@@ -214,7 +214,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.identifiantSiteCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite identifiantSiteInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!identifiantSiteCouverture.dejaInitialise) {
 			_identifiantSite(identifiantSiteCouverture);
 			if(identifiantSite == null)
@@ -260,7 +260,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _prefixeEchappe(Couverture<String> o) throws Exception;
+	protected abstract void _prefixeEchappe(Couverture<String> o) throws Exception, Exception;
 
 	public String getPrefixeEchappe() {
 		return prefixeEchappe;
@@ -271,7 +271,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.prefixeEchappeCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite prefixeEchappeInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!prefixeEchappeCouverture.dejaInitialise) {
 			_prefixeEchappe(prefixeEchappeCouverture);
 			if(prefixeEchappe == null)
@@ -317,7 +317,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _appliChemin(Couverture<String> o) throws Exception;
+	protected abstract void _appliChemin(Couverture<String> o) throws Exception, Exception;
 
 	public String getAppliChemin() {
 		return appliChemin;
@@ -328,7 +328,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.appliCheminCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite appliCheminInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!appliCheminCouverture.dejaInitialise) {
 			_appliChemin(appliCheminCouverture);
 			if(appliChemin == null)
@@ -374,7 +374,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _racineDocument(Couverture<String> o) throws Exception;
+	protected abstract void _racineDocument(Couverture<String> o) throws Exception, Exception;
 
 	public String getRacineDocument() {
 		return racineDocument;
@@ -385,7 +385,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.racineDocumentCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite racineDocumentInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!racineDocumentCouverture.dejaInitialise) {
 			_racineDocument(racineDocumentCouverture);
 			if(racineDocument == null)
@@ -431,7 +431,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _nomEntreprise(Couverture<String> o) throws Exception;
+	protected abstract void _nomEntreprise(Couverture<String> o) throws Exception, Exception;
 
 	public String getNomEntreprise() {
 		return nomEntreprise;
@@ -442,7 +442,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.nomEntrepriseCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite nomEntrepriseInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!nomEntrepriseCouverture.dejaInitialise) {
 			_nomEntreprise(nomEntrepriseCouverture);
 			if(nomEntreprise == null)
@@ -488,7 +488,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _nomDomaine(Couverture<String> o) throws Exception;
+	protected abstract void _nomDomaine(Couverture<String> o) throws Exception, Exception;
 
 	public String getNomDomaine() {
 		return nomDomaine;
@@ -499,7 +499,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.nomDomaineCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite nomDomaineInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!nomDomaineCouverture.dejaInitialise) {
 			_nomDomaine(nomDomaineCouverture);
 			if(nomDomaine == null)
@@ -545,7 +545,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _siteNomHote(Couverture<String> o) throws Exception;
+	protected abstract void _siteNomHote(Couverture<String> o) throws Exception, Exception;
 
 	public String getSiteNomHote() {
 		return siteNomHote;
@@ -556,7 +556,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.siteNomHoteCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite siteNomHoteInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!siteNomHoteCouverture.dejaInitialise) {
 			_siteNomHote(siteNomHoteCouverture);
 			if(siteNomHote == null)
@@ -602,7 +602,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _sitePort(Couverture<Integer> o) throws Exception;
+	protected abstract void _sitePort(Couverture<Integer> o) throws Exception, Exception;
 
 	public Integer getSitePort() {
 		return sitePort;
@@ -619,7 +619,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return (ConfigSite)this;
 	}
 	protected ConfigSite sitePortInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!sitePortCouverture.dejaInitialise) {
 			_sitePort(sitePortCouverture);
 			if(sitePort == null)
@@ -665,7 +665,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _authRoyaume(Couverture<String> o) throws Exception;
+	protected abstract void _authRoyaume(Couverture<String> o) throws Exception, Exception;
 
 	public String getAuthRoyaume() {
 		return authRoyaume;
@@ -676,7 +676,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.authRoyaumeCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite authRoyaumeInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!authRoyaumeCouverture.dejaInitialise) {
 			_authRoyaume(authRoyaumeCouverture);
 			if(authRoyaume == null)
@@ -722,7 +722,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _authRessource(Couverture<String> o) throws Exception;
+	protected abstract void _authRessource(Couverture<String> o) throws Exception, Exception;
 
 	public String getAuthRessource() {
 		return authRessource;
@@ -733,7 +733,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.authRessourceCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite authRessourceInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!authRessourceCouverture.dejaInitialise) {
 			_authRessource(authRessourceCouverture);
 			if(authRessource == null)
@@ -779,7 +779,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _authSecret(Couverture<String> o) throws Exception;
+	protected abstract void _authSecret(Couverture<String> o) throws Exception, Exception;
 
 	public String getAuthSecret() {
 		return authSecret;
@@ -790,7 +790,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.authSecretCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite authSecretInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!authSecretCouverture.dejaInitialise) {
 			_authSecret(authSecretCouverture);
 			if(authSecret == null)
@@ -836,7 +836,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _authSslRequis(Couverture<String> o) throws Exception;
+	protected abstract void _authSslRequis(Couverture<String> o) throws Exception, Exception;
 
 	public String getAuthSslRequis() {
 		return authSslRequis;
@@ -847,7 +847,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.authSslRequisCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite authSslRequisInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!authSslRequisCouverture.dejaInitialise) {
 			_authSslRequis(authSslRequisCouverture);
 			if(authSslRequis == null)
@@ -893,7 +893,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _sslJksChemin(Couverture<String> o) throws Exception;
+	protected abstract void _sslJksChemin(Couverture<String> o) throws Exception, Exception;
 
 	public String getSslJksChemin() {
 		return sslJksChemin;
@@ -904,7 +904,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.sslJksCheminCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite sslJksCheminInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!sslJksCheminCouverture.dejaInitialise) {
 			_sslJksChemin(sslJksCheminCouverture);
 			if(sslJksChemin == null)
@@ -950,7 +950,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _sslJksMotDePasse(Couverture<String> o) throws Exception;
+	protected abstract void _sslJksMotDePasse(Couverture<String> o) throws Exception, Exception;
 
 	public String getSslJksMotDePasse() {
 		return sslJksMotDePasse;
@@ -961,7 +961,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.sslJksMotDePasseCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite sslJksMotDePasseInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!sslJksMotDePasseCouverture.dejaInitialise) {
 			_sslJksMotDePasse(sslJksMotDePasseCouverture);
 			if(sslJksMotDePasse == null)
@@ -1007,7 +1007,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _authUrl(Couverture<String> o) throws Exception;
+	protected abstract void _authUrl(Couverture<String> o) throws Exception, Exception;
 
 	public String getAuthUrl() {
 		return authUrl;
@@ -1018,7 +1018,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.authUrlCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite authUrlInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!authUrlCouverture.dejaInitialise) {
 			_authUrl(authUrlCouverture);
 			if(authUrl == null)
@@ -1064,7 +1064,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _selCryptage(Couverture<String> o) throws Exception;
+	protected abstract void _selCryptage(Couverture<String> o) throws Exception, Exception;
 
 	public String getSelCryptage() {
 		return selCryptage;
@@ -1075,7 +1075,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.selCryptageCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite selCryptageInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!selCryptageCouverture.dejaInitialise) {
 			_selCryptage(selCryptageCouverture);
 			if(selCryptage == null)
@@ -1121,7 +1121,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _motDePasseCryptage(Couverture<String> o) throws Exception;
+	protected abstract void _motDePasseCryptage(Couverture<String> o) throws Exception, Exception;
 
 	public String getMotDePasseCryptage() {
 		return motDePasseCryptage;
@@ -1132,7 +1132,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.motDePasseCryptageCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite motDePasseCryptageInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!motDePasseCryptageCouverture.dejaInitialise) {
 			_motDePasseCryptage(motDePasseCryptageCouverture);
 			if(motDePasseCryptage == null)
@@ -1178,7 +1178,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _urlDomaineBase(Couverture<String> o) throws Exception;
+	protected abstract void _urlDomaineBase(Couverture<String> o) throws Exception, Exception;
 
 	public String getUrlDomaineBase() {
 		return urlDomaineBase;
@@ -1189,7 +1189,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.urlDomaineBaseCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite urlDomaineBaseInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!urlDomaineBaseCouverture.dejaInitialise) {
 			_urlDomaineBase(urlDomaineBaseCouverture);
 			if(urlDomaineBase == null)
@@ -1235,7 +1235,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _siteNomAffichage(Couverture<String> o) throws Exception;
+	protected abstract void _siteNomAffichage(Couverture<String> o) throws Exception, Exception;
 
 	public String getSiteNomAffichage() {
 		return siteNomAffichage;
@@ -1246,7 +1246,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.siteNomAffichageCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite siteNomAffichageInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!siteNomAffichageCouverture.dejaInitialise) {
 			_siteNomAffichage(siteNomAffichageCouverture);
 			if(siteNomAffichage == null)
@@ -1292,7 +1292,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _jdbcClassePilote(Couverture<String> o) throws Exception;
+	protected abstract void _jdbcClassePilote(Couverture<String> o) throws Exception, Exception;
 
 	public String getJdbcClassePilote() {
 		return jdbcClassePilote;
@@ -1303,7 +1303,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.jdbcClassePiloteCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite jdbcClassePiloteInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!jdbcClassePiloteCouverture.dejaInitialise) {
 			_jdbcClassePilote(jdbcClassePiloteCouverture);
 			if(jdbcClassePilote == null)
@@ -1349,7 +1349,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _jdbcUtilisateur(Couverture<String> o) throws Exception;
+	protected abstract void _jdbcUtilisateur(Couverture<String> o) throws Exception, Exception;
 
 	public String getJdbcUtilisateur() {
 		return jdbcUtilisateur;
@@ -1360,7 +1360,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.jdbcUtilisateurCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite jdbcUtilisateurInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!jdbcUtilisateurCouverture.dejaInitialise) {
 			_jdbcUtilisateur(jdbcUtilisateurCouverture);
 			if(jdbcUtilisateur == null)
@@ -1406,7 +1406,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _jdbcMotDePasse(Couverture<String> o) throws Exception;
+	protected abstract void _jdbcMotDePasse(Couverture<String> o) throws Exception, Exception;
 
 	public String getJdbcMotDePasse() {
 		return jdbcMotDePasse;
@@ -1417,7 +1417,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.jdbcMotDePasseCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite jdbcMotDePasseInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!jdbcMotDePasseCouverture.dejaInitialise) {
 			_jdbcMotDePasse(jdbcMotDePasseCouverture);
 			if(jdbcMotDePasse == null)
@@ -1463,7 +1463,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _jdbcTailleMaxPiscine(Couverture<Integer> o) throws Exception;
+	protected abstract void _jdbcTailleMaxPiscine(Couverture<Integer> o) throws Exception, Exception;
 
 	public Integer getJdbcTailleMaxPiscine() {
 		return jdbcTailleMaxPiscine;
@@ -1480,7 +1480,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return (ConfigSite)this;
 	}
 	protected ConfigSite jdbcTailleMaxPiscineInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!jdbcTailleMaxPiscineCouverture.dejaInitialise) {
 			_jdbcTailleMaxPiscine(jdbcTailleMaxPiscineCouverture);
 			if(jdbcTailleMaxPiscine == null)
@@ -1526,7 +1526,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _jdbcTailleInitialePiscine(Couverture<Integer> o) throws Exception;
+	protected abstract void _jdbcTailleInitialePiscine(Couverture<Integer> o) throws Exception, Exception;
 
 	public Integer getJdbcTailleInitialePiscine() {
 		return jdbcTailleInitialePiscine;
@@ -1543,7 +1543,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return (ConfigSite)this;
 	}
 	protected ConfigSite jdbcTailleInitialePiscineInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!jdbcTailleInitialePiscineCouverture.dejaInitialise) {
 			_jdbcTailleInitialePiscine(jdbcTailleInitialePiscineCouverture);
 			if(jdbcTailleInitialePiscine == null)
@@ -1589,7 +1589,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _jdbcTailleMinPiscine(Couverture<Integer> o) throws Exception;
+	protected abstract void _jdbcTailleMinPiscine(Couverture<Integer> o) throws Exception, Exception;
 
 	public Integer getJdbcTailleMinPiscine() {
 		return jdbcTailleMinPiscine;
@@ -1606,7 +1606,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return (ConfigSite)this;
 	}
 	protected ConfigSite jdbcTailleMinPiscineInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!jdbcTailleMinPiscineCouverture.dejaInitialise) {
 			_jdbcTailleMinPiscine(jdbcTailleMinPiscineCouverture);
 			if(jdbcTailleMinPiscine == null)
@@ -1652,7 +1652,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _jdbcMaxDeclarations(Couverture<Integer> o) throws Exception;
+	protected abstract void _jdbcMaxDeclarations(Couverture<Integer> o) throws Exception, Exception;
 
 	public Integer getJdbcMaxDeclarations() {
 		return jdbcMaxDeclarations;
@@ -1669,7 +1669,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return (ConfigSite)this;
 	}
 	protected ConfigSite jdbcMaxDeclarationsInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!jdbcMaxDeclarationsCouverture.dejaInitialise) {
 			_jdbcMaxDeclarations(jdbcMaxDeclarationsCouverture);
 			if(jdbcMaxDeclarations == null)
@@ -1715,7 +1715,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _jdbcMaxDeclarationsParConnexion(Couverture<Integer> o) throws Exception;
+	protected abstract void _jdbcMaxDeclarationsParConnexion(Couverture<Integer> o) throws Exception, Exception;
 
 	public Integer getJdbcMaxDeclarationsParConnexion() {
 		return jdbcMaxDeclarationsParConnexion;
@@ -1732,7 +1732,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return (ConfigSite)this;
 	}
 	protected ConfigSite jdbcMaxDeclarationsParConnexionInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!jdbcMaxDeclarationsParConnexionCouverture.dejaInitialise) {
 			_jdbcMaxDeclarationsParConnexion(jdbcMaxDeclarationsParConnexionCouverture);
 			if(jdbcMaxDeclarationsParConnexion == null)
@@ -1778,7 +1778,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _jdbcTempsInactiviteMax(Couverture<Integer> o) throws Exception;
+	protected abstract void _jdbcTempsInactiviteMax(Couverture<Integer> o) throws Exception, Exception;
 
 	public Integer getJdbcTempsInactiviteMax() {
 		return jdbcTempsInactiviteMax;
@@ -1795,7 +1795,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return (ConfigSite)this;
 	}
 	protected ConfigSite jdbcTempsInactiviteMaxInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!jdbcTempsInactiviteMaxCouverture.dejaInitialise) {
 			_jdbcTempsInactiviteMax(jdbcTempsInactiviteMaxCouverture);
 			if(jdbcTempsInactiviteMax == null)
@@ -1841,7 +1841,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _jdbcUrl(Couverture<String> o) throws Exception;
+	protected abstract void _jdbcUrl(Couverture<String> o) throws Exception, Exception;
 
 	public String getJdbcUrl() {
 		return jdbcUrl;
@@ -1852,7 +1852,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.jdbcUrlCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite jdbcUrlInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!jdbcUrlCouverture.dejaInitialise) {
 			_jdbcUrl(jdbcUrlCouverture);
 			if(jdbcUrl == null)
@@ -1898,7 +1898,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _solrUrl(Couverture<String> o) throws Exception;
+	protected abstract void _solrUrl(Couverture<String> o) throws Exception, Exception;
 
 	public String getSolrUrl() {
 		return solrUrl;
@@ -1909,7 +1909,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.solrUrlCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite solrUrlInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!solrUrlCouverture.dejaInitialise) {
 			_solrUrl(solrUrlCouverture);
 			if(solrUrl == null)
@@ -1955,7 +1955,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _solrUrlComputate(Couverture<String> o) throws Exception;
+	protected abstract void _solrUrlComputate(Couverture<String> o) throws Exception, Exception;
 
 	public String getSolrUrlComputate() {
 		return solrUrlComputate;
@@ -1966,7 +1966,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.solrUrlComputateCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite solrUrlComputateInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!solrUrlComputateCouverture.dejaInitialise) {
 			_solrUrlComputate(solrUrlComputateCouverture);
 			if(solrUrlComputate == null)
@@ -2012,7 +2012,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _jetonIdentitePaypal(Couverture<String> o) throws Exception;
+	protected abstract void _jetonIdentitePaypal(Couverture<String> o) throws Exception, Exception;
 
 	public String getJetonIdentitePaypal() {
 		return jetonIdentitePaypal;
@@ -2023,7 +2023,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.jetonIdentitePaypalCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite jetonIdentitePaypalInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!jetonIdentitePaypalCouverture.dejaInitialise) {
 			_jetonIdentitePaypal(jetonIdentitePaypalCouverture);
 			if(jetonIdentitePaypal == null)
@@ -2069,7 +2069,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _compteFacebook(Couverture<String> o) throws Exception;
+	protected abstract void _compteFacebook(Couverture<String> o) throws Exception, Exception;
 
 	public String getCompteFacebook() {
 		return compteFacebook;
@@ -2080,7 +2080,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.compteFacebookCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite compteFacebookInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!compteFacebookCouverture.dejaInitialise) {
 			_compteFacebook(compteFacebookCouverture);
 			if(compteFacebook == null)
@@ -2126,7 +2126,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _compteTwitter(Couverture<String> o) throws Exception;
+	protected abstract void _compteTwitter(Couverture<String> o) throws Exception, Exception;
 
 	public String getCompteTwitter() {
 		return compteTwitter;
@@ -2137,7 +2137,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.compteTwitterCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite compteTwitterInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!compteTwitterCouverture.dejaInitialise) {
 			_compteTwitter(compteTwitterCouverture);
 			if(compteTwitter == null)
@@ -2183,7 +2183,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _compteGooglePlus(Couverture<String> o) throws Exception;
+	protected abstract void _compteGooglePlus(Couverture<String> o) throws Exception, Exception;
 
 	public String getCompteGooglePlus() {
 		return compteGooglePlus;
@@ -2194,7 +2194,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.compteGooglePlusCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite compteGooglePlusInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!compteGooglePlusCouverture.dejaInitialise) {
 			_compteGooglePlus(compteGooglePlusCouverture);
 			if(compteGooglePlus == null)
@@ -2240,7 +2240,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _compteInstagram(Couverture<String> o) throws Exception;
+	protected abstract void _compteInstagram(Couverture<String> o) throws Exception, Exception;
 
 	public String getCompteInstagram() {
 		return compteInstagram;
@@ -2251,7 +2251,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.compteInstagramCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite compteInstagramInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!compteInstagramCouverture.dejaInitialise) {
 			_compteInstagram(compteInstagramCouverture);
 			if(compteInstagram == null)
@@ -2297,7 +2297,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _compteYoutube(Couverture<String> o) throws Exception;
+	protected abstract void _compteYoutube(Couverture<String> o) throws Exception, Exception;
 
 	public String getCompteYoutube() {
 		return compteYoutube;
@@ -2308,7 +2308,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.compteYoutubeCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite compteYoutubeInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!compteYoutubeCouverture.dejaInitialise) {
 			_compteYoutube(compteYoutubeCouverture);
 			if(compteYoutube == null)
@@ -2354,7 +2354,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _identifiantCanalYoutube(Couverture<String> o) throws Exception;
+	protected abstract void _identifiantCanalYoutube(Couverture<String> o) throws Exception, Exception;
 
 	public String getIdentifiantCanalYoutube() {
 		return identifiantCanalYoutube;
@@ -2365,7 +2365,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.identifiantCanalYoutubeCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite identifiantCanalYoutubeInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!identifiantCanalYoutubeCouverture.dejaInitialise) {
 			_identifiantCanalYoutube(identifiantCanalYoutubeCouverture);
 			if(identifiantCanalYoutube == null)
@@ -2411,7 +2411,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _comptePinterest(Couverture<String> o) throws Exception;
+	protected abstract void _comptePinterest(Couverture<String> o) throws Exception, Exception;
 
 	public String getComptePinterest() {
 		return comptePinterest;
@@ -2422,7 +2422,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.comptePinterestCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite comptePinterestInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!comptePinterestCouverture.dejaInitialise) {
 			_comptePinterest(comptePinterestCouverture);
 			if(comptePinterest == null)
@@ -2468,7 +2468,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _compteOpenclipart(Couverture<String> o) throws Exception;
+	protected abstract void _compteOpenclipart(Couverture<String> o) throws Exception, Exception;
 
 	public String getCompteOpenclipart() {
 		return compteOpenclipart;
@@ -2479,7 +2479,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.compteOpenclipartCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite compteOpenclipartInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!compteOpenclipartCouverture.dejaInitialise) {
 			_compteOpenclipart(compteOpenclipartCouverture);
 			if(compteOpenclipart == null)
@@ -2525,7 +2525,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _compteMail(Couverture<String> o) throws Exception;
+	protected abstract void _compteMail(Couverture<String> o) throws Exception, Exception;
 
 	public String getCompteMail() {
 		return compteMail;
@@ -2536,7 +2536,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.compteMailCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite compteMailInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!compteMailCouverture.dejaInitialise) {
 			_compteMail(compteMailCouverture);
 			if(compteMail == null)
@@ -2582,7 +2582,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _roleAdmin(Couverture<String> o) throws Exception;
+	protected abstract void _roleAdmin(Couverture<String> o) throws Exception, Exception;
 
 	public String getRoleAdmin() {
 		return roleAdmin;
@@ -2593,7 +2593,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.roleAdminCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite roleAdminInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!roleAdminCouverture.dejaInitialise) {
 			_roleAdmin(roleAdminCouverture);
 			if(roleAdmin == null)
@@ -2639,7 +2639,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _mailAdmin(Couverture<String> o) throws Exception;
+	protected abstract void _mailAdmin(Couverture<String> o) throws Exception, Exception;
 
 	public String getMailAdmin() {
 		return mailAdmin;
@@ -2650,7 +2650,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.mailAdminCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite mailAdminInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!mailAdminCouverture.dejaInitialise) {
 			_mailAdmin(mailAdminCouverture);
 			if(mailAdmin == null)
@@ -2696,7 +2696,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _nombreExecuteurs(Couverture<Integer> o) throws Exception;
+	protected abstract void _nombreExecuteurs(Couverture<Integer> o) throws Exception, Exception;
 
 	public Integer getNombreExecuteurs() {
 		return nombreExecuteurs;
@@ -2713,7 +2713,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return (ConfigSite)this;
 	}
 	protected ConfigSite nombreExecuteursInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!nombreExecuteursCouverture.dejaInitialise) {
 			_nombreExecuteurs(nombreExecuteursCouverture);
 			if(nombreExecuteurs == null)
@@ -2759,7 +2759,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _openApiVersion(Couverture<String> o) throws Exception;
+	protected abstract void _openApiVersion(Couverture<String> o) throws Exception, Exception;
 
 	public String getOpenApiVersion() {
 		return openApiVersion;
@@ -2770,7 +2770,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.openApiVersionCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite openApiVersionInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!openApiVersionCouverture.dejaInitialise) {
 			_openApiVersion(openApiVersionCouverture);
 			if(openApiVersion == null)
@@ -2816,7 +2816,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _apiDescription(Couverture<String> o) throws Exception;
+	protected abstract void _apiDescription(Couverture<String> o) throws Exception, Exception;
 
 	public String getApiDescription() {
 		return apiDescription;
@@ -2827,7 +2827,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.apiDescriptionCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite apiDescriptionInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!apiDescriptionCouverture.dejaInitialise) {
 			_apiDescription(apiDescriptionCouverture);
 			if(apiDescription == null)
@@ -2873,7 +2873,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _apiTitre(Couverture<String> o) throws Exception;
+	protected abstract void _apiTitre(Couverture<String> o) throws Exception, Exception;
 
 	public String getApiTitre() {
 		return apiTitre;
@@ -2884,7 +2884,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.apiTitreCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite apiTitreInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!apiTitreCouverture.dejaInitialise) {
 			_apiTitre(apiTitreCouverture);
 			if(apiTitre == null)
@@ -2930,7 +2930,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _apiTermsService(Couverture<String> o) throws Exception;
+	protected abstract void _apiTermsService(Couverture<String> o) throws Exception, Exception;
 
 	public String getApiTermsService() {
 		return apiTermsService;
@@ -2941,7 +2941,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.apiTermsServiceCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite apiTermsServiceInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!apiTermsServiceCouverture.dejaInitialise) {
 			_apiTermsService(apiTermsServiceCouverture);
 			if(apiTermsService == null)
@@ -2987,7 +2987,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _apiVersion(Couverture<String> o) throws Exception;
+	protected abstract void _apiVersion(Couverture<String> o) throws Exception, Exception;
 
 	public String getApiVersion() {
 		return apiVersion;
@@ -2998,7 +2998,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.apiVersionCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite apiVersionInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!apiVersionCouverture.dejaInitialise) {
 			_apiVersion(apiVersionCouverture);
 			if(apiVersion == null)
@@ -3044,7 +3044,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _apiContactMail(Couverture<String> o) throws Exception;
+	protected abstract void _apiContactMail(Couverture<String> o) throws Exception, Exception;
 
 	public String getApiContactMail() {
 		return apiContactMail;
@@ -3055,7 +3055,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.apiContactMailCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite apiContactMailInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!apiContactMailCouverture.dejaInitialise) {
 			_apiContactMail(apiContactMailCouverture);
 			if(apiContactMail == null)
@@ -3101,7 +3101,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _apiLicenceNom(Couverture<String> o) throws Exception;
+	protected abstract void _apiLicenceNom(Couverture<String> o) throws Exception, Exception;
 
 	public String getApiLicenceNom() {
 		return apiLicenceNom;
@@ -3112,7 +3112,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.apiLicenceNomCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite apiLicenceNomInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!apiLicenceNomCouverture.dejaInitialise) {
 			_apiLicenceNom(apiLicenceNomCouverture);
 			if(apiLicenceNom == null)
@@ -3158,7 +3158,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _apiLicenceUrl(Couverture<String> o) throws Exception;
+	protected abstract void _apiLicenceUrl(Couverture<String> o) throws Exception, Exception;
 
 	public String getApiLicenceUrl() {
 		return apiLicenceUrl;
@@ -3169,7 +3169,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.apiLicenceUrlCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite apiLicenceUrlInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!apiLicenceUrlCouverture.dejaInitialise) {
 			_apiLicenceUrl(apiLicenceUrlCouverture);
 			if(apiLicenceUrl == null)
@@ -3215,7 +3215,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _apiNomHote(Couverture<String> o) throws Exception;
+	protected abstract void _apiNomHote(Couverture<String> o) throws Exception, Exception;
 
 	public String getApiNomHote() {
 		return apiNomHote;
@@ -3226,7 +3226,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.apiNomHoteCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite apiNomHoteInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!apiNomHoteCouverture.dejaInitialise) {
 			_apiNomHote(apiNomHoteCouverture);
 			if(apiNomHote == null)
@@ -3272,7 +3272,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _apiCheminBase(Couverture<String> o) throws Exception;
+	protected abstract void _apiCheminBase(Couverture<String> o) throws Exception, Exception;
 
 	public String getApiCheminBase() {
 		return apiCheminBase;
@@ -3283,7 +3283,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.apiCheminBaseCouverture.dejaInitialise = true;
 	}
 	protected ConfigSite apiCheminBaseInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!apiCheminBaseCouverture.dejaInitialise) {
 			_apiCheminBase(apiCheminBaseCouverture);
 			if(apiCheminBase == null)

@@ -8,6 +8,7 @@ import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
 import io.vertx.core.json.JsonObject;
+import io.vertx.ext.web.api.OperationRequest;
 import io.vertx.ext.web.api.OperationResponse;
 
 @ProxyGen
@@ -22,7 +23,7 @@ public interface ClusterApiService {
 		return new ClusterApiServiceVertxEBProxy(vertx, address);
 	}
 
-	public void patchCluster(JsonObject document, Handler<AsyncResult<OperationResponse>> resultHandler);
-	public void postCluster(JsonObject document, Handler<AsyncResult<OperationResponse>> resultHandler);
+	public void patchCluster(JsonObject document, OperationRequest context, Handler<AsyncResult<OperationResponse>> resultHandler);
+	public void postCluster(JsonObject document, OperationRequest context, Handler<AsyncResult<OperationResponse>> resultHandler);
 
 }

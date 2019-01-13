@@ -34,9 +34,11 @@ import java.security.Principal;
 import io.vertx.core.buffer.Buffer;
 import io.vertx.core.http.HttpServerResponse;
 import org.apache.solr.client.solrj.SolrQuery;
+import org.apache.http.client.utils.URLEncodedUtils;
 import io.vertx.ext.auth.oauth2.OAuth2Auth;
 import org.apache.solr.client.solrj.util.ClientUtils;
 import io.vertx.ext.sql.SQLClient;
+import org.apache.http.NameValuePair;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.json.Json;
@@ -44,6 +46,7 @@ import java.time.LocalDateTime;
 import io.vertx.core.logging.LoggerFactory;
 import java.util.ArrayList;
 import io.vertx.core.CompositeFuture;
+import java.nio.charset.Charset;
 import io.vertx.ext.web.api.validation.HTTPRequestValidationHandler;
 import io.vertx.core.AsyncResult;
 import io.vertx.ext.web.api.validation.ValidationException;
@@ -54,6 +57,7 @@ import io.vertx.ext.reactivestreams.ReactiveWriteStream;
 import java.util.concurrent.TimeUnit;
 import org.apache.solr.common.SolrDocument;
 import io.vertx.core.json.JsonArray;
+import io.vertx.ext.web.api.OperationRequest;
 import java.time.format.DateTimeFormatter;
 import io.vertx.ext.sql.SQLConnection;
 import org.apache.solr.client.solrj.SolrQuery.ORDER;
@@ -78,7 +82,7 @@ public class CalculInrApiGen implements CalculInrApiService {
 		OpenAPI3RouterFactory usineRouteur = siteContexte.getUsineRouteur();
 
 		usineRouteur.addHandlerByOperationId("getCalculInr", contexteItineraire -> {
-			contexteItineraire.user().isAuthorized("Something", authRes -> {
+			gestionnaireEvenements.user().isAuthorized("Something", authRes -> {
 				try {
 					if (authRes.result() == Boolean.TRUE) {
 
@@ -223,47 +227,46 @@ public class CalculInrApiGen implements CalculInrApiService {
 		listeRecherche.setQuery("*:*");
 		listeRecherche.setRows(1000000);
 		listeRecherche.addSort("partNumero_indexed_int", ORDER.asc);
-		MultiMap paramMap = requeteSite.getRequeteServeur().params();
-		for(String paramCle : paramMap.names()) {
-			List<String> paramValeurs = paramMap.getAll(paramCle);
-			for(String paramValeur : paramValeurs) {
-				try {
-					switch(paramCle) {
-						case "q":
-							entiteVar = StringUtils.trim(StringUtils.substringBefore(paramValeur, ":"));
-							valeurIndexe = StringUtils.trim(StringUtils.substringAfter(paramValeur, ":"));
-							varIndexe = varIndexeCalculInr(paramCle);
-							listeRecherche.setQuery(varIndexe + ":" + ClientUtils.escapeQueryChars(valeurIndexe));
-							break;
-						case "fq":
-							entiteVar = StringUtils.trim(StringUtils.substringBefore(paramValeur, ":"));
-							valeurIndexe = StringUtils.trim(StringUtils.substringAfter(paramValeur, ":"));
-							varIndexe = varIndexeCalculInr(paramCle);
-							listeRecherche.addFilterQuery(varIndexe + ":" + ClientUtils.escapeQueryChars(valeurIndexe));
-							break;
-						case "sort":
-							entiteVar = StringUtils.trim(StringUtils.substringBefore(paramValeur, " "));
-							valeurTri = StringUtils.trim(StringUtils.substringAfter(paramValeur, " "));
-							varIndexe = varIndexeCalculInr(paramCle);
-							listeRecherche.addSort(varIndexe, ORDER.valueOf(valeurTri));
-							break;
-						case "fl":
-							entiteVar = StringUtils.trim(paramValeur);
-							varIndexe = varIndexeCalculInr(paramCle);
-							listeRecherche.addField(varIndexe);
-							break;
-						case "start":
-							rechercheDebut = Integer.parseInt(paramValeur);
-							listeRecherche.setStart(rechercheDebut);
-							break;
-						case "rows":
-							rechercheNum = Integer.parseInt(paramValeur);
-							listeRecherche.setRows(rechercheNum);
-							break;
-					}
-				} catch(Exception e) {
-					return Future.failedFuture(e);
+		List<NameValuePair> pairesNomValeur = URLEncodedUtils.parse(requeteSite.getRequeteServeur().query(), Charset.forName("UTF-8"));
+		for(NameValuePair paireNomValeur : pairesNomValeur) {
+			String paireNom = paireNomValeur.getName();
+			String paireValeur = paireNomValeur.getValue();
+			try {
+				switch(paireNom) {
+					case "q":
+						entiteVar = StringUtils.trim(StringUtils.substringBefore(paireValeur, ":"));
+						valeurIndexe = StringUtils.trim(StringUtils.substringAfter(paireValeur, ":"));
+						varIndexe = varIndexeCalculInr(entiteVar);
+						listeRecherche.setQuery(varIndexe + ":" + ClientUtils.escapeQueryChars(valeurIndexe));
+						break;
+					case "fq":
+						entiteVar = StringUtils.trim(StringUtils.substringBefore(paireValeur, ":"));
+						valeurIndexe = StringUtils.trim(StringUtils.substringAfter(paireValeur, ":"));
+						varIndexe = varIndexeCalculInr(entiteVar);
+						listeRecherche.addFilterQuery(varIndexe + ":" + ClientUtils.escapeQueryChars(valeurIndexe));
+						break;
+					case "sort":
+						entiteVar = StringUtils.trim(StringUtils.substringBefore(paireValeur, " "));
+						valeurTri = StringUtils.trim(StringUtils.substringAfter(paireValeur, " "));
+						varIndexe = varIndexeCalculInr(entiteVar);
+						listeRecherche.addSort(varIndexe, ORDER.valueOf(valeurTri));
+						break;
+					case "fl":
+						entiteVar = StringUtils.trim(paireValeur);
+						varIndexe = varIndexeCalculInr(entiteVar);
+						listeRecherche.addField(varIndexe);
+						break;
+					case "start":
+						rechercheDebut = Integer.parseInt(paireValeur);
+						listeRecherche.setStart(rechercheDebut);
+						break;
+					case "rows":
+						rechercheNum = Integer.parseInt(paireValeur);
+						listeRecherche.setRows(rechercheNum);
+						break;
 				}
+			} catch(Exception e) {
+				return Future.failedFuture(e);
 			}
 		}
 		listeRecherche.initLoinPourClasse(requeteSite);
@@ -386,27 +389,26 @@ public class CalculInrApiGen implements CalculInrApiService {
 	}
 
 	@Override
-	public void postCalculInr(JsonObject document, Handler<AsyncResult<OperationResponse>> resultHandler) {
-		contexteItineraire.user().isAuthorized("Something", authRes -> {
+	public void postCalculInr(JsonObject document, OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
+		operationRequete.user().isAuthorized("Something", authRes -> {
 			if (authRes.result() == Boolean.TRUE) {
-				RequeteSite requeteSite;
 				try {
-					requeteSite = genererRequeteSitePourCalculInr(siteContexte);
-				} catch(Exception e) {
-					resultHandler.handle(Future.failedFuture(e));
-				}
-				Future<OperationResponse> etapesFutures = sqlCalculInr(requeteSite).compose(
-					a -> creerCalculInr(requeteSite).compose(
-						cluster -> definirCalculInr(calculInr).compose(
-							c -> attribuerCalculInr(calculInr).compose(
-								d -> indexerCalculInr(calculInr).compose(
-									operationResponse -> postJsonCalculInr(calculInr)
+					RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte);
+					Future<OperationResponse> etapesFutures = sqlCalculInr(requeteSite).compose(
+						a -> creerCalculInr(requeteSite).compose(
+							cluster -> definirCalculInr(calculInr).compose(
+								c -> attribuerCalculInr(calculInr).compose(
+									d -> indexerCalculInr(calculInr).compose(
+										operationResponse -> postJsonCalculInr(calculInr)
+									)
 								)
 							)
 						)
-					)
-				);
-				etapesFutures.setHandler(resultHandler);
+					);
+					etapesFutures.setHandler(gestionnaireEvenements);
+				} catch(Exception e) {
+					gestionnaireEvenements.handle(Future.failedFuture(e));
+				}
 			}
 			else {
 				contexteItineraire.response().setStatusCode(HttpResponseStatus.UNAUTHORIZED.code()).end();
@@ -415,29 +417,20 @@ public class CalculInrApiGen implements CalculInrApiService {
 	}
 
 	@Override
-	public void patchCalculInr(JsonObject document, Handler<AsyncResult<OperationResponse>> resultHandler) {
-		contexteItineraire.user().isAuthorized("Something", authRes -> {
+	public void patchCalculInr(JsonObject document, OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
+		operationRequete.user().isAuthorized("Something", authRes -> {
 			if (authRes.result() == Boolean.TRUE) {
-				RequeteSite requeteSite;
 				try {
-					requeteSite = genererRequeteSitePourCalculInr(siteContexte);
-				} catch(Exception e) {
-					resultHandler.handle(Future.failedFuture(e));
-				}
-				Future<OperationResponse> etapesFutures = sqlCalculInr(requeteSite).compose(
-					a -> rechercheCalculInr(requeteSite).compose(
-						listeCalculInr -> patchCalculInr(requeteSite).compose(
-							c -> definirCalculInr(requeteSite).compose(
-								d -> attribuerCalculInr(requeteSite).compose(
-									e -> indexerCalculInr(requeteSite).compose(
-										operationResponse -> patchJsonCalculInr(requeteSite)
-									)
-								)
-							)
+					RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte);
+					Future<OperationResponse> etapesFutures = sqlCalculInr(requeteSite).compose(
+						a -> rechercheCalculInr(requeteSite).compose(
+							listeCalculInr -> patchListeCalculInr(listeCalculInr)
 						)
-					)
-				);
-				etapesFutures.setHandler(resultHandler);
+					);
+					etapesFutures.setHandler(gestionnaireEvenements);
+				} catch(Exception e) {
+					gestionnaireEvenements.handle(Future.failedFuture(e));
+				}
 			}
 			else {
 				contexteItineraire.response().setStatusCode(HttpResponseStatus.UNAUTHORIZED.code()).end();
@@ -469,9 +462,9 @@ public class CalculInrApiGen implements CalculInrApiService {
 				, creerAsync
 		-> {
 			JsonArray patchLigne = creerAsync.result().getResults().stream().findFirst().orElseGet(() -> null);
-			Long pk = patchLigne.getLong(0);
+			Long  = patchLigne.getLong(0);
 			CalculInr o = new CalculInr();
-			o.setPk(pk);
+			o.set();
 			future.complete(o);
 		});
 		return future;
@@ -481,7 +474,7 @@ public class CalculInrApiGen implements CalculInrApiService {
 		Future<Void> future = Future.future();
 		RequeteSite requeteSite = o.getRequeteSite_();
 		SQLConnection connexionSql = requeteSite.getConnexionSql();
-		Long pk = o.getPk();
+		Long  = o.get();
 		RoutingContext contexteItineraire = requeteSite.getContexteItineraire();
 		JsonObject jsonObject = contexteItineraire.getBodyAsJson();
 		StringBuilder postSql = new StringBuilder();
@@ -492,43 +485,43 @@ public class CalculInrApiGen implements CalculInrApiService {
 			switch(entiteVar) {
 				case "utilisateurPk":
 					postSql.append(SiteContexte.SQL_addA);
-					postSqlParams.addAll(Arrays.asList("calculInrPks", pk, "utilisateurPk", jsonObject.getLong(entiteVar)));
+					postSqlParams.addAll(Arrays.asList("calculInrPks", , "utilisateurPk", jsonObject.getLong(entiteVar)));
 					break;
 				case "dateInr":
 					postSql.append(SiteContexte.SQL_setP);
-					postSqlParams.addAll(Arrays.asList("dateInr", jsonObject.getInstant(entiteVar), pk));
+					postSqlParams.addAll(Arrays.asList("dateInr", jsonObject.getInstant(entiteVar), ));
 					break;
 				case "dateReverifier":
 					postSql.append(SiteContexte.SQL_setP);
-					postSqlParams.addAll(Arrays.asList("dateReverifier", jsonObject.getInstant(entiteVar), pk));
+					postSqlParams.addAll(Arrays.asList("dateReverifier", jsonObject.getInstant(entiteVar), ));
 					break;
 				case "patientPrendCoumadin":
 					postSql.append(SiteContexte.SQL_setP);
-					postSqlParams.addAll(Arrays.asList("patientPrendCoumadin", jsonObject.getString(entiteVar), pk));
+					postSqlParams.addAll(Arrays.asList("patientPrendCoumadin", jsonObject.getString(entiteVar), ));
 					break;
 				case "butActuel":
 					postSql.append(SiteContexte.SQL_setP);
-					postSqlParams.addAll(Arrays.asList("butActuel", jsonObject.getString(entiteVar), pk));
+					postSqlParams.addAll(Arrays.asList("butActuel", jsonObject.getString(entiteVar), ));
 					break;
 				case "doseActuel":
 					postSql.append(SiteContexte.SQL_setP);
-					postSqlParams.addAll(Arrays.asList("doseActuel", jsonObject.getString(entiteVar), pk));
+					postSqlParams.addAll(Arrays.asList("doseActuel", jsonObject.getString(entiteVar), ));
 					break;
 				case "medicamentActuel":
 					postSql.append(SiteContexte.SQL_setP);
-					postSqlParams.addAll(Arrays.asList("medicamentActuel", jsonObject.getString(entiteVar), pk));
+					postSqlParams.addAll(Arrays.asList("medicamentActuel", jsonObject.getString(entiteVar), ));
 					break;
 				case "changementDose":
 					postSql.append(SiteContexte.SQL_setP);
-					postSqlParams.addAll(Arrays.asList("changementDose", jsonObject.getString(entiteVar), pk));
+					postSqlParams.addAll(Arrays.asList("changementDose", jsonObject.getString(entiteVar), ));
 					break;
 				case "notesComplementaires":
 					postSql.append(SiteContexte.SQL_setP);
-					postSqlParams.addAll(Arrays.asList("notesComplementaires", jsonObject.getString(entiteVar), pk));
+					postSqlParams.addAll(Arrays.asList("notesComplementaires", jsonObject.getString(entiteVar), ));
 					break;
 				case "infoContact":
 					postSql.append(SiteContexte.SQL_setP);
-					postSqlParams.addAll(Arrays.asList("infoContact", jsonObject.getString(entiteVar), pk));
+					postSqlParams.addAll(Arrays.asList("infoContact", jsonObject.getString(entiteVar), ));
 					break;
 			}
 		}
@@ -542,23 +535,34 @@ public class CalculInrApiGen implements CalculInrApiService {
 		return future;
 	}
 
-	public Future<Void> patchListeCalculInr(RequeteSite requeteSite, List<CalculInr> listeCalculInr) {
+	public Future<OperationResponse> patchListeCalculInr(ListeRecherche<CalculInr> listeCalculInr) {
 		List<Future> futures = new ArrayList<>();
-		listeCalculInr.forEach(o -> { futures.add(indexerCalculInr(o)); });
-		CompositeFuture.all(futures).setHandler(ar -> {
+		listeCalculInr.getList().forEach(o -> {
+			futures.add(
+				patchCalculInr(o).compose(
+					b -> indexerCalculInr(o)
+				)
+			);
+		});
+		CompositeFuture compositeFuture = CompositeFuture.all(futures).setHandler(ar -> {
 			if(ar.succeeded()) {
 				patchJsonCluster(listeCluster);
-				future.complete();
 			} else {
 			}
 		});
+		Future<OperationResponse> future = Future.future().compose(
+			a -> compositeFuture.compose(
+				b -> patchJsonCluster(listeCluster)
+			)
+		);
+		return future;
 	}
 
-	public Future<Void> patchCalculInr(RequeteSite requeteSite) {
+	public Future<Void> patchCalculInr(CalculInr o) {
 		Future<Void> future = Future.future();
 		RequeteSite requeteSite = o.getRequeteSite_();
 		SQLConnection connexionSql = requeteSite.getConnexionSql();
-		Long pk = o.getPk();
+		Long  = o.get();
 		RoutingContext contexteItineraire = requeteSite.getContexteItineraire();
 		JsonObject requeteJson = contexteItineraire.getBodyAsJson();
 		StringBuilder patchSql = new StringBuilder();
@@ -569,39 +573,39 @@ public class CalculInrApiGen implements CalculInrApiService {
 			switch(methodeNom) {
 				case "setDateInr":
 					patchSql.append(SiteContexte.SQL_setP);
-					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_dateInr, requeteJson.getInstant(methodeNom), pk));
+					patchSqlParams.addAll(Arrays.asList("dateInr", requeteJson.getInstant(methodeNom), ));
 					break;
 				case "setDateReverifier":
 					patchSql.append(SiteContexte.SQL_setP);
-					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_dateReverifier, requeteJson.getInstant(methodeNom), pk));
+					patchSqlParams.addAll(Arrays.asList("dateReverifier", requeteJson.getInstant(methodeNom), ));
 					break;
 				case "setPatientPrendCoumadin":
 					patchSql.append(SiteContexte.SQL_setP);
-					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_patientPrendCoumadin, requeteJson.getString(methodeNom), pk));
+					patchSqlParams.addAll(Arrays.asList("patientPrendCoumadin", requeteJson.getString(methodeNom), ));
 					break;
 				case "setButActuel":
 					patchSql.append(SiteContexte.SQL_setP);
-					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_butActuel, requeteJson.getString(methodeNom), pk));
+					patchSqlParams.addAll(Arrays.asList("butActuel", requeteJson.getString(methodeNom), ));
 					break;
 				case "setDoseActuel":
 					patchSql.append(SiteContexte.SQL_setP);
-					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_doseActuel, requeteJson.getString(methodeNom), pk));
+					patchSqlParams.addAll(Arrays.asList("doseActuel", requeteJson.getString(methodeNom), ));
 					break;
 				case "setMedicamentActuel":
 					patchSql.append(SiteContexte.SQL_setP);
-					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_medicamentActuel, requeteJson.getString(methodeNom), pk));
+					patchSqlParams.addAll(Arrays.asList("medicamentActuel", requeteJson.getString(methodeNom), ));
 					break;
 				case "setChangementDose":
 					patchSql.append(SiteContexte.SQL_setP);
-					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_changementDose, requeteJson.getString(methodeNom), pk));
+					patchSqlParams.addAll(Arrays.asList("changementDose", requeteJson.getString(methodeNom), ));
 					break;
 				case "setNotesComplementaires":
 					patchSql.append(SiteContexte.SQL_setP);
-					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_notesComplementaires, requeteJson.getString(methodeNom), pk));
+					patchSqlParams.addAll(Arrays.asList("notesComplementaires", requeteJson.getString(methodeNom), ));
 					break;
 				case "setInfoContact":
 					patchSql.append(SiteContexte.SQL_setP);
-					patchSqlParams.addAll(Arrays.asList(ENTITE_VAR_infoContact, requeteJson.getString(methodeNom), pk));
+					patchSqlParams.addAll(Arrays.asList("infoContact", requeteJson.getString(methodeNom), ));
 					break;
 			}
 		}
@@ -619,10 +623,10 @@ public class CalculInrApiGen implements CalculInrApiService {
 		Future<Void> future = Future.future();
 		RequeteSite requeteSite = o.getRequeteSite_();
 		SQLConnection connexionSql = requeteSite.getConnexionSql();
-		Long pk = o.getPk();
+		Long  = o.get();
 		connexionSql.queryWithParams(
 				SiteContexte.SQL_definir
-				, new JsonArray(Arrays.asList(pk))
+				, new JsonArray(Arrays.asList())
 				, definirAsync
 		-> {
 			for(JsonArray definition : definirAsync.result().getResults()) {
@@ -637,10 +641,10 @@ public class CalculInrApiGen implements CalculInrApiService {
 		Future<Void> future = Future.future();
 		RequeteSite requeteSite = o.getRequeteSite_();
 		SQLConnection connexionSql = requeteSite.getConnexionSql();
-		Long pk = o.getPk();
+		Long  = o.get();
 		connexionSql.queryWithParams(
 				SiteContexte.SQL_attribuer
-				, new JsonArray(Arrays.asList(pk))
+				, new JsonArray(Arrays.asList())
 				, attribuerAsync
 		-> {
 			for(JsonArray definition : attribuerAsync.result().getResults()) {
@@ -671,7 +675,7 @@ public class CalculInrApiGen implements CalculInrApiService {
 		return Future.succeededFuture(OperationResponse.completedWithJson(buffer));
 	}
 
-	public Future<OperationResponse> patchJsonCalculInr(List<CalculInr> listeCalculInr) {
+	public Future<OperationResponse> patchJsonCalculInr(ListeRecherche<CalculInr> listeCalculInr) {
 		Buffer buffer = Buffer.buffer();
 		return Future.succeededFuture(OperationResponse.completedWithJson(buffer));
 	}

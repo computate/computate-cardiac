@@ -1,6 +1,5 @@
 package org.computate.frFR.cardiaque.warfarin; 
 
-import java.math.BigDecimal;
 import java.time.LocalDate;
 
 import org.computate.frFR.cardiaque.chaine.Chaine;
@@ -23,15 +22,16 @@ import org.computate.frFR.cardiaque.couverture.Couverture;
  * keyword: something
  * keyword: somethingelse
  * map.this.Integer: 1
-*/                       
-public class CalculInr extends CalculInrGen<Cluster> {   
+*/                   
+public class CalculInr extends CalculInrGen<Cluster> {  
 
 	/**
 	 * {@inheritDoc}
 	 * indexe: true
 	 * stocke: true
 	 * attribuer: UtilisateurSite.calculInrPks
-	 */ 
+	 * enUS: User primary key. 
+	 */  
 	protected void _utilisateurPk(Couverture<Long> c) {
 	}
 
@@ -99,6 +99,8 @@ public class CalculInr extends CalculInrGen<Cluster> {
 	 * var.enUS: dosageChange
 	 * indexe: true
 	 * stocke: true
+	 * r: FORMAT_dateMedicalCourt
+	 * r.enUS: FORMAT_dateMedicalShort
 	 */
 	protected void _changementDose(Chaine o) {
 		o.tout(dateInr.format(FORMAT_dateMedicalCourt), " INR @ ");

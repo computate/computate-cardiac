@@ -215,7 +215,9 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 		c.o(o);
 	}
 
-	/**	L'URL du domaine de base pour les URLs du site. **/
+	/**
+	 * var.enUS: urlDomainBase
+	 * 	L'URL du domaine de base pour les URLs du site. **/
 	protected void _urlDomaineBase(Couverture<String> c) throws Exception {
 		String o;
 		if(config == null)

@@ -1,8 +1,9 @@
 package org.computate.frFR.cardiaque.vertx;
 
 import java.io.File;
-import java.io.PrintWriter;
+import java.io.ToutEcrivain;
 import java.io.StringWriter;
+import java.util.List;
 
 import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -16,91 +17,147 @@ import org.apache.solr.common.SolrDocumentList;
 import org.computate.frFR.cardiaque.config.ConfigSite;
 import org.computate.frFR.cardiaque.contexte.SiteContexte;
 import org.computate.frFR.cardiaque.couverture.Couverture;
-import org.computate.frFR.cardiaque.recherche.ResultatRecherche;
+import org.computate.frFR.cardiaque.ecrivain.ToutEcrivain;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
-
+/**
+ * nomCanonique.enUS: org.computate.enUS.cardiac.vertx.AppOpenApi3
+ */
 public class AppOpenApi3 extends AppOpenApi3Gen<Object> { 
 
+	/**
+	 * var.enUS: requeteSite_
+	 */
 	protected void _requeteSite_(Couverture<RequeteSite> c) throws Exception {
 	}
 
+	/**
+	 * var.enUS: siteContext
+	 */
 	protected void _siteContexte(SiteContexte o) throws Exception {
 	}
 
+	/**
+	 * var.enUS: siteConfig
+	 * r: siteContexte.getConfigSite
+	 * r.enUS: siteContext.getSiteConfig
+	 */
 	protected void _configSite(Couverture<ConfigSite> c) throws Exception {
 		c.o(siteContexte.getConfigSite());
 	}
 
+	/**
+	 * r: initLoin
+	 * r.enUS: initDeep
+	 * r: generer
+	 * r.enUS: generate
+	 */
 	public static void main(String[] args) throws Exception {
 		AppOpenApi3 api = new AppOpenApi3();
 		api.initLoinAppOpenApi3();
 		api.genererOpenApi();
 	}
 
+	/**
+	 * var.enUS: generateOpenApi
+	 * r: configSite
+	 * r.enUS: siteConfig
+	 * r: ConfigSite
+	 * r.enUS: SiteConfig
+	 * r: appliChemin
+	 * r.enUS: appChemin
+	 * r: siteContexte
+	 * r.enUS: siteContext
+	 * r: openapiYamlChemin
+	 * r.enUS: openapiYamlChemin
+	 * r: genererChemins
+	 * r.enUS: generateChemins
+	 * r: genererCorpsRequetes
+	 * r.enUS: generateRequeteBodies
+	 * r: genererSchemas
+	 * r.enUS: generateSchemas
+	 * r: ToutEcrivain
+	 * r.enUS: AllWriter
+	 * r: .creer(
+	 * r.enUS: .create(
+	 */
 	public void genererOpenApi() throws Exception {
 		ConfigSite configSite = siteContexte.getConfigSite();
 		String appliChemin = configSite.getAppliChemin();
-		String swaggerYamlChemin = appliChemin + "/src/main/resources/openapi3.yaml";
-		File swaggerYamlFichier = new File(swaggerYamlChemin);
-		PrintWriter w = new PrintWriter(swaggerYamlFichier);
+		String openapiYamlChemin = appliChemin + "/src/main/resources/openapi3.yaml";
+		File openapiYamlFichier = new File(openapiYamlChemin);
+		ToutEcrivain w = ToutEcrivain.creer(requeteSite_, openapiYamlFichier);
 
 		genererChemins(w);
 		genererCorpsRequetes(w);
 		genererSchemas(w);
 
-		w.flush();
-		w.close();
+		w.flushClose();
 	}
 
-	public void genererChemins(PrintWriter w) throws Exception {
+	/**
+	 * var.enUS: generateChemins
+	 * r: configSite
+	 * r.enUS: siteConfig
+	 * r: rechercheClasses
+	 * r.enUS: searchClasses
+	 * r: getSiteNomAffichage
+	 * r.enUS: getSiteDisplayName
+	 * r: getApiContractMail
+	 * r.enUS: getApiContractEmail
+	 * r: getApiLicenceNom
+	 * r.enUS: getApiLicenceName
+	 * r: getUrlDomaineBase
+	 * r.enUS: getUrlDomainBase
+	 */
+	public void genererChemins(ToutEcrivain w) throws Exception {
 
-		w.write("openapi: \"");
-		w.write(StringEscapeUtils.escapeJava(configSite.getOpenApiVersion()));
-		w.write("\"\n");
+		w.s("openapi: \"");
+		w.s(StringEscapeUtils.escapeJava(configSite.getOpenApiVersion()));
+		w.l("\"");
 
-		w.write("info:\n");
+		w.l("info:");
 
-		w.write("  description: \"");
-		w.write(StringEscapeUtils.escapeJava(configSite.getApiDescription()));
-		w.write("\"\n");
+		w.s("  description: \"");
+		w.s(StringEscapeUtils.escapeJava(configSite.getApiDescription()));
+		w.l("\"");
 
-		w.write("  version: \"");
-		w.write(StringEscapeUtils.escapeJava(configSite.getApiVersion()));
-		w.write("\"\n");
+		w.s("  version: \"");
+		w.s(StringEscapeUtils.escapeJava(configSite.getApiVersion()));
+		w.l("\"");
 
-		w.write("  title: \"");
-		w.write(StringEscapeUtils.escapeJava(configSite.getSiteNomAffichage()));
-		w.write("\"\n");
+		w.s("  title: \"");
+		w.s(StringEscapeUtils.escapeJava(configSite.getSiteNomAffichage()));
+		w.l("\"");
 
-		w.write("  termsOfService: \"");
-		w.write(StringEscapeUtils.escapeJava(configSite.getApiTermsService()));
-		w.write("\"\n");
+		w.s("  termsOfService: \"");
+		w.s(StringEscapeUtils.escapeJava(configSite.getApiTermsService()));
+		w.l("\"");
 
-		w.write("  contact:\n");
+		w.l("  contact:");
 
-		w.write("    email: \"");
-		w.write(StringEscapeUtils.escapeJava(configSite.getApiContactMail()));
-		w.write("\"\n");
+		w.s("    email: \"");
+		w.s(StringEscapeUtils.escapeJava(configSite.getApiContactMail()));
+		w.l("\"");
 
-		w.write("  license:\n");
+		w.l("  license:");
 
-		w.write("    name: \"");
-		w.write(StringEscapeUtils.escapeJava(configSite.getApiLicenceNom()));
-		w.write("\"\n");
+		w.s("    name: \"");
+		w.s(StringEscapeUtils.escapeJava(configSite.getApiLicenceNom()));
+		w.l("\"");
 
-		w.write("    url: \"");
-		w.write(StringEscapeUtils.escapeJava(configSite.getApiLicenceUrl()));
-		w.write("\"\n");
+		w.s("    url: \"");
+		w.s(StringEscapeUtils.escapeJava(configSite.getApiLicenceUrl()));
+		w.l("\"");
 
-		w.write("servers:\n");
+		w.l("servers:");
 
-		w.write("  - url: \"");
-		w.write(StringEscapeUtils.escapeJava(configSite.getUrlDomaineBase()));
-		w.write("\"\n");
-		w.write("    description: \"");
-		w.write("\"\n");
+		w.s("  - url: \"");
+		w.s(StringEscapeUtils.escapeJava(configSite.getUrlDomaineBase()));
+		w.l("\"");
+		w.s("    description: \"");
+		w.l("\"");
 
-		w.write("paths:\n");
+		w.l("paths:");
 
 		SolrQuery rechercheClasses = new SolrQuery();
 		rechercheClasses.setQuery("*:*");
@@ -114,202 +171,455 @@ public class AppOpenApi3 extends AppOpenApi3Gen<Object> {
 		Integer rechercheClassesLignes = rechercheClasses.getRows();
 		for(Long i = rechercheClassesResultats.getStart(); i < rechercheClassesResultats.getNumFound(); i+=rechercheClassesLignes) {
 			for(Integer j = 0; j < rechercheClassesResultats.size(); j++) {
-				SolrDocument documentSolrClasse = rechercheClassesResultats.get(j);
-				String classeApiUri = (String)documentSolrClasse.get("classeApiUri_frFR_stored_string");
-				String classeNomSimple = (String)documentSolrClasse.get("classeNomSimple_frFR_stored_string");
-				String operationIdGet = "get" + classeNomSimple;
-				String operationIdPost = "post" + classeNomSimple;
-				String operationIdPatch = "patch" + classeNomSimple;
+				SolrDocument classeSolrDocument = rechercheClassesResultats.get(j);
 
-				w.write("  ");
-				w.write(classeApiUri);
-				w.write(":\n");
+				String classeApiUri = (String)classeSolrDocument.get("classeApiUri_frFR_stored_string");
+				String classeApiUriRecherche = (String)classeSolrDocument.get("classeApiUri_frFR_stored_string");
+				String classeApiUriGET = (String)classeSolrDocument.get("classeApiUriGET_frFR_stored_string");
+				String classeApiUriPOST = (String)classeSolrDocument.get("classeApiUriPOST_frFR_stored_string");
+				String classeApiUriPATCH = (String)classeSolrDocument.get("classeApiUriPATCH_frFR_stored_string");
+				String classeApiUriPUT = (String)classeSolrDocument.get("classeApiUriPUT_frFR_stored_string");
+				String classeApiUriDELETE = (String)classeSolrDocument.get("classeApiUriDELETE_frFR_stored_string");
 
-				/////////
-				// GET //
-				/////////
-				w.write("    get:\n");
-				w.write("      operationId: \"");
-				w.write(operationIdGet);
-				w.write("\"\n");
+				String classeNomSimple = (String)classeSolrDocument.get("classeNomSimple_frFR_stored_string");
+				String classeCheminAbsolu = (String)classeSolrDocument.get("classeCheminAbsolu_stored_string");
 
-				w.write("      summary: \"");
-				w.write("\"\n");
+				String classeApiMethodeRecherche = (String)classeSolrDocument.get("classeApiMethode_frFR_stored_string");
+				String classeApiMethodeGET = (String)classeSolrDocument.get("classeApiMethodeGET_frFR_stored_string");
+				String classeApiMethodePOST = (String)classeSolrDocument.get("classeApiMethodePOST_frFR_stored_string");
+				String classeApiMethodePATCH = (String)classeSolrDocument.get("classeApiMethodePATCH_frFR_stored_string");
+				String classeApiMethodePUT = (String)classeSolrDocument.get("classeApiMethodePUT_frFR_stored_string");
+				String classeApiMethodeDELETE = (String)classeSolrDocument.get("classeApiMethodeDELETE_frFR_stored_string");
 
-				w.write("      description: \"");
-				w.write("\"\n");
+				String operationIdRecherche = "recherche" + classeNomSimple;
+				String operationIdRechercheRequete = "rechercheRequete" + classeNomSimple;
+				String operationIdRechercheReponse = "rechercheReponse" + classeNomSimple;
 
-//		tl(2, "  (\"q\",   (\"[^:]+:.*\", \"*:*\"), false, false);");
-//		tl(2, "  (\"fq\",   (\"[^:]+:.*\", null), false, false);");
-//		tl(2, "  (\"sort\",   (\"[^:]+:.*\", null), false, false);");
-//		tl(2, "  (\"fl\",   (\"[^:]+:.*\", null), false, false);");
-//		tl(2, "  (\"start\",   (null, 0D, null, 0), false, false);");
-//		tl(2, "  (\"rows\",   (null, 1D, null, 10), false, false);");
-				w.write("      parameters:\n");
-				w.write("      - in: \"query\"\n");
-				w.write("        name: \"q\"\n");
-				w.write("        description: \"\"\n");
-				w.write("        required: false\n");
-				w.write("        schema:\n");
-				w.write("          type: string\n");
-				w.write("          default: \"**:**\"\n");
-				w.write("        examples:\n");
-				w.write("          default:\n");
-				w.write("            value: \"&ast;:&ast;\"\n");
-				w.write("            summary: \"This is the default solr query. \"\n");
-				w.write("      - in: \"query\"\n");
-				w.write("        name: \"fq\"\n");
-				w.write("        description: \"\"\n");
-				w.write("        required: false\n");
-				w.write("        schema:\n");
-				w.write("          type: array\n");
-				w.write("          items:\n");
-				w.write("            type: string\n");
-				w.write("      - in: \"query\"\n");
-				w.write("        name: \"fl\"\n");
-				w.write("        description: \"\"\n");
-				w.write("        required: false\n");
-				w.write("        schema:\n");
-				w.write("          type: string\n");
-				w.write("      - in: \"query\"\n");
-				w.write("        name: \"start\"\n");
-				w.write("        description: \"\"\n");
-				w.write("        required: false\n");
-				w.write("        schema:\n");
-				w.write("          type: integer\n");
-				w.write("          default: 0\n");
-				w.write("          minimum: 0\n");
-				w.write("      - in: \"query\"\n");
-				w.write("        name: \"rows\"\n");
-				w.write("        description: \"\"\n");
-				w.write("        required: false\n");
-				w.write("        schema:\n");
-				w.write("          type: integer\n");
-				w.write("          default: 10\n");
-				w.write("          minimum: 1\n");
-				w.write("      responses:\n");
-				w.write("        '200':\n");
-				w.write("          description: \"");
-				w.write("\"\n");
-				w.write("          content:\n");
-				w.write("            application/json:\n");
-				w.write("              schema:\n");
+				String operationIdGET = "getDetails" + classeNomSimple;
+				String operationIdGETRequete = "getDetailsRequete" + classeNomSimple;
+				String operationIdGETReponse = "getDetailsReponse" + classeNomSimple;
 
-				w.write("                $ref: '#/components/schemas/");
-				w.write(operationIdGet);
-				w.write("'\n");
+				String operationIdPOSTRequete = "submitRequete" + classeNomSimple;
+				String operationIdPOSTReponse = "submitReponse" + classeNomSimple;
+
+				String operationIdPutRequete = "putRequete" + classeNomSimple;
+				String operationIdPATCHRequete = "patchRequete" + classeNomSimple;
+
+				Boolean classeMotClesTrouve = BooleanUtils.isTrue((Boolean)classeSolrDocument.get("classeMotClesTrouve_stored_boolean"));
+				List<String> classeMotCles = (List<String>)classeSolrDocument.get("classeMotCles_stored_strings");
+
+				ToutEcrivain wRechercheRequete = ToutEcrivain.creer(requeteSite_);
+				ToutEcrivain wGETRequete = ToutEcrivain.creer(requeteSite_);
+				ToutEcrivain wPOSTRequete = ToutEcrivain.creer(requeteSite_);
+				ToutEcrivain wPutRequete = ToutEcrivain.creer(requeteSite_);
+				ToutEcrivain wPATCHRequete = ToutEcrivain.creer(requeteSite_);
+
+				ToutEcrivain wRechercheReponse = ToutEcrivain.creer(requeteSite_);
+				ToutEcrivain wGETReponse = ToutEcrivain.creer(requeteSite_);
+				ToutEcrivain wPOSTReponse = ToutEcrivain.creer(requeteSite_);
+				ToutEcrivain wPutReponse = ToutEcrivain.creer(requeteSite_);
+				ToutEcrivain wPATCHReponse = ToutEcrivain.creer(requeteSite_);
+
+				SolrQuery rechercheEntites = new SolrQuery();
+				rechercheEntites.setQuery("*:*");
+				rechercheEntites.setRows(1000000);
+				rechercheEntites.addFilterQuery("appliChemin_indexed_string:" + ClientUtils.escapeQueryChars(configSite.getAppliChemin()));
+				rechercheEntites.addFilterQuery("classeCheminAbsolu_indexed_string:" + ClientUtils.escapeQueryChars(classeCheminAbsolu));
+				rechercheEntites.addFilterQuery("partEstEntite_indexed_boolean:true");
+				rechercheEntites.addSort("partNumero_indexed_int", ORDER.asc);
+				QueryResponse rechercheEntitesReponse = siteContexte.getClientSolrComputate().query(rechercheEntites);
+				SolrDocumentList rechercheEntitesResultats = rechercheEntitesReponse.getResults();
+				Integer rechercheEntitesLignes = rechercheEntites.getRows();
+
+				if(classeApiUri != null) {
+					for(Long k = rechercheEntitesResultats.getStart(); k < rechercheEntitesResultats.getNumFound(); k+=rechercheEntitesLignes) {
+						for(Integer l = 0; l < rechercheEntitesResultats.size(); l++) {
+							SolrDocument documentSolrEntite = rechercheEntitesResultats.get(l);
+							String entiteVar = (String)documentSolrEntite.get("entiteVar_enUS_stored_string");
+							String entiteDescription = (String)documentSolrEntite.get("entiteDescription_enUS_stored_string");
+							String entiteDisplayName = (String)documentSolrEntite.get("entiteDisplayName_enUS_stored_string");
+							Integer entiteMinLength = (Integer)documentSolrEntite.get("entiteMinLength_stored_int");
+							Integer entiteMaxLength = (Integer)documentSolrEntite.get("entiteMaxLength_stored_int");
+							Double entiteMin = (Double)documentSolrEntite.get("entiteMin_stored_double");
+							Double entiteMax = (Double)documentSolrEntite.get("entiteMax_stored_double");
+							Boolean entiteOptional = (Boolean)documentSolrEntite.get("entiteOptional_stored_boolean");
+							String entiteVarCapitalized = (String)documentSolrEntite.get("entiteVarCapitalized_enUS_stored_string");
+							String entiteJsonType = (String)documentSolrEntite.get("entiteJsonType_stored_string");
+							String entiteListJsonType = (String)documentSolrEntite.get("entiteListJsonType_stored_string");
+							String entiteJsonFormat = (String)documentSolrEntite.get("entiteJsonFormat_stored_string");
+							Boolean entitePrimaryKey = BooleanUtils.isTrue((Boolean)documentSolrEntite.get("entitePrimaryKey_stored_boolean"));
+							Boolean entiteStored = BooleanUtils.isTrue((Boolean)documentSolrEntite.get("entiteStored_stored_boolean"));
+							Boolean entiteIndexed = BooleanUtils.isTrue((Boolean)documentSolrEntite.get("entiteIndexed_stored_boolean"));
+							Boolean entiteMotClesTrouve = BooleanUtils.isTrue((Boolean)documentSolrEntite.get("entiteMotClesTrouve_stored_boolean"));
+							List<String> entiteMotCles = (List<String>)documentSolrEntite.get("entiteMotCles_stored_strings");
+							List<String> entiteOptionsVar = (List<String>)documentSolrEntite.get("entiteOptionsVar_stored_strings");
+							List<String> entiteOptionsValue = (List<String>)documentSolrEntite.get("entiteOptionsValue_stored_strings");
+	
+							if(entiteJsonType != null) {
+		
+								//////////////////////
+								// RechercheRequete //
+								//////////////////////
+		
+								if(classMotClesTrouve && entiteMotClesTrouve && entiteMotCles.contains("search.request")) {
+									wRechercheRequete.write("- " + entiteVar);
+									if(StringUtils.isNotBlank(entiteDisplayName))
+										wRechercheRequete.write(" (" + entiteDisplayName + ")");
+									wRechercheRequete.write(": ");
+									if(StringUtils.isNotBlank(entiteDescription))
+										wRechercheRequete.write(entiteDescription.replace("\"", "\\\""));
+									wRechercheRequete.write("\\n");
+									if(BooleanUtils.isTrue(entiteOptional))
+										wRechercheRequete.write("  - optional: " + entiteOptional + "\\n");
+									if(entiteMinLength != null)
+										wRechercheRequete.write("  - min length: " + entiteMinLength + "\\n");
+									if(entiteMaxLength != null)
+										wRechercheRequete.write("  - max length: " + entiteMaxLength + "\\n");
+									if(entiteMin != null)
+										wRechercheRequete.write("  - min: " + entiteMin + "\\n");
+									if(entiteMax != null)
+										wRechercheRequete.write("  - max: " + entiteMax + "\\n");
+									if(entiteOptionsVar != null && entiteOptionsValue != null && entiteOptionsVar.size() > 0 && entiteOptionsValue.size() == entiteOptionsVar.size()) {
+										wRechercheRequete.write("  - enum:\\n");
+										for(int m = 0; m < entiteOptionsVar.size(); m++) {
+											wRechercheRequete.write("    - " + entiteOptionsVar.get(m) + ": " + entiteOptionsValue.get(m) + "\\n");
+										}
+									}
+								}
+		
+								if(classMotClesTrouve && entiteMotClesTrouve && entiteMotCles.contains("search.response")) {
+									wRechercheReponse.write("- " + entiteVar);
+									if(StringUtils.isNotBlank(entiteDisplayName))
+										wRechercheReponse.write(" (" + entiteDisplayName + ")");
+									wRechercheReponse.write(": ");
+									if(StringUtils.isNotBlank(entiteDescription))
+										wRechercheReponse.write(entiteDescription.replace("\"", "\\\""));
+									wRechercheReponse.write("\\n");
+									if(BooleanUtils.isTrue(entiteOptional))
+										wRechercheReponse.write("  - optional: " + entiteOptional + "\\n");
+									if(entiteMinLength != null)
+										wRechercheReponse.write("  - min length: " + entiteMinLength + "\\n");
+									if(entiteMaxLength != null)
+										wRechercheReponse.write("  - max length: " + entiteMaxLength + "\\n");
+									if(entiteMin != null)
+										wRechercheReponse.write("  - min: " + entiteMin + "\\n");
+									if(entiteMax != null)
+										wRechercheReponse.write("  - max: " + entiteMax + "\\n");
+									if(entiteOptionsVar != null && entiteOptionsValue != null && entiteOptionsVar.size() > 0 && entiteOptionsValue.size() == entiteOptionsVar.size()) {
+										wRechercheReponse.write("  - enum:\\n");
+										for(int m = 0; m < entiteOptionsVar.size(); m++) {
+											wRechercheReponse.write("    - " + entiteOptionsVar.get(m) + ": " + entiteOptionsValue.get(m) + "\\n");
+										}
+									}
+								}
+		
+								/////////////////
+								// GET Requete //
+								/////////////////
+		
+								if(classMotClesTrouve && entiteMotClesTrouve && entiteMotCles.contains("details.request")) {
+									wGetPathRequete.write("- " + entiteVar);
+									if(StringUtils.isNotBlank(entiteDisplayName))
+										wGetPathRequete.write(" (" + entiteDisplayName + ")");
+									wGetPathRequete.write(": ");
+									if(StringUtils.isNotBlank(entiteDescription))
+										wGetPathRequete.write(entiteDescription.replace("\"", "\\\""));
+									wGetPathRequete.write("\\n");
+									if(BooleanUtils.isTrue(entiteOptional))
+										wGetPathRequete.write("  - optional: " + entiteOptional + "\\n");
+									if(entiteMinLength != null)
+										wGetPathRequete.write("  - min length: " + entiteMinLength + "\\n");
+									if(entiteMaxLength != null)
+										wGetPathRequete.write("  - max length: " + entiteMaxLength + "\\n");
+									if(entiteMin != null)
+										wGetPathRequete.write("  - min: " + entiteMin + "\\n");
+									if(entiteMax != null)
+										wGetPathRequete.write("  - max: " + entiteMax + "\\n");
+									if(entiteOptionsVar != null && entiteOptionsValue != null && entiteOptionsVar.size() > 0 && entiteOptionsValue.size() == entiteOptionsVar.size()) {
+										wGetPathRequete.write("  - enum:\\n");
+										for(int m = 0; m < entiteOptionsVar.size(); m++) {
+											wGetPathRequete.write("    - " + entiteOptionsVar.get(m) + ": " + entiteOptionsValue.get(m) + "\\n");
+										}
+									}
+								}
+		
+								if(classMotClesTrouve && entiteMotClesTrouve && entiteMotCles.contains("details.response")) {
+									wGetPathReponse.write("- " + entiteVar);
+									if(StringUtils.isNotBlank(entiteDisplayName))
+										wGetPathReponse.write(" (" + entiteDisplayName + ")");
+									wGetPathReponse.write(": ");
+									if(StringUtils.isNotBlank(entiteDescription))
+										wGetPathReponse.write(entiteDescription.replace("\"", "\\\""));
+									wGetPathReponse.write("\\n");
+									if(BooleanUtils.isTrue(entiteOptional))
+										wGetPathReponse.write("  - optional: " + entiteOptional + "\\n");
+									if(entiteMinLength != null)
+										wGetPathReponse.write("  - min length: " + entiteMinLength + "\\n");
+									if(entiteMaxLength != null)
+										wGetPathReponse.write("  - max length: " + entiteMaxLength + "\\n");
+									if(entiteMin != null)
+										wGetPathReponse.write("  - min: " + entiteMin + "\\n");
+									if(entiteMax != null)
+										wGetPathReponse.write("  - max: " + entiteMax + "\\n");
+									if(entiteOptionsVar != null && entiteOptionsValue != null && entiteOptionsVar.size() > 0 && entiteOptionsValue.size() == entiteOptionsVar.size()) {
+										wGetPathReponse.write("  - enum:\\n");
+										for(int m = 0; m < entiteOptionsVar.size(); m++) {
+											wGetPathReponse.write("    - " + entiteOptionsVar.get(m) + ": " + entiteOptionsValue.get(m) + "\\n");
+										}
+									}
+								}
+		
+								//////////////////
+								// POST Requete //
+								//////////////////
+
+								if(classMotClesTrouve && entiteMotClesTrouve && entiteMotCles.contains("submit.request")) {
+									wPostPathRequete.write("- " + entiteVar);
+									if(StringUtils.isNotBlank(entiteDisplayName))
+										wPostPathRequete.write(" (" + entiteDisplayName + ")");
+									wPostPathRequete.write(": ");
+									if(StringUtils.isNotBlank(entiteDescription))
+										wPostPathRequete.write(entiteDescription.replace("\"", "\\\""));
+									wPostPathRequete.write("\\n");
+									if(BooleanUtils.isTrue(entiteOptional))
+										wPostPathRequete.write("  - optional: " + entiteOptional + "\\n");
+									if(entiteMinLength != null)
+										wPostPathRequete.write("  - min length: " + entiteMinLength + "\\n");
+									if(entiteMaxLength != null)
+										wPostPathRequete.write("  - max length: " + entiteMaxLength + "\\n");
+									if(entiteMin != null)
+										wPostPathRequete.write("  - min: " + entiteMin + "\\n");
+									if(entiteMax != null)
+										wPostPathRequete.write("  - max: " + entiteMax + "\\n");
+									if(entiteOptionsVar != null && entiteOptionsValue != null && entiteOptionsVar.size() > 0 && entiteOptionsValue.size() == entiteOptionsVar.size()) {
+										wPostPathRequete.write("  - enum:\\n");
+										for(int m = 0; m < entiteOptionsVar.size(); m++) {
+											wPostPathRequete.write("    - " + entiteOptionsVar.get(m) + ": " + entiteOptionsValue.get(m) + "\\n");
+										}
+									}
+								}
+
+								if(classMotClesTrouve && entiteMotClesTrouve && entiteMotCles.contains("submit.response")) {
+									wPostPathReponse.write("- " + entiteVar);
+									if(StringUtils.isNotBlank(entiteDisplayName))
+										wPostPathReponse.write(" (" + entiteDisplayName + ")");
+									wPostPathReponse.write(": ");
+									if(StringUtils.isNotBlank(entiteDescription))
+										wPostPathReponse.write(entiteDescription.replace("\"", "\\\""));
+									wPostPathReponse.write("\\n");
+									if(BooleanUtils.isTrue(entiteOptional))
+										wPostPathReponse.write("  - optional: " + entiteOptional + "\\n");
+									if(entiteMinLength != null)
+										wPostPathReponse.write("  - min length: " + entiteMinLength + "\\n");
+									if(entiteMaxLength != null)
+										wPostPathReponse.write("  - max length: " + entiteMaxLength + "\\n");
+									if(entiteMin != null)
+										wPostPathReponse.write("  - min: " + entiteMin + "\\n");
+									if(entiteMax != null)
+										wPostPathReponse.write("  - max: " + entiteMax + "\\n");
+									if(entiteOptionsVar != null && entiteOptionsValue != null && entiteOptionsVar.size() > 0 && entiteOptionsValue.size() == entiteOptionsVar.size()) {
+										wPostPathReponse.write("  - enum:\\n");
+										for(int m = 0; m < entiteOptionsVar.size(); m++) {
+											wPostPathReponse.write("    - " + entiteOptionsVar.get(m) + ": " + entiteOptionsValue.get(m) + "\\n");
+										}
+									}
+								}
+							}
+						}
+					}
+
+					///////////////
+					// Recherche //
+					///////////////
+
+					if(classeMotClesTrouve && (classeMotCles.contains("recherche.requete") || classeMotCles.contains("recherche.reponse"))) {
+
+						//////////////////
+						// SEARCH BEGIN //
+						//////////////////
+						wRechercheRequete.l("  ", classeApiUriRecherche, ":");
+						wRechercheRequete.l("    ", StringUtils.lowerCase(classeApiMethodeRecherche), ":");
+						wRechercheRequete.l("      operationId: \"", operationIdRecherche, "\"");
+						wRechercheRequete.l("      summary: \"", "\"");
+						wRechercheRequete.l("      tags:");
+						wRechercheRequete.l("        - \"", classeNomSimple, " modele", "\"");
+						wRechercheRequete.l("      description: \"", "\"");
+						wRechercheRequete.l("      produces:");
+						wRechercheRequete.l("      - \"application/json\"");
+						wRechercheRequete.l("      parameters:");
+						wRechercheRequete.l("      - in: \"query\"");
+						wRechercheRequete.l("        name: \"q\"");
+						wRechercheRequete.l("        description: \"\"");
+						wRechercheRequete.l("        required: false");
+						wRechercheRequete.l("        type: string");
+						wRechercheRequete.l("        default: \"**:**\"");
+						wRechercheRequete.l("      - in: \"query\"");
+						wRechercheRequete.l("        name: \"fq\"");
+						wRechercheRequete.l("        description: \"\"");
+						wRechercheRequete.l("        required: false");
+						wRechercheRequete.l("        type: array");
+						wRechercheRequete.l("        items:");
+						wRechercheRequete.l("          type: string");
+						wRechercheRequete.l("      - in: \"query\"");
+						wRechercheRequete.l("        name: \"fl\"");
+						wRechercheRequete.l("        description: \"\"");
+						wRechercheRequete.l("        required: false");
+						wRechercheRequete.l("        type: string");
+						wRechercheRequete.l("      - in: \"query\"");
+						wRechercheRequete.l("        name: \"sort\"");
+						wRechercheRequete.l("        description: \"\"");
+						wRechercheRequete.l("        required: false");
+						wRechercheRequete.l("        type: array");
+						wRechercheRequete.l("        items:");
+						wRechercheRequete.l("          type: string");
+						wRechercheRequete.l("      - in: \"query\"");
+						wRechercheRequete.l("        name: \"start\"");
+						wRechercheRequete.l("        description: \"\"");
+						wRechercheRequete.l("        required: false");
+						wRechercheRequete.l("        type: integer");
+						wRechercheRequete.l("        default: 0");
+						wRechercheRequete.l("        minimum: 0");
+						wRechercheRequete.l("      - in: \"query\"");
+						wRechercheRequete.l("        name: \"rows\"");
+						wRechercheRequete.l("        description: \"\"");
+						wRechercheRequete.l("        required: false");
+						wRechercheRequete.l("        type: integer");
+						wRechercheRequete.l("        default: 10");
+						wRechercheRequete.l("        minimum: 1");
+//	swagger2
+//						if(!classeMotClesTrouve || classeMotClesTrouve && classeMotCles.contains("recherche.requete")) {
+//							wRechercheCheminRequete.l("      - in: body");
+//							wRechercheCheminRequete.l("        name: \"body\"");
+//							wRechercheCheminRequete.s("        description: \"");
+//						}
+	
+						wRechercheReponse.l("      responses:");
+						wRechercheReponse.l("        '200':");
+						wRechercheReponse.s("          description: \"");
+					}
+				w.l("      responses:");
+				w.l("        '200':");
+				w.s("          description: \"");
+				w.l("\"");
+				w.l("          content:");
+				w.l("            application/json:");
+				w.l("              schema:");
+
+				w.s("                $ref: '#/components/schemas/");
+				w.s(operationIdGET);
+				w.l("'");
 
 				//////////
 				// POST //
 				//////////
-				w.write("    post:\n");
-				w.write("      operationId: \"");
-				w.write(operationIdPost);
-				w.write("\"\n");
+				w.l("    post:");
+				w.s("      operationId: \"");
+				w.s(operationIdPOST);
+				w.l("\"");
 
-				w.write("      summary: \"");
-				w.write("\"\n");
+				w.s("      summary: \"");
+				w.l("\"");
 
-				w.write("      description: \"");
-				w.write("\"\n");
+				w.s("      description: \"");
+				w.l("\"");
 
-				w.write("      requestBody:\n");
-				w.write("        description: \"\"\n");
-				w.write("        required: true\n");
-				w.write("        content:\n");
-				w.write("          application/json:\n");
-				w.write("            schema:\n");
+				w.l("      requestBody:");
+				w.l("        description: \"\"");
+				w.l("        required: true");
+				w.l("        content:");
+				w.l("          application/json:");
+				w.l("            schema:");
 
-				w.write("              $ref: '#/components/schemas/");
-				w.write(operationIdPost);
-				w.write("'\n");
+				w.s("              $ref: '#/components/schemas/");
+				w.s(operationIdPOST);
+				w.l("'");
 
-				w.write("      responses:\n");
-				w.write("        '201':\n");
-				w.write("          description: \"");
-				w.write("\"\n");
-				w.write("          content:\n");
-				w.write("            application/json:\n");
-				w.write("              schema:\n");
+				w.l("      responses:");
+				w.l("        '201':");
+				w.s("          description: \"");
+				w.l("\"");
+				w.l("          content:");
+				w.l("            application/json:");
+				w.l("              schema:");
 
-				w.write("                $ref: '#/components/schemas/");
-				w.write(operationIdGet);
-				w.write("'\n");
+				w.s("                $ref: '#/components/schemas/");
+				w.s(operationIdGET);
+				w.l("'");
 
 				///////////
 				// PATCH //
 				///////////
-				w.write("    patch:\n");
-				w.write("      operationId: \"");
-				w.write(operationIdPatch);
-				w.write("\"\n");
+				w.l("    patch:");
+				w.s("      operationId: \"");
+				w.s(operationIdPATCH);
+				w.l("\"");
 
-				w.write("      summary: \"");
-				w.write("\"\n");
+				w.s("      summary: \"");
+				w.l("\"");
 
-				w.write("      description: \"");
-				w.write("\"\n");
+				w.s("      description: \"");
+				w.l("\"");
 
-				w.write("      parameters:\n");
-				w.write("      - in: \"query\"\n");
-				w.write("        name: \"q\"\n");
-				w.write("        description: \"\"\n");
-				w.write("        required: false\n");
-				w.write("        schema:\n");
-				w.write("          type: string\n");
-				w.write("        examples:\n");
-				w.write("          default:\n");
-				w.write("            value: \"*:*\"\n");
-				w.write("            summary: \"This is the default solr query. \"\n");
-				w.write("      - in: \"query\"\n");
-				w.write("        name: \"fq\"\n");
-				w.write("        description: \"\"\n");
-				w.write("        required: false\n");
-				w.write("        schema:\n");
-				w.write("          type: string\n");
-				w.write("      - in: \"query\"\n");
-				w.write("        name: \"fl\"\n");
-				w.write("        description: \"\"\n");
-				w.write("        required: false\n");
-				w.write("        schema:\n");
-				w.write("          type: string\n");
-				w.write("      - in: \"query\"\n");
-				w.write("        name: \"start\"\n");
-				w.write("        description: \"\"\n");
-				w.write("        required: false\n");
-				w.write("        schema:\n");
-				w.write("          type: integer\n");
-				w.write("          minimum: 0\n");
-				w.write("      - in: \"query\"\n");
-				w.write("        name: \"rows\"\n");
-				w.write("        description: \"\"\n");
-				w.write("        required: false\n");
-				w.write("        schema:\n");
-				w.write("          type: integer\n");
-				w.write("          minimum: 1\n");
+				w.l("      parameters:");
+				w.l("      - in: \"query\"");
+				w.l("        name: \"q\"");
+				w.l("        description: \"\"");
+				w.l("        required: false");
+				w.l("        schema:");
+				w.l("          type: string");
+				w.l("        examples:");
+				w.l("          default:");
+				w.l("            value: \"*:*\"");
+				w.l("            summary: \"This is the default solr query. \"");
+				w.l("      - in: \"query\"");
+				w.l("        name: \"fq\"");
+				w.l("        description: \"\"");
+				w.l("        required: false");
+				w.l("        schema:");
+				w.l("          type: string");
+				w.l("      - in: \"query\"");
+				w.l("        name: \"fl\"");
+				w.l("        description: \"\"");
+				w.l("        required: false");
+				w.l("        schema:");
+				w.l("          type: string");
+				w.l("      - in: \"query\"");
+				w.l("        name: \"start\"");
+				w.l("        description: \"\"");
+				w.l("        required: false");
+				w.l("        schema:");
+				w.l("          type: integer");
+				w.l("          minimum: 0");
+				w.l("      - in: \"query\"");
+				w.l("        name: \"rows\"");
+				w.l("        description: \"\"");
+				w.l("        required: false");
+				w.l("        schema:");
+				w.l("          type: integer");
+				w.l("          minimum: 1");
 
-				w.write("      requestBody:\n");
-				w.write("        description: \"\"\n");
-				w.write("        required: true\n");
-				w.write("        content:\n");
-				w.write("          application/json:\n");
-				w.write("            schema:\n");
+				w.l("      requestBody:");
+				w.l("        description: \"\"");
+				w.l("        required: true");
+				w.l("        content:");
+				w.l("          application/json:");
+				w.l("            schema:");
 
-				w.write("              $ref: '#/components/schemas/");
-				w.write(operationIdPatch);
-				w.write("'\n");
+				w.s("              $ref: '#/components/schemas/");
+				w.s(operationIdPATCH);
+				w.l("'");
 
-				w.write("      responses:\n");
-				w.write("        '200':\n");
-				w.write("          description: \"");
-				w.write("\"\n");
-				w.write("          content:\n");
-				w.write("            application/json:\n");
-				w.write("              schema:\n");
+				w.l("      responses:");
+				w.l("        '200':");
+				w.s("          description: \"");
+				w.l("\"");
+				w.l("          content:");
+				w.l("            application/json:");
+				w.l("              schema:");
 
-				w.write("                $ref: '#/components/schemas/");
-				w.write(operationIdGet);
-				w.write("'\n");
+				w.s("                $ref: '#/components/schemas/");
+				w.s(operationIdGET);
+				w.l("'");
 			}
 			rechercheClasses.setStart(i.intValue() + rechercheClassesLignes);
 			rechercheClassesReponse = siteContexte.getClientSolrComputate().query(rechercheClasses);
@@ -318,11 +628,11 @@ public class AppOpenApi3 extends AppOpenApi3Gen<Object> {
 		}
 	}
 
-	public void genererCorpsRequetes(PrintWriter w) throws Exception {
+	public void genererCorpsRequetes(ToutEcrivain w) throws Exception {
 
-		w.write("components:\n");
+		w.l("components:");
 
-		w.write("  requestBodies:\n");
+		w.l("  requestBodies:");
 
 		SolrQuery rechercheClasses = new SolrQuery();
 		rechercheClasses.setQuery("*:*");
@@ -337,72 +647,98 @@ public class AppOpenApi3 extends AppOpenApi3Gen<Object> {
 		for(Long i = rechercheClassesResultats.getStart(); i < rechercheClassesResultats.getNumFound(); i+=rechercheClassesLignes) {
 			for(Integer j = 0; j < rechercheClassesResultats.size(); j++) {
 				Long resultatIndice = i + j;
-				SolrDocument documentSolr = rechercheClassesResultats.get(j);
-				String classeApiUri = (String)documentSolr.get("classeApiUri_frFR_stored_string");
-				String classeNomSimple = (String)documentSolr.get("classeNomSimple_frFR_stored_string");
-				String operationIdGet = "get" + classeNomSimple;
-				String operationIdPost = "post" + classeNomSimple;
-				String operationIdPatch = "patch" + classeNomSimple;
+				SolrDocument classeSolrDocument = rechercheClassesResultats.get(j);
+				String classeApiUri = (String)classeSolrDocument.get("classeApiUri_frFR_stored_string");
+				String classeNomSimple = (String)classeSolrDocument.get("classeNomSimple_frFR_stored_string");
+				String classeCheminAbsolu = (String)classeSolrDocument.get("classAbsoluteChemin_stored_string");
+
+				String operationIdRecherche = "getPending" + classeNomSimple;
+				String operationIdRechercheRequete = "getPendingRequete" + classeNomSimple;
+				String operationIdRechercheReponse = "getPendingReponse" + classeNomSimple;
+
+				String operationIdGET = "getDetails" + classeNomSimple;
+				String operationIdGETRequete = "getDetailsRequete" + classeNomSimple;
+				String operationIdGETReponse = "getDetailsReponse" + classeNomSimple;
+
+				String operationIdPOSTRequete = "submitRequete" + classeNomSimple;
+				String operationIdPOSTReponse = "submitReponse" + classeNomSimple;
+
+				String operationIdPutRequete = "putRequete" + classeNomSimple;
+				String operationIdPATCHRequete = "patchRequete" + classeNomSimple;
+
+				Boolean classMotClesTrouve = BooleanUtils.isTrue((Boolean)classeSolrDocument.get("classMotClesTrouve_stored_boolean"));
+				List<String> classMotCles = (List<String>)classeSolrDocument.get("classMotCles_stored_strings");
+
+				ToutEcrivain wRechercheCheminRequete = ToutEcrivain.creer(requeteSite_);
+				ToutEcrivain wGETCheminRequete = ToutEcrivain.creer(requeteSite_);
+				ToutEcrivain wPOSTCheminRequete = ToutEcrivain.creer(requeteSite_);
+				ToutEcrivain wPutCheminRequete = ToutEcrivain.creer(requeteSite_);
+				ToutEcrivain wPATCHCheminRequete = ToutEcrivain.creer(requeteSite_);
+				ToutEcrivain wRechercheCheminReponse = ToutEcrivain.creer(requeteSite_);
+				ToutEcrivain wGETCheminReponse = ToutEcrivain.creer(requeteSite_);
+				ToutEcrivain wPOSTCheminReponse = ToutEcrivain.creer(requeteSite_);
+				ToutEcrivain wPutCheminReponse = ToutEcrivain.creer(requeteSite_);
+				ToutEcrivain wPATCHCheminReponse = ToutEcrivain.creer(requeteSite_);
 
 				/////////
 				// GET //
 				/////////
-				w.write("    ");
-				w.write(operationIdGet);
-				w.write(":\n");
+				w.s("    ");
+				w.s(operationIdGET);
+				w.l(":");
 
-				w.write("      required: true\n");
+				w.l("      required: true");
 
-				w.write("      description: \"");
-				w.write("\"\n");
+				w.s("      description: \"");
+				w.l("\"");
 
-				w.write("      content:\n");
-				w.write("        application/json:\n");
-				w.write("          schema:\n");
+				w.l("      content:");
+				w.l("        application/json:");
+				w.l("          schema:");
 
-				w.write("            $ref: '#/components/schemas/");
-				w.write(operationIdGet);
-				w.write("'\n");
+				w.s("            $ref: '#/components/schemas/");
+				w.s(operationIdGET);
+				w.l("'");
 
 				//////////
 				// POST //
 				//////////
-				w.write("    ");
-				w.write(operationIdPost);
-				w.write(":\n");
+				w.s("    ");
+				w.s(operationIdPOST);
+				w.l(":");
 
-				w.write("      required: true\n");
+				w.l("      required: true");
 
-				w.write("      description: \"");
-				w.write("\"\n");
+				w.s("      description: \"");
+				w.l("\"");
 
-				w.write("      content:\n");
-				w.write("        application/json:\n");
-				w.write("          schema:\n");
+				w.l("      content:");
+				w.l("        application/json:");
+				w.l("          schema:");
 
-				w.write("            $ref: '#/components/schemas/");
-				w.write(operationIdPost);
-				w.write("'\n");
+				w.s("            $ref: '#/components/schemas/");
+				w.s(operationIdPOST);
+				w.l("'");
 
 				///////////
 				// PATCH //
 				///////////
-				w.write("    ");
-				w.write(operationIdPatch);
-				w.write(":\n");
+				w.s("    ");
+				w.s(operationIdPATCH);
+				w.l(":");
 
-				w.write("      required: true\n");
+				w.l("      required: true");
 
-				w.write("      description: \"");
-				w.write("\"\n");
+				w.s("      description: \"");
+				w.l("\"");
 
-				w.write("      content:\n");
-				w.write("        application/json:\n");
-				w.write("          schema:\n");
+				w.l("      content:");
+				w.l("        application/json:");
+				w.l("          schema:");
 
-				w.write("            $ref: '#/components/schemas/");
-				w.write(operationIdPatch);
-				w.write("'\n");
+				w.s("            $ref: '#/components/schemas/");
+				w.s(operationIdPATCH);
+				w.l("'");
 			}
 			rechercheClasses.setStart(i.intValue() + rechercheClassesLignes);
 			rechercheClassesReponse = siteContexte.getClientSolrComputate().query(rechercheClasses);
@@ -411,9 +747,9 @@ public class AppOpenApi3 extends AppOpenApi3Gen<Object> {
 		}
 	}
 
-	public void genererSchemas(PrintWriter w) throws Exception {
+	public void genererSchemas(ToutEcrivain w) throws Exception {
 
-		w.write("  schemas:\n");
+		w.l("  schemas:");
 
 		SolrQuery rechercheClasses = new SolrQuery();
 		rechercheClasses.setQuery("*:*");
@@ -434,9 +770,9 @@ public class AppOpenApi3 extends AppOpenApi3Gen<Object> {
 				String classeNomSimple = (String)documentSolr.get("classeNomSimple_frFR_stored_string");
 				String classeNomSimpleSuperGenerique = (String)documentSolr.get("classeNomSimpleSuperGenerique_frFR_stored_string");
 				Boolean classeEstBase = (Boolean)documentSolr.get("classeEstBase_stored_boolean");
-				String operationIdGet = "get" + classeNomSimple;
-				String operationIdPost = "post" + classeNomSimple;
-				String operationIdPatch = "patch" + classeNomSimple;
+				String operationIdGET = "get" + classeNomSimple;
+				String operationIdPOST = "post" + classeNomSimple;
+				String operationIdPATCH = "patch" + classeNomSimple;
 
 				SolrQuery rechercheEntites = new SolrQuery();
 				rechercheEntites.setQuery("*:*");
@@ -453,64 +789,64 @@ public class AppOpenApi3 extends AppOpenApi3Gen<Object> {
 				// GET //
 				/////////
 
-				StringWriter sGet = new StringWriter();
-				PrintWriter wGet = new PrintWriter(sGet);
+				StringWriter sGET = new StringWriter();
+				ToutEcrivain wGET = ToutEcrivain.creer(sGET);
 
-				StringWriter sPost = new StringWriter();
-				PrintWriter wPost = new PrintWriter(sPost);
+				StringWriter sPOST = new StringWriter();
+				ToutEcrivain wPOST = ToutEcrivain.creer(sPOST);
 
-				StringWriter sPatch = new StringWriter();
-				PrintWriter wPatch = new PrintWriter(sPatch);
+				StringWriter sPATCH = new StringWriter();
+				ToutEcrivain wPATCH = ToutEcrivain.creer(sPATCH);
 
-				wGet.write("    ");
-				wGet.write(operationIdGet);
-				wGet.write(":\n");
-				wGet.write("      allOf:\n");
+				wGET.write("    ");
+				wGET.write(operationIdGET);
+				wGET.write(":\n");
+				wGET.write("      allOf:\n");
 				if(BooleanUtils.isFalse(classeEstBase)) {
-					wGet.write("      - $ref: \"#/components/schemas/get");
-					wGet.write(classeNomSimpleSuperGenerique);
-					wGet.write("\"\n");
+					wGET.write("      - $ref: \"#/components/schemas/get");
+					wGET.write(classeNomSimpleSuperGenerique);
+					wGET.write("\"\n");
 				}
-				wGet.write("      - type: object\n");
-				wGet.write("        properties:\n");
-				wGet.write("          numFound:\n");
-				wGet.write("            type: number\n");
-				wGet.write("            default: 1\n");
-				wGet.write("          start:\n");
-				wGet.write("            type: number\n");
-				wGet.write("            default: 0\n");
-				wGet.write("          rows:\n");
-				wGet.write("            type: number\n");
-				wGet.write("            default: 10\n");
-				wGet.write("          docs:\n");
-				wGet.write("            type: array\n");
-				wGet.write("            items:\n");
-				wGet.write("              type: object\n");
-				wGet.write("              properties:\n");
+				wGET.write("      - type: object\n");
+				wGET.write("        properties:\n");
+				wGET.write("          numFound:\n");
+				wGET.write("            type: number\n");
+				wGET.write("            default: 1\n");
+				wGET.write("          start:\n");
+				wGET.write("            type: number\n");
+				wGET.write("            default: 0\n");
+				wGET.write("          rows:\n");
+				wGET.write("            type: number\n");
+				wGET.write("            default: 10\n");
+				wGET.write("          docs:\n");
+				wGET.write("            type: array\n");
+				wGET.write("            items:\n");
+				wGET.write("              type: object\n");
+				wGET.write("              properties:\n");
 
-				wPost.write("    ");
-				wPost.write(operationIdPost);
-				wPost.write(":\n");
-				wPost.write("      allOf:\n");
+				wPOST.write("    ");
+				wPOST.write(operationIdPOST);
+				wPOST.write(":\n");
+				wPOST.write("      allOf:\n");
 				if(BooleanUtils.isFalse(classeEstBase)) {
-					wPost.write("      - $ref: \"#/components/schemas/post");
-					wPost.write(classeNomSimpleSuperGenerique);
-					wPost.write("\"\n");
+					wPOST.write("      - $ref: \"#/components/schemas/post");
+					wPOST.write(classeNomSimpleSuperGenerique);
+					wPOST.write("\"\n");
 				}
-				wPost.write("      - type: object\n");
-				wPost.write("        properties:\n");
+				wPOST.write("      - type: object\n");
+				wPOST.write("        properties:\n");
 
-				wPatch.write("    ");
-				wPatch.write(operationIdPatch);
-				wPatch.write(":\n");
-				wPatch.write("      allOf:\n");
+				wPATCH.write("    ");
+				wPATCH.write(operationIdPATCH);
+				wPATCH.write(":\n");
+				wPATCH.write("      allOf:\n");
 				if(BooleanUtils.isFalse(classeEstBase)) {
-					wPatch.write("      - $ref: \"#/components/schemas/patch");
-					wPatch.write(classeNomSimpleSuperGenerique);
-					wPatch.write("\"\n");
+					wPATCH.write("      - $ref: \"#/components/schemas/patch");
+					wPATCH.write(classeNomSimpleSuperGenerique);
+					wPATCH.write("\"\n");
 				}
-				wPatch.write("      - type: object\n");
-				wPatch.write("        properties:\n");
+				wPATCH.write("      - type: object\n");
+				wPATCH.write("        properties:\n");
 
 				for(Long k = rechercheEntitesResultats.getStart(); k < rechercheEntitesResultats.getNumFound(); k+=rechercheEntitesLignes) {
 					for(Integer l = 0; l < rechercheEntitesResultats.size(); l++) {
@@ -527,27 +863,27 @@ public class AppOpenApi3 extends AppOpenApi3Gen<Object> {
 							// GET //
 							/////////
 	
-							wGet.write("                ");
-							wGet.write(entiteVar);
-							wGet.write(":\n");
+							wGET.write("                ");
+							wGET.write(entiteVar);
+							wGET.write(":\n");
 	
-							wGet.write("                  type: ");
-							wGet.write(entiteTypeJson);
-							wGet.write("\n");
+							wGET.write("                  type: ");
+							wGET.write(entiteTypeJson);
+							wGET.write("\n");
 	
 							if(entiteFormatJson != null) {
-								wGet.write("                  format: ");
-								wGet.write(entiteFormatJson);
-								wGet.write("\n");
+								wGET.write("                  format: ");
+								wGET.write(entiteFormatJson);
+								wGET.write("\n");
 							}
 	
 							if(entiteListeTypeJson != null) {
 		
-								wGet.write("                items:\n");
+								wGET.write("                items:\n");
 		
-								wGet.write("                  type: ");
-								wGet.write(entiteListeTypeJson);
-								wGet.write("\n");
+								wGET.write("                  type: ");
+								wGET.write(entiteListeTypeJson);
+								wGET.write("\n");
 							}
 	
 							if(!StringUtils.equals(entiteVar, "pk")) {
@@ -555,81 +891,81 @@ public class AppOpenApi3 extends AppOpenApi3Gen<Object> {
 								// POST //
 								//////////
 		
-								wPost.write("          ");
-								wPost.write(entiteVar);
-								wPost.write(":\n");
+								wPOST.write("          ");
+								wPOST.write(entiteVar);
+								wPOST.write(":\n");
 		
-								wPost.write("            type: ");
-								wPost.write(entiteTypeJson);
-								wPost.write("\n");
+								wPOST.write("            type: ");
+								wPOST.write(entiteTypeJson);
+								wPOST.write("\n");
 		
 								if(entiteFormatJson != null) {
-									wPost.write("            format: ");
-									wPost.write(entiteFormatJson);
-									wPost.write("\n");
+									wPOST.write("            format: ");
+									wPOST.write(entiteFormatJson);
+									wPOST.write("\n");
 								}
 		
 								if(entiteListeTypeJson != null) {
 			
-									wPost.write("            items:\n");
+									wPOST.write("            items:\n");
 			
-									wPost.write("              type: ");
-									wPost.write(entiteListeTypeJson);
-									wPost.write("\n");
+									wPOST.write("              type: ");
+									wPOST.write(entiteListeTypeJson);
+									wPOST.write("\n");
 								}
 		
 								///////////
 								// PATCH //
 								///////////
 		
-								wPatch.write("          ");
-								wPatch.write("set");
-								wPatch.write(entiteVarCapitalise);
-								wPatch.write(":\n");
+								wPATCH.write("          ");
+								wPATCH.write("set");
+								wPATCH.write(entiteVarCapitalise);
+								wPATCH.write(":\n");
 		
-								wPatch.write("            type: ");
-								wPatch.write(entiteTypeJson);
-								wPatch.write("\n");
+								wPATCH.write("            type: ");
+								wPATCH.write(entiteTypeJson);
+								wPATCH.write("\n");
 
-								wPatch.write("            nullable: true\n");
+								wPATCH.write("            nullable: true\n");
 		
 								if(entiteFormatJson != null) {
-									wPatch.write("            format: ");
-									wPatch.write(entiteFormatJson);
-									wPatch.write("\n");
+									wPATCH.write("            format: ");
+									wPATCH.write(entiteFormatJson);
+									wPATCH.write("\n");
 								}
 		
 								if(entiteListeTypeJson != null) {
 			
-									wPatch.write("            items:\n");
+									wPATCH.write("            items:\n");
 			
-									wPatch.write("              type: ");
-									wPatch.write(entiteListeTypeJson);
-									wPatch.write("\n");
+									wPATCH.write("              type: ");
+									wPATCH.write(entiteListeTypeJson);
+									wPATCH.write("\n");
 								}
 							}
 						}
 					}
 				}
 
-				wGet.flush();
-				sGet.flush();
-				wGet.close();
-				sGet.close();
+				wGET.flush();
+				sGET.flush();
+				wGET.close();
+				sGET.close();
 
-				wPost.flush();
-				sPost.flush();
-				wPost.close();
-				sPost.close();
+				wPOST.flush();
+				sPOST.flush();
+				wPOST.close();
+				sPOST.close();
 
-				wPatch.flush();
-				sPatch.flush();
-				wPatch.close();
-				sPatch.close();
+				wPATCH.flush();
+				sPATCH.flush();
+				wPATCH.close();
+				sPATCH.close();
 
-				w.write(sGet.toString());
-				w.write(sPost.toString());
-				w.write(sPatch.toString());
+				w.s(sGET.toString());
+				w.s(sPOST.toString());
+				w.s(sPATCH.toString());
 			}
 			rechercheClasses.setStart(i.intValue() + rechercheClassesLignes);
 			rechercheClassesReponse = siteContexte.getClientSolrComputate().query(rechercheClasses);

@@ -64,8 +64,7 @@ public abstract class ClusterGen<DEV> extends Object {
 		this.requeteSite_ = o;
 		this.requeteSite_Couverture.dejaInitialise = true;
 	}
-	protected Cluster requeteSite_Init()
- {
+	protected Cluster requeteSite_Init() {
 		if(!requeteSite_Couverture.dejaInitialise) {
 			_requeteSite_(requeteSite_Couverture);
 			if(requeteSite_ == null)
@@ -101,8 +100,7 @@ public abstract class ClusterGen<DEV> extends Object {
 		this.page_ = o;
 		this.page_Couverture.dejaInitialise = true;
 	}
-	protected Cluster page_Init()
- {
+	protected Cluster page_Init() {
 		if(!page_Couverture.dejaInitialise) {
 			_page_(page_Couverture);
 			if(page_ == null)
@@ -144,8 +142,7 @@ public abstract class ClusterGen<DEV> extends Object {
 		this.pkCouverture.dejaInitialise = true;
 		return (Cluster)this;
 	}
-	protected Cluster pkInit()
- {
+	protected Cluster pkInit() {
 		if(!pkCouverture.dejaInitialise) {
 			_pk(pkCouverture);
 			if(pk == null)
@@ -242,8 +239,7 @@ public abstract class ClusterGen<DEV> extends Object {
 		this.id = o;
 		this.idCouverture.dejaInitialise = true;
 	}
-	protected Cluster idInit()
- {
+	protected Cluster idInit() {
 		if(!idCouverture.dejaInitialise) {
 			_id(idCouverture);
 			if(id == null)
@@ -356,8 +352,7 @@ public abstract class ClusterGen<DEV> extends Object {
 		this.creeCouverture.dejaInitialise = true;
 		return (Cluster)this;
 	}
-	protected Cluster creeInit()
- {
+	protected Cluster creeInit() {
 		if(!creeCouverture.dejaInitialise) {
 			_cree(creeCouverture);
 			if(cree == null)
@@ -470,8 +465,7 @@ public abstract class ClusterGen<DEV> extends Object {
 		this.modifieCouverture.dejaInitialise = true;
 		return (Cluster)this;
 	}
-	protected Cluster modifieInit()
- {
+	protected Cluster modifieInit() {
 		if(!modifieCouverture.dejaInitialise) {
 			_modifie(modifieCouverture);
 			if(modifie == null)
@@ -568,8 +562,7 @@ public abstract class ClusterGen<DEV> extends Object {
 		this.utilisateurId = o;
 		this.utilisateurIdCouverture.dejaInitialise = true;
 	}
-	protected Cluster utilisateurIdInit()
- {
+	protected Cluster utilisateurIdInit() {
 		if(!utilisateurIdCouverture.dejaInitialise) {
 			_utilisateurId(utilisateurIdCouverture);
 			if(utilisateurId == null)
@@ -666,8 +659,7 @@ public abstract class ClusterGen<DEV> extends Object {
 		this.clusterNomCanonique = o;
 		this.clusterNomCanoniqueCouverture.dejaInitialise = true;
 	}
-	protected Cluster clusterNomCanoniqueInit()
- {
+	protected Cluster clusterNomCanoniqueInit() {
 		if(!clusterNomCanoniqueCouverture.dejaInitialise) {
 			_clusterNomCanonique(clusterNomCanoniqueCouverture);
 			if(clusterNomCanonique == null)
@@ -764,8 +756,7 @@ public abstract class ClusterGen<DEV> extends Object {
 		this.clusterNomSimple = o;
 		this.clusterNomSimpleCouverture.dejaInitialise = true;
 	}
-	protected Cluster clusterNomSimpleInit()
- {
+	protected Cluster clusterNomSimpleInit() {
 		if(!clusterNomSimpleCouverture.dejaInitialise) {
 			_clusterNomSimple(clusterNomSimpleCouverture);
 			if(clusterNomSimple == null)
@@ -868,8 +859,7 @@ public abstract class ClusterGen<DEV> extends Object {
 		this.supprimeCouverture.dejaInitialise = true;
 		return (Cluster)this;
 	}
-	protected Cluster supprimeInit()
- {
+	protected Cluster supprimeInit() {
 		if(!supprimeCouverture.dejaInitialise) {
 			_supprime(supprimeCouverture);
 			if(supprime == null)

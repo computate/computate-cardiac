@@ -1,10 +1,10 @@
-package org.computate.frFR.cardiaque.cluster;
+package org.computate.enUS.cardiac.warfarin;
 
 import org.computate.frFR.cardiaque.recherche.ResultatRecherche;
 import java.util.Arrays;
 import org.computate.frFR.cardiaque.recherche.ListeRecherche;
 import io.vertx.ext.web.api.validation.ParameterTypeValidator;
-import org.computate.frFR.cardiaque.config.ConfigSite;
+import org.computate.enUS.java.SiteConfig;
 import org.apache.solr.common.SolrDocumentList;
 import java.util.Date;
 import org.computate.frFR.cardiaque.utilisateur.UtilisateurSite;
@@ -65,32 +65,32 @@ import io.vertx.core.Handler;
 import java.util.Collections;
 
 
-public class ClusterApiGen implements ClusterApiService {
+public class InrEntryApiGen implements InrEntryApiService {
 
-	private static final Logger LOGGER = LoggerFactory.getLogger(ClusterApiGen.class);
+	private static final Logger LOGGER = LoggerFactory.getLogger(InrEntryApiGen.class);
 
-	private static final String SERVICE_ADDRESS = "ClusterApi";
+	private static final String SERVICE_ADDRESS = "InrEntryApi";
 
 	protected SiteContexte siteContexte;
 
-	public ClusterApiGen(SiteContexte siteContexte) {
+	public InrEntryApiGen(SiteContexte siteContexte) {
 		this.siteContexte = siteContexte;
-		ClusterApiService service = ClusterApiService.createProxy(siteContexte.getVertx(), SERVICE_ADDRESS);
+		InrEntryApiService service = InrEntryApiService.createProxy(siteContexte.getVertx(), SERVICE_ADDRESS);
 	}
 
-	public void handleGetCluster(SiteContexte siteContexte) {
+	public void handleGetInrEntry(SiteContexte siteContexte) {
 		OpenAPI3RouterFactory usineRouteur = siteContexte.getUsineRouteur();
 
-		usineRouteur.addHandlerByOperationId("getCluster", contexteItineraire -> {
+		usineRouteur.addHandlerByOperationId("getInrEntry", contexteItineraire -> {
 			try {
 
 				contexteItineraire.response().putHeader("content-type", "application/json").setChunked(true);
-				RequeteSite requeteSite = genererRequeteSitePourCluster(siteContexte);
+				RequeteSite requeteSite = genererRequeteSitePourInrEntry(siteContexte);
 				SolrQuery rechercheSolr = requeteSite.getRechercheSolr();
 				SolrDocumentList resultatsRecherche = requeteSite.getReponseRecherche().getResults();
 				Integer rechercheLignes = rechercheSolr.getRows();
 
-				genererGetDebutCluster(requeteSite);
+				genererGetDebutInrEntry(requeteSite);
 				for(long i = resultatsRecherche.getStart(); i < resultatsRecherche.getNumFound(); i+=rechercheLignes) {
 					for(int j = 0; j < resultatsRecherche.size(); j++) {
 						long resultatIndice = i + j;
@@ -99,17 +99,17 @@ public class ClusterApiGen implements ClusterApiService {
 						resultatRecherche.setRequeteSite_(requeteSite);
 						resultatRecherche.setDocumentSolr(documentSolr);
 						resultatRecherche.setResultatIndice(resultatIndice);
-						genererGetIndividuelCluster(resultatRecherche);
+						genererGetIndividuelInrEntry(resultatRecherche);
 					}
 				}
-				genererGetFinCluster(requeteSite);
+				genererGetFinInrEntry(requeteSite);
 				requeteSite.getReponseServeur().end();
 			} catch(Exception e) {
 				LOGGER.error("Error: ", e.getMessage());
 				contexteItineraire.fail(e);
 			}
 		});
-		usineRouteur.addFailureHandlerByOperationId("getCluster", contexteItineraire -> {
+		usineRouteur.addFailureHandlerByOperationId("getInrEntry", contexteItineraire -> {
 			Throwable failure = contexteItineraire.failure();
 			if (failure instanceof ValidationException) {
 				String validationErrorMessage = failure.getMessage();
@@ -119,7 +119,7 @@ public class ClusterApiGen implements ClusterApiService {
 		});
 	}
 
-	public void genererGetDebutCluster(RequeteSite requeteSite) {
+	public void genererGetDebutInrEntry(RequeteSite requeteSite) {
 		HttpServerResponse reponseServeur = requeteSite.getReponseServeur();
 		QueryResponse reponseRecherche = requeteSite.getReponseRecherche();
 		reponseServeur.write("{\n");
@@ -158,7 +158,7 @@ public class ClusterApiGen implements ClusterApiService {
 		reponseServeur.write(",\n\t\"resultats\": [\n");
 	}
 
-	public void genererGetIndividuelCluster(ResultatRecherche resultatRecherche) throws Exception {
+	public void genererGetIndividuelInrEntry(ResultatRecherche resultatRecherche) throws Exception {
 		RequeteSite requeteSite = resultatRecherche.getRequeteSite_();
 		SolrDocument documentSolr = resultatRecherche.getDocumentSolr();
 		Long resultatIndice = resultatRecherche.getResultatIndice();
@@ -171,44 +171,52 @@ public class ClusterApiGen implements ClusterApiService {
 		Integer j = 0;
 		for(String champNomStocke : champNoms) {
 			Collection<Object> champValeurs = documentSolr.getFieldValues(champNomStocke);
-			j = genererGetCluster(j, resultatRecherche, champNomStocke, champValeurs);
+			j = genererGetInrEntry(j, resultatRecherche, champNomStocke, champValeurs);
 		}
 		reponseServeur.write("\t\t}\n");
 	}
 
-	public void genererGetFinCluster(RequeteSite requeteSite) {
+	public void genererGetFinInrEntry(RequeteSite requeteSite) {
 		HttpServerResponse reponseServeur = requeteSite.getReponseServeur();
 		reponseServeur.write("\t]\n");
 		reponseServeur.write("}\n");
 	}
 
-	public String varIndexeCluster(String entiteVar) throws Exception {
+	public String varIndexeInrEntry(String entiteVar) throws Exception {
 		switch(entiteVar) {
-			case "pk":
-				return "pk_indexed_long";
-			case "cree":
-				return "cree_indexed_date";
-			case "modifie":
-				return "modifie_indexed_date";
-			case "utilisateurId":
-				return "utilisateurId_indexed_string";
-			case "clusterNomCanonique":
-				return "clusterNomCanonique_indexed_string";
-			case "clusterNomSimple":
-				return "clusterNomSimple_indexed_string";
+			case "utilisateurPk":
+				return "utilisateurPk_indexed_long";
+			case "dateInr":
+				return "dateInr_indexed_date";
+			case "dateReverifier":
+				return "dateReverifier_indexed_date";
+			case "currentDosageText":
+				return "currentDosageText_indexed_string";
+			case "currentGoal":
+				return "currentGoal_indexed_string";
+			case "currentDosage":
+				return "currentDosage_indexed_string";
+			case "currentMedication":
+				return "currentMedication_indexed_string";
+			case "dosageChange":
+				return "dosageChange_indexed_string";
+			case "additionalNotes":
+				return "additionalNotes_indexed_string";
+			case "contactInfo":
+				return "contactInfo_indexed_string";
 			default:
 				throw new Exception(String.format("\"%s\" n'est pas une entité indexé. ", entiteVar));
 		}
 	}
 
-	public Future<ListeRecherche<Cluster>> rechercheCluster(RequeteSite requeteSite) {
+	public Future<ListeRecherche<InrEntry>> rechercheInrEntry(RequeteSite requeteSite) {
 		String entiteVar = null;
 		String valeurIndexe = null;
 		String varIndexe = null;
 		String valeurTri = null;
 		Integer rechercheDebut = null;
 		Integer rechercheNum = null;
-		ListeRecherche<Cluster> listeRecherche = new ListeRecherche<Cluster>();
+		ListeRecherche<InrEntry> listeRecherche = new ListeRecherche<InrEntry>();
 		listeRecherche.setQuery("*:*");
 		listeRecherche.setRows(1000000);
 		listeRecherche.addSort("partNumero_indexed_int", ORDER.asc);
@@ -221,24 +229,24 @@ public class ClusterApiGen implements ClusterApiService {
 					case "q":
 						entiteVar = StringUtils.trim(StringUtils.substringBefore(paireValeur, ":"));
 						valeurIndexe = StringUtils.trim(StringUtils.substringAfter(paireValeur, ":"));
-						varIndexe = varIndexeCluster(entiteVar);
+						varIndexe = varIndexeInrEntry(entiteVar);
 						listeRecherche.setQuery(varIndexe + ":" + ClientUtils.escapeQueryChars(valeurIndexe));
 						break;
 					case "fq":
 						entiteVar = StringUtils.trim(StringUtils.substringBefore(paireValeur, ":"));
 						valeurIndexe = StringUtils.trim(StringUtils.substringAfter(paireValeur, ":"));
-						varIndexe = varIndexeCluster(entiteVar);
+						varIndexe = varIndexeInrEntry(entiteVar);
 						listeRecherche.addFilterQuery(varIndexe + ":" + ClientUtils.escapeQueryChars(valeurIndexe));
 						break;
 					case "sort":
 						entiteVar = StringUtils.trim(StringUtils.substringBefore(paireValeur, " "));
 						valeurTri = StringUtils.trim(StringUtils.substringAfter(paireValeur, " "));
-						varIndexe = varIndexeCluster(entiteVar);
+						varIndexe = varIndexeInrEntry(entiteVar);
 						listeRecherche.addSort(varIndexe, ORDER.valueOf(valeurTri));
 						break;
 					case "fl":
 						entiteVar = StringUtils.trim(paireValeur);
-						varIndexe = varIndexeCluster(entiteVar);
+						varIndexe = varIndexeInrEntry(entiteVar);
 						listeRecherche.addField(varIndexe);
 						break;
 					case "start":
@@ -258,7 +266,7 @@ public class ClusterApiGen implements ClusterApiService {
 		return Future.succeededFuture(listeRecherche);
 	}
 
-	public RequeteSite genererRequeteSitePourCluster(SiteContexte siteContexte) throws Exception {
+	public RequeteSite genererRequeteSitePourInrEntry(SiteContexte siteContexte) throws Exception {
 		Vertx vertx = siteContexte.getVertx();
 		RequeteSite requeteSite = new RequeteSite();
 		requeteSite.setVertx(vertx);
@@ -272,61 +280,97 @@ public class ClusterApiGen implements ClusterApiService {
 		return requeteSite;
 	}
 
-	public Integer genererGetCluster(Integer j, ResultatRecherche resultatRecherche, String entiteVarStocke, Collection<Object> champValeurs) throws Exception {
+	public Integer genererGetInrEntry(Integer j, ResultatRecherche resultatRecherche, String entiteVarStocke, Collection<Object> champValeurs) throws Exception {
 		RequeteSite requeteSite = resultatRecherche.getRequeteSite_();
 		HttpServerResponse reponseServeur = requeteSite.getReponseServeur();
 		if(!champValeurs.isEmpty()) {
 			Object champValeur = champValeurs.iterator().next();
 			if(champValeur != null) {
-				if("pk".equals(entiteVarStocke)) {
+				if("utilisateurPk".equals(entiteVarStocke)) {
 					if(j > 0)
 						reponseServeur.write(", ");
-					reponseServeur.write("\"pk\": ");
+					reponseServeur.write("\"utilisateurPk\": ");
 					reponseServeur.write(((Long)champValeur).toString());
 					reponseServeur.write("\n");
 					j++;
 					return j;
 				}
-				if("cree".equals(entiteVarStocke)) {
+				if("dateInr".equals(entiteVarStocke)) {
 					if(j > 0)
 						reponseServeur.write(", ");
-					reponseServeur.write("\"cree\": \"");
-					reponseServeur.write(DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(((Date)champValeur).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()));
+					reponseServeur.write("\"dateInr\": \"");
+					reponseServeur.write(DateTimeFormatter.ISO_OFFSET_DATE.format(((Date)champValeur).toInstant().atZone(ZoneId.systemDefault()).toLocalDate()));
 					reponseServeur.write("\"\n");
 					j++;
 					return j;
 				}
-				if("modifie".equals(entiteVarStocke)) {
+				if("dateReverifier".equals(entiteVarStocke)) {
 					if(j > 0)
 						reponseServeur.write(", ");
-					reponseServeur.write("\"modifie\": \"");
-					reponseServeur.write(DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(((Date)champValeur).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()));
+					reponseServeur.write("\"dateReverifier\": \"");
+					reponseServeur.write(DateTimeFormatter.ISO_OFFSET_DATE.format(((Date)champValeur).toInstant().atZone(ZoneId.systemDefault()).toLocalDate()));
 					reponseServeur.write("\"\n");
 					j++;
 					return j;
 				}
-				if("utilisateurId".equals(entiteVarStocke)) {
+				if("currentDosageText".equals(entiteVarStocke)) {
 					if(j > 0)
 						reponseServeur.write(", ");
-					reponseServeur.write("\"utilisateurId\": \"");
+					reponseServeur.write("\"currentDosageText\": \"");
 					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
 					reponseServeur.write("\"\n");
 					j++;
 					return j;
 				}
-				if("clusterNomCanonique".equals(entiteVarStocke)) {
+				if("currentGoal".equals(entiteVarStocke)) {
 					if(j > 0)
 						reponseServeur.write(", ");
-					reponseServeur.write("\"clusterNomCanonique\": \"");
+					reponseServeur.write("\"currentGoal\": \"");
 					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
 					reponseServeur.write("\"\n");
 					j++;
 					return j;
 				}
-				if("clusterNomSimple".equals(entiteVarStocke)) {
+				if("currentDosage".equals(entiteVarStocke)) {
 					if(j > 0)
 						reponseServeur.write(", ");
-					reponseServeur.write("\"clusterNomSimple\": \"");
+					reponseServeur.write("\"currentDosage\": \"");
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write("\"\n");
+					j++;
+					return j;
+				}
+				if("currentMedication".equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(", ");
+					reponseServeur.write("\"currentMedication\": \"");
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write("\"\n");
+					j++;
+					return j;
+				}
+				if("dosageChange".equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(", ");
+					reponseServeur.write("\"dosageChange\": \"");
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write("\"\n");
+					j++;
+					return j;
+				}
+				if("additionalNotes".equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(", ");
+					reponseServeur.write("\"additionalNotes\": \"");
+					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
+					reponseServeur.write("\"\n");
+					j++;
+					return j;
+				}
+				if("contactInfo".equals(entiteVarStocke)) {
+					if(j > 0)
+						reponseServeur.write(", ");
+					reponseServeur.write("\"contactInfo\": \"");
 					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
 					reponseServeur.write("\"\n");
 					j++;
@@ -338,15 +382,15 @@ public class ClusterApiGen implements ClusterApiService {
 	}
 
 	@Override
-	public void postCluster(JsonObject document, OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
+	public void postInrEntry(JsonObject document, OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
 		try {
-			RequeteSite requeteSite = genererRequeteSitePourCluster(siteContexte);
-			Future<OperationResponse> etapesFutures = sqlCluster(requeteSite).compose(
-				a -> creerCluster(requeteSite).compose(
-					cluster -> definirCluster(cluster).compose(
-						c -> attribuerCluster(cluster).compose(
-							d -> indexerCluster(cluster).compose(
-								operationResponse -> postJsonCluster(cluster)
+			RequeteSite requeteSite = genererRequeteSitePourInrEntry(siteContexte);
+			Future<OperationResponse> etapesFutures = sqlInrEntry(requeteSite).compose(
+				a -> creerInrEntry(requeteSite).compose(
+					cluster -> definirInrEntry(inrEntry).compose(
+						c -> attribuerInrEntry(inrEntry).compose(
+							d -> indexerInrEntry(inrEntry).compose(
+								operationResponse -> postJsonInrEntry(inrEntry)
 							)
 						)
 					)
@@ -359,12 +403,12 @@ public class ClusterApiGen implements ClusterApiService {
 	}
 
 	@Override
-	public void patchCluster(JsonObject document, OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
+	public void patchInrEntry(JsonObject document, OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
 		try {
-			RequeteSite requeteSite = genererRequeteSitePourCluster(siteContexte);
-			Future<OperationResponse> etapesFutures = sqlCluster(requeteSite).compose(
-				a -> rechercheCluster(requeteSite).compose(
-					listeCluster -> patchListeCluster(listeCluster)
+			RequeteSite requeteSite = genererRequeteSitePourInrEntry(siteContexte);
+			Future<OperationResponse> etapesFutures = sqlInrEntry(requeteSite).compose(
+				a -> rechercheInrEntry(requeteSite).compose(
+					listeInrEntry -> patchListeInrEntry(listeInrEntry)
 				)
 			);
 			etapesFutures.setHandler(gestionnaireEvenements);
@@ -373,7 +417,7 @@ public class ClusterApiGen implements ClusterApiService {
 		}
 	}
 
-	public Future<Void> sqlCluster(RequeteSite requeteSite) {
+	public Future<Void> sqlInrEntry(RequeteSite requeteSite) {
 		Future<Void> future = Future.future();
 		SQLClient clientSql = requeteSite.getSiteContexte_().getClientSql();
 
@@ -386,30 +430,30 @@ public class ClusterApiGen implements ClusterApiService {
 		return future;
 	}
 
-	public Future<Cluster> creerCluster(RequeteSite requeteSite) {
-		Future<Cluster> future = Future.future();
+	public Future<InrEntry> creerInrEntry(RequeteSite requeteSite) {
+		Future<InrEntry> future = Future.future();
 		SQLConnection connexionSql = requeteSite.getConnexionSql();
 		String utilisateurId = requeteSite.getUtilisateurId();
 
 		connexionSql.queryWithParams(
 				SiteContexte.SQL_creer
-				, new JsonArray(Arrays.asList(Cluster.class.getCanonicalName(), utilisateurId))
+				, new JsonArray(Arrays.asList(InrEntry.class.getCanonicalName(), utilisateurId))
 				, creerAsync
 		-> {
 			JsonArray patchLigne = creerAsync.result().getResults().stream().findFirst().orElseGet(() -> null);
-			Long pk = patchLigne.getLong(0);
-			Cluster o = new Cluster();
-			o.setPk(pk);
+			Long  = patchLigne.getLong(0);
+			InrEntry o = new InrEntry();
+			o.set();
 			future.complete(o);
 		});
 		return future;
 	}
 
-	public Future<Void> postCluster(Cluster o) {
+	public Future<Void> postInrEntry(InrEntry o) {
 		Future<Void> future = Future.future();
 		RequeteSite requeteSite = o.getRequeteSite_();
 		SQLConnection connexionSql = requeteSite.getConnexionSql();
-		Long pk = o.getPk();
+		Long  = o.get();
 		RoutingContext contexteItineraire = requeteSite.getContexteItineraire();
 		JsonObject jsonObject = contexteItineraire.getBodyAsJson();
 		StringBuilder postSql = new StringBuilder();
@@ -418,37 +462,45 @@ public class ClusterApiGen implements ClusterApiService {
 
 		for(String entiteVar : entiteVars) {
 			switch(entiteVar) {
-				case "pk":
-					postSql.append(SiteContexte.SQL_setP);
-					postSqlParams.addAll(Arrays.asList("pk", jsonObject.getLong(entiteVar), pk));
+				case "utilisateurPk":
+					postSql.append(SiteContexte.SQL_addA);
+					postSqlParams.addAll(Arrays.asList("", , "utilisateurPk", jsonObject.getLong(entiteVar)));
 					break;
-				case "id":
+				case "dateInr":
 					postSql.append(SiteContexte.SQL_setP);
-					postSqlParams.addAll(Arrays.asList("id", jsonObject.getString(entiteVar), pk));
+					postSqlParams.addAll(Arrays.asList("dateInr", jsonObject.getInstant(entiteVar), ));
 					break;
-				case "cree":
+				case "dateReverifier":
 					postSql.append(SiteContexte.SQL_setP);
-					postSqlParams.addAll(Arrays.asList("cree", jsonObject.getInstant(entiteVar), pk));
+					postSqlParams.addAll(Arrays.asList("dateReverifier", jsonObject.getInstant(entiteVar), ));
 					break;
-				case "modifie":
+				case "currentDosageText":
 					postSql.append(SiteContexte.SQL_setP);
-					postSqlParams.addAll(Arrays.asList("modifie", jsonObject.getInstant(entiteVar), pk));
+					postSqlParams.addAll(Arrays.asList("currentDosageText", jsonObject.getString(entiteVar), ));
 					break;
-				case "utilisateurId":
+				case "currentGoal":
 					postSql.append(SiteContexte.SQL_setP);
-					postSqlParams.addAll(Arrays.asList("utilisateurId", jsonObject.getString(entiteVar), pk));
+					postSqlParams.addAll(Arrays.asList("currentGoal", jsonObject.getString(entiteVar), ));
 					break;
-				case "clusterNomCanonique":
+				case "currentDosage":
 					postSql.append(SiteContexte.SQL_setP);
-					postSqlParams.addAll(Arrays.asList("clusterNomCanonique", jsonObject.getString(entiteVar), pk));
+					postSqlParams.addAll(Arrays.asList("currentDosage", jsonObject.getString(entiteVar), ));
 					break;
-				case "clusterNomSimple":
+				case "currentMedication":
 					postSql.append(SiteContexte.SQL_setP);
-					postSqlParams.addAll(Arrays.asList("clusterNomSimple", jsonObject.getString(entiteVar), pk));
+					postSqlParams.addAll(Arrays.asList("currentMedication", jsonObject.getString(entiteVar), ));
 					break;
-				case "supprime":
+				case "dosageChange":
 					postSql.append(SiteContexte.SQL_setP);
-					postSqlParams.addAll(Arrays.asList("supprime", jsonObject.getBoolean(entiteVar), pk));
+					postSqlParams.addAll(Arrays.asList("dosageChange", jsonObject.getString(entiteVar), ));
+					break;
+				case "additionalNotes":
+					postSql.append(SiteContexte.SQL_setP);
+					postSqlParams.addAll(Arrays.asList("additionalNotes", jsonObject.getString(entiteVar), ));
+					break;
+				case "contactInfo":
+					postSql.append(SiteContexte.SQL_setP);
+					postSqlParams.addAll(Arrays.asList("contactInfo", jsonObject.getString(entiteVar), ));
 					break;
 			}
 		}
@@ -462,12 +514,12 @@ public class ClusterApiGen implements ClusterApiService {
 		return future;
 	}
 
-	public Future<OperationResponse> patchListeCluster(ListeRecherche<Cluster> listeCluster) {
+	public Future<OperationResponse> patchListeInrEntry(ListeRecherche<InrEntry> listeInrEntry) {
 		List<Future> futures = new ArrayList<>();
-		listeCluster.getList().forEach(o -> {
+		listeInrEntry.getList().forEach(o -> {
 			futures.add(
-				patchCluster(o).compose(
-					b -> indexerCluster(o)
+				patchInrEntry(o).compose(
+					b -> indexerInrEntry(o)
 				)
 			);
 		});
@@ -485,11 +537,11 @@ public class ClusterApiGen implements ClusterApiService {
 		return future;
 	}
 
-	public Future<Void> patchCluster(Cluster o) {
+	public Future<Void> patchInrEntry(InrEntry o) {
 		Future<Void> future = Future.future();
 		RequeteSite requeteSite = o.getRequeteSite_();
 		SQLConnection connexionSql = requeteSite.getConnexionSql();
-		Long pk = o.getPk();
+		Long  = o.get();
 		RoutingContext contexteItineraire = requeteSite.getContexteItineraire();
 		JsonObject requeteJson = contexteItineraire.getBodyAsJson();
 		StringBuilder patchSql = new StringBuilder();
@@ -498,37 +550,41 @@ public class ClusterApiGen implements ClusterApiService {
 
 		for(String methodeNom : methodeNoms) {
 			switch(methodeNom) {
-				case "setPk":
+				case "set":
 					patchSql.append(SiteContexte.SQL_setP);
-					patchSqlParams.addAll(Arrays.asList("pk", requeteJson.getLong(methodeNom), pk));
+					patchSqlParams.addAll(Arrays.asList("dateInr", requeteJson.getInstant(methodeNom), ));
 					break;
-				case "setId":
+				case "set":
 					patchSql.append(SiteContexte.SQL_setP);
-					patchSqlParams.addAll(Arrays.asList("id", requeteJson.getString(methodeNom), pk));
+					patchSqlParams.addAll(Arrays.asList("dateReverifier", requeteJson.getInstant(methodeNom), ));
 					break;
-				case "setCree":
+				case "set":
 					patchSql.append(SiteContexte.SQL_setP);
-					patchSqlParams.addAll(Arrays.asList("cree", requeteJson.getInstant(methodeNom), pk));
+					patchSqlParams.addAll(Arrays.asList("currentDosageText", requeteJson.getString(methodeNom), ));
 					break;
-				case "setModifie":
+				case "set":
 					patchSql.append(SiteContexte.SQL_setP);
-					patchSqlParams.addAll(Arrays.asList("modifie", requeteJson.getInstant(methodeNom), pk));
+					patchSqlParams.addAll(Arrays.asList("currentGoal", requeteJson.getString(methodeNom), ));
 					break;
-				case "setUtilisateurId":
+				case "set":
 					patchSql.append(SiteContexte.SQL_setP);
-					patchSqlParams.addAll(Arrays.asList("utilisateurId", requeteJson.getString(methodeNom), pk));
+					patchSqlParams.addAll(Arrays.asList("currentDosage", requeteJson.getString(methodeNom), ));
 					break;
-				case "setClusterNomCanonique":
+				case "set":
 					patchSql.append(SiteContexte.SQL_setP);
-					patchSqlParams.addAll(Arrays.asList("clusterNomCanonique", requeteJson.getString(methodeNom), pk));
+					patchSqlParams.addAll(Arrays.asList("currentMedication", requeteJson.getString(methodeNom), ));
 					break;
-				case "setClusterNomSimple":
+				case "set":
 					patchSql.append(SiteContexte.SQL_setP);
-					patchSqlParams.addAll(Arrays.asList("clusterNomSimple", requeteJson.getString(methodeNom), pk));
+					patchSqlParams.addAll(Arrays.asList("dosageChange", requeteJson.getString(methodeNom), ));
 					break;
-				case "setSupprime":
+				case "set":
 					patchSql.append(SiteContexte.SQL_setP);
-					patchSqlParams.addAll(Arrays.asList("supprime", requeteJson.getBoolean(methodeNom), pk));
+					patchSqlParams.addAll(Arrays.asList("additionalNotes", requeteJson.getString(methodeNom), ));
+					break;
+				case "set":
+					patchSql.append(SiteContexte.SQL_setP);
+					patchSqlParams.addAll(Arrays.asList("contactInfo", requeteJson.getString(methodeNom), ));
 					break;
 			}
 		}
@@ -542,14 +598,14 @@ public class ClusterApiGen implements ClusterApiService {
 		return future;
 	}
 
-	public Future<Void> definirCluster(Cluster o) {
+	public Future<Void> definirInrEntry(InrEntry o) {
 		Future<Void> future = Future.future();
 		RequeteSite requeteSite = o.getRequeteSite_();
 		SQLConnection connexionSql = requeteSite.getConnexionSql();
-		Long pk = o.getPk();
+		Long  = o.get();
 		connexionSql.queryWithParams(
 				SiteContexte.SQL_definir
-				, new JsonArray(Arrays.asList(pk))
+				, new JsonArray(Arrays.asList())
 				, definirAsync
 		-> {
 			for(JsonArray definition : definirAsync.result().getResults()) {
@@ -560,14 +616,14 @@ public class ClusterApiGen implements ClusterApiService {
 		return future;
 	}
 
-	public Future<Void> attribuerCluster(Cluster o) {
+	public Future<Void> attribuerInrEntry(InrEntry o) {
 		Future<Void> future = Future.future();
 		RequeteSite requeteSite = o.getRequeteSite_();
 		SQLConnection connexionSql = requeteSite.getConnexionSql();
-		Long pk = o.getPk();
+		Long  = o.get();
 		connexionSql.queryWithParams(
 				SiteContexte.SQL_attribuer
-				, new JsonArray(Arrays.asList(pk))
+				, new JsonArray(Arrays.asList())
 				, attribuerAsync
 		-> {
 			for(JsonArray definition : attribuerAsync.result().getResults()) {
@@ -578,7 +634,7 @@ public class ClusterApiGen implements ClusterApiService {
 		return future;
 	}
 
-	public Future<Void> indexerCluster(Cluster o) {
+	public Future<Void> indexerInrEntry(InrEntry o) {
 		Future<Void> future = Future.future();
 		RequeteSite requeteSite = o.getRequeteSite_();
 		try {
@@ -592,13 +648,13 @@ public class ClusterApiGen implements ClusterApiService {
 		return future;
 	}
 
-	public Future<OperationResponse> postJsonCluster(Cluster o) {
+	public Future<OperationResponse> postJsonInrEntry(InrEntry o) {
 		Buffer buffer = Buffer.buffer();
 		RequeteSite requeteSite = o.getRequeteSite_();
 		return Future.succeededFuture(OperationResponse.completedWithJson(buffer));
 	}
 
-	public Future<OperationResponse> patchJsonCluster(ListeRecherche<Cluster> listeCluster) {
+	public Future<OperationResponse> patchJsonInrEntry(ListeRecherche<InrEntry> listeInrEntry) {
 		Buffer buffer = Buffer.buffer();
 		return Future.succeededFuture(OperationResponse.completedWithJson(buffer));
 	}

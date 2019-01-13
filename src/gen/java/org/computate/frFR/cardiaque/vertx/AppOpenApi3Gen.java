@@ -34,7 +34,7 @@ public abstract class AppOpenApi3Gen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _requeteSite_(Couverture<RequeteSite> o) throws Exception;
+	protected abstract void _requeteSite_(Couverture<RequeteSite> o) throws Exception, Exception;
 
 	public RequeteSite getRequeteSite_() {
 		return requeteSite_;
@@ -45,7 +45,7 @@ public abstract class AppOpenApi3Gen<DEV> extends Object {
 		this.requeteSite_Couverture.dejaInitialise = true;
 	}
 	protected AppOpenApi3 requeteSite_Init()
- throws Exception {
+ throws Exception, Exception {
 		if(!requeteSite_Couverture.dejaInitialise) {
 			_requeteSite_(requeteSite_Couverture);
 			if(requeteSite_ == null)
@@ -71,7 +71,7 @@ public abstract class AppOpenApi3Gen<DEV> extends Object {
 	 * <br/>
 	 * @param siteContexte est l'entité déjà construit. 
 	 **/
-	protected abstract void _siteContexte(SiteContexte o) throws Exception;
+	protected abstract void _siteContexte(SiteContexte o) throws Exception, Exception;
 
 	public SiteContexte getSiteContexte() {
 		return siteContexte;
@@ -82,7 +82,7 @@ public abstract class AppOpenApi3Gen<DEV> extends Object {
 		this.siteContexteCouverture.dejaInitialise = true;
 	}
 	protected AppOpenApi3 siteContexteInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!siteContexteCouverture.dejaInitialise) {
 			_siteContexte(siteContexte);
 		}
@@ -107,7 +107,7 @@ public abstract class AppOpenApi3Gen<DEV> extends Object {
 	 * <br/>
 	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _configSite(Couverture<ConfigSite> o) throws Exception;
+	protected abstract void _configSite(Couverture<ConfigSite> o) throws Exception, Exception;
 
 	public ConfigSite getConfigSite() {
 		return configSite;
@@ -118,7 +118,7 @@ public abstract class AppOpenApi3Gen<DEV> extends Object {
 		this.configSiteCouverture.dejaInitialise = true;
 	}
 	protected AppOpenApi3 configSiteInit()
- throws Exception {
+ throws Exception, Exception {
 		if(!configSiteCouverture.dejaInitialise) {
 			_configSite(configSiteCouverture);
 			if(configSite == null)

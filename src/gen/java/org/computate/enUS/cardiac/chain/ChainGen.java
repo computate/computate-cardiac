@@ -1,4 +1,4 @@
-package org.computate.frFR.cardiaque.chaine;
+package org.computate.enUS.cardiac.chain;
 
 import java.util.Objects;
 import org.computate.frFR.cardiaque.page.parti.Icone;
@@ -6,7 +6,7 @@ import org.computate.frFR.cardiaque.couverture.Couverture;
 import java.lang.Double;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
 import java.lang.Boolean;
-import org.computate.frFR.cardiaque.ecrivain.ToutEcrivain;
+import org.computate.enUS.cardiac.writer.AllWriter;
 import org.apache.commons.text.StringEscapeUtils;
 import java.lang.Object;
 import java.lang.String;
@@ -14,10 +14,10 @@ import org.apache.commons.lang3.StringUtils;
 import java.util.ArrayList;
 
 /**	
- * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.chaine.Chaine&fq=classeEtendGen_indexed_boolean:true">Trouver la classe  dans Solr</a>
+ * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.enUS.cardiac.chain.Chain&fq=classeEtendGen_indexed_boolean:true">Trouver la classe  dans Solr</a>
  * <br/>
  **/
-public abstract class ChaineGen<DEV> extends Object {
+public abstract class ChainGen<DEV> extends Object {
 
 	//////////////////
 	// requeteSite_ //
@@ -31,28 +31,28 @@ public abstract class ChaineGen<DEV> extends Object {
 
 	/**	<br/>L'entité « requeteSite_ »
 	 *  est défini comme null avant d'être initialisé. 
-	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.chaine.Chaine&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:requeteSite_">Trouver l'entité requeteSite_ dans Solr</a>
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.enUS.cardiac.chain.Chain&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_enUS_indexed_string:requeteSite_">Trouver l'entité requeteSite_ dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param  est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _requeteSite_(Couverture<RequeteSite> o);
+	protected abstract void _requeteSite_(Couverture<RequeteSite> );
 
-	public RequeteSite getRequeteSite_() {
+	public RequeteSite get() {
 		return requeteSite_;
 	}
 
-	public void setRequeteSite_(RequeteSite o) {
-		this.requeteSite_ = o;
+	public void set(RequeteSite ) {
+		this.requeteSite_ = ;
 		this.requeteSite_Couverture.dejaInitialise = true;
 	}
-	protected Chaine requeteSite_Init() {
+	protected Chain requeteSite_Init() {
 		if(!requeteSite_Couverture.dejaInitialise) {
 			_requeteSite_(requeteSite_Couverture);
 			if(requeteSite_ == null)
-				setRequeteSite_(requeteSite_Couverture.o);
+				set(requeteSite_Couverture.o);
 		}
 		requeteSite_Couverture.dejaInitialise(true);
-		return (Chaine)this;
+		return (Chain)this;
 	}
 
 	////////////
@@ -67,48 +67,48 @@ public abstract class ChaineGen<DEV> extends Object {
 
 	/**	<br/>L'entité « police »
 	 *  est défini comme null avant d'être initialisé. 
-	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.chaine.Chaine&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:police">Trouver l'entité police dans Solr</a>
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.enUS.cardiac.chain.Chain&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_enUS_indexed_string:police">Trouver l'entité police dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param  est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _police(Couverture<String> o);
+	protected abstract void _police(Couverture<String> );
 
-	public String getPolice() {
+	public String get() {
 		return police;
 	}
 
-	public void setPolice(String o) {
-		this.police = o;
+	public void set(String ) {
+		this.police = ;
 		this.policeCouverture.dejaInitialise = true;
 	}
-	protected Chaine policeInit() {
+	protected Chain policeInit() {
 		if(!policeCouverture.dejaInitialise) {
 			_police(policeCouverture);
 			if(police == null)
-				setPolice(policeCouverture.o);
+				set(policeCouverture.o);
 		}
 		policeCouverture.dejaInitialise(true);
-		return (Chaine)this;
+		return (Chain)this;
 	}
 
-	public String solrPolice() {
+	public String solr() {
 		return police;
 	}
 
-	public String strPolice() {
+	public String str() {
 		return police == null ? "" : police;
 	}
 
-	public String nomAffichagePolice() {
+	public String nomAffichage() {
 		return null;
 	}
 
-	public String htmTooltipPolice() {
+	public String htmTooltip() {
 		return null;
 	}
 
-	public String htmPolice() {
-		return police == null ? "" : StringEscapeUtils.escapeHtml4(strPolice());
+	public String htm() {
+		return police == null ? "" : StringEscapeUtils.escapeHtml4(str());
 	}
 
 	///////////////////
@@ -123,54 +123,54 @@ public abstract class ChaineGen<DEV> extends Object {
 
 	/**	<br/>L'entité « alignerCentre »
 	 *  est défini comme null avant d'être initialisé. 
-	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.chaine.Chaine&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:alignerCentre">Trouver l'entité alignerCentre dans Solr</a>
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.enUS.cardiac.chain.Chain&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_enUS_indexed_string:alignerCentre">Trouver l'entité alignerCentre dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param  est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _alignerCentre(Couverture<Boolean> o);
+	protected abstract void _alignerCentre(Couverture<Boolean> );
 
-	public Boolean getAlignerCentre() {
+	public Boolean get() {
 		return alignerCentre;
 	}
 
-	public void setAlignerCentre(Boolean o) {
-		this.alignerCentre = o;
+	public void set(Boolean ) {
+		this.alignerCentre = ;
 		this.alignerCentreCouverture.dejaInitialise = true;
 	}
-	public Chaine setAlignerCentre(String o) {
+	public Chain set(String o) {
 		if(org.apache.commons.lang3.BooleanUtils.isTrue(org.apache.commons.lang3.BooleanUtils.toBoolean(o)))
 			this.alignerCentre = Boolean.parseBoolean(o);
 		this.alignerCentreCouverture.dejaInitialise = true;
-		return (Chaine)this;
+		return (Chain)this;
 	}
-	protected Chaine alignerCentreInit() {
+	protected Chain alignerCentreInit() {
 		if(!alignerCentreCouverture.dejaInitialise) {
 			_alignerCentre(alignerCentreCouverture);
 			if(alignerCentre == null)
-				setAlignerCentre(alignerCentreCouverture.o);
+				set(alignerCentreCouverture.o);
 		}
 		alignerCentreCouverture.dejaInitialise(true);
-		return (Chaine)this;
+		return (Chain)this;
 	}
 
-	public Boolean solrAlignerCentre() {
+	public Boolean solr() {
 		return alignerCentre;
 	}
 
-	public String strAlignerCentre() {
+	public String str() {
 		return alignerCentre == null ? "" : alignerCentre.toString();
 	}
 
-	public String nomAffichageAlignerCentre() {
+	public String nomAffichage() {
 		return null;
 	}
 
-	public String htmTooltipAlignerCentre() {
+	public String htmTooltip() {
 		return null;
 	}
 
-	public String htmAlignerCentre() {
-		return alignerCentre == null ? "" : StringEscapeUtils.escapeHtml4(strAlignerCentre());
+	public String htm() {
+		return alignerCentre == null ? "" : StringEscapeUtils.escapeHtml4(str());
 	}
 
 	///////////////////
@@ -185,54 +185,54 @@ public abstract class ChaineGen<DEV> extends Object {
 
 	/**	<br/>L'entité « alignerGauche »
 	 *  est défini comme null avant d'être initialisé. 
-	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.chaine.Chaine&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:alignerGauche">Trouver l'entité alignerGauche dans Solr</a>
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.enUS.cardiac.chain.Chain&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_enUS_indexed_string:alignerGauche">Trouver l'entité alignerGauche dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param  est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _alignerGauche(Couverture<Boolean> o);
+	protected abstract void _alignerGauche(Couverture<Boolean> );
 
-	public Boolean getAlignerGauche() {
+	public Boolean get() {
 		return alignerGauche;
 	}
 
-	public void setAlignerGauche(Boolean o) {
-		this.alignerGauche = o;
+	public void set(Boolean ) {
+		this.alignerGauche = ;
 		this.alignerGaucheCouverture.dejaInitialise = true;
 	}
-	public Chaine setAlignerGauche(String o) {
+	public Chain set(String o) {
 		if(org.apache.commons.lang3.BooleanUtils.isTrue(org.apache.commons.lang3.BooleanUtils.toBoolean(o)))
 			this.alignerGauche = Boolean.parseBoolean(o);
 		this.alignerGaucheCouverture.dejaInitialise = true;
-		return (Chaine)this;
+		return (Chain)this;
 	}
-	protected Chaine alignerGaucheInit() {
+	protected Chain alignerGaucheInit() {
 		if(!alignerGaucheCouverture.dejaInitialise) {
 			_alignerGauche(alignerGaucheCouverture);
 			if(alignerGauche == null)
-				setAlignerGauche(alignerGaucheCouverture.o);
+				set(alignerGaucheCouverture.o);
 		}
 		alignerGaucheCouverture.dejaInitialise(true);
-		return (Chaine)this;
+		return (Chain)this;
 	}
 
-	public Boolean solrAlignerGauche() {
+	public Boolean solr() {
 		return alignerGauche;
 	}
 
-	public String strAlignerGauche() {
+	public String str() {
 		return alignerGauche == null ? "" : alignerGauche.toString();
 	}
 
-	public String nomAffichageAlignerGauche() {
+	public String nomAffichage() {
 		return null;
 	}
 
-	public String htmTooltipAlignerGauche() {
+	public String htmTooltip() {
 		return null;
 	}
 
-	public String htmAlignerGauche() {
-		return alignerGauche == null ? "" : StringEscapeUtils.escapeHtml4(strAlignerGauche());
+	public String htm() {
+		return alignerGauche == null ? "" : StringEscapeUtils.escapeHtml4(str());
 	}
 
 	//////////////////
@@ -247,54 +247,54 @@ public abstract class ChaineGen<DEV> extends Object {
 
 	/**	<br/>L'entité « alignerDroit »
 	 *  est défini comme null avant d'être initialisé. 
-	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.chaine.Chaine&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:alignerDroit">Trouver l'entité alignerDroit dans Solr</a>
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.enUS.cardiac.chain.Chain&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_enUS_indexed_string:alignerDroit">Trouver l'entité alignerDroit dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param  est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _alignerDroit(Couverture<Boolean> o);
+	protected abstract void _alignerDroit(Couverture<Boolean> );
 
-	public Boolean getAlignerDroit() {
+	public Boolean get() {
 		return alignerDroit;
 	}
 
-	public void setAlignerDroit(Boolean o) {
-		this.alignerDroit = o;
+	public void set(Boolean ) {
+		this.alignerDroit = ;
 		this.alignerDroitCouverture.dejaInitialise = true;
 	}
-	public Chaine setAlignerDroit(String o) {
+	public Chain set(String o) {
 		if(org.apache.commons.lang3.BooleanUtils.isTrue(org.apache.commons.lang3.BooleanUtils.toBoolean(o)))
 			this.alignerDroit = Boolean.parseBoolean(o);
 		this.alignerDroitCouverture.dejaInitialise = true;
-		return (Chaine)this;
+		return (Chain)this;
 	}
-	protected Chaine alignerDroitInit() {
+	protected Chain alignerDroitInit() {
 		if(!alignerDroitCouverture.dejaInitialise) {
 			_alignerDroit(alignerDroitCouverture);
 			if(alignerDroit == null)
-				setAlignerDroit(alignerDroitCouverture.o);
+				set(alignerDroitCouverture.o);
 		}
 		alignerDroitCouverture.dejaInitialise(true);
-		return (Chaine)this;
+		return (Chain)this;
 	}
 
-	public Boolean solrAlignerDroit() {
+	public Boolean solr() {
 		return alignerDroit;
 	}
 
-	public String strAlignerDroit() {
+	public String str() {
 		return alignerDroit == null ? "" : alignerDroit.toString();
 	}
 
-	public String nomAffichageAlignerDroit() {
+	public String nomAffichage() {
 		return null;
 	}
 
-	public String htmTooltipAlignerDroit() {
+	public String htmTooltip() {
 		return null;
 	}
 
-	public String htmAlignerDroit() {
-		return alignerDroit == null ? "" : StringEscapeUtils.escapeHtml4(strAlignerDroit());
+	public String htm() {
+		return alignerDroit == null ? "" : StringEscapeUtils.escapeHtml4(str());
 	}
 
 	/////////////////
@@ -309,37 +309,37 @@ public abstract class ChaineGen<DEV> extends Object {
 
 	/**	<br/>L'entité « iconesAvant »
 	 * Il est construit avant d'être initialisé avec le constructeur par défaut ArrayList<Icone>(). 
-	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.chaine.Chaine&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:iconesAvant">Trouver l'entité iconesAvant dans Solr</a>
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.enUS.cardiac.chain.Chain&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_enUS_indexed_string:iconesAvant">Trouver l'entité iconesAvant dans Solr</a>
 	 * <br/>
 	 * @param iconesAvant est l'entité déjà construit. 
 	 **/
-	protected abstract void _iconesAvant(ArrayList<Icone> l);
+	protected abstract void _iconesAvant(ArrayList<Icone> );
 
-	public ArrayList<Icone> getIconesAvant() {
+	public ArrayList<Icone> get() {
 		return iconesAvant;
 	}
 
-	public void setIconesAvant(ArrayList<Icone> l) {
-		this.iconesAvant = l;
+	public void set(ArrayList<Icone> ) {
+		this.iconesAvant = ;
 		this.iconesAvantCouverture.dejaInitialise = true;
 	}
-	public Chaine addIconesAvant(Icone...objets) {
-		for(Icone o : objets) {
-			addIconesAvant(o);
+	public Chain add(...objets) {
+		for( o : objets) {
+			add(o);
 		}
-		return (Chaine)this;
+		return (Chain)this;
 	}
-	public Chaine addIconesAvant(Icone o) {
+	public Chain add( o) {
 		if(o != null && !iconesAvant.contains(o))
 			this.iconesAvant.add(o);
-		return (Chaine)this;
+		return (Chain)this;
 	}
-	protected Chaine iconesAvantInit() {
+	protected Chain iconesAvantInit() {
 		if(!iconesAvantCouverture.dejaInitialise) {
 			_iconesAvant(iconesAvant);
 		}
 		iconesAvantCouverture.dejaInitialise(true);
-		return (Chaine)this;
+		return (Chain)this;
 	}
 
 	/////////////////
@@ -354,37 +354,37 @@ public abstract class ChaineGen<DEV> extends Object {
 
 	/**	<br/>L'entité « iconesApres »
 	 * Il est construit avant d'être initialisé avec le constructeur par défaut ArrayList<Icone>(). 
-	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.chaine.Chaine&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:iconesApres">Trouver l'entité iconesApres dans Solr</a>
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.enUS.cardiac.chain.Chain&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_enUS_indexed_string:iconesApres">Trouver l'entité iconesApres dans Solr</a>
 	 * <br/>
 	 * @param iconesApres est l'entité déjà construit. 
 	 **/
-	protected abstract void _iconesApres(ArrayList<Icone> l);
+	protected abstract void _iconesApres(ArrayList<Icone> );
 
-	public ArrayList<Icone> getIconesApres() {
+	public ArrayList<Icone> get() {
 		return iconesApres;
 	}
 
-	public void setIconesApres(ArrayList<Icone> l) {
-		this.iconesApres = l;
+	public void set(ArrayList<Icone> ) {
+		this.iconesApres = ;
 		this.iconesApresCouverture.dejaInitialise = true;
 	}
-	public Chaine addIconesApres(Icone...objets) {
-		for(Icone o : objets) {
-			addIconesApres(o);
+	public Chain add(...objets) {
+		for( o : objets) {
+			add(o);
 		}
-		return (Chaine)this;
+		return (Chain)this;
 	}
-	public Chaine addIconesApres(Icone o) {
+	public Chain add( o) {
 		if(o != null && !iconesApres.contains(o))
 			this.iconesApres.add(o);
-		return (Chaine)this;
+		return (Chain)this;
 	}
-	protected Chaine iconesApresInit() {
+	protected Chain iconesApresInit() {
 		if(!iconesApresCouverture.dejaInitialise) {
 			_iconesApres(iconesApres);
 		}
 		iconesApresCouverture.dejaInitialise(true);
-		return (Chaine)this;
+		return (Chain)this;
 	}
 
 	///////////////
@@ -399,54 +399,54 @@ public abstract class ChaineGen<DEV> extends Object {
 
 	/**	<br/>L'entité « xDecalage »
 	 *  est défini comme null avant d'être initialisé. 
-	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.chaine.Chaine&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:xDecalage">Trouver l'entité xDecalage dans Solr</a>
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.enUS.cardiac.chain.Chain&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_enUS_indexed_string:xDecalage">Trouver l'entité xDecalage dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param  est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _xDecalage(Couverture<Double> o);
+	protected abstract void _xDecalage(Couverture<Double> );
 
-	public Double getXDecalage() {
+	public Double get() {
 		return xDecalage;
 	}
 
-	public void setXDecalage(Double o) {
-		this.xDecalage = o;
+	public void set(Double ) {
+		this.xDecalage = ;
 		this.xDecalageCouverture.dejaInitialise = true;
 	}
-	public Chaine setXDecalage(String o) {
+	public Chain set(String o) {
 		if(org.apache.commons.lang3.math.NumberUtils.isCreatable(o))
 			this.xDecalage = Double.parseDouble(o);
 		this.xDecalageCouverture.dejaInitialise = true;
-		return (Chaine)this;
+		return (Chain)this;
 	}
-	protected Chaine xDecalageInit() {
+	protected Chain xDecalageInit() {
 		if(!xDecalageCouverture.dejaInitialise) {
 			_xDecalage(xDecalageCouverture);
 			if(xDecalage == null)
-				setXDecalage(xDecalageCouverture.o);
+				set(xDecalageCouverture.o);
 		}
 		xDecalageCouverture.dejaInitialise(true);
-		return (Chaine)this;
+		return (Chain)this;
 	}
 
-	public Double solrXDecalage() {
+	public Double solr() {
 		return xDecalage;
 	}
 
-	public String strXDecalage() {
+	public String str() {
 		return xDecalage == null ? "" : xDecalage.toString();
 	}
 
-	public String nomAffichageXDecalage() {
+	public String nomAffichage() {
 		return null;
 	}
 
-	public String htmTooltipXDecalage() {
+	public String htmTooltip() {
 		return null;
 	}
 
-	public String htmXDecalage() {
-		return xDecalage == null ? "" : StringEscapeUtils.escapeHtml4(strXDecalage());
+	public String htm() {
+		return xDecalage == null ? "" : StringEscapeUtils.escapeHtml4(str());
 	}
 
 	///////////////
@@ -461,54 +461,54 @@ public abstract class ChaineGen<DEV> extends Object {
 
 	/**	<br/>L'entité « yDecalage »
 	 *  est défini comme null avant d'être initialisé. 
-	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.chaine.Chaine&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:yDecalage">Trouver l'entité yDecalage dans Solr</a>
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.enUS.cardiac.chain.Chain&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_enUS_indexed_string:yDecalage">Trouver l'entité yDecalage dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param  est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _yDecalage(Couverture<Double> o);
+	protected abstract void _yDecalage(Couverture<Double> );
 
-	public Double getYDecalage() {
+	public Double get() {
 		return yDecalage;
 	}
 
-	public void setYDecalage(Double o) {
-		this.yDecalage = o;
+	public void set(Double ) {
+		this.yDecalage = ;
 		this.yDecalageCouverture.dejaInitialise = true;
 	}
-	public Chaine setYDecalage(String o) {
+	public Chain set(String o) {
 		if(org.apache.commons.lang3.math.NumberUtils.isCreatable(o))
 			this.yDecalage = Double.parseDouble(o);
 		this.yDecalageCouverture.dejaInitialise = true;
-		return (Chaine)this;
+		return (Chain)this;
 	}
-	protected Chaine yDecalageInit() {
+	protected Chain yDecalageInit() {
 		if(!yDecalageCouverture.dejaInitialise) {
 			_yDecalage(yDecalageCouverture);
 			if(yDecalage == null)
-				setYDecalage(yDecalageCouverture.o);
+				set(yDecalageCouverture.o);
 		}
 		yDecalageCouverture.dejaInitialise(true);
-		return (Chaine)this;
+		return (Chain)this;
 	}
 
-	public Double solrYDecalage() {
+	public Double solr() {
 		return yDecalage;
 	}
 
-	public String strYDecalage() {
+	public String str() {
 		return yDecalage == null ? "" : yDecalage.toString();
 	}
 
-	public String nomAffichageYDecalage() {
+	public String nomAffichage() {
 		return null;
 	}
 
-	public String htmTooltipYDecalage() {
+	public String htmTooltip() {
 		return null;
 	}
 
-	public String htmYDecalage() {
-		return yDecalage == null ? "" : StringEscapeUtils.escapeHtml4(strYDecalage());
+	public String htm() {
+		return yDecalage == null ? "" : StringEscapeUtils.escapeHtml4(str());
 	}
 
 	////////////
@@ -523,54 +523,54 @@ public abstract class ChaineGen<DEV> extends Object {
 
 	/**	<br/>L'entité « hLigne »
 	 *  est défini comme null avant d'être initialisé. 
-	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.chaine.Chaine&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:hLigne">Trouver l'entité hLigne dans Solr</a>
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.enUS.cardiac.chain.Chain&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_enUS_indexed_string:hLigne">Trouver l'entité hLigne dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param  est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _hLigne(Couverture<Double> o);
+	protected abstract void _hLigne(Couverture<Double> );
 
-	public Double getHLigne() {
+	public Double get() {
 		return hLigne;
 	}
 
-	public void setHLigne(Double o) {
-		this.hLigne = o;
+	public void set(Double ) {
+		this.hLigne = ;
 		this.hLigneCouverture.dejaInitialise = true;
 	}
-	public Chaine setHLigne(String o) {
+	public Chain set(String o) {
 		if(org.apache.commons.lang3.math.NumberUtils.isCreatable(o))
 			this.hLigne = Double.parseDouble(o);
 		this.hLigneCouverture.dejaInitialise = true;
-		return (Chaine)this;
+		return (Chain)this;
 	}
-	protected Chaine hLigneInit() {
+	protected Chain hLigneInit() {
 		if(!hLigneCouverture.dejaInitialise) {
 			_hLigne(hLigneCouverture);
 			if(hLigne == null)
-				setHLigne(hLigneCouverture.o);
+				set(hLigneCouverture.o);
 		}
 		hLigneCouverture.dejaInitialise(true);
-		return (Chaine)this;
+		return (Chain)this;
 	}
 
-	public Double solrHLigne() {
+	public Double solr() {
 		return hLigne;
 	}
 
-	public String strHLigne() {
+	public String str() {
 		return hLigne == null ? "" : hLigne.toString();
 	}
 
-	public String nomAffichageHLigne() {
+	public String nomAffichage() {
 		return null;
 	}
 
-	public String htmTooltipHLigne() {
+	public String htmTooltip() {
 		return null;
 	}
 
-	public String htmHLigne() {
-		return hLigne == null ? "" : StringEscapeUtils.escapeHtml4(strHLigne());
+	public String htm() {
+		return hLigne == null ? "" : StringEscapeUtils.escapeHtml4(str());
 	}
 
 	/////////////
@@ -585,54 +585,54 @@ public abstract class ChaineGen<DEV> extends Object {
 
 	/**	<br/>L'entité « hEspace »
 	 *  est défini comme null avant d'être initialisé. 
-	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.chaine.Chaine&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:hEspace">Trouver l'entité hEspace dans Solr</a>
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.enUS.cardiac.chain.Chain&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_enUS_indexed_string:hEspace">Trouver l'entité hEspace dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param  est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _hEspace(Couverture<Double> o);
+	protected abstract void _hEspace(Couverture<Double> );
 
-	public Double getHEspace() {
+	public Double get() {
 		return hEspace;
 	}
 
-	public void setHEspace(Double o) {
-		this.hEspace = o;
+	public void set(Double ) {
+		this.hEspace = ;
 		this.hEspaceCouverture.dejaInitialise = true;
 	}
-	public Chaine setHEspace(String o) {
+	public Chain set(String o) {
 		if(org.apache.commons.lang3.math.NumberUtils.isCreatable(o))
 			this.hEspace = Double.parseDouble(o);
 		this.hEspaceCouverture.dejaInitialise = true;
-		return (Chaine)this;
+		return (Chain)this;
 	}
-	protected Chaine hEspaceInit() {
+	protected Chain hEspaceInit() {
 		if(!hEspaceCouverture.dejaInitialise) {
 			_hEspace(hEspaceCouverture);
 			if(hEspace == null)
-				setHEspace(hEspaceCouverture.o);
+				set(hEspaceCouverture.o);
 		}
 		hEspaceCouverture.dejaInitialise(true);
-		return (Chaine)this;
+		return (Chain)this;
 	}
 
-	public Double solrHEspace() {
+	public Double solr() {
 		return hEspace;
 	}
 
-	public String strHEspace() {
+	public String str() {
 		return hEspace == null ? "" : hEspace.toString();
 	}
 
-	public String nomAffichageHEspace() {
+	public String nomAffichage() {
 		return null;
 	}
 
-	public String htmTooltipHEspace() {
+	public String htmTooltip() {
 		return null;
 	}
 
-	public String htmHEspace() {
-		return hEspace == null ? "" : StringEscapeUtils.escapeHtml4(strHEspace());
+	public String htm() {
+		return hEspace == null ? "" : StringEscapeUtils.escapeHtml4(str());
 	}
 
 	//////////
@@ -647,59 +647,59 @@ public abstract class ChaineGen<DEV> extends Object {
 
 	/**	<br/>L'entité « tout »
 	 * Il est construit avant d'être initialisé avec le constructeur par défaut ArrayList<Object>(). 
-	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.chaine.Chaine&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:tout">Trouver l'entité tout dans Solr</a>
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.enUS.cardiac.chain.Chain&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_enUS_indexed_string:tout">Trouver l'entité tout dans Solr</a>
 	 * <br/>
 	 * @param tout est l'entité déjà construit. 
 	 **/
-	protected abstract void _tout(ArrayList<Object> l);
+	protected abstract void _tout(ArrayList<Object> );
 
-	public ArrayList<Object> getTout() {
+	public ArrayList<Object> get() {
 		return tout;
 	}
 
-	public void setTout(ArrayList<Object> l) {
-		this.tout = l;
+	public void set(ArrayList<Object> ) {
+		this.tout = ;
 		this.toutCouverture.dejaInitialise = true;
 	}
-	public Chaine addTout(Object...objets) {
-		for(Object o : objets) {
-			addTout(o);
+	public Chain add(...objets) {
+		for( o : objets) {
+			add(o);
 		}
-		return (Chaine)this;
+		return (Chain)this;
 	}
-	public Chaine addTout(Object o) {
+	public Chain add( o) {
 		if(o != null && !tout.contains(o))
 			this.tout.add(o);
-		return (Chaine)this;
+		return (Chain)this;
 	}
-	protected Chaine toutInit() {
+	protected Chain toutInit() {
 		if(!toutCouverture.dejaInitialise) {
 			_tout(tout);
 		}
 		toutCouverture.dejaInitialise(true);
-		return (Chaine)this;
+		return (Chain)this;
 	}
 
 	//////////////
 	// initLoin //
 	//////////////
 
-	protected boolean dejaInitialiseChaine = false;
+	protected boolean dejaInitialiseChain = false;
 
-	public Chaine initLoinChaine(RequeteSite requeteSite) {
+	public Chain initLoinChain(RequeteSite requeteSite) {
 		setRequeteSite_(requeteSite);
-		if(!dejaInitialiseChaine) {
-			dejaInitialiseChaine = true;
-			initLoinChaine();
+		if(!dejaInitialiseChain) {
+			dejaInitialiseChain = true;
+			initLoinChain();
 		}
-		return (Chaine)this;
+		return (Chain)this;
 	}
 
-	public void initLoinChaine() {
-		initChaine();
+	public void initLoinChain() {
+		initChain();
 	}
 
-	public void initChaine() {
+	public void initChain() {
 		requeteSite_Init();
 		policeInit();
 		alignerCentreInit();
@@ -715,18 +715,18 @@ public abstract class ChaineGen<DEV> extends Object {
 	}
 
 	public void initLoinPourClasse(RequeteSite requeteSite) {
-		initLoinChaine(requeteSite);
+		initLoinChain(requeteSite);
 	}
 
 	/////////////////
 	// requeteSite //
 	/////////////////
 
-	public void requeteSiteChaine(RequeteSite requeteSite) {
+	public void requeteSiteChain(RequeteSite requeteSite) {
 	}
 
 	public void requeteSitePourClasse(RequeteSite requeteSite) {
-		requeteSiteChaine(requeteSite);
+		requeteSiteChain(requeteSite);
 	}
 
 	/////////////
@@ -738,7 +738,7 @@ public abstract class ChaineGen<DEV> extends Object {
 		Object o = null;
 		for(String v : vars) {
 			if(o == null)
-				o = obtenirChaine(v);
+				o = obtenirChain(v);
 			else if(o instanceof Cluster) {
 				Cluster cluster = (Cluster)o;
 				o = cluster.obtenirPourClasse(v);
@@ -746,33 +746,33 @@ public abstract class ChaineGen<DEV> extends Object {
 		}
 		return o;
 	}
-	public Object obtenirChaine(String var) throws Exception {
-		Chaine oChaine = (Chaine)this;
+	public Object obtenirChain(String var) throws Exception {
+		Chain oChain = (Chain)this;
 		switch(var) {
 			case "requeteSite_":
-				return oChaine.requeteSite_;
+				return oChain.requeteSite_;
 			case "police":
-				return oChaine.police;
+				return oChain.police;
 			case "alignerCentre":
-				return oChaine.alignerCentre;
+				return oChain.alignerCentre;
 			case "alignerGauche":
-				return oChaine.alignerGauche;
+				return oChain.alignerGauche;
 			case "alignerDroit":
-				return oChaine.alignerDroit;
+				return oChain.alignerDroit;
 			case "iconesAvant":
-				return oChaine.iconesAvant;
+				return oChain.iconesAvant;
 			case "iconesApres":
-				return oChaine.iconesApres;
+				return oChain.iconesApres;
 			case "xDecalage":
-				return oChaine.xDecalage;
+				return oChain.xDecalage;
 			case "yDecalage":
-				return oChaine.yDecalage;
+				return oChain.yDecalage;
 			case "hLigne":
-				return oChaine.hLigne;
+				return oChain.hLigne;
 			case "hEspace":
-				return oChaine.hEspace;
+				return oChain.hEspace;
 			case "tout":
-				return oChaine.tout;
+				return oChain.tout;
 			default:
 				return null;
 		}
@@ -787,7 +787,7 @@ public abstract class ChaineGen<DEV> extends Object {
 		Object o = null;
 		for(String v : vars) {
 			if(o == null)
-				o = attribuerChaine(v, val);
+				o = attribuerChain(v, val);
 			else if(o instanceof Cluster) {
 				Cluster cluster = (Cluster)o;
 				o = cluster.attribuerPourClasse(v, val);
@@ -795,8 +795,8 @@ public abstract class ChaineGen<DEV> extends Object {
 		}
 		return o != null;
 	}
-	public Object attribuerChaine(String var, Object val) {
-		Chaine oChaine = (Chaine)this;
+	public Object attribuerChain(String var, Object val) {
+		Chain oChain = (Chain)this;
 		switch(var) {
 			default:
 				return null;
@@ -813,7 +813,7 @@ public abstract class ChaineGen<DEV> extends Object {
 		if(val != null) {
 			for(String v : vars) {
 				if(o == null)
-					o = definirChaine(v, val);
+					o = definirChain(v, val);
 				else if(o instanceof Cluster) {
 					Cluster cluster = (Cluster)o;
 					o = cluster.definirPourClasse(v, val);
@@ -822,7 +822,7 @@ public abstract class ChaineGen<DEV> extends Object {
 		}
 		return o != null;
 	}
-	public Object definirChaine(String var, String val) {
+	public Object definirChain(String var, String val) {
 		switch(var) {
 			default:
 				return null;
@@ -844,9 +844,9 @@ public abstract class ChaineGen<DEV> extends Object {
 	@Override public boolean equals(Object o) {
 		if(this == o)
 			return true;
-		if(!(o instanceof Chaine))
+		if(!(o instanceof Chain))
 			return false;
-		Chaine that = (Chaine)o;
+		Chain that = (Chain)o;
 		return Objects.equals( police, that.police )
 				&& Objects.equals( alignerCentre, that.alignerCentre )
 				&& Objects.equals( alignerGauche, that.alignerGauche )
@@ -863,7 +863,7 @@ public abstract class ChaineGen<DEV> extends Object {
 
 	@Override public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("Chaine {");
+		sb.append("Chain {");
 		sb.append( "police: \"" ).append(police).append( "\"" );
 		sb.append( ", alignerCentre: " ).append(alignerCentre);
 		sb.append( ", alignerGauche: " ).append(alignerGauche);

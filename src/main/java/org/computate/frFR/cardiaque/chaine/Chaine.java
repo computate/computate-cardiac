@@ -9,6 +9,9 @@ import org.computate.frFR.cardiaque.couverture.Couverture;
 import org.computate.frFR.cardiaque.page.parti.Icone;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
 
+/**
+ * nomCanonique.enUS: org.computate.enUS.cardiac.chain.Chain
+ */
 public class Chaine extends ChaineGen<Object> {  
 
 	protected void _requeteSite_(Couverture<RequeteSite> c) {}
