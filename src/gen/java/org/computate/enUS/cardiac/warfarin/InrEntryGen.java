@@ -12,7 +12,7 @@ import io.vertx.core.json.JsonObject;
 import java.lang.String;
 import io.vertx.core.logging.Logger;
 import org.computate.enUS.cardiac.chain.Chain;
-import org.computate.frFR.cardiaque.cluster.Cluster;
+import org.computate.site.course.c000.cluster.Cluster;
 import java.util.Set;
 import org.apache.commons.text.StringEscapeUtils;
 import java.time.Instant;
@@ -22,6 +22,7 @@ import org.computate.frFR.cardiaque.contexte.SiteContexte;
 import java.util.Objects;
 import org.apache.solr.common.SolrDocument;
 import io.vertx.core.json.JsonArray;
+import org.computate.site.course.c000.cluster.Cluster;
 import java.util.List;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -60,8 +61,8 @@ User primary key.
 		return utilisateurPk;
 	}
 
-	public void set(Long c) {
-		this.utilisateurPk = c;
+	public void set(Long utilisateurPk) {
+		this.utilisateurPk = utilisateurPk;
 		this.utilisateurPkCouverture.dejaInitialise = true;
 	}
 	public InrEntry set(String o) {
@@ -122,8 +123,8 @@ User primary key.
 		return dateInr;
 	}
 
-	public void set(LocalDate c) {
-		this.dateInr = c;
+	public void set(LocalDate dateInr) {
+		this.dateInr = dateInr;
 		this.dateInrCouverture.dejaInitialise = true;
 	}
 	public InrEntry set(Instant o) {
@@ -194,8 +195,8 @@ User primary key.
 		return dateReverifier;
 	}
 
-	public void set(LocalDate c) {
-		this.dateReverifier = c;
+	public void set(LocalDate dateReverifier) {
+		this.dateReverifier = dateReverifier;
 		this.dateReverifierCouverture.dejaInitialise = true;
 	}
 	public InrEntry set(Instant o) {
@@ -266,8 +267,8 @@ User primary key.
 		return currentDosageText;
 	}
 
-	public void set(Chain o) {
-		this.currentDosageText = o;
+	public void set(Chain currentDosageText) {
+		this.currentDosageText = currentDosageText;
 		this.currentDosageTextCouverture.dejaInitialise = true;
 	}
 	protected InrEntry currentDosageTextInit() {
@@ -321,8 +322,8 @@ User primary key.
 		return currentGoal;
 	}
 
-	public void set(Chain o) {
-		this.currentGoal = o;
+	public void set(Chain currentGoal) {
+		this.currentGoal = currentGoal;
 		this.currentGoalCouverture.dejaInitialise = true;
 	}
 	protected InrEntry currentGoalInit() {
@@ -376,8 +377,8 @@ User primary key.
 		return currentDosage;
 	}
 
-	public void set(Chain o) {
-		this.currentDosage = o;
+	public void set(Chain currentDosage) {
+		this.currentDosage = currentDosage;
 		this.currentDosageCouverture.dejaInitialise = true;
 	}
 	protected InrEntry currentDosageInit() {
@@ -431,8 +432,8 @@ User primary key.
 		return currentMedication;
 	}
 
-	public void set(Chain o) {
-		this.currentMedication = o;
+	public void set(Chain currentMedication) {
+		this.currentMedication = currentMedication;
 		this.currentMedicationCouverture.dejaInitialise = true;
 	}
 	protected InrEntry currentMedicationInit() {
@@ -486,8 +487,8 @@ User primary key.
 		return dosageChange;
 	}
 
-	public void set(Chain o) {
-		this.dosageChange = o;
+	public void set(Chain dosageChange) {
+		this.dosageChange = dosageChange;
 		this.dosageChangeCouverture.dejaInitialise = true;
 	}
 	protected InrEntry dosageChangeInit() {
@@ -541,8 +542,8 @@ User primary key.
 		return additionalNotes;
 	}
 
-	public void set(Chain o) {
-		this.additionalNotes = o;
+	public void set(Chain additionalNotes) {
+		this.additionalNotes = additionalNotes;
 		this.additionalNotesCouverture.dejaInitialise = true;
 	}
 	protected InrEntry additionalNotesInit() {
@@ -596,8 +597,8 @@ User primary key.
 		return contactInfo;
 	}
 
-	public void set(Chain o) {
-		this.contactInfo = o;
+	public void set(Chain contactInfo) {
+		this.contactInfo = contactInfo;
 		this.contactInfoCouverture.dejaInitialise = true;
 	}
 	protected InrEntry contactInfoInit() {
@@ -635,8 +636,8 @@ User primary key.
 
 	protected boolean dejaInitialiseInrEntry = false;
 
-	public InrEntry initLoinInrEntry(RequeteSite requeteSite) {
-		setRequeteSite_(requeteSite);
+	public InrEntry initLoinInrEntry(RequeteSite requeteSite_) {
+		setRequeteSite_(requeteSite_);
 		if(!dejaInitialiseInrEntry) {
 			dejaInitialiseInrEntry = true;
 			initLoinInrEntry();
@@ -645,6 +646,7 @@ User primary key.
 	}
 
 	public void initLoinInrEntry() {
+		super.initLoinCluster(requeteSite_);
 		initInrEntry();
 	}
 
@@ -661,15 +663,16 @@ User primary key.
 		contactInfoInit();
 	}
 
-	public void initLoinPourClasse(RequeteSite requeteSite) {
-		initLoinInrEntry(requeteSite);
+	@Override public void initLoinPourClasse(RequeteSite requeteSite_) {
+		initLoinInrEntry(requeteSite_);
 	}
 
 	/////////////////
 	// requeteSite //
 	/////////////////
 
-	public void requeteSiteInrEntry(RequeteSite requeteSite) {
+	public void requeteSiteInrEntry(RequeteSite requeteSite_) {
+			super.requeteSiteCluster(requeteSite_);
 		currentDosageText.setRequeteSite_(requeteSite);
 		currentGoal.setRequeteSite_(requeteSite);
 		currentDosage.setRequeteSite_(requeteSite);
@@ -679,8 +682,8 @@ User primary key.
 		contactInfo.setRequeteSite_(requeteSite);
 	}
 
-	public void requeteSitePourClasse(RequeteSite requeteSite) {
-		requeteSiteInrEntry(requeteSite);
+	public void requeteSitePourClasse(RequeteSite requeteSite_) {
+		requeteSiteInrEntry(requeteSite_);
 	}
 
 	/////////////
@@ -700,11 +703,11 @@ User primary key.
 	//}
 
 
-	public void indexerPourClasse() throws Exception {
+	@Override public void indexerPourClasse() throws Exception {
 		indexerInrEntry();
 	}
 
-	public void indexerPourClasse(SolrInputDocument document) throws Exception {
+	@Override public void indexerPourClasse(SolrInputDocument document) throws Exception {
 		indexerInrEntry(document);
 	}
 	public void indexerInrEntry() throws Exception {
@@ -756,13 +759,15 @@ User primary key.
 			document.addField("contactInfo_indexed_string", contactInfo);
 			document.addField("contactInfo_stored_string", contactInfo);
 		}
+		super.indexerCluster(document);
+
 	}
 
 	/////////////
 	// obtenir //
 	/////////////
 
-	public Object obtenirPourClasse(String var) throws Exception {
+	@Override public Object obtenirPourClasse(String var) throws Exception {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
@@ -799,7 +804,7 @@ User primary key.
 			case "contactInfo":
 				return oInrEntry.contactInfo;
 			default:
-				return null;
+				return super.obtenirCluster(var);
 		}
 	}
 
@@ -807,7 +812,7 @@ User primary key.
 	// attribuer //
 	///////////////
 
-	public boolean attribuerPourClasse(String var, Object val) {
+	@Override public boolean attribuerPourClasse(String var, Object val) {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
@@ -827,7 +832,7 @@ User primary key.
 				oInrEntry.set((Long)val);
 				return val;
 			default:
-				return null;
+				return super.attribuerCluster(var, val);
 		}
 	}
 
@@ -835,7 +840,7 @@ User primary key.
 	// definir //
 	/////////////
 
-	public boolean definirPourClasse(String var, String val) {
+	@Override public boolean definirPourClasse(String var, String val) {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		if(val != null) {
@@ -889,7 +894,7 @@ User primary key.
 				sauvegardesInrEntry.add(var);
 				return val;
 			default:
-				return null;
+				return super.definirCluster(var, val);
 		}
 	}
 
@@ -903,7 +908,7 @@ User primary key.
 	// peupler //
 	/////////////
 
-	public void peuplerPourClasse(SolrDocument solrDocument) {
+	@Override public void peuplerPourClasse(SolrDocument solrDocument) {
 		peuplerInrEntry(solrDocument);
 	}
 	public void peuplerInrEntry(SolrDocument solrDocument) {
@@ -969,6 +974,8 @@ User primary key.
 			if(contactInfo != null)
 				oInrEntry.set(contactInfo);
 		}
+
+		super.peuplerCluster(solrDocument);
 	}
 
 	//////////////
@@ -976,7 +983,7 @@ User primary key.
 	//////////////
 
 	@Override public int hashCode() {
-		return Objects.hash(dateInr, dateReverifier, currentDosageText, currentGoal, currentDosage, currentMedication, dosageChange, additionalNotes, contactInfo);
+		return Objects.hash(super.hashCode(), dateInr, dateReverifier, currentDosageText, currentGoal, currentDosage, currentMedication, dosageChange, additionalNotes, contactInfo);
 	}
 
 	////////////
@@ -989,7 +996,8 @@ User primary key.
 		if(!(o instanceof InrEntry))
 			return false;
 		InrEntry that = (InrEntry)o;
-		return Objects.equals( dateInr, that.dateInr )
+		return super.equals(o)
+				&& Objects.equals( dateInr, that.dateInr )
 				&& Objects.equals( dateReverifier, that.dateReverifier )
 				&& Objects.equals( currentDosageText, that.currentDosageText )
 				&& Objects.equals( currentGoal, that.currentGoal )
@@ -1006,6 +1014,7 @@ User primary key.
 
 	@Override public String toString() {
 		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString() + "\n");
 		sb.append("InrEntry {");
 		sb.append( "dateInr: " ).append(dateInr);
 		sb.append( ", dateReverifier: " ).append(dateReverifier);

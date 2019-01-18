@@ -43,7 +43,7 @@ public class Cluster extends ClusterGen<Object> {
 	 * indexe: true
 	 * stocke: true
 	 * clePrimaire: true
-	 */                           
+	 */                          
 	protected void _pk(Couverture<Long> c) {}
 
 	/**

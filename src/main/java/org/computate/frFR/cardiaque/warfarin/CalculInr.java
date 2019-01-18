@@ -1,4 +1,4 @@
-package org.computate.frFR.cardiaque.warfarin; 
+package org.computate.frFR.cardiaque.warfarin;  
 
 import java.time.LocalDate;
 
@@ -19,10 +19,8 @@ import org.computate.frFR.cardiaque.couverture.Couverture;
  * val.VAL_patientPrendCoumadinOuiDosageInitial.frFR:Yes, initial dosing
  * val.VAL_patientPrendCoumadinOuiRecommence.frFR:Yes, restarted
  * role.frFR: Something
- * keyword: something
- * keyword: somethingelse
  * map.this.Integer: 1
-*/                   
+*/  
 public class CalculInr extends CalculInrGen<Cluster> {  
 
 	/**

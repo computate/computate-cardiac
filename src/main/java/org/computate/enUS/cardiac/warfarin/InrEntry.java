@@ -2,7 +2,7 @@ package org.computate.enUS.cardiac.warfarin;
 
 import java.time.LocalDate;
 import org.computate.enUS.cardiac.chain.Chain;
-import org.computate.frFR.cardiaque.cluster.Cluster;
+import org.computate.site.course.c000.cluster.Cluster;
 import org.computate.frFR.cardiaque.couverture.Couverture;
 
 public class InrEntry extends InrEntryGen<Cluster> {

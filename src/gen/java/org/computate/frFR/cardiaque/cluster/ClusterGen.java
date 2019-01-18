@@ -52,16 +52,16 @@ public abstract class ClusterGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.cluster.Cluster&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:requeteSite_">Trouver l'entité requeteSite_ dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _requeteSite_(Couverture<RequeteSite> o);
+	protected abstract void _requeteSite_(Couverture<RequeteSite> c);
 
 	public RequeteSite getRequeteSite_() {
 		return requeteSite_;
 	}
 
-	public void setRequeteSite_(RequeteSite o) {
-		this.requeteSite_ = o;
+	public void setRequeteSite_(RequeteSite c) {
+		this.requeteSite_ = c;
 		this.requeteSite_Couverture.dejaInitialise = true;
 	}
 	protected Cluster requeteSite_Init() {
@@ -88,16 +88,16 @@ public abstract class ClusterGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.cluster.Cluster&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:page_">Trouver l'entité page_ dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _page_(Couverture<MiseEnPage> o);
+	protected abstract void _page_(Couverture<MiseEnPage> c);
 
 	public MiseEnPage getPage_() {
 		return page_;
 	}
 
-	public void setPage_(MiseEnPage o) {
-		this.page_ = o;
+	public void setPage_(MiseEnPage c) {
+		this.page_ = c;
 		this.page_Couverture.dejaInitialise = true;
 	}
 	protected Cluster page_Init() {
@@ -124,16 +124,16 @@ public abstract class ClusterGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.cluster.Cluster&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:pk">Trouver l'entité pk dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _pk(Couverture<Long> o);
+	protected abstract void _pk(Couverture<Long> c);
 
 	public Long getPk() {
 		return pk;
 	}
 
-	public void setPk(Long o) {
-		this.pk = o;
+	public void setPk(Long c) {
+		this.pk = c;
 		this.pkCouverture.dejaInitialise = true;
 	}
 	public Cluster setPk(String o) {
@@ -227,16 +227,16 @@ public abstract class ClusterGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.cluster.Cluster&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:id">Trouver l'entité id dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _id(Couverture<String> o);
+	protected abstract void _id(Couverture<String> c);
 
 	public String getId() {
 		return id;
 	}
 
-	public void setId(String o) {
-		this.id = o;
+	public void setId(String c) {
+		this.id = c;
 		this.idCouverture.dejaInitialise = true;
 	}
 	protected Cluster idInit() {
@@ -324,16 +324,16 @@ public abstract class ClusterGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.cluster.Cluster&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:cree">Trouver l'entité cree dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _cree(Couverture<LocalDateTime> o);
+	protected abstract void _cree(Couverture<LocalDateTime> c);
 
 	public LocalDateTime getCree() {
 		return cree;
 	}
 
-	public void setCree(LocalDateTime o) {
-		this.cree = o;
+	public void setCree(LocalDateTime c) {
+		this.cree = c;
 		this.creeCouverture.dejaInitialise = true;
 	}
 	public Cluster setCree(Instant o) {
@@ -437,16 +437,16 @@ public abstract class ClusterGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.cluster.Cluster&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:modifie">Trouver l'entité modifie dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _modifie(Couverture<LocalDateTime> o);
+	protected abstract void _modifie(Couverture<LocalDateTime> c);
 
 	public LocalDateTime getModifie() {
 		return modifie;
 	}
 
-	public void setModifie(LocalDateTime o) {
-		this.modifie = o;
+	public void setModifie(LocalDateTime c) {
+		this.modifie = c;
 		this.modifieCouverture.dejaInitialise = true;
 	}
 	public Cluster setModifie(Instant o) {
@@ -550,16 +550,16 @@ public abstract class ClusterGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.cluster.Cluster&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:utilisateurId">Trouver l'entité utilisateurId dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _utilisateurId(Couverture<String> o);
+	protected abstract void _utilisateurId(Couverture<String> c);
 
 	public String getUtilisateurId() {
 		return utilisateurId;
 	}
 
-	public void setUtilisateurId(String o) {
-		this.utilisateurId = o;
+	public void setUtilisateurId(String c) {
+		this.utilisateurId = c;
 		this.utilisateurIdCouverture.dejaInitialise = true;
 	}
 	protected Cluster utilisateurIdInit() {
@@ -647,16 +647,16 @@ public abstract class ClusterGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.cluster.Cluster&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:clusterNomCanonique">Trouver l'entité clusterNomCanonique dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _clusterNomCanonique(Couverture<String> o);
+	protected abstract void _clusterNomCanonique(Couverture<String> c);
 
 	public String getClusterNomCanonique() {
 		return clusterNomCanonique;
 	}
 
-	public void setClusterNomCanonique(String o) {
-		this.clusterNomCanonique = o;
+	public void setClusterNomCanonique(String c) {
+		this.clusterNomCanonique = c;
 		this.clusterNomCanoniqueCouverture.dejaInitialise = true;
 	}
 	protected Cluster clusterNomCanoniqueInit() {
@@ -744,16 +744,16 @@ public abstract class ClusterGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.cluster.Cluster&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:clusterNomSimple">Trouver l'entité clusterNomSimple dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _clusterNomSimple(Couverture<String> o);
+	protected abstract void _clusterNomSimple(Couverture<String> c);
 
 	public String getClusterNomSimple() {
 		return clusterNomSimple;
 	}
 
-	public void setClusterNomSimple(String o) {
-		this.clusterNomSimple = o;
+	public void setClusterNomSimple(String c) {
+		this.clusterNomSimple = c;
 		this.clusterNomSimpleCouverture.dejaInitialise = true;
 	}
 	protected Cluster clusterNomSimpleInit() {
@@ -841,16 +841,16 @@ public abstract class ClusterGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.cluster.Cluster&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:supprime">Trouver l'entité supprime dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _supprime(Couverture<Boolean> o);
+	protected abstract void _supprime(Couverture<Boolean> c);
 
 	public Boolean getSupprime() {
 		return supprime;
 	}
 
-	public void setSupprime(Boolean o) {
-		this.supprime = o;
+	public void setSupprime(Boolean c) {
+		this.supprime = c;
 		this.supprimeCouverture.dejaInitialise = true;
 	}
 	public Cluster setSupprime(String o) {

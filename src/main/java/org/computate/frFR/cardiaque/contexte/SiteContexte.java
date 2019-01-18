@@ -24,7 +24,7 @@ public class SiteContexte extends SiteContexteGen<Object> {
 
 	public static final String SQL_existe = "select count(*), nom_canonique, id_utilisateur from c group by nom_canonique, id_utilisateur having c.pk=?;\n";
 	public static final String SQL_creer = "insert into c(nom_canonique, id_utilisateur) values(?, ?) returning pk;\n";
-	public static final String SQL_modifier = "update c set modifie=? where objet.pk=? and objet.id_utilisateur=? and objet.nom_canonique=? returning cree;\n";
+	public static final String SQL_modifier = "update c set modifie=now() where objet.pk=? and objet.nom_canonique=? returning cree;\n";
 	public static final String SQL_setP = "with p1 as (insert into p(chemin, valeur, actuel, pk_c) values(?, ?, true, ?) returning pk, chemin, pk_c) update p set actuel=false, modifie=now() where p.pk_c=(select pk_c from p1) and p.chemin=(select chemin from p1) and p.actuel=true and p.pk != (select pk from p1);\n";
 	public static final String SQL_removeP = "update p set actuel=false, modifie=now() where p.pk_c=? and p.chemin=? and p.actuel=true;\n";
 	public static final String SQL_definir = "select chemin, valeur from d where d.pk_c=?;\n";
@@ -35,6 +35,7 @@ public class SiteContexte extends SiteContexteGen<Object> {
 	public static final String SQL_clearA1 = "update a set actuel=false, modifie=now() where a.entite1=? and a.pk1=? and a.entite2=? and a.actuel=true;\n";
 	public static final String SQL_clearA2 = "update a set actuel=false, modifie=now() where a.entite1=? and a.entite2=? and a.pk2=? and a.actuel=true;\n";
 	public static final String SQL_removeA = "update a set actuel=false, modifie=now() where a.entite1=? and a.pk1=? and a.entite2=? and a.pk2=? and a.actuel=true;\n";
+	public static final String SQL_vider = "update c set modifie=now() where objet.pk=? and objet.nom_canonique=? returning cree;\nupdate a set actuel=false, modifie=now() where a.pk1=? or a.pk2=? and a.actuel=true;\nupdate p set actuel=false, modifie=now() where p.pk_c=? and p.actuel=true;\n";
 
 	protected void _vertx(Couverture<Vertx> c) throws Exception {
 	}

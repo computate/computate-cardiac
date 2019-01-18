@@ -11,8 +11,8 @@ import java.lang.Exception;
 import java.util.Objects;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
-import org.computate.frFR.cardiaque.ecrivain.ToutEcrivain;
 import java.lang.Object;
+import org.computate.frFR.cardiaque.ecrivain.ToutEcrivain;
 import io.vertx.ext.web.api.contract.openapi3.OpenAPI3RouterFactory;
 import io.vertx.core.json.JsonObject;
 import io.vertx.ext.auth.oauth2.OAuth2Auth;
@@ -39,20 +39,19 @@ public abstract class SiteContexteGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.contexte.SiteContexte&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:vertx">Trouver l'entité vertx dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _vertx(Couverture<Vertx> o) throws Exception;
+	protected abstract void _vertx(Couverture<Vertx> c) throws Exception, Exception;
 
 	public Vertx getVertx() {
 		return vertx;
 	}
 
-	public void setVertx(Vertx o) {
-		this.vertx = o;
+	public void setVertx(Vertx vertx) {
+		this.vertx = vertx;
 		this.vertxCouverture.dejaInitialise = true;
 	}
-	protected SiteContexte vertxInit()
- throws Exception {
+	protected SiteContexte vertxInit() throws Exception {
 		if(!vertxCouverture.dejaInitialise) {
 			_vertx(vertxCouverture);
 			if(vertx == null)
@@ -76,20 +75,19 @@ public abstract class SiteContexteGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.contexte.SiteContexte&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:siteAuth">Trouver l'entité siteAuth dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _siteAuth(Couverture<OAuth2Auth> o) throws Exception;
+	protected abstract void _siteAuth(Couverture<OAuth2Auth> c) throws Exception, Exception;
 
 	public OAuth2Auth getSiteAuth() {
 		return siteAuth;
 	}
 
-	public void setSiteAuth(OAuth2Auth o) {
-		this.siteAuth = o;
+	public void setSiteAuth(OAuth2Auth siteAuth) {
+		this.siteAuth = siteAuth;
 		this.siteAuthCouverture.dejaInitialise = true;
 	}
-	protected SiteContexte siteAuthInit()
- throws Exception {
+	protected SiteContexte siteAuthInit() throws Exception {
 		if(!siteAuthCouverture.dejaInitialise) {
 			_siteAuth(siteAuthCouverture);
 			if(siteAuth == null)
@@ -113,20 +111,19 @@ public abstract class SiteContexteGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.contexte.SiteContexte&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:usineRouteur">Trouver l'entité usineRouteur dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _usineRouteur(Couverture<OpenAPI3RouterFactory> o) throws Exception;
+	protected abstract void _usineRouteur(Couverture<OpenAPI3RouterFactory> c) throws Exception, Exception;
 
 	public OpenAPI3RouterFactory getUsineRouteur() {
 		return usineRouteur;
 	}
 
-	public void setUsineRouteur(OpenAPI3RouterFactory o) {
-		this.usineRouteur = o;
+	public void setUsineRouteur(OpenAPI3RouterFactory usineRouteur) {
+		this.usineRouteur = usineRouteur;
 		this.usineRouteurCouverture.dejaInitialise = true;
 	}
-	protected SiteContexte usineRouteurInit()
- throws Exception {
+	protected SiteContexte usineRouteurInit() throws Exception {
 		if(!usineRouteurCouverture.dejaInitialise) {
 			_usineRouteur(usineRouteurCouverture);
 			if(usineRouteur == null)
@@ -152,18 +149,17 @@ public abstract class SiteContexteGen<DEV> extends Object {
 	 * <br/>
 	 * @param configSite est l'entité déjà construit. 
 	 **/
-	protected abstract void _configSite(ConfigSite o) throws Exception;
+	protected abstract void _configSite(ConfigSite o) throws Exception, Exception;
 
 	public ConfigSite getConfigSite() {
 		return configSite;
 	}
 
-	public void setConfigSite(ConfigSite o) {
-		this.configSite = o;
+	public void setConfigSite(ConfigSite configSite) {
+		this.configSite = configSite;
 		this.configSiteCouverture.dejaInitialise = true;
 	}
-	protected SiteContexte configSiteInit()
- throws Exception {
+	protected SiteContexte configSiteInit() throws Exception {
 		if(!configSiteCouverture.dejaInitialise) {
 			_configSite(configSite);
 		}
@@ -188,18 +184,17 @@ public abstract class SiteContexteGen<DEV> extends Object {
 	 * <br/>
 	 * @param jdbcConfig est l'entité déjà construit. 
 	 **/
-	protected abstract void _jdbcConfig(JsonObject o) throws Exception;
+	protected abstract void _jdbcConfig(JsonObject o) throws Exception, Exception;
 
 	public JsonObject getJdbcConfig() {
 		return jdbcConfig;
 	}
 
-	public void setJdbcConfig(JsonObject o) {
-		this.jdbcConfig = o;
+	public void setJdbcConfig(JsonObject jdbcConfig) {
+		this.jdbcConfig = jdbcConfig;
 		this.jdbcConfigCouverture.dejaInitialise = true;
 	}
-	protected SiteContexte jdbcConfigInit()
- throws Exception {
+	protected SiteContexte jdbcConfigInit() throws Exception {
 		if(!jdbcConfigCouverture.dejaInitialise) {
 			_jdbcConfig(jdbcConfig);
 		}
@@ -221,20 +216,19 @@ public abstract class SiteContexteGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.contexte.SiteContexte&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:clientSql">Trouver l'entité clientSql dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _clientSql(Couverture<SQLClient> o) throws Exception;
+	protected abstract void _clientSql(Couverture<SQLClient> c) throws Exception, Exception;
 
 	public SQLClient getClientSql() {
 		return clientSql;
 	}
 
-	public void setClientSql(SQLClient o) {
-		this.clientSql = o;
+	public void setClientSql(SQLClient clientSql) {
+		this.clientSql = clientSql;
 		this.clientSqlCouverture.dejaInitialise = true;
 	}
-	protected SiteContexte clientSqlInit()
- throws Exception {
+	protected SiteContexte clientSqlInit() throws Exception {
 		if(!clientSqlCouverture.dejaInitialise) {
 			_clientSql(clientSqlCouverture);
 			if(clientSql == null)
@@ -258,20 +252,19 @@ public abstract class SiteContexteGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.contexte.SiteContexte&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:clientSolr">Trouver l'entité clientSolr dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _clientSolr(Couverture<HttpSolrClient> o) throws Exception;
+	protected abstract void _clientSolr(Couverture<HttpSolrClient> c) throws Exception, Exception;
 
 	public HttpSolrClient getClientSolr() {
 		return clientSolr;
 	}
 
-	public void setClientSolr(HttpSolrClient o) {
-		this.clientSolr = o;
+	public void setClientSolr(HttpSolrClient clientSolr) {
+		this.clientSolr = clientSolr;
 		this.clientSolrCouverture.dejaInitialise = true;
 	}
-	protected SiteContexte clientSolrInit()
- throws Exception {
+	protected SiteContexte clientSolrInit() throws Exception {
 		if(!clientSolrCouverture.dejaInitialise) {
 			_clientSolr(clientSolrCouverture);
 			if(clientSolr == null)
@@ -295,20 +288,19 @@ public abstract class SiteContexteGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.contexte.SiteContexte&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:clientSolrComputate">Trouver l'entité clientSolrComputate dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _clientSolrComputate(Couverture<HttpSolrClient> o) throws Exception;
+	protected abstract void _clientSolrComputate(Couverture<HttpSolrClient> c) throws Exception, Exception;
 
 	public HttpSolrClient getClientSolrComputate() {
 		return clientSolrComputate;
 	}
 
-	public void setClientSolrComputate(HttpSolrClient o) {
-		this.clientSolrComputate = o;
+	public void setClientSolrComputate(HttpSolrClient clientSolrComputate) {
+		this.clientSolrComputate = clientSolrComputate;
 		this.clientSolrComputateCouverture.dejaInitialise = true;
 	}
-	protected SiteContexte clientSolrComputateInit()
- throws Exception {
+	protected SiteContexte clientSolrComputateInit() throws Exception {
 		if(!clientSolrComputateCouverture.dejaInitialise) {
 			_clientSolrComputate(clientSolrComputateCouverture);
 			if(clientSolrComputate == null)
@@ -332,20 +324,19 @@ public abstract class SiteContexteGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.contexte.SiteContexte&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:selCryptage">Trouver l'entité selCryptage dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _selCryptage(Couverture<String> o) throws Exception;
+	protected abstract void _selCryptage(Couverture<String> c) throws Exception, Exception;
 
 	public String getSelCryptage() {
 		return selCryptage;
 	}
 
-	public void setSelCryptage(String o) {
-		this.selCryptage = o;
+	public void setSelCryptage(String selCryptage) {
+		this.selCryptage = selCryptage;
 		this.selCryptageCouverture.dejaInitialise = true;
 	}
-	protected SiteContexte selCryptageInit()
- throws Exception {
+	protected SiteContexte selCryptageInit() throws Exception {
 		if(!selCryptageCouverture.dejaInitialise) {
 			_selCryptage(selCryptageCouverture);
 			if(selCryptage == null)
@@ -389,20 +380,19 @@ public abstract class SiteContexteGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.contexte.SiteContexte&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:motDePasseCryptage">Trouver l'entité motDePasseCryptage dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _motDePasseCryptage(Couverture<String> o) throws Exception;
+	protected abstract void _motDePasseCryptage(Couverture<String> c) throws Exception, Exception;
 
 	public String getMotDePasseCryptage() {
 		return motDePasseCryptage;
 	}
 
-	public void setMotDePasseCryptage(String o) {
-		this.motDePasseCryptage = o;
+	public void setMotDePasseCryptage(String motDePasseCryptage) {
+		this.motDePasseCryptage = motDePasseCryptage;
 		this.motDePasseCryptageCouverture.dejaInitialise = true;
 	}
-	protected SiteContexte motDePasseCryptageInit()
- throws Exception {
+	protected SiteContexte motDePasseCryptageInit() throws Exception {
 		if(!motDePasseCryptageCouverture.dejaInitialise) {
 			_motDePasseCryptage(motDePasseCryptageCouverture);
 			if(motDePasseCryptage == null)
@@ -446,20 +436,19 @@ public abstract class SiteContexteGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.contexte.SiteContexte&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:jetonIdentitePaypal">Trouver l'entité jetonIdentitePaypal dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _jetonIdentitePaypal(Couverture<String> o) throws Exception;
+	protected abstract void _jetonIdentitePaypal(Couverture<String> c) throws Exception, Exception;
 
 	public String getJetonIdentitePaypal() {
 		return jetonIdentitePaypal;
 	}
 
-	public void setJetonIdentitePaypal(String o) {
-		this.jetonIdentitePaypal = o;
+	public void setJetonIdentitePaypal(String jetonIdentitePaypal) {
+		this.jetonIdentitePaypal = jetonIdentitePaypal;
 		this.jetonIdentitePaypalCouverture.dejaInitialise = true;
 	}
-	protected SiteContexte jetonIdentitePaypalInit()
- throws Exception {
+	protected SiteContexte jetonIdentitePaypalInit() throws Exception {
 		if(!jetonIdentitePaypalCouverture.dejaInitialise) {
 			_jetonIdentitePaypal(jetonIdentitePaypalCouverture);
 			if(jetonIdentitePaypal == null)
@@ -503,16 +492,16 @@ public abstract class SiteContexteGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.contexte.SiteContexte&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:nombreExecuteurs">Trouver l'entité nombreExecuteurs dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _nombreExecuteurs(Couverture<Integer> o) throws Exception;
+	protected abstract void _nombreExecuteurs(Couverture<Integer> c) throws Exception, Exception;
 
 	public Integer getNombreExecuteurs() {
 		return nombreExecuteurs;
 	}
 
-	public void setNombreExecuteurs(Integer o) {
-		this.nombreExecuteurs = o;
+	public void setNombreExecuteurs(Integer nombreExecuteurs) {
+		this.nombreExecuteurs = nombreExecuteurs;
 		this.nombreExecuteursCouverture.dejaInitialise = true;
 	}
 	public SiteContexte setNombreExecuteurs(String o) {
@@ -521,8 +510,7 @@ public abstract class SiteContexteGen<DEV> extends Object {
 		this.nombreExecuteursCouverture.dejaInitialise = true;
 		return (SiteContexte)this;
 	}
-	protected SiteContexte nombreExecuteursInit()
- throws Exception {
+	protected SiteContexte nombreExecuteursInit() throws Exception {
 		if(!nombreExecuteursCouverture.dejaInitialise) {
 			_nombreExecuteurs(nombreExecuteursCouverture);
 			if(nombreExecuteurs == null)
@@ -568,18 +556,17 @@ public abstract class SiteContexteGen<DEV> extends Object {
 	 * <br/>
 	 * @param requeteSite_ est l'entité déjà construit. 
 	 **/
-	protected abstract void _requeteSite_(RequeteSite o) throws Exception;
+	protected abstract void _requeteSite_(RequeteSite o) throws Exception, Exception;
 
 	public RequeteSite getRequeteSite_() {
 		return requeteSite_;
 	}
 
-	public void setRequeteSite_(RequeteSite o) {
-		this.requeteSite_ = o;
+	public void setRequeteSite_(RequeteSite requeteSite_) {
+		this.requeteSite_ = requeteSite_;
 		this.requeteSite_Couverture.dejaInitialise = true;
 	}
-	protected SiteContexte requeteSite_Init()
- throws Exception {
+	protected SiteContexte requeteSite_Init() throws Exception {
 		if(!requeteSite_Couverture.dejaInitialise) {
 			_requeteSite_(requeteSite_);
 		}
@@ -593,8 +580,8 @@ public abstract class SiteContexteGen<DEV> extends Object {
 
 	protected boolean dejaInitialiseSiteContexte = false;
 
-	public SiteContexte initLoinSiteContexte(RequeteSite requeteSite) throws Exception {
-		setRequeteSite_(requeteSite);
+	public SiteContexte initLoinSiteContexte(RequeteSite requeteSite_) throws Exception {
+		setRequeteSite_(requeteSite_);
 		if(!dejaInitialiseSiteContexte) {
 			dejaInitialiseSiteContexte = true;
 			initLoinSiteContexte();
@@ -622,20 +609,20 @@ public abstract class SiteContexteGen<DEV> extends Object {
 		requeteSite_Init();
 	}
 
-	public void initLoinPourClasse(RequeteSite requeteSite) throws Exception {
-		initLoinSiteContexte(requeteSite);
+	public void initLoinPourClasse(RequeteSite requeteSite_) throws Exception {
+		initLoinSiteContexte(requeteSite_);
 	}
 
 	/////////////////
 	// requeteSite //
 	/////////////////
 
-	public void requeteSiteSiteContexte(RequeteSite requeteSite) {
+	public void requeteSiteSiteContexte(RequeteSite requeteSite_) {
 		configSite.setRequeteSite_(requeteSite);
 	}
 
-	public void requeteSitePourClasse(RequeteSite requeteSite) {
-		requeteSiteSiteContexte(requeteSite);
+	public void requeteSitePourClasse(RequeteSite requeteSite_) {
+		requeteSiteSiteContexte(requeteSite_);
 	}
 
 	/////////////
@@ -693,7 +680,7 @@ public abstract class SiteContexteGen<DEV> extends Object {
 	// attribuer //
 	///////////////
 
-	public boolean attribuerPourClasse(String var, Object val) {
+	public boolean attribuerPourClasse(String var, Object val) throws Exception {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
@@ -718,7 +705,7 @@ public abstract class SiteContexteGen<DEV> extends Object {
 	// definir //
 	/////////////
 
-	public boolean definirPourClasse(String var, String val) {
+	public boolean definirPourClasse(String var, String val) throws Exception {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		if(val != null) {
