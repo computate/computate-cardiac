@@ -36,25 +36,26 @@ public class SiteContexte extends SiteContexteGen<Object> {
 	public static final String SQL_clearA2 = "update a set actuel=false, modifie=now() where a.entite1=? and a.entite2=? and a.pk2=? and a.actuel=true;\n";
 	public static final String SQL_removeA = "update a set actuel=false, modifie=now() where a.entite1=? and a.pk1=? and a.entite2=? and a.pk2=? and a.actuel=true;\n";
 	public static final String SQL_vider = "update c set modifie=now() where objet.pk=? and objet.nom_canonique=? returning cree;\nupdate a set actuel=false, modifie=now() where a.pk1=? or a.pk2=? and a.actuel=true;\nupdate p set actuel=false, modifie=now() where p.pk_c=? and p.actuel=true;\n";
+	public static final String SQL_supprimer = "update c set modifie=now() where objet.pk=? and objet.nom_canonique=? returning cree;\nupdate a set actuel=false, modifie=now() where a.pk1=? or a.pk2=? and a.actuel=true;\nupdate p set actuel=false, modifie=now() where p.pk_c=? and p.actuel=true;\nwith p1 as (insert into p(chemin, valeur, actuel, pk_c) values('supprime', true, true, ?) returning pk, chemin, pk_c) update p set actuel=false, modifie=now() where p.pk_c=(select pk_c from p1) and p.chemin=(select chemin from p1) and p.actuel=true and p.pk != (select pk from p1);\n";
 
-	protected void _vertx(Couverture<Vertx> c) throws Exception {
+	protected void _vertx(Couverture<Vertx> c) {
 	}
 
-	protected void _siteAuth(Couverture<OAuth2Auth> c) throws Exception {
+	protected void _siteAuth(Couverture<OAuth2Auth> c) {
 	}
 
-	protected void _usineRouteur(Couverture<OpenAPI3RouterFactory> c) throws Exception {
+	protected void _usineRouteur(Couverture<OpenAPI3RouterFactory> c) {
 	}
 
-//	protected void _siteRouteur_(Couverture<Router> c) throws Exception {
+//	protected void _siteRouteur_(Couverture<Router> c) {
 //	}
 
 	/**	Le config du site. **/
-	protected void _configSite(ConfigSite o) throws Exception { 
+	protected void _configSite(ConfigSite o) { 
 			o.setSiteContexte_(this);
 	}
 
-	protected void _jdbcConfig(JsonObject o) throws Exception {
+	protected void _jdbcConfig(JsonObject o) {
 		if(StringUtils.isNotEmpty(configSite.getJdbcUrl()))
 			o.put("url", configSite.getJdbcUrl());
 		if(StringUtils.isNotEmpty(configSite.getJdbcClassePilote()))
@@ -78,7 +79,7 @@ public class SiteContexte extends SiteContexteGen<Object> {
 	}
 
 	/**	Le source de données du site. **/
-	protected void _clientSql(Couverture<SQLClient> c) throws Exception {
+	protected void _clientSql(Couverture<SQLClient> c) {
 		if(vertx != null) {
 			SQLClient o = JDBCClient.createShared(vertx, jdbcConfig);
 			c.o(o);
@@ -86,13 +87,13 @@ public class SiteContexte extends SiteContexteGen<Object> {
 	}
 //
 //	/**	L'URL JNDI vers le source de courriels dans Tomcat. **/
-//	protected void _urlSourceMail(Couverture<String> c) throws Exception {
+//	protected void _urlSourceMail(Couverture<String> c) {
 //		String o = "java:comp/env/mail/Session";
 //		c.o(o);
 //	}
 //
 //	/**	Le source de courriels du site. **/
-//	protected void _sessionCourriel(Couverture<Session> c) throws Exception {
+//	protected void _sessionCourriel(Couverture<Session> c) {
 //		try {
 //			Session o = (Session)contexteInitiale.lookup(urlSourceMail);
 //			c.o(o);
@@ -105,13 +106,13 @@ public class SiteContexte extends SiteContexteGen<Object> {
 //	}
 
 	/**	Le client du moteur de recherche SOLR. **/
-	protected void _clientSolr(Couverture<HttpSolrClient> c) throws Exception {
+	protected void _clientSolr(Couverture<HttpSolrClient> c) {
 		HttpSolrClient o = new HttpSolrClient.Builder(configSite.getSolrUrl()).build();
 		c.o(o);
 	}
 
 	/**	Le client du moteur de recherche SOLR. **/
-	protected void _clientSolrComputate(Couverture<HttpSolrClient> c) throws Exception {
+	protected void _clientSolrComputate(Couverture<HttpSolrClient> c) {
 		String solrUrlComputate = configSite.getSolrUrlComputate();
 		if(StringUtils.isNotEmpty(solrUrlComputate)) {
 			HttpSolrClient o = new HttpSolrClient.Builder(solrUrlComputate).build();
@@ -120,31 +121,31 @@ public class SiteContexte extends SiteContexteGen<Object> {
 	}
 
 	/**	Le sel de cryptage à utiliser pour tout cryptage. **/
-	protected void _selCryptage(Couverture<String> c) throws Exception {
+	protected void _selCryptage(Couverture<String> c) {
 		String o = configSite.getSelCryptage();
 		c.o(o);
 	}
 
 	/**	Le mot de passe de cryptage à utiliser pour tout cryptage. **/
-	protected void _motDePasseCryptage(Couverture<String> c) throws Exception {
+	protected void _motDePasseCryptage(Couverture<String> c) {
 		String o = configSite.getMotDePasseCryptage();
 		c.o(o);
 	}
 
 	/**	Le jeton d'identité Paypal pour valider des transactions Paypal. **/
-	protected void _jetonIdentitePaypal(Couverture<String> c) throws Exception {
+	protected void _jetonIdentitePaypal(Couverture<String> c) {
 		String o = configSite.getJetonIdentitePaypal();
 		c.o(o);
 	}
 
 	/**	Le nombre de fils pour executer des tâches daemon dans le site. **/
-	protected void _nombreExecuteurs(Couverture<Integer> c) throws Exception {
+	protected void _nombreExecuteurs(Couverture<Integer> c) {
 		Integer o = configSite.getNombreExecuteurs();
 		c.o(o);
 	}
 
 	/**	Tous les infos importants à propos de la requête actuelle. **/
-	protected void _requeteSite_(RequeteSite o) throws Exception { 
+	protected void _requeteSite_(RequeteSite o) { 
 //		o.configSite_ = configSite;
 //		o.SiteContexte_ = this;
 	}

@@ -6,9 +6,9 @@ import org.computate.frFR.cardiaque.couverture.Couverture;
 import org.computate.frFR.cardiaque.config.ConfigSite;
 import org.computate.frFR.cardiaque.cluster.Cluster;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
+import java.lang.Object;
 import org.computate.frFR.cardiaque.ecrivain.ToutEcrivain;
 import org.apache.commons.text.StringEscapeUtils;
-import java.lang.Object;
 import org.apache.commons.lang3.StringUtils;
 import java.lang.Exception;
 
@@ -32,20 +32,19 @@ public abstract class AppPeuplerGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.vertx.AppPeupler&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:requeteSite_">Trouver l'entité requeteSite_ dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _requeteSite_(Couverture<RequeteSite> o) throws Exception;
+	protected abstract void _requeteSite_(Couverture<RequeteSite> c) throws Exception, Exception;
 
 	public RequeteSite getRequeteSite_() {
 		return requeteSite_;
 	}
 
-	public void setRequeteSite_(RequeteSite o) {
-		this.requeteSite_ = o;
+	public void setRequeteSite_(RequeteSite requeteSite_) {
+		this.requeteSite_ = requeteSite_;
 		this.requeteSite_Couverture.dejaInitialise = true;
 	}
-	protected AppPeupler requeteSite_Init()
- throws Exception {
+	protected AppPeupler requeteSite_Init() throws Exception {
 		if(!requeteSite_Couverture.dejaInitialise) {
 			_requeteSite_(requeteSite_Couverture);
 			if(requeteSite_ == null)
@@ -71,18 +70,17 @@ public abstract class AppPeuplerGen<DEV> extends Object {
 	 * <br/>
 	 * @param siteContexte est l'entité déjà construit. 
 	 **/
-	protected abstract void _siteContexte(SiteContexte o) throws Exception;
+	protected abstract void _siteContexte(SiteContexte o) throws Exception, Exception;
 
 	public SiteContexte getSiteContexte() {
 		return siteContexte;
 	}
 
-	public void setSiteContexte(SiteContexte o) {
-		this.siteContexte = o;
+	public void setSiteContexte(SiteContexte siteContexte) {
+		this.siteContexte = siteContexte;
 		this.siteContexteCouverture.dejaInitialise = true;
 	}
-	protected AppPeupler siteContexteInit()
- throws Exception {
+	protected AppPeupler siteContexteInit() throws Exception {
 		if(!siteContexteCouverture.dejaInitialise) {
 			_siteContexte(siteContexte);
 		}
@@ -105,20 +103,19 @@ public abstract class AppPeuplerGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.vertx.AppPeupler&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:configSite">Trouver l'entité configSite dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _configSite(Couverture<ConfigSite> o) throws Exception;
+	protected abstract void _configSite(Couverture<ConfigSite> c) throws Exception, Exception;
 
 	public ConfigSite getConfigSite() {
 		return configSite;
 	}
 
-	public void setConfigSite(ConfigSite o) {
-		this.configSite = o;
+	public void setConfigSite(ConfigSite configSite) {
+		this.configSite = configSite;
 		this.configSiteCouverture.dejaInitialise = true;
 	}
-	protected AppPeupler configSiteInit()
- throws Exception {
+	protected AppPeupler configSiteInit() throws Exception {
 		if(!configSiteCouverture.dejaInitialise) {
 			_configSite(configSiteCouverture);
 			if(configSite == null)
@@ -136,8 +133,8 @@ public abstract class AppPeuplerGen<DEV> extends Object {
 
 	protected boolean dejaInitialiseAppPeupler = false;
 
-	public AppPeupler initLoinAppPeupler(RequeteSite requeteSite) throws Exception {
-		setRequeteSite_(requeteSite);
+	public AppPeupler initLoinAppPeupler(RequeteSite requeteSite_) throws Exception {
+		setRequeteSite_(requeteSite_);
 		if(!dejaInitialiseAppPeupler) {
 			dejaInitialiseAppPeupler = true;
 			initLoinAppPeupler();
@@ -155,21 +152,21 @@ public abstract class AppPeuplerGen<DEV> extends Object {
 		configSiteInit();
 	}
 
-	public void initLoinPourClasse(RequeteSite requeteSite) throws Exception {
-		initLoinAppPeupler(requeteSite);
+	public void initLoinPourClasse(RequeteSite requeteSite_) throws Exception {
+		initLoinAppPeupler(requeteSite_);
 	}
 
 	/////////////////
 	// requeteSite //
 	/////////////////
 
-	public void requeteSiteAppPeupler(RequeteSite requeteSite) {
-		siteContexte.setRequeteSite_(requeteSite);
-		configSite.setRequeteSite_(requeteSite);
+	public void requeteSiteAppPeupler(RequeteSite requeteSite_) {
+		siteContexte.setRequeteSite_(requeteSite_);
+		configSite.setRequeteSite_(requeteSite_);
 	}
 
-	public void requeteSitePourClasse(RequeteSite requeteSite) {
-		requeteSiteAppPeupler(requeteSite);
+	public void requeteSitePourClasse(RequeteSite requeteSite_) {
+		requeteSiteAppPeupler(requeteSite_);
 	}
 
 	/////////////
@@ -207,7 +204,7 @@ public abstract class AppPeuplerGen<DEV> extends Object {
 	// attribuer //
 	///////////////
 
-	public boolean attribuerPourClasse(String var, Object val) {
+	public boolean attribuerPourClasse(String var, Object val) throws Exception {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
@@ -232,7 +229,7 @@ public abstract class AppPeuplerGen<DEV> extends Object {
 	// definir //
 	/////////////
 
-	public boolean definirPourClasse(String var, String val) {
+	public boolean definirPourClasse(String var, String val) throws Exception {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		if(val != null) {

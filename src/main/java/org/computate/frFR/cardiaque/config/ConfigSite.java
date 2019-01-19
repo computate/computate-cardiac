@@ -5,7 +5,9 @@ import java.io.Serializable;
 
 import org.apache.commons.configuration2.INIConfiguration;
 import org.apache.commons.configuration2.builder.fluent.Configurations;
+import org.apache.commons.configuration2.ex.ConfigurationException;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 import org.computate.frFR.cardiaque.contexte.SiteContexte;
 import org.computate.frFR.cardiaque.couverture.Couverture;
@@ -21,15 +23,15 @@ import org.computate.frFR.cardiaque.requete.RequeteSite;
 public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {   
 
 	/**	Tous les infos importants à propos de la requête actuelle. **/
-	protected void _requeteSite_(RequeteSite o) throws Exception {
+	protected void _requeteSite_(RequeteSite o) {
 	}
 
 	/**	L'écouteur de contexte du site pour obtenir des objets globals du contexte. **/
-	protected void _siteContexte_(Couverture<SiteContexte> c) throws Exception {
+	protected void _siteContexte_(Couverture<SiteContexte> c) {
 	}
 
 	/**	Le chemin vers le fichier de config du site. **/
-	protected void _configChemin(Couverture<String> c) throws Exception {   
+	protected void _configChemin(Couverture<String> c) {   
 		String o = System.getenv("configChemin");
 		c.o(o);
 	}
@@ -40,17 +42,21 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 	 * r.enUS: configFile
 	 * enUS: The INI Configuration Object for the config file. 
 	 **/ 
-	protected void _config(Couverture<INIConfiguration> c) throws Exception {
+	protected void _config(Couverture<INIConfiguration> c) {
 		Configurations configurations = new Configurations();
 		File fichierConfig = new File(configChemin);
 		if(configChemin != null && fichierConfig.exists()) {
-			INIConfiguration o = configurations.ini(fichierConfig);
-			c.o(o);
+			try {
+				INIConfiguration o = configurations.ini(fichierConfig);
+				c.o(o);
+			} catch (ConfigurationException e) {
+				ExceptionUtils.rethrow(e);
+			}
 		}
 	}
 
 	/**	Le nom du groupe principal du config pour ce site Web. **/
-	protected void _identifiantSite(Couverture<String> c) throws Exception {
+	protected void _identifiantSite(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv("appliNom");
@@ -61,13 +67,13 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 	}
 
 	/**	Le préfixe déjà échappé pour trouver des propriétés du site. **/
-	protected void _prefixeEchappe(Couverture<String> c) throws Exception {
+	protected void _prefixeEchappe(Couverture<String> c) {
 		String o = StringUtils.replace(identifiantSite, ".", "..") + ".";
 		c.o(o);
 	}
 
 	/**	Le chemin vers le projet du site cloné de git. **/  
-	protected void _appliChemin(Couverture<String> c) throws Exception {
+	protected void _appliChemin(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -78,7 +84,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 	}
 
 	/**	Le chemin vers la racine de document pour le projet. **/
-	protected void _racineDocument(Couverture<String> c) throws Exception {
+	protected void _racineDocument(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -88,7 +94,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 	}
 
 	/**	Le nom de l'entreprise. **/
-	protected void _nomEntreprise(Couverture<String> c) throws Exception {
+	protected void _nomEntreprise(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -98,7 +104,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 	}
 
 	/**	Le nom de domaine du site. **/
-	protected void _nomDomaine(Couverture<String> c) throws Exception {
+	protected void _nomDomaine(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -108,7 +114,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 	}
 
 	/**	Le nom d'hôte du site. **/
-	protected void _siteNomHote(Couverture<String> c) throws Exception {
+	protected void _siteNomHote(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -118,7 +124,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 	}
 
 	/**	Le port du site. **/
-	protected void _sitePort(Couverture<Integer> c) throws Exception {
+	protected void _sitePort(Couverture<Integer> c) {
 		Integer o;
 		if(config == null)
 			o = NumberUtils.toInt(System.getenv(c.var));
@@ -128,7 +134,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 	}
 
 	/**	L'ID client Keycloak du site. **/
-	protected void _authRoyaume(Couverture<String> c) throws Exception {
+	protected void _authRoyaume(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -138,7 +144,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 	}
 
 	/**	L'ID client Keycloak du site. **/
-	protected void _authRessource(Couverture<String> c) throws Exception {
+	protected void _authRessource(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -148,7 +154,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 	}
 
 	/**	L'ID client Keycloak du site. **/
-	protected void _authSecret(Couverture<String> c) throws Exception {
+	protected void _authSecret(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -158,7 +164,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 	}
 
 	/**	L'ID client Keycloak du site. **/
-	protected void _authSslRequis(Couverture<String> c) throws Exception {
+	protected void _authSslRequis(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -167,7 +173,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 		c.o(o);
 	}
 
-	protected void _sslJksChemin(Couverture<String> c) throws Exception {
+	protected void _sslJksChemin(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -176,7 +182,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 		c.o(o);
 	}
 
-	protected void _sslJksMotDePasse(Couverture<String> c) throws Exception {
+	protected void _sslJksMotDePasse(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -186,7 +192,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 	}
 
 	/**	L'ID client Keycloak du site. **/
-	protected void _authUrl(Couverture<String> c) throws Exception {
+	protected void _authUrl(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -196,7 +202,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 	}
 
 	/**	Le sel de cryptage à utiliser pour tout cryptage. **/
-	protected void _selCryptage(Couverture<String> c) throws Exception {
+	protected void _selCryptage(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -206,7 +212,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 	}
 
 	/**	Le mot de passe de cryptage à utiliser pour tout cryptage. **/
-	protected void _motDePasseCryptage(Couverture<String> c) throws Exception {
+	protected void _motDePasseCryptage(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -218,7 +224,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 	/**
 	 * var.enUS: urlDomainBase
 	 * 	L'URL du domaine de base pour les URLs du site. **/
-	protected void _urlDomaineBase(Couverture<String> c) throws Exception {
+	protected void _urlDomaineBase(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -228,7 +234,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 	}
 
 	/**	Le nom d'affichage du site. **/
-	protected void _siteNomAffichage(Couverture<String> c) throws Exception {
+	protected void _siteNomAffichage(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -237,7 +243,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 		c.o(o);
 	}
 
-	protected void _jdbcClassePilote(Couverture<String> c) throws Exception {
+	protected void _jdbcClassePilote(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = StringUtils.defaultIfEmpty(System.getenv(c.var), "org.postgresql.Driver");
@@ -246,7 +252,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 		c.o(o);
 	}
 
-	protected void _jdbcUtilisateur(Couverture<String> c) throws Exception {
+	protected void _jdbcUtilisateur(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -255,7 +261,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 		c.o(o);
 	}
 
-	protected void _jdbcMotDePasse(Couverture<String> c) throws Exception {
+	protected void _jdbcMotDePasse(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -264,7 +270,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 		c.o(o);
 	}
 
-	protected void _jdbcTailleMaxPiscine(Couverture<Integer> c) throws Exception {
+	protected void _jdbcTailleMaxPiscine(Couverture<Integer> c) {
 		Integer o;
 		if(config == null)
 			o = NumberUtils.toInt(System.getenv(c.var), 15);
@@ -273,7 +279,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 		c.o(o);
 	}
 
-	protected void _jdbcTailleInitialePiscine(Couverture<Integer> c) throws Exception {
+	protected void _jdbcTailleInitialePiscine(Couverture<Integer> c) {
 		Integer o;
 		if(config == null)
 			o = NumberUtils.toInt(System.getenv(c.var), 3);
@@ -282,7 +288,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 		c.o(o);
 	}
 
-	protected void _jdbcTailleMinPiscine(Couverture<Integer> c) throws Exception {
+	protected void _jdbcTailleMinPiscine(Couverture<Integer> c) {
 		Integer o;
 		if(config == null)
 			o = NumberUtils.toInt(System.getenv(c.var), 0);
@@ -291,7 +297,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 		c.o(o);
 	}
 
-	protected void _jdbcMaxDeclarations(Couverture<Integer> c) throws Exception {
+	protected void _jdbcMaxDeclarations(Couverture<Integer> c) {
 		Integer o;
 		if(config == null)
 			o = NumberUtils.toInt(System.getenv(c.var), 0);
@@ -300,7 +306,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 		c.o(o);
 	}
 
-	protected void _jdbcMaxDeclarationsParConnexion(Couverture<Integer> c) throws Exception {
+	protected void _jdbcMaxDeclarationsParConnexion(Couverture<Integer> c) {
 		Integer o;
 		if(config == null)
 			o = NumberUtils.toInt(System.getenv(c.var), 0);
@@ -309,7 +315,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 		c.o(o);
 	}
 
-	protected void _jdbcTempsInactiviteMax(Couverture<Integer> c) throws Exception {
+	protected void _jdbcTempsInactiviteMax(Couverture<Integer> c) {
 		Integer o;
 		if(config == null)
 			o = NumberUtils.toInt(System.getenv(c.var), 0);
@@ -319,7 +325,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 	}
 
 	/**	L'URL JDBC vers le source de données. **/ 
-	protected void _jdbcUrl(Couverture<String> c) throws Exception {
+	protected void _jdbcUrl(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -329,7 +335,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 	}
 
 	/**	L'URL vers le moteur de recherche SOLR. **/
-	protected void _solrUrl(Couverture<String> c) throws Exception {
+	protected void _solrUrl(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -339,7 +345,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 	}
 
 	/**	L'URL vers le moteur de recherche SOLR. **/
-	protected void _solrUrlComputate(Couverture<String> c) throws Exception {
+	protected void _solrUrlComputate(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -349,7 +355,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 	}
 
 	/**	Le jeton d'identité Paypal pour valider des transactions Paypal. **/
-	protected void _jetonIdentitePaypal(Couverture<String> c) throws Exception {
+	protected void _jetonIdentitePaypal(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -359,7 +365,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 	}
 
 	/**	Le compte Facebook pour le site. **/
-	protected void _compteFacebook(Couverture<String> c) throws Exception {
+	protected void _compteFacebook(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -369,7 +375,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 	}
 
 	/**	Le compte Twitter pour le site. **/
-	protected void _compteTwitter(Couverture<String> c) throws Exception {
+	protected void _compteTwitter(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -379,7 +385,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 	}
 
 	/**	Le compte Google Plus pour le site. **/
-	protected void _compteGooglePlus(Couverture<String> c) throws Exception {
+	protected void _compteGooglePlus(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -389,7 +395,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 	}
 
 	/**	Le compte Instagram pour le site. **/
-	protected void _compteInstagram(Couverture<String> c) throws Exception {
+	protected void _compteInstagram(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -399,7 +405,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 	}
 
 	/**	Le compte Youtube pour le site. **/
-	protected void _compteYoutube(Couverture<String> c) throws Exception {
+	protected void _compteYoutube(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -409,7 +415,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 	}
 
 	/**	L'identifiant du canal Youtube pour le site. **/
-	protected void _identifiantCanalYoutube(Couverture<String> c) throws Exception {
+	protected void _identifiantCanalYoutube(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -419,7 +425,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 	}
 
 	/**	Le compte Pinterest pour le site. **/
-	protected void _comptePinterest(Couverture<String> c) throws Exception {
+	protected void _comptePinterest(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -429,7 +435,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 	}
 
 	/**	Le compte Open Clipart pour le site. **/
-	protected void _compteOpenclipart(Couverture<String> c) throws Exception {
+	protected void _compteOpenclipart(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -439,7 +445,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 	}
 
 	/**	Le compte mail pour le site. **/
-	protected void _compteMail(Couverture<String> c) throws Exception {
+	protected void _compteMail(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -449,7 +455,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 	}
 
 	/**	Le rôle OpenID Connect pour un administrateur. **/
-	protected void _roleAdmin(Couverture<String> c) throws Exception {
+	protected void _roleAdmin(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -459,7 +465,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 	}
 
 	/**	L'addresse mail pour l'administrateur du site pour les rapports d'erreur. **/
-	protected void _mailAdmin(Couverture<String> c) throws Exception {
+	protected void _mailAdmin(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -469,7 +475,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 	}
 
 	/**	Le nombre de fils pour executer des tâches daemon dans le site. **/
-	protected void _nombreExecuteurs(Couverture<Integer> c) throws Exception {
+	protected void _nombreExecuteurs(Couverture<Integer> c) {
 		Integer o;
 		if(config == null)
 			o = Integer.parseInt(System.getenv(c.var), 1);
@@ -478,7 +484,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 		c.o(o);
 	}
 
-	protected void _openApiVersion(Couverture<String> c) throws Exception {
+	protected void _openApiVersion(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -487,7 +493,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 		c.o(o);
 	}
 
-	protected void _apiDescription(Couverture<String> c) throws Exception {
+	protected void _apiDescription(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -496,7 +502,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 		c.o(o);
 	}
 
-	protected void _apiTitre(Couverture<String> c) throws Exception {
+	protected void _apiTitre(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -505,7 +511,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 		c.o(o);
 	}
 
-	protected void _apiTermsService(Couverture<String> c) throws Exception {
+	protected void _apiTermsService(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -514,7 +520,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 		c.o(o);
 	}
 
-	protected void _apiVersion(Couverture<String> c) throws Exception {
+	protected void _apiVersion(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -523,7 +529,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 		c.o(o);
 	}
 
-	protected void _apiContactMail(Couverture<String> c) throws Exception {
+	protected void _apiContactMail(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -532,7 +538,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 		c.o(o);
 	}
 
-	protected void _apiLicenceNom(Couverture<String> c) throws Exception {
+	protected void _apiLicenceNom(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -541,7 +547,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 		c.o(o);
 	}
 
-	protected void _apiLicenceUrl(Couverture<String> c) throws Exception {
+	protected void _apiLicenceUrl(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -550,7 +556,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 		c.o(o);
 	}
 
-	protected void _apiNomHote(Couverture<String> c) throws Exception {
+	protected void _apiNomHote(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);
@@ -559,7 +565,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 		c.o(o);
 	}
 
-	protected void _apiCheminBase(Couverture<String> c) throws Exception {
+	protected void _apiCheminBase(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);

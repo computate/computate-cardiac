@@ -16,8 +16,8 @@ import java.util.List;
 import java.time.format.DateTimeFormatter;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
 import java.lang.Boolean;
-import org.computate.frFR.cardiaque.ecrivain.ToutEcrivain;
 import java.lang.Object;
+import org.computate.frFR.cardiaque.ecrivain.ToutEcrivain;
 import java.lang.String;
 
 /**	
@@ -40,20 +40,19 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.MiseEnPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:requeteSite_">Trouver l'entité requeteSite_ dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _requeteSite_(Couverture<RequeteSite> o);
+	protected abstract void _requeteSite_(Couverture<RequeteSite> c);
 
 	public RequeteSite getRequeteSite_() {
 		return requeteSite_;
 	}
 
-	public void setRequeteSite_(RequeteSite o) {
-		this.requeteSite_ = o;
+	public void setRequeteSite_(RequeteSite requeteSite_) {
+		this.requeteSite_ = requeteSite_;
 		this.requeteSite_Couverture.dejaInitialise = true;
 	}
-	protected MiseEnPage requeteSite_Init()
- {
+	protected MiseEnPage requeteSite_Init() throws Exception {
 		if(!requeteSite_Couverture.dejaInitialise) {
 			_requeteSite_(requeteSite_Couverture);
 			if(requeteSite_ == null)
@@ -77,20 +76,19 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.MiseEnPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:solrDocument">Trouver l'entité solrDocument dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _solrDocument(Couverture<SolrDocument> o);
+	protected abstract void _solrDocument(Couverture<SolrDocument> c);
 
 	public SolrDocument getSolrDocument() {
 		return solrDocument;
 	}
 
-	public void setSolrDocument(SolrDocument o) {
-		this.solrDocument = o;
+	public void setSolrDocument(SolrDocument solrDocument) {
+		this.solrDocument = solrDocument;
 		this.solrDocumentCouverture.dejaInitialise = true;
 	}
-	protected MiseEnPage solrDocumentInit()
- {
+	protected MiseEnPage solrDocumentInit() throws Exception {
 		if(!solrDocumentCouverture.dejaInitialise) {
 			_solrDocument(solrDocumentCouverture);
 			if(solrDocument == null)
@@ -114,20 +112,19 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.MiseEnPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:w">Trouver l'entité w dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _w(Couverture<ToutEcrivain> o) throws Exception;
+	protected abstract void _w(Couverture<ToutEcrivain> c) throws Exception, Exception;
 
 	public ToutEcrivain getW() {
 		return w;
 	}
 
-	public void setW(ToutEcrivain o) {
-		this.w = o;
+	public void setW(ToutEcrivain w) {
+		this.w = w;
 		this.wCouverture.dejaInitialise = true;
 	}
-	protected MiseEnPage wInit()
- throws Exception {
+	protected MiseEnPage wInit() throws Exception {
 		if(!wCouverture.dejaInitialise) {
 			_w(wCouverture);
 			if(w == null)
@@ -153,16 +150,16 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.MiseEnPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:pageVisibleAuxBots">Trouver l'entité pageVisibleAuxBots dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _pageVisibleAuxBots(Couverture<Boolean> o);
+	protected abstract void _pageVisibleAuxBots(Couverture<Boolean> c);
 
 	public Boolean getPageVisibleAuxBots() {
 		return pageVisibleAuxBots;
 	}
 
-	public void setPageVisibleAuxBots(Boolean o) {
-		this.pageVisibleAuxBots = o;
+	public void setPageVisibleAuxBots(Boolean pageVisibleAuxBots) {
+		this.pageVisibleAuxBots = pageVisibleAuxBots;
 		this.pageVisibleAuxBotsCouverture.dejaInitialise = true;
 	}
 	public MiseEnPage setPageVisibleAuxBots(String o) {
@@ -171,8 +168,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		this.pageVisibleAuxBotsCouverture.dejaInitialise = true;
 		return (MiseEnPage)this;
 	}
-	protected MiseEnPage pageVisibleAuxBotsInit()
- {
+	protected MiseEnPage pageVisibleAuxBotsInit() throws Exception {
 		if(!pageVisibleAuxBotsCouverture.dejaInitialise) {
 			_pageVisibleAuxBots(pageVisibleAuxBotsCouverture);
 			if(pageVisibleAuxBots == null)
@@ -216,20 +212,19 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.MiseEnPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:pageH1">Trouver l'entité pageH1 dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _pageH1(Couverture<String> o);
+	protected abstract void _pageH1(Couverture<String> c);
 
 	public String getPageH1() {
 		return pageH1;
 	}
 
-	public void setPageH1(String o) {
-		this.pageH1 = o;
+	public void setPageH1(String pageH1) {
+		this.pageH1 = pageH1;
 		this.pageH1Couverture.dejaInitialise = true;
 	}
-	protected MiseEnPage pageH1Init()
- {
+	protected MiseEnPage pageH1Init() throws Exception {
 		if(!pageH1Couverture.dejaInitialise) {
 			_pageH1(pageH1Couverture);
 			if(pageH1 == null)
@@ -273,20 +268,19 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.MiseEnPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:pageH2">Trouver l'entité pageH2 dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _pageH2(Couverture<String> o);
+	protected abstract void _pageH2(Couverture<String> c);
 
 	public String getPageH2() {
 		return pageH2;
 	}
 
-	public void setPageH2(String o) {
-		this.pageH2 = o;
+	public void setPageH2(String pageH2) {
+		this.pageH2 = pageH2;
 		this.pageH2Couverture.dejaInitialise = true;
 	}
-	protected MiseEnPage pageH2Init()
- {
+	protected MiseEnPage pageH2Init() throws Exception {
 		if(!pageH2Couverture.dejaInitialise) {
 			_pageH2(pageH2Couverture);
 			if(pageH2 == null)
@@ -330,20 +324,19 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.MiseEnPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:pageH1Court">Trouver l'entité pageH1Court dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _pageH1Court(Couverture<String> o);
+	protected abstract void _pageH1Court(Couverture<String> c);
 
 	public String getPageH1Court() {
 		return pageH1Court;
 	}
 
-	public void setPageH1Court(String o) {
-		this.pageH1Court = o;
+	public void setPageH1Court(String pageH1Court) {
+		this.pageH1Court = pageH1Court;
 		this.pageH1CourtCouverture.dejaInitialise = true;
 	}
-	protected MiseEnPage pageH1CourtInit()
- {
+	protected MiseEnPage pageH1CourtInit() throws Exception {
 		if(!pageH1CourtCouverture.dejaInitialise) {
 			_pageH1Court(pageH1CourtCouverture);
 			if(pageH1Court == null)
@@ -387,20 +380,19 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.MiseEnPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:pageH2Court">Trouver l'entité pageH2Court dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _pageH2Court(Couverture<String> o);
+	protected abstract void _pageH2Court(Couverture<String> c);
 
 	public String getPageH2Court() {
 		return pageH2Court;
 	}
 
-	public void setPageH2Court(String o) {
-		this.pageH2Court = o;
+	public void setPageH2Court(String pageH2Court) {
+		this.pageH2Court = pageH2Court;
 		this.pageH2CourtCouverture.dejaInitialise = true;
 	}
-	protected MiseEnPage pageH2CourtInit()
- {
+	protected MiseEnPage pageH2CourtInit() throws Exception {
 		if(!pageH2CourtCouverture.dejaInitialise) {
 			_pageH2Court(pageH2CourtCouverture);
 			if(pageH2Court == null)
@@ -444,20 +436,19 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.MiseEnPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:pageTitre">Trouver l'entité pageTitre dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _pageTitre(Couverture<String> o);
+	protected abstract void _pageTitre(Couverture<String> c);
 
 	public String getPageTitre() {
 		return pageTitre;
 	}
 
-	public void setPageTitre(String o) {
-		this.pageTitre = o;
+	public void setPageTitre(String pageTitre) {
+		this.pageTitre = pageTitre;
 		this.pageTitreCouverture.dejaInitialise = true;
 	}
-	protected MiseEnPage pageTitreInit()
- {
+	protected MiseEnPage pageTitreInit() throws Exception {
 		if(!pageTitreCouverture.dejaInitialise) {
 			_pageTitre(pageTitreCouverture);
 			if(pageTitre == null)
@@ -501,20 +492,19 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.MiseEnPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:pageUri">Trouver l'entité pageUri dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _pageUri(Couverture<String> o);
+	protected abstract void _pageUri(Couverture<String> c);
 
 	public String getPageUri() {
 		return pageUri;
 	}
 
-	public void setPageUri(String o) {
-		this.pageUri = o;
+	public void setPageUri(String pageUri) {
+		this.pageUri = pageUri;
 		this.pageUriCouverture.dejaInitialise = true;
 	}
-	protected MiseEnPage pageUriInit()
- {
+	protected MiseEnPage pageUriInit() throws Exception {
 		if(!pageUriCouverture.dejaInitialise) {
 			_pageUri(pageUriCouverture);
 			if(pageUri == null)
@@ -566,8 +556,8 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		return pageUris;
 	}
 
-	public void setPageUris(List<String> l) {
-		this.pageUris = l;
+	public void setPageUris(List<String> pageUris) {
+		this.pageUris = pageUris;
 		this.pageUrisCouverture.dejaInitialise = true;
 	}
 	public MiseEnPage addPageUris(String...objets) {
@@ -581,8 +571,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 			this.pageUris.add(o);
 		return (MiseEnPage)this;
 	}
-	protected MiseEnPage pageUrisInit()
- {
+	protected MiseEnPage pageUrisInit() throws Exception {
 		if(!pageUrisCouverture.dejaInitialise) {
 			_pageUris(pageUris);
 		}
@@ -624,20 +613,19 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.MiseEnPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:pageUrl">Trouver l'entité pageUrl dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _pageUrl(Couverture<String> o);
+	protected abstract void _pageUrl(Couverture<String> c);
 
 	public String getPageUrl() {
 		return pageUrl;
 	}
 
-	public void setPageUrl(String o) {
-		this.pageUrl = o;
+	public void setPageUrl(String pageUrl) {
+		this.pageUrl = pageUrl;
 		this.pageUrlCouverture.dejaInitialise = true;
 	}
-	protected MiseEnPage pageUrlInit()
- {
+	protected MiseEnPage pageUrlInit() throws Exception {
 		if(!pageUrlCouverture.dejaInitialise) {
 			_pageUrl(pageUrlCouverture);
 			if(pageUrl == null)
@@ -681,20 +669,19 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.MiseEnPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:pageImageUri">Trouver l'entité pageImageUri dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _pageImageUri(Couverture<String> o);
+	protected abstract void _pageImageUri(Couverture<String> c);
 
 	public String getPageImageUri() {
 		return pageImageUri;
 	}
 
-	public void setPageImageUri(String o) {
-		this.pageImageUri = o;
+	public void setPageImageUri(String pageImageUri) {
+		this.pageImageUri = pageImageUri;
 		this.pageImageUriCouverture.dejaInitialise = true;
 	}
-	protected MiseEnPage pageImageUriInit()
- {
+	protected MiseEnPage pageImageUriInit() throws Exception {
 		if(!pageImageUriCouverture.dejaInitialise) {
 			_pageImageUri(pageImageUriCouverture);
 			if(pageImageUri == null)
@@ -738,20 +725,19 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.MiseEnPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:pageImageUrl">Trouver l'entité pageImageUrl dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _pageImageUrl(Couverture<String> o);
+	protected abstract void _pageImageUrl(Couverture<String> c);
 
 	public String getPageImageUrl() {
 		return pageImageUrl;
 	}
 
-	public void setPageImageUrl(String o) {
-		this.pageImageUrl = o;
+	public void setPageImageUrl(String pageImageUrl) {
+		this.pageImageUrl = pageImageUrl;
 		this.pageImageUrlCouverture.dejaInitialise = true;
 	}
-	protected MiseEnPage pageImageUrlInit()
- {
+	protected MiseEnPage pageImageUrlInit() throws Exception {
 		if(!pageImageUrlCouverture.dejaInitialise) {
 			_pageImageUrl(pageImageUrlCouverture);
 			if(pageImageUrl == null)
@@ -795,20 +781,19 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.MiseEnPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:pageVideoId">Trouver l'entité pageVideoId dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _pageVideoId(Couverture<String> o);
+	protected abstract void _pageVideoId(Couverture<String> c);
 
 	public String getPageVideoId() {
 		return pageVideoId;
 	}
 
-	public void setPageVideoId(String o) {
-		this.pageVideoId = o;
+	public void setPageVideoId(String pageVideoId) {
+		this.pageVideoId = pageVideoId;
 		this.pageVideoIdCouverture.dejaInitialise = true;
 	}
-	protected MiseEnPage pageVideoIdInit()
- {
+	protected MiseEnPage pageVideoIdInit() throws Exception {
 		if(!pageVideoIdCouverture.dejaInitialise) {
 			_pageVideoId(pageVideoIdCouverture);
 			if(pageVideoId == null)
@@ -852,20 +837,19 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.MiseEnPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:pageVideoUrl">Trouver l'entité pageVideoUrl dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _pageVideoUrl(Couverture<String> o);
+	protected abstract void _pageVideoUrl(Couverture<String> c);
 
 	public String getPageVideoUrl() {
 		return pageVideoUrl;
 	}
 
-	public void setPageVideoUrl(String o) {
-		this.pageVideoUrl = o;
+	public void setPageVideoUrl(String pageVideoUrl) {
+		this.pageVideoUrl = pageVideoUrl;
 		this.pageVideoUrlCouverture.dejaInitialise = true;
 	}
-	protected MiseEnPage pageVideoUrlInit()
- {
+	protected MiseEnPage pageVideoUrlInit() throws Exception {
 		if(!pageVideoUrlCouverture.dejaInitialise) {
 			_pageVideoUrl(pageVideoUrlCouverture);
 			if(pageVideoUrl == null)
@@ -909,20 +893,19 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.MiseEnPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:pageVideoUrlEmbed">Trouver l'entité pageVideoUrlEmbed dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _pageVideoUrlEmbed(Couverture<String> o);
+	protected abstract void _pageVideoUrlEmbed(Couverture<String> c);
 
 	public String getPageVideoUrlEmbed() {
 		return pageVideoUrlEmbed;
 	}
 
-	public void setPageVideoUrlEmbed(String o) {
-		this.pageVideoUrlEmbed = o;
+	public void setPageVideoUrlEmbed(String pageVideoUrlEmbed) {
+		this.pageVideoUrlEmbed = pageVideoUrlEmbed;
 		this.pageVideoUrlEmbedCouverture.dejaInitialise = true;
 	}
-	protected MiseEnPage pageVideoUrlEmbedInit()
- {
+	protected MiseEnPage pageVideoUrlEmbedInit() throws Exception {
 		if(!pageVideoUrlEmbedCouverture.dejaInitialise) {
 			_pageVideoUrlEmbed(pageVideoUrlEmbedCouverture);
 			if(pageVideoUrlEmbed == null)
@@ -966,16 +949,16 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.MiseEnPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:pageImageLargeur">Trouver l'entité pageImageLargeur dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _pageImageLargeur(Couverture<Integer> o);
+	protected abstract void _pageImageLargeur(Couverture<Integer> c);
 
 	public Integer getPageImageLargeur() {
 		return pageImageLargeur;
 	}
 
-	public void setPageImageLargeur(Integer o) {
-		this.pageImageLargeur = o;
+	public void setPageImageLargeur(Integer pageImageLargeur) {
+		this.pageImageLargeur = pageImageLargeur;
 		this.pageImageLargeurCouverture.dejaInitialise = true;
 	}
 	public MiseEnPage setPageImageLargeur(String o) {
@@ -984,8 +967,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		this.pageImageLargeurCouverture.dejaInitialise = true;
 		return (MiseEnPage)this;
 	}
-	protected MiseEnPage pageImageLargeurInit()
- {
+	protected MiseEnPage pageImageLargeurInit() throws Exception {
 		if(!pageImageLargeurCouverture.dejaInitialise) {
 			_pageImageLargeur(pageImageLargeurCouverture);
 			if(pageImageLargeur == null)
@@ -1029,16 +1011,16 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.MiseEnPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:pageImageHauteur">Trouver l'entité pageImageHauteur dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _pageImageHauteur(Couverture<Integer> o);
+	protected abstract void _pageImageHauteur(Couverture<Integer> c);
 
 	public Integer getPageImageHauteur() {
 		return pageImageHauteur;
 	}
 
-	public void setPageImageHauteur(Integer o) {
-		this.pageImageHauteur = o;
+	public void setPageImageHauteur(Integer pageImageHauteur) {
+		this.pageImageHauteur = pageImageHauteur;
 		this.pageImageHauteurCouverture.dejaInitialise = true;
 	}
 	public MiseEnPage setPageImageHauteur(String o) {
@@ -1047,8 +1029,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		this.pageImageHauteurCouverture.dejaInitialise = true;
 		return (MiseEnPage)this;
 	}
-	protected MiseEnPage pageImageHauteurInit()
- {
+	protected MiseEnPage pageImageHauteurInit() throws Exception {
 		if(!pageImageHauteurCouverture.dejaInitialise) {
 			_pageImageHauteur(pageImageHauteurCouverture);
 			if(pageImageHauteur == null)
@@ -1092,20 +1073,19 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.MiseEnPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:pageImageTypeContenu">Trouver l'entité pageImageTypeContenu dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _pageImageTypeContenu(Couverture<String> o);
+	protected abstract void _pageImageTypeContenu(Couverture<String> c);
 
 	public String getPageImageTypeContenu() {
 		return pageImageTypeContenu;
 	}
 
-	public void setPageImageTypeContenu(String o) {
-		this.pageImageTypeContenu = o;
+	public void setPageImageTypeContenu(String pageImageTypeContenu) {
+		this.pageImageTypeContenu = pageImageTypeContenu;
 		this.pageImageTypeContenuCouverture.dejaInitialise = true;
 	}
-	protected MiseEnPage pageImageTypeContenuInit()
- {
+	protected MiseEnPage pageImageTypeContenuInit() throws Exception {
 		if(!pageImageTypeContenuCouverture.dejaInitialise) {
 			_pageImageTypeContenu(pageImageTypeContenuCouverture);
 			if(pageImageTypeContenu == null)
@@ -1149,20 +1129,19 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.MiseEnPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:pageMethode">Trouver l'entité pageMethode dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _pageMethode(Couverture<String> o);
+	protected abstract void _pageMethode(Couverture<String> c);
 
 	public String getPageMethode() {
 		return pageMethode;
 	}
 
-	public void setPageMethode(String o) {
-		this.pageMethode = o;
+	public void setPageMethode(String pageMethode) {
+		this.pageMethode = pageMethode;
 		this.pageMethodeCouverture.dejaInitialise = true;
 	}
-	protected MiseEnPage pageMethodeInit()
- {
+	protected MiseEnPage pageMethodeInit() throws Exception {
 		if(!pageMethodeCouverture.dejaInitialise) {
 			_pageMethode(pageMethodeCouverture);
 			if(pageMethode == null)
@@ -1206,20 +1185,19 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.MiseEnPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:pageTypeContenu">Trouver l'entité pageTypeContenu dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _pageTypeContenu(Couverture<String> o);
+	protected abstract void _pageTypeContenu(Couverture<String> c);
 
 	public String getPageTypeContenu() {
 		return pageTypeContenu;
 	}
 
-	public void setPageTypeContenu(String o) {
-		this.pageTypeContenu = o;
+	public void setPageTypeContenu(String pageTypeContenu) {
+		this.pageTypeContenu = pageTypeContenu;
 		this.pageTypeContenuCouverture.dejaInitialise = true;
 	}
-	protected MiseEnPage pageTypeContenuInit()
- {
+	protected MiseEnPage pageTypeContenuInit() throws Exception {
 		if(!pageTypeContenuCouverture.dejaInitialise) {
 			_pageTypeContenu(pageTypeContenuCouverture);
 			if(pageTypeContenu == null)
@@ -1263,16 +1241,16 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.MiseEnPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:pageCree">Trouver l'entité pageCree dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _pageCree(Couverture<LocalDateTime> o);
+	protected abstract void _pageCree(Couverture<LocalDateTime> c);
 
 	public LocalDateTime getPageCree() {
 		return pageCree;
 	}
 
-	public void setPageCree(LocalDateTime o) {
-		this.pageCree = o;
+	public void setPageCree(LocalDateTime pageCree) {
+		this.pageCree = pageCree;
 		this.pageCreeCouverture.dejaInitialise = true;
 	}
 	public MiseEnPage setPageCree(Instant o) {
@@ -1291,8 +1269,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		this.pageCreeCouverture.dejaInitialise = true;
 		return (MiseEnPage)this;
 	}
-	protected MiseEnPage pageCreeInit()
- {
+	protected MiseEnPage pageCreeInit() throws Exception {
 		if(!pageCreeCouverture.dejaInitialise) {
 			_pageCree(pageCreeCouverture);
 			if(pageCree == null)
@@ -1336,16 +1313,16 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.MiseEnPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:pageModifiee">Trouver l'entité pageModifiee dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _pageModifiee(Couverture<LocalDateTime> o);
+	protected abstract void _pageModifiee(Couverture<LocalDateTime> c);
 
 	public LocalDateTime getPageModifiee() {
 		return pageModifiee;
 	}
 
-	public void setPageModifiee(LocalDateTime o) {
-		this.pageModifiee = o;
+	public void setPageModifiee(LocalDateTime pageModifiee) {
+		this.pageModifiee = pageModifiee;
 		this.pageModifieeCouverture.dejaInitialise = true;
 	}
 	public MiseEnPage setPageModifiee(Instant o) {
@@ -1364,8 +1341,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		this.pageModifieeCouverture.dejaInitialise = true;
 		return (MiseEnPage)this;
 	}
-	protected MiseEnPage pageModifieeInit()
- {
+	protected MiseEnPage pageModifieeInit() throws Exception {
 		if(!pageModifieeCouverture.dejaInitialise) {
 			_pageModifiee(pageModifieeCouverture);
 			if(pageModifiee == null)
@@ -1409,20 +1385,19 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.MiseEnPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:pageAccueilUri">Trouver l'entité pageAccueilUri dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _pageAccueilUri(Couverture<String> o);
+	protected abstract void _pageAccueilUri(Couverture<String> c);
 
 	public String getPageAccueilUri() {
 		return pageAccueilUri;
 	}
 
-	public void setPageAccueilUri(String o) {
-		this.pageAccueilUri = o;
+	public void setPageAccueilUri(String pageAccueilUri) {
+		this.pageAccueilUri = pageAccueilUri;
 		this.pageAccueilUriCouverture.dejaInitialise = true;
 	}
-	protected MiseEnPage pageAccueilUriInit()
- {
+	protected MiseEnPage pageAccueilUriInit() throws Exception {
 		if(!pageAccueilUriCouverture.dejaInitialise) {
 			_pageAccueilUri(pageAccueilUriCouverture);
 			if(pageAccueilUri == null)
@@ -1466,20 +1441,19 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.MiseEnPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:pageAProposUri">Trouver l'entité pageAProposUri dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _pageAProposUri(Couverture<String> o);
+	protected abstract void _pageAProposUri(Couverture<String> c);
 
 	public String getPageAProposUri() {
 		return pageAProposUri;
 	}
 
-	public void setPageAProposUri(String o) {
-		this.pageAProposUri = o;
+	public void setPageAProposUri(String pageAProposUri) {
+		this.pageAProposUri = pageAProposUri;
 		this.pageAProposUriCouverture.dejaInitialise = true;
 	}
-	protected MiseEnPage pageAProposUriInit()
- {
+	protected MiseEnPage pageAProposUriInit() throws Exception {
 		if(!pageAProposUriCouverture.dejaInitialise) {
 			_pageAProposUri(pageAProposUriCouverture);
 			if(pageAProposUri == null)
@@ -1523,20 +1497,19 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.MiseEnPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:pageFaqUri">Trouver l'entité pageFaqUri dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _pageFaqUri(Couverture<String> o);
+	protected abstract void _pageFaqUri(Couverture<String> c);
 
 	public String getPageFaqUri() {
 		return pageFaqUri;
 	}
 
-	public void setPageFaqUri(String o) {
-		this.pageFaqUri = o;
+	public void setPageFaqUri(String pageFaqUri) {
+		this.pageFaqUri = pageFaqUri;
 		this.pageFaqUriCouverture.dejaInitialise = true;
 	}
-	protected MiseEnPage pageFaqUriInit()
- {
+	protected MiseEnPage pageFaqUriInit() throws Exception {
 		if(!pageFaqUriCouverture.dejaInitialise) {
 			_pageFaqUri(pageFaqUriCouverture);
 			if(pageFaqUri == null)
@@ -1580,20 +1553,19 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.MiseEnPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:pageUtilisateurUri">Trouver l'entité pageUtilisateurUri dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _pageUtilisateurUri(Couverture<String> o);
+	protected abstract void _pageUtilisateurUri(Couverture<String> c);
 
 	public String getPageUtilisateurUri() {
 		return pageUtilisateurUri;
 	}
 
-	public void setPageUtilisateurUri(String o) {
-		this.pageUtilisateurUri = o;
+	public void setPageUtilisateurUri(String pageUtilisateurUri) {
+		this.pageUtilisateurUri = pageUtilisateurUri;
 		this.pageUtilisateurUriCouverture.dejaInitialise = true;
 	}
-	protected MiseEnPage pageUtilisateurUriInit()
- {
+	protected MiseEnPage pageUtilisateurUriInit() throws Exception {
 		if(!pageUtilisateurUriCouverture.dejaInitialise) {
 			_pageUtilisateurUri(pageUtilisateurUriCouverture);
 			if(pageUtilisateurUri == null)
@@ -1637,20 +1609,19 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.MiseEnPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:pageDeconnexionUri">Trouver l'entité pageDeconnexionUri dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _pageDeconnexionUri(Couverture<String> o);
+	protected abstract void _pageDeconnexionUri(Couverture<String> c);
 
 	public String getPageDeconnexionUri() {
 		return pageDeconnexionUri;
 	}
 
-	public void setPageDeconnexionUri(String o) {
-		this.pageDeconnexionUri = o;
+	public void setPageDeconnexionUri(String pageDeconnexionUri) {
+		this.pageDeconnexionUri = pageDeconnexionUri;
 		this.pageDeconnexionUriCouverture.dejaInitialise = true;
 	}
-	protected MiseEnPage pageDeconnexionUriInit()
- {
+	protected MiseEnPage pageDeconnexionUriInit() throws Exception {
 		if(!pageDeconnexionUriCouverture.dejaInitialise) {
 			_pageDeconnexionUri(pageDeconnexionUriCouverture);
 			if(pageDeconnexionUri == null)
@@ -1686,8 +1657,8 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 
 	protected boolean dejaInitialiseMiseEnPage = false;
 
-	public MiseEnPage initLoinMiseEnPage(RequeteSite requeteSite) throws Exception {
-		setRequeteSite_(requeteSite);
+	public MiseEnPage initLoinMiseEnPage(RequeteSite requeteSite_) throws Exception {
+		setRequeteSite_(requeteSite_);
 		if(!dejaInitialiseMiseEnPage) {
 			dejaInitialiseMiseEnPage = true;
 			initLoinMiseEnPage();
@@ -1731,20 +1702,20 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		pageDeconnexionUriInit();
 	}
 
-	public void initLoinPourClasse(RequeteSite requeteSite) throws Exception {
-		initLoinMiseEnPage(requeteSite);
+	public void initLoinPourClasse(RequeteSite requeteSite_) throws Exception {
+		initLoinMiseEnPage(requeteSite_);
 	}
 
 	/////////////////
 	// requeteSite //
 	/////////////////
 
-	public void requeteSiteMiseEnPage(RequeteSite requeteSite) {
-		w.setRequeteSite_(requeteSite);
+	public void requeteSiteMiseEnPage(RequeteSite requeteSite_) {
+		w.setRequeteSite_(requeteSite_);
 	}
 
-	public void requeteSitePourClasse(RequeteSite requeteSite) {
-		requeteSiteMiseEnPage(requeteSite);
+	public void requeteSitePourClasse(RequeteSite requeteSite_) {
+		requeteSiteMiseEnPage(requeteSite_);
 	}
 
 	/////////////
@@ -1834,7 +1805,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 	// attribuer //
 	///////////////
 
-	public boolean attribuerPourClasse(String var, Object val) {
+	public boolean attribuerPourClasse(String var, Object val) throws Exception {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
@@ -1859,7 +1830,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 	// definir //
 	/////////////
 
-	public boolean definirPourClasse(String var, String val) {
+	public boolean definirPourClasse(String var, String val) throws Exception {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		if(val != null) {

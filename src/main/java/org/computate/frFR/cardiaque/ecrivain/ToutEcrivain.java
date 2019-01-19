@@ -1,16 +1,21 @@
 package org.computate.frFR.cardiaque.ecrivain;   
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
+import org.apache.commons.text.StringEscapeUtils;
+import org.apache.commons.text.WordUtils;
+import org.computate.frFR.cardiaque.chaine.Chaine;
 import org.computate.frFR.cardiaque.couverture.Couverture;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
 
-import io.vertx.core.http.HttpServerResponse;
+import io.vertx.core.buffer.Buffer;
 
 
 /**  
@@ -36,9 +41,9 @@ public class ToutEcrivain extends ToutEcrivainGen<Object> {
 	 * r: ToutEcrivain
 	 * r.enUS: AllWriter
 	 */
-	public static ToutEcrivain creer(RequeteSite requeteSite) throws Exception {
+	public static ToutEcrivain creer(RequeteSite requeteSite_) {
 		ToutEcrivain o = new ToutEcrivain();
-		o.initLoinPourClasse(requeteSite);
+		o.initLoinPourClasse(requeteSite_);
 		return o;
 	}
 
@@ -58,10 +63,33 @@ public class ToutEcrivain extends ToutEcrivainGen<Object> {
 	 * r: ToutEcrivain
 	 * r.enUS: AllWriter
 	 */
-	public static ToutEcrivain creer(RequeteSite requeteSite, File fichier) throws Exception {
+	public static ToutEcrivain creer(RequeteSite requeteSite_, File fichier) {
 		ToutEcrivain o = new ToutEcrivain();
 		o.setFichier(fichier);
-		o.initLoinPourClasse(requeteSite);
+		o.initLoinPourClasse(requeteSite_);
+		return o;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * var.enUS: create
+	 * param1.var.enUS: siteRequest
+	 * param2.var.enUS: fichier
+	 * r: Fichier
+	 * r.enUS: File
+	 * r: fichier
+	 * r.enUS: file
+	 * r: initLoinPourClasse
+	 * r.enUS: initDeepForClass
+	 * r: requeteSite
+	 * r.enUS: siteRequest
+	 * r: ToutEcrivain
+	 * r.enUS: AllWriter
+	 */
+	public static ToutEcrivain creer(RequeteSite requeteSite_, Buffer buffer) {
+		ToutEcrivain o = new ToutEcrivain();
+		o.setBuffer(buffer);
+		o.initLoinPourClasse(requeteSite_);
 		return o;
 	}
 
@@ -80,16 +108,23 @@ public class ToutEcrivain extends ToutEcrivainGen<Object> {
 	 * r.enUS: stringWriter
 	 */
 	protected void _ecrivainString(Couverture<StringWriter> c) {
-		if(fichier == null && reponseServeurHttp == null)
+//		if(fichier == null && reponseServeurHttp == null)
+		if(fichier == null && buffer == null)
 			c.o(new StringWriter());
 	}
 
 	/**
 	 * {@inheritDoc}
-	 * var.enUS: httpServerResponse
 	 **/
-	protected void _reponseServeurHttp(Couverture<HttpServerResponse> c) {
+	protected void _buffer(Couverture<Buffer> c) {
 	}
+//
+//	/**
+//	 * {@inheritDoc}
+//	 * var.enUS: httpServerResponse
+//	 **/
+//	protected void _reponseServeurHttp(Couverture<HttpServerResponse> c) {
+//	}
 
 	/**
 	 * var.enUS: printWriter
@@ -100,12 +135,18 @@ public class ToutEcrivain extends ToutEcrivainGen<Object> {
 	 * r: reponseServeurHttp
 	 * r.enUS: httpServerResponse
 	 */
-	protected void _ecrivainImpression(Couverture<PrintWriter> c) throws Exception {
-		if(reponseServeurHttp == null) {
+	protected void _ecrivainImpression(Couverture<PrintWriter> c) {
+//		if(reponseServeurHttp == null && buffer == null) {
+		if(buffer == null) {
 			if(fichier == null)
 				c.o(new PrintWriter(ecrivainString));
-			else
-				c.o(new PrintWriter(fichier));
+			else {
+				try {
+					c.o(new PrintWriter(fichier));
+				} catch (FileNotFoundException e) {
+					ExceptionUtils.rethrow(e);
+				}
+			}
 		}
 	}
 
@@ -181,25 +222,107 @@ public class ToutEcrivain extends ToutEcrivainGen<Object> {
 					for(Object objet2 : chaine) {
 						String str = objet2.toString();
 						if(objet2 != null && !StringUtils.isEmpty(str)) {
-							if(reponseServeurHttp == null)
+//							if(reponseServeurHttp == null)
+							if(buffer == null)
 								ecrivainImpression.write(str);
 							else
-								reponseServeurHttp.write(str);
+//								reponseServeurHttp.write(str);
+								buffer.appendString(str);
 						}
 					}
 				}
 				else {
 					String str = objet.toString();
 					if(!StringUtils.isEmpty(str)) {
-						if(reponseServeurHttp == null)
+//						if(reponseServeurHttp == null)
+						if(buffer == null)
 							ecrivainImpression.write(str);
 						else
-							reponseServeurHttp.write(str);
+//							reponseServeurHttp.write(str);
+							buffer.appendString(str);
 					}
 				}
 			}
 		}
 		vide = false;
+		return this;
+	}
+
+	public ToutEcrivain string(Object...objets) {
+		s("\"");
+		for(Object objet : objets)
+			if(objet != null)
+				s(StringEscapeUtils.escapeJava(objet.toString()));
+		s("\"");
+		return this;
+	}
+
+	public ToutEcrivain js(Object...objets) {
+		for(Object objet : objets)
+			if(objet != null)
+				s(StringEscapeUtils.escapeJava(objet.toString()));
+		return this;
+	}
+
+	public ToutEcrivain yamlStr(int tabNumber, Object...objets) {
+		StringWriter stringWriter = new StringWriter();
+		PrintWriter printWriter = new PrintWriter(stringWriter);
+		for(Object objet : objets) {
+			if(objet != null) {
+				if(objet instanceof Chaine) {
+					Chaine chaine = (Chaine)objet;
+					for(Object objet2 : chaine.getTout()) {
+						if(objet2 != null && !StringUtils.isEmpty(objet2.toString()))
+							printWriter.append(objet2.toString());
+					}
+				}
+				else if(objet instanceof List) {
+					List<?> chaine = (List<?>)objet;
+					for(Object objet2 : chaine) {
+						if(objet2 != null && !StringUtils.isEmpty(objet2.toString()))
+							printWriter.append(objet2.toString());
+					}
+				}
+				else {
+					if(!StringUtils.isEmpty(objet.toString()))
+						printWriter.append(objet.toString());
+				}
+			}
+		}
+		String[] lines = StringUtils.splitPreserveAllTokens(stringWriter.toString(), "\n");
+		l(">+");
+		for(int i = 0; i < lines.length; i++) {
+			boolean last = i == (lines.length -1);
+			String line = lines[i];
+
+			String[] wrapLines = StringUtils.splitPreserveAllTokens(WordUtils.wrap(line, 70), "\n");
+			for(int j = 0; j < wrapLines.length; j++) {
+				boolean wrapLast = j == (wrapLines.length -1);
+				String wrapLine = wrapLines[j];
+				if(wrapLast)
+					t(tabNumber, wrapLine);
+				else
+					tl(tabNumber, wrapLine);
+			}
+
+			if(!last) {
+				tl(tabNumber);
+				if(StringUtils.isNotBlank(line))
+					tl(tabNumber);
+			}
+			else {
+				l();
+			}
+		}
+
+		try {
+			printWriter.flush();
+			stringWriter.flush();
+			printWriter.close();
+			stringWriter.close();
+		} catch (IOException e) {
+			ExceptionUtils.rethrow(e);
+		}
 		return this;
 	}
 
@@ -211,7 +334,7 @@ public class ToutEcrivain extends ToutEcrivainGen<Object> {
 	 * r: reponseServeurHttp
 	 * r.enUS: httpServerResponse
 	 */
-	public void flushClose() throws IOException {
+	public void flushClose() {
 
 		if(ecrivainImpression != null)
 			ecrivainImpression.flush();
@@ -220,11 +343,16 @@ public class ToutEcrivain extends ToutEcrivainGen<Object> {
 
 		if(ecrivainImpression != null)
 			ecrivainImpression.close();
-		if(ecrivainString != null)
-			ecrivainString.close();
+		if(ecrivainString != null) {
+			try {
+				ecrivainString.close();
+			} catch (IOException e) {
+				ExceptionUtils.rethrow(e);
+			}
+		}
 
-		if(reponseServeurHttp != null)
-			reponseServeurHttp.close();
+//		if(reponseServeurHttp != null)
+//			reponseServeurHttp.close();
 	}
 
 	/**
@@ -236,7 +364,9 @@ public class ToutEcrivain extends ToutEcrivainGen<Object> {
 	 * r.enUS: httpServerResponse
 	 */
 	@Override public String toString() {
-		if(reponseServeurHttp != null)
+//		if(reponseServeurHttp != null)
+//			return ecrivainString.toString();
+		if(buffer != null)
 			return ecrivainString.toString();
 		else if(fichier != null)
 			return ecrivainImpression.toString();

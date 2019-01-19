@@ -1,58 +1,54 @@
-package org.computate.enUS.cardiac.vertx;
+package org.computate.frFR.cardiaque.warfarin;
 
 import java.util.Objects;
-import org.computate.frFR.cardiaque.contexte.SiteContexte;
 import org.computate.frFR.cardiaque.couverture.Couverture;
-import org.computate.enUS.java.SiteConfig;
-import org.computate.site.course.c000.cluster.Cluster;
+import org.computate.frFR.cardiaque.cluster.Cluster;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
-import org.computate.enUS.cardiac.writer.AllWriter;
+import org.computate.frFR.cardiaque.ecrivain.ToutEcrivain;
 import org.apache.commons.text.StringEscapeUtils;
-import java.lang.Object;
 import org.apache.commons.lang3.StringUtils;
-import java.lang.Exception;
 
 /**	
- * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_enUS_indexed_string:org.computate.enUS.cardiac.vertx.AppOpenApi3&fq=classeEtendGen_indexed_boolean:true">Trouver la classe  dans Solr</a>
+ * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.warfarin.CalculInrApiServiceImpl&fq=classeEtendGen_indexed_boolean:true">Trouver la classe  dans Solr</a>
  * <br/>
  **/
-public abstract class AppOpenApi3Gen<DEV> extends Object {
+public abstract class CalculInrApiServiceImplGen<DEV> {
 
 	//////////////
 	// initLoin //
 	//////////////
 
-	protected boolean dejaInitialiseAppOpenApi3 = false;
+	protected boolean dejaInitialiseCalculInrApiServiceImpl = false;
 
-	public AppOpenApi3 initLoinAppOpenApi3(RequeteSite requeteSite) throws Exception {
-		setRequeteSite_(requeteSite);
-		if(!dejaInitialiseAppOpenApi3) {
-			dejaInitialiseAppOpenApi3 = true;
-			initLoinAppOpenApi3();
+	public CalculInrApiServiceImpl initLoinCalculInrApiServiceImpl(RequeteSite requeteSite_) {
+		setRequeteSite_(requeteSite_);
+		if(!dejaInitialiseCalculInrApiServiceImpl) {
+			dejaInitialiseCalculInrApiServiceImpl = true;
+			initLoinCalculInrApiServiceImpl();
 		}
-		return (AppOpenApi3)this;
+		return (CalculInrApiServiceImpl)this;
 	}
 
-	public void initLoinAppOpenApi3() throws Exception {
-		initAppOpenApi3();
+	public void initLoinCalculInrApiServiceImpl() {
+		initCalculInrApiServiceImpl();
 	}
 
-	public void initAppOpenApi3() throws Exception {
+	public void initCalculInrApiServiceImpl() {
 	}
 
-	public void initLoinPourClasse(RequeteSite requeteSite) throws Exception {
-		initLoinAppOpenApi3(requeteSite);
+	public void initLoinPourClasse(RequeteSite requeteSite_) {
+		initLoinCalculInrApiServiceImpl(requeteSite_);
 	}
 
 	/////////////////
 	// requeteSite //
 	/////////////////
 
-	public void requeteSiteAppOpenApi3(RequeteSite requeteSite) {
+	public void requeteSiteCalculInrApiServiceImpl(RequeteSite requeteSite_) {
 	}
 
-	public void requeteSitePourClasse(RequeteSite requeteSite) {
-		requeteSiteAppOpenApi3(requeteSite);
+	public void requeteSitePourClasse(RequeteSite requeteSite_) {
+		requeteSiteCalculInrApiServiceImpl(requeteSite_);
 	}
 
 	/////////////
@@ -64,7 +60,7 @@ public abstract class AppOpenApi3Gen<DEV> extends Object {
 		Object o = null;
 		for(String v : vars) {
 			if(o == null)
-				o = obtenirAppOpenApi3(v);
+				o = obtenirCalculInrApiServiceImpl(v);
 			else if(o instanceof Cluster) {
 				Cluster cluster = (Cluster)o;
 				o = cluster.obtenirPourClasse(v);
@@ -72,8 +68,8 @@ public abstract class AppOpenApi3Gen<DEV> extends Object {
 		}
 		return o;
 	}
-	public Object obtenirAppOpenApi3(String var) throws Exception {
-		AppOpenApi3 oAppOpenApi3 = (AppOpenApi3)this;
+	public Object obtenirCalculInrApiServiceImpl(String var) throws Exception {
+		CalculInrApiServiceImpl oCalculInrApiServiceImpl = (CalculInrApiServiceImpl)this;
 		switch(var) {
 			default:
 				return null;
@@ -89,7 +85,7 @@ public abstract class AppOpenApi3Gen<DEV> extends Object {
 		Object o = null;
 		for(String v : vars) {
 			if(o == null)
-				o = attribuerAppOpenApi3(v, val);
+				o = attribuerCalculInrApiServiceImpl(v, val);
 			else if(o instanceof Cluster) {
 				Cluster cluster = (Cluster)o;
 				o = cluster.attribuerPourClasse(v, val);
@@ -97,8 +93,8 @@ public abstract class AppOpenApi3Gen<DEV> extends Object {
 		}
 		return o != null;
 	}
-	public Object attribuerAppOpenApi3(String var, Object val) {
-		AppOpenApi3 oAppOpenApi3 = (AppOpenApi3)this;
+	public Object attribuerCalculInrApiServiceImpl(String var, Object val) {
+		CalculInrApiServiceImpl oCalculInrApiServiceImpl = (CalculInrApiServiceImpl)this;
 		switch(var) {
 			default:
 				return null;
@@ -115,7 +111,7 @@ public abstract class AppOpenApi3Gen<DEV> extends Object {
 		if(val != null) {
 			for(String v : vars) {
 				if(o == null)
-					o = definirAppOpenApi3(v, val);
+					o = definirCalculInrApiServiceImpl(v, val);
 				else if(o instanceof Cluster) {
 					Cluster cluster = (Cluster)o;
 					o = cluster.definirPourClasse(v, val);
@@ -124,7 +120,7 @@ public abstract class AppOpenApi3Gen<DEV> extends Object {
 		}
 		return o != null;
 	}
-	public Object definirAppOpenApi3(String var, String val) {
+	public Object definirCalculInrApiServiceImpl(String var, String val) {
 		switch(var) {
 			default:
 				return null;
@@ -146,9 +142,9 @@ public abstract class AppOpenApi3Gen<DEV> extends Object {
 	@Override public boolean equals(Object o) {
 		if(this == o)
 			return true;
-		if(!(o instanceof AppOpenApi3))
+		if(!(o instanceof CalculInrApiServiceImpl))
 			return false;
-		AppOpenApi3 that = (AppOpenApi3)o;
+		CalculInrApiServiceImpl that = (CalculInrApiServiceImpl)o;
 		return true;
 	}
 
@@ -158,7 +154,7 @@ public abstract class AppOpenApi3Gen<DEV> extends Object {
 
 	@Override public String toString() {
 		StringBuilder sb = new StringBuilder();
-		sb.append("AppOpenApi3 {");
+		sb.append("CalculInrApiServiceImpl {");
 		sb.append(" }");
 		return sb.toString();
 	}

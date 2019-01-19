@@ -1,4 +1,4 @@
-package org.computate.frFR.cardiaque.cluster;
+package org.computate.frFR.cardiaque.utilisateur;
 
 import org.computate.frFR.cardiaque.contexte.SiteContexte;
 import io.vertx.codegen.annotations.ProxyGen;
@@ -10,15 +10,15 @@ import io.vertx.ext.web.api.OperationRequest;
 import io.vertx.ext.web.api.OperationResponse;
 
 @ProxyGen
-public interface ClusterGenApiService {
+public interface UtilisateurSiteGenApiService {
 	// Une méthode d'usine pour créer une instance et un proxy. 
-	static ClusterGenApiService creer(SiteContexte siteContexte, Vertx vertx) {
-		return new ClusterApiServiceImpl(siteContexte);
+	static UtilisateurSiteGenApiService creer(SiteContexte siteContexte, Vertx vertx) {
+		return new UtilisateurSiteApiServiceImpl(siteContexte);
 	}
 
 	// Une méthode d'usine pour créer une instance et un proxy. 
-	static ClusterGenApiService creerProxy(Vertx vertx, String addresse) {
-		return new ClusterGenApiServiceVertxEBProxy(vertx, addresse);
+	static UtilisateurSiteGenApiService creerProxy(Vertx vertx, String addresse) {
+		return new UtilisateurSiteGenApiServiceVertxEBProxy(vertx, addresse);
 	}
 
 }

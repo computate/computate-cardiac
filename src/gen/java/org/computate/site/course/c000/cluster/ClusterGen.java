@@ -1,6 +1,6 @@
 package org.computate.site.course.c000.cluster;
 
-import org.computate.frFR.cardiaque.couverture.Couverture;
+import org.computate.enUS.wrap.Wrap;
 import java.util.Date;
 import java.time.LocalDateTime;
 import org.apache.commons.lang3.StringUtils;
@@ -27,7 +27,7 @@ import java.util.List;
 import java.time.format.DateTimeFormatter;
 import io.vertx.ext.sql.SQLConnection;
 import java.lang.Object;
-import org.computate.frFR.cardiaque.page.MiseEnPage;
+import org.computate.enUS.cardiac.page.PageLayout;
 import io.vertx.ext.sql.SQLClient;
 import org.apache.solr.common.SolrInputDocument;
 
@@ -60,8 +60,8 @@ public abstract class ClusterGen<DEV> extends Object {
 		return _siteRequest;
 	}
 
-	public void set(RequeteSite c) {
-		this._siteRequest = c;
+	public void set(RequeteSite _siteRequest) {
+		this._siteRequest = _siteRequest;
 		this._siteRequestCouverture.dejaInitialise = true;
 	}
 	protected Cluster _siteRequestInit() {
@@ -81,8 +81,8 @@ public abstract class ClusterGen<DEV> extends Object {
 	/**	L'entité « page_ »
 	 *	 is defined as null before being initialized. 
 	 */
-	protected MiseEnPage page_;
-	public Couverture<MiseEnPage> page_Couverture = new Couverture<MiseEnPage>().p(this).c(MiseEnPage.class).var("page_").o(page_);
+	protected PageLayout page_;
+	public Couverture<PageLayout> page_Couverture = new Couverture<PageLayout>().p(this).c(PageLayout.class).var("page_").o(page_);
 
 	/**	<br/>L'entité « page_ »
 	 *  est défini comme null avant d'être initialisé. 
@@ -90,14 +90,14 @@ public abstract class ClusterGen<DEV> extends Object {
 	 * <br/>
 	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _page_(Couverture<MiseEnPage> c);
+	protected abstract void _page_(Couverture<PageLayout> c);
 
-	public MiseEnPage get() {
+	public PageLayout get() {
 		return page_;
 	}
 
-	public void set(MiseEnPage c) {
-		this.page_ = c;
+	public void set(PageLayout page_) {
+		this.page_ = page_;
 		this.page_Couverture.dejaInitialise = true;
 	}
 	protected Cluster page_Init() {
@@ -132,8 +132,8 @@ public abstract class ClusterGen<DEV> extends Object {
 		return pk;
 	}
 
-	public void set(Long c) {
-		this.pk = c;
+	public void set(Long pk) {
+		this.pk = pk;
 		this.pkCouverture.dejaInitialise = true;
 	}
 	public Cluster set(String o) {
@@ -194,8 +194,8 @@ public abstract class ClusterGen<DEV> extends Object {
 		return id;
 	}
 
-	public void set(String c) {
-		this.id = c;
+	public void set(String id) {
+		this.id = id;
 		this.idCouverture.dejaInitialise = true;
 	}
 	protected Cluster idInit() {
@@ -250,8 +250,8 @@ public abstract class ClusterGen<DEV> extends Object {
 		return _created;
 	}
 
-	public void set(LocalDateTime c) {
-		this._created = c;
+	public void set(LocalDateTime _created) {
+		this._created = _created;
 		this._createdCouverture.dejaInitialise = true;
 	}
 	public Cluster set(Instant o) {
@@ -322,8 +322,8 @@ public abstract class ClusterGen<DEV> extends Object {
 		return _modified;
 	}
 
-	public void set(LocalDateTime c) {
-		this._modified = c;
+	public void set(LocalDateTime _modified) {
+		this._modified = _modified;
 		this._modifiedCouverture.dejaInitialise = true;
 	}
 	public Cluster set(Instant o) {
@@ -394,8 +394,8 @@ public abstract class ClusterGen<DEV> extends Object {
 		return _userId;
 	}
 
-	public void set(String c) {
-		this._userId = c;
+	public void set(String _userId) {
+		this._userId = _userId;
 		this._userIdCouverture.dejaInitialise = true;
 	}
 	protected Cluster _userIdInit() {
@@ -450,8 +450,8 @@ public abstract class ClusterGen<DEV> extends Object {
 		return _clusterCanonicalName;
 	}
 
-	public void set(String c) {
-		this._clusterCanonicalName = c;
+	public void set(String _clusterCanonicalName) {
+		this._clusterCanonicalName = _clusterCanonicalName;
 		this._clusterCanonicalNameCouverture.dejaInitialise = true;
 	}
 	protected Cluster _clusterCanonicalNameInit() {
@@ -506,8 +506,8 @@ public abstract class ClusterGen<DEV> extends Object {
 		return _clusterSimpleName;
 	}
 
-	public void set(String c) {
-		this._clusterSimpleName = c;
+	public void set(String _clusterSimpleName) {
+		this._clusterSimpleName = _clusterSimpleName;
 		this._clusterSimpleNameCouverture.dejaInitialise = true;
 	}
 	protected Cluster _clusterSimpleNameInit() {
@@ -562,8 +562,8 @@ public abstract class ClusterGen<DEV> extends Object {
 		return _deleted;
 	}
 
-	public void set(Boolean c) {
-		this._deleted = c;
+	public void set(Boolean _deleted) {
+		this._deleted = _deleted;
 		this._deletedCouverture.dejaInitialise = true;
 	}
 	public Cluster set(String o) {
@@ -608,8 +608,8 @@ public abstract class ClusterGen<DEV> extends Object {
 
 	protected boolean dejaInitialiseCluster = false;
 
-	public Cluster initLoinCluster(RequeteSite requeteSite) {
-		setRequeteSite_(requeteSite);
+	public Cluster initLoinCluster(RequeteSite requeteSite_) {
+		setRequeteSite_(requeteSite_);
 		if(!dejaInitialiseCluster) {
 			dejaInitialiseCluster = true;
 			initLoinCluster();
@@ -634,19 +634,19 @@ public abstract class ClusterGen<DEV> extends Object {
 		_deletedInit();
 	}
 
-	public void initLoinPourClasse(RequeteSite requeteSite) {
-		initLoinCluster(requeteSite);
+	public void initLoinPourClasse(RequeteSite requeteSite_) {
+		initLoinCluster(requeteSite_);
 	}
 
 	/////////////////
 	// requeteSite //
 	/////////////////
 
-	public void requeteSiteCluster(RequeteSite requeteSite) {
+	public void requeteSiteCluster(RequeteSite requeteSite_) {
 	}
 
-	public void requeteSitePourClasse(RequeteSite requeteSite) {
-		requeteSiteCluster(requeteSite);
+	public void requeteSitePourClasse(RequeteSite requeteSite_) {
+		requeteSiteCluster(requeteSite_);
 	}
 
 	/////////////

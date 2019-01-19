@@ -20,8 +20,8 @@ public abstract class ClusterApiServiceGen<DEV> {
 
 	protected boolean dejaInitialiseClusterApiService = false;
 
-	public ClusterApiService initLoinClusterApiService(RequeteSite requeteSite) {
-		setRequeteSite_(requeteSite);
+	public ClusterApiService initLoinClusterApiService(RequeteSite requeteSite_) {
+		setRequeteSite_(requeteSite_);
 		if(!dejaInitialiseClusterApiService) {
 			dejaInitialiseClusterApiService = true;
 			initLoinClusterApiService();
@@ -36,19 +36,19 @@ public abstract class ClusterApiServiceGen<DEV> {
 	public void initClusterApiService() {
 	}
 
-	public void initLoinPourClasse(RequeteSite requeteSite) {
-		initLoinClusterApiService(requeteSite);
+	public void initLoinPourClasse(RequeteSite requeteSite_) {
+		initLoinClusterApiService(requeteSite_);
 	}
 
 	/////////////////
 	// requeteSite //
 	/////////////////
 
-	public void requeteSiteClusterApiService(RequeteSite requeteSite) {
+	public void requeteSiteClusterApiService(RequeteSite requeteSite_) {
 	}
 
-	public void requeteSitePourClasse(RequeteSite requeteSite) {
-		requeteSiteClusterApiService(requeteSite);
+	public void requeteSitePourClasse(RequeteSite requeteSite_) {
+		requeteSiteClusterApiService(requeteSite_);
 	}
 
 	/////////////

@@ -22,7 +22,6 @@ import org.computate.frFR.cardiaque.contexte.SiteContexte;
 import java.util.Objects;
 import org.apache.solr.common.SolrDocument;
 import io.vertx.core.json.JsonArray;
-import org.computate.site.course.c000.cluster.Cluster;
 import java.util.List;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -1120,13 +1119,13 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 
 	public void requeteSiteCalculInr(RequeteSite requeteSite_) {
 			super.requeteSiteCluster(requeteSite_);
-		patientPrendCoumadin.setRequeteSite_(requeteSite);
-		butActuel.setRequeteSite_(requeteSite);
-		doseActuel.setRequeteSite_(requeteSite);
-		medicamentActuel.setRequeteSite_(requeteSite);
-		changementDose.setRequeteSite_(requeteSite);
-		notesComplementaires.setRequeteSite_(requeteSite);
-		infoContact.setRequeteSite_(requeteSite);
+		patientPrendCoumadin.setRequeteSite_(requeteSite_);
+		butActuel.setRequeteSite_(requeteSite_);
+		doseActuel.setRequeteSite_(requeteSite_);
+		medicamentActuel.setRequeteSite_(requeteSite_);
+		changementDose.setRequeteSite_(requeteSite_);
+		notesComplementaires.setRequeteSite_(requeteSite_);
+		infoContact.setRequeteSite_(requeteSite_);
 	}
 
 	public void requeteSitePourClasse(RequeteSite requeteSite_) {

@@ -60,8 +60,8 @@ public abstract class ClusterGen<DEV> extends Object {
 		return requeteSite_;
 	}
 
-	public void setRequeteSite_(RequeteSite c) {
-		this.requeteSite_ = c;
+	public void setRequeteSite_(RequeteSite requeteSite_) {
+		this.requeteSite_ = requeteSite_;
 		this.requeteSite_Couverture.dejaInitialise = true;
 	}
 	protected Cluster requeteSite_Init() {
@@ -96,8 +96,8 @@ public abstract class ClusterGen<DEV> extends Object {
 		return page_;
 	}
 
-	public void setPage_(MiseEnPage c) {
-		this.page_ = c;
+	public void setPage_(MiseEnPage page_) {
+		this.page_ = page_;
 		this.page_Couverture.dejaInitialise = true;
 	}
 	protected Cluster page_Init() {
@@ -132,8 +132,8 @@ public abstract class ClusterGen<DEV> extends Object {
 		return pk;
 	}
 
-	public void setPk(Long c) {
-		this.pk = c;
+	public void setPk(Long pk) {
+		this.pk = pk;
 		this.pkCouverture.dejaInitialise = true;
 	}
 	public Cluster setPk(String o) {
@@ -180,7 +180,7 @@ public abstract class ClusterGen<DEV> extends Object {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchCluster", strPk(), "Pk() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/warfarin/cluster?fq=pk:", strPk(), "',");
+				r.l("				url: '?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -235,8 +235,8 @@ public abstract class ClusterGen<DEV> extends Object {
 		return id;
 	}
 
-	public void setId(String c) {
-		this.id = c;
+	public void setId(String id) {
+		this.id = id;
 		this.idCouverture.dejaInitialise = true;
 	}
 	protected Cluster idInit() {
@@ -277,7 +277,7 @@ public abstract class ClusterGen<DEV> extends Object {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchCluster", strPk(), "Id() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/warfarin/cluster?fq=pk:", strPk(), "',");
+				r.l("				url: '?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -332,8 +332,8 @@ public abstract class ClusterGen<DEV> extends Object {
 		return cree;
 	}
 
-	public void setCree(LocalDateTime c) {
-		this.cree = c;
+	public void setCree(LocalDateTime cree) {
+		this.cree = cree;
 		this.creeCouverture.dejaInitialise = true;
 	}
 	public Cluster setCree(Instant o) {
@@ -390,7 +390,7 @@ public abstract class ClusterGen<DEV> extends Object {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchCluster", strPk(), "Cree() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/warfarin/cluster?fq=pk:", strPk(), "',");
+				r.l("				url: '?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -445,8 +445,8 @@ public abstract class ClusterGen<DEV> extends Object {
 		return modifie;
 	}
 
-	public void setModifie(LocalDateTime c) {
-		this.modifie = c;
+	public void setModifie(LocalDateTime modifie) {
+		this.modifie = modifie;
 		this.modifieCouverture.dejaInitialise = true;
 	}
 	public Cluster setModifie(Instant o) {
@@ -503,7 +503,7 @@ public abstract class ClusterGen<DEV> extends Object {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchCluster", strPk(), "Modifie() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/warfarin/cluster?fq=pk:", strPk(), "',");
+				r.l("				url: '?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -558,8 +558,8 @@ public abstract class ClusterGen<DEV> extends Object {
 		return utilisateurId;
 	}
 
-	public void setUtilisateurId(String c) {
-		this.utilisateurId = c;
+	public void setUtilisateurId(String utilisateurId) {
+		this.utilisateurId = utilisateurId;
 		this.utilisateurIdCouverture.dejaInitialise = true;
 	}
 	protected Cluster utilisateurIdInit() {
@@ -600,7 +600,7 @@ public abstract class ClusterGen<DEV> extends Object {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchCluster", strPk(), "UtilisateurId() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/warfarin/cluster?fq=pk:", strPk(), "',");
+				r.l("				url: '?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -655,8 +655,8 @@ public abstract class ClusterGen<DEV> extends Object {
 		return clusterNomCanonique;
 	}
 
-	public void setClusterNomCanonique(String c) {
-		this.clusterNomCanonique = c;
+	public void setClusterNomCanonique(String clusterNomCanonique) {
+		this.clusterNomCanonique = clusterNomCanonique;
 		this.clusterNomCanoniqueCouverture.dejaInitialise = true;
 	}
 	protected Cluster clusterNomCanoniqueInit() {
@@ -697,7 +697,7 @@ public abstract class ClusterGen<DEV> extends Object {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchCluster", strPk(), "ClusterNomCanonique() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/warfarin/cluster?fq=pk:", strPk(), "',");
+				r.l("				url: '?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -752,8 +752,8 @@ public abstract class ClusterGen<DEV> extends Object {
 		return clusterNomSimple;
 	}
 
-	public void setClusterNomSimple(String c) {
-		this.clusterNomSimple = c;
+	public void setClusterNomSimple(String clusterNomSimple) {
+		this.clusterNomSimple = clusterNomSimple;
 		this.clusterNomSimpleCouverture.dejaInitialise = true;
 	}
 	protected Cluster clusterNomSimpleInit() {
@@ -794,7 +794,7 @@ public abstract class ClusterGen<DEV> extends Object {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchCluster", strPk(), "ClusterNomSimple() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/warfarin/cluster?fq=pk:", strPk(), "',");
+				r.l("				url: '?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -849,8 +849,8 @@ public abstract class ClusterGen<DEV> extends Object {
 		return supprime;
 	}
 
-	public void setSupprime(Boolean c) {
-		this.supprime = c;
+	public void setSupprime(Boolean supprime) {
+		this.supprime = supprime;
 		this.supprimeCouverture.dejaInitialise = true;
 	}
 	public Cluster setSupprime(String o) {
@@ -897,7 +897,7 @@ public abstract class ClusterGen<DEV> extends Object {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchCluster", strPk(), "Supprime() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/warfarin/cluster?fq=pk:", strPk(), "',");
+				r.l("				url: '?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -936,8 +936,8 @@ public abstract class ClusterGen<DEV> extends Object {
 
 	protected boolean dejaInitialiseCluster = false;
 
-	public Cluster initLoinCluster(RequeteSite requeteSite) {
-		setRequeteSite_(requeteSite);
+	public Cluster initLoinCluster(RequeteSite requeteSite_) {
+		setRequeteSite_(requeteSite_);
 		if(!dejaInitialiseCluster) {
 			dejaInitialiseCluster = true;
 			initLoinCluster();
@@ -962,19 +962,19 @@ public abstract class ClusterGen<DEV> extends Object {
 		supprimeInit();
 	}
 
-	public void initLoinPourClasse(RequeteSite requeteSite) {
-		initLoinCluster(requeteSite);
+	public void initLoinPourClasse(RequeteSite requeteSite_) {
+		initLoinCluster(requeteSite_);
 	}
 
 	/////////////////
 	// requeteSite //
 	/////////////////
 
-	public void requeteSiteCluster(RequeteSite requeteSite) {
+	public void requeteSiteCluster(RequeteSite requeteSite_) {
 	}
 
-	public void requeteSitePourClasse(RequeteSite requeteSite) {
-		requeteSiteCluster(requeteSite);
+	public void requeteSitePourClasse(RequeteSite requeteSite_) {
+		requeteSiteCluster(requeteSite_);
 	}
 
 	/////////////

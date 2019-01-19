@@ -6,6 +6,7 @@ import org.computate.frFR.cardiaque.cluster.Cluster;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
 import org.computate.frFR.cardiaque.ecrivain.ToutEcrivain;
 import org.apache.commons.text.StringEscapeUtils;
+import org.computate.enUS.cardiac.page.PageLayout;
 import org.computate.frFR.cardiaque.page.MiseEnPage;
 import java.lang.String;
 import org.apache.commons.lang3.StringUtils;
@@ -30,20 +31,19 @@ public abstract class PageAccueilGen<DEV> extends MiseEnPage {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.accueil.PageAccueil&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:pageTitre">Trouver l'entité pageTitre dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _pageTitre(Couverture<String> o);
+	protected abstract void _pageTitre(Couverture<String> c);
 
 	public String getPageTitre() {
 		return pageTitre;
 	}
 
-	public void setPageTitre(String o) {
-		this.pageTitre = o;
+	public void setPageTitre(String pageTitre) {
+		this.pageTitre = pageTitre;
 		this.pageTitreCouverture.dejaInitialise = true;
 	}
-	protected PageAccueil pageTitreInit()
- {
+	protected PageAccueil pageTitreInit() {
 		if(!pageTitreCouverture.dejaInitialise) {
 			_pageTitre(pageTitreCouverture);
 			if(pageTitre == null)
@@ -87,20 +87,19 @@ public abstract class PageAccueilGen<DEV> extends MiseEnPage {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.accueil.PageAccueil&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:pageUri">Trouver l'entité pageUri dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _pageUri(Couverture<String> o);
+	protected abstract void _pageUri(Couverture<String> c);
 
 	public String getPageUri() {
 		return pageUri;
 	}
 
-	public void setPageUri(String o) {
-		this.pageUri = o;
+	public void setPageUri(String pageUri) {
+		this.pageUri = pageUri;
 		this.pageUriCouverture.dejaInitialise = true;
 	}
-	protected PageAccueil pageUriInit()
- {
+	protected PageAccueil pageUriInit() {
 		if(!pageUriCouverture.dejaInitialise) {
 			_pageUri(pageUriCouverture);
 			if(pageUri == null)
@@ -136,8 +135,8 @@ public abstract class PageAccueilGen<DEV> extends MiseEnPage {
 
 	protected boolean dejaInitialisePageAccueil = false;
 
-	public PageAccueil initLoinPageAccueil(RequeteSite requeteSite) throws Exception {
-		setRequeteSite_(requeteSite);
+	public PageAccueil initLoinPageAccueil(RequeteSite requeteSite_) {
+		setRequeteSite_(requeteSite_);
 		if(!dejaInitialisePageAccueil) {
 			dejaInitialisePageAccueil = true;
 			initLoinPageAccueil();
@@ -145,7 +144,7 @@ public abstract class PageAccueilGen<DEV> extends MiseEnPage {
 		return (PageAccueil)this;
 	}
 
-	public void initLoinPageAccueil() throws Exception {
+	public void initLoinPageAccueil() {
 		super.initLoinMiseEnPage(requeteSite_);
 		initPageAccueil();
 	}
@@ -155,20 +154,20 @@ public abstract class PageAccueilGen<DEV> extends MiseEnPage {
 		pageUriInit();
 	}
 
-	@Override public void initLoinPourClasse(RequeteSite requeteSite) throws Exception {
-		initLoinPageAccueil(requeteSite);
+	@Override public void initLoinPourClasse(RequeteSite requeteSite_) {
+		initLoinPageAccueil(requeteSite_);
 	}
 
 	/////////////////
 	// requeteSite //
 	/////////////////
 
-	public void requeteSitePageAccueil(RequeteSite requeteSite) {
-			super.requeteSiteMiseEnPage(requeteSite);
+	public void requeteSitePageAccueil(RequeteSite requeteSite_) {
+			super.requeteSiteMiseEnPage(requeteSite_);
 	}
 
-	public void requeteSitePourClasse(RequeteSite requeteSite) {
-		requeteSitePageAccueil(requeteSite);
+	public void requeteSitePourClasse(RequeteSite requeteSite_) {
+		requeteSitePageAccueil(requeteSite_);
 	}
 
 	/////////////

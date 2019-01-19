@@ -1,6 +1,7 @@
 package org.computate.frFR.cardiaque.page.parti;
 
 import java.util.Objects;
+import org.computate.site.course.c000.cluster.Cluster;
 import org.computate.frFR.cardiaque.couverture.Couverture;
 import org.computate.frFR.cardiaque.cluster.Cluster;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
@@ -29,20 +30,19 @@ public abstract class PagePartiGen<DEV> extends Cluster {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.parti.PageParti&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:requeteSite_">Trouver l'entité requeteSite_ dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _requeteSite_(Couverture<RequeteSite> o);
+	protected abstract void _requeteSite_(Couverture<RequeteSite> c);
 
 	public RequeteSite getRequeteSite_() {
 		return requeteSite_;
 	}
 
-	public void setRequeteSite_(RequeteSite o) {
-		this.requeteSite_ = o;
+	public void setRequeteSite_(RequeteSite requeteSite_) {
+		this.requeteSite_ = requeteSite_;
 		this.requeteSite_Couverture.dejaInitialise = true;
 	}
-	protected PageParti requeteSite_Init()
- {
+	protected PageParti requeteSite_Init() {
 		if(!requeteSite_Couverture.dejaInitialise) {
 			_requeteSite_(requeteSite_Couverture);
 			if(requeteSite_ == null)
@@ -66,20 +66,19 @@ public abstract class PagePartiGen<DEV> extends Cluster {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.parti.PageParti&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:partiVar">Trouver l'entité partiVar dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _partiVar(Couverture<String> o);
+	protected abstract void _partiVar(Couverture<String> c);
 
 	public String getPartiVar() {
 		return partiVar;
 	}
 
-	public void setPartiVar(String o) {
-		this.partiVar = o;
+	public void setPartiVar(String partiVar) {
+		this.partiVar = partiVar;
 		this.partiVarCouverture.dejaInitialise = true;
 	}
-	protected PageParti partiVarInit()
- {
+	protected PageParti partiVarInit() {
 		if(!partiVarCouverture.dejaInitialise) {
 			_partiVar(partiVarCouverture);
 			if(partiVar == null)
@@ -115,8 +114,8 @@ public abstract class PagePartiGen<DEV> extends Cluster {
 
 	protected boolean dejaInitialisePageParti = false;
 
-	public PageParti initLoinPageParti(RequeteSite requeteSite) {
-		setRequeteSite_(requeteSite);
+	public PageParti initLoinPageParti(RequeteSite requeteSite_) {
+		setRequeteSite_(requeteSite_);
 		if(!dejaInitialisePageParti) {
 			dejaInitialisePageParti = true;
 			initLoinPageParti();
@@ -134,20 +133,20 @@ public abstract class PagePartiGen<DEV> extends Cluster {
 		partiVarInit();
 	}
 
-	@Override public void initLoinPourClasse(RequeteSite requeteSite) {
-		initLoinPageParti(requeteSite);
+	@Override public void initLoinPourClasse(RequeteSite requeteSite_) {
+		initLoinPageParti(requeteSite_);
 	}
 
 	/////////////////
 	// requeteSite //
 	/////////////////
 
-	public void requeteSitePageParti(RequeteSite requeteSite) {
-			super.requeteSiteCluster(requeteSite);
+	public void requeteSitePageParti(RequeteSite requeteSite_) {
+			super.requeteSiteCluster(requeteSite_);
 	}
 
-	public void requeteSitePourClasse(RequeteSite requeteSite) {
-		requeteSitePageParti(requeteSite);
+	public void requeteSitePourClasse(RequeteSite requeteSite_) {
+		requeteSitePageParti(requeteSite_);
 	}
 
 	/////////////

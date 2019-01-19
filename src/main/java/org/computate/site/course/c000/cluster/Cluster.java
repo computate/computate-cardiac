@@ -3,8 +3,8 @@ package org.computate.site.course.c000.cluster;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
-import org.computate.frFR.cardiaque.couverture.Couverture;
-import org.computate.frFR.cardiaque.page.MiseEnPage;
+import org.computate.enUS.wrap.Wrap;
+import org.computate.enUS.cardiac.page.PageLayout;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
 
 public class Cluster extends ClusterGen<Object> {
@@ -13,7 +13,7 @@ public class Cluster extends ClusterGen<Object> {
 
 	protected void __siteRequest(Couverture<RequeteSite> c) {}
 
-	protected void _page_(Couverture<MiseEnPage> c) {}
+	protected void _page_(Couverture<PageLayout> c) {}
 
 	protected void _pk(Couverture<Long> c) {}
 

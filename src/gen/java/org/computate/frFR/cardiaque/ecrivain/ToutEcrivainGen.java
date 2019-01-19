@@ -7,9 +7,8 @@ import java.io.StringWriter;
 import org.apache.commons.text.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import java.io.File;
-import java.lang.Exception;
 import java.util.Objects;
-import io.vertx.core.http.HttpServerResponse;
+import io.vertx.core.buffer.Buffer;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
 import java.lang.Boolean;
 import org.computate.frFR.cardiaque.ecrivain.ToutEcrivain;
@@ -35,19 +34,19 @@ public abstract class ToutEcrivainGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.ecrivain.ToutEcrivain&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:requeteSite_">Trouver l'entité requeteSite_ dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _requeteSite_(Couverture<RequeteSite> o);
+	protected abstract void _requeteSite_(Couverture<RequeteSite> c);
 
 	public RequeteSite getRequeteSite_() {
 		return requeteSite_;
 	}
 
-	public void setRequeteSite_(RequeteSite o) {
-		this.requeteSite_ = o;
+	public void setRequeteSite_(RequeteSite requeteSite_) {
+		this.requeteSite_ = requeteSite_;
 		this.requeteSite_Couverture.dejaInitialise = true;
 	}
-	protected ToutEcrivain requeteSite_Init() throws Exception {
+	protected ToutEcrivain requeteSite_Init() {
 		if(!requeteSite_Couverture.dejaInitialise) {
 			_requeteSite_(requeteSite_Couverture);
 			if(requeteSite_ == null)
@@ -71,19 +70,19 @@ public abstract class ToutEcrivainGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.ecrivain.ToutEcrivain&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:fichier">Trouver l'entité fichier dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _fichier(Couverture<File> o);
+	protected abstract void _fichier(Couverture<File> c);
 
 	public File getFichier() {
 		return fichier;
 	}
 
-	public void setFichier(File o) {
-		this.fichier = o;
+	public void setFichier(File fichier) {
+		this.fichier = fichier;
 		this.fichierCouverture.dejaInitialise = true;
 	}
-	protected ToutEcrivain fichierInit() throws Exception {
+	protected ToutEcrivain fichierInit() {
 		if(!fichierCouverture.dejaInitialise) {
 			_fichier(fichierCouverture);
 			if(fichier == null)
@@ -107,19 +106,19 @@ public abstract class ToutEcrivainGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.ecrivain.ToutEcrivain&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:ecrivainString">Trouver l'entité ecrivainString dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _ecrivainString(Couverture<StringWriter> o);
+	protected abstract void _ecrivainString(Couverture<StringWriter> c);
 
 	public StringWriter getEcrivainString() {
 		return ecrivainString;
 	}
 
-	public void setEcrivainString(StringWriter o) {
-		this.ecrivainString = o;
+	public void setEcrivainString(StringWriter ecrivainString) {
+		this.ecrivainString = ecrivainString;
 		this.ecrivainStringCouverture.dejaInitialise = true;
 	}
-	protected ToutEcrivain ecrivainStringInit() throws Exception {
+	protected ToutEcrivain ecrivainStringInit() {
 		if(!ecrivainStringCouverture.dejaInitialise) {
 			_ecrivainString(ecrivainStringCouverture);
 			if(ecrivainString == null)
@@ -129,39 +128,39 @@ public abstract class ToutEcrivainGen<DEV> extends Object {
 		return (ToutEcrivain)this;
 	}
 
-	////////////////////////
-	// reponseServeurHttp //
-	////////////////////////
+	////////////
+	// buffer //
+	////////////
 
-	/**	L'entité « reponseServeurHttp »
+	/**	L'entité « buffer »
 	 *	 is defined as null before being initialized. 
 	 */
-	protected HttpServerResponse reponseServeurHttp;
-	public Couverture<HttpServerResponse> reponseServeurHttpCouverture = new Couverture<HttpServerResponse>().p(this).c(HttpServerResponse.class).var("reponseServeurHttp").o(reponseServeurHttp);
+	protected Buffer buffer;
+	public Couverture<Buffer> bufferCouverture = new Couverture<Buffer>().p(this).c(Buffer.class).var("buffer").o(buffer);
 
-	/**	<br/>L'entité « reponseServeurHttp »
+	/**	<br/>L'entité « buffer »
 	 *  est défini comme null avant d'être initialisé. 
-	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.ecrivain.ToutEcrivain&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:reponseServeurHttp">Trouver l'entité reponseServeurHttp dans Solr</a>
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.ecrivain.ToutEcrivain&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:buffer">Trouver l'entité buffer dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _reponseServeurHttp(Couverture<HttpServerResponse> o);
+	protected abstract void _buffer(Couverture<Buffer> c);
 
-	public HttpServerResponse getReponseServeurHttp() {
-		return reponseServeurHttp;
+	public Buffer getBuffer() {
+		return buffer;
 	}
 
-	public void setReponseServeurHttp(HttpServerResponse o) {
-		this.reponseServeurHttp = o;
-		this.reponseServeurHttpCouverture.dejaInitialise = true;
+	public void setBuffer(Buffer buffer) {
+		this.buffer = buffer;
+		this.bufferCouverture.dejaInitialise = true;
 	}
-	protected ToutEcrivain reponseServeurHttpInit() throws Exception {
-		if(!reponseServeurHttpCouverture.dejaInitialise) {
-			_reponseServeurHttp(reponseServeurHttpCouverture);
-			if(reponseServeurHttp == null)
-				setReponseServeurHttp(reponseServeurHttpCouverture.o);
+	protected ToutEcrivain bufferInit() {
+		if(!bufferCouverture.dejaInitialise) {
+			_buffer(bufferCouverture);
+			if(buffer == null)
+				setBuffer(bufferCouverture.o);
 		}
-		reponseServeurHttpCouverture.dejaInitialise(true);
+		bufferCouverture.dejaInitialise(true);
 		return (ToutEcrivain)this;
 	}
 
@@ -179,19 +178,19 @@ public abstract class ToutEcrivainGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.ecrivain.ToutEcrivain&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:ecrivainImpression">Trouver l'entité ecrivainImpression dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _ecrivainImpression(Couverture<PrintWriter> o) throws Exception, Exception;
+	protected abstract void _ecrivainImpression(Couverture<PrintWriter> c);
 
 	public PrintWriter getEcrivainImpression() {
 		return ecrivainImpression;
 	}
 
-	public void setEcrivainImpression(PrintWriter o) {
-		this.ecrivainImpression = o;
+	public void setEcrivainImpression(PrintWriter ecrivainImpression) {
+		this.ecrivainImpression = ecrivainImpression;
 		this.ecrivainImpressionCouverture.dejaInitialise = true;
 	}
-	protected ToutEcrivain ecrivainImpressionInit() throws Exception {
+	protected ToutEcrivain ecrivainImpressionInit() {
 		if(!ecrivainImpressionCouverture.dejaInitialise) {
 			_ecrivainImpression(ecrivainImpressionCouverture);
 			if(ecrivainImpression == null)
@@ -215,16 +214,16 @@ public abstract class ToutEcrivainGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.ecrivain.ToutEcrivain&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:vide">Trouver l'entité vide dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _vide(Couverture<Boolean> o);
+	protected abstract void _vide(Couverture<Boolean> c);
 
 	public Boolean getVide() {
 		return vide;
 	}
 
-	public void setVide(Boolean o) {
-		this.vide = o;
+	public void setVide(Boolean vide) {
+		this.vide = vide;
 		this.videCouverture.dejaInitialise = true;
 	}
 	public ToutEcrivain setVide(String o) {
@@ -233,7 +232,7 @@ public abstract class ToutEcrivainGen<DEV> extends Object {
 		this.videCouverture.dejaInitialise = true;
 		return (ToutEcrivain)this;
 	}
-	protected ToutEcrivain videInit() throws Exception {
+	protected ToutEcrivain videInit() {
 		if(!videCouverture.dejaInitialise) {
 			_vide(videCouverture);
 			if(vide == null)
@@ -269,8 +268,8 @@ public abstract class ToutEcrivainGen<DEV> extends Object {
 
 	protected boolean dejaInitialiseToutEcrivain = false;
 
-	public ToutEcrivain initLoinToutEcrivain(RequeteSite requeteSite) throws Exception {
-		setRequeteSite_(requeteSite);
+	public ToutEcrivain initLoinToutEcrivain(RequeteSite requeteSite_) {
+		setRequeteSite_(requeteSite_);
 		if(!dejaInitialiseToutEcrivain) {
 			dejaInitialiseToutEcrivain = true;
 			initLoinToutEcrivain();
@@ -278,32 +277,32 @@ public abstract class ToutEcrivainGen<DEV> extends Object {
 		return (ToutEcrivain)this;
 	}
 
-	public void initLoinToutEcrivain() throws Exception {
+	public void initLoinToutEcrivain() {
 		initToutEcrivain();
 	}
 
-	public void initToutEcrivain() throws Exception {
+	public void initToutEcrivain() {
 		requeteSite_Init();
 		fichierInit();
 		ecrivainStringInit();
-		reponseServeurHttpInit();
+		bufferInit();
 		ecrivainImpressionInit();
 		videInit();
 	}
 
-	public void initLoinPourClasse(RequeteSite requeteSite) throws Exception {
-		initLoinToutEcrivain(requeteSite);
+	public void initLoinPourClasse(RequeteSite requeteSite_) {
+		initLoinToutEcrivain(requeteSite_);
 	}
 
 	/////////////////
 	// requeteSite //
 	/////////////////
 
-	public void requeteSiteToutEcrivain(RequeteSite requeteSite) {
+	public void requeteSiteToutEcrivain(RequeteSite requeteSite_) {
 	}
 
-	public void requeteSitePourClasse(RequeteSite requeteSite) {
-		requeteSiteToutEcrivain(requeteSite);
+	public void requeteSitePourClasse(RequeteSite requeteSite_) {
+		requeteSiteToutEcrivain(requeteSite_);
 	}
 
 	/////////////
@@ -332,8 +331,8 @@ public abstract class ToutEcrivainGen<DEV> extends Object {
 				return oToutEcrivain.fichier;
 			case "ecrivainString":
 				return oToutEcrivain.ecrivainString;
-			case "reponseServeurHttp":
-				return oToutEcrivain.reponseServeurHttp;
+			case "buffer":
+				return oToutEcrivain.buffer;
 			case "ecrivainImpression":
 				return oToutEcrivain.ecrivainImpression;
 			case "vide":
@@ -347,7 +346,7 @@ public abstract class ToutEcrivainGen<DEV> extends Object {
 	// attribuer //
 	///////////////
 
-	public boolean attribuerPourClasse(String var, Object val) throws Exception {
+	public boolean attribuerPourClasse(String var, Object val) {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
@@ -372,7 +371,7 @@ public abstract class ToutEcrivainGen<DEV> extends Object {
 	// definir //
 	/////////////
 
-	public boolean definirPourClasse(String var, String val) throws Exception {
+	public boolean definirPourClasse(String var, String val) {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		if(val != null) {

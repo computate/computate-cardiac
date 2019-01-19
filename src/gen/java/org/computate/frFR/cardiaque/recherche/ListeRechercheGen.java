@@ -33,20 +33,19 @@ public abstract class ListeRechercheGen<DEV> {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.recherche.ListeRecherche&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:c">Trouver l'entité c dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _c(Couverture<Class<DEV>> o);
+	protected abstract void _c(Couverture<Class<DEV>> c);
 
 	public Class<DEV> getC() {
 		return c;
 	}
 
-	public void setC(Class<DEV> o) {
-		this.c = o;
+	public void setC(Class<DEV> c) {
+		this.c = c;
 		this.cCouverture.dejaInitialise = true;
 	}
-	protected ListeRecherche cInit()
- {
+	protected ListeRecherche cInit() {
 		if(!cCouverture.dejaInitialise) {
 			_c(cCouverture);
 			if(c == null)
@@ -70,20 +69,19 @@ public abstract class ListeRechercheGen<DEV> {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.recherche.ListeRecherche&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:requeteSite_">Trouver l'entité requeteSite_ dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _requeteSite_(Couverture<RequeteSite> o);
+	protected abstract void _requeteSite_(Couverture<RequeteSite> c);
 
 	public RequeteSite getRequeteSite_() {
 		return requeteSite_;
 	}
 
-	public void setRequeteSite_(RequeteSite o) {
-		this.requeteSite_ = o;
+	public void setRequeteSite_(RequeteSite requeteSite_) {
+		this.requeteSite_ = requeteSite_;
 		this.requeteSite_Couverture.dejaInitialise = true;
 	}
-	protected ListeRecherche requeteSite_Init()
- {
+	protected ListeRecherche requeteSite_Init() {
 		if(!requeteSite_Couverture.dejaInitialise) {
 			_requeteSite_(requeteSite_Couverture);
 			if(requeteSite_ == null)
@@ -115,12 +113,11 @@ public abstract class ListeRechercheGen<DEV> {
 		return solrQuery;
 	}
 
-	public void setSolrQuery(SolrQuery o) {
-		this.solrQuery = o;
+	public void setSolrQuery(SolrQuery solrQuery) {
+		this.solrQuery = solrQuery;
 		this.solrQueryCouverture.dejaInitialise = true;
 	}
-	protected ListeRecherche solrQueryInit()
- {
+	protected ListeRecherche solrQueryInit() {
 		if(!solrQueryCouverture.dejaInitialise) {
 			_solrQuery(solrQuery);
 		}
@@ -142,20 +139,19 @@ public abstract class ListeRechercheGen<DEV> {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.recherche.ListeRecherche&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:queryResponse">Trouver l'entité queryResponse dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _queryResponse(Couverture<QueryResponse> o);
+	protected abstract void _queryResponse(Couverture<QueryResponse> c);
 
 	public QueryResponse getQueryResponse() {
 		return queryResponse;
 	}
 
-	public void setQueryResponse(QueryResponse o) {
-		this.queryResponse = o;
+	public void setQueryResponse(QueryResponse queryResponse) {
+		this.queryResponse = queryResponse;
 		this.queryResponseCouverture.dejaInitialise = true;
 	}
-	protected ListeRecherche queryResponseInit()
- {
+	protected ListeRecherche queryResponseInit() {
 		if(!queryResponseCouverture.dejaInitialise) {
 			_queryResponse(queryResponseCouverture);
 			if(queryResponse == null)
@@ -179,20 +175,19 @@ public abstract class ListeRechercheGen<DEV> {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.recherche.ListeRecherche&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:solrDocumentList">Trouver l'entité solrDocumentList dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _solrDocumentList(Couverture<SolrDocumentList> o);
+	protected abstract void _solrDocumentList(Couverture<SolrDocumentList> c);
 
 	public SolrDocumentList getSolrDocumentList() {
 		return solrDocumentList;
 	}
 
-	public void setSolrDocumentList(SolrDocumentList o) {
-		this.solrDocumentList = o;
+	public void setSolrDocumentList(SolrDocumentList solrDocumentList) {
+		this.solrDocumentList = solrDocumentList;
 		this.solrDocumentListCouverture.dejaInitialise = true;
 	}
-	protected ListeRecherche solrDocumentListInit()
- {
+	protected ListeRecherche solrDocumentListInit() {
 		if(!solrDocumentListCouverture.dejaInitialise) {
 			_solrDocumentList(solrDocumentListCouverture);
 			if(solrDocumentList == null)
@@ -224,8 +219,8 @@ public abstract class ListeRechercheGen<DEV> {
 		return list;
 	}
 
-	public void setList(List<DEV> l) {
-		this.list = l;
+	public void setList(List<DEV> list) {
+		this.list = list;
 		this.listCouverture.dejaInitialise = true;
 	}
 	public ListeRecherche addList(DEV...objets) {
@@ -239,8 +234,7 @@ public abstract class ListeRechercheGen<DEV> {
 			this.list.add(o);
 		return (ListeRecherche)this;
 	}
-	protected ListeRecherche listInit()
- {
+	protected ListeRecherche listInit() {
 		if(!listCouverture.dejaInitialise) {
 			_list(list);
 		}
@@ -254,8 +248,8 @@ public abstract class ListeRechercheGen<DEV> {
 
 	protected boolean dejaInitialiseListeRecherche = false;
 
-	public ListeRecherche initLoinListeRecherche(RequeteSite requeteSite) {
-		setRequeteSite_(requeteSite);
+	public ListeRecherche initLoinListeRecherche(RequeteSite requeteSite_) {
+		setRequeteSite_(requeteSite_);
 		if(!dejaInitialiseListeRecherche) {
 			dejaInitialiseListeRecherche = true;
 			initLoinListeRecherche();
@@ -276,19 +270,19 @@ public abstract class ListeRechercheGen<DEV> {
 		listInit();
 	}
 
-	public void initLoinPourClasse(RequeteSite requeteSite) {
-		initLoinListeRecherche(requeteSite);
+	public void initLoinPourClasse(RequeteSite requeteSite_) {
+		initLoinListeRecherche(requeteSite_);
 	}
 
 	/////////////////
 	// requeteSite //
 	/////////////////
 
-	public void requeteSiteListeRecherche(RequeteSite requeteSite) {
+	public void requeteSiteListeRecherche(RequeteSite requeteSite_) {
 	}
 
-	public void requeteSitePourClasse(RequeteSite requeteSite) {
-		requeteSiteListeRecherche(requeteSite);
+	public void requeteSitePourClasse(RequeteSite requeteSite_) {
+		requeteSiteListeRecherche(requeteSite_);
 	}
 
 	/////////////

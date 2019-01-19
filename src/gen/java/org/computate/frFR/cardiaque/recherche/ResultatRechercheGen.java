@@ -6,9 +6,9 @@ import org.computate.frFR.cardiaque.couverture.Couverture;
 import java.lang.Long;
 import org.computate.frFR.cardiaque.cluster.Cluster;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
+import java.lang.Object;
 import org.computate.frFR.cardiaque.ecrivain.ToutEcrivain;
 import org.apache.commons.text.StringEscapeUtils;
-import java.lang.Object;
 import org.apache.commons.lang3.StringUtils;
 import java.lang.Exception;
 
@@ -32,20 +32,19 @@ public abstract class ResultatRechercheGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.recherche.ResultatRecherche&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:requeteSite_">Trouver l'entité requeteSite_ dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _requeteSite_(Couverture<RequeteSite> o) throws Exception;
+	protected abstract void _requeteSite_(Couverture<RequeteSite> c) throws Exception, Exception;
 
 	public RequeteSite getRequeteSite_() {
 		return requeteSite_;
 	}
 
-	public void setRequeteSite_(RequeteSite o) {
-		this.requeteSite_ = o;
+	public void setRequeteSite_(RequeteSite requeteSite_) {
+		this.requeteSite_ = requeteSite_;
 		this.requeteSite_Couverture.dejaInitialise = true;
 	}
-	protected ResultatRecherche requeteSite_Init()
- throws Exception {
+	protected ResultatRecherche requeteSite_Init() throws Exception {
 		if(!requeteSite_Couverture.dejaInitialise) {
 			_requeteSite_(requeteSite_Couverture);
 			if(requeteSite_ == null)
@@ -69,20 +68,19 @@ public abstract class ResultatRechercheGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.recherche.ResultatRecherche&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:documentSolr">Trouver l'entité documentSolr dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _documentSolr(Couverture<SolrDocument> o) throws Exception;
+	protected abstract void _documentSolr(Couverture<SolrDocument> c) throws Exception, Exception;
 
 	public SolrDocument getDocumentSolr() {
 		return documentSolr;
 	}
 
-	public void setDocumentSolr(SolrDocument o) {
-		this.documentSolr = o;
+	public void setDocumentSolr(SolrDocument documentSolr) {
+		this.documentSolr = documentSolr;
 		this.documentSolrCouverture.dejaInitialise = true;
 	}
-	protected ResultatRecherche documentSolrInit()
- throws Exception {
+	protected ResultatRecherche documentSolrInit() throws Exception {
 		if(!documentSolrCouverture.dejaInitialise) {
 			_documentSolr(documentSolrCouverture);
 			if(documentSolr == null)
@@ -106,16 +104,16 @@ public abstract class ResultatRechercheGen<DEV> extends Object {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.recherche.ResultatRecherche&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:resultatIndice">Trouver l'entité resultatIndice dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _resultatIndice(Couverture<Long> o) throws Exception;
+	protected abstract void _resultatIndice(Couverture<Long> c) throws Exception, Exception;
 
 	public Long getResultatIndice() {
 		return resultatIndice;
 	}
 
-	public void setResultatIndice(Long o) {
-		this.resultatIndice = o;
+	public void setResultatIndice(Long resultatIndice) {
+		this.resultatIndice = resultatIndice;
 		this.resultatIndiceCouverture.dejaInitialise = true;
 	}
 	public ResultatRecherche setResultatIndice(String o) {
@@ -124,8 +122,7 @@ public abstract class ResultatRechercheGen<DEV> extends Object {
 		this.resultatIndiceCouverture.dejaInitialise = true;
 		return (ResultatRecherche)this;
 	}
-	protected ResultatRecherche resultatIndiceInit()
- throws Exception {
+	protected ResultatRecherche resultatIndiceInit() throws Exception {
 		if(!resultatIndiceCouverture.dejaInitialise) {
 			_resultatIndice(resultatIndiceCouverture);
 			if(resultatIndice == null)
@@ -161,8 +158,8 @@ public abstract class ResultatRechercheGen<DEV> extends Object {
 
 	protected boolean dejaInitialiseResultatRecherche = false;
 
-	public ResultatRecherche initLoinResultatRecherche(RequeteSite requeteSite) throws Exception {
-		setRequeteSite_(requeteSite);
+	public ResultatRecherche initLoinResultatRecherche(RequeteSite requeteSite_) throws Exception {
+		setRequeteSite_(requeteSite_);
 		if(!dejaInitialiseResultatRecherche) {
 			dejaInitialiseResultatRecherche = true;
 			initLoinResultatRecherche();
@@ -180,19 +177,19 @@ public abstract class ResultatRechercheGen<DEV> extends Object {
 		resultatIndiceInit();
 	}
 
-	public void initLoinPourClasse(RequeteSite requeteSite) throws Exception {
-		initLoinResultatRecherche(requeteSite);
+	public void initLoinPourClasse(RequeteSite requeteSite_) throws Exception {
+		initLoinResultatRecherche(requeteSite_);
 	}
 
 	/////////////////
 	// requeteSite //
 	/////////////////
 
-	public void requeteSiteResultatRecherche(RequeteSite requeteSite) {
+	public void requeteSiteResultatRecherche(RequeteSite requeteSite_) {
 	}
 
-	public void requeteSitePourClasse(RequeteSite requeteSite) {
-		requeteSiteResultatRecherche(requeteSite);
+	public void requeteSitePourClasse(RequeteSite requeteSite_) {
+		requeteSiteResultatRecherche(requeteSite_);
 	}
 
 	/////////////
@@ -230,7 +227,7 @@ public abstract class ResultatRechercheGen<DEV> extends Object {
 	// attribuer //
 	///////////////
 
-	public boolean attribuerPourClasse(String var, Object val) {
+	public boolean attribuerPourClasse(String var, Object val) throws Exception {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
@@ -255,7 +252,7 @@ public abstract class ResultatRechercheGen<DEV> extends Object {
 	// definir //
 	/////////////
 
-	public boolean definirPourClasse(String var, String val) {
+	public boolean definirPourClasse(String var, String val) throws Exception {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		if(val != null) {

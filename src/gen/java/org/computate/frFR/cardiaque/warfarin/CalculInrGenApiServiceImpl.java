@@ -83,9 +83,9 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 	@Override
 	public void gererRechercheCalculInr(OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
 		try {
-			RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte);
+			RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte, operationRequete);
 			Future<OperationResponse> etapesFutures = rechercheCalculInr(requeteSite).compose(listeCalculInr -> 
-				listeRechercheCalculInr(listeCalculInr)
+				jsonRechercheCalculInr(listeCalculInr)
 			);
 			etapesFutures.setHandler(gestionnaireEvenements);
 		} catch(Exception e) {
@@ -160,7 +160,7 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 	@Override
 	public void gererPOSTCalculInr(JsonObject document, OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
 		try {
-			RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte);
+			RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte, operationRequete);
 			Future<OperationResponse> etapesFutures = sqlCalculInr(requeteSite).compose(a -> 
 				creerPOSTCalculInr(requeteSite).compose(calculInr -> 
 					sqlPOSTCalculInr(calculInr).compose(c -> 
@@ -275,7 +275,7 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 	@Override
 	public void gererPATCHCalculInr(JsonObject document, OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
 		try {
-			RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte);
+			RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte, operationRequete);
 			Future<OperationResponse> etapesFutures = sqlCalculInr(requeteSite).compose(a -> 
 				rechercheCalculInr(requeteSite).compose(listeCalculInr-> 
 					listePATCHCalculInr(listeCalculInr)
@@ -373,7 +373,7 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 	@Override
 	public void gererGETCalculInr(OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
 		try {
-			RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte);
+			RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte, operationRequete);
 			Future<OperationResponse> etapesFutures = rechercheCalculInr(requeteSite).compose(listeCalculInr -> 
 				jsonGETCalculInr(listeCalculInr)
 			);
@@ -381,6 +381,63 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 		} catch(Exception e) {
 			gestionnaireEvenements.handle(Future.failedFuture(e));
 		}
+	}
+
+	public void genererGetDebutCalculInr(RequeteSite requeteSite) {
+		HttpServerResponse reponseServeur = requeteSite.getReponseServeur();
+		QueryResponse reponseRecherche = requeteSite.getReponseRecherche();
+		reponseServeur.write("{\n");
+		Long millisRecherche = Long.valueOf(reponseRecherche.getQTime());
+		Long millisTransmission = reponseRecherche.getElapsedTime();
+		Long numCommence = reponseRecherche.getResults().getStart();
+		Long numTrouve = reponseRecherche.getResults().getNumFound();
+		Integer numRetourne = reponseRecherche.getResults().size();
+		String tempsRecherche = String.format("%d.%03d sec", TimeUnit.MILLISECONDS.toSeconds(millisRecherche), TimeUnit.MILLISECONDS.toMillis(millisRecherche) - TimeUnit.SECONDS.toMillis(TimeUnit.MILLISECONDS.toSeconds(millisRecherche)));
+		String tempsTransmission = String.format("%d.%03d sec", TimeUnit.MILLISECONDS.toSeconds(millisTransmission), TimeUnit.MILLISECONDS.toMillis(millisTransmission) - TimeUnit.SECONDS.toSeconds(TimeUnit.MILLISECONDS.toSeconds(millisTransmission)));
+		Exception exceptionRecherche = reponseRecherche.getException();
+
+		reponseServeur.write("\t\"numCommence\": ");
+		reponseServeur.write(numCommence.toString());
+
+		reponseServeur.write(",\n\t\"numTrouve\": ");
+		reponseServeur.write(numTrouve.toString());
+
+		reponseServeur.write(",\n\t\"numRetourne\": ");
+		reponseServeur.write(numRetourne.toString());
+
+		reponseServeur.write(",\n\t\"tempsRecherche\": \"");
+		reponseServeur.write(tempsRecherche);
+		reponseServeur.write("\"");
+
+		reponseServeur.write(",\n\t\"tempsTransmission\": \"");
+		reponseServeur.write(tempsTransmission);
+		reponseServeur.write("\"");
+
+		if(exceptionRecherche != null) {
+			reponseServeur.write(",\n\t\"exceptionRecherche\": \"");
+			reponseServeur.write(exceptionRecherche.getMessage());
+			reponseServeur.write("\"");
+		}
+
+		reponseServeur.write(",\n\t\"resultats\": [\n");
+	}
+
+	public void genererGetIndividuelCalculInr(ResultatRecherche resultatRecherche) throws Exception {
+		RequeteSite requeteSite = resultatRecherche.getRequeteSite_();
+		SolrDocument documentSolr = resultatRecherche.getDocumentSolr();
+		Long resultatIndice = resultatRecherche.getResultatIndice();
+		HttpServerResponse reponseServeur = requeteSite.getReponseServeur();
+		reponseServeur.write("\t\t");
+		if(resultatIndice > 0)
+			reponseServeur.write(", ");
+		reponseServeur.write("{\n");
+		Collection<String> champNoms = documentSolr.getFieldNames();
+		Integer j = 0;
+		for(String champNomStocke : champNoms) {
+			Collection<Object> champValeurs = documentSolr.getFieldValues(champNomStocke);
+			j = genererGetCalculInr(j, resultatRecherche, champNomStocke, champValeurs);
+		}
+		reponseServeur.write("\t\t}\n");
 	}
 
 	public Integer genererGetCalculInr(Integer j, ResultatRecherche resultatRecherche, String entiteVarStocke, Collection<Object> champValeurs) throws Exception {
@@ -484,6 +541,39 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 		return j;
 	}
 
+	public void genererGetFinCalculInr(RequeteSite requeteSite) {
+		HttpServerResponse reponseServeur = requeteSite.getReponseServeur();
+		reponseServeur.write("\t]\n");
+		reponseServeur.write("}\n");
+	}
+
+	public String varIndexeCalculInr(String entiteVar) throws Exception {
+		switch(entiteVar) {
+			case "utilisateurPk":
+				return "utilisateurPk_indexed_long";
+			case "dateInr":
+				return "dateInr_indexed_date";
+			case "dateReverifier":
+				return "dateReverifier_indexed_date";
+			case "patientPrendCoumadin":
+				return "patientPrendCoumadin_indexed_string";
+			case "butActuel":
+				return "butActuel_indexed_string";
+			case "doseActuel":
+				return "doseActuel_indexed_string";
+			case "medicamentActuel":
+				return "medicamentActuel_indexed_string";
+			case "changementDose":
+				return "changementDose_indexed_string";
+			case "notesComplementaires":
+				return "notesComplementaires_indexed_string";
+			case "infoContact":
+				return "infoContact_indexed_string";
+			default:
+				throw new Exception(String.format("\"%s\" n'est pas une entité indexé. ", entiteVar));
+		}
+	}
+
 	public Future<OperationResponse> jsonGETCalculInr(ListeRecherche<CalculInr> listeCalculInr) {
 		Buffer buffer = Buffer.buffer();
 		return Future.succeededFuture(OperationResponse.completedWithJson(buffer));
@@ -494,7 +584,7 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 	@Override
 	public void gererPUTCalculInr(JsonObject document, OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
 		try {
-			RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte);
+			RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte, operationRequete);
 			Future<OperationResponse> etapesFutures = sqlCalculInr(requeteSite).compose(a -> 
 				remplacerPUTCalculInr(requeteSite).compose(calculInr -> 
 					sqlPUTCalculInr(calculInr).compose(c -> 
@@ -518,14 +608,13 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 		Future<CalculInr> future = Future.future();
 		SQLConnection connexionSql = requeteSite.getConnexionSql();
 		String utilisateurId = requeteSite.getUtilisateurId();
+		Long pk = requeteSite.getRequetePk();
 
 		connexionSql.queryWithParams(
 				SiteContexte.SQL_vider
 				, new JsonArray(Arrays.asList(pk, CalculInr.class.getCanonicalName(), pk, pk, pk))
-				, creerAsync
+				, remplacerAsync
 		-> {
-			JsonArray ligne = creerAsync.result().getResults().stream().findFirst().orElseGet(() -> null);
-			Long pk = ligne.getLong(0);
 			CalculInr o = new CalculInr();
 			o.setPk(pk);
 			future.complete(o);
@@ -609,10 +698,12 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 	@Override
 	public void gererDELETECalculInr(OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
 		try {
-			RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte);
+			RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte, operationRequete);
 			Future<OperationResponse> etapesFutures = sqlCalculInr(requeteSite).compose(a -> 
 				rechercheCalculInr(requeteSite).compose(calculInr -> 
-					methodeDELETECalculInr(calculInr)
+					supprimerDELETECalculInr(requeteSite).compose(c -> 
+						jsonDELETECalculInr()
+					)
 				)
 			);
 			etapesFutures.setHandler(gestionnaireEvenements);
@@ -621,114 +712,25 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 		}
 	}
 
-	public Future<OperationResponse> jsonDELETECalculInr(ListeRecherche<CalculInr> listeCalculInr) {
-		Buffer buffer = Buffer.buffer();
-		return Future.succeededFuture(OperationResponse.completedWithJson(buffer));
-	}
+	public Future<Void> supprimerDELETECalculInr(RequeteSite requeteSite) {
+		Future<Void> future = Future.future();
+		SQLConnection connexionSql = requeteSite.getConnexionSql();
+		String utilisateurId = requeteSite.getUtilisateurId();
+		Long pk = requeteSite.getRequetePk();
 
-	public Future<OperationResponse> listeRechercheCalculInr(ListeRecherche<CalculInr> listeCalculInr) {
-		List<Future> futures = new ArrayList<>();
-		listeCalculInr.getList().forEach(o -> {
-			futures.add(
-				sqlPATCHCalculInr(o).compose(
-					b -> indexerCalculInr(o)
-				)
-			);
+		connexionSql.queryWithParams(
+				SiteContexte.SQL_supprimer
+				, new JsonArray(Arrays.asList(pk, CalculInr.class.getCanonicalName(), pk, pk, pk, pk))
+				, supprimerAsync
+		-> {
+			future.complete();
 		});
-		Future<OperationResponse> future = CompositeFuture.all(futures).compose( a -> 
-			jsonRechercheCalculInr(listeCalculInr)
-		);
 		return future;
 	}
 
-	public void genererGetDebutCalculInr(RequeteSite requeteSite) {
-		HttpServerResponse reponseServeur = requeteSite.getReponseServeur();
-		QueryResponse reponseRecherche = requeteSite.getReponseRecherche();
-		reponseServeur.write("{\n");
-		Long millisRecherche = Long.valueOf(reponseRecherche.getQTime());
-		Long millisTransmission = reponseRecherche.getElapsedTime();
-		Long numCommence = reponseRecherche.getResults().getStart();
-		Long numTrouve = reponseRecherche.getResults().getNumFound();
-		Integer numRetourne = reponseRecherche.getResults().size();
-		String tempsRecherche = String.format("%d.%03d sec", TimeUnit.MILLISECONDS.toSeconds(millisRecherche), TimeUnit.MILLISECONDS.toMillis(millisRecherche) - TimeUnit.SECONDS.toMillis(TimeUnit.MILLISECONDS.toSeconds(millisRecherche)));
-		String tempsTransmission = String.format("%d.%03d sec", TimeUnit.MILLISECONDS.toSeconds(millisTransmission), TimeUnit.MILLISECONDS.toMillis(millisTransmission) - TimeUnit.SECONDS.toSeconds(TimeUnit.MILLISECONDS.toSeconds(millisTransmission)));
-		Exception exceptionRecherche = reponseRecherche.getException();
-
-		reponseServeur.write("\t\"numCommence\": ");
-		reponseServeur.write(numCommence.toString());
-
-		reponseServeur.write(",\n\t\"numTrouve\": ");
-		reponseServeur.write(numTrouve.toString());
-
-		reponseServeur.write(",\n\t\"numRetourne\": ");
-		reponseServeur.write(numRetourne.toString());
-
-		reponseServeur.write(",\n\t\"tempsRecherche\": \"");
-		reponseServeur.write(tempsRecherche);
-		reponseServeur.write("\"");
-
-		reponseServeur.write(",\n\t\"tempsTransmission\": \"");
-		reponseServeur.write(tempsTransmission);
-		reponseServeur.write("\"");
-
-		if(exceptionRecherche != null) {
-			reponseServeur.write(",\n\t\"exceptionRecherche\": \"");
-			reponseServeur.write(exceptionRecherche.getMessage());
-			reponseServeur.write("\"");
-		}
-
-		reponseServeur.write(",\n\t\"resultats\": [\n");
-	}
-
-	public void genererGetIndividuelCalculInr(ResultatRecherche resultatRecherche) throws Exception {
-		RequeteSite requeteSite = resultatRecherche.getRequeteSite_();
-		SolrDocument documentSolr = resultatRecherche.getDocumentSolr();
-		Long resultatIndice = resultatRecherche.getResultatIndice();
-		HttpServerResponse reponseServeur = requeteSite.getReponseServeur();
-		reponseServeur.write("\t\t");
-		if(resultatIndice > 0)
-			reponseServeur.write(", ");
-		reponseServeur.write("{\n");
-		Collection<String> champNoms = documentSolr.getFieldNames();
-		Integer j = 0;
-		for(String champNomStocke : champNoms) {
-			Collection<Object> champValeurs = documentSolr.getFieldValues(champNomStocke);
-			j = genererGetCalculInr(j, resultatRecherche, champNomStocke, champValeurs);
-		}
-		reponseServeur.write("\t\t}\n");
-	}
-
-	public void genererGetFinCalculInr(RequeteSite requeteSite) {
-		HttpServerResponse reponseServeur = requeteSite.getReponseServeur();
-		reponseServeur.write("\t]\n");
-		reponseServeur.write("}\n");
-	}
-
-	public String varIndexeCalculInr(String entiteVar) throws Exception {
-		switch(entiteVar) {
-			case "utilisateurPk":
-				return "utilisateurPk_indexed_long";
-			case "dateInr":
-				return "dateInr_indexed_date";
-			case "dateReverifier":
-				return "dateReverifier_indexed_date";
-			case "patientPrendCoumadin":
-				return "patientPrendCoumadin_indexed_string";
-			case "butActuel":
-				return "butActuel_indexed_string";
-			case "doseActuel":
-				return "doseActuel_indexed_string";
-			case "medicamentActuel":
-				return "medicamentActuel_indexed_string";
-			case "changementDose":
-				return "changementDose_indexed_string";
-			case "notesComplementaires":
-				return "notesComplementaires_indexed_string";
-			case "infoContact":
-				return "infoContact_indexed_string";
-			default:
-				throw new Exception(String.format("\"%s\" n'est pas une entité indexé. ", entiteVar));
-		}
+	public Future<OperationResponse> jsonDELETECalculInr() {
+		Buffer buffer = Buffer.buffer();
+		return Future.succeededFuture(OperationResponse.completedWithJson(buffer));
 	}
 
 	public Future<Void> sqlCalculInr(RequeteSite requeteSite) {
@@ -746,11 +748,12 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 
 	// Partagé //
 
-	public RequeteSite genererRequeteSitePourCalculInr(SiteContexte siteContexte) throws Exception {
+	public RequeteSite genererRequeteSitePourCalculInr(SiteContexte siteContexte, OperationRequest operationRequete) throws Exception {
 		Vertx vertx = siteContexte.getVertx();
 		RequeteSite requeteSite = new RequeteSite();
 		requeteSite.setVertx(vertx);
 		requeteSite.setSiteContexte_(siteContexte);
+		requeteSite.setOperationRequete(operationRequete);
 		requeteSite.initLoinRequeteSite(requeteSite);
 
 		UtilisateurSite utilisateurSite = new UtilisateurSite();

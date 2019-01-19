@@ -13,6 +13,12 @@ import org.computate.frFR.cardiaque.couverture.Couverture;
  * nomCanonique.enUS: org.computate.enUS.cardiac.warfarin.InrEntry
  * apiUri.enUS: /api/v1/warfarin/inr-entry
  * apiUri.frFR: /api/v1/warfarin/calcul-inr
+ * apiMethode: Recherche
+ * apiMethode: POST
+ * apiMethode: PATCH
+ * apiMethode: GET
+ * apiMethode: PUT
+ * apiMethode: DELETE
  * 
  * val.VAL_patientPrendCoumadinOui.frFR:Yes
  * val.VAL_patientPrendCoumadinNon.frFR:No

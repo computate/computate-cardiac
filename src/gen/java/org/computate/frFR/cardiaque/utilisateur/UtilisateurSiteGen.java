@@ -21,6 +21,7 @@ import org.computate.frFR.cardiaque.contexte.SiteContexte;
 import java.util.Objects;
 import org.apache.solr.common.SolrDocument;
 import io.vertx.core.json.JsonArray;
+import org.computate.site.course.c000.cluster.Cluster;
 import java.util.List;
 import io.vertx.ext.sql.SQLConnection;
 import io.vertx.ext.sql.SQLClient;
@@ -55,8 +56,8 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 		return calculInrPks;
 	}
 
-	public void setCalculInrPks(List<Long> l) {
-		this.calculInrPks = l;
+	public void setCalculInrPks(List<Long> calculInrPks) {
+		this.calculInrPks = calculInrPks;
 		this.calculInrPksCouverture.dejaInitialise = true;
 	}
 	public UtilisateurSite addCalculInrPks(Long...objets) {
@@ -77,8 +78,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 		}
 		return (UtilisateurSite)this;
 	}
-	protected UtilisateurSite calculInrPksInit()
- {
+	protected UtilisateurSite calculInrPksInit() {
 		if(!calculInrPksCouverture.dejaInitialise) {
 			_calculInrPks(calculInrPks);
 		}
@@ -114,7 +114,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchUtilisateurSite", strPk(), "CalculInrPks() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
+				r.l("				url: '?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -161,20 +161,19 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.utilisateur.UtilisateurSite&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:requeteSite_">Trouver l'entité requeteSite_ dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _requeteSite_(Couverture<RequeteSite> o);
+	protected abstract void _requeteSite_(Couverture<RequeteSite> c);
 
 	public RequeteSite getRequeteSite_() {
 		return requeteSite_;
 	}
 
-	public void setRequeteSite_(RequeteSite o) {
-		this.requeteSite_ = o;
+	public void setRequeteSite_(RequeteSite requeteSite_) {
+		this.requeteSite_ = requeteSite_;
 		this.requeteSite_Couverture.dejaInitialise = true;
 	}
-	protected UtilisateurSite requeteSite_Init()
- {
+	protected UtilisateurSite requeteSite_Init() {
 		if(!requeteSite_Couverture.dejaInitialise) {
 			_requeteSite_(requeteSite_Couverture);
 			if(requeteSite_ == null)
@@ -198,20 +197,19 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.utilisateur.UtilisateurSite&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:utilisateurNom">Trouver l'entité utilisateurNom dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _utilisateurNom(Couverture<String> o);
+	protected abstract void _utilisateurNom(Couverture<String> c);
 
 	public String getUtilisateurNom() {
 		return utilisateurNom;
 	}
 
-	public void setUtilisateurNom(String o) {
-		this.utilisateurNom = o;
+	public void setUtilisateurNom(String utilisateurNom) {
+		this.utilisateurNom = utilisateurNom;
 		this.utilisateurNomCouverture.dejaInitialise = true;
 	}
-	protected UtilisateurSite utilisateurNomInit()
- {
+	protected UtilisateurSite utilisateurNomInit() {
 		if(!utilisateurNomCouverture.dejaInitialise) {
 			_utilisateurNom(utilisateurNomCouverture);
 			if(utilisateurNom == null)
@@ -249,7 +247,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchUtilisateurSite", strPk(), "UtilisateurNom() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
+				r.l("				url: '?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -296,20 +294,19 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.utilisateur.UtilisateurSite&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:utilisateurMail">Trouver l'entité utilisateurMail dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _utilisateurMail(Couverture<String> o);
+	protected abstract void _utilisateurMail(Couverture<String> c);
 
 	public String getUtilisateurMail() {
 		return utilisateurMail;
 	}
 
-	public void setUtilisateurMail(String o) {
-		this.utilisateurMail = o;
+	public void setUtilisateurMail(String utilisateurMail) {
+		this.utilisateurMail = utilisateurMail;
 		this.utilisateurMailCouverture.dejaInitialise = true;
 	}
-	protected UtilisateurSite utilisateurMailInit()
- {
+	protected UtilisateurSite utilisateurMailInit() {
 		if(!utilisateurMailCouverture.dejaInitialise) {
 			_utilisateurMail(utilisateurMailCouverture);
 			if(utilisateurMail == null)
@@ -347,7 +344,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchUtilisateurSite", strPk(), "UtilisateurMail() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
+				r.l("				url: '?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -394,20 +391,19 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.utilisateur.UtilisateurSite&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:utilisateurId">Trouver l'entité utilisateurId dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _utilisateurId(Couverture<String> o);
+	protected abstract void _utilisateurId(Couverture<String> c);
 
 	public String getUtilisateurId() {
 		return utilisateurId;
 	}
 
-	public void setUtilisateurId(String o) {
-		this.utilisateurId = o;
+	public void setUtilisateurId(String utilisateurId) {
+		this.utilisateurId = utilisateurId;
 		this.utilisateurIdCouverture.dejaInitialise = true;
 	}
-	protected UtilisateurSite utilisateurIdInit()
- {
+	protected UtilisateurSite utilisateurIdInit() {
 		if(!utilisateurIdCouverture.dejaInitialise) {
 			_utilisateurId(utilisateurIdCouverture);
 			if(utilisateurId == null)
@@ -445,7 +441,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchUtilisateurSite", strPk(), "UtilisateurId() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
+				r.l("				url: '?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -492,20 +488,19 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.utilisateur.UtilisateurSite&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:utilisateurPrenom">Trouver l'entité utilisateurPrenom dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _utilisateurPrenom(Couverture<String> o);
+	protected abstract void _utilisateurPrenom(Couverture<String> c);
 
 	public String getUtilisateurPrenom() {
 		return utilisateurPrenom;
 	}
 
-	public void setUtilisateurPrenom(String o) {
-		this.utilisateurPrenom = o;
+	public void setUtilisateurPrenom(String utilisateurPrenom) {
+		this.utilisateurPrenom = utilisateurPrenom;
 		this.utilisateurPrenomCouverture.dejaInitialise = true;
 	}
-	protected UtilisateurSite utilisateurPrenomInit()
- {
+	protected UtilisateurSite utilisateurPrenomInit() {
 		if(!utilisateurPrenomCouverture.dejaInitialise) {
 			_utilisateurPrenom(utilisateurPrenomCouverture);
 			if(utilisateurPrenom == null)
@@ -543,7 +538,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchUtilisateurSite", strPk(), "UtilisateurPrenom() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
+				r.l("				url: '?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -590,20 +585,19 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.utilisateur.UtilisateurSite&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:utilisateurNomFamille">Trouver l'entité utilisateurNomFamille dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _utilisateurNomFamille(Couverture<String> o);
+	protected abstract void _utilisateurNomFamille(Couverture<String> c);
 
 	public String getUtilisateurNomFamille() {
 		return utilisateurNomFamille;
 	}
 
-	public void setUtilisateurNomFamille(String o) {
-		this.utilisateurNomFamille = o;
+	public void setUtilisateurNomFamille(String utilisateurNomFamille) {
+		this.utilisateurNomFamille = utilisateurNomFamille;
 		this.utilisateurNomFamilleCouverture.dejaInitialise = true;
 	}
-	protected UtilisateurSite utilisateurNomFamilleInit()
- {
+	protected UtilisateurSite utilisateurNomFamilleInit() {
 		if(!utilisateurNomFamilleCouverture.dejaInitialise) {
 			_utilisateurNomFamille(utilisateurNomFamilleCouverture);
 			if(utilisateurNomFamille == null)
@@ -641,7 +635,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchUtilisateurSite", strPk(), "UtilisateurNomFamille() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
+				r.l("				url: '?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -688,20 +682,19 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.utilisateur.UtilisateurSite&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:utilisateurNomComplet">Trouver l'entité utilisateurNomComplet dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _utilisateurNomComplet(Couverture<String> o);
+	protected abstract void _utilisateurNomComplet(Couverture<String> c);
 
 	public String getUtilisateurNomComplet() {
 		return utilisateurNomComplet;
 	}
 
-	public void setUtilisateurNomComplet(String o) {
-		this.utilisateurNomComplet = o;
+	public void setUtilisateurNomComplet(String utilisateurNomComplet) {
+		this.utilisateurNomComplet = utilisateurNomComplet;
 		this.utilisateurNomCompletCouverture.dejaInitialise = true;
 	}
-	protected UtilisateurSite utilisateurNomCompletInit()
- {
+	protected UtilisateurSite utilisateurNomCompletInit() {
 		if(!utilisateurNomCompletCouverture.dejaInitialise) {
 			_utilisateurNomComplet(utilisateurNomCompletCouverture);
 			if(utilisateurNomComplet == null)
@@ -739,7 +732,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchUtilisateurSite", strPk(), "UtilisateurNomComplet() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
+				r.l("				url: '?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -786,20 +779,19 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.utilisateur.UtilisateurSite&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:utilisateurSite">Trouver l'entité utilisateurSite dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _utilisateurSite(Couverture<String> o);
+	protected abstract void _utilisateurSite(Couverture<String> c);
 
 	public String getUtilisateurSite() {
 		return utilisateurSite;
 	}
 
-	public void setUtilisateurSite(String o) {
-		this.utilisateurSite = o;
+	public void setUtilisateurSite(String utilisateurSite) {
+		this.utilisateurSite = utilisateurSite;
 		this.utilisateurSiteCouverture.dejaInitialise = true;
 	}
-	protected UtilisateurSite utilisateurSiteInit()
- {
+	protected UtilisateurSite utilisateurSiteInit() {
 		if(!utilisateurSiteCouverture.dejaInitialise) {
 			_utilisateurSite(utilisateurSiteCouverture);
 			if(utilisateurSite == null)
@@ -837,7 +829,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchUtilisateurSite", strPk(), "UtilisateurSite() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
+				r.l("				url: '?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -884,16 +876,16 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.utilisateur.UtilisateurSite&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:utilisateurRecevoirCourriels">Trouver l'entité utilisateurRecevoirCourriels dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _utilisateurRecevoirCourriels(Couverture<Boolean> o);
+	protected abstract void _utilisateurRecevoirCourriels(Couverture<Boolean> c);
 
 	public Boolean getUtilisateurRecevoirCourriels() {
 		return utilisateurRecevoirCourriels;
 	}
 
-	public void setUtilisateurRecevoirCourriels(Boolean o) {
-		this.utilisateurRecevoirCourriels = o;
+	public void setUtilisateurRecevoirCourriels(Boolean utilisateurRecevoirCourriels) {
+		this.utilisateurRecevoirCourriels = utilisateurRecevoirCourriels;
 		this.utilisateurRecevoirCourrielsCouverture.dejaInitialise = true;
 	}
 	public UtilisateurSite setUtilisateurRecevoirCourriels(String o) {
@@ -902,8 +894,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 		this.utilisateurRecevoirCourrielsCouverture.dejaInitialise = true;
 		return (UtilisateurSite)this;
 	}
-	protected UtilisateurSite utilisateurRecevoirCourrielsInit()
- {
+	protected UtilisateurSite utilisateurRecevoirCourrielsInit() {
 		if(!utilisateurRecevoirCourrielsCouverture.dejaInitialise) {
 			_utilisateurRecevoirCourriels(utilisateurRecevoirCourrielsCouverture);
 			if(utilisateurRecevoirCourriels == null)
@@ -941,7 +932,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchUtilisateurSite", strPk(), "UtilisateurRecevoirCourriels() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
+				r.l("				url: '?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -988,16 +979,16 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.utilisateur.UtilisateurSite&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:modeleSupprime">Trouver l'entité modeleSupprime dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _modeleSupprime(Couverture<Boolean> o);
+	protected abstract void _modeleSupprime(Couverture<Boolean> c);
 
 	public Boolean getModeleSupprime() {
 		return modeleSupprime;
 	}
 
-	public void setModeleSupprime(Boolean o) {
-		this.modeleSupprime = o;
+	public void setModeleSupprime(Boolean modeleSupprime) {
+		this.modeleSupprime = modeleSupprime;
 		this.modeleSupprimeCouverture.dejaInitialise = true;
 	}
 	public UtilisateurSite setModeleSupprime(String o) {
@@ -1006,8 +997,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 		this.modeleSupprimeCouverture.dejaInitialise = true;
 		return (UtilisateurSite)this;
 	}
-	protected UtilisateurSite modeleSupprimeInit()
- {
+	protected UtilisateurSite modeleSupprimeInit() {
 		if(!modeleSupprimeCouverture.dejaInitialise) {
 			_modeleSupprime(modeleSupprimeCouverture);
 			if(modeleSupprime == null)
@@ -1045,7 +1035,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchUtilisateurSite", strPk(), "ModeleSupprime() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
+				r.l("				url: '?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -1092,20 +1082,19 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.utilisateur.UtilisateurSite&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:modeleCree">Trouver l'entité modeleCree dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _modeleCree(Couverture<ZonedDateTime> o);
+	protected abstract void _modeleCree(Couverture<ZonedDateTime> c);
 
 	public ZonedDateTime getModeleCree() {
 		return modeleCree;
 	}
 
-	public void setModeleCree(ZonedDateTime o) {
-		this.modeleCree = o;
+	public void setModeleCree(ZonedDateTime modeleCree) {
+		this.modeleCree = modeleCree;
 		this.modeleCreeCouverture.dejaInitialise = true;
 	}
-	protected UtilisateurSite modeleCreeInit()
- {
+	protected UtilisateurSite modeleCreeInit() {
 		if(!modeleCreeCouverture.dejaInitialise) {
 			_modeleCree(modeleCreeCouverture);
 			if(modeleCree == null)
@@ -1129,20 +1118,19 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.utilisateur.UtilisateurSite&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:modeleModifie">Trouver l'entité modeleModifie dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _modeleModifie(Couverture<ZonedDateTime> o);
+	protected abstract void _modeleModifie(Couverture<ZonedDateTime> c);
 
 	public ZonedDateTime getModeleModifie() {
 		return modeleModifie;
 	}
 
-	public void setModeleModifie(ZonedDateTime o) {
-		this.modeleModifie = o;
+	public void setModeleModifie(ZonedDateTime modeleModifie) {
+		this.modeleModifie = modeleModifie;
 		this.modeleModifieCouverture.dejaInitialise = true;
 	}
-	protected UtilisateurSite modeleModifieInit()
- {
+	protected UtilisateurSite modeleModifieInit() {
 		if(!modeleModifieCouverture.dejaInitialise) {
 			_modeleModifie(modeleModifieCouverture);
 			if(modeleModifie == null)
@@ -1166,20 +1154,19 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.utilisateur.UtilisateurSite&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:modeleClasseNomCanonique">Trouver l'entité modeleClasseNomCanonique dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _modeleClasseNomCanonique(Couverture<String> o);
+	protected abstract void _modeleClasseNomCanonique(Couverture<String> c);
 
 	public String getModeleClasseNomCanonique() {
 		return modeleClasseNomCanonique;
 	}
 
-	public void setModeleClasseNomCanonique(String o) {
-		this.modeleClasseNomCanonique = o;
+	public void setModeleClasseNomCanonique(String modeleClasseNomCanonique) {
+		this.modeleClasseNomCanonique = modeleClasseNomCanonique;
 		this.modeleClasseNomCanoniqueCouverture.dejaInitialise = true;
 	}
-	protected UtilisateurSite modeleClasseNomCanoniqueInit()
- {
+	protected UtilisateurSite modeleClasseNomCanoniqueInit() {
 		if(!modeleClasseNomCanoniqueCouverture.dejaInitialise) {
 			_modeleClasseNomCanonique(modeleClasseNomCanoniqueCouverture);
 			if(modeleClasseNomCanonique == null)
@@ -1217,7 +1204,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchUtilisateurSite", strPk(), "ModeleClasseNomCanonique() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
+				r.l("				url: '?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -1264,16 +1251,16 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.utilisateur.UtilisateurSite&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:modeleCle">Trouver l'entité modeleCle dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _modeleCle(Couverture<Long> o);
+	protected abstract void _modeleCle(Couverture<Long> c);
 
 	public Long getModeleCle() {
 		return modeleCle;
 	}
 
-	public void setModeleCle(Long o) {
-		this.modeleCle = o;
+	public void setModeleCle(Long modeleCle) {
+		this.modeleCle = modeleCle;
 		this.modeleCleCouverture.dejaInitialise = true;
 	}
 	public UtilisateurSite setModeleCle(String o) {
@@ -1282,8 +1269,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 		this.modeleCleCouverture.dejaInitialise = true;
 		return (UtilisateurSite)this;
 	}
-	protected UtilisateurSite modeleCleInit()
- {
+	protected UtilisateurSite modeleCleInit() {
 		if(!modeleCleCouverture.dejaInitialise) {
 			_modeleCle(modeleCleCouverture);
 			if(modeleCle == null)
@@ -1321,7 +1307,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchUtilisateurSite", strPk(), "ModeleCle() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
+				r.l("				url: '?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -1368,20 +1354,19 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.utilisateur.UtilisateurSite&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:modeleSuggestionStocke">Trouver l'entité modeleSuggestionStocke dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _modeleSuggestionStocke(Couverture<String> o);
+	protected abstract void _modeleSuggestionStocke(Couverture<String> c);
 
 	public String getModeleSuggestionStocke() {
 		return modeleSuggestionStocke;
 	}
 
-	public void setModeleSuggestionStocke(String o) {
-		this.modeleSuggestionStocke = o;
+	public void setModeleSuggestionStocke(String modeleSuggestionStocke) {
+		this.modeleSuggestionStocke = modeleSuggestionStocke;
 		this.modeleSuggestionStockeCouverture.dejaInitialise = true;
 	}
-	protected UtilisateurSite modeleSuggestionStockeInit()
- {
+	protected UtilisateurSite modeleSuggestionStockeInit() {
 		if(!modeleSuggestionStockeCouverture.dejaInitialise) {
 			_modeleSuggestionStocke(modeleSuggestionStockeCouverture);
 			if(modeleSuggestionStocke == null)
@@ -1419,7 +1404,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchUtilisateurSite", strPk(), "ModeleSuggestionStocke() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
+				r.l("				url: '?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -1466,20 +1451,19 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.utilisateur.UtilisateurSite&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:modeleSuggestionIndexe">Trouver l'entité modeleSuggestionIndexe dans Solr</a>
 	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _modeleSuggestionIndexe(Couverture<String> o);
+	protected abstract void _modeleSuggestionIndexe(Couverture<String> c);
 
 	public String getModeleSuggestionIndexe() {
 		return modeleSuggestionIndexe;
 	}
 
-	public void setModeleSuggestionIndexe(String o) {
-		this.modeleSuggestionIndexe = o;
+	public void setModeleSuggestionIndexe(String modeleSuggestionIndexe) {
+		this.modeleSuggestionIndexe = modeleSuggestionIndexe;
 		this.modeleSuggestionIndexeCouverture.dejaInitialise = true;
 	}
-	protected UtilisateurSite modeleSuggestionIndexeInit()
- {
+	protected UtilisateurSite modeleSuggestionIndexeInit() {
 		if(!modeleSuggestionIndexeCouverture.dejaInitialise) {
 			_modeleSuggestionIndexe(modeleSuggestionIndexeCouverture);
 			if(modeleSuggestionIndexe == null)
@@ -1517,7 +1501,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchUtilisateurSite", strPk(), "ModeleSuggestionIndexe() {");
 				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
+				r.l("				url: '?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -1556,8 +1540,8 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 
 	protected boolean dejaInitialiseUtilisateurSite = false;
 
-	public UtilisateurSite initLoinUtilisateurSite(RequeteSite requeteSite) {
-		setRequeteSite_(requeteSite);
+	public UtilisateurSite initLoinUtilisateurSite(RequeteSite requeteSite_) {
+		setRequeteSite_(requeteSite_);
 		if(!dejaInitialiseUtilisateurSite) {
 			dejaInitialiseUtilisateurSite = true;
 			initLoinUtilisateurSite();
@@ -1590,20 +1574,20 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 		modeleSuggestionIndexeInit();
 	}
 
-	@Override public void initLoinPourClasse(RequeteSite requeteSite) {
-		initLoinUtilisateurSite(requeteSite);
+	@Override public void initLoinPourClasse(RequeteSite requeteSite_) {
+		initLoinUtilisateurSite(requeteSite_);
 	}
 
 	/////////////////
 	// requeteSite //
 	/////////////////
 
-	public void requeteSiteUtilisateurSite(RequeteSite requeteSite) {
-			super.requeteSiteCluster(requeteSite);
+	public void requeteSiteUtilisateurSite(RequeteSite requeteSite_) {
+			super.requeteSiteCluster(requeteSite_);
 	}
 
-	public void requeteSitePourClasse(RequeteSite requeteSite) {
-		requeteSiteUtilisateurSite(requeteSite);
+	public void requeteSitePourClasse(RequeteSite requeteSite_) {
+		requeteSiteUtilisateurSite(requeteSite_);
 	}
 
 	/////////////
@@ -1819,11 +1803,6 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 	}
 	public Object definirUtilisateurSite(String var, String val) {
 		switch(var) {
-			case "calculInrPks":
-				addCalculInrPks(val);
-				if(!sauvegardesUtilisateurSite.contains(var))
-					sauvegardesUtilisateurSite.add(var);
-				return val;
 			case "utilisateurNom":
 				setUtilisateurNom(val);
 				sauvegardesUtilisateurSite.add(var);
@@ -1958,6 +1937,18 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 				oUtilisateurSite.setModeleSupprime(modeleSupprime);
 		}
 
+		if(sauvegardesUtilisateurSite.contains("modeleCree")) {
+			 modeleCree = ()solrDocument.get("modeleCree_stored");
+			if(modeleCree != null)
+				oUtilisateurSite.setModeleCree(modeleCree);
+		}
+
+		if(sauvegardesUtilisateurSite.contains("modeleModifie")) {
+			 modeleModifie = ()solrDocument.get("modeleModifie_stored");
+			if(modeleModifie != null)
+				oUtilisateurSite.setModeleModifie(modeleModifie);
+		}
+
 		if(sauvegardesUtilisateurSite.contains("modeleClasseNomCanonique")) {
 			String modeleClasseNomCanonique = (String)solrDocument.get("modeleClasseNomCanonique_stored_string");
 			if(modeleClasseNomCanonique != null)
@@ -1990,7 +1981,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 	//////////////
 
 	@Override public int hashCode() {
-		return Objects.hash(super.hashCode(), calculInrPks, utilisateurNom, utilisateurMail, utilisateurId, utilisateurPrenom, utilisateurNomFamille, utilisateurNomComplet, utilisateurSite, utilisateurRecevoirCourriels, modeleSupprime, modeleClasseNomCanonique, modeleCle, modeleSuggestionStocke, modeleSuggestionIndexe);
+		return Objects.hash(super.hashCode(), utilisateurNom, utilisateurMail, utilisateurId, utilisateurPrenom, utilisateurNomFamille, utilisateurNomComplet, utilisateurSite, utilisateurRecevoirCourriels, modeleSupprime, modeleClasseNomCanonique, modeleCle, modeleSuggestionStocke, modeleSuggestionIndexe);
 	}
 
 	////////////
@@ -2004,7 +1995,6 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 			return false;
 		UtilisateurSite that = (UtilisateurSite)o;
 		return super.equals(o)
-				&& Objects.equals( calculInrPks, that.calculInrPks )
 				&& Objects.equals( utilisateurNom, that.utilisateurNom )
 				&& Objects.equals( utilisateurMail, that.utilisateurMail )
 				&& Objects.equals( utilisateurId, that.utilisateurId )
@@ -2028,8 +2018,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 		StringBuilder sb = new StringBuilder();
 		sb.append(super.toString() + "\n");
 		sb.append("UtilisateurSite {");
-		sb.append( "calculInrPks: " ).append(calculInrPks);
-		sb.append( ", utilisateurNom: \"" ).append(utilisateurNom).append( "\"" );
+		sb.append( "utilisateurNom: \"" ).append(utilisateurNom).append( "\"" );
 		sb.append( ", utilisateurMail: \"" ).append(utilisateurMail).append( "\"" );
 		sb.append( ", utilisateurId: \"" ).append(utilisateurId).append( "\"" );
 		sb.append( ", utilisateurPrenom: \"" ).append(utilisateurPrenom).append( "\"" );

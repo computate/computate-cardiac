@@ -7,7 +7,6 @@ import org.computate.frFR.cardiaque.cluster.ClusterApiServiceImpl;
 import org.computate.frFR.cardiaque.config.ConfigSite;
 import org.computate.frFR.cardiaque.contexte.SiteContexte;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
-import org.computate.frFR.cardiaque.warfarin.CalculInrApiGen;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
@@ -140,8 +139,8 @@ public class AppVertx extends AbstractVerticle {
 				// RouterFactoryOptions options = new
 				// RouterFactoryOptions().setMountNotImplementedHandler(true)
 				// .setMountValidationFailureHandler(false);
-				CalculInrApiGen apiCalculInr = new CalculInrApiGen();
-				apiCalculInr.handleGetCalculInr(siteContexte);
+//				CalculInrApiGen apiCalculInr = new CalculInrApiGen();
+//				apiCalculInr.handleGetCalculInr(siteContexte);
 				future.complete();
 			} else {
 				LOGGER.error("Could not configure the api", ar.cause());
@@ -212,13 +211,13 @@ public class AppVertx extends AbstractVerticle {
 					OpenAPI3RouterFactory routerFactory = ar.result();
 					routerFactory.addSecurityHandler("oauth2", gestionnaireAuth);
 
-					routerFactory.addHandlerByOperationId("authorize", SecurityApis.createAuthorizeHandler(siteAuth, config().getString("HTTP_ROOT")));
-					routerFactory.addFailureHandlerByOperationId("authorize", new FailureHandler());
+//					routerFactory.addHandlerByOperationId("authorize", SecurityApis.createAuthorizeHandler(siteAuth, config().getString("HTTP_ROOT")));
+//					routerFactory.addFailureHandlerByOperationId("authorize", new FailureHandler());
+//			        
+//					routerFactory.addHandlerByOperationId("callback", SecurityApis.createCallbackHandler(siteAuth, config().getString("HTTP_ROOT")));
+//					routerFactory.addFailureHandlerByOperationId("callback", new FailureHandler());
 			        
-					routerFactory.addHandlerByOperationId("callback", SecurityApis.createCallbackHandler(siteAuth, config().getString("HTTP_ROOT")));
-					routerFactory.addFailureHandlerByOperationId("callback", new FailureHandler());
-			        
-					gestionnaireAuth.setupCallback(routerFactory.getRouter().route("/callback"))
+//					gestionnaireAuth.setupCallback(routerFactory.getRouter().route("/callback"))
 //					routerFactory..addHandlerByOperationId(EndpointUriOperationId.SIGN_UP.endpoint, { routingContext -> signUpRouter?.signUp(routingContext) });
 //		            routerFactory.addHandlerByOperationId(EndpointUriOperationId.SIGN_IN.endpoint, { routingContext -> signInRouter?.signIn(routingContext) });
 //		            routerFactory.addHandlerByOperationId(EndpointUriOperationId.CONFIRM_ACCESS_CODE.endpoint, { routingContext -> signUpRouter?.confirmAccessCode(routingContext) });
@@ -230,7 +229,7 @@ public class AppVertx extends AbstractVerticle {
 					RouterFactoryOptions options = new RouterFactoryOptions().setMountNotImplementedHandler(true)
 							.setMountValidationFailureHandler(false);
 
-					CalculInrApiGen moissoneurOaiApi = new CalculInrApiGen();
+//					CalculInrApiGen moissoneurOaiApi = new CalculInrApiGen();
 				}
 			});
 	
