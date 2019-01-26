@@ -6,9 +6,9 @@ import org.computate.frFR.cardiaque.couverture.Couverture;
 import org.computate.frFR.cardiaque.config.ConfigSite;
 import org.computate.frFR.cardiaque.cluster.Cluster;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
-import java.lang.Object;
 import org.computate.frFR.cardiaque.ecrivain.ToutEcrivain;
 import org.apache.commons.text.StringEscapeUtils;
+import java.lang.Object;
 import org.apache.commons.lang3.StringUtils;
 import java.lang.Exception;
 
@@ -34,7 +34,7 @@ public abstract class AppPeuplerGen<DEV> extends Object {
 	 * <br/>
 	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _requeteSite_(Couverture<RequeteSite> c) throws Exception, Exception;
+	protected abstract void _requeteSite_(Couverture<RequeteSite> c) throws Exception;
 
 	public RequeteSite getRequeteSite_() {
 		return requeteSite_;
@@ -70,7 +70,7 @@ public abstract class AppPeuplerGen<DEV> extends Object {
 	 * <br/>
 	 * @param siteContexte est l'entité déjà construit. 
 	 **/
-	protected abstract void _siteContexte(SiteContexte o) throws Exception, Exception;
+	protected abstract void _siteContexte(SiteContexte o) throws Exception;
 
 	public SiteContexte getSiteContexte() {
 		return siteContexte;
@@ -105,7 +105,7 @@ public abstract class AppPeuplerGen<DEV> extends Object {
 	 * <br/>
 	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _configSite(Couverture<ConfigSite> c) throws Exception, Exception;
+	protected abstract void _configSite(Couverture<ConfigSite> c) throws Exception;
 
 	public ConfigSite getConfigSite() {
 		return configSite;

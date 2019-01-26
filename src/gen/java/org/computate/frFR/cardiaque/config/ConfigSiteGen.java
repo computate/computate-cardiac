@@ -3254,6 +3254,62 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return apiCheminBase == null ? "" : StringEscapeUtils.escapeHtml4(strApiCheminBase());
 	}
 
+	//////////////////////////
+	// vertxServiceAddresse //
+	//////////////////////////
+
+	/**	L'entité « vertxServiceAddresse »
+	 *	 is defined as null before being initialized. 
+	 */
+	protected String vertxServiceAddresse;
+	public Couverture<String> vertxServiceAddresseCouverture = new Couverture<String>().p(this).c(String.class).var("vertxServiceAddresse").o(vertxServiceAddresse);
+
+	/**	<br/>L'entité « vertxServiceAddresse »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.config.ConfigSite&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:vertxServiceAddresse">Trouver l'entité vertxServiceAddresse dans Solr</a>
+	 * <br/>
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
+	protected abstract void _vertxServiceAddresse(Couverture<String> c);
+
+	public String getVertxServiceAddresse() {
+		return vertxServiceAddresse;
+	}
+
+	public void setVertxServiceAddresse(String vertxServiceAddresse) {
+		this.vertxServiceAddresse = vertxServiceAddresse;
+		this.vertxServiceAddresseCouverture.dejaInitialise = true;
+	}
+	protected ConfigSite vertxServiceAddresseInit() {
+		if(!vertxServiceAddresseCouverture.dejaInitialise) {
+			_vertxServiceAddresse(vertxServiceAddresseCouverture);
+			if(vertxServiceAddresse == null)
+				setVertxServiceAddresse(vertxServiceAddresseCouverture.o);
+		}
+		vertxServiceAddresseCouverture.dejaInitialise(true);
+		return (ConfigSite)this;
+	}
+
+	public String solrVertxServiceAddresse() {
+		return vertxServiceAddresse;
+	}
+
+	public String strVertxServiceAddresse() {
+		return vertxServiceAddresse == null ? "" : vertxServiceAddresse;
+	}
+
+	public String nomAffichageVertxServiceAddresse() {
+		return null;
+	}
+
+	public String htmTooltipVertxServiceAddresse() {
+		return null;
+	}
+
+	public String htmVertxServiceAddresse() {
+		return vertxServiceAddresse == null ? "" : StringEscapeUtils.escapeHtml4(strVertxServiceAddresse());
+	}
+
 	//////////////
 	// initLoin //
 	//////////////
@@ -3332,6 +3388,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		apiLicenceUrlInit();
 		apiNomHoteInit();
 		apiCheminBaseInit();
+		vertxServiceAddresseInit();
 	}
 
 	public void initLoinPourClasse(RequeteSite requeteSite_) {
@@ -3485,6 +3542,8 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 				return oConfigSite.apiNomHote;
 			case "apiCheminBase":
 				return oConfigSite.apiCheminBase;
+			case "vertxServiceAddresse":
+				return oConfigSite.vertxServiceAddresse;
 			default:
 				return null;
 		}
@@ -3546,7 +3605,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	//////////////
 
 	@Override public int hashCode() {
-		return Objects.hash(configChemin, identifiantSite, prefixeEchappe, appliChemin, racineDocument, nomEntreprise, nomDomaine, siteNomHote, sitePort, authRoyaume, authRessource, authSecret, authSslRequis, sslJksChemin, sslJksMotDePasse, authUrl, selCryptage, motDePasseCryptage, urlDomaineBase, siteNomAffichage, jdbcClassePilote, jdbcUtilisateur, jdbcMotDePasse, jdbcTailleMaxPiscine, jdbcTailleInitialePiscine, jdbcTailleMinPiscine, jdbcMaxDeclarations, jdbcMaxDeclarationsParConnexion, jdbcTempsInactiviteMax, jdbcUrl, solrUrl, solrUrlComputate, jetonIdentitePaypal, compteFacebook, compteTwitter, compteGooglePlus, compteInstagram, compteYoutube, identifiantCanalYoutube, comptePinterest, compteOpenclipart, compteMail, roleAdmin, mailAdmin, nombreExecuteurs, openApiVersion, apiDescription, apiTitre, apiTermsService, apiVersion, apiContactMail, apiLicenceNom, apiLicenceUrl, apiNomHote, apiCheminBase);
+		return Objects.hash(configChemin, identifiantSite, prefixeEchappe, appliChemin, racineDocument, nomEntreprise, nomDomaine, siteNomHote, sitePort, authRoyaume, authRessource, authSecret, authSslRequis, sslJksChemin, sslJksMotDePasse, authUrl, selCryptage, motDePasseCryptage, urlDomaineBase, siteNomAffichage, jdbcClassePilote, jdbcUtilisateur, jdbcMotDePasse, jdbcTailleMaxPiscine, jdbcTailleInitialePiscine, jdbcTailleMinPiscine, jdbcMaxDeclarations, jdbcMaxDeclarationsParConnexion, jdbcTempsInactiviteMax, jdbcUrl, solrUrl, solrUrlComputate, jetonIdentitePaypal, compteFacebook, compteTwitter, compteGooglePlus, compteInstagram, compteYoutube, identifiantCanalYoutube, comptePinterest, compteOpenclipart, compteMail, roleAdmin, mailAdmin, nombreExecuteurs, openApiVersion, apiDescription, apiTitre, apiTermsService, apiVersion, apiContactMail, apiLicenceNom, apiLicenceUrl, apiNomHote, apiCheminBase, vertxServiceAddresse);
 	}
 
 	////////////
@@ -3613,7 +3672,8 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 				&& Objects.equals( apiLicenceNom, that.apiLicenceNom )
 				&& Objects.equals( apiLicenceUrl, that.apiLicenceUrl )
 				&& Objects.equals( apiNomHote, that.apiNomHote )
-				&& Objects.equals( apiCheminBase, that.apiCheminBase );
+				&& Objects.equals( apiCheminBase, that.apiCheminBase )
+				&& Objects.equals( vertxServiceAddresse, that.vertxServiceAddresse );
 	}
 
 	//////////////
@@ -3678,6 +3738,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		sb.append( ", apiLicenceUrl: \"" ).append(apiLicenceUrl).append( "\"" );
 		sb.append( ", apiNomHote: \"" ).append(apiNomHote).append( "\"" );
 		sb.append( ", apiCheminBase: \"" ).append(apiCheminBase).append( "\"" );
+		sb.append( ", vertxServiceAddresse: \"" ).append(vertxServiceAddresse).append( "\"" );
 		sb.append(" }");
 		return sb.toString();
 	}

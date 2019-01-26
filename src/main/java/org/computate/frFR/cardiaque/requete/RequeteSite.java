@@ -1,18 +1,27 @@
 package org.computate.frFR.cardiaque.requete;  
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
+import java.security.InvalidKeyException;
 import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.security.SecureRandom;
 import java.util.Arrays;
 import java.util.Base64;
 import java.util.Stack;
 
+import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
+import javax.crypto.IllegalBlockSizeException;
+import javax.crypto.NoSuchPaddingException;
 import javax.crypto.spec.SecretKeySpec;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.apache.solr.client.solrj.SolrQuery;
+import org.apache.solr.client.solrj.SolrServerException;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import org.apache.solr.common.SolrDocument;
 import org.apache.solr.common.SolrDocumentList;
@@ -30,13 +39,14 @@ import io.vertx.ext.auth.User;
 import io.vertx.ext.auth.oauth2.KeycloakHelper;
 import io.vertx.ext.sql.SQLConnection;
 import io.vertx.ext.web.RoutingContext;
-import io.vertx.ext.web.api.OperationRequest;
+import io.vertx.ext.web.api.OperationRequest; 
 
 public class RequeteSite extends RequeteSiteGen<Object> implements Serializable {   
 	private static final long serialVersionUID = -6737494107881513257L;
 
 	/**	L'ecouteur de contexte du site pour obtenir des objets globals du contexte. **/
 	protected void _siteContexte_(Couverture<SiteContexte> c) {
+		c.o(new SiteContexte());
 	}
 
 	/**	L'objet de configuration du site. **/
@@ -65,10 +75,14 @@ public class RequeteSite extends RequeteSiteGen<Object> implements Serializable 
 	protected void _operationRequete(Couverture<OperationRequest> c) {
 	}
 
-	protected void _reponseRecherche(Couverture<QueryResponse> c) throws Exception {
+	protected void _reponseRecherche(Couverture<QueryResponse> c) {
 		if(rechercheSolr != null) {
-			QueryResponse o = siteContexte_.getClientSolr().query(rechercheSolr);
-			c.o(o);
+			try {
+				QueryResponse o = siteContexte_.getClientSolr().query(rechercheSolr);
+				c.o(o);
+			} catch (SolrServerException | IOException e) {
+				ExceptionUtils.rethrow(e);
+			}
 		}
 	}
 
@@ -102,7 +116,7 @@ public class RequeteSite extends RequeteSiteGen<Object> implements Serializable 
 	 * r.enUS: ecrivain
 	 * writer
 	 */  
-	protected void _w(Couverture<ToutEcrivain> c) throws Exception {
+	protected void _w(Couverture<ToutEcrivain> c) {
 	}
 //
 //	protected void _siteIdKeycloak(Couverture<String> c) {
@@ -257,21 +271,33 @@ public class RequeteSite extends RequeteSiteGen<Object> implements Serializable 
 	
 	protected void _h(Couverture<String> c) {}
 	
-	protected void _chiffrementCrypter(Couverture<Cipher> c) throws Exception {
+	protected void _chiffrementCrypter(Couverture<Cipher> c) {
 		if(!StringUtils.isEmpty(h)) {
-			c.o(Cipher.getInstance("AES"));
+			try {
+				c.o(Cipher.getInstance("AES"));
+			} catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
+				ExceptionUtils.rethrow(e);
+			}
 		}
 	}
 	
-	protected void _chiffrementDecrypter(Couverture<Cipher> c) throws Exception {
+	protected void _chiffrementDecrypter(Couverture<Cipher> c) {
 		if(!StringUtils.isEmpty(h)) {
-			c.o(Cipher.getInstance("AES"));
+			try {
+				c.o(Cipher.getInstance("AES"));
+			} catch (NoSuchAlgorithmException | NoSuchPaddingException e) {
+				ExceptionUtils.rethrow(e);
+			}
 		}
 	}
 	
-	protected void _digestMessage(Couverture<MessageDigest> c) throws Exception {    
+	protected void _digestMessage(Couverture<MessageDigest> c) {    
 		if(!StringUtils.isEmpty(h)) {
-			c.o(MessageDigest.getInstance("SHA-1"));
+			try {
+				c.o(MessageDigest.getInstance("SHA-1"));
+			} catch (NoSuchAlgorithmException e) {
+				ExceptionUtils.rethrow(e);
+			}
 		}
 	}
 	
@@ -290,55 +316,79 @@ public class RequeteSite extends RequeteSiteGen<Object> implements Serializable 
 	protected void _connexionSql(Couverture<SQLConnection> c) {
 	}
 	
-	protected void _crypterCle(Couverture<byte[]> c) throws Exception {
+	protected void _crypterCle(Couverture<byte[]> c) {
 		if(!StringUtils.isEmpty(h)) {
-			c.o(Arrays.copyOf(digestMessage.digest((crypterSel + h).getBytes("UTF-8")), 16));
+			try {
+				c.o(Arrays.copyOf(digestMessage.digest((crypterSel + h).getBytes("UTF-8")), 16));
+			} catch (UnsupportedEncodingException e) {
+				ExceptionUtils.rethrow(e);
+			}
 		}
 	}
 	
 	protected void _aleatoireSecurise(SecureRandom o) {}  
 	
-	protected void _specCleSecrete(Couverture<SecretKeySpec> c) throws Exception {
+	protected void _specCleSecrete(Couverture<SecretKeySpec> c) {
 		if(!StringUtils.isEmpty(h)) {
-			SecretKeySpec specCleSecrete = new SecretKeySpec(crypterCle, "AES");
-			chiffrementCrypter.init(Cipher.ENCRYPT_MODE, specCleSecrete);
-			chiffrementDecrypter.init(Cipher.DECRYPT_MODE, specCleSecrete);
-			c.o(specCleSecrete);
+			try {
+				SecretKeySpec specCleSecrete = new SecretKeySpec(crypterCle, "AES");
+				chiffrementCrypter.init(Cipher.ENCRYPT_MODE, specCleSecrete);
+				chiffrementDecrypter.init(Cipher.DECRYPT_MODE, specCleSecrete);
+				c.o(specCleSecrete);
+			} catch (InvalidKeyException e) {
+				ExceptionUtils.rethrow(e);
+			}
 		}
 	}
 	
-	public byte[] crypterOctets(String o) throws Exception {
+	public byte[] crypterOctets(String o) {
 		byte[] octetsNonCrypte = o.getBytes();
 		byte[] encryptedByte = null;
-		encryptedByte = chiffrementCrypter.doFinal(octetsNonCrypte);
+		try {
+			encryptedByte = chiffrementCrypter.doFinal(octetsNonCrypte);
+		} catch (IllegalBlockSizeException | BadPaddingException e) {
+			ExceptionUtils.rethrow(e);
+		}
 		return encryptedByte;
 	}
 	
-	public String decrypterOctets(byte[] octetsCrypte) throws Exception {
+	public String decrypterOctets(byte[] octetsCrypte) {
 		String texteNonCrypte = null;
-		byte[] decryptedByte = chiffrementDecrypter.doFinal(octetsCrypte);
-		texteNonCrypte = new String(decryptedByte);
+		try {
+			byte[] decryptedByte = chiffrementDecrypter.doFinal(octetsCrypte);
+			texteNonCrypte = new String(decryptedByte);
+		} catch (IllegalBlockSizeException | BadPaddingException e) {
+			ExceptionUtils.rethrow(e);
+		}
 		return texteNonCrypte;
 	}
 	
-	public String crypterStr(String o) throws Exception {
+	public String crypterStr(String o) {
 		String texteCrypte = null;     
 		if(chiffrementCrypter != null) {
 			byte[] octetsNonCrypte = o.getBytes();
-			byte[] encryptedByte = chiffrementCrypter.doFinal(octetsNonCrypte);
-			Base64.Encoder codeur = Base64.getEncoder();
-			texteCrypte = codeur.encodeToString(encryptedByte);
+			try {
+				byte[] encryptedByte = chiffrementCrypter.doFinal(octetsNonCrypte);
+				Base64.Encoder codeur = Base64.getEncoder();
+				texteCrypte = codeur.encodeToString(encryptedByte);
+			} catch (IllegalBlockSizeException | BadPaddingException e) {
+				ExceptionUtils.rethrow(e);
+			}
 		}
 		return texteCrypte;
 	}
 	
-	public String decrypterStr(String o) throws Exception {
+	public String decrypterStr(String o) {
 		String texteNonCrypte = null;
 		if(o != null && chiffrementDecrypter != null) {
 			Base64.Decoder decodeur = Base64.getDecoder();
-			byte[] octetsCrypte = decodeur.decode(o);
-			byte[] decryptedByte = chiffrementDecrypter.doFinal(octetsCrypte);
-			texteNonCrypte = new String(decryptedByte);
+			try {
+				byte[] octetsCrypte = decodeur.decode(o);
+				byte[] decryptedByte = chiffrementDecrypter.doFinal(octetsCrypte);
+				texteNonCrypte = new String(decryptedByte);
+			} catch (IllegalBlockSizeException | BadPaddingException e) {
+				ExceptionUtils.rethrow(e);
+			}
 		}
 		return texteNonCrypte;
 	}

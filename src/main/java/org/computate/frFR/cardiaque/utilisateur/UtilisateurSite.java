@@ -11,8 +11,8 @@ import org.computate.frFR.cardiaque.requete.RequeteSite;
  * modele: true
  * apiUri.enUS: /api/v1/site/user
  * apiUri.frFR: /api/v1/site/utilisateur
- */             
-public class UtilisateurSite extends UtilisateurSiteGen<Cluster> {  
+ */                
+public class UtilisateurSite extends UtilisateurSiteGen<Cluster> { 
 
 	/**
 	 * indexe: true
@@ -130,7 +130,7 @@ public class UtilisateurSite extends UtilisateurSiteGen<Cluster> {
 	 * description.frFR: La date créée pour le modèle. 
 	 * indexe: true
 	 * stocke: true
-	 */
+	 */         
 	protected void _modeleCree(Couverture<ZonedDateTime> c) {
 		ZonedDateTime o = ZonedDateTime.now();
 		c.o(o);

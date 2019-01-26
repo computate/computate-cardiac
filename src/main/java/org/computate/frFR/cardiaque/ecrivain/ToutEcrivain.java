@@ -32,6 +32,14 @@ public class ToutEcrivain extends ToutEcrivainGen<Object> {
 
 	/**
 	 * {@inheritDoc}
+	 * 
+	 **/
+	protected void _tabStr(Couverture<String> c) {
+		c.o("\t");
+	}
+
+	/**
+	 * {@inheritDoc}
 	 * var.enUS: create
 	 * param1.var.enUS: siteRequest
 	 * r: initLoinPourClasse
@@ -43,6 +51,24 @@ public class ToutEcrivain extends ToutEcrivainGen<Object> {
 	 */
 	public static ToutEcrivain creer(RequeteSite requeteSite_) {
 		ToutEcrivain o = new ToutEcrivain();
+		o.initLoinPourClasse(requeteSite_);
+		return o;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * var.enUS: create
+	 * param1.var.enUS: siteRequest
+	 * r: initLoinPourClasse
+	 * r.enUS: initDeepForClass
+	 * r: requeteSite
+	 * r.enUS: siteRequest
+	 * r: ToutEcrivain
+	 * r.enUS: AllWriter
+	 */
+	public static ToutEcrivain creer(RequeteSite requeteSite_, String tabStr) {
+		ToutEcrivain o = new ToutEcrivain();
+		o.setTabStr(tabStr);
 		o.initLoinPourClasse(requeteSite_);
 		return o;
 	}
@@ -86,9 +112,57 @@ public class ToutEcrivain extends ToutEcrivainGen<Object> {
 	 * r: ToutEcrivain
 	 * r.enUS: AllWriter
 	 */
+	public static ToutEcrivain creer(RequeteSite requeteSite_, File fichier, String tabStr) {
+		ToutEcrivain o = new ToutEcrivain();
+		o.setFichier(fichier);
+		o.setTabStr(tabStr);
+		o.initLoinPourClasse(requeteSite_);
+		return o;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * var.enUS: create
+	 * param1.var.enUS: siteRequest
+	 * param2.var.enUS: fichier
+	 * r: Fichier
+	 * r.enUS: File
+	 * r: fichier
+	 * r.enUS: file
+	 * r: initLoinPourClasse
+	 * r.enUS: initDeepForClass
+	 * r: requeteSite
+	 * r.enUS: siteRequest
+	 * r: ToutEcrivain
+	 * r.enUS: AllWriter
+	 */
 	public static ToutEcrivain creer(RequeteSite requeteSite_, Buffer buffer) {
 		ToutEcrivain o = new ToutEcrivain();
 		o.setBuffer(buffer);
+		o.initLoinPourClasse(requeteSite_);
+		return o;
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * var.enUS: create
+	 * param1.var.enUS: siteRequest
+	 * param2.var.enUS: fichier
+	 * r: Fichier
+	 * r.enUS: File
+	 * r: fichier
+	 * r.enUS: file
+	 * r: initLoinPourClasse
+	 * r.enUS: initDeepForClass
+	 * r: requeteSite
+	 * r.enUS: siteRequest
+	 * r: ToutEcrivain
+	 * r.enUS: AllWriter
+	 */
+	public static ToutEcrivain creer(RequeteSite requeteSite_, Buffer buffer, String tabStr) {
+		ToutEcrivain o = new ToutEcrivain();
+		o.setBuffer(buffer);
+		o.setTabStr(tabStr);
 		o.initLoinPourClasse(requeteSite_);
 		return o;
 	}
@@ -168,7 +242,7 @@ public class ToutEcrivain extends ToutEcrivainGen<Object> {
 	 */
 	public ToutEcrivain t(int nombreTabulations, Object...objets) {
 		for(int i = 0; i < nombreTabulations; i++)
-			s("\t");
+			s(tabStr);
 		s(objets);
 		return this;
 	}
@@ -183,7 +257,7 @@ public class ToutEcrivain extends ToutEcrivainGen<Object> {
 	 */
 	public ToutEcrivain tl(int nombreTabulations, Object...objets) {
 		for(int i = 0; i < nombreTabulations; i++)
-			s("\t");
+			s(tabStr);
 		s(objets);
 		s("\n");
 		return this;

@@ -2,6 +2,7 @@ package org.computate.frFR.cardiaque.cluster;
 
 import org.computate.frFR.cardiaque.couverture.Couverture;
 import java.util.Date;
+import java.time.ZonedDateTime;
 import java.time.LocalDateTime;
 import org.apache.commons.lang3.StringUtils;
 import io.vertx.core.logging.LoggerFactory;
@@ -180,7 +181,7 @@ public abstract class ClusterGen<DEV> extends Object {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchCluster", strPk(), "Pk() {");
 				r.l("			$.ajax({");
-				r.l("				url: '?fq=pk:", strPk(), "',");
+				r.l("				url: '/api/v1/warfarin/cluster?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -277,7 +278,7 @@ public abstract class ClusterGen<DEV> extends Object {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchCluster", strPk(), "Id() {");
 				r.l("			$.ajax({");
-				r.l("				url: '?fq=pk:", strPk(), "',");
+				r.l("				url: '/api/v1/warfarin/cluster?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -390,7 +391,7 @@ public abstract class ClusterGen<DEV> extends Object {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchCluster", strPk(), "Cree() {");
 				r.l("			$.ajax({");
-				r.l("				url: '?fq=pk:", strPk(), "',");
+				r.l("				url: '/api/v1/warfarin/cluster?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -503,7 +504,7 @@ public abstract class ClusterGen<DEV> extends Object {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchCluster", strPk(), "Modifie() {");
 				r.l("			$.ajax({");
-				r.l("				url: '?fq=pk:", strPk(), "',");
+				r.l("				url: '/api/v1/warfarin/cluster?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -600,7 +601,7 @@ public abstract class ClusterGen<DEV> extends Object {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchCluster", strPk(), "UtilisateurId() {");
 				r.l("			$.ajax({");
-				r.l("				url: '?fq=pk:", strPk(), "',");
+				r.l("				url: '/api/v1/warfarin/cluster?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -697,7 +698,7 @@ public abstract class ClusterGen<DEV> extends Object {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchCluster", strPk(), "ClusterNomCanonique() {");
 				r.l("			$.ajax({");
-				r.l("				url: '?fq=pk:", strPk(), "',");
+				r.l("				url: '/api/v1/warfarin/cluster?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -794,7 +795,7 @@ public abstract class ClusterGen<DEV> extends Object {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchCluster", strPk(), "ClusterNomSimple() {");
 				r.l("			$.ajax({");
-				r.l("				url: '?fq=pk:", strPk(), "',");
+				r.l("				url: '/api/v1/warfarin/cluster?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -897,7 +898,7 @@ public abstract class ClusterGen<DEV> extends Object {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchCluster", strPk(), "Supprime() {");
 				r.l("			$.ajax({");
-				r.l("				url: '?fq=pk:", strPk(), "',");
+				r.l("				url: '/api/v1/warfarin/cluster?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -1001,6 +1002,14 @@ public abstract class ClusterGen<DEV> extends Object {
 	public void indexerPourClasse(SolrInputDocument document) throws Exception {
 		indexerCluster(document);
 	}
+
+	public void indexerCluster(SolrClient clientSolr) throws Exception {
+		SolrInputDocument document = new SolrInputDocument();
+		indexerCluster(document);
+		clientSolr.add(document);
+		clientSolr.commit();
+	}
+
 	public void indexerCluster() throws Exception {
 		SolrInputDocument document = new SolrInputDocument();
 		indexerCluster(document);
@@ -1015,14 +1024,15 @@ public abstract class ClusterGen<DEV> extends Object {
 			document.addField("pk_stored_long", pk);
 		}
 		if(id != null) {
+			document.addField("id", id);
 		}
 		if(cree != null) {
-			document.addField("cree_indexed_date", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(java.time.ZonedDateTime.ofInstant(cree, java.time.OffsetDateTime.now().getOffset(), ZoneId.systemDefault())));
-			document.addField("cree_stored_date", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(java.time.ZonedDateTime.ofInstant(cree, java.time.OffsetDateTime.now().getOffset(), ZoneId.systemDefault())));
+			document.addField("cree_indexed_date", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(cree));
+			document.addField("cree_stored_date", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(cree));
 		}
 		if(modifie != null) {
-			document.addField("modifie_indexed_date", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(java.time.ZonedDateTime.ofInstant(modifie, java.time.OffsetDateTime.now().getOffset(), ZoneId.systemDefault())));
-			document.addField("modifie_stored_date", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(java.time.ZonedDateTime.ofInstant(modifie, java.time.OffsetDateTime.now().getOffset(), ZoneId.systemDefault())));
+			document.addField("modifie_indexed_date", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(modifie));
+			document.addField("modifie_stored_date", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(modifie));
 		}
 		if(utilisateurId != null) {
 			document.addField("utilisateurId_indexed_string", utilisateurId);
@@ -1036,6 +1046,20 @@ public abstract class ClusterGen<DEV> extends Object {
 			document.addField("clusterNomSimple_indexed_string", clusterNomSimple);
 			document.addField("clusterNomSimple_stored_string", clusterNomSimple);
 		}
+	}
+
+	public void desindexerCluster() throws Exception {
+		RequeteSite requeteSite = new RequeteSite();
+		requeteSite.initLoinRequeteSite();
+		SiteContexte siteContexte = new SiteContexte();
+		siteContexte.initLoinSiteContexte();
+		siteContexte.setRequeteSite_(requeteSite);
+		requeteSite.setSiteContexte_(siteContexte);
+		requeteSite.setConfigSite_(siteContexte.getConfigSite());
+		initLoinCluster(siteContexte.getRequeteSite_());
+		SolrClient clientSolr = siteContexte.getClientSolr();
+		clientSolr.deleteById(id.toString());
+		clientSolr.commit();
 	}
 
 	/////////////
@@ -1223,6 +1247,44 @@ public abstract class ClusterGen<DEV> extends Object {
 			if(clusterNomSimple != null)
 				oCluster.setClusterNomSimple(clusterNomSimple);
 		}
+	}
+
+	/////////////
+	// stocker //
+	/////////////
+
+	public void stockerPourClasse(SolrDocument solrDocument) {
+		stockerCluster(solrDocument);
+	}
+	public void stockerCluster(SolrDocument solrDocument) {
+		Cluster oCluster = (Cluster)this;
+
+		Long pk = (Long)solrDocument.get("pk_stored_long");
+		if(pk != null)
+			oCluster.setPk(pk);
+
+		String id = (String)solrDocument.get("id_stored_string");
+		oCluster.setId(id);
+
+		Date cree = (Date)solrDocument.get("cree_stored_date");
+		if(cree != null)
+			oCluster.setCree(cree);
+
+		Date modifie = (Date)solrDocument.get("modifie_stored_date");
+		if(modifie != null)
+			oCluster.setModifie(modifie);
+
+		String utilisateurId = (String)solrDocument.get("utilisateurId_stored_string");
+		if(utilisateurId != null)
+			oCluster.setUtilisateurId(utilisateurId);
+
+		String clusterNomCanonique = (String)solrDocument.get("clusterNomCanonique_stored_string");
+		if(clusterNomCanonique != null)
+			oCluster.setClusterNomCanonique(clusterNomCanonique);
+
+		String clusterNomSimple = (String)solrDocument.get("clusterNomSimple_stored_string");
+		if(clusterNomSimple != null)
+			oCluster.setClusterNomSimple(clusterNomSimple);
 	}
 
 	//////////////

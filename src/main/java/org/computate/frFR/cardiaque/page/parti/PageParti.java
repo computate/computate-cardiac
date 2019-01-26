@@ -1,4 +1,4 @@
-package org.computate.frFR.cardiaque.page.parti;
+package org.computate.frFR.cardiaque.page.parti; 
 
 import org.computate.frFR.cardiaque.chaine.Chaine;
 import org.computate.frFR.cardiaque.cluster.Cluster;

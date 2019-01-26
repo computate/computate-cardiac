@@ -2,15 +2,14 @@ package org.computate.frFR.cardiaque.vertx;
 
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import org.computate.frFR.cardiaque.cluster.ClusterApiService;
-import org.computate.frFR.cardiaque.cluster.ClusterApiServiceImpl;
 import org.computate.frFR.cardiaque.config.ConfigSite;
 import org.computate.frFR.cardiaque.contexte.SiteContexte;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
+import org.computate.frFR.cardiaque.warfarin.CalculInrApiServiceImpl;
+import org.computate.frFR.cardiaque.warfarin.CalculInrGenApiService;
 
 import io.vertx.core.AbstractVerticle;
 import io.vertx.core.Future;
-import io.vertx.core.eventbus.DeliveryOptions;
 import io.vertx.core.eventbus.MessageConsumer;
 import io.vertx.core.http.HttpServerOptions;
 import io.vertx.core.json.JsonObject;
@@ -25,7 +24,6 @@ import io.vertx.ext.auth.oauth2.providers.KeycloakAuth;
 import io.vertx.ext.jdbc.JDBCClient;
 import io.vertx.ext.sql.SQLConnection;
 import io.vertx.ext.web.Router;
-import io.vertx.ext.web.api.contract.RouterFactoryOptions;
 import io.vertx.ext.web.api.contract.openapi3.OpenAPI3RouterFactory;
 import io.vertx.ext.web.handler.OAuth2AuthHandler;
 import io.vertx.ext.web.handler.StaticHandler;
@@ -134,11 +132,33 @@ public class AppVertx extends AbstractVerticle {
 		OpenAPI3RouterFactory.create(vertx, "src/main/resources/openapi3.yaml", ar -> {
 			if (ar.succeeded()) {
 				OpenAPI3RouterFactory usineRouteur = ar.result();
+				usineRouteur.mountServicesFromExtensions();
 				siteContexte.setUsineRouteur(usineRouteur);
+
+				JsonObject keycloakJson = new JsonObject() {
+					{
+						put("realm", configSite.getAuthRoyaume());
+						// put("realm-public-key", "MIIBIjANBgkqhk...wIDAQAB");
+						put("auth-server-url", configSite.getAuthUrl());
+						put("ssl-required", configSite.getAuthSslRequis());
+						put("resource", configSite.getAuthRessource());
+						put("credentials", new JsonObject().put("secret", configSite.getAuthSecret()));
+						put("use-resource-role-mappings", true);
+						put("policy-enforcer", new JsonObject());
+					}
+				};
+		
+				// Initialize the OAuth2 Library
+	//			OAuth2FlowType AUTH_CODE AUTH_JWT CLIENT PASSWORD;
+				OAuth2Auth siteAuth = KeycloakAuth.create(vertx, OAuth2FlowType.AUTH_CODE, keycloakJson);
+				OAuth2AuthHandler gestionnaireAuth = OAuth2AuthHandler.create(siteAuth);
+				siteContexte.setSiteAuth(siteAuth);
+				usineRouteur.addSecurityHandler("oauth2", gestionnaireAuth);
+
 				// Create and mount options to router factory
 				// RouterFactoryOptions options = new
-				// RouterFactoryOptions().setMountNotImplementedHandler(true)
-				// .setMountValidationFailureHandler(false);
+//				 RouterFactoryOptions().setMountNotImplementedHandler(true)
+//				 .setMountValidationFailureHandler(false);
 //				CalculInrApiGen apiCalculInr = new CalculInrApiGen();
 //				apiCalculInr.handleGetCalculInr(siteContexte);
 				future.complete();
@@ -149,117 +169,61 @@ public class AppVertx extends AbstractVerticle {
 		});
 		return future;
 	}
-
-	private Future<Void> configurerServices(SiteContexte siteContexte) {
-		Future<Void> future = Future.future();
-		ClusterApiService clusterApi = ClusterApiService.create(siteContexte, vertx);
-		// ClusterApiService clusterApi = ClusterApiSesrvice.new
-		// ClusterApiServiceImpl(siteContexte, vertx);
-		// Register the handler
-		ServiceBinder clusterApiBinder = new ServiceBinder(vertx);
-		clusterApiBinder.setAddress("ClusterApi-address");
-		MessageConsumer<JsonObject> clusterApiConsumer = clusterApiBinder.register(ClusterApiServiceImpl.class,
-				clusterApi);
-
-		ServiceProxyBuilder clusterApiBuilder = new ServiceProxyBuilder(vertx).setAddress("ClusterApi-address");
-		// or with delivery options:
-		ClusterApiServiceImpl clusterApiService = clusterApiBuilder.setOptions(new DeliveryOptions(new JsonObject()))
-				.build(ClusterApiServiceImpl.class);
-
-		future.complete();
-		return future;
-	}
+//
+//	private Future<Void> configurerServices(SiteContexte siteContexte) {
+//		Future<Void> future = Future.future();
+////		ClusterApiService clusterApi = ClusterApiService.create(siteContexte, vertx);
+//		// ClusterApiService clusterApi = ClusterApiSesrvice.new
+//		// ClusterApiServiceImpl(siteContexte, vertx);
+//		// Register the handler
+//		ServiceBinder clusterApiBinder = new ServiceBinder(vertx);
+//		clusterApiBinder.setAddress("ClusterApi-address");
+////		MessageConsumer<JsonObject> clusterApiConsumer = clusterApiBinder.register(ClusterApiServiceImpl.class,
+////				clusterApi);
+//
+//		ServiceProxyBuilder clusterApiBuilder = new ServiceProxyBuilder(vertx).setAddress("ClusterApi-address");
+//		// or with delivery options:
+////		ClusterApiServiceImpl clusterApiService = clusterApiBuilder.setOptions(new DeliveryOptions(new JsonObject()))
+////				.build(ClusterApiServiceImpl.class);
+//
+//		future.complete();
+//		return future;
+//	}
 
 	private Future<Void> demarrerServeur(SiteContexte siteContexte) {
 		ConfigSite configSite = siteContexte.getConfigSite();
 		Future<Void> future = Future.future();
 
-		try {
-			JsonObject keycloakJson = new JsonObject() {
-				{
-					put("realm", configSite.getAuthRoyaume());
-					// put("realm-public-key", "MIIBIjANBgkqhk...wIDAQAB");
-					put("auth-server-url", configSite.getAuthUrl());
-					put("ssl-required", configSite.getAuthSslRequis());
-					put("resource", configSite.getAuthRessource());
-					put("credentials", new JsonObject().put("secret", configSite.getAuthSecret()));
-//					JsonObject("{\n" +
-//		                    "\"realm\": \"master\",\n" +
-//		                    "\"bearer-only\": true,\n" +
-//		                    "\"auth-server-url\": \"http://localhost:8080/auth\",\n" +
-//		                    "\"ssl-required\": \"external\",\n" +
-//		                    "\"realm-public-key\": \"MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAn9Xya697ZVZzQidld4uCwRoWmLyWBDQQhn+EL1e0WDUWq9v39OBpM+HadkYlOMvfU1A8ohGZZVBkKV4w35gkm3bFPluCPsWxdcqD1NNF6BnIC6bRicgP/4beeehff8nWI3mFAfH7Q7Ik8mm8BDQYhOPRx50JBkDiIQ7AlAjNJ+5/eIj6Pt/eZSmMSk+vM4Xu64E0mCZfHpasdf!QsFGN+VPQejNBz7h9nEdi3swIIo0ot2+5PZGELX/2Dek7cY4RMKGb+rvU6ug3UvZHQ985KuubKsWMCs8+A80yWSoA6umw1DC5rAmc5jo/6giWawuFj5jFZRx69CcMSx1VaEJ5lS4LmAi5sXuQIDAQAB\",\n" +
-//		                    "\"resource\": \"vertx\",\n" +
-//		                    "\"use-resource-role-mappings\": true,\n" +
-//		                    "\"credentials\": {\n" +
-//		                    "\"secret\": \"asd1t747-3d11-456f-a553-d8e140cfaf58\"\n" +
-//		                    "}\n" +
-//		                    "}")
-				}
-			};
-	
-			// Initialize the OAuth2 Library
-//			OAuth2Auth siteAuth = KeycloakAuth.create(vertx, OAuth2FlowType.PASSWORD, keycloakJson);
-			OAuth2Auth siteAuth = KeycloakAuth.create(vertx, OAuth2FlowType.AUTH_CODE, keycloakJson);
-			OAuth2AuthHandler gestionnaireAuth = OAuth2AuthHandler.create(siteAuth);
-//			OAuth2AuthHandler gestionnaireAuth = OAuth2AuthHandler.create(siteAuth, "http://localhost:8081/");
-			siteContexte.setSiteAuth(siteAuth);
+		final ServiceBinder serviceBinder = new ServiceBinder(vertx).setAddress(configSite.getVertxServiceAddresse());
 
-//			AuthorizationValue v = new 
-			OpenAPI3RouterFactory.create(vertx, "src/main/resources/petstore.yaml", ar -> {
-				if (ar.succeeded()) {
-					OpenAPI3RouterFactory routerFactory = ar.result();
-					routerFactory.addSecurityHandler("oauth2", gestionnaireAuth);
+		CalculInrGenApiService calculInrApiService = new CalculInrApiServiceImpl(siteContexte);
+		MessageConsumer<JsonObject> calculInrApiConsumer = serviceBinder.register(CalculInrGenApiService.class, calculInrApiService);
 
-//					routerFactory.addHandlerByOperationId("authorize", SecurityApis.createAuthorizeHandler(siteAuth, config().getString("HTTP_ROOT")));
-//					routerFactory.addFailureHandlerByOperationId("authorize", new FailureHandler());
-//			        
-//					routerFactory.addHandlerByOperationId("callback", SecurityApis.createCallbackHandler(siteAuth, config().getString("HTTP_ROOT")));
-//					routerFactory.addFailureHandlerByOperationId("callback", new FailureHandler());
-			        
-//					gestionnaireAuth.setupCallback(routerFactory.getRouter().route("/callback"))
-//					routerFactory..addHandlerByOperationId(EndpointUriOperationId.SIGN_UP.endpoint, { routingContext -> signUpRouter?.signUp(routingContext) });
-//		            routerFactory.addHandlerByOperationId(EndpointUriOperationId.SIGN_IN.endpoint, { routingContext -> signInRouter?.signIn(routingContext) });
-//		            routerFactory.addHandlerByOperationId(EndpointUriOperationId.CONFIRM_ACCESS_CODE.endpoint, { routingContext -> signUpRouter?.confirmAccessCode(routingContext) });
-//		            routerFactory.addHandlerByOperationId(EndpointUriOperationId.IS_EMAIL_EXISTS.endpoint, { routingContext -> signUpRouter?.isEmailExists(routingContext) });
-//		            routerFactory.addHandlerByOperationId(EndpointUriOperationId.GET_ACCESS_CODE.endpoint, { routingContext -> signUpRouter?.getAccessCode(routingContext) });
-//		            routerFactory.addHandlerByOperationId(EndpointUriOperationId.VERIFICATION.endpoint, { routingContext -> signInRouter?.verification(routingContext) });
-
-					// Create and mount options to router factory
-					RouterFactoryOptions options = new RouterFactoryOptions().setMountNotImplementedHandler(true)
-							.setMountValidationFailureHandler(false);
-
-//					CalculInrApiGen moissoneurOaiApi = new CalculInrApiGen();
-				}
-			});
-	
-			Router siteRouteur = siteContexte.getUsineRouteur().getRouter();
+		Router siteRouteur = siteContexte.getUsineRouteur().getRouter();
 //			siteContexte.setSiteRouteur_(siteRouteur);
-	
-			siteRouteur.route().handler(StaticHandler.create());
-	
-			HttpServerOptions options = new HttpServerOptions();
-			// options.setMaxWebsocketFrameSize(1000000);
-			options.setSsl(true);
-			options.setKeyStoreOptions(new JksOptions().setPath(configSite.getSslJksChemin()).setPassword(configSite.getSslJksMotDePasse()));
-			String siteNomHote = configSite.getSiteNomHote();
-			Integer sitePort = configSite.getSitePort();
-	
-			LOGGER.info(String.format("HTTP server starting: %s://%s:%s", "https", siteNomHote, sitePort));
-			vertx.createHttpServer(options).requestHandler(siteRouteur::accept).listen(sitePort,
-					siteNomHote, ar -> {
-				if (ar.succeeded()) {
-					LOGGER.info(String.format("HTTP server running: %s:%s", siteNomHote, sitePort));
-					future.complete();
-				} else {
-					LOGGER.error("Could not start a HTTP server", ar.cause());
-					future.fail(ar.cause());
-				}
-			});
-		} catch(Exception e) {
-			LOGGER.error("Could not start a HTTP server", e.getMessage());
-			future.fail(e);
-		}
+
+//		siteRouteur.route().handler(StaticHandler.create());
+
+		String siteNomHote = configSite.getSiteNomHote();
+		Integer sitePort = configSite.getSitePort();
+		HttpServerOptions options = new HttpServerOptions();
+		// options.setMaxWebsocketFrameSize(1000000);
+		options.setSsl(true);
+		options.setKeyStoreOptions(new JksOptions().setPath(configSite.getSslJksChemin()).setPassword(configSite.getSslJksMotDePasse()));
+		options.setPort(sitePort);
+		options.setHost(siteNomHote);
+
+		LOGGER.info(String.format("HTTP server starting: %s://%s:%s", "https", siteNomHote, sitePort));
+//		vertx.createHttpServer(options).requestHandler(siteRouteur).listen();
+		vertx.createHttpServer(options).requestHandler(siteRouteur).listen(ar -> {
+			if (ar.succeeded()) {
+				LOGGER.info(String.format("HTTP server running: %s:%s", siteNomHote, sitePort));
+				future.complete();
+			} else {
+				LOGGER.error("Could not start a HTTP server", ar.cause());
+				future.fail(ar.cause());
+			}
+		});
 
 		return future;
 	}
@@ -276,9 +240,13 @@ public class AppVertx extends AbstractVerticle {
 
 		siteContexte.initLoinSiteContexte();
 
-		Future<Void> etapesFutures = preparerDonnees(siteContexte)
-				.compose(a -> configurerCluster(siteContexte).compose(b -> configurerOpenApi(siteContexte)
-						.compose(c -> configurerServices(siteContexte).compose(d -> demarrerServeur(siteContexte)))));
+		Future<Void> etapesFutures = preparerDonnees(siteContexte).compose(a -> 
+			configurerCluster(siteContexte).compose(b -> 
+				configurerOpenApi(siteContexte).compose(c -> 
+					demarrerServeur(siteContexte)
+				)
+			)
+		);
 		etapesFutures.setHandler(demarrerFuture.completer());
 	}
 }

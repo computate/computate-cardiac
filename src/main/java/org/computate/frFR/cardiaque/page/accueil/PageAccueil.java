@@ -1,4 +1,4 @@
-package org.computate.frFR.cardiaque.page.accueil; 
+package org.computate.frFR.cardiaque.page.accueil;  
 
 import org.computate.frFR.cardiaque.couverture.Couverture;
 import org.computate.frFR.cardiaque.page.MiseEnPage;

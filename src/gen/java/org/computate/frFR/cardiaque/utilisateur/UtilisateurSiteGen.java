@@ -3,6 +3,7 @@ package org.computate.frFR.cardiaque.utilisateur;
 import org.computate.frFR.cardiaque.couverture.Couverture;
 import java.util.Date;
 import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 import org.apache.commons.lang3.StringUtils;
 import io.vertx.core.logging.LoggerFactory;
 import java.util.ArrayList;
@@ -16,13 +17,15 @@ import io.vertx.core.logging.Logger;
 import org.computate.frFR.cardiaque.cluster.Cluster;
 import java.util.Set;
 import org.apache.commons.text.StringEscapeUtils;
+import java.time.Instant;
+import java.time.ZoneId;
 import org.apache.solr.client.solrj.SolrClient;
 import org.computate.frFR.cardiaque.contexte.SiteContexte;
 import java.util.Objects;
 import org.apache.solr.common.SolrDocument;
 import io.vertx.core.json.JsonArray;
-import org.computate.site.course.c000.cluster.Cluster;
 import java.util.List;
+import java.time.format.DateTimeFormatter;
 import io.vertx.ext.sql.SQLConnection;
 import io.vertx.ext.sql.SQLClient;
 import org.apache.solr.common.SolrInputDocument;
@@ -114,7 +117,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchUtilisateurSite", strPk(), "CalculInrPks() {");
 				r.l("			$.ajax({");
-				r.l("				url: '?fq=pk:", strPk(), "',");
+				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -247,7 +250,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchUtilisateurSite", strPk(), "UtilisateurNom() {");
 				r.l("			$.ajax({");
-				r.l("				url: '?fq=pk:", strPk(), "',");
+				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -344,7 +347,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchUtilisateurSite", strPk(), "UtilisateurMail() {");
 				r.l("			$.ajax({");
-				r.l("				url: '?fq=pk:", strPk(), "',");
+				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -441,7 +444,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchUtilisateurSite", strPk(), "UtilisateurId() {");
 				r.l("			$.ajax({");
-				r.l("				url: '?fq=pk:", strPk(), "',");
+				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -538,7 +541,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchUtilisateurSite", strPk(), "UtilisateurPrenom() {");
 				r.l("			$.ajax({");
-				r.l("				url: '?fq=pk:", strPk(), "',");
+				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -635,7 +638,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchUtilisateurSite", strPk(), "UtilisateurNomFamille() {");
 				r.l("			$.ajax({");
-				r.l("				url: '?fq=pk:", strPk(), "',");
+				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -732,7 +735,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchUtilisateurSite", strPk(), "UtilisateurNomComplet() {");
 				r.l("			$.ajax({");
-				r.l("				url: '?fq=pk:", strPk(), "',");
+				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -829,7 +832,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchUtilisateurSite", strPk(), "UtilisateurSite() {");
 				r.l("			$.ajax({");
-				r.l("				url: '?fq=pk:", strPk(), "',");
+				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -932,7 +935,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchUtilisateurSite", strPk(), "UtilisateurRecevoirCourriels() {");
 				r.l("			$.ajax({");
-				r.l("				url: '?fq=pk:", strPk(), "',");
+				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -1035,7 +1038,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchUtilisateurSite", strPk(), "ModeleSupprime() {");
 				r.l("			$.ajax({");
-				r.l("				url: '?fq=pk:", strPk(), "',");
+				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -1094,6 +1097,22 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 		this.modeleCree = modeleCree;
 		this.modeleCreeCouverture.dejaInitialise = true;
 	}
+	public UtilisateurSite setModeleCree(Instant o) {
+		this.modeleCree = ZonedDateTime.from(o);
+		this.modeleCreeCouverture.dejaInitialise = true;
+		return (UtilisateurSite)this;
+	}
+	/** Example: 2011-12-03T10:15:30+01:00 **/
+	public UtilisateurSite setModeleCree(String o) {
+		this.modeleCree = ZonedDateTime.parse(o, DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+		this.modeleCreeCouverture.dejaInitialise = true;
+		return (UtilisateurSite)this;
+	}
+	public UtilisateurSite setModeleCree(Date o) {
+		this.modeleCree = ZonedDateTime.ofInstant(o.toInstant(), ZoneId.systemDefault());
+		this.modeleCreeCouverture.dejaInitialise = true;
+		return (UtilisateurSite)this;
+	}
 	protected UtilisateurSite modeleCreeInit() {
 		if(!modeleCreeCouverture.dejaInitialise) {
 			_modeleCree(modeleCreeCouverture);
@@ -1102,6 +1121,67 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 		}
 		modeleCreeCouverture.dejaInitialise(true);
 		return (UtilisateurSite)this;
+	}
+
+	public Date solrModeleCree() {
+		return modeleCree == null ? null : Date.from(modeleCree.toInstant());
+	}
+
+	public String strModeleCree() {
+		return modeleCree == null ? "" : modeleCree.toString();
+	}
+
+	public String nomAffichageModeleCree() {
+		return null;
+	}
+
+	public String htmTooltipModeleCree() {
+		return null;
+	}
+
+	public String htmModeleCree() {
+		return modeleCree == null ? "" : StringEscapeUtils.escapeHtml4(strModeleCree());
+	}
+
+	public void htmModeleCree(ToutEcrivain r, Boolean patchDroits) {
+		if(pk!= null) {
+			r.s("<div id=\"patchUtilisateurSite", strPk(), "ModeleCree\">");
+			if(patchDroits) {
+				r.l();
+				r.l("	<script>//<![CDATA[");
+				r.l("		function patchUtilisateurSite", strPk(), "ModeleCree() {");
+				r.l("			$.ajax({");
+				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
+				r.l("				dataType: 'json',");
+				r.l("				type: 'patch',");
+				r.l("				contentType: 'application/json',");
+				r.l("				processData: false,");
+				r.l("				success: function( data, textStatus, jQxhr ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				error: function( jqXhr, textStatus, errorThrown ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				data: {\"setModeleCree\": this.value },");
+				r.l("				");
+				r.l("			});");
+				r.l("		}");
+				r.l("	//]]></script>");
+				r.l("	<div class=\"\">");
+				r.l("		<label class=\"w3-tooltip \">");
+				r.l("			<span>", StringEscapeUtils.escapeHtml4(nomAffichageModeleCree()), "</span>");
+				r.s("			<input");
+							r.s(" name=\"modeleCree\"");
+							r.s(" value=\"", htmModeleCree(), "\");");
+							r.s(" onchange=\"\"");
+							r.l("/>");
+				r.l("		</label>");
+				r.l("	</div>");
+			} else {
+				r.s(htmModeleCree());
+			}
+			r.l("</div>");
+		}
 	}
 
 	///////////////////
@@ -1130,6 +1210,22 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 		this.modeleModifie = modeleModifie;
 		this.modeleModifieCouverture.dejaInitialise = true;
 	}
+	public UtilisateurSite setModeleModifie(Instant o) {
+		this.modeleModifie = ZonedDateTime.from(o);
+		this.modeleModifieCouverture.dejaInitialise = true;
+		return (UtilisateurSite)this;
+	}
+	/** Example: 2011-12-03T10:15:30+01:00 **/
+	public UtilisateurSite setModeleModifie(String o) {
+		this.modeleModifie = ZonedDateTime.parse(o, DateTimeFormatter.ISO_OFFSET_DATE_TIME);
+		this.modeleModifieCouverture.dejaInitialise = true;
+		return (UtilisateurSite)this;
+	}
+	public UtilisateurSite setModeleModifie(Date o) {
+		this.modeleModifie = ZonedDateTime.ofInstant(o.toInstant(), ZoneId.systemDefault());
+		this.modeleModifieCouverture.dejaInitialise = true;
+		return (UtilisateurSite)this;
+	}
 	protected UtilisateurSite modeleModifieInit() {
 		if(!modeleModifieCouverture.dejaInitialise) {
 			_modeleModifie(modeleModifieCouverture);
@@ -1138,6 +1234,67 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 		}
 		modeleModifieCouverture.dejaInitialise(true);
 		return (UtilisateurSite)this;
+	}
+
+	public Date solrModeleModifie() {
+		return modeleModifie == null ? null : Date.from(modeleModifie.toInstant());
+	}
+
+	public String strModeleModifie() {
+		return modeleModifie == null ? "" : modeleModifie.toString();
+	}
+
+	public String nomAffichageModeleModifie() {
+		return null;
+	}
+
+	public String htmTooltipModeleModifie() {
+		return null;
+	}
+
+	public String htmModeleModifie() {
+		return modeleModifie == null ? "" : StringEscapeUtils.escapeHtml4(strModeleModifie());
+	}
+
+	public void htmModeleModifie(ToutEcrivain r, Boolean patchDroits) {
+		if(pk!= null) {
+			r.s("<div id=\"patchUtilisateurSite", strPk(), "ModeleModifie\">");
+			if(patchDroits) {
+				r.l();
+				r.l("	<script>//<![CDATA[");
+				r.l("		function patchUtilisateurSite", strPk(), "ModeleModifie() {");
+				r.l("			$.ajax({");
+				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
+				r.l("				dataType: 'json',");
+				r.l("				type: 'patch',");
+				r.l("				contentType: 'application/json',");
+				r.l("				processData: false,");
+				r.l("				success: function( data, textStatus, jQxhr ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				error: function( jqXhr, textStatus, errorThrown ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				data: {\"setModeleModifie\": this.value },");
+				r.l("				");
+				r.l("			});");
+				r.l("		}");
+				r.l("	//]]></script>");
+				r.l("	<div class=\"\">");
+				r.l("		<label class=\"w3-tooltip \">");
+				r.l("			<span>", StringEscapeUtils.escapeHtml4(nomAffichageModeleModifie()), "</span>");
+				r.s("			<input");
+							r.s(" name=\"modeleModifie\"");
+							r.s(" value=\"", htmModeleModifie(), "\");");
+							r.s(" onchange=\"\"");
+							r.l("/>");
+				r.l("		</label>");
+				r.l("	</div>");
+			} else {
+				r.s(htmModeleModifie());
+			}
+			r.l("</div>");
+		}
 	}
 
 	//////////////////////////////
@@ -1204,7 +1361,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchUtilisateurSite", strPk(), "ModeleClasseNomCanonique() {");
 				r.l("			$.ajax({");
-				r.l("				url: '?fq=pk:", strPk(), "',");
+				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -1307,7 +1464,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchUtilisateurSite", strPk(), "ModeleCle() {");
 				r.l("			$.ajax({");
-				r.l("				url: '?fq=pk:", strPk(), "',");
+				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -1404,7 +1561,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchUtilisateurSite", strPk(), "ModeleSuggestionStocke() {");
 				r.l("			$.ajax({");
-				r.l("				url: '?fq=pk:", strPk(), "',");
+				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -1501,7 +1658,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 				r.l("	<script>//<![CDATA[");
 				r.l("		function patchUtilisateurSite", strPk(), "ModeleSuggestionIndexe() {");
 				r.l("			$.ajax({");
-				r.l("				url: '?fq=pk:", strPk(), "',");
+				r.l("				url: '/api/v1/site/utilisateur?fq=pk:", strPk(), "',");
 				r.l("				dataType: 'json',");
 				r.l("				type: 'patch',");
 				r.l("				contentType: 'application/json',");
@@ -1614,6 +1771,14 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 	@Override public void indexerPourClasse(SolrInputDocument document) throws Exception {
 		indexerUtilisateurSite(document);
 	}
+
+	public void indexerUtilisateurSite(SolrClient clientSolr) throws Exception {
+		SolrInputDocument document = new SolrInputDocument();
+		indexerUtilisateurSite(document);
+		clientSolr.add(document);
+		clientSolr.commit();
+	}
+
 	public void indexerUtilisateurSite() throws Exception {
 		SolrInputDocument document = new SolrInputDocument();
 		indexerUtilisateurSite(document);
@@ -1668,12 +1833,12 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 			document.addField("modeleSupprime_stored_boolean", modeleSupprime);
 		}
 		if(modeleCree != null) {
-			document.addField("modeleCree_indexed", modeleCree);
-			document.addField("modeleCree_stored", modeleCree);
+			document.addField("modeleCree_indexed_date", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(modeleCree));
+			document.addField("modeleCree_stored_date", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(modeleCree));
 		}
 		if(modeleModifie != null) {
-			document.addField("modeleModifie_indexed", modeleModifie);
-			document.addField("modeleModifie_stored", modeleModifie);
+			document.addField("modeleModifie_indexed_date", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(modeleModifie));
+			document.addField("modeleModifie_stored_date", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(modeleModifie));
 		}
 		if(modeleClasseNomCanonique != null) {
 			document.addField("modeleClasseNomCanonique_indexed_string", modeleClasseNomCanonique);
@@ -1693,6 +1858,20 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 		}
 		super.indexerCluster(document);
 
+	}
+
+	public void desindexerUtilisateurSite() throws Exception {
+		RequeteSite requeteSite = new RequeteSite();
+		requeteSite.initLoinRequeteSite();
+		SiteContexte siteContexte = new SiteContexte();
+		siteContexte.initLoinSiteContexte();
+		siteContexte.setRequeteSite_(requeteSite);
+		requeteSite.setSiteContexte_(siteContexte);
+		requeteSite.setConfigSite_(siteContexte.getConfigSite());
+		initLoinUtilisateurSite(siteContexte.getRequeteSite_());
+		SolrClient clientSolr = siteContexte.getClientSolr();
+		clientSolr.deleteById(id.toString());
+		clientSolr.commit();
 	}
 
 	/////////////
@@ -1839,6 +2018,14 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 				setModeleSupprime(val);
 				sauvegardesUtilisateurSite.add(var);
 				return val;
+			case "modeleCree":
+				setModeleCree(val);
+				sauvegardesUtilisateurSite.add(var);
+				return val;
+			case "modeleModifie":
+				setModeleModifie(val);
+				sauvegardesUtilisateurSite.add(var);
+				return val;
 			case "modeleClasseNomCanonique":
 				setModeleClasseNomCanonique(val);
 				sauvegardesUtilisateurSite.add(var);
@@ -1938,13 +2125,13 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 		}
 
 		if(sauvegardesUtilisateurSite.contains("modeleCree")) {
-			 modeleCree = ()solrDocument.get("modeleCree_stored");
+			Date modeleCree = (Date)solrDocument.get("modeleCree_stored_date");
 			if(modeleCree != null)
 				oUtilisateurSite.setModeleCree(modeleCree);
 		}
 
 		if(sauvegardesUtilisateurSite.contains("modeleModifie")) {
-			 modeleModifie = ()solrDocument.get("modeleModifie_stored");
+			Date modeleModifie = (Date)solrDocument.get("modeleModifie_stored_date");
 			if(modeleModifie != null)
 				oUtilisateurSite.setModeleModifie(modeleModifie);
 		}
@@ -1976,12 +2163,89 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 		super.peuplerCluster(solrDocument);
 	}
 
+	/////////////
+	// stocker //
+	/////////////
+
+	@Override public void stockerPourClasse(SolrDocument solrDocument) {
+		stockerUtilisateurSite(solrDocument);
+	}
+	public void stockerUtilisateurSite(SolrDocument solrDocument) {
+		UtilisateurSite oUtilisateurSite = (UtilisateurSite)this;
+
+		List<Long> calculInrPks = (List<Long>)solrDocument.get("calculInrPks_stored_longs");
+		if(calculInrPks != null)
+			oUtilisateurSite.calculInrPks.addAll(calculInrPks);
+
+		String utilisateurNom = (String)solrDocument.get("utilisateurNom_stored_string");
+		if(utilisateurNom != null)
+			oUtilisateurSite.setUtilisateurNom(utilisateurNom);
+
+		String utilisateurMail = (String)solrDocument.get("utilisateurMail_stored_string");
+		if(utilisateurMail != null)
+			oUtilisateurSite.setUtilisateurMail(utilisateurMail);
+
+		String utilisateurId = (String)solrDocument.get("utilisateurId_stored_string");
+		if(utilisateurId != null)
+			oUtilisateurSite.setUtilisateurId(utilisateurId);
+
+		String utilisateurPrenom = (String)solrDocument.get("utilisateurPrenom_stored_string");
+		if(utilisateurPrenom != null)
+			oUtilisateurSite.setUtilisateurPrenom(utilisateurPrenom);
+
+		String utilisateurNomFamille = (String)solrDocument.get("utilisateurNomFamille_stored_string");
+		if(utilisateurNomFamille != null)
+			oUtilisateurSite.setUtilisateurNomFamille(utilisateurNomFamille);
+
+		String utilisateurNomComplet = (String)solrDocument.get("utilisateurNomComplet_stored_string");
+		if(utilisateurNomComplet != null)
+			oUtilisateurSite.setUtilisateurNomComplet(utilisateurNomComplet);
+
+		String utilisateurSite = (String)solrDocument.get("utilisateurSite_stored_string");
+		if(utilisateurSite != null)
+			oUtilisateurSite.setUtilisateurSite(utilisateurSite);
+
+		Boolean utilisateurRecevoirCourriels = (Boolean)solrDocument.get("utilisateurRecevoirCourriels_stored_boolean");
+		if(utilisateurRecevoirCourriels != null)
+			oUtilisateurSite.setUtilisateurRecevoirCourriels(utilisateurRecevoirCourriels);
+
+		Boolean modeleSupprime = (Boolean)solrDocument.get("modeleSupprime_stored_boolean");
+		if(modeleSupprime != null)
+			oUtilisateurSite.setModeleSupprime(modeleSupprime);
+
+		Date modeleCree = (Date)solrDocument.get("modeleCree_stored_date");
+		if(modeleCree != null)
+			oUtilisateurSite.setModeleCree(modeleCree);
+
+		Date modeleModifie = (Date)solrDocument.get("modeleModifie_stored_date");
+		if(modeleModifie != null)
+			oUtilisateurSite.setModeleModifie(modeleModifie);
+
+		String modeleClasseNomCanonique = (String)solrDocument.get("modeleClasseNomCanonique_stored_string");
+		if(modeleClasseNomCanonique != null)
+			oUtilisateurSite.setModeleClasseNomCanonique(modeleClasseNomCanonique);
+
+		Long modeleCle = (Long)solrDocument.get("modeleCle_stored_long");
+		if(modeleCle != null)
+			oUtilisateurSite.setModeleCle(modeleCle);
+
+		String modeleSuggestionStocke = (String)solrDocument.get("modeleSuggestionStocke_stored_string");
+		if(modeleSuggestionStocke != null)
+			oUtilisateurSite.setModeleSuggestionStocke(modeleSuggestionStocke);
+
+		String modeleSuggestionIndexe = (String)solrDocument.get("modeleSuggestionIndexe_stored_string");
+		if(modeleSuggestionIndexe != null)
+			oUtilisateurSite.setModeleSuggestionIndexe(modeleSuggestionIndexe);
+
+		super.stockerCluster(solrDocument);
+	}
+
 	//////////////
 	// hashCode //
 	//////////////
 
 	@Override public int hashCode() {
-		return Objects.hash(super.hashCode(), utilisateurNom, utilisateurMail, utilisateurId, utilisateurPrenom, utilisateurNomFamille, utilisateurNomComplet, utilisateurSite, utilisateurRecevoirCourriels, modeleSupprime, modeleClasseNomCanonique, modeleCle, modeleSuggestionStocke, modeleSuggestionIndexe);
+		return Objects.hash(super.hashCode(), utilisateurNom, utilisateurMail, utilisateurId, utilisateurPrenom, utilisateurNomFamille, utilisateurNomComplet, utilisateurSite, utilisateurRecevoirCourriels, modeleSupprime, modeleCree, modeleModifie, modeleClasseNomCanonique, modeleCle, modeleSuggestionStocke, modeleSuggestionIndexe);
 	}
 
 	////////////
@@ -2004,6 +2268,8 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 				&& Objects.equals( utilisateurSite, that.utilisateurSite )
 				&& Objects.equals( utilisateurRecevoirCourriels, that.utilisateurRecevoirCourriels )
 				&& Objects.equals( modeleSupprime, that.modeleSupprime )
+				&& Objects.equals( modeleCree, that.modeleCree )
+				&& Objects.equals( modeleModifie, that.modeleModifie )
 				&& Objects.equals( modeleClasseNomCanonique, that.modeleClasseNomCanonique )
 				&& Objects.equals( modeleCle, that.modeleCle )
 				&& Objects.equals( modeleSuggestionStocke, that.modeleSuggestionStocke )
@@ -2027,6 +2293,8 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 		sb.append( ", utilisateurSite: \"" ).append(utilisateurSite).append( "\"" );
 		sb.append( ", utilisateurRecevoirCourriels: " ).append(utilisateurRecevoirCourriels);
 		sb.append( ", modeleSupprime: " ).append(modeleSupprime);
+		sb.append( ", modeleCree: " ).append(modeleCree);
+		sb.append( ", modeleModifie: " ).append(modeleModifie);
 		sb.append( ", modeleClasseNomCanonique: \"" ).append(modeleClasseNomCanonique).append( "\"" );
 		sb.append( ", modeleCle: " ).append(modeleCle);
 		sb.append( ", modeleSuggestionStocke: \"" ).append(modeleSuggestionStocke).append( "\"" );

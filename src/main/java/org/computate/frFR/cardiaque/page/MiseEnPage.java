@@ -81,7 +81,7 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 	 * r.enUS: ecrivain
 	 * writer
 	 */ 
-	protected void _w(Couverture<ToutEcrivain> c) throws Exception {
+	protected void _w(Couverture<ToutEcrivain> c) {
 		c.o(requeteSite_.getW());
 	}
 //

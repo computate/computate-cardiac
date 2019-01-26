@@ -1,4 +1,4 @@
-package org.computate.frFR.cardiaque.warfarin;  
+package org.computate.frFR.cardiaque.warfarin;   
 
 import java.time.LocalDate;
 
@@ -26,7 +26,9 @@ import org.computate.frFR.cardiaque.couverture.Couverture;
  * val.VAL_patientPrendCoumadinOuiRecommence.frFR:Yes, restarted
  * role.frFR: Something
  * map.this.Integer: 1
-*/  
+ * apiTag.enUS: InrEntry
+ * apiTag.frFR: CalculInr
+*/           
 public class CalculInr extends CalculInrGen<Cluster> {  
 
 	/**
@@ -62,11 +64,11 @@ public class CalculInr extends CalculInrGen<Cluster> {
 	 * var.enUS: currentDosageText
 	 * indexe: true
 	 * stocke: true
-	 * option.vide.frFR:""
-	 * option.oui.frFR:CalculInr.VAL_patientPrendCoumadinOui
-	 * option.non.frFR:CalculInr.VAL_patientPrendCoumadinNon
-	 * option.ouiDosageInitial.frFR:CalculInr.VAL_patientPrendCoumadinOuiDosageInitial
-	 * option.ouiRecommence.frFR:CalculInr.VAL_patientPrendCoumadinOuiRecommence
+	 * option.frFR.vide:""
+	 * option.frFR.oui:CalculInr.VAL_patientPrendCoumadinOui
+	 * option.frFR.non:CalculInr.VAL_patientPrendCoumadinNon
+	 * option.frFR.ouiDosageInitial:CalculInr.VAL_patientPrendCoumadinOuiDosageInitial
+	 * option.frFR.ouiRecommence:CalculInr.VAL_patientPrendCoumadinOuiRecommence
 	 */ 
 	protected void _patientPrendCoumadin(Chaine o) {
 	}
@@ -107,7 +109,7 @@ public class CalculInr extends CalculInrGen<Cluster> {
 	 * r.enUS: FORMAT_dateMedicalShort
 	 */
 	protected void _changementDose(Chaine o) {
-		o.tout(dateInr.format(FORMAT_dateMedicalCourt), " INR @ ");
+		o.s(dateInr.format(FORMAT_dateMedicalCourt), " INR @ ");
 	}
 
 	/**

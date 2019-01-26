@@ -6,7 +6,6 @@ import org.computate.frFR.cardiaque.cluster.Cluster;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
 import org.computate.frFR.cardiaque.ecrivain.ToutEcrivain;
 import org.apache.commons.text.StringEscapeUtils;
-import org.computate.enUS.cardiac.page.PageLayout;
 import org.computate.frFR.cardiaque.page.MiseEnPage;
 import java.lang.String;
 import org.apache.commons.lang3.StringUtils;

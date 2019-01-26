@@ -1,7 +1,6 @@
 package org.computate.frFR.cardiaque.page.parti;
 
 import java.util.Objects;
-import org.computate.site.course.c000.cluster.Cluster;
 import org.computate.frFR.cardiaque.couverture.Couverture;
 import org.computate.frFR.cardiaque.cluster.Cluster;
 import org.computate.frFR.cardiaque.requete.RequeteSite;

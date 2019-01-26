@@ -1,17 +1,18 @@
 package org.computate.frFR.cardiaque.vertx;
 
-import java.util.Objects;
-import org.computate.frFR.cardiaque.contexte.SiteContexte;
 import org.computate.frFR.cardiaque.couverture.Couverture;
 import org.computate.frFR.cardiaque.config.ConfigSite;
 import org.computate.frFR.cardiaque.cluster.Cluster;
+import org.apache.commons.text.StringEscapeUtils;
+import org.apache.commons.lang3.StringUtils;
+import java.lang.Integer;
+import java.io.File;
+import java.util.Objects;
+import org.computate.frFR.cardiaque.contexte.SiteContexte;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
 import org.computate.frFR.cardiaque.ecrivain.ToutEcrivain;
-import org.apache.commons.text.StringEscapeUtils;
 import java.lang.Object;
 import java.lang.String;
-import org.apache.commons.lang3.StringUtils;
-import java.io.File;
 
 /**	
  * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.vertx.AppSwagger2&fq=classeEtendGen_indexed_boolean:true">Trouver la classe  dans Solr</a>
@@ -182,6 +183,186 @@ public abstract class AppSwagger2Gen<DEV> extends Object {
 
 	public String htmAppliChemin() {
 		return appliChemin == null ? "" : StringEscapeUtils.escapeHtml4(strAppliChemin());
+	}
+
+	////////////////////
+	// openApiVersion //
+	////////////////////
+
+	/**	L'entité « openApiVersion »
+	 *	 is defined as null before being initialized. 
+	 */
+	protected String openApiVersion;
+	public Couverture<String> openApiVersionCouverture = new Couverture<String>().p(this).c(String.class).var("openApiVersion").o(openApiVersion);
+
+	/**	<br/>L'entité « openApiVersion »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.vertx.AppSwagger2&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:openApiVersion">Trouver l'entité openApiVersion dans Solr</a>
+	 * <br/>
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
+	protected abstract void _openApiVersion(Couverture<String> c);
+
+	public String getOpenApiVersion() {
+		return openApiVersion;
+	}
+
+	public void setOpenApiVersion(String openApiVersion) {
+		this.openApiVersion = openApiVersion;
+		this.openApiVersionCouverture.dejaInitialise = true;
+	}
+	protected AppSwagger2 openApiVersionInit() {
+		if(!openApiVersionCouverture.dejaInitialise) {
+			_openApiVersion(openApiVersionCouverture);
+			if(openApiVersion == null)
+				setOpenApiVersion(openApiVersionCouverture.o);
+		}
+		openApiVersionCouverture.dejaInitialise(true);
+		return (AppSwagger2)this;
+	}
+
+	public String solrOpenApiVersion() {
+		return openApiVersion;
+	}
+
+	public String strOpenApiVersion() {
+		return openApiVersion == null ? "" : openApiVersion;
+	}
+
+	public String nomAffichageOpenApiVersion() {
+		return null;
+	}
+
+	public String htmTooltipOpenApiVersion() {
+		return null;
+	}
+
+	public String htmOpenApiVersion() {
+		return openApiVersion == null ? "" : StringEscapeUtils.escapeHtml4(strOpenApiVersion());
+	}
+
+	//////////////////////////
+	// openApiVersionNumero //
+	//////////////////////////
+
+	/**	L'entité « openApiVersionNumero »
+	 *	 is defined as null before being initialized. 
+	 */
+	protected Integer openApiVersionNumero;
+	public Couverture<Integer> openApiVersionNumeroCouverture = new Couverture<Integer>().p(this).c(Integer.class).var("openApiVersionNumero").o(openApiVersionNumero);
+
+	/**	<br/>L'entité « openApiVersionNumero »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.vertx.AppSwagger2&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:openApiVersionNumero">Trouver l'entité openApiVersionNumero dans Solr</a>
+	 * <br/>
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
+	protected abstract void _openApiVersionNumero(Couverture<Integer> c);
+
+	public Integer getOpenApiVersionNumero() {
+		return openApiVersionNumero;
+	}
+
+	public void setOpenApiVersionNumero(Integer openApiVersionNumero) {
+		this.openApiVersionNumero = openApiVersionNumero;
+		this.openApiVersionNumeroCouverture.dejaInitialise = true;
+	}
+	public AppSwagger2 setOpenApiVersionNumero(String o) {
+		if(org.apache.commons.lang3.math.NumberUtils.isCreatable(o))
+			this.openApiVersionNumero = Integer.parseInt(o);
+		this.openApiVersionNumeroCouverture.dejaInitialise = true;
+		return (AppSwagger2)this;
+	}
+	protected AppSwagger2 openApiVersionNumeroInit() {
+		if(!openApiVersionNumeroCouverture.dejaInitialise) {
+			_openApiVersionNumero(openApiVersionNumeroCouverture);
+			if(openApiVersionNumero == null)
+				setOpenApiVersionNumero(openApiVersionNumeroCouverture.o);
+		}
+		openApiVersionNumeroCouverture.dejaInitialise(true);
+		return (AppSwagger2)this;
+	}
+
+	public Integer solrOpenApiVersionNumero() {
+		return openApiVersionNumero;
+	}
+
+	public String strOpenApiVersionNumero() {
+		return openApiVersionNumero == null ? "" : openApiVersionNumero.toString();
+	}
+
+	public String nomAffichageOpenApiVersionNumero() {
+		return null;
+	}
+
+	public String htmTooltipOpenApiVersionNumero() {
+		return null;
+	}
+
+	public String htmOpenApiVersionNumero() {
+		return openApiVersionNumero == null ? "" : StringEscapeUtils.escapeHtml4(strOpenApiVersionNumero());
+	}
+
+	////////////////
+	// tabsSchema //
+	////////////////
+
+	/**	L'entité « tabsSchema »
+	 *	 is defined as null before being initialized. 
+	 */
+	protected Integer tabsSchema;
+	public Couverture<Integer> tabsSchemaCouverture = new Couverture<Integer>().p(this).c(Integer.class).var("tabsSchema").o(tabsSchema);
+
+	/**	<br/>L'entité « tabsSchema »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.vertx.AppSwagger2&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:tabsSchema">Trouver l'entité tabsSchema dans Solr</a>
+	 * <br/>
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
+	protected abstract void _tabsSchema(Couverture<Integer> c);
+
+	public Integer getTabsSchema() {
+		return tabsSchema;
+	}
+
+	public void setTabsSchema(Integer tabsSchema) {
+		this.tabsSchema = tabsSchema;
+		this.tabsSchemaCouverture.dejaInitialise = true;
+	}
+	public AppSwagger2 setTabsSchema(String o) {
+		if(org.apache.commons.lang3.math.NumberUtils.isCreatable(o))
+			this.tabsSchema = Integer.parseInt(o);
+		this.tabsSchemaCouverture.dejaInitialise = true;
+		return (AppSwagger2)this;
+	}
+	protected AppSwagger2 tabsSchemaInit() {
+		if(!tabsSchemaCouverture.dejaInitialise) {
+			_tabsSchema(tabsSchemaCouverture);
+			if(tabsSchema == null)
+				setTabsSchema(tabsSchemaCouverture.o);
+		}
+		tabsSchemaCouverture.dejaInitialise(true);
+		return (AppSwagger2)this;
+	}
+
+	public Integer solrTabsSchema() {
+		return tabsSchema;
+	}
+
+	public String strTabsSchema() {
+		return tabsSchema == null ? "" : tabsSchema.toString();
+	}
+
+	public String nomAffichageTabsSchema() {
+		return null;
+	}
+
+	public String htmTooltipTabsSchema() {
+		return null;
+	}
+
+	public String htmTabsSchema() {
+		return tabsSchema == null ? "" : StringEscapeUtils.escapeHtml4(strTabsSchema());
 	}
 
 	////////////////
@@ -508,6 +689,9 @@ public abstract class AppSwagger2Gen<DEV> extends Object {
 		siteContexteInit();
 		configSiteInit();
 		appliCheminInit();
+		openApiVersionInit();
+		openApiVersionNumeroInit();
+		tabsSchemaInit();
 		apiVersionInit();
 		openApiYamlCheminInit();
 		openApiYamlFichierInit();
@@ -566,6 +750,12 @@ public abstract class AppSwagger2Gen<DEV> extends Object {
 				return oAppSwagger2.configSite;
 			case "appliChemin":
 				return oAppSwagger2.appliChemin;
+			case "openApiVersion":
+				return oAppSwagger2.openApiVersion;
+			case "openApiVersionNumero":
+				return oAppSwagger2.openApiVersionNumero;
+			case "tabsSchema":
+				return oAppSwagger2.tabsSchema;
 			case "apiVersion":
 				return oAppSwagger2.apiVersion;
 			case "openApiYamlChemin":
@@ -641,7 +831,7 @@ public abstract class AppSwagger2Gen<DEV> extends Object {
 	//////////////
 
 	@Override public int hashCode() {
-		return Objects.hash(appliChemin, apiVersion, openApiYamlChemin);
+		return Objects.hash(appliChemin, openApiVersion, openApiVersionNumero, tabsSchema, apiVersion, openApiYamlChemin);
 	}
 
 	////////////
@@ -655,6 +845,9 @@ public abstract class AppSwagger2Gen<DEV> extends Object {
 			return false;
 		AppSwagger2 that = (AppSwagger2)o;
 		return Objects.equals( appliChemin, that.appliChemin )
+				&& Objects.equals( openApiVersion, that.openApiVersion )
+				&& Objects.equals( openApiVersionNumero, that.openApiVersionNumero )
+				&& Objects.equals( tabsSchema, that.tabsSchema )
 				&& Objects.equals( apiVersion, that.apiVersion )
 				&& Objects.equals( openApiYamlChemin, that.openApiYamlChemin );
 	}
@@ -667,6 +860,9 @@ public abstract class AppSwagger2Gen<DEV> extends Object {
 		StringBuilder sb = new StringBuilder();
 		sb.append("AppSwagger2 {");
 		sb.append( "appliChemin: \"" ).append(appliChemin).append( "\"" );
+		sb.append( ", openApiVersion: \"" ).append(openApiVersion).append( "\"" );
+		sb.append( ", openApiVersionNumero: " ).append(openApiVersionNumero);
+		sb.append( ", tabsSchema: " ).append(tabsSchema);
 		sb.append( ", apiVersion: \"" ).append(apiVersion).append( "\"" );
 		sb.append( ", openApiYamlChemin: \"" ).append(openApiYamlChemin).append( "\"" );
 		sb.append(" }");

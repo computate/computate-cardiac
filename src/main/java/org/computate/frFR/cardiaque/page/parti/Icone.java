@@ -1,14 +1,14 @@
-package org.computate.frFR.cardiaque.page.parti;  
+package org.computate.frFR.cardiaque.page.parti;   
 
 import org.computate.frFR.cardiaque.chaine.Chaine;
 import org.computate.frFR.cardiaque.couverture.Couverture;
 import org.computate.frFR.cardiaque.page.MiseEnPage;
 
-public class Icone extends IconeGen<PageParti> {  
+public class Icone extends IconeGen<PageParti> {   
 
-	protected void _type(Chaine o) throws Exception {
+	protected void _type(Chaine o) {
 	}
-	protected void _nom(Chaine o) throws Exception {
+	protected void _nom(Chaine o) {
 	}
 
 	protected void _page_(Couverture<MiseEnPage> c) {}

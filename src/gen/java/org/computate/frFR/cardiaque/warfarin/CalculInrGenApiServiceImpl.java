@@ -81,7 +81,7 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 	// Recherche //
 
 	@Override
-	public void gererRechercheCalculInr(OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
+	public void rechercheCalculInr(OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
 		try {
 			RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte, operationRequete);
 			Future<OperationResponse> etapesFutures = rechercheCalculInr(requeteSite).compose(listeCalculInr -> 
@@ -158,7 +158,7 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 	// POST //
 
 	@Override
-	public void gererPOSTCalculInr(JsonObject document, OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
+	public void postCalculInr(JsonObject document, OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
 		try {
 			RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte, operationRequete);
 			Future<OperationResponse> etapesFutures = sqlCalculInr(requeteSite).compose(a -> 
@@ -273,7 +273,7 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 	// PATCH //
 
 	@Override
-	public void gererPATCHCalculInr(JsonObject document, OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
+	public void patchCalculInr(JsonObject document, OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
 		try {
 			RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte, operationRequete);
 			Future<OperationResponse> etapesFutures = sqlCalculInr(requeteSite).compose(a -> 
@@ -371,7 +371,7 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 	// GET //
 
 	@Override
-	public void gererGETCalculInr(OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
+	public void getCalculInr(OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
 		try {
 			RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte, operationRequete);
 			Future<OperationResponse> etapesFutures = rechercheCalculInr(requeteSite).compose(listeCalculInr -> 
@@ -582,7 +582,7 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 	// PUT //
 
 	@Override
-	public void gererPUTCalculInr(JsonObject document, OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
+	public void putCalculInr(JsonObject document, OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
 		try {
 			RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte, operationRequete);
 			Future<OperationResponse> etapesFutures = sqlCalculInr(requeteSite).compose(a -> 
@@ -696,7 +696,7 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 	// DELETE //
 
 	@Override
-	public void gererDELETECalculInr(OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
+	public void deleteCalculInr(OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
 		try {
 			RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte, operationRequete);
 			Future<OperationResponse> etapesFutures = sqlCalculInr(requeteSite).compose(a -> 

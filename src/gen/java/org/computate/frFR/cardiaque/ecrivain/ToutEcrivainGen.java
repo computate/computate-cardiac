@@ -13,6 +13,7 @@ import org.computate.frFR.cardiaque.requete.RequeteSite;
 import java.lang.Boolean;
 import org.computate.frFR.cardiaque.ecrivain.ToutEcrivain;
 import java.lang.Object;
+import java.lang.String;
 
 /**	
  * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.ecrivain.ToutEcrivain&fq=classeEtendGen_indexed_boolean:true">Trouver la classe  dans Solr</a>
@@ -54,6 +55,62 @@ public abstract class ToutEcrivainGen<DEV> extends Object {
 		}
 		requeteSite_Couverture.dejaInitialise(true);
 		return (ToutEcrivain)this;
+	}
+
+	////////////
+	// tabStr //
+	////////////
+
+	/**	L'entité « tabStr »
+	 *	 is defined as null before being initialized. 
+	 */
+	protected String tabStr;
+	public Couverture<String> tabStrCouverture = new Couverture<String>().p(this).c(String.class).var("tabStr").o(tabStr);
+
+	/**	<br/>L'entité « tabStr »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.ecrivain.ToutEcrivain&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:tabStr">Trouver l'entité tabStr dans Solr</a>
+	 * <br/>
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
+	protected abstract void _tabStr(Couverture<String> c);
+
+	public String getTabStr() {
+		return tabStr;
+	}
+
+	public void setTabStr(String tabStr) {
+		this.tabStr = tabStr;
+		this.tabStrCouverture.dejaInitialise = true;
+	}
+	protected ToutEcrivain tabStrInit() {
+		if(!tabStrCouverture.dejaInitialise) {
+			_tabStr(tabStrCouverture);
+			if(tabStr == null)
+				setTabStr(tabStrCouverture.o);
+		}
+		tabStrCouverture.dejaInitialise(true);
+		return (ToutEcrivain)this;
+	}
+
+	public String solrTabStr() {
+		return tabStr;
+	}
+
+	public String strTabStr() {
+		return tabStr == null ? "" : tabStr;
+	}
+
+	public String nomAffichageTabStr() {
+		return null;
+	}
+
+	public String htmTooltipTabStr() {
+		return null;
+	}
+
+	public String htmTabStr() {
+		return tabStr == null ? "" : StringEscapeUtils.escapeHtml4(strTabStr());
 	}
 
 	/////////////
@@ -283,6 +340,7 @@ public abstract class ToutEcrivainGen<DEV> extends Object {
 
 	public void initToutEcrivain() {
 		requeteSite_Init();
+		tabStrInit();
 		fichierInit();
 		ecrivainStringInit();
 		bufferInit();
@@ -327,6 +385,8 @@ public abstract class ToutEcrivainGen<DEV> extends Object {
 		switch(var) {
 			case "requeteSite_":
 				return oToutEcrivain.requeteSite_;
+			case "tabStr":
+				return oToutEcrivain.tabStr;
 			case "fichier":
 				return oToutEcrivain.fichier;
 			case "ecrivainString":
@@ -398,7 +458,7 @@ public abstract class ToutEcrivainGen<DEV> extends Object {
 	//////////////
 
 	@Override public int hashCode() {
-		return Objects.hash(vide);
+		return Objects.hash(tabStr, vide);
 	}
 
 	////////////
@@ -411,7 +471,8 @@ public abstract class ToutEcrivainGen<DEV> extends Object {
 		if(!(o instanceof ToutEcrivain))
 			return false;
 		ToutEcrivain that = (ToutEcrivain)o;
-		return Objects.equals( vide, that.vide );
+		return Objects.equals( tabStr, that.tabStr )
+				&& Objects.equals( vide, that.vide );
 	}
 
 	//////////////
@@ -421,7 +482,8 @@ public abstract class ToutEcrivainGen<DEV> extends Object {
 	@Override public String toString() {
 		StringBuilder sb = new StringBuilder();
 		sb.append("ToutEcrivain {");
-		sb.append( "vide: " ).append(vide);
+		sb.append( "tabStr: \"" ).append(tabStr).append( "\"" );
+		sb.append( ", vide: " ).append(vide);
 		sb.append(" }");
 		return sb.toString();
 	}

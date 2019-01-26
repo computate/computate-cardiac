@@ -22,7 +22,6 @@ import org.computate.frFR.cardiaque.cluster.Cluster;
 import org.apache.solr.client.solrj.response.QueryResponse;
 import io.vertx.core.Vertx;
 import org.apache.commons.text.StringEscapeUtils;
-import java.lang.Exception;
 import java.util.Objects;
 import org.computate.frFR.cardiaque.contexte.SiteContexte;
 import org.apache.solr.common.SolrDocument;
@@ -65,7 +64,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		this.siteContexte_ = siteContexte_;
 		this.siteContexte_Couverture.dejaInitialise = true;
 	}
-	protected RequeteSite siteContexte_Init() throws Exception {
+	protected RequeteSite siteContexte_Init() {
 		if(!siteContexte_Couverture.dejaInitialise) {
 			_siteContexte_(siteContexte_Couverture);
 			if(siteContexte_ == null)
@@ -101,7 +100,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		this.configSite_ = configSite_;
 		this.configSite_Couverture.dejaInitialise = true;
 	}
-	protected RequeteSite configSite_Init() throws Exception {
+	protected RequeteSite configSite_Init() {
 		if(!configSite_Couverture.dejaInitialise) {
 			_configSite_(configSite_Couverture);
 			if(configSite_ == null)
@@ -137,7 +136,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		this.requeteSite_ = requeteSite_;
 		this.requeteSite_Couverture.dejaInitialise = true;
 	}
-	protected RequeteSite requeteSite_Init() throws Exception {
+	protected RequeteSite requeteSite_Init() {
 		if(!requeteSite_Couverture.dejaInitialise) {
 			_requeteSite_(requeteSite_Couverture);
 			if(requeteSite_ == null)
@@ -173,7 +172,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		this.vertx = vertx;
 		this.vertxCouverture.dejaInitialise = true;
 	}
-	protected RequeteSite vertxInit() throws Exception {
+	protected RequeteSite vertxInit() {
 		if(!vertxCouverture.dejaInitialise) {
 			_vertx(vertxCouverture);
 			if(vertx == null)
@@ -209,7 +208,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		this.contexteItineraire = contexteItineraire;
 		this.contexteItineraireCouverture.dejaInitialise = true;
 	}
-	protected RequeteSite contexteItineraireInit() throws Exception {
+	protected RequeteSite contexteItineraireInit() {
 		if(!contexteItineraireCouverture.dejaInitialise) {
 			_contexteItineraire(contexteItineraireCouverture);
 			if(contexteItineraire == null)
@@ -245,7 +244,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		this.rechercheSolr = rechercheSolr;
 		this.rechercheSolrCouverture.dejaInitialise = true;
 	}
-	protected RequeteSite rechercheSolrInit() throws Exception {
+	protected RequeteSite rechercheSolrInit() {
 		if(!rechercheSolrCouverture.dejaInitialise) {
 			_rechercheSolr(rechercheSolrCouverture);
 			if(rechercheSolr == null)
@@ -281,7 +280,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		this.operationRequete = operationRequete;
 		this.operationRequeteCouverture.dejaInitialise = true;
 	}
-	protected RequeteSite operationRequeteInit() throws Exception {
+	protected RequeteSite operationRequeteInit() {
 		if(!operationRequeteCouverture.dejaInitialise) {
 			_operationRequete(operationRequeteCouverture);
 			if(operationRequete == null)
@@ -307,7 +306,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _reponseRecherche(Couverture<QueryResponse> c) throws Exception, Exception;
+	protected abstract void _reponseRecherche(Couverture<QueryResponse> c);
 
 	public QueryResponse getReponseRecherche() {
 		return reponseRecherche;
@@ -317,7 +316,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		this.reponseRecherche = reponseRecherche;
 		this.reponseRechercheCouverture.dejaInitialise = true;
 	}
-	protected RequeteSite reponseRechercheInit() throws Exception {
+	protected RequeteSite reponseRechercheInit() {
 		if(!reponseRechercheCouverture.dejaInitialise) {
 			_reponseRecherche(reponseRechercheCouverture);
 			if(reponseRecherche == null)
@@ -353,7 +352,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		this.resultatsRecherche = resultatsRecherche;
 		this.resultatsRechercheCouverture.dejaInitialise = true;
 	}
-	protected RequeteSite resultatsRechercheInit() throws Exception {
+	protected RequeteSite resultatsRechercheInit() {
 		if(!resultatsRechercheCouverture.dejaInitialise) {
 			_resultatsRecherche(resultatsRechercheCouverture);
 			if(resultatsRecherche == null)
@@ -389,7 +388,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		this.requeteServeur = requeteServeur;
 		this.requeteServeurCouverture.dejaInitialise = true;
 	}
-	protected RequeteSite requeteServeurInit() throws Exception {
+	protected RequeteSite requeteServeurInit() {
 		if(!requeteServeurCouverture.dejaInitialise) {
 			_requeteServeur(requeteServeurCouverture);
 			if(requeteServeur == null)
@@ -425,7 +424,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		this.reponseServeur = reponseServeur;
 		this.reponseServeurCouverture.dejaInitialise = true;
 	}
-	protected RequeteSite reponseServeurInit() throws Exception {
+	protected RequeteSite reponseServeurInit() {
 		if(!reponseServeurCouverture.dejaInitialise) {
 			_reponseServeur(reponseServeurCouverture);
 			if(reponseServeur == null)
@@ -451,7 +450,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _w(Couverture<ToutEcrivain> c) throws Exception, Exception;
+	protected abstract void _w(Couverture<ToutEcrivain> c);
 
 	public ToutEcrivain getW() {
 		return w;
@@ -461,7 +460,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		this.w = w;
 		this.wCouverture.dejaInitialise = true;
 	}
-	protected RequeteSite wInit() throws Exception {
+	protected RequeteSite wInit() {
 		if(!wCouverture.dejaInitialise) {
 			_w(wCouverture);
 			if(w == null)
@@ -499,7 +498,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		this.utilisateurVertx = utilisateurVertx;
 		this.utilisateurVertxCouverture.dejaInitialise = true;
 	}
-	protected RequeteSite utilisateurVertxInit() throws Exception {
+	protected RequeteSite utilisateurVertxInit() {
 		if(!utilisateurVertxCouverture.dejaInitialise) {
 			_utilisateurVertx(utilisateurVertxCouverture);
 			if(utilisateurVertx == null)
@@ -535,7 +534,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		this.principalJson = principalJson;
 		this.principalJsonCouverture.dejaInitialise = true;
 	}
-	protected RequeteSite principalJsonInit() throws Exception {
+	protected RequeteSite principalJsonInit() {
 		if(!principalJsonCouverture.dejaInitialise) {
 			_principalJson(principalJsonCouverture);
 			if(principalJson == null)
@@ -571,7 +570,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		this.utilisateurNomDomaine = utilisateurNomDomaine;
 		this.utilisateurNomDomaineCouverture.dejaInitialise = true;
 	}
-	protected RequeteSite utilisateurNomDomaineInit() throws Exception {
+	protected RequeteSite utilisateurNomDomaineInit() {
 		if(!utilisateurNomDomaineCouverture.dejaInitialise) {
 			_utilisateurNomDomaine(utilisateurNomDomaineCouverture);
 			if(utilisateurNomDomaine == null)
@@ -627,7 +626,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		this.utilisateurNomEnsemble = utilisateurNomEnsemble;
 		this.utilisateurNomEnsembleCouverture.dejaInitialise = true;
 	}
-	protected RequeteSite utilisateurNomEnsembleInit() throws Exception {
+	protected RequeteSite utilisateurNomEnsembleInit() {
 		if(!utilisateurNomEnsembleCouverture.dejaInitialise) {
 			_utilisateurNomEnsemble(utilisateurNomEnsembleCouverture);
 			if(utilisateurNomEnsemble == null)
@@ -683,7 +682,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		this.utilisateurSite = utilisateurSite;
 		this.utilisateurSiteCouverture.dejaInitialise = true;
 	}
-	protected RequeteSite utilisateurSiteInit() throws Exception {
+	protected RequeteSite utilisateurSiteInit() {
 		if(!utilisateurSiteCouverture.dejaInitialise) {
 			_utilisateurSite(utilisateurSiteCouverture);
 			if(utilisateurSite == null)
@@ -721,7 +720,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		this.utilisateurId = utilisateurId;
 		this.utilisateurIdCouverture.dejaInitialise = true;
 	}
-	protected RequeteSite utilisateurIdInit() throws Exception {
+	protected RequeteSite utilisateurIdInit() {
 		if(!utilisateurIdCouverture.dejaInitialise) {
 			_utilisateurId(utilisateurIdCouverture);
 			if(utilisateurId == null)
@@ -777,7 +776,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		this.utilisateurNom = utilisateurNom;
 		this.utilisateurNomCouverture.dejaInitialise = true;
 	}
-	protected RequeteSite utilisateurNomInit() throws Exception {
+	protected RequeteSite utilisateurNomInit() {
 		if(!utilisateurNomCouverture.dejaInitialise) {
 			_utilisateurNom(utilisateurNomCouverture);
 			if(utilisateurNom == null)
@@ -833,7 +832,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		this.utilisateurNomFamille = utilisateurNomFamille;
 		this.utilisateurNomFamilleCouverture.dejaInitialise = true;
 	}
-	protected RequeteSite utilisateurNomFamilleInit() throws Exception {
+	protected RequeteSite utilisateurNomFamilleInit() {
 		if(!utilisateurNomFamilleCouverture.dejaInitialise) {
 			_utilisateurNomFamille(utilisateurNomFamilleCouverture);
 			if(utilisateurNomFamille == null)
@@ -889,7 +888,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		this.utilisateurPrenom = utilisateurPrenom;
 		this.utilisateurPrenomCouverture.dejaInitialise = true;
 	}
-	protected RequeteSite utilisateurPrenomInit() throws Exception {
+	protected RequeteSite utilisateurPrenomInit() {
 		if(!utilisateurPrenomCouverture.dejaInitialise) {
 			_utilisateurPrenom(utilisateurPrenomCouverture);
 			if(utilisateurPrenom == null)
@@ -945,7 +944,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		this.utilisateurNomComplet = utilisateurNomComplet;
 		this.utilisateurNomCompletCouverture.dejaInitialise = true;
 	}
-	protected RequeteSite utilisateurNomCompletInit() throws Exception {
+	protected RequeteSite utilisateurNomCompletInit() {
 		if(!utilisateurNomCompletCouverture.dejaInitialise) {
 			_utilisateurNomComplet(utilisateurNomCompletCouverture);
 			if(utilisateurNomComplet == null)
@@ -1001,7 +1000,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		this.xmlPile = xmlPile;
 		this.xmlPileCouverture.dejaInitialise = true;
 	}
-	protected RequeteSite xmlPileInit() throws Exception {
+	protected RequeteSite xmlPileInit() {
 		if(!xmlPileCouverture.dejaInitialise) {
 			_xmlPile(xmlPile);
 		}
@@ -1035,7 +1034,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		this.solrDocument = solrDocument;
 		this.solrDocumentCouverture.dejaInitialise = true;
 	}
-	protected RequeteSite solrDocumentInit() throws Exception {
+	protected RequeteSite solrDocumentInit() {
 		if(!solrDocumentCouverture.dejaInitialise) {
 			_solrDocument(solrDocumentCouverture);
 			if(solrDocument == null)
@@ -1077,7 +1076,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		this.pageAcheteCouverture.dejaInitialise = true;
 		return (RequeteSite)this;
 	}
-	protected RequeteSite pageAcheteInit() throws Exception {
+	protected RequeteSite pageAcheteInit() {
 		if(!pageAcheteCouverture.dejaInitialise) {
 			_pageAchete(pageAcheteCouverture);
 			if(pageAchete == null)
@@ -1139,7 +1138,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		this.pageAdminCouverture.dejaInitialise = true;
 		return (RequeteSite)this;
 	}
-	protected RequeteSite pageAdminInit() throws Exception {
+	protected RequeteSite pageAdminInit() {
 		if(!pageAdminCouverture.dejaInitialise) {
 			_pageAdmin(pageAdminCouverture);
 			if(pageAdmin == null)
@@ -1195,7 +1194,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		this.h = h;
 		this.hCouverture.dejaInitialise = true;
 	}
-	protected RequeteSite hInit() throws Exception {
+	protected RequeteSite hInit() {
 		if(!hCouverture.dejaInitialise) {
 			_h(hCouverture);
 			if(h == null)
@@ -1241,7 +1240,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _chiffrementCrypter(Couverture<Cipher> c) throws Exception, Exception;
+	protected abstract void _chiffrementCrypter(Couverture<Cipher> c);
 
 	public Cipher getChiffrementCrypter() {
 		return chiffrementCrypter;
@@ -1251,7 +1250,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		this.chiffrementCrypter = chiffrementCrypter;
 		this.chiffrementCrypterCouverture.dejaInitialise = true;
 	}
-	protected RequeteSite chiffrementCrypterInit() throws Exception {
+	protected RequeteSite chiffrementCrypterInit() {
 		if(!chiffrementCrypterCouverture.dejaInitialise) {
 			_chiffrementCrypter(chiffrementCrypterCouverture);
 			if(chiffrementCrypter == null)
@@ -1277,7 +1276,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _chiffrementDecrypter(Couverture<Cipher> c) throws Exception, Exception;
+	protected abstract void _chiffrementDecrypter(Couverture<Cipher> c);
 
 	public Cipher getChiffrementDecrypter() {
 		return chiffrementDecrypter;
@@ -1287,7 +1286,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		this.chiffrementDecrypter = chiffrementDecrypter;
 		this.chiffrementDecrypterCouverture.dejaInitialise = true;
 	}
-	protected RequeteSite chiffrementDecrypterInit() throws Exception {
+	protected RequeteSite chiffrementDecrypterInit() {
 		if(!chiffrementDecrypterCouverture.dejaInitialise) {
 			_chiffrementDecrypter(chiffrementDecrypterCouverture);
 			if(chiffrementDecrypter == null)
@@ -1313,7 +1312,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _digestMessage(Couverture<MessageDigest> c) throws Exception, Exception;
+	protected abstract void _digestMessage(Couverture<MessageDigest> c);
 
 	public MessageDigest getDigestMessage() {
 		return digestMessage;
@@ -1323,7 +1322,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		this.digestMessage = digestMessage;
 		this.digestMessageCouverture.dejaInitialise = true;
 	}
-	protected RequeteSite digestMessageInit() throws Exception {
+	protected RequeteSite digestMessageInit() {
 		if(!digestMessageCouverture.dejaInitialise) {
 			_digestMessage(digestMessageCouverture);
 			if(digestMessage == null)
@@ -1359,7 +1358,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		this.crypterSel = crypterSel;
 		this.crypterSelCouverture.dejaInitialise = true;
 	}
-	protected RequeteSite crypterSelInit() throws Exception {
+	protected RequeteSite crypterSelInit() {
 		if(!crypterSelCouverture.dejaInitialise) {
 			_crypterSel(crypterSelCouverture);
 			if(crypterSel == null)
@@ -1421,7 +1420,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		this.requetePkCouverture.dejaInitialise = true;
 		return (RequeteSite)this;
 	}
-	protected RequeteSite requetePkInit() throws Exception {
+	protected RequeteSite requetePkInit() {
 		if(!requetePkCouverture.dejaInitialise) {
 			_requetePk(requetePkCouverture);
 			if(requetePk == null)
@@ -1477,7 +1476,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		this.connexionSql = connexionSql;
 		this.connexionSqlCouverture.dejaInitialise = true;
 	}
-	protected RequeteSite connexionSqlInit() throws Exception {
+	protected RequeteSite connexionSqlInit() {
 		if(!connexionSqlCouverture.dejaInitialise) {
 			_connexionSql(connexionSqlCouverture);
 			if(connexionSql == null)
@@ -1503,7 +1502,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _crypterCle(Couverture<byte[]> c) throws Exception, Exception;
+	protected abstract void _crypterCle(Couverture<byte[]> c);
 
 	public byte[] getCrypterCle() {
 		return crypterCle;
@@ -1513,7 +1512,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		this.crypterCle = crypterCle;
 		this.crypterCleCouverture.dejaInitialise = true;
 	}
-	protected RequeteSite crypterCleInit() throws Exception {
+	protected RequeteSite crypterCleInit() {
 		if(!crypterCleCouverture.dejaInitialise) {
 			_crypterCle(crypterCleCouverture);
 			if(crypterCle == null)
@@ -1549,7 +1548,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		this.aleatoireSecurise = aleatoireSecurise;
 		this.aleatoireSecuriseCouverture.dejaInitialise = true;
 	}
-	protected RequeteSite aleatoireSecuriseInit() throws Exception {
+	protected RequeteSite aleatoireSecuriseInit() {
 		if(!aleatoireSecuriseCouverture.dejaInitialise) {
 			_aleatoireSecurise(aleatoireSecurise);
 		}
@@ -1573,7 +1572,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _specCleSecrete(Couverture<SecretKeySpec> c) throws Exception, Exception;
+	protected abstract void _specCleSecrete(Couverture<SecretKeySpec> c);
 
 	public SecretKeySpec getSpecCleSecrete() {
 		return specCleSecrete;
@@ -1583,7 +1582,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		this.specCleSecrete = specCleSecrete;
 		this.specCleSecreteCouverture.dejaInitialise = true;
 	}
-	protected RequeteSite specCleSecreteInit() throws Exception {
+	protected RequeteSite specCleSecreteInit() {
 		if(!specCleSecreteCouverture.dejaInitialise) {
 			_specCleSecrete(specCleSecreteCouverture);
 			if(specCleSecrete == null)
@@ -1599,7 +1598,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 
 	protected boolean dejaInitialiseRequeteSite = false;
 
-	public RequeteSite initLoinRequeteSite(RequeteSite requeteSite_) throws Exception {
+	public RequeteSite initLoinRequeteSite(RequeteSite requeteSite_) {
 		setRequeteSite_(requeteSite_);
 		if(!dejaInitialiseRequeteSite) {
 			dejaInitialiseRequeteSite = true;
@@ -1608,11 +1607,11 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		return (RequeteSite)this;
 	}
 
-	public void initLoinRequeteSite() throws Exception {
+	public void initLoinRequeteSite() {
 		initRequeteSite();
 	}
 
-	public void initRequeteSite() throws Exception {
+	public void initRequeteSite() {
 		siteContexte_Init();
 		configSite_Init();
 		requeteSite_Init();
@@ -1651,7 +1650,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		specCleSecreteInit();
 	}
 
-	public void initLoinPourClasse(RequeteSite requeteSite_) throws Exception {
+	public void initLoinPourClasse(RequeteSite requeteSite_) {
 		initLoinRequeteSite(requeteSite_);
 	}
 
@@ -1769,7 +1768,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	// attribuer //
 	///////////////
 
-	public boolean attribuerPourClasse(String var, Object val) throws Exception {
+	public boolean attribuerPourClasse(String var, Object val) {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
@@ -1794,7 +1793,7 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	// definir //
 	/////////////
 
-	public boolean definirPourClasse(String var, String val) throws Exception {
+	public boolean definirPourClasse(String var, String val) {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		if(val != null) {

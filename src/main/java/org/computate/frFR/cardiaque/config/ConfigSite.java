@@ -573,4 +573,18 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 			o = config.getString(prefixeEchappe + c.var, "/api/v" + apiVersion);
 		c.o(o);
 	}
+
+	/**
+	 * var.enUS: vertxServiceAddress
+	 * r: addresse
+	 * r.enUS: address
+	 */
+	protected void _vertxServiceAddresse(Couverture<String> c) {
+		String o;
+		if(config == null)
+			o = System.getenv(c.var);
+		else
+			o = config.getString(prefixeEchappe + c.var, "addresse");
+		c.o(o);
+	}
 }

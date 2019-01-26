@@ -3,12 +3,12 @@ package org.computate.frFR.cardiaque.page;
 import org.computate.frFR.cardiaque.couverture.Couverture;
 import java.util.Date;
 import org.computate.frFR.cardiaque.cluster.Cluster;
+import java.time.ZonedDateTime;
 import java.time.LocalDateTime;
 import org.apache.commons.text.StringEscapeUtils;
 import java.time.Instant;
 import org.apache.commons.lang3.StringUtils;
 import java.lang.Integer;
-import java.lang.Exception;
 import java.time.ZoneId;
 import java.util.Objects;
 import org.apache.solr.common.SolrDocument;
@@ -16,8 +16,8 @@ import java.util.List;
 import java.time.format.DateTimeFormatter;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
 import java.lang.Boolean;
-import java.lang.Object;
 import org.computate.frFR.cardiaque.ecrivain.ToutEcrivain;
+import java.lang.Object;
 import java.lang.String;
 
 /**	
@@ -52,7 +52,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		this.requeteSite_ = requeteSite_;
 		this.requeteSite_Couverture.dejaInitialise = true;
 	}
-	protected MiseEnPage requeteSite_Init() throws Exception {
+	protected MiseEnPage requeteSite_Init() {
 		if(!requeteSite_Couverture.dejaInitialise) {
 			_requeteSite_(requeteSite_Couverture);
 			if(requeteSite_ == null)
@@ -88,7 +88,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		this.solrDocument = solrDocument;
 		this.solrDocumentCouverture.dejaInitialise = true;
 	}
-	protected MiseEnPage solrDocumentInit() throws Exception {
+	protected MiseEnPage solrDocumentInit() {
 		if(!solrDocumentCouverture.dejaInitialise) {
 			_solrDocument(solrDocumentCouverture);
 			if(solrDocument == null)
@@ -114,7 +114,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 	 * <br/>
 	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _w(Couverture<ToutEcrivain> c) throws Exception, Exception;
+	protected abstract void _w(Couverture<ToutEcrivain> c);
 
 	public ToutEcrivain getW() {
 		return w;
@@ -124,7 +124,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		this.w = w;
 		this.wCouverture.dejaInitialise = true;
 	}
-	protected MiseEnPage wInit() throws Exception {
+	protected MiseEnPage wInit() {
 		if(!wCouverture.dejaInitialise) {
 			_w(wCouverture);
 			if(w == null)
@@ -168,7 +168,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		this.pageVisibleAuxBotsCouverture.dejaInitialise = true;
 		return (MiseEnPage)this;
 	}
-	protected MiseEnPage pageVisibleAuxBotsInit() throws Exception {
+	protected MiseEnPage pageVisibleAuxBotsInit() {
 		if(!pageVisibleAuxBotsCouverture.dejaInitialise) {
 			_pageVisibleAuxBots(pageVisibleAuxBotsCouverture);
 			if(pageVisibleAuxBots == null)
@@ -224,7 +224,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		this.pageH1 = pageH1;
 		this.pageH1Couverture.dejaInitialise = true;
 	}
-	protected MiseEnPage pageH1Init() throws Exception {
+	protected MiseEnPage pageH1Init() {
 		if(!pageH1Couverture.dejaInitialise) {
 			_pageH1(pageH1Couverture);
 			if(pageH1 == null)
@@ -280,7 +280,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		this.pageH2 = pageH2;
 		this.pageH2Couverture.dejaInitialise = true;
 	}
-	protected MiseEnPage pageH2Init() throws Exception {
+	protected MiseEnPage pageH2Init() {
 		if(!pageH2Couverture.dejaInitialise) {
 			_pageH2(pageH2Couverture);
 			if(pageH2 == null)
@@ -336,7 +336,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		this.pageH1Court = pageH1Court;
 		this.pageH1CourtCouverture.dejaInitialise = true;
 	}
-	protected MiseEnPage pageH1CourtInit() throws Exception {
+	protected MiseEnPage pageH1CourtInit() {
 		if(!pageH1CourtCouverture.dejaInitialise) {
 			_pageH1Court(pageH1CourtCouverture);
 			if(pageH1Court == null)
@@ -392,7 +392,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		this.pageH2Court = pageH2Court;
 		this.pageH2CourtCouverture.dejaInitialise = true;
 	}
-	protected MiseEnPage pageH2CourtInit() throws Exception {
+	protected MiseEnPage pageH2CourtInit() {
 		if(!pageH2CourtCouverture.dejaInitialise) {
 			_pageH2Court(pageH2CourtCouverture);
 			if(pageH2Court == null)
@@ -448,7 +448,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		this.pageTitre = pageTitre;
 		this.pageTitreCouverture.dejaInitialise = true;
 	}
-	protected MiseEnPage pageTitreInit() throws Exception {
+	protected MiseEnPage pageTitreInit() {
 		if(!pageTitreCouverture.dejaInitialise) {
 			_pageTitre(pageTitreCouverture);
 			if(pageTitre == null)
@@ -504,7 +504,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		this.pageUri = pageUri;
 		this.pageUriCouverture.dejaInitialise = true;
 	}
-	protected MiseEnPage pageUriInit() throws Exception {
+	protected MiseEnPage pageUriInit() {
 		if(!pageUriCouverture.dejaInitialise) {
 			_pageUri(pageUriCouverture);
 			if(pageUri == null)
@@ -571,7 +571,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 			this.pageUris.add(o);
 		return (MiseEnPage)this;
 	}
-	protected MiseEnPage pageUrisInit() throws Exception {
+	protected MiseEnPage pageUrisInit() {
 		if(!pageUrisCouverture.dejaInitialise) {
 			_pageUris(pageUris);
 		}
@@ -625,7 +625,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		this.pageUrl = pageUrl;
 		this.pageUrlCouverture.dejaInitialise = true;
 	}
-	protected MiseEnPage pageUrlInit() throws Exception {
+	protected MiseEnPage pageUrlInit() {
 		if(!pageUrlCouverture.dejaInitialise) {
 			_pageUrl(pageUrlCouverture);
 			if(pageUrl == null)
@@ -681,7 +681,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		this.pageImageUri = pageImageUri;
 		this.pageImageUriCouverture.dejaInitialise = true;
 	}
-	protected MiseEnPage pageImageUriInit() throws Exception {
+	protected MiseEnPage pageImageUriInit() {
 		if(!pageImageUriCouverture.dejaInitialise) {
 			_pageImageUri(pageImageUriCouverture);
 			if(pageImageUri == null)
@@ -737,7 +737,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		this.pageImageUrl = pageImageUrl;
 		this.pageImageUrlCouverture.dejaInitialise = true;
 	}
-	protected MiseEnPage pageImageUrlInit() throws Exception {
+	protected MiseEnPage pageImageUrlInit() {
 		if(!pageImageUrlCouverture.dejaInitialise) {
 			_pageImageUrl(pageImageUrlCouverture);
 			if(pageImageUrl == null)
@@ -793,7 +793,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		this.pageVideoId = pageVideoId;
 		this.pageVideoIdCouverture.dejaInitialise = true;
 	}
-	protected MiseEnPage pageVideoIdInit() throws Exception {
+	protected MiseEnPage pageVideoIdInit() {
 		if(!pageVideoIdCouverture.dejaInitialise) {
 			_pageVideoId(pageVideoIdCouverture);
 			if(pageVideoId == null)
@@ -849,7 +849,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		this.pageVideoUrl = pageVideoUrl;
 		this.pageVideoUrlCouverture.dejaInitialise = true;
 	}
-	protected MiseEnPage pageVideoUrlInit() throws Exception {
+	protected MiseEnPage pageVideoUrlInit() {
 		if(!pageVideoUrlCouverture.dejaInitialise) {
 			_pageVideoUrl(pageVideoUrlCouverture);
 			if(pageVideoUrl == null)
@@ -905,7 +905,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		this.pageVideoUrlEmbed = pageVideoUrlEmbed;
 		this.pageVideoUrlEmbedCouverture.dejaInitialise = true;
 	}
-	protected MiseEnPage pageVideoUrlEmbedInit() throws Exception {
+	protected MiseEnPage pageVideoUrlEmbedInit() {
 		if(!pageVideoUrlEmbedCouverture.dejaInitialise) {
 			_pageVideoUrlEmbed(pageVideoUrlEmbedCouverture);
 			if(pageVideoUrlEmbed == null)
@@ -967,7 +967,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		this.pageImageLargeurCouverture.dejaInitialise = true;
 		return (MiseEnPage)this;
 	}
-	protected MiseEnPage pageImageLargeurInit() throws Exception {
+	protected MiseEnPage pageImageLargeurInit() {
 		if(!pageImageLargeurCouverture.dejaInitialise) {
 			_pageImageLargeur(pageImageLargeurCouverture);
 			if(pageImageLargeur == null)
@@ -1029,7 +1029,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		this.pageImageHauteurCouverture.dejaInitialise = true;
 		return (MiseEnPage)this;
 	}
-	protected MiseEnPage pageImageHauteurInit() throws Exception {
+	protected MiseEnPage pageImageHauteurInit() {
 		if(!pageImageHauteurCouverture.dejaInitialise) {
 			_pageImageHauteur(pageImageHauteurCouverture);
 			if(pageImageHauteur == null)
@@ -1085,7 +1085,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		this.pageImageTypeContenu = pageImageTypeContenu;
 		this.pageImageTypeContenuCouverture.dejaInitialise = true;
 	}
-	protected MiseEnPage pageImageTypeContenuInit() throws Exception {
+	protected MiseEnPage pageImageTypeContenuInit() {
 		if(!pageImageTypeContenuCouverture.dejaInitialise) {
 			_pageImageTypeContenu(pageImageTypeContenuCouverture);
 			if(pageImageTypeContenu == null)
@@ -1141,7 +1141,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		this.pageMethode = pageMethode;
 		this.pageMethodeCouverture.dejaInitialise = true;
 	}
-	protected MiseEnPage pageMethodeInit() throws Exception {
+	protected MiseEnPage pageMethodeInit() {
 		if(!pageMethodeCouverture.dejaInitialise) {
 			_pageMethode(pageMethodeCouverture);
 			if(pageMethode == null)
@@ -1197,7 +1197,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		this.pageTypeContenu = pageTypeContenu;
 		this.pageTypeContenuCouverture.dejaInitialise = true;
 	}
-	protected MiseEnPage pageTypeContenuInit() throws Exception {
+	protected MiseEnPage pageTypeContenuInit() {
 		if(!pageTypeContenuCouverture.dejaInitialise) {
 			_pageTypeContenu(pageTypeContenuCouverture);
 			if(pageTypeContenu == null)
@@ -1269,7 +1269,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		this.pageCreeCouverture.dejaInitialise = true;
 		return (MiseEnPage)this;
 	}
-	protected MiseEnPage pageCreeInit() throws Exception {
+	protected MiseEnPage pageCreeInit() {
 		if(!pageCreeCouverture.dejaInitialise) {
 			_pageCree(pageCreeCouverture);
 			if(pageCree == null)
@@ -1341,7 +1341,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		this.pageModifieeCouverture.dejaInitialise = true;
 		return (MiseEnPage)this;
 	}
-	protected MiseEnPage pageModifieeInit() throws Exception {
+	protected MiseEnPage pageModifieeInit() {
 		if(!pageModifieeCouverture.dejaInitialise) {
 			_pageModifiee(pageModifieeCouverture);
 			if(pageModifiee == null)
@@ -1397,7 +1397,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		this.pageAccueilUri = pageAccueilUri;
 		this.pageAccueilUriCouverture.dejaInitialise = true;
 	}
-	protected MiseEnPage pageAccueilUriInit() throws Exception {
+	protected MiseEnPage pageAccueilUriInit() {
 		if(!pageAccueilUriCouverture.dejaInitialise) {
 			_pageAccueilUri(pageAccueilUriCouverture);
 			if(pageAccueilUri == null)
@@ -1453,7 +1453,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		this.pageAProposUri = pageAProposUri;
 		this.pageAProposUriCouverture.dejaInitialise = true;
 	}
-	protected MiseEnPage pageAProposUriInit() throws Exception {
+	protected MiseEnPage pageAProposUriInit() {
 		if(!pageAProposUriCouverture.dejaInitialise) {
 			_pageAProposUri(pageAProposUriCouverture);
 			if(pageAProposUri == null)
@@ -1509,7 +1509,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		this.pageFaqUri = pageFaqUri;
 		this.pageFaqUriCouverture.dejaInitialise = true;
 	}
-	protected MiseEnPage pageFaqUriInit() throws Exception {
+	protected MiseEnPage pageFaqUriInit() {
 		if(!pageFaqUriCouverture.dejaInitialise) {
 			_pageFaqUri(pageFaqUriCouverture);
 			if(pageFaqUri == null)
@@ -1565,7 +1565,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		this.pageUtilisateurUri = pageUtilisateurUri;
 		this.pageUtilisateurUriCouverture.dejaInitialise = true;
 	}
-	protected MiseEnPage pageUtilisateurUriInit() throws Exception {
+	protected MiseEnPage pageUtilisateurUriInit() {
 		if(!pageUtilisateurUriCouverture.dejaInitialise) {
 			_pageUtilisateurUri(pageUtilisateurUriCouverture);
 			if(pageUtilisateurUri == null)
@@ -1621,7 +1621,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		this.pageDeconnexionUri = pageDeconnexionUri;
 		this.pageDeconnexionUriCouverture.dejaInitialise = true;
 	}
-	protected MiseEnPage pageDeconnexionUriInit() throws Exception {
+	protected MiseEnPage pageDeconnexionUriInit() {
 		if(!pageDeconnexionUriCouverture.dejaInitialise) {
 			_pageDeconnexionUri(pageDeconnexionUriCouverture);
 			if(pageDeconnexionUri == null)
@@ -1657,7 +1657,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 
 	protected boolean dejaInitialiseMiseEnPage = false;
 
-	public MiseEnPage initLoinMiseEnPage(RequeteSite requeteSite_) throws Exception {
+	public MiseEnPage initLoinMiseEnPage(RequeteSite requeteSite_) {
 		setRequeteSite_(requeteSite_);
 		if(!dejaInitialiseMiseEnPage) {
 			dejaInitialiseMiseEnPage = true;
@@ -1666,11 +1666,11 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		return (MiseEnPage)this;
 	}
 
-	public void initLoinMiseEnPage() throws Exception {
+	public void initLoinMiseEnPage() {
 		initMiseEnPage();
 	}
 
-	public void initMiseEnPage() throws Exception {
+	public void initMiseEnPage() {
 		requeteSite_Init();
 		solrDocumentInit();
 		wInit();
@@ -1702,7 +1702,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		pageDeconnexionUriInit();
 	}
 
-	public void initLoinPourClasse(RequeteSite requeteSite_) throws Exception {
+	public void initLoinPourClasse(RequeteSite requeteSite_) {
 		initLoinMiseEnPage(requeteSite_);
 	}
 
@@ -1805,7 +1805,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 	// attribuer //
 	///////////////
 
-	public boolean attribuerPourClasse(String var, Object val) throws Exception {
+	public boolean attribuerPourClasse(String var, Object val) {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
@@ -1830,7 +1830,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 	// definir //
 	/////////////
 
-	public boolean definirPourClasse(String var, String val) throws Exception {
+	public boolean definirPourClasse(String var, String val) {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		if(val != null) {

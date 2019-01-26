@@ -1,780 +1,1539 @@
-openapi: "3.0.0"
+openapi: 3.0.0
 info:
-  description: "2.0"
-  version: "1"
   title: "computate-cardiac"
-  termsOfService: "http://swagger.io/terms/"
-  contact:
-    email: "ctate@redhat.com"
-  license:
-    name: "Apache 2.0"
-    url: "http://www.apache.org/licenses/LICENSE-2.0.html"
+  version: 3.0.0
 servers:
-  - url: "https://cardiac.heytate.com"
-    description: ""
+  - url: https://cardiac.heytate.com
 paths:
   /api/v1/warfarin/cluster:
     get:
-      operationId: "getCluster"
-      summary: ""
-      description: ""
+      operationId: rechercheCluster
+      x-vertx-event-bus: api
+      description: >+
+      summary: >+
+      tags:
+        - Cluster
       parameters:
-      - in: "query"
-        name: "q"
-        description: ""
-        required: false
-        schema:
-          type: string
-          default: "**:**"
-        examples:
-          default:
-            value: "&ast;:&ast;"
-            summary: "This is the default solr query. "
-      - in: "query"
-        name: "fq"
-        description: ""
-        required: false
-        schema:
-          type: array
-          items:
+        - in: query
+          name: q
+          description: ''
+          required: false
+          schema:
             type: string
-      - in: "query"
-        name: "fl"
-        description: ""
-        required: false
-        schema:
-          type: string
-      - in: "query"
-        name: "start"
-        description: ""
-        required: false
-        schema:
-          type: integer
-          default: 0
-          minimum: 0
-      - in: "query"
-        name: "rows"
-        description: ""
-        required: false
-        schema:
-          type: integer
-          default: 10
-          minimum: 1
+            default: '**:**'
+        - in: query
+          name: fq
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
+        - in: query
+          name: fl
+          description: ''
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sort
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
+        - in: query
+          name: start
+          description: ''
+          required: false
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+        - in: query
+          name: rows
+          description: ''
+          required: false
+          schema:
+            type: integer
+            default: 10
+            minimum: 1
       responses:
         '200':
-          description: ""
+          description: >+
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getCluster'
+                $ref: '#/components/requestBodies/RechercheClusterReponse'
+        '400':
+          description: >+
+                <table><table><tr><td>Type</td><td>Code</td><td>Details</td></tr><tr><td>error</td><td>invalidRequest</td><td>Missing
+                or invalid Parameters</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '401':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td></tr><tr><td>error</td><td>unAuthorized</td><td>Authorization
+                credentials are missing or invalid</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '403':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td><td>More
+                Info</td></tr><tr><td>error</td><td>accessNotConfigured</td><td>The
+                request operation is not configured to access this
+                resource</td><td>Channel/Country/Business provided in the request is
+                not supported currently</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '404':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td><td>More
+                Info</td></tr><tr><td>error</td><td>resourceNotFound</td><td>The
+                requested resource was not found</td><td>Empty resource/resource not
+                found</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '500':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td></tr><tr><td>fatal</td><td>serverUnavailable</td><td>The
+                request failed due to an internal error/server
+                unavailability</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
     post:
-      operationId: "postCluster"
-      summary: ""
-      description: ""
+      operationId: postCluster
+      x-vertx-event-bus: api
+      description: >+
+      summary: >+
+      tags:
+        - Cluster
       requestBody:
-        description: ""
+        description: >+
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/postCluster'
-      responses:
-        '201':
-          description: ""
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getCluster'
-    patch:
-      operationId: "patchCluster"
-      summary: ""
-      description: ""
-      parameters:
-      - in: "query"
-        name: "q"
-        description: ""
-        required: false
-        schema:
-          type: string
-        examples:
-          default:
-            value: "*:*"
-            summary: "This is the default solr query. "
-      - in: "query"
-        name: "fq"
-        description: ""
-        required: false
-        schema:
-          type: string
-      - in: "query"
-        name: "fl"
-        description: ""
-        required: false
-        schema:
-          type: string
-      - in: "query"
-        name: "start"
-        description: ""
-        required: false
-        schema:
-          type: integer
-          minimum: 0
-      - in: "query"
-        name: "rows"
-        description: ""
-        required: false
-        schema:
-          type: integer
-          minimum: 1
-      requestBody:
-        description: ""
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/patchCluster'
+              $ref: '#/components/requestBodies/POSTClusterRequete'
       responses:
         '200':
-          description: ""
+          description: >+
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getCluster'
-  /api/v1/site/utilisateur:
+                $ref: '#/components/requestBodies/POSTClusterReponse'
+        '400':
+          description: >+
+                <table><table><tr><td>Type</td><td>Code</td><td>Details</td></tr><tr><td>error</td><td>invalidRequest</td><td>Missing
+                or invalid Parameters</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '401':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td></tr><tr><td>error</td><td>unAuthorized</td><td>Authorization
+                credentials are missing or invalid</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '403':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td><td>More
+                Info</td></tr><tr><td>error</td><td>accessNotConfigured</td><td>The
+                request operation is not configured to access this
+                resource</td><td>Channel/Country/Business provided in the request is
+                not supported currently</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '404':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td><td>More
+                Info</td></tr><tr><td>error</td><td>resourceNotFound</td><td>The
+                requested resource was not found</td><td>Empty resource/resource not
+                found</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '500':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td></tr><tr><td>fatal</td><td>serverUnavailable</td><td>The
+                request failed due to an internal error/server
+                unavailability</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+    patch:
+      operationId: patchCluster
+      x-vertx-event-bus: api
+      description: >+
+      summary: >+
+      tags:
+        - Cluster
+      requestBody:
+        description: >+
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/requestBodies/PATCHClusterRequete'
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/PATCHClusterReponse'
+        '400':
+          description: >+
+                <table><table><tr><td>Type</td><td>Code</td><td>Details</td></tr><tr><td>error</td><td>invalidRequest</td><td>Missing
+                or invalid Parameters</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '401':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td></tr><tr><td>error</td><td>unAuthorized</td><td>Authorization
+                credentials are missing or invalid</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '403':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td><td>More
+                Info</td></tr><tr><td>error</td><td>accessNotConfigured</td><td>The
+                request operation is not configured to access this
+                resource</td><td>Channel/Country/Business provided in the request is
+                not supported currently</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '404':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td><td>More
+                Info</td></tr><tr><td>error</td><td>resourceNotFound</td><td>The
+                requested resource was not found</td><td>Empty resource/resource not
+                found</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '500':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td></tr><tr><td>fatal</td><td>serverUnavailable</td><td>The
+                request failed due to an internal error/server
+                unavailability</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+  /api/v1/warfarin/cluster/{pk}:
     get:
-      operationId: "getUtilisateurSite"
-      summary: ""
-      description: ""
+      operationId: getCluster
+      x-vertx-event-bus: api
+      description: >+
+      summary: >+
+      tags:
+        - Cluster
       parameters:
-      - in: "query"
-        name: "q"
-        description: ""
-        required: false
-        schema:
-          type: string
-          default: "**:**"
-        examples:
-          default:
-            value: "&ast;:&ast;"
-            summary: "This is the default solr query. "
-      - in: "query"
-        name: "fq"
-        description: ""
-        required: false
-        schema:
-          type: array
-          items:
-            type: string
-      - in: "query"
-        name: "fl"
-        description: ""
-        required: false
-        schema:
-          type: string
-      - in: "query"
-        name: "start"
-        description: ""
-        required: false
-        schema:
-          type: integer
-          default: 0
-          minimum: 0
-      - in: "query"
-        name: "rows"
-        description: ""
-        required: false
-        schema:
-          type: integer
-          default: 10
-          minimum: 1
+        - name: pk
+          in: path
+          description: >+
+          required: true
+          schema:
+            type: number
       responses:
         '200':
-          description: ""
+          description: >+
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getUtilisateurSite'
-    post:
-      operationId: "postUtilisateurSite"
-      summary: ""
-      description: ""
+                $ref: '#/components/requestBodies/GETClusterReponse'
+        '400':
+          description: >+
+                <table><table><tr><td>Type</td><td>Code</td><td>Details</td></tr><tr><td>error</td><td>invalidRequest</td><td>Missing
+                or invalid Parameters</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '401':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td></tr><tr><td>error</td><td>unAuthorized</td><td>Authorization
+                credentials are missing or invalid</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '403':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td><td>More
+                Info</td></tr><tr><td>error</td><td>accessNotConfigured</td><td>The
+                request operation is not configured to access this
+                resource</td><td>Channel/Country/Business provided in the request is
+                not supported currently</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '404':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td><td>More
+                Info</td></tr><tr><td>error</td><td>resourceNotFound</td><td>The
+                requested resource was not found</td><td>Empty resource/resource not
+                found</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '500':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td></tr><tr><td>fatal</td><td>serverUnavailable</td><td>The
+                request failed due to an internal error/server
+                unavailability</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+    put:
+      operationId: putCluster
+      x-vertx-event-bus: api
+      description: >+
+      summary: >+
+      tags:
+        - Cluster
+      parameters:
+        - name: pk
+          in: path
+          description: >+
+          required: true
+          schema:
+            type: number
       requestBody:
-        description: ""
+        description: >+
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/postUtilisateurSite'
-      responses:
-        '201':
-          description: ""
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getUtilisateurSite'
-    patch:
-      operationId: "patchUtilisateurSite"
-      summary: ""
-      description: ""
-      parameters:
-      - in: "query"
-        name: "q"
-        description: ""
-        required: false
-        schema:
-          type: string
-        examples:
-          default:
-            value: "*:*"
-            summary: "This is the default solr query. "
-      - in: "query"
-        name: "fq"
-        description: ""
-        required: false
-        schema:
-          type: string
-      - in: "query"
-        name: "fl"
-        description: ""
-        required: false
-        schema:
-          type: string
-      - in: "query"
-        name: "start"
-        description: ""
-        required: false
-        schema:
-          type: integer
-          minimum: 0
-      - in: "query"
-        name: "rows"
-        description: ""
-        required: false
-        schema:
-          type: integer
-          minimum: 1
-      requestBody:
-        description: ""
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/patchUtilisateurSite'
+              $ref: '#/components/requestBodies/PUTClusterRequete'
       responses:
         '200':
-          description: ""
+          description: >+
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getUtilisateurSite'
+                $ref: '#/components/requestBodies/PUTClusterReponse'
+        '400':
+          description: >+
+                <table><table><tr><td>Type</td><td>Code</td><td>Details</td></tr><tr><td>error</td><td>invalidRequest</td><td>Missing
+                or invalid Parameters</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '401':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td></tr><tr><td>error</td><td>unAuthorized</td><td>Authorization
+                credentials are missing or invalid</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '403':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td><td>More
+                Info</td></tr><tr><td>error</td><td>accessNotConfigured</td><td>The
+                request operation is not configured to access this
+                resource</td><td>Channel/Country/Business provided in the request is
+                not supported currently</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '404':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td><td>More
+                Info</td></tr><tr><td>error</td><td>resourceNotFound</td><td>The
+                requested resource was not found</td><td>Empty resource/resource not
+                found</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '500':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td></tr><tr><td>fatal</td><td>serverUnavailable</td><td>The
+                request failed due to an internal error/server
+                unavailability</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+    delete:
+      operationId: deleteCluster
+      x-vertx-event-bus: api
+      description: >+
+      summary: >+
+      tags:
+        - Cluster
+      parameters:
+        - name: pk
+          in: path
+          description: >+
+          required: true
+          schema:
+            type: number
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/DELETEClusterReponse'
+        '400':
+          description: >+
+                <table><table><tr><td>Type</td><td>Code</td><td>Details</td></tr><tr><td>error</td><td>invalidRequest</td><td>Missing
+                or invalid Parameters</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '401':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td></tr><tr><td>error</td><td>unAuthorized</td><td>Authorization
+                credentials are missing or invalid</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '403':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td><td>More
+                Info</td></tr><tr><td>error</td><td>accessNotConfigured</td><td>The
+                request operation is not configured to access this
+                resource</td><td>Channel/Country/Business provided in the request is
+                not supported currently</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '404':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td><td>More
+                Info</td></tr><tr><td>error</td><td>resourceNotFound</td><td>The
+                requested resource was not found</td><td>Empty resource/resource not
+                found</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '500':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td></tr><tr><td>fatal</td><td>serverUnavailable</td><td>The
+                request failed due to an internal error/server
+                unavailability</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
   /api/v1/warfarin/calcul-inr:
     get:
-      operationId: "getCalculInr"
-      summary: ""
-      description: ""
+      operationId: rechercheCalculInr
+      x-vertx-event-bus: api
+      description: >+
+      summary: >+
+      tags:
+        - CalculInr
       parameters:
-      - in: "query"
-        name: "q"
-        description: ""
-        required: false
-        schema:
-          type: string
-          default: "**:**"
-        examples:
-          default:
-            value: "&ast;:&ast;"
-            summary: "This is the default solr query. "
-      - in: "query"
-        name: "fq"
-        description: ""
-        required: false
-        schema:
-          type: array
-          items:
+        - in: query
+          name: q
+          description: ''
+          required: false
+          schema:
             type: string
-      - in: "query"
-        name: "fl"
-        description: ""
-        required: false
-        schema:
-          type: string
-      - in: "query"
-        name: "start"
-        description: ""
-        required: false
-        schema:
-          type: integer
-          default: 0
-          minimum: 0
-      - in: "query"
-        name: "rows"
-        description: ""
-        required: false
-        schema:
-          type: integer
-          default: 10
-          minimum: 1
+            default: '**:**'
+        - in: query
+          name: fq
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
+        - in: query
+          name: fl
+          description: ''
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sort
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
+        - in: query
+          name: start
+          description: ''
+          required: false
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+        - in: query
+          name: rows
+          description: ''
+          required: false
+          schema:
+            type: integer
+            default: 10
+            minimum: 1
       responses:
         '200':
-          description: ""
+          description: >+
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getCalculInr'
+                $ref: '#/components/requestBodies/RechercheCalculInrReponse'
+        '400':
+          description: >+
+                <table><table><tr><td>Type</td><td>Code</td><td>Details</td></tr><tr><td>error</td><td>invalidRequest</td><td>Missing
+                or invalid Parameters</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '401':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td></tr><tr><td>error</td><td>unAuthorized</td><td>Authorization
+                credentials are missing or invalid</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '403':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td><td>More
+                Info</td></tr><tr><td>error</td><td>accessNotConfigured</td><td>The
+                request operation is not configured to access this
+                resource</td><td>Channel/Country/Business provided in the request is
+                not supported currently</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '404':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td><td>More
+                Info</td></tr><tr><td>error</td><td>resourceNotFound</td><td>The
+                requested resource was not found</td><td>Empty resource/resource not
+                found</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '500':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td></tr><tr><td>fatal</td><td>serverUnavailable</td><td>The
+                request failed due to an internal error/server
+                unavailability</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
     post:
-      operationId: "postCalculInr"
-      summary: ""
-      description: ""
+      operationId: postCalculInr
+      x-vertx-event-bus: api
+      description: >+
+      summary: >+
+      tags:
+        - CalculInr
       requestBody:
-        description: ""
+        description: >+
         required: true
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/postCalculInr'
-      responses:
-        '201':
-          description: ""
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/getCalculInr'
-    patch:
-      operationId: "patchCalculInr"
-      summary: ""
-      description: ""
-      parameters:
-      - in: "query"
-        name: "q"
-        description: ""
-        required: false
-        schema:
-          type: string
-        examples:
-          default:
-            value: "*:*"
-            summary: "This is the default solr query. "
-      - in: "query"
-        name: "fq"
-        description: ""
-        required: false
-        schema:
-          type: string
-      - in: "query"
-        name: "fl"
-        description: ""
-        required: false
-        schema:
-          type: string
-      - in: "query"
-        name: "start"
-        description: ""
-        required: false
-        schema:
-          type: integer
-          minimum: 0
-      - in: "query"
-        name: "rows"
-        description: ""
-        required: false
-        schema:
-          type: integer
-          minimum: 1
-      requestBody:
-        description: ""
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/patchCalculInr'
+              $ref: '#/components/requestBodies/POSTCalculInrRequete'
       responses:
         '200':
-          description: ""
+          description: >+
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/getCalculInr'
+                $ref: '#/components/requestBodies/POSTCalculInrReponse'
+        '400':
+          description: >+
+                <table><table><tr><td>Type</td><td>Code</td><td>Details</td></tr><tr><td>error</td><td>invalidRequest</td><td>Missing
+                or invalid Parameters</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '401':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td></tr><tr><td>error</td><td>unAuthorized</td><td>Authorization
+                credentials are missing or invalid</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '403':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td><td>More
+                Info</td></tr><tr><td>error</td><td>accessNotConfigured</td><td>The
+                request operation is not configured to access this
+                resource</td><td>Channel/Country/Business provided in the request is
+                not supported currently</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '404':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td><td>More
+                Info</td></tr><tr><td>error</td><td>resourceNotFound</td><td>The
+                requested resource was not found</td><td>Empty resource/resource not
+                found</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '500':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td></tr><tr><td>fatal</td><td>serverUnavailable</td><td>The
+                request failed due to an internal error/server
+                unavailability</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+    patch:
+      operationId: patchCalculInr
+      x-vertx-event-bus: api
+      description: >+
+      summary: >+
+      tags:
+        - CalculInr
+      requestBody:
+        description: >+
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/requestBodies/PATCHCalculInrRequete'
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/PATCHCalculInrReponse'
+        '400':
+          description: >+
+                <table><table><tr><td>Type</td><td>Code</td><td>Details</td></tr><tr><td>error</td><td>invalidRequest</td><td>Missing
+                or invalid Parameters</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '401':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td></tr><tr><td>error</td><td>unAuthorized</td><td>Authorization
+                credentials are missing or invalid</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '403':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td><td>More
+                Info</td></tr><tr><td>error</td><td>accessNotConfigured</td><td>The
+                request operation is not configured to access this
+                resource</td><td>Channel/Country/Business provided in the request is
+                not supported currently</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '404':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td><td>More
+                Info</td></tr><tr><td>error</td><td>resourceNotFound</td><td>The
+                requested resource was not found</td><td>Empty resource/resource not
+                found</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '500':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td></tr><tr><td>fatal</td><td>serverUnavailable</td><td>The
+                request failed due to an internal error/server
+                unavailability</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+  /api/v1/warfarin/calcul-inr/{pk}:
+    get:
+      operationId: getCalculInr
+      x-vertx-event-bus: api
+      description: >+
+      summary: >+
+      tags:
+        - CalculInr
+      parameters:
+        - name: pk
+          in: path
+          description: >+
+          required: true
+          schema:
+            type: number
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/GETCalculInrReponse'
+        '400':
+          description: >+
+                <table><table><tr><td>Type</td><td>Code</td><td>Details</td></tr><tr><td>error</td><td>invalidRequest</td><td>Missing
+                or invalid Parameters</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '401':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td></tr><tr><td>error</td><td>unAuthorized</td><td>Authorization
+                credentials are missing or invalid</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '403':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td><td>More
+                Info</td></tr><tr><td>error</td><td>accessNotConfigured</td><td>The
+                request operation is not configured to access this
+                resource</td><td>Channel/Country/Business provided in the request is
+                not supported currently</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '404':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td><td>More
+                Info</td></tr><tr><td>error</td><td>resourceNotFound</td><td>The
+                requested resource was not found</td><td>Empty resource/resource not
+                found</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '500':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td></tr><tr><td>fatal</td><td>serverUnavailable</td><td>The
+                request failed due to an internal error/server
+                unavailability</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+    put:
+      operationId: putCalculInr
+      x-vertx-event-bus: api
+      description: >+
+      summary: >+
+      tags:
+        - CalculInr
+      parameters:
+        - name: pk
+          in: path
+          description: >+
+          required: true
+          schema:
+            type: number
+      requestBody:
+        description: >+
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/requestBodies/PUTCalculInrRequete'
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/PUTCalculInrReponse'
+        '400':
+          description: >+
+                <table><table><tr><td>Type</td><td>Code</td><td>Details</td></tr><tr><td>error</td><td>invalidRequest</td><td>Missing
+                or invalid Parameters</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '401':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td></tr><tr><td>error</td><td>unAuthorized</td><td>Authorization
+                credentials are missing or invalid</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '403':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td><td>More
+                Info</td></tr><tr><td>error</td><td>accessNotConfigured</td><td>The
+                request operation is not configured to access this
+                resource</td><td>Channel/Country/Business provided in the request is
+                not supported currently</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '404':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td><td>More
+                Info</td></tr><tr><td>error</td><td>resourceNotFound</td><td>The
+                requested resource was not found</td><td>Empty resource/resource not
+                found</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '500':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td></tr><tr><td>fatal</td><td>serverUnavailable</td><td>The
+                request failed due to an internal error/server
+                unavailability</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+    delete:
+      operationId: deleteCalculInr
+      x-vertx-event-bus: api
+      description: >+
+      summary: >+
+      tags:
+        - CalculInr
+      parameters:
+        - name: pk
+          in: path
+          description: >+
+          required: true
+          schema:
+            type: number
+      responses:
+        '200':
+          description: >+
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/DELETECalculInrReponse'
+        '400':
+          description: >+
+                <table><table><tr><td>Type</td><td>Code</td><td>Details</td></tr><tr><td>error</td><td>invalidRequest</td><td>Missing
+                or invalid Parameters</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '401':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td></tr><tr><td>error</td><td>unAuthorized</td><td>Authorization
+                credentials are missing or invalid</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '403':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td><td>More
+                Info</td></tr><tr><td>error</td><td>accessNotConfigured</td><td>The
+                request operation is not configured to access this
+                resource</td><td>Channel/Country/Business provided in the request is
+                not supported currently</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '404':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td><td>More
+                Info</td></tr><tr><td>error</td><td>resourceNotFound</td><td>The
+                requested resource was not found</td><td>Empty resource/resource not
+                found</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '500':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td></tr><tr><td>fatal</td><td>serverUnavailable</td><td>The
+                request failed due to an internal error/server
+                unavailability</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
 components:
   requestBodies:
-    getCluster:
-      required: true
-      description: ""
+    ErrorResponse:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/getCluster'
-    postCluster:
-      required: true
-      description: ""
+            $ref: '#/components/schemas/ErrorResponse'
+    RechercheClusterReponse:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/postCluster'
-    patchCluster:
-      required: true
-      description: ""
+            $ref: '#/components/schemas/RechercheClusterReponse'
+    POSTClusterRequete:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/patchCluster'
-    getUtilisateurSite:
-      required: true
-      description: ""
+            $ref: '#/components/schemas/POSTClusterRequete'
+    POSTClusterReponse:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/getUtilisateurSite'
-    postUtilisateurSite:
-      required: true
-      description: ""
+            $ref: '#/components/schemas/POSTClusterReponse'
+    PATCHClusterRequete:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/postUtilisateurSite'
-    patchUtilisateurSite:
-      required: true
-      description: ""
+            $ref: '#/components/schemas/PATCHClusterRequete'
+    PATCHClusterReponse:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/patchUtilisateurSite'
-    getCalculInr:
-      required: true
-      description: ""
+            $ref: '#/components/schemas/PATCHClusterReponse'
+    GETClusterReponse:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/getCalculInr'
-    postCalculInr:
-      required: true
-      description: ""
+            $ref: '#/components/schemas/GETClusterReponse'
+    PUTClusterRequete:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/postCalculInr'
-    patchCalculInr:
-      required: true
-      description: ""
+            $ref: '#/components/schemas/PUTClusterRequete'
+    PUTClusterReponse:
       content:
         application/json:
           schema:
-            $ref: '#/components/schemas/patchCalculInr'
+            $ref: '#/components/schemas/PUTClusterReponse'
+    DELETEClusterReponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DELETEClusterReponse'
+    RechercheCalculInrReponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/RechercheCalculInrReponse'
+    POSTCalculInrRequete:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/POSTCalculInrRequete'
+    POSTCalculInrReponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/POSTCalculInrReponse'
+    PATCHCalculInrRequete:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PATCHCalculInrRequete'
+    PATCHCalculInrReponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PATCHCalculInrReponse'
+    GETCalculInrReponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GETCalculInrReponse'
+    PUTCalculInrRequete:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PUTCalculInrRequete'
+    PUTCalculInrReponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PUTCalculInrReponse'
+    DELETECalculInrReponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DELETECalculInrReponse'
   schemas:
-    getCluster:
+    RechercheClusterReponse:
       allOf:
-      - type: object
-        properties:
-          numFound:
-            type: number
-            default: 1
-          start:
-            type: number
-            default: 0
-          rows:
-            type: number
-            default: 10
-          docs:
-            type: array
-            items:
-              type: object
-              properties:
-                pk:
-                  type: number
-                id:
-                  type: string
-                cree:
-                  type: string
-                  format: date-time
-                modifie:
-                  type: string
-                  format: date-time
-                utilisateurId:
-                  type: string
-                clusterNomCanonique:
-                  type: string
-                clusterNomSimple:
-                  type: string
-                supprime:
-                  type: boolean
-    postCluster:
+        - type: array
+          items:
+            type: object
+            properties:
+              pk:
+                type: number
+              id:
+                type: string
+              cree:
+                type: string
+                format: date-time
+              modifie:
+                type: string
+                format: date-time
+              utilisateurId:
+                type: string
+              clusterNomCanonique:
+                type: string
+              clusterNomSimple:
+                type: string
+              supprime:
+                type: boolean
+    POSTClusterRequete:
       allOf:
-      - type: object
-        properties:
-          id:
-            type: string
-          cree:
-            type: string
-            format: date-time
-          modifie:
-            type: string
-            format: date-time
-          utilisateurId:
-            type: string
-          clusterNomCanonique:
-            type: string
-          clusterNomSimple:
-            type: string
-          supprime:
-            type: boolean
-    patchCluster:
-      allOf:
-      - type: object
-        properties:
-          setId:
-            type: string
-            nullable: true
-          setCree:
-            type: string
-            nullable: true
-            format: date-time
-          setModifie:
-            type: string
-            nullable: true
-            format: date-time
-          setUtilisateurId:
-            type: string
-            nullable: true
-          setClusterNomCanonique:
-            type: string
-            nullable: true
-          setClusterNomSimple:
-            type: string
-            nullable: true
-          setSupprime:
-            type: boolean
-            nullable: true
-    getUtilisateurSite:
-      allOf:
-      - type: object
-        properties:
-          numFound:
-            type: number
-            default: 1
-          start:
-            type: number
-            default: 0
-          rows:
-            type: number
-            default: 10
-          docs:
-            type: array
-            items:
-              type: object
-              properties:
-                calculInrPks:
-                  type: java.util.List<java.lang.Long>
-                items:
-                  type: number
-                utilisateurNom:
-                  type: string
-                utilisateurMail:
-                  type: string
-                utilisateurId:
-                  type: string
-                utilisateurPrenom:
-                  type: string
-                utilisateurNomFamille:
-                  type: string
-                utilisateurNomComplet:
-                  type: string
-                utilisateurSite:
-                  type: string
-                utilisateurRecevoirCourriels:
-                  type: boolean
-                modeleSupprime:
-                  type: boolean
-                modeleClasseNomCanonique:
-                  type: string
-                modeleCle:
-                  type: number
-                modeleSuggestionStocke:
-                  type: string
-                modeleSuggestionIndexe:
-                  type: string
-    postUtilisateurSite:
-      allOf:
-      - type: object
-        properties:
-          calculInrPks:
-            type: java.util.List<java.lang.Long>
-            items:
+        - type: object
+          properties:
+            pk:
               type: number
-          utilisateurNom:
-            type: string
-          utilisateurMail:
-            type: string
-          utilisateurId:
-            type: string
-          utilisateurPrenom:
-            type: string
-          utilisateurNomFamille:
-            type: string
-          utilisateurNomComplet:
-            type: string
-          utilisateurSite:
-            type: string
-          utilisateurRecevoirCourriels:
-            type: boolean
-          modeleSupprime:
-            type: boolean
-          modeleClasseNomCanonique:
-            type: string
-          modeleCle:
-            type: number
-          modeleSuggestionStocke:
-            type: string
-          modeleSuggestionIndexe:
-            type: string
-    patchUtilisateurSite:
+            id:
+              type: string
+            cree:
+              type: string
+              format: date-time
+            modifie:
+              type: string
+              format: date-time
+            utilisateurId:
+              type: string
+            clusterNomCanonique:
+              type: string
+            clusterNomSimple:
+              type: string
+            supprime:
+              type: boolean
+    POSTClusterReponse:
       allOf:
-      - type: object
-        properties:
-          setCalculInrPks:
-            type: java.util.List<java.lang.Long>
-            nullable: true
-            items:
+        - type: object
+          properties:
+            pk:
               type: number
-          setUtilisateurNom:
-            type: string
-            nullable: true
-          setUtilisateurMail:
-            type: string
-            nullable: true
-          setUtilisateurId:
-            type: string
-            nullable: true
-          setUtilisateurPrenom:
-            type: string
-            nullable: true
-          setUtilisateurNomFamille:
-            type: string
-            nullable: true
-          setUtilisateurNomComplet:
-            type: string
-            nullable: true
-          setUtilisateurSite:
-            type: string
-            nullable: true
-          setUtilisateurRecevoirCourriels:
-            type: boolean
-            nullable: true
-          setModeleSupprime:
-            type: boolean
-            nullable: true
-          setModeleClasseNomCanonique:
-            type: string
-            nullable: true
-          setModeleCle:
-            type: number
-            nullable: true
-          setModeleSuggestionStocke:
-            type: string
-            nullable: true
-          setModeleSuggestionIndexe:
-            type: string
-            nullable: true
-    getCalculInr:
+            id:
+              type: string
+            cree:
+              type: string
+              format: date-time
+            modifie:
+              type: string
+              format: date-time
+            utilisateurId:
+              type: string
+            clusterNomCanonique:
+              type: string
+            clusterNomSimple:
+              type: string
+            supprime:
+              type: boolean
+    PATCHClusterRequete:
       allOf:
-      - $ref: "#/components/schemas/getCluster"
-      - type: object
-        properties:
-          numFound:
-            type: number
-            default: 1
-          start:
-            type: number
-            default: 0
-          rows:
-            type: number
-            default: 10
-          docs:
-            type: array
-            items:
-              type: object
-              properties:
-                utilisateurPk:
-                  type: number
-                dateInr:
-                  type: string
-                  format: date
-                dateReverifier:
-                  type: string
-                  format: date
-                patientPrendCoumadin:
-                  type: string
-                butActuel:
-                  type: string
-                doseActuel:
-                  type: string
-                medicamentActuel:
-                  type: string
-                changementDose:
-                  type: string
-                notesComplementaires:
-                  type: string
-                infoContact:
-                  type: string
-    postCalculInr:
+        - type: object
+          properties:
+            pk:
+              type: number
+            id:
+              type: string
+            cree:
+              type: string
+              format: date-time
+            modifie:
+              type: string
+              format: date-time
+            utilisateurId:
+              type: string
+            clusterNomCanonique:
+              type: string
+            clusterNomSimple:
+              type: string
+            supprime:
+              type: boolean
+    PATCHClusterReponse:
       allOf:
-      - $ref: "#/components/schemas/postCluster"
-      - type: object
-        properties:
-          utilisateurPk:
-            type: number
-          dateInr:
-            type: string
-            format: date
-          dateReverifier:
-            type: string
-            format: date
-          patientPrendCoumadin:
-            type: string
-          butActuel:
-            type: string
-          doseActuel:
-            type: string
-          medicamentActuel:
-            type: string
-          changementDose:
-            type: string
-          notesComplementaires:
-            type: string
-          infoContact:
-            type: string
-    patchCalculInr:
+        - type: object
+          properties:
+            pk:
+              type: number
+            id:
+              type: string
+            cree:
+              type: string
+              format: date-time
+            modifie:
+              type: string
+              format: date-time
+            utilisateurId:
+              type: string
+            clusterNomCanonique:
+              type: string
+            clusterNomSimple:
+              type: string
+            supprime:
+              type: boolean
+    GETClusterReponse:
       allOf:
-      - $ref: "#/components/schemas/patchCluster"
-      - type: object
-        properties:
-          setUtilisateurPk:
-            type: number
-            nullable: true
-          setDateInr:
-            type: string
-            nullable: true
-            format: date
-          setDateReverifier:
-            type: string
-            nullable: true
-            format: date
-          setPatientPrendCoumadin:
-            type: string
-            nullable: true
-          setButActuel:
-            type: string
-            nullable: true
-          setDoseActuel:
-            type: string
-            nullable: true
-          setMedicamentActuel:
-            type: string
-            nullable: true
-          setChangementDose:
-            type: string
-            nullable: true
-          setNotesComplementaires:
-            type: string
-            nullable: true
-          setInfoContact:
-            type: string
-            nullable: true
+        - type: object
+          properties:
+            pk:
+              type: number
+            id:
+              type: string
+            cree:
+              type: string
+              format: date-time
+            modifie:
+              type: string
+              format: date-time
+            utilisateurId:
+              type: string
+            clusterNomCanonique:
+              type: string
+            clusterNomSimple:
+              type: string
+            supprime:
+              type: boolean
+    PUTClusterRequete:
+      allOf:
+        - type: object
+          properties:
+            pk:
+              type: number
+            id:
+              type: string
+            cree:
+              type: string
+              format: date-time
+            modifie:
+              type: string
+              format: date-time
+            utilisateurId:
+              type: string
+            clusterNomCanonique:
+              type: string
+            clusterNomSimple:
+              type: string
+            supprime:
+              type: boolean
+    PUTClusterReponse:
+      allOf:
+        - type: object
+          properties:
+            pk:
+              type: number
+            id:
+              type: string
+            cree:
+              type: string
+              format: date-time
+            modifie:
+              type: string
+              format: date-time
+            utilisateurId:
+              type: string
+            clusterNomCanonique:
+              type: string
+            clusterNomSimple:
+              type: string
+            supprime:
+              type: boolean
+    DELETEClusterReponse:
+      allOf:
+        - type: object
+          properties:
+            pk:
+              type: number
+            id:
+              type: string
+            cree:
+              type: string
+              format: date-time
+            modifie:
+              type: string
+              format: date-time
+            utilisateurId:
+              type: string
+            clusterNomCanonique:
+              type: string
+            clusterNomSimple:
+              type: string
+            supprime:
+              type: boolean
+    RechercheCalculInrReponse:
+      allOf:
+        - $ref: "#/components/schemas/RechercheClusterReponse"
+        - type: array
+          items:
+            type: object
+            properties:
+              utilisateurPk:
+                type: number
+              dateInr:
+                type: string
+                format: date
+              dateReverifier:
+                type: string
+                format: date
+              patientPrendCoumadin:
+                type: string
+                enum:
+                  - vide
+                  - oui
+                  - non
+                  - ouiDosageInitial
+                  - ouiRecommence
+              butActuel:
+                type: string
+              doseActuel:
+                type: string
+              medicamentActuel:
+                type: string
+              changementDose:
+                type: string
+              notesComplementaires:
+                type: string
+              infoContact:
+                type: string
+    POSTCalculInrRequete:
+      allOf:
+        - $ref: "#/components/schemas/POSTClusterRequete"
+        - type: object
+          properties:
+            utilisateurPk:
+              type: number
+            dateInr:
+              type: string
+              format: date
+            dateReverifier:
+              type: string
+              format: date
+            patientPrendCoumadin:
+              type: string
+              enum:
+                - vide
+                - oui
+                - non
+                - ouiDosageInitial
+                - ouiRecommence
+            butActuel:
+              type: string
+            doseActuel:
+              type: string
+            medicamentActuel:
+              type: string
+            changementDose:
+              type: string
+            notesComplementaires:
+              type: string
+            infoContact:
+              type: string
+    POSTCalculInrReponse:
+      allOf:
+        - $ref: "#/components/schemas/POSTClusterReponse"
+        - type: object
+          properties:
+            utilisateurPk:
+              type: number
+            dateInr:
+              type: string
+              format: date
+            dateReverifier:
+              type: string
+              format: date
+            patientPrendCoumadin:
+              type: string
+              enum:
+                - vide
+                - oui
+                - non
+                - ouiDosageInitial
+                - ouiRecommence
+            butActuel:
+              type: string
+            doseActuel:
+              type: string
+            medicamentActuel:
+              type: string
+            changementDose:
+              type: string
+            notesComplementaires:
+              type: string
+            infoContact:
+              type: string
+    PATCHCalculInrRequete:
+      allOf:
+        - $ref: "#/components/schemas/PATCHClusterRequete"
+        - type: object
+          properties:
+            utilisateurPk:
+              type: number
+            dateInr:
+              type: string
+              format: date
+            dateReverifier:
+              type: string
+              format: date
+            patientPrendCoumadin:
+              type: string
+              enum:
+                - vide
+                - oui
+                - non
+                - ouiDosageInitial
+                - ouiRecommence
+            butActuel:
+              type: string
+            doseActuel:
+              type: string
+            medicamentActuel:
+              type: string
+            changementDose:
+              type: string
+            notesComplementaires:
+              type: string
+            infoContact:
+              type: string
+    PATCHCalculInrReponse:
+      allOf:
+        - $ref: "#/components/schemas/PATCHClusterReponse"
+        - type: object
+          properties:
+            utilisateurPk:
+              type: number
+            dateInr:
+              type: string
+              format: date
+            dateReverifier:
+              type: string
+              format: date
+            patientPrendCoumadin:
+              type: string
+              enum:
+                - vide
+                - oui
+                - non
+                - ouiDosageInitial
+                - ouiRecommence
+            butActuel:
+              type: string
+            doseActuel:
+              type: string
+            medicamentActuel:
+              type: string
+            changementDose:
+              type: string
+            notesComplementaires:
+              type: string
+            infoContact:
+              type: string
+    GETCalculInrReponse:
+      allOf:
+        - $ref: "#/components/schemas/GETClusterReponse"
+        - type: object
+          properties:
+            utilisateurPk:
+              type: number
+            dateInr:
+              type: string
+              format: date
+            dateReverifier:
+              type: string
+              format: date
+            patientPrendCoumadin:
+              type: string
+              enum:
+                - vide
+                - oui
+                - non
+                - ouiDosageInitial
+                - ouiRecommence
+            butActuel:
+              type: string
+            doseActuel:
+              type: string
+            medicamentActuel:
+              type: string
+            changementDose:
+              type: string
+            notesComplementaires:
+              type: string
+            infoContact:
+              type: string
+    PUTCalculInrRequete:
+      allOf:
+        - $ref: "#/components/schemas/PUTClusterRequete"
+        - type: object
+          properties:
+            utilisateurPk:
+              type: number
+            dateInr:
+              type: string
+              format: date
+            dateReverifier:
+              type: string
+              format: date
+            patientPrendCoumadin:
+              type: string
+              enum:
+                - vide
+                - oui
+                - non
+                - ouiDosageInitial
+                - ouiRecommence
+            butActuel:
+              type: string
+            doseActuel:
+              type: string
+            medicamentActuel:
+              type: string
+            changementDose:
+              type: string
+            notesComplementaires:
+              type: string
+            infoContact:
+              type: string
+    PUTCalculInrReponse:
+      allOf:
+        - $ref: "#/components/schemas/PUTClusterReponse"
+        - type: object
+          properties:
+            utilisateurPk:
+              type: number
+            dateInr:
+              type: string
+              format: date
+            dateReverifier:
+              type: string
+              format: date
+            patientPrendCoumadin:
+              type: string
+              enum:
+                - vide
+                - oui
+                - non
+                - ouiDosageInitial
+                - ouiRecommence
+            butActuel:
+              type: string
+            doseActuel:
+              type: string
+            medicamentActuel:
+              type: string
+            changementDose:
+              type: string
+            notesComplementaires:
+              type: string
+            infoContact:
+              type: string
+    DELETECalculInrReponse:
+      allOf:
+        - $ref: "#/components/schemas/DELETEClusterReponse"
+        - type: object
+          properties:
+            utilisateurPk:
+              type: number
+            dateInr:
+              type: string
+              format: date
+            dateReverifier:
+              type: string
+              format: date
+            patientPrendCoumadin:
+              type: string
+              enum:
+                - vide
+                - oui
+                - non
+                - ouiDosageInitial
+                - ouiRecommence
+            butActuel:
+              type: string
+            doseActuel:
+              type: string
+            medicamentActuel:
+              type: string
+            changementDose:
+              type: string
+            notesComplementaires:
+              type: string
+            infoContact:
+              type: string
+    ErrorResponse:
+      required:
+        - type
+        - code
+      properties:
+        type:
+          type: string
+          enum:
+            - ERROR
+            - WARN
+            - INVALID
+            - FATAL
+          description: >+
+            <br>invalid - Request did not confirm to the specification and was
+            unprocessed & rejected. Please fix the value and try again</br>       
+            <br>warn - Request was partially processed.  E.g. some of the fields
+            are missing in response to the system issues,  request was accepted
+            successfully but will be processed asynchronously</br>                
+            <br>error - The request was accepted but could not be processed
+            successfully</br>            <br>fatal - There was an internal system
+            error while processing the request. These are technical errors and
+            will be resolved by Citi, and the consumer should retry after some
+            time. Business errors will not be categorized as fatal </br>
+        code:
+          type: string
+          description: Error code which qualifies the error. 
+        details:
+          type: string
+          description: Human readable explanation specific to the occurrence of the problem. 
+        location:
+          type: string
+          description: The name of the field that resulted in the error. 
+        moreInfo:
+          type: string
+          description: URI to human readable documentation of the error. 

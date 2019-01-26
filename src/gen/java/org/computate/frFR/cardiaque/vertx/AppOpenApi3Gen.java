@@ -1,134 +1,19 @@
 package org.computate.frFR.cardiaque.vertx;
 
 import java.util.Objects;
-import org.computate.frFR.cardiaque.contexte.SiteContexte;
 import org.computate.frFR.cardiaque.couverture.Couverture;
-import org.computate.frFR.cardiaque.config.ConfigSite;
 import org.computate.frFR.cardiaque.cluster.Cluster;
+import org.computate.frFR.cardiaque.vertx.AppSwagger2;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
 import org.computate.frFR.cardiaque.ecrivain.ToutEcrivain;
 import org.apache.commons.text.StringEscapeUtils;
-import java.lang.Object;
 import org.apache.commons.lang3.StringUtils;
-import java.lang.Exception;
 
 /**	
  * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.vertx.AppOpenApi3&fq=classeEtendGen_indexed_boolean:true">Trouver la classe  dans Solr</a>
  * <br/>
  **/
-public abstract class AppOpenApi3Gen<DEV> extends Object {
-
-	//////////////////
-	// requeteSite_ //
-	//////////////////
-
-	/**	L'entité « requeteSite_ »
-	 *	 is defined as null before being initialized. 
-	 */
-	protected RequeteSite requeteSite_;
-	public Couverture<RequeteSite> requeteSite_Couverture = new Couverture<RequeteSite>().p(this).c(RequeteSite.class).var("requeteSite_").o(requeteSite_);
-
-	/**	<br/>L'entité « requeteSite_ »
-	 *  est défini comme null avant d'être initialisé. 
-	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.vertx.AppOpenApi3&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:requeteSite_">Trouver l'entité requeteSite_ dans Solr</a>
-	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
-	 **/
-	protected abstract void _requeteSite_(Couverture<RequeteSite> o) throws Exception, Exception;
-
-	public RequeteSite getRequeteSite_() {
-		return requeteSite_;
-	}
-
-	public void setRequeteSite_(RequeteSite o) {
-		this.requeteSite_ = o;
-		this.requeteSite_Couverture.dejaInitialise = true;
-	}
-	protected AppOpenApi3 requeteSite_Init()
- throws Exception, Exception {
-		if(!requeteSite_Couverture.dejaInitialise) {
-			_requeteSite_(requeteSite_Couverture);
-			if(requeteSite_ == null)
-				setRequeteSite_(requeteSite_Couverture.o);
-		}
-		requeteSite_Couverture.dejaInitialise(true);
-		return (AppOpenApi3)this;
-	}
-
-	//////////////////
-	// siteContexte //
-	//////////////////
-
-	/**	L'entité « siteContexte »
-	 *	Il est construit avant d'être initialisé avec le constructeur par défaut SiteContexte(). 
-	 */
-	protected SiteContexte siteContexte = new SiteContexte();
-	public Couverture<SiteContexte> siteContexteCouverture = new Couverture<SiteContexte>().p(this).c(SiteContexte.class).var("siteContexte").o(siteContexte);
-
-	/**	<br/>L'entité « siteContexte »
-	 * Il est construit avant d'être initialisé avec le constructeur par défaut SiteContexte(). 
-	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.vertx.AppOpenApi3&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:siteContexte">Trouver l'entité siteContexte dans Solr</a>
-	 * <br/>
-	 * @param siteContexte est l'entité déjà construit. 
-	 **/
-	protected abstract void _siteContexte(SiteContexte o) throws Exception, Exception;
-
-	public SiteContexte getSiteContexte() {
-		return siteContexte;
-	}
-
-	public void setSiteContexte(SiteContexte o) {
-		this.siteContexte = o;
-		this.siteContexteCouverture.dejaInitialise = true;
-	}
-	protected AppOpenApi3 siteContexteInit()
- throws Exception, Exception {
-		if(!siteContexteCouverture.dejaInitialise) {
-			_siteContexte(siteContexte);
-		}
-		siteContexte.initLoinPourClasse(requeteSite_);
-		siteContexteCouverture.dejaInitialise(true);
-		return (AppOpenApi3)this;
-	}
-
-	////////////////
-	// configSite //
-	////////////////
-
-	/**	L'entité « configSite »
-	 *	 is defined as null before being initialized. 
-	 */
-	protected ConfigSite configSite;
-	public Couverture<ConfigSite> configSiteCouverture = new Couverture<ConfigSite>().p(this).c(ConfigSite.class).var("configSite").o(configSite);
-
-	/**	<br/>L'entité « configSite »
-	 *  est défini comme null avant d'être initialisé. 
-	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.vertx.AppOpenApi3&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:configSite">Trouver l'entité configSite dans Solr</a>
-	 * <br/>
-	 * @param o est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
-	 **/
-	protected abstract void _configSite(Couverture<ConfigSite> o) throws Exception, Exception;
-
-	public ConfigSite getConfigSite() {
-		return configSite;
-	}
-
-	public void setConfigSite(ConfigSite o) {
-		this.configSite = o;
-		this.configSiteCouverture.dejaInitialise = true;
-	}
-	protected AppOpenApi3 configSiteInit()
- throws Exception, Exception {
-		if(!configSiteCouverture.dejaInitialise) {
-			_configSite(configSiteCouverture);
-			if(configSite == null)
-				setConfigSite(configSiteCouverture.o);
-		}
-		if(configSite != null)
-			configSite.initLoinPourClasse(requeteSite_);
-		configSiteCouverture.dejaInitialise(true);
-		return (AppOpenApi3)this;
-	}
+public abstract class AppOpenApi3Gen<DEV> extends AppSwagger2 {
 
 	//////////////
 	// initLoin //
@@ -136,8 +21,8 @@ public abstract class AppOpenApi3Gen<DEV> extends Object {
 
 	protected boolean dejaInitialiseAppOpenApi3 = false;
 
-	public AppOpenApi3 initLoinAppOpenApi3(RequeteSite requeteSite) throws Exception {
-		setRequeteSite_(requeteSite);
+	public AppOpenApi3 initLoinAppOpenApi3(RequeteSite requeteSite_) {
+		setRequeteSite_(requeteSite_);
 		if(!dejaInitialiseAppOpenApi3) {
 			dejaInitialiseAppOpenApi3 = true;
 			initLoinAppOpenApi3();
@@ -145,38 +30,35 @@ public abstract class AppOpenApi3Gen<DEV> extends Object {
 		return (AppOpenApi3)this;
 	}
 
-	public void initLoinAppOpenApi3() throws Exception {
+	public void initLoinAppOpenApi3() {
+		super.initLoinAppSwagger2(requeteSite_);
 		initAppOpenApi3();
 	}
 
-	public void initAppOpenApi3() throws Exception {
-		requeteSite_Init();
-		siteContexteInit();
-		configSiteInit();
+	public void initAppOpenApi3() {
 	}
 
-	public void initLoinPourClasse(RequeteSite requeteSite) throws Exception {
-		initLoinAppOpenApi3(requeteSite);
+	@Override public void initLoinPourClasse(RequeteSite requeteSite_) {
+		initLoinAppOpenApi3(requeteSite_);
 	}
 
 	/////////////////
 	// requeteSite //
 	/////////////////
 
-	public void requeteSiteAppOpenApi3(RequeteSite requeteSite) {
-		siteContexte.setRequeteSite_(requeteSite);
-		configSite.setRequeteSite_(requeteSite);
+	public void requeteSiteAppOpenApi3(RequeteSite requeteSite_) {
+			super.requeteSiteAppSwagger2(requeteSite_);
 	}
 
-	public void requeteSitePourClasse(RequeteSite requeteSite) {
-		requeteSiteAppOpenApi3(requeteSite);
+	public void requeteSitePourClasse(RequeteSite requeteSite_) {
+		requeteSiteAppOpenApi3(requeteSite_);
 	}
 
 	/////////////
 	// obtenir //
 	/////////////
 
-	public Object obtenirPourClasse(String var) throws Exception {
+	@Override public Object obtenirPourClasse(String var) throws Exception {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
@@ -192,14 +74,8 @@ public abstract class AppOpenApi3Gen<DEV> extends Object {
 	public Object obtenirAppOpenApi3(String var) throws Exception {
 		AppOpenApi3 oAppOpenApi3 = (AppOpenApi3)this;
 		switch(var) {
-			case "requeteSite_":
-				return oAppOpenApi3.requeteSite_;
-			case "siteContexte":
-				return oAppOpenApi3.siteContexte;
-			case "configSite":
-				return oAppOpenApi3.configSite;
 			default:
-				return null;
+				return super.obtenirAppSwagger2(var);
 		}
 	}
 
@@ -207,7 +83,7 @@ public abstract class AppOpenApi3Gen<DEV> extends Object {
 	// attribuer //
 	///////////////
 
-	public boolean attribuerPourClasse(String var, Object val) {
+	@Override public boolean attribuerPourClasse(String var, Object val) {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		for(String v : vars) {
@@ -224,7 +100,7 @@ public abstract class AppOpenApi3Gen<DEV> extends Object {
 		AppOpenApi3 oAppOpenApi3 = (AppOpenApi3)this;
 		switch(var) {
 			default:
-				return null;
+				return super.attribuerAppSwagger2(var, val);
 		}
 	}
 
@@ -232,7 +108,7 @@ public abstract class AppOpenApi3Gen<DEV> extends Object {
 	// definir //
 	/////////////
 
-	public boolean definirPourClasse(String var, String val) {
+	@Override public boolean definirPourClasse(String var, String val) {
 		String[] vars = StringUtils.split(var, ".");
 		Object o = null;
 		if(val != null) {
@@ -250,7 +126,7 @@ public abstract class AppOpenApi3Gen<DEV> extends Object {
 	public Object definirAppOpenApi3(String var, String val) {
 		switch(var) {
 			default:
-				return null;
+				return super.definirAppSwagger2(var, val);
 		}
 	}
 
@@ -259,7 +135,7 @@ public abstract class AppOpenApi3Gen<DEV> extends Object {
 	//////////////
 
 	@Override public int hashCode() {
-		return Objects.hash();
+		return Objects.hash(super.hashCode());
 	}
 
 	////////////
@@ -272,7 +148,7 @@ public abstract class AppOpenApi3Gen<DEV> extends Object {
 		if(!(o instanceof AppOpenApi3))
 			return false;
 		AppOpenApi3 that = (AppOpenApi3)o;
-		return true;
+		return super.equals(o);
 	}
 
 	//////////////
@@ -281,6 +157,7 @@ public abstract class AppOpenApi3Gen<DEV> extends Object {
 
 	@Override public String toString() {
 		StringBuilder sb = new StringBuilder();
+		sb.append(super.toString() + "\n");
 		sb.append("AppOpenApi3 {");
 		sb.append(" }");
 		return sb.toString();

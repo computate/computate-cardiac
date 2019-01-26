@@ -3,106 +3,71 @@ package org.computate.frFR.cardiaque.ecrivain;
 import java.io.IOException;
 import java.util.List;
 
+import org.computate.frFR.cardiaque.couverture.Couverture;
+import org.computate.frFR.cardiaque.requete.RequeteSite;
+
 
 /**   
  * nomCanonique.enUS: org.computate.enUS.cardiac.writer.AllWriters
  **/
-public class TousEcrivains {    
+public class TousEcrivains extends TousEcrivainsGen<Object> {    
 
-	public static TousEcrivains create(ToutEcrivain...writers) {
+	/**
+	 * {@inheritDoc}
+	 * var.enUS: siteRequest_
+	 **/
+	protected void _requeteSite_(Couverture<RequeteSite> c) {
+	}
+
+	/**
+	 * var.enUS: create
+	 * r: initLoinPourClasse
+	 * r.enUS: initDeepForClass
+	 */
+	public static TousEcrivains creer(RequeteSite requeteSite_, ToutEcrivain...ecrivains) {
 		TousEcrivains o = new TousEcrivains();
-		o.initDeepForClass();
-		o.addStringPrintWriters(writers);
+		o.initLoinPourClasse(requeteSite_);
+		o.addEcrivains(ecrivains);
 		return o;
 	}
 
-	protected void _stringPrintWriters(List<ToutEcrivain> c) {
+	protected void _ecrivains(List<ToutEcrivain> c) {
 	}
 
 	public TousEcrivains t(int nombreTabulations, Object...objets) {
-		for(ToutEcrivain stringPrintWriter : stringPrintWriters) {
+		for(ToutEcrivain stringPrintWriter : ecrivains) {
 			stringPrintWriter.t(nombreTabulations, objets);
 		}
 		return this;
 	}
 	public TousEcrivains tl(int nombreTabulations, Object...objets) {
-		for(ToutEcrivain stringPrintWriter : stringPrintWriters) {
+		for(ToutEcrivain stringPrintWriter : ecrivains) {
 			stringPrintWriter.tl(nombreTabulations, objets);
 		}
 		return this;
 	}
 
 	public TousEcrivains l(Object...objets) {
-		for(ToutEcrivain stringPrintWriter : stringPrintWriters) {
+		for(ToutEcrivain stringPrintWriter : ecrivains) {
 			stringPrintWriter.l(objets);
 		}
 		return this;
 	}
 
 	public TousEcrivains s(Object...objets) { 
-		for(ToutEcrivain stringPrintWriter : stringPrintWriters) {
+		for(ToutEcrivain stringPrintWriter : ecrivains) {
 			stringPrintWriter.s(objets);
 		}
 		return this;
 	}
 
 	public void flushClose() throws IOException {
-		for(ToutEcrivain stringPrintWriter : stringPrintWriters) {
+		for(ToutEcrivain stringPrintWriter : ecrivains) {
 			stringPrintWriter.flushClose();
 		}
 	}
 
 	@Override public String toString() {
-		return stringPrintWriters.get(0).toString();
-	}
-
-	////////////////////////
-	// stringPrintWriters //
-	////////////////////////
-
-	/**	The entity " stringPrintWriters "
-	 *	It is constructed before being initialized with the constructor by default List<StringPrintWriter>(). 
-	 */
-	protected List<ToutEcrivain> stringPrintWriters = new java.util.ArrayList<ToutEcrivain>();
-
-	public List<ToutEcrivain> getStringPrintWriters() {
-		return stringPrintWriters;
-	}
-
-	public void setStringPrintWriters(List<ToutEcrivain> l) {
-		this.stringPrintWriters = l;
-	}
-	public TousEcrivains addStringPrintWriters(ToutEcrivain...objets) {
-		for(ToutEcrivain o : objets) {
-			addStringPrintWriters(o);
-		}
-		return (TousEcrivains)this;
-	}
-	public TousEcrivains addStringPrintWriters(ToutEcrivain o) {
-		if(o != null && !stringPrintWriters.contains(o))
-			this.stringPrintWriters.add(o);
-		return (TousEcrivains)this;
-	}
-	protected TousEcrivains stringPrintWritersInit() {
-		_stringPrintWriters(stringPrintWriters);
-		return (TousEcrivains)this;
-	}
-
-	//////////////
-	// initDeep //
-	//////////////
-
-	protected boolean alreadyInitializedStringPrintWriters = false;
-
-	public TousEcrivains initDeepStringPrintWriters() {
-		if(!alreadyInitializedStringPrintWriters) {
-			alreadyInitializedStringPrintWriters = true;
-			stringPrintWritersInit();
-		}
-		return (TousEcrivains)this;
-	}
-
-	public void initDeepForClass() {
-		initDeepStringPrintWriters();
+		return ecrivains.get(0).toString();
 	}
 }

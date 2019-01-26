@@ -2,6 +2,7 @@ package org.computate.frFR.cardiaque.utilisateur;
 
 import org.computate.frFR.cardiaque.contexte.SiteContexte;
 import io.vertx.codegen.annotations.ProxyGen;
+import io.vertx.ext.web.api.generator.WebApiServiceGen;
 import io.vertx.core.AsyncResult;
 import io.vertx.core.Handler;
 import io.vertx.core.Vertx;
@@ -9,6 +10,7 @@ import io.vertx.core.json.JsonObject;
 import io.vertx.ext.web.api.OperationRequest;
 import io.vertx.ext.web.api.OperationResponse;
 
+@WebApiServiceGen
 @ProxyGen
 public interface UtilisateurSiteGenApiService {
 	// Une méthode d'usine pour créer une instance et un proxy. 

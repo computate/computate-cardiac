@@ -90,27 +90,27 @@ public class Chaine extends ChaineGen<Object> {
 		return o.toString();
 	}
 
-	public Chaine tab(int nombreTabulations, Object...objets) {
+	public Chaine t(int nombreTabulations, Object...objets) {
 		for(int i = 0; i < nombreTabulations; i++)
-			tout("\t");
-		tout(objets);
+			s("\t");
+		s(objets);
 		return this;
 	}
-	public Chaine tabLigne(int nombreTabulations, Object...objets) {
+	public Chaine tl(int nombreTabulations, Object...objets) {
 		for(int i = 0; i < nombreTabulations; i++)
-			tout("\t");
-		tout(objets);
-		tout("\n");
+			s("\t");
+		s(objets);
+		s("\n");
 		return this;
 	}
 
-	public Chaine toutLigne(Object...objets) {
-		tout(objets);
-		tout("\n");
+	public Chaine l(Object...objets) {
+		s(objets);
+		s("\n");
 		return this;
 	}
 
-	public Chaine tout(Object...objets) { 
+	public Chaine s(Object...objets) { 
 		for(Object objet : objets) {
 			if(objet != null) {
 				if(objet instanceof Chaine) {
@@ -208,22 +208,22 @@ public class Chaine extends ChaineGen<Object> {
 
 	public void sousChaineAvant(Chaine o, String separator) {
 		String s = StringUtils.substringBefore(o.s(), separator);
-		tout(s);
+		s(s);
 	}
 
 	public void sousChaineAvantDernier(Chaine o, String separator) {
 		String s = StringUtils.substringBeforeLast(o.s(), separator);
-		tout(s);
+		s(s);
 	}
 
 	public void sousChaineApres(Chaine o, String separator) {
 		String s = StringUtils.substringAfter(o.s(), separator);
-		tout(s);
+		s(s);
 	}
 
 	public void sousChaineApresDernier(Chaine o, String separator) {
 		String s = StringUtils.substringAfterLast(o.s(), separator);
-		tout(s);
+		s(s);
 	}
 	
 	public String[] diviserParCaractèreTypeChameau() {
