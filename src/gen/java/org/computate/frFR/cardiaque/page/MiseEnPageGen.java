@@ -63,38 +63,38 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 	}
 
 	//////////////////
-	// solrDocument //
+	// documentSolr //
 	//////////////////
 
-	/**	L'entité « solrDocument »
+	/**	L'entité « documentSolr »
 	 *	 is defined as null before being initialized. 
 	 */
-	protected SolrDocument solrDocument;
-	public Couverture<SolrDocument> solrDocumentCouverture = new Couverture<SolrDocument>().p(this).c(SolrDocument.class).var("solrDocument").o(solrDocument);
+	protected SolrDocument documentSolr;
+	public Couverture<SolrDocument> documentSolrCouverture = new Couverture<SolrDocument>().p(this).c(SolrDocument.class).var("documentSolr").o(documentSolr);
 
-	/**	<br/>L'entité « solrDocument »
+	/**	<br/>L'entité « documentSolr »
 	 *  est défini comme null avant d'être initialisé. 
-	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.MiseEnPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:solrDocument">Trouver l'entité solrDocument dans Solr</a>
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.MiseEnPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:documentSolr">Trouver l'entité documentSolr dans Solr</a>
 	 * <br/>
 	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _solrDocument(Couverture<SolrDocument> c);
+	protected abstract void _documentSolr(Couverture<SolrDocument> c);
 
-	public SolrDocument getSolrDocument() {
-		return solrDocument;
+	public SolrDocument getDocumentSolr() {
+		return documentSolr;
 	}
 
-	public void setSolrDocument(SolrDocument solrDocument) {
-		this.solrDocument = solrDocument;
-		this.solrDocumentCouverture.dejaInitialise = true;
+	public void setDocumentSolr(SolrDocument documentSolr) {
+		this.documentSolr = documentSolr;
+		this.documentSolrCouverture.dejaInitialise = true;
 	}
-	protected MiseEnPage solrDocumentInit() {
-		if(!solrDocumentCouverture.dejaInitialise) {
-			_solrDocument(solrDocumentCouverture);
-			if(solrDocument == null)
-				setSolrDocument(solrDocumentCouverture.o);
+	protected MiseEnPage documentSolrInit() {
+		if(!documentSolrCouverture.dejaInitialise) {
+			_documentSolr(documentSolrCouverture);
+			if(documentSolr == null)
+				setDocumentSolr(documentSolrCouverture.o);
 		}
-		solrDocumentCouverture.dejaInitialise(true);
+		documentSolrCouverture.dejaInitialise(true);
 		return (MiseEnPage)this;
 	}
 
@@ -1672,7 +1672,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 
 	public void initMiseEnPage() {
 		requeteSite_Init();
-		solrDocumentInit();
+		documentSolrInit();
 		wInit();
 		pageVisibleAuxBotsInit();
 		pageH1Init();
@@ -1740,8 +1740,8 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		switch(var) {
 			case "requeteSite_":
 				return oMiseEnPage.requeteSite_;
-			case "solrDocument":
-				return oMiseEnPage.solrDocument;
+			case "documentSolr":
+				return oMiseEnPage.documentSolr;
 			case "w":
 				return oMiseEnPage.w;
 			case "pageVisibleAuxBots":

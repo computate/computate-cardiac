@@ -376,6 +376,24 @@ public class ApiEcrivain extends ApiEcrivainGen<Object> implements Comparable<Ap
 
 	/**
 	 * {@inheritDoc}
+	 * var.enUS: classApiMediaType200Method
+	 * r: classeApiTypeMedia
+	 * r.enUS: classApiMediaType
+	 * r: Methode
+	 * r.enUS: Method
+	 * r: classeDocumentSolr
+	 * r.enUS: classSolrDocument
+	 * r: classe
+	 * r.enUS: class
+	 * r: frFR
+	 * r.enUS: enUS
+	 **/
+	protected void _classeApiTypeMedia200Methode(Couverture<String> c) {
+		c.o((String)classeDocumentSolr.get("classeApiTypeMedia200" + classeApiMethode + "_stored_string"));
+	}
+
+	/**
+	 * {@inheritDoc}
 	 * var.enUS: classApiOperationIdMethod
 	 * r: Methode
 	 * r.enUS: Method
@@ -903,7 +921,7 @@ public class ApiEcrivain extends ApiEcrivainGen<Object> implements Comparable<Ap
 
 		if(openApiVersionNumero == 2) {
 			wChemins.tl(3, "produces:");
-			wChemins.tl(4, "- application/json");
+			wChemins.tl(4, "- ", classeApiTypeMedia200Methode);
 		}
 
 		if(!wRequeteEnTete.getVide() || "GET".equals(classeApiMethodeMethode) || "DELETE".equals(classeApiMethodeMethode) || "PUT".equals(classeApiMethodeMethode)) {
@@ -924,7 +942,7 @@ public class ApiEcrivain extends ApiEcrivainGen<Object> implements Comparable<Ap
 				wChemins.tl(5, "required: false");
 				wChemins.tl(5, "schema:");
 				wChemins.tl(6, "type: string");
-				wChemins.tl(6, "default: '**:**'");
+				wChemins.tl(6, "default: '*:*'");
 				wChemins.tl(4, "- in: query");
 				wChemins.tl(5, "name: fq");
 				wChemins.tl(5, "description: ''");
@@ -967,7 +985,7 @@ public class ApiEcrivain extends ApiEcrivainGen<Object> implements Comparable<Ap
 		}
 
 		if(openApiVersionNumero > 2) {
-			if(!"GET".equals(classeApiMethodeMethode) && !"DELETE".equals(classeApiMethodeMethode)) {
+			if(!classeApiMethodeMethode.contains("GET") && !classeApiMethodeMethode.contains("DELETE")) {
 				wChemins.tl(3, "requestBody:");
 				String strRequeteDescription = wRequeteDescription.toString();
 				wChemins.t(4, "description: ").yamlStr(5, StringUtils.trim(strRequeteDescription));
@@ -997,7 +1015,7 @@ public class ApiEcrivain extends ApiEcrivainGen<Object> implements Comparable<Ap
 		if(openApiVersionNumero > 2) {
 			String strReponseDescription = wReponseDescription.toString();
 			wChemins.t(5, "description: ").yamlStr(6, strReponseDescription);
-			wChemins.tl(5, "content:").tl(6, "application/json:");
+			wChemins.tl(5, "content:").tl(6, classeApiTypeMedia200Methode, ":");
 		}
 		else {
 	

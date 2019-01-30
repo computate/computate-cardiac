@@ -1453,6 +1453,62 @@ public abstract class ApiEcrivainGen<DEV> extends Object {
 		return classeApiMethodeMethode == null ? "" : StringEscapeUtils.escapeHtml4(strClasseApiMethodeMethode());
 	}
 
+	//////////////////////////////////
+	// classeApiTypeMedia200Methode //
+	//////////////////////////////////
+
+	/**	L'entité « classeApiTypeMedia200Methode »
+	 *	 is defined as null before being initialized. 
+	 */
+	protected String classeApiTypeMedia200Methode;
+	public Couverture<String> classeApiTypeMedia200MethodeCouverture = new Couverture<String>().p(this).c(String.class).var("classeApiTypeMedia200Methode").o(classeApiTypeMedia200Methode);
+
+	/**	<br/>L'entité « classeApiTypeMedia200Methode »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.ecrivain.ApiEcrivain&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:classeApiTypeMedia200Methode">Trouver l'entité classeApiTypeMedia200Methode dans Solr</a>
+	 * <br/>
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
+	protected abstract void _classeApiTypeMedia200Methode(Couverture<String> c);
+
+	public String getClasseApiTypeMedia200Methode() {
+		return classeApiTypeMedia200Methode;
+	}
+
+	public void setClasseApiTypeMedia200Methode(String classeApiTypeMedia200Methode) {
+		this.classeApiTypeMedia200Methode = classeApiTypeMedia200Methode;
+		this.classeApiTypeMedia200MethodeCouverture.dejaInitialise = true;
+	}
+	protected ApiEcrivain classeApiTypeMedia200MethodeInit() {
+		if(!classeApiTypeMedia200MethodeCouverture.dejaInitialise) {
+			_classeApiTypeMedia200Methode(classeApiTypeMedia200MethodeCouverture);
+			if(classeApiTypeMedia200Methode == null)
+				setClasseApiTypeMedia200Methode(classeApiTypeMedia200MethodeCouverture.o);
+		}
+		classeApiTypeMedia200MethodeCouverture.dejaInitialise(true);
+		return (ApiEcrivain)this;
+	}
+
+	public String solrClasseApiTypeMedia200Methode() {
+		return classeApiTypeMedia200Methode;
+	}
+
+	public String strClasseApiTypeMedia200Methode() {
+		return classeApiTypeMedia200Methode == null ? "" : classeApiTypeMedia200Methode;
+	}
+
+	public String nomAffichageClasseApiTypeMedia200Methode() {
+		return null;
+	}
+
+	public String htmTooltipClasseApiTypeMedia200Methode() {
+		return null;
+	}
+
+	public String htmClasseApiTypeMedia200Methode() {
+		return classeApiTypeMedia200Methode == null ? "" : StringEscapeUtils.escapeHtml4(strClasseApiTypeMedia200Methode());
+	}
+
 	/////////////////////////////////
 	// classeApiOperationIdMethode //
 	/////////////////////////////////
@@ -1948,6 +2004,7 @@ public abstract class ApiEcrivainGen<DEV> extends Object {
 		classeCheminAbsoluInit();
 		classeApiUriMethodeInit();
 		classeApiMethodeMethodeInit();
+		classeApiTypeMedia200MethodeInit();
 		classeApiOperationIdMethodeInit();
 		classeApiOperationIdMethodeRequeteInit();
 		classeApiOperationIdMethodeReponseInit();
@@ -2067,6 +2124,8 @@ public abstract class ApiEcrivainGen<DEV> extends Object {
 				return oApiEcrivain.classeApiUriMethode;
 			case "classeApiMethodeMethode":
 				return oApiEcrivain.classeApiMethodeMethode;
+			case "classeApiTypeMedia200Methode":
+				return oApiEcrivain.classeApiTypeMedia200Methode;
 			case "classeApiOperationIdMethode":
 				return oApiEcrivain.classeApiOperationIdMethode;
 			case "classeApiOperationIdMethodeRequete":
@@ -2144,7 +2203,7 @@ public abstract class ApiEcrivainGen<DEV> extends Object {
 	//////////////
 
 	@Override public int hashCode() {
-		return Objects.hash(classeApiMethode, openApiVersion, classeUris, openApiVersionNumero, tabsSchema, tabsReponses, classeApiTag, vertxServiceAddresse, classeEtendBase, classeEstBase, classeNomSimple, classeCheminAbsolu, classeApiUriMethode, classeApiMethodeMethode, classeApiOperationIdMethode, classeApiOperationIdMethodeRequete, classeApiOperationIdMethodeReponse, classeSuperApiOperationIdMethodeRequete, classeSuperApiOperationIdMethodeReponse, classeMotsClesTrouves, classeMotsCles);
+		return Objects.hash(classeApiMethode, openApiVersion, classeUris, openApiVersionNumero, tabsSchema, tabsReponses, classeApiTag, vertxServiceAddresse, classeEtendBase, classeEstBase, classeNomSimple, classeCheminAbsolu, classeApiUriMethode, classeApiMethodeMethode, classeApiTypeMedia200Methode, classeApiOperationIdMethode, classeApiOperationIdMethodeRequete, classeApiOperationIdMethodeReponse, classeSuperApiOperationIdMethodeRequete, classeSuperApiOperationIdMethodeReponse, classeMotsClesTrouves, classeMotsCles);
 	}
 
 	////////////
@@ -2171,6 +2230,7 @@ public abstract class ApiEcrivainGen<DEV> extends Object {
 				&& Objects.equals( classeCheminAbsolu, that.classeCheminAbsolu )
 				&& Objects.equals( classeApiUriMethode, that.classeApiUriMethode )
 				&& Objects.equals( classeApiMethodeMethode, that.classeApiMethodeMethode )
+				&& Objects.equals( classeApiTypeMedia200Methode, that.classeApiTypeMedia200Methode )
 				&& Objects.equals( classeApiOperationIdMethode, that.classeApiOperationIdMethode )
 				&& Objects.equals( classeApiOperationIdMethodeRequete, that.classeApiOperationIdMethodeRequete )
 				&& Objects.equals( classeApiOperationIdMethodeReponse, that.classeApiOperationIdMethodeReponse )
@@ -2201,6 +2261,7 @@ public abstract class ApiEcrivainGen<DEV> extends Object {
 		sb.append( ", classeCheminAbsolu: \"" ).append(classeCheminAbsolu).append( "\"" );
 		sb.append( ", classeApiUriMethode: \"" ).append(classeApiUriMethode).append( "\"" );
 		sb.append( ", classeApiMethodeMethode: \"" ).append(classeApiMethodeMethode).append( "\"" );
+		sb.append( ", classeApiTypeMedia200Methode: \"" ).append(classeApiTypeMedia200Methode).append( "\"" );
 		sb.append( ", classeApiOperationIdMethode: \"" ).append(classeApiOperationIdMethode).append( "\"" );
 		sb.append( ", classeApiOperationIdMethodeRequete: \"" ).append(classeApiOperationIdMethodeRequete).append( "\"" );
 		sb.append( ", classeApiOperationIdMethodeReponse: \"" ).append(classeApiOperationIdMethodeReponse).append( "\"" );

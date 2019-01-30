@@ -326,9 +326,19 @@ public class ToutEcrivain extends ToutEcrivainGen<Object> {
 		s("\"");
 		for(Object objet : objets)
 			if(objet != null)
-				s(StringEscapeUtils.escapeJava(objet.toString()));
+				s(StringUtils.replace(StringUtils.replace(objet.toString(), "\\", "\\\\"), "\"", "\\\""));
 		s("\"");
 		return this;
+	}
+
+	public String q(Object...objets) {
+		StringBuilder o = new StringBuilder();
+		o.append("\"");
+		for(Object objet : objets)
+			if(objet != null)
+				o.append(StringUtils.replace(StringUtils.replace(objet.toString(), "\\", "\\\\"), "\"", "\\\""));
+		o.append("\"");
+		return o.toString();
 	}
 
 	public ToutEcrivain js(Object...objets) {

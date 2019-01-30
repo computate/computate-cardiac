@@ -1,4 +1,4 @@
-package org.computate.frFR.cardiaque.warfarin;   
+package org.computate.frFR.cardiaque.warfarin; 
 
 import java.time.LocalDate;
 
@@ -19,6 +19,13 @@ import org.computate.frFR.cardiaque.couverture.Couverture;
  * apiMethode: GET
  * apiMethode: PUT
  * apiMethode: DELETE
+ * apiMethode: GETPage
+ * apiMotCleGETPage.frFR: page
+ * apiMotCleGETPage.enUS: page
+ * apiUriGETPage.frFR: /calcul-inr
+ * apiUriGETPage.enUS: /inr-entry
+ * apiTypeMedia200GETPage: text/html
+ * pageGETPage: CalculInrPage
  * 
  * val.VAL_patientPrendCoumadinOui.frFR:Yes
  * val.VAL_patientPrendCoumadinNon.frFR:No
@@ -28,7 +35,7 @@ import org.computate.frFR.cardiaque.couverture.Couverture;
  * map.this.Integer: 1
  * apiTag.enUS: InrEntry
  * apiTag.frFR: CalculInr
-*/           
+*/                
 public class CalculInr extends CalculInrGen<Cluster> {  
 
 	/**
@@ -37,7 +44,7 @@ public class CalculInr extends CalculInrGen<Cluster> {
 	 * stocke: true
 	 * attribuer: UtilisateurSite.calculInrPks
 	 * enUS: User primary key. 
-	 */  
+	 */         
 	protected void _utilisateurPk(Couverture<Long> c) {
 	}
 

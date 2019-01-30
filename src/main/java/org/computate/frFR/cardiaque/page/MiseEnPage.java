@@ -15,7 +15,6 @@ import org.apache.solr.common.SolrDocument;
 import org.computate.frFR.cardiaque.chaine.Chaine;
 import org.computate.frFR.cardiaque.couverture.Couverture;
 import org.computate.frFR.cardiaque.ecrivain.ToutEcrivain;
-import org.computate.frFR.cardiaque.page.parti.PageParti;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
 import org.computate.frFR.cardiaque.xml.OutilXml;
 
@@ -24,7 +23,7 @@ import io.vertx.core.http.HttpServerRequest;
 /**
  * nomCanonique.enUS: org.computate.enUS.cardiac.page.PageLayout
  */   
-public class MiseEnPage extends MiseEnPageGen<Object> {
+public class MiseEnPage extends MiseEnPageGen<Object> { 
 
 	/**
 	 * var.enUS: HTML_CLOSED_ELEMENTS
@@ -67,9 +66,9 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 
 	/**
 	 * {@inheritDoc}
-	 * var.enUS: solrDocument
+	 * var.enUS: documentSolr
 	 **/
-	protected void _solrDocument(Couverture<SolrDocument> c) {
+	protected void _documentSolr(Couverture<SolrDocument> c) {
 		
 	}
 
@@ -115,7 +114,7 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 	 * stocke: true
 	 */
 	protected void _pageVisibleAuxBots(Couverture<Boolean> c)  {
-		c.o(BooleanUtils.toBooleanDefaultIfNull((Boolean)solrDocument.get(c.var + "_stored_boolean"), false));
+		c.o(BooleanUtils.toBooleanDefaultIfNull((Boolean)documentSolr.get(c.var + "_stored_boolean"), false));
 	}
 
 	/**
@@ -123,7 +122,7 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 	 * stocke: true
 	 */
 	protected void _pageH1(Couverture<String> c)  {
-		c.o(StringUtils.defaultIfBlank((String)solrDocument.get(c.var + "_stored_string"), null));
+		c.o(StringUtils.defaultIfBlank((String)documentSolr.get(c.var + "_stored_string"), null));
 	}
 
 	/**
@@ -131,21 +130,21 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 	 * stocke: true
 	 */
 	protected void _pageH2(Couverture<String> c)  {
-		c.o(StringUtils.defaultIfBlank((String)solrDocument.get(c.var + "_stored_string"), null));
+		c.o(StringUtils.defaultIfBlank((String)documentSolr.get(c.var + "_stored_string"), null));
 	}
 
 	/**
 	 * var.enUS: _pageH1Short
 	 */
 	protected void _pageH1Court(Couverture<String> c)  {
-		c.o(StringUtils.defaultIfBlank((String)solrDocument.get(c.var + "_stored_string"), pageH1));
+		c.o(StringUtils.defaultIfBlank((String)documentSolr.get(c.var + "_stored_string"), pageH1));
 	}
 
 	/**
 	 * var.enUS: _pageH2Short
 	 */
 	protected void _pageH2Court(Couverture<String> c)  {
-		c.o(StringUtils.defaultIfBlank((String)solrDocument.get(c.var + "_stored_string"), pageH2));
+		c.o(StringUtils.defaultIfBlank((String)documentSolr.get(c.var + "_stored_string"), pageH2));
 	}
 
 	/**
@@ -154,7 +153,7 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 	 * stocke: true
 	 */
 	protected void _pageTitre(Couverture<String> c)  {
-		c.o(StringUtils.defaultIfBlank((String)solrDocument.get(c.var + "_stored_string"), StringUtils.join(pageH1, pageH2)));
+		c.o(StringUtils.defaultIfBlank((String)documentSolr.get(c.var + "_stored_string"), StringUtils.join(pageH1, pageH2)));
 	}
 
 	/**	la version plus courte de l'URL qui commence avec « / » 
@@ -162,7 +161,7 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 		stocke: true
 	 * **/
 	protected void _pageUri(Couverture<String> c)  {
-		c.o(StringUtils.defaultIfBlank((String)solrDocument.get(c.var + "_stored_string"), null));
+		c.o(StringUtils.defaultIfBlank((String)documentSolr.get(c.var + "_stored_string"), null));
 	}
 //
 //	/**
@@ -206,7 +205,7 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 		if(requeteServeur != null) {
 			q = requeteServeur.query();
 		}
-		c.o(StringUtils.defaultIfBlank((String)solrDocument.get(c.var + "_stored_string"), "https://" + requeteSite_.getConfigSite_().getSiteNomHote() + pageUri + (StringUtils.isEmpty(q) ? "" : "?" + q)));
+		c.o(StringUtils.defaultIfBlank((String)documentSolr.get(c.var + "_stored_string"), "https://" + requeteSite_.getConfigSite_().getSiteNomHote() + pageUri + (StringUtils.isEmpty(q) ? "" : "?" + q)));
 	}
 
 	/**
@@ -215,7 +214,7 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 	 * stocke: true
 	 */
 	protected void _pageImageUri(Couverture<String> c)  {
-		c.o(StringUtils.defaultIfBlank((String)solrDocument.get(c.var + "_stored_string"), null));
+		c.o(StringUtils.defaultIfBlank((String)documentSolr.get(c.var + "_stored_string"), null));
 	}
 
 	/**
@@ -230,7 +229,7 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 	 * siteHostName
 	 */
 	protected void _pageImageUrl(Couverture<String> c)  {
-		c.o(StringUtils.defaultIfBlank((String)solrDocument.get(c.var + "_stored_string"), "https://" + requeteSite_.getConfigSite_().getSiteNomHote() + pageImageUri));
+		c.o(StringUtils.defaultIfBlank((String)documentSolr.get(c.var + "_stored_string"), "https://" + requeteSite_.getConfigSite_().getSiteNomHote() + pageImageUri));
 	}
 
 	/**
@@ -245,7 +244,7 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 	 * siteHostName
 	 */
 	protected void _pageVideoId(Couverture<String> c)  {
-		c.o(StringUtils.defaultIfBlank((String)solrDocument.get(c.var + "_stored_string"), null));
+		c.o(StringUtils.defaultIfBlank((String)documentSolr.get(c.var + "_stored_string"), null));
 	}
 
 	/**
@@ -261,7 +260,7 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 	 */
 	protected void _pageVideoUrl(Couverture<String> c)  {
 		if(pageVideoId != null) {
-			c.o(StringUtils.defaultIfBlank((String)solrDocument.get(c.var + "_stored_string"), "https://youtu.be/" + pageVideoId));
+			c.o(StringUtils.defaultIfBlank((String)documentSolr.get(c.var + "_stored_string"), "https://youtu.be/" + pageVideoId));
 		}
 	}
 
@@ -278,7 +277,7 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 	 */
 	protected void _pageVideoUrlEmbed(Couverture<String> c)  {
 		if(pageVideoId != null) {
-			c.o(StringUtils.defaultIfBlank((String)solrDocument.get(c.var + "_stored_string"), "https://www.youtube.com/embed/" + pageVideoId));
+			c.o(StringUtils.defaultIfBlank((String)documentSolr.get(c.var + "_stored_string"), "https://www.youtube.com/embed/" + pageVideoId));
 		}
 	}
 
@@ -289,7 +288,7 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 	 * stocke: true
 	 */
 	protected void _pageImageLargeur(Couverture<Integer> c)  {
-		c.o((Integer)solrDocument.get(c.var + "_stored_int"));
+		c.o((Integer)documentSolr.get(c.var + "_stored_int"));
 	}
 
 	/**
@@ -299,7 +298,7 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 	 * stocke: true
 	 */
 	protected void _pageImageHauteur(Couverture<Integer> c)  {
-		c.o((Integer)solrDocument.get(c.var + "_stored_int"));
+		c.o((Integer)documentSolr.get(c.var + "_stored_int"));
 	}
 
 	/**
@@ -309,7 +308,7 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 	 * stocke: true
 	 */
 	protected void _pageImageTypeContenu(Couverture<String> c)  {
-		c.o(StringUtils.defaultIfBlank((String)solrDocument.get(c.var + "_stored_string"), null));
+		c.o(StringUtils.defaultIfBlank((String)documentSolr.get(c.var + "_stored_string"), null));
 	}
 //
 //	/**
@@ -395,7 +394,7 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 	 * stocke: true
 	 */
 	protected void _pageCree(Couverture<LocalDateTime> c)  {   
-		Date solrVal = (Date)solrDocument.get(c.var + "_stored_date");
+		Date solrVal = (Date)documentSolr.get(c.var + "_stored_date");
 		if(solrVal != null)
 			c.o(solrVal.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
 	}
@@ -406,7 +405,7 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 	 * pageCreated
 	 */
 	protected void _pageModifiee(Couverture<LocalDateTime> c)  {
-		Date solrVal = (Date)solrDocument.get(c.var + "_stored_date");
+		Date solrVal = (Date)documentSolr.get(c.var + "_stored_date");
 		if(solrVal != null)
 			c.o(solrVal.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
 		else

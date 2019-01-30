@@ -20,7 +20,7 @@ paths:
           required: false
           schema:
             type: string
-            default: '**:**'
+            default: '*:*'
         - in: query
           name: fq
           description: ''
@@ -63,7 +63,7 @@ paths:
         '200':
           description: >+
           content:
-            application/json:
+            :
               schema:
                 $ref: '#/components/requestBodies/RechercheClusterReponse'
         '400':
@@ -130,7 +130,7 @@ paths:
         '200':
           description: >+
           content:
-            application/json:
+            :
               schema:
                 $ref: '#/components/requestBodies/POSTClusterReponse'
         '400':
@@ -197,7 +197,7 @@ paths:
         '200':
           description: >+
           content:
-            application/json:
+            :
               schema:
                 $ref: '#/components/requestBodies/PATCHClusterReponse'
         '400':
@@ -265,7 +265,7 @@ paths:
         '200':
           description: >+
           content:
-            application/json:
+            :
               schema:
                 $ref: '#/components/requestBodies/GETClusterReponse'
         '400':
@@ -339,7 +339,7 @@ paths:
         '200':
           description: >+
           content:
-            application/json:
+            :
               schema:
                 $ref: '#/components/requestBodies/PUTClusterReponse'
         '400':
@@ -406,7 +406,7 @@ paths:
         '200':
           description: >+
           content:
-            application/json:
+            :
               schema:
                 $ref: '#/components/requestBodies/DELETEClusterReponse'
         '400':
@@ -470,7 +470,7 @@ paths:
           required: false
           schema:
             type: string
-            default: '**:**'
+            default: '*:*'
         - in: query
           name: fq
           description: ''
@@ -905,6 +905,67 @@ paths:
             application/json:
               schema:
                 $ref: '#/components/requestBodies/ErrorResponse'
+  /calcul-inr:
+    getpage:
+      operationId: getpageCalculInr
+      x-vertx-event-bus: api
+      description: >+
+      summary: >+
+      tags:
+        - CalculInr
+      responses:
+        '200':
+          description: >+
+          content:
+            text/html:
+              schema:
+                $ref: '#/components/requestBodies/GETPageCalculInrReponse'
+        '400':
+          description: >+
+                <table><table><tr><td>Type</td><td>Code</td><td>Details</td></tr><tr><td>error</td><td>invalidRequest</td><td>Missing
+                or invalid Parameters</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '401':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td></tr><tr><td>error</td><td>unAuthorized</td><td>Authorization
+                credentials are missing or invalid</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '403':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td><td>More
+                Info</td></tr><tr><td>error</td><td>accessNotConfigured</td><td>The
+                request operation is not configured to access this
+                resource</td><td>Channel/Country/Business provided in the request is
+                not supported currently</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '404':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td><td>More
+                Info</td></tr><tr><td>error</td><td>resourceNotFound</td><td>The
+                requested resource was not found</td><td>Empty resource/resource not
+                found</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
+        '500':
+          description: >+
+                <table><tr><td>Type</td><td>Code</td><td>Details</td></tr><tr><td>fatal</td><td>serverUnavailable</td><td>The
+                request failed due to an internal error/server
+                unavailability</td></tr></table>
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/requestBodies/ErrorResponse'
 components:
   requestBodies:
     ErrorResponse:
@@ -1002,6 +1063,16 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/DELETECalculInrReponse'
+    GETPageCalculInrRequete:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GETPageCalculInrRequete'
+    GETPageCalculInrReponse:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GETPageCalculInrReponse'
   schemas:
     RechercheClusterReponse:
       allOf:
@@ -1472,6 +1543,72 @@ components:
     DELETECalculInrReponse:
       allOf:
         - $ref: "#/components/schemas/DELETEClusterReponse"
+        - type: object
+          properties:
+            utilisateurPk:
+              type: number
+            dateInr:
+              type: string
+              format: date
+            dateReverifier:
+              type: string
+              format: date
+            patientPrendCoumadin:
+              type: string
+              enum:
+                - vide
+                - oui
+                - non
+                - ouiDosageInitial
+                - ouiRecommence
+            butActuel:
+              type: string
+            doseActuel:
+              type: string
+            medicamentActuel:
+              type: string
+            changementDose:
+              type: string
+            notesComplementaires:
+              type: string
+            infoContact:
+              type: string
+    GETPageCalculInrRequete:
+      allOf:
+        - $ref: "#/components/schemas/"
+        - type: object
+          properties:
+            utilisateurPk:
+              type: number
+            dateInr:
+              type: string
+              format: date
+            dateReverifier:
+              type: string
+              format: date
+            patientPrendCoumadin:
+              type: string
+              enum:
+                - vide
+                - oui
+                - non
+                - ouiDosageInitial
+                - ouiRecommence
+            butActuel:
+              type: string
+            doseActuel:
+              type: string
+            medicamentActuel:
+              type: string
+            changementDose:
+              type: string
+            notesComplementaires:
+              type: string
+            infoContact:
+              type: string
+    GETPageCalculInrReponse:
+      allOf:
+        - $ref: "#/components/schemas/"
         - type: object
           properties:
             utilisateurPk:
