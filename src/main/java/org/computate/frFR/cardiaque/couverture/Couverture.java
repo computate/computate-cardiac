@@ -5,7 +5,7 @@ import java.util.ArrayList;
 
 /**
  * 
- * nomCanonique.enUS: org.computate.enUS.wrap.Wrap
+ * NomCanonique.enUS: org.computate.enUS.wrap.Wrap
  */ 
 public class Couverture<DEV> implements Serializable { 
 	private static final long serialVersionUID = 4171725370071929571L;
@@ -47,12 +47,12 @@ public class Couverture<DEV> implements Serializable {
 	}
 
 	/**
-	 * var.enUS: cChild
+	 * Var.enUS: cChild
 	 */
 	public Class<?> cEnfant;
 
 	/**
-	 * var.enUS: cChild
+	 * Var.enUS: cChild
 	 * r: cEnfant
 	 * r.enUS: cChild
 	 */
@@ -62,12 +62,12 @@ public class Couverture<DEV> implements Serializable {
 	}
 
 	/**
-	 * var.enUS: alreadyInitialized
+	 * Var.enUS: alreadyInitialized
 	 * frFR: Vrai si cette couverture a était déjà initialisée. 
 	 */
 	public Boolean dejaInitialise = false;
 	/**
-	 * var.enUS: alreadyInitialized
+	 * Var.enUS: alreadyInitialized
 	 * r: dejaInitialise
 	 * r.enUS: alreadyInitialized
 	 * frFR: Vrai si cette couverture a était déjà initialisée. 
@@ -78,11 +78,11 @@ public class Couverture<DEV> implements Serializable {
 	}
 
 	/**
-	 * var.enUS: siteRequestObject
+	 * Var.enUS: siteRequestObject
 	 * **/
 	public Object requeteSiteObjet;
 	/**
-	 * var.enUS: siteRequestObject
+	 * Var.enUS: siteRequestObject
 	 * r: requeteSiteObjet
 	 * r.enUS: siteRequestObject
 	 * frFR: Tous les infos importants à propos de la requête actuelle. 
@@ -97,7 +97,7 @@ public class Couverture<DEV> implements Serializable {
 	public ArrayList<String> pageVars = new ArrayList<String>();
 
 	/** 
-	 * var.enUS: pageVarsAdd
+	 * Var.enUS: pageVarsAdd
 	 */
 	public void pageVarsAjouter(String...pageVars) {
 		for(String pageVar : pageVars)

@@ -1,5 +1,6 @@
 package org.computate.frFR.cardiaque.cluster;
 
+import org.computate.frFR.cardiaque.ecrivain.ToutEcrivain;
 import org.computate.frFR.cardiaque.recherche.ResultatRecherche;
 import java.util.Arrays;
 import org.computate.frFR.cardiaque.recherche.ListeRecherche;
@@ -82,76 +83,137 @@ public class ClusterGenApiServiceImpl implements ClusterGenApiService {
 
 	@Override
 	public void rechercheCluster(OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
-		try {
-			RequeteSite requeteSite = genererRequeteSitePourCluster(siteContexte, operationRequete);
-			Future<OperationResponse> etapesFutures = rechercheCluster(requeteSite).compose(listeCluster -> 
-				jsonRechercheCluster(listeCluster)
-			);
-			etapesFutures.setHandler(gestionnaireEvenements);
-		} catch(Exception e) {
-			gestionnaireEvenements.handle(Future.failedFuture(e));
-		}
+		RequeteSite requeteSite = genererRequeteSitePourCluster(siteContexte, operationRequete);
+		Future<OperationResponse> etapesFutures = rechercheCluster(requeteSite).compose(listeCluster -> 
+			reponse200RechercheCluster(listeCluster)
+		);
+		etapesFutures.setHandler(gestionnaireEvenements);
 	}
 
 	public Future<ListeRecherche<Cluster>> rechercheCluster(RequeteSite requeteSite) {
-		String entiteVar = null;
-		String valeurIndexe = null;
-		String varIndexe = null;
-		String valeurTri = null;
-		Integer rechercheDebut = null;
-		Integer rechercheNum = null;
+		OperationRequest operationRequete = requeteSite.getOperationRequete();
+		String entiteListeStr = requeteSite.getOperationRequete().getParams().getJsonObject("query").getString("fl");
+		String[] entiteListe = entiteListeStr == null ? null : entiteListeStr.split(",\\s*");
 		ListeRecherche<Cluster> listeRecherche = new ListeRecherche<Cluster>();
 		listeRecherche.setQuery("*:*");
 		listeRecherche.setRows(1000000);
+		if(entiteListe != null)
+			listeRecherche.setFields(entiteListe);
 		listeRecherche.addSort("partNumero_indexed_int", ORDER.asc);
-		List<NameValuePair> pairesNomValeur = URLEncodedUtils.parse(requeteSite.getRequeteServeur().query(), Charset.forName("UTF-8"));
-		for(NameValuePair paireNomValeur : pairesNomValeur) {
-			String paireNom = paireNomValeur.getName();
-			String paireValeur = paireNomValeur.getValue();
-			try {
-				switch(paireNom) {
+		operationRequete.getParams().getJsonObject("query").forEach(paramRequete -> {
+			String entiteVar = null;
+			String valeurIndexe = null;
+			String varIndexe = null;
+			String valeurTri = null;
+			Integer rechercheDebut = null;
+			Integer rechercheNum = null;
+			String paramNom = paramRequete.getKey();
+			Object paramValeursObjet = paramRequete.getValue();
+			JsonArray paramObjets = paramValeursObjet instanceof JsonArray ? (JsonArray)paramValeursObjet : new JsonArray().add(paramValeursObjet);
+
+			for(Object paramObjet : paramObjets) {
+				switch(paramNom) {
 					case "q":
-						entiteVar = StringUtils.trim(StringUtils.substringBefore(paireValeur, ":"));
-						valeurIndexe = StringUtils.trim(StringUtils.substringAfter(paireValeur, ":"));
-						varIndexe = varIndexeCluster(entiteVar);
-						listeRecherche.setQuery(varIndexe + ":" + ClientUtils.escapeQueryChars(valeurIndexe));
+						entiteVar = StringUtils.trim(StringUtils.substringBefore((String)paramObjet, ":"));
+						valeurIndexe = StringUtils.trim(StringUtils.substringAfter((String)paramObjet, ":"));
+						varIndexe = "*".equals(entiteVar) ? entiteVar : varIndexeCluster(entiteVar);
+						listeRecherche.setQuery(varIndexe + ":" + ("*".equals(valeurIndexe) ? valeurIndexe : ClientUtils.escapeQueryChars(valeurIndexe)));
 						break;
 					case "fq":
-						entiteVar = StringUtils.trim(StringUtils.substringBefore(paireValeur, ":"));
-						valeurIndexe = StringUtils.trim(StringUtils.substringAfter(paireValeur, ":"));
+						entiteVar = StringUtils.trim(StringUtils.substringBefore((String)paramObjet, ":"));
+						valeurIndexe = StringUtils.trim(StringUtils.substringAfter((String)paramObjet, ":"));
 						varIndexe = varIndexeCluster(entiteVar);
 						listeRecherche.addFilterQuery(varIndexe + ":" + ClientUtils.escapeQueryChars(valeurIndexe));
 						break;
 					case "sort":
-						entiteVar = StringUtils.trim(StringUtils.substringBefore(paireValeur, " "));
-						valeurTri = StringUtils.trim(StringUtils.substringAfter(paireValeur, " "));
+						entiteVar = StringUtils.trim(StringUtils.substringBefore((String)paramObjet, " "));
+						valeurTri = StringUtils.trim(StringUtils.substringAfter((String)paramObjet, " "));
 						varIndexe = varIndexeCluster(entiteVar);
 						listeRecherche.addSort(varIndexe, ORDER.valueOf(valeurTri));
 						break;
 					case "fl":
-						entiteVar = StringUtils.trim(paireValeur);
+						entiteVar = StringUtils.trim((String)paramObjet);
 						varIndexe = varIndexeCluster(entiteVar);
 						listeRecherche.addField(varIndexe);
 						break;
 					case "start":
-						rechercheDebut = Integer.parseInt(paireValeur);
+						rechercheDebut = (Integer)paramObjet;
 						listeRecherche.setStart(rechercheDebut);
 						break;
 					case "rows":
-						rechercheNum = Integer.parseInt(paireValeur);
+						rechercheNum = (Integer)paramObjet;
 						listeRecherche.setRows(rechercheNum);
 						break;
 				}
-			} catch(Exception e) {
-				return Future.failedFuture(e);
 			}
-		}
+		});
 		listeRecherche.initLoinPourClasse(requeteSite);
 		return Future.succeededFuture(listeRecherche);
 	}
 
-	public Future<OperationResponse> jsonRechercheCluster(ListeRecherche<Cluster> listeCluster) {
+	public Future<OperationResponse> reponse200RechercheCluster(ListeRecherche<Cluster> listeCluster) {
 		Buffer buffer = Buffer.buffer();
+		RequeteSite requeteSite = listeCluster.getRequeteSite_();
+		ToutEcrivain w = ToutEcrivain.creer(listeCluster.getRequeteSite_(), buffer);
+		QueryResponse reponseRecherche = listeCluster.getQueryResponse();
+		SolrDocumentList documentsSolr = listeCluster.getSolrDocumentList();
+		Long millisRecherche = Long.valueOf(reponseRecherche.getQTime());
+		Long millisTransmission = reponseRecherche.getElapsedTime();
+		Long numCommence = reponseRecherche.getResults().getStart();
+		Long numTrouve = reponseRecherche.getResults().getNumFound();
+		Integer numRetourne = reponseRecherche.getResults().size();
+		String tempsRecherche = String.format("%d.%03d sec", TimeUnit.MILLISECONDS.toSeconds(millisRecherche), TimeUnit.MILLISECONDS.toMillis(millisRecherche) - TimeUnit.SECONDS.toMillis(TimeUnit.MILLISECONDS.toSeconds(millisRecherche)));
+		String tempsTransmission = String.format("%d.%03d sec", TimeUnit.MILLISECONDS.toSeconds(millisTransmission), TimeUnit.MILLISECONDS.toMillis(millisTransmission) - TimeUnit.SECONDS.toSeconds(TimeUnit.MILLISECONDS.toSeconds(millisTransmission)));
+		Exception exceptionRecherche = reponseRecherche.getException();
+
+		w.l("{");
+		w.tl(1, "\"numCommence\": ", numCommence);
+		w.tl(1, ", \"numTrouve\": ", numTrouve);
+		w.tl(1, ", \"numRetourne\": ", numRetourne);
+		w.tl(1, ", \"tempsRecherche\": ", w.q(tempsRecherche));
+		w.tl(1, ", \"tempsTransmission\": ", w.q(tempsTransmission));
+		w.tl(1, ", \"liste\": [");
+		for(int i = 0; i < documentsSolr.size(); i++) {
+			SolrDocument documentSolr = documentsSolr.get(i);
+			Object entiteValeur;
+			Integer entiteNumero = 0;
+
+			w.t(2);
+			if(i > 0)
+				w.s(", ");
+			w.s("{");
+
+			entiteValeur = documentSolr.getFieldValues("pk_stored_long").stream().findFirst().orElse(null);
+			if(entiteValeur != null)
+				w.l(entiteNumero++ == 0 ? "" : ", ", "\"pk\": ", entiteValeur);
+
+			entiteValeur = documentSolr.getFieldValues("cree_stored_date").stream().findFirst().orElse(null);
+			if(entiteValeur != null)
+				w.l(entiteNumero++ == 0 ? "" : ", ", "\"cree\": ", w.q(entiteValeur));
+
+			entiteValeur = documentSolr.getFieldValues("modifie_stored_date").stream().findFirst().orElse(null);
+			if(entiteValeur != null)
+				w.l(entiteNumero++ == 0 ? "" : ", ", "\"modifie\": ", w.q(entiteValeur));
+
+			entiteValeur = documentSolr.getFieldValues("utilisateurId_stored_string").stream().findFirst().orElse(null);
+			if(entiteValeur != null)
+				w.l(entiteNumero++ == 0 ? "" : ", ", "\"utilisateurId\": ", w.q(entiteValeur));
+
+			entiteValeur = documentSolr.getFieldValues("clusterNomCanonique_stored_string").stream().findFirst().orElse(null);
+			if(entiteValeur != null)
+				w.l(entiteNumero++ == 0 ? "" : ", ", "\"clusterNomCanonique\": ", w.q(entiteValeur));
+
+			entiteValeur = documentSolr.getFieldValues("clusterNomSimple_stored_string").stream().findFirst().orElse(null);
+			if(entiteValeur != null)
+				w.l(entiteNumero++ == 0 ? "" : ", ", "\"clusterNomSimple\": ", w.q(entiteValeur));
+
+			w.tl(2, "}");
+		}
+		w.tl(1, "]");
+		if(exceptionRecherche != null) {
+			w.tl(1, ", \"exceptionRecherche\": ", w.q(exceptionRecherche.getMessage()));
+		}
+		w.l("}");
 		return Future.succeededFuture(OperationResponse.completedWithJson(buffer));
 	}
 
@@ -159,25 +221,21 @@ public class ClusterGenApiServiceImpl implements ClusterGenApiService {
 
 	@Override
 	public void postCluster(JsonObject document, OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
-		try {
-			RequeteSite requeteSite = genererRequeteSitePourCluster(siteContexte, operationRequete);
-			Future<OperationResponse> etapesFutures = sqlCluster(requeteSite).compose(a -> 
-				creerPOSTCluster(requeteSite).compose(cluster -> 
-					sqlPOSTCluster(cluster).compose(c -> 
-						definirCluster(cluster).compose(d -> 
-							attribuerCluster(cluster).compose(e -> 
-								indexerCluster(cluster).compose(f -> 
-									jsonPOSTCluster(cluster)
-								)
+		RequeteSite requeteSite = genererRequeteSitePourCluster(siteContexte, operationRequete);
+		Future<OperationResponse> etapesFutures = sqlCluster(requeteSite).compose(a -> 
+			creerPOSTCluster(requeteSite).compose(cluster -> 
+				sqlPOSTCluster(cluster).compose(c -> 
+					definirCluster(cluster).compose(d -> 
+						attribuerCluster(cluster).compose(e -> 
+							indexerCluster(cluster).compose(f -> 
+								reponse200POSTCluster(cluster)
 							)
 						)
 					)
 				)
-			);
-			etapesFutures.setHandler(gestionnaireEvenements);
-		} catch(Exception e) {
-			gestionnaireEvenements.handle(Future.failedFuture(e));
-		}
+			)
+		);
+		etapesFutures.setHandler(gestionnaireEvenements);
 	}
 
 	public Future<Cluster> creerPOSTCluster(RequeteSite requeteSite) {
@@ -256,9 +314,10 @@ public class ClusterGenApiServiceImpl implements ClusterGenApiService {
 		return future;
 	}
 
-	public Future<OperationResponse> jsonPOSTCluster(Cluster o) {
+	public Future<OperationResponse> reponse200POSTCluster(Cluster o) {
 		Buffer buffer = Buffer.buffer();
 		RequeteSite requeteSite = o.getRequeteSite_();
+		ToutEcrivain w = ToutEcrivain.creer(o.getRequeteSite_(), buffer);
 		return Future.succeededFuture(OperationResponse.completedWithJson(buffer));
 	}
 
@@ -266,17 +325,13 @@ public class ClusterGenApiServiceImpl implements ClusterGenApiService {
 
 	@Override
 	public void patchCluster(JsonObject document, OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
-		try {
-			RequeteSite requeteSite = genererRequeteSitePourCluster(siteContexte, operationRequete);
-			Future<OperationResponse> etapesFutures = sqlCluster(requeteSite).compose(a -> 
-				rechercheCluster(requeteSite).compose(listeCluster-> 
-					listePATCHCluster(listeCluster)
-				)
-			);
-			etapesFutures.setHandler(gestionnaireEvenements);
-		} catch(Exception e) {
-			gestionnaireEvenements.handle(Future.failedFuture(e));
-		}
+		RequeteSite requeteSite = genererRequeteSitePourCluster(siteContexte, operationRequete);
+		Future<OperationResponse> etapesFutures = sqlCluster(requeteSite).compose(a -> 
+			rechercheCluster(requeteSite).compose(listeCluster-> 
+				listePATCHCluster(listeCluster)
+			)
+		);
+		etapesFutures.setHandler(gestionnaireEvenements);
 	}
 
 	public Future<OperationResponse> listePATCHCluster(ListeRecherche<Cluster> listeCluster) {
@@ -289,7 +344,7 @@ public class ClusterGenApiServiceImpl implements ClusterGenApiService {
 			);
 		});
 		Future<OperationResponse> future = CompositeFuture.all(futures).compose( a -> 
-			jsonPATCHCluster(listeCluster)
+			reponse200PATCHCluster(listeCluster)
 		);
 		return future;
 	}
@@ -351,8 +406,9 @@ public class ClusterGenApiServiceImpl implements ClusterGenApiService {
 		return future;
 	}
 
-	public Future<OperationResponse> jsonPATCHCluster(ListeRecherche<Cluster> listeCluster) {
+	public Future<OperationResponse> reponse200PATCHCluster(ListeRecherche<Cluster> listeCluster) {
 		Buffer buffer = Buffer.buffer();
+		ToutEcrivain w = ToutEcrivain.creer(listeCluster.getRequeteSite_(), buffer);
 		return Future.succeededFuture(OperationResponse.completedWithJson(buffer));
 	}
 
@@ -360,166 +416,51 @@ public class ClusterGenApiServiceImpl implements ClusterGenApiService {
 
 	@Override
 	public void getCluster(OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
-		try {
-			RequeteSite requeteSite = genererRequeteSitePourCluster(siteContexte, operationRequete);
-			Future<OperationResponse> etapesFutures = rechercheCluster(requeteSite).compose(listeCluster -> 
-				jsonGETCluster(listeCluster)
-			);
-			etapesFutures.setHandler(gestionnaireEvenements);
-		} catch(Exception e) {
-			gestionnaireEvenements.handle(Future.failedFuture(e));
-		}
+		RequeteSite requeteSite = genererRequeteSitePourCluster(siteContexte, operationRequete);
+		Future<OperationResponse> etapesFutures = rechercheCluster(requeteSite).compose(listeCluster -> 
+			reponse200GETCluster(listeCluster)
+		);
+		etapesFutures.setHandler(gestionnaireEvenements);
 	}
 
-	public void genererGetDebutCluster(RequeteSite requeteSite) {
-		HttpServerResponse reponseServeur = requeteSite.getReponseServeur();
-		QueryResponse reponseRecherche = requeteSite.getReponseRecherche();
-		reponseServeur.write("{\n");
-		Long millisRecherche = Long.valueOf(reponseRecherche.getQTime());
-		Long millisTransmission = reponseRecherche.getElapsedTime();
-		Long numCommence = reponseRecherche.getResults().getStart();
-		Long numTrouve = reponseRecherche.getResults().getNumFound();
-		Integer numRetourne = reponseRecherche.getResults().size();
-		String tempsRecherche = String.format("%d.%03d sec", TimeUnit.MILLISECONDS.toSeconds(millisRecherche), TimeUnit.MILLISECONDS.toMillis(millisRecherche) - TimeUnit.SECONDS.toMillis(TimeUnit.MILLISECONDS.toSeconds(millisRecherche)));
-		String tempsTransmission = String.format("%d.%03d sec", TimeUnit.MILLISECONDS.toSeconds(millisTransmission), TimeUnit.MILLISECONDS.toMillis(millisTransmission) - TimeUnit.SECONDS.toSeconds(TimeUnit.MILLISECONDS.toSeconds(millisTransmission)));
-		Exception exceptionRecherche = reponseRecherche.getException();
-
-		reponseServeur.write("\t\"numCommence\": ");
-		reponseServeur.write(numCommence.toString());
-
-		reponseServeur.write(",\n\t\"numTrouve\": ");
-		reponseServeur.write(numTrouve.toString());
-
-		reponseServeur.write(",\n\t\"numRetourne\": ");
-		reponseServeur.write(numRetourne.toString());
-
-		reponseServeur.write(",\n\t\"tempsRecherche\": \"");
-		reponseServeur.write(tempsRecherche);
-		reponseServeur.write("\"");
-
-		reponseServeur.write(",\n\t\"tempsTransmission\": \"");
-		reponseServeur.write(tempsTransmission);
-		reponseServeur.write("\"");
-
-		if(exceptionRecherche != null) {
-			reponseServeur.write(",\n\t\"exceptionRecherche\": \"");
-			reponseServeur.write(exceptionRecherche.getMessage());
-			reponseServeur.write("\"");
-		}
-
-		reponseServeur.write(",\n\t\"resultats\": [\n");
-	}
-
-	public void genererGetIndividuelCluster(ResultatRecherche resultatRecherche) throws Exception {
-		RequeteSite requeteSite = resultatRecherche.getRequeteSite_();
-		SolrDocument documentSolr = resultatRecherche.getDocumentSolr();
-		Long resultatIndice = resultatRecherche.getResultatIndice();
-		HttpServerResponse reponseServeur = requeteSite.getReponseServeur();
-		reponseServeur.write("\t\t");
-		if(resultatIndice > 0)
-			reponseServeur.write(", ");
-		reponseServeur.write("{\n");
-		Collection<String> champNoms = documentSolr.getFieldNames();
-		Integer j = 0;
-		for(String champNomStocke : champNoms) {
-			Collection<Object> champValeurs = documentSolr.getFieldValues(champNomStocke);
-			j = genererGetCluster(j, resultatRecherche, champNomStocke, champValeurs);
-		}
-		reponseServeur.write("\t\t}\n");
-	}
-
-	public Integer genererGetCluster(Integer j, ResultatRecherche resultatRecherche, String entiteVarStocke, Collection<Object> champValeurs) throws Exception {
-		RequeteSite requeteSite = resultatRecherche.getRequeteSite_();
-		HttpServerResponse reponseServeur = requeteSite.getReponseServeur();
-		if(!champValeurs.isEmpty()) {
-			Object champValeur = champValeurs.iterator().next();
-			if(champValeur != null) {
-				if("pk".equals(entiteVarStocke)) {
-					if(j > 0)
-						reponseServeur.write(", ");
-					reponseServeur.write("\"pk\": ");
-					reponseServeur.write(((Long)champValeur).toString());
-					reponseServeur.write("\n");
-					j++;
-					return j;
-				}
-				if("cree".equals(entiteVarStocke)) {
-					if(j > 0)
-						reponseServeur.write(", ");
-					reponseServeur.write("\"cree\": \"");
-					reponseServeur.write(DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(((Date)champValeur).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()));
-					reponseServeur.write("\"\n");
-					j++;
-					return j;
-				}
-				if("modifie".equals(entiteVarStocke)) {
-					if(j > 0)
-						reponseServeur.write(", ");
-					reponseServeur.write("\"modifie\": \"");
-					reponseServeur.write(DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(((Date)champValeur).toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime()));
-					reponseServeur.write("\"\n");
-					j++;
-					return j;
-				}
-				if("utilisateurId".equals(entiteVarStocke)) {
-					if(j > 0)
-						reponseServeur.write(", ");
-					reponseServeur.write("\"utilisateurId\": \"");
-					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
-					reponseServeur.write("\"\n");
-					j++;
-					return j;
-				}
-				if("clusterNomCanonique".equals(entiteVarStocke)) {
-					if(j > 0)
-						reponseServeur.write(", ");
-					reponseServeur.write("\"clusterNomCanonique\": \"");
-					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
-					reponseServeur.write("\"\n");
-					j++;
-					return j;
-				}
-				if("clusterNomSimple".equals(entiteVarStocke)) {
-					if(j > 0)
-						reponseServeur.write(", ");
-					reponseServeur.write("\"clusterNomSimple\": \"");
-					reponseServeur.write(Json.encode((String)champValeurs.iterator().next()));
-					reponseServeur.write("\"\n");
-					j++;
-					return j;
-				}
-			}
-		}
-		return j;
-	}
-
-	public void genererGetFinCluster(RequeteSite requeteSite) {
-		HttpServerResponse reponseServeur = requeteSite.getReponseServeur();
-		reponseServeur.write("\t]\n");
-		reponseServeur.write("}\n");
-	}
-
-	public String varIndexeCluster(String entiteVar) throws Exception {
-		switch(entiteVar) {
-			case "pk":
-				return "pk_indexed_long";
-			case "cree":
-				return "cree_indexed_date";
-			case "modifie":
-				return "modifie_indexed_date";
-			case "utilisateurId":
-				return "utilisateurId_indexed_string";
-			case "clusterNomCanonique":
-				return "clusterNomCanonique_indexed_string";
-			case "clusterNomSimple":
-				return "clusterNomSimple_indexed_string";
-			default:
-				throw new Exception(String.format("\"%s\" n'est pas une entité indexé. ", entiteVar));
-		}
-	}
-
-	public Future<OperationResponse> jsonGETCluster(ListeRecherche<Cluster> listeCluster) {
+	public Future<OperationResponse> reponse200GETCluster(ListeRecherche<Cluster> listeCluster) {
 		Buffer buffer = Buffer.buffer();
+		ToutEcrivain w = ToutEcrivain.creer(listeCluster.getRequeteSite_(), buffer);
+		SolrDocumentList documentsSolr = listeCluster.getSolrDocumentList();
+
+		if(documentsSolr.size() > 0) {
+			SolrDocument documentSolr = documentsSolr.get(0);
+			Object entiteValeur;
+			Integer entiteNumero = 0;
+
+			w.l("{");
+
+			entiteValeur = documentSolr.getFieldValues("pk_stored_long").stream().findFirst().orElse(null);
+			if(entiteValeur != null)
+				w.l(entiteNumero++ == 0 ? "" : ", ", "\"pk\": ", entiteValeur);
+
+			entiteValeur = documentSolr.getFieldValues("cree_stored_date").stream().findFirst().orElse(null);
+			if(entiteValeur != null)
+				w.l(entiteNumero++ == 0 ? "" : ", ", "\"cree\": ", w.q(entiteValeur));
+
+			entiteValeur = documentSolr.getFieldValues("modifie_stored_date").stream().findFirst().orElse(null);
+			if(entiteValeur != null)
+				w.l(entiteNumero++ == 0 ? "" : ", ", "\"modifie\": ", w.q(entiteValeur));
+
+			entiteValeur = documentSolr.getFieldValues("utilisateurId_stored_string").stream().findFirst().orElse(null);
+			if(entiteValeur != null)
+				w.l(entiteNumero++ == 0 ? "" : ", ", "\"utilisateurId\": ", w.q(entiteValeur));
+
+			entiteValeur = documentSolr.getFieldValues("clusterNomCanonique_stored_string").stream().findFirst().orElse(null);
+			if(entiteValeur != null)
+				w.l(entiteNumero++ == 0 ? "" : ", ", "\"clusterNomCanonique\": ", w.q(entiteValeur));
+
+			entiteValeur = documentSolr.getFieldValues("clusterNomSimple_stored_string").stream().findFirst().orElse(null);
+			if(entiteValeur != null)
+				w.l(entiteNumero++ == 0 ? "" : ", ", "\"clusterNomSimple\": ", w.q(entiteValeur));
+
+			w.l("}");
+		}
 		return Future.succeededFuture(OperationResponse.completedWithJson(buffer));
 	}
 
@@ -527,25 +468,21 @@ public class ClusterGenApiServiceImpl implements ClusterGenApiService {
 
 	@Override
 	public void putCluster(JsonObject document, OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
-		try {
-			RequeteSite requeteSite = genererRequeteSitePourCluster(siteContexte, operationRequete);
-			Future<OperationResponse> etapesFutures = sqlCluster(requeteSite).compose(a -> 
-				remplacerPUTCluster(requeteSite).compose(cluster -> 
-					sqlPUTCluster(cluster).compose(c -> 
-						definirCluster(cluster).compose(d -> 
-							attribuerCluster(cluster).compose(e -> 
-								indexerCluster(cluster).compose(f -> 
-									jsonPUTCluster(cluster)
-								)
+		RequeteSite requeteSite = genererRequeteSitePourCluster(siteContexte, operationRequete);
+		Future<OperationResponse> etapesFutures = sqlCluster(requeteSite).compose(a -> 
+			remplacerPUTCluster(requeteSite).compose(cluster -> 
+				sqlPUTCluster(cluster).compose(c -> 
+					definirCluster(cluster).compose(d -> 
+						attribuerCluster(cluster).compose(e -> 
+						indexerCluster(cluster).compose(f -> 
+							reponse200PUTCluster(cluster)
 							)
 						)
 					)
 				)
-			);
-			etapesFutures.setHandler(gestionnaireEvenements);
-		} catch(Exception e) {
-			gestionnaireEvenements.handle(Future.failedFuture(e));
-		}
+			)
+		);
+		etapesFutures.setHandler(gestionnaireEvenements);
 	}
 
 	public Future<Cluster> remplacerPUTCluster(RequeteSite requeteSite) {
@@ -623,9 +560,10 @@ public class ClusterGenApiServiceImpl implements ClusterGenApiService {
 		return future;
 	}
 
-	public Future<OperationResponse> jsonPUTCluster(Cluster o) {
+	public Future<OperationResponse> reponse200PUTCluster(Cluster o) {
 		Buffer buffer = Buffer.buffer();
 		RequeteSite requeteSite = o.getRequeteSite_();
+		ToutEcrivain w = ToutEcrivain.creer(o.getRequeteSite_(), buffer);
 		return Future.succeededFuture(OperationResponse.completedWithJson(buffer));
 	}
 
@@ -633,19 +571,15 @@ public class ClusterGenApiServiceImpl implements ClusterGenApiService {
 
 	@Override
 	public void deleteCluster(OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
-		try {
-			RequeteSite requeteSite = genererRequeteSitePourCluster(siteContexte, operationRequete);
-			Future<OperationResponse> etapesFutures = sqlCluster(requeteSite).compose(a -> 
-				rechercheCluster(requeteSite).compose(cluster -> 
-					supprimerDELETECluster(requeteSite).compose(c -> 
-						jsonDELETECluster()
-					)
+		RequeteSite requeteSite = genererRequeteSitePourCluster(siteContexte, operationRequete);
+		Future<OperationResponse> etapesFutures = sqlCluster(requeteSite).compose(a -> 
+			rechercheCluster(requeteSite).compose(cluster -> 
+				supprimerDELETECluster(requeteSite).compose(c -> 
+					reponse200DELETECluster(requeteSite)
 				)
-			);
-			etapesFutures.setHandler(gestionnaireEvenements);
-		} catch(Exception e) {
-			gestionnaireEvenements.handle(Future.failedFuture(e));
-		}
+			)
+		);
+		etapesFutures.setHandler(gestionnaireEvenements);
 	}
 
 	public Future<Void> supprimerDELETECluster(RequeteSite requeteSite) {
@@ -664,9 +598,29 @@ public class ClusterGenApiServiceImpl implements ClusterGenApiService {
 		return future;
 	}
 
-	public Future<OperationResponse> jsonDELETECluster() {
+	public Future<OperationResponse> reponse200DELETECluster(RequeteSite requeteSite) {
 		Buffer buffer = Buffer.buffer();
+		ToutEcrivain w = ToutEcrivain.creer(requeteSite, buffer);
 		return Future.succeededFuture(OperationResponse.completedWithJson(buffer));
+	}
+
+	public String varIndexeCluster(String entiteVar) {
+		switch(entiteVar) {
+			case "pk":
+				return "pk_indexed_long";
+			case "cree":
+				return "cree_indexed_date";
+			case "modifie":
+				return "modifie_indexed_date";
+			case "utilisateurId":
+				return "utilisateurId_indexed_string";
+			case "clusterNomCanonique":
+				return "clusterNomCanonique_indexed_string";
+			case "clusterNomSimple":
+				return "clusterNomSimple_indexed_string";
+			default:
+				throw new RuntimeException(String.format("\"%s\" n'est pas une entité indexé. ", entiteVar));
+		}
 	}
 
 	public Future<Void> sqlCluster(RequeteSite requeteSite) {
@@ -684,7 +638,7 @@ public class ClusterGenApiServiceImpl implements ClusterGenApiService {
 
 	// Partagé //
 
-	public RequeteSite genererRequeteSitePourCluster(SiteContexte siteContexte, OperationRequest operationRequete) throws Exception {
+	public RequeteSite genererRequeteSitePourCluster(SiteContexte siteContexte, OperationRequest operationRequete) {
 		Vertx vertx = siteContexte.getVertx();
 		RequeteSite requeteSite = new RequeteSite();
 		requeteSite.setVertx(vertx);

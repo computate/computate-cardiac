@@ -1,5 +1,6 @@
 package org.computate.frFR.cardiaque.utilisateur;
 
+import org.computate.frFR.cardiaque.ecrivain.ToutEcrivain;
 import org.computate.frFR.cardiaque.recherche.ResultatRecherche;
 import java.util.Arrays;
 import org.computate.frFR.cardiaque.recherche.ListeRecherche;
@@ -78,6 +79,45 @@ public class UtilisateurSiteGenApiServiceImpl implements UtilisateurSiteGenApiSe
 		UtilisateurSiteGenApiService service = UtilisateurSiteGenApiService.creerProxy(siteContexte.getVertx(), SERVICE_ADDRESS);
 	}
 
+	public String varIndexeUtilisateurSite(String entiteVar) {
+		switch(entiteVar) {
+			case "calculInrPks":
+				return "calculInrPks_indexed_longs";
+			case "utilisateurNom":
+				return "utilisateurNom_indexed_string";
+			case "utilisateurMail":
+				return "utilisateurMail_indexed_string";
+			case "utilisateurId":
+				return "utilisateurId_indexed_string";
+			case "utilisateurPrenom":
+				return "utilisateurPrenom_indexed_string";
+			case "utilisateurNomFamille":
+				return "utilisateurNomFamille_indexed_string";
+			case "utilisateurNomComplet":
+				return "utilisateurNomComplet_indexed_string";
+			case "utilisateurSite":
+				return "utilisateurSite_indexed_string";
+			case "utilisateurRecevoirCourriels":
+				return "utilisateurRecevoirCourriels_indexed_boolean";
+			case "modeleSupprime":
+				return "modeleSupprime_indexed_boolean";
+			case "modeleCree":
+				return "modeleCree_indexed_date";
+			case "modeleModifie":
+				return "modeleModifie_indexed_date";
+			case "modeleClasseNomCanonique":
+				return "modeleClasseNomCanonique_indexed_string";
+			case "modeleCle":
+				return "modeleCle_indexed_long";
+			case "modeleSuggestionStocke":
+				return "modeleSuggestionStocke_indexed_string";
+			case "modeleSuggestionIndexe":
+				return "modeleSuggestionIndexe_indexed_string";
+			default:
+				throw new RuntimeException(String.format("\"%s\" n'est pas une entité indexé. ", entiteVar));
+		}
+	}
+
 	public Future<Void> sqlUtilisateurSite(RequeteSite requeteSite) {
 		Future<Void> future = Future.future();
 		SQLClient clientSql = requeteSite.getSiteContexte_().getClientSql();
@@ -93,7 +133,7 @@ public class UtilisateurSiteGenApiServiceImpl implements UtilisateurSiteGenApiSe
 
 	// Partagé //
 
-	public RequeteSite genererRequeteSitePourUtilisateurSite(SiteContexte siteContexte, OperationRequest operationRequete) throws Exception {
+	public RequeteSite genererRequeteSitePourUtilisateurSite(SiteContexte siteContexte, OperationRequest operationRequete) {
 		Vertx vertx = siteContexte.getVertx();
 		RequeteSite requeteSite = new RequeteSite();
 		requeteSite.setVertx(vertx);

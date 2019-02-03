@@ -63,7 +63,7 @@ paths:
         '200':
           description: >+
           content:
-            :
+            application/json:
               schema:
                 $ref: '#/components/requestBodies/RechercheClusterReponse'
         '400':
@@ -130,7 +130,7 @@ paths:
         '200':
           description: >+
           content:
-            :
+            application/json:
               schema:
                 $ref: '#/components/requestBodies/POSTClusterReponse'
         '400':
@@ -197,7 +197,7 @@ paths:
         '200':
           description: >+
           content:
-            :
+            application/json:
               schema:
                 $ref: '#/components/requestBodies/PATCHClusterReponse'
         '400':
@@ -265,7 +265,7 @@ paths:
         '200':
           description: >+
           content:
-            :
+            application/json:
               schema:
                 $ref: '#/components/requestBodies/GETClusterReponse'
         '400':
@@ -339,7 +339,7 @@ paths:
         '200':
           description: >+
           content:
-            :
+            application/json:
               schema:
                 $ref: '#/components/requestBodies/PUTClusterReponse'
         '400':
@@ -406,7 +406,7 @@ paths:
         '200':
           description: >+
           content:
-            :
+            application/json:
               schema:
                 $ref: '#/components/requestBodies/DELETEClusterReponse'
         '400':
@@ -906,20 +906,66 @@ paths:
               schema:
                 $ref: '#/components/requestBodies/ErrorResponse'
   /calcul-inr:
-    getpage:
-      operationId: getpageCalculInr
+    get:
+      operationId: recherchepageCalculInr
       x-vertx-event-bus: api
       description: >+
       summary: >+
       tags:
         - CalculInr
+      parameters:
+        - in: query
+          name: q
+          description: ''
+          required: false
+          schema:
+            type: string
+            default: '*:*'
+        - in: query
+          name: fq
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
+        - in: query
+          name: fl
+          description: ''
+          required: false
+          schema:
+            type: string
+        - in: query
+          name: sort
+          description: ''
+          required: false
+          schema:
+            type: array
+            items:
+                type: string
+        - in: query
+          name: start
+          description: ''
+          required: false
+          schema:
+            type: integer
+            default: 0
+            minimum: 0
+        - in: query
+          name: rows
+          description: ''
+          required: false
+          schema:
+            type: integer
+            default: 10
+            minimum: 1
       responses:
         '200':
           description: >+
           content:
             text/html:
               schema:
-                $ref: '#/components/requestBodies/GETPageCalculInrReponse'
+                $ref: '#/components/requestBodies/RecherchePageCalculInrReponse'
         '400':
           description: >+
                 <table><table><tr><td>Type</td><td>Code</td><td>Details</td></tr><tr><td>error</td><td>invalidRequest</td><td>Missing
@@ -1063,16 +1109,11 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/DELETECalculInrReponse'
-    GETPageCalculInrRequete:
+    RecherchePageCalculInrReponse:
       content:
-        application/json:
+        text/html:
           schema:
-            $ref: '#/components/schemas/GETPageCalculInrRequete'
-    GETPageCalculInrReponse:
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/GETPageCalculInrReponse'
+            $ref: '#/components/schemas/RecherchePageCalculInrReponse'
   schemas:
     RechercheClusterReponse:
       allOf:
@@ -1573,72 +1614,9 @@ components:
               type: string
             infoContact:
               type: string
-    GETPageCalculInrRequete:
+    RecherchePageCalculInrReponse:
       allOf:
-        - $ref: "#/components/schemas/"
-        - type: object
-          properties:
-            utilisateurPk:
-              type: number
-            dateInr:
-              type: string
-              format: date
-            dateReverifier:
-              type: string
-              format: date
-            patientPrendCoumadin:
-              type: string
-              enum:
-                - vide
-                - oui
-                - non
-                - ouiDosageInitial
-                - ouiRecommence
-            butActuel:
-              type: string
-            doseActuel:
-              type: string
-            medicamentActuel:
-              type: string
-            changementDose:
-              type: string
-            notesComplementaires:
-              type: string
-            infoContact:
-              type: string
-    GETPageCalculInrReponse:
-      allOf:
-        - $ref: "#/components/schemas/"
-        - type: object
-          properties:
-            utilisateurPk:
-              type: number
-            dateInr:
-              type: string
-              format: date
-            dateReverifier:
-              type: string
-              format: date
-            patientPrendCoumadin:
-              type: string
-              enum:
-                - vide
-                - oui
-                - non
-                - ouiDosageInitial
-                - ouiRecommence
-            butActuel:
-              type: string
-            doseActuel:
-              type: string
-            medicamentActuel:
-              type: string
-            changementDose:
-              type: string
-            notesComplementaires:
-              type: string
-            infoContact:
-              type: string
+        - type: string
     ErrorResponse:
       required:
         - type

@@ -18,37 +18,40 @@ import org.apache.commons.lang3.StringUtils;
 public abstract class CalculInrPageGen<DEV> extends MiseEnPage {
 
 	////////////////////
-	// listeRecherche //
+	// listeCalculInr //
 	////////////////////
 
-	/**	L'entité « listeRecherche »
-	 *	Il est construit avant d'être initialisé avec le constructeur par défaut ListeRecherche<CalculInr>(). 
+	/**	L'entité « listeCalculInr »
+	 *	 is defined as null before being initialized. 
 	 */
-	protected ListeRecherche<CalculInr> listeRecherche = new ListeRecherche<CalculInr>();
-	public Couverture<ListeRecherche<CalculInr>> listeRechercheCouverture = new Couverture<ListeRecherche<CalculInr>>().p(this).c(ListeRecherche.class).var("listeRecherche").o(listeRecherche);
+	protected ListeRecherche<CalculInr> listeCalculInr;
+	public Couverture<ListeRecherche<CalculInr>> listeCalculInrCouverture = new Couverture<ListeRecherche<CalculInr>>().p(this).c(ListeRecherche.class).var("listeCalculInr").o(listeCalculInr);
 
-	/**	<br/>L'entité « listeRecherche »
-	 * Il est construit avant d'être initialisé avec le constructeur par défaut ListeRecherche<CalculInr>(). 
-	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.warfarin.CalculInrPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:listeRecherche">Trouver l'entité listeRecherche dans Solr</a>
+	/**	<br/>L'entité « listeCalculInr »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.warfarin.CalculInrPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:listeCalculInr">Trouver l'entité listeCalculInr dans Solr</a>
 	 * <br/>
-	 * @param listeRecherche est l'entité déjà construit. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _listeRecherche(ListeRecherche<CalculInr> o);
+	protected abstract void _listeCalculInr(Couverture<ListeRecherche<CalculInr>> c);
 
-	public ListeRecherche<CalculInr> getListeRecherche() {
-		return listeRecherche;
+	public ListeRecherche<CalculInr> getListeCalculInr() {
+		return listeCalculInr;
 	}
 
-	public void setListeRecherche(ListeRecherche<CalculInr> listeRecherche) {
-		this.listeRecherche = listeRecherche;
-		this.listeRechercheCouverture.dejaInitialise = true;
+	public void setListeCalculInr(ListeRecherche<CalculInr> listeCalculInr) {
+		this.listeCalculInr = listeCalculInr;
+		this.listeCalculInrCouverture.dejaInitialise = true;
 	}
-	protected CalculInrPage listeRechercheInit() {
-		if(!listeRechercheCouverture.dejaInitialise) {
-			_listeRecherche(listeRecherche);
+	protected CalculInrPage listeCalculInrInit() {
+		if(!listeCalculInrCouverture.dejaInitialise) {
+			_listeCalculInr(listeCalculInrCouverture);
+			if(listeCalculInr == null)
+				setListeCalculInr(listeCalculInrCouverture.o);
 		}
-		listeRecherche.initLoinPourClasse(requeteSite_);
-		listeRechercheCouverture.dejaInitialise(true);
+		if(listeCalculInr != null)
+			listeCalculInr.initLoinPourClasse(requeteSite_);
+		listeCalculInrCouverture.dejaInitialise(true);
 		return (CalculInrPage)this;
 	}
 
@@ -73,7 +76,7 @@ public abstract class CalculInrPageGen<DEV> extends MiseEnPage {
 	}
 
 	public void initCalculInrPage() {
-		listeRechercheInit();
+		listeCalculInrInit();
 	}
 
 	@Override public void initLoinPourClasse(RequeteSite requeteSite_) {
@@ -86,7 +89,7 @@ public abstract class CalculInrPageGen<DEV> extends MiseEnPage {
 
 	public void requeteSiteCalculInrPage(RequeteSite requeteSite_) {
 			super.requeteSiteMiseEnPage(requeteSite_);
-		listeRecherche.setRequeteSite_(requeteSite_);
+		listeCalculInr.setRequeteSite_(requeteSite_);
 	}
 
 	public void requeteSitePourClasse(RequeteSite requeteSite_) {
@@ -113,8 +116,8 @@ public abstract class CalculInrPageGen<DEV> extends MiseEnPage {
 	public Object obtenirCalculInrPage(String var) throws Exception {
 		CalculInrPage oCalculInrPage = (CalculInrPage)this;
 		switch(var) {
-			case "listeRecherche":
-				return oCalculInrPage.listeRecherche;
+			case "listeCalculInr":
+				return oCalculInrPage.listeCalculInr;
 			default:
 				return super.obtenirMiseEnPage(var);
 		}
@@ -169,6 +172,34 @@ public abstract class CalculInrPageGen<DEV> extends MiseEnPage {
 			default:
 				return super.definirMiseEnPage(var, val);
 		}
+	}
+
+	//////////
+	// html //
+	//////////
+
+	@Override public void html() {
+		htmlAvant();
+		htmlMilieu();
+		htmlApres();
+	}
+	public void htmlAvant() {
+		htmlCalculInrPageAvant();
+		super.htmlMiseEnPageAvant();
+	}
+	public void htmlMilieu() {
+		htmlCalculInrPageMilieu();
+		super.htmlMiseEnPageMilieu();
+	}
+	public void htmlApres() {
+		htmlCalculInrPageApres();
+		super.htmlMiseEnPageApres();
+	}
+	public void htmlCalculInrPageAvant() {
+	}
+	public void htmlCalculInrPageMilieu() {
+	}
+	public void htmlCalculInrPageApres() {
 	}
 
 	//////////////

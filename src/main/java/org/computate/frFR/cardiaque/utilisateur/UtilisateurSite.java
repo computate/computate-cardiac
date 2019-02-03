@@ -8,30 +8,30 @@ import org.computate.frFR.cardiaque.couverture.Couverture;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
 
 /**
- * modele: true
- * apiUri.enUS: /api/v1/site/user
- * apiUri.frFR: /api/v1/site/utilisateur
+ * Modele: true
+ * ApiUri.enUS: /api/v1/site/user
+ * ApiUri.frFR: /api/v1/site/utilisateur
  */                
 public class UtilisateurSite extends UtilisateurSiteGen<Cluster> { 
 
 	/**
-	 * indexe: true
-	 * stocke: true
+	 * Indexe: true
+	 * Stocke: true
 	 * attribuer: CalculInr.utilisateurPk
 	 */ 
 	protected void _calculInrPks(List<Long> l) {
 	}
 
 	/**
-	 * var.enUS: _siteRequest
+	 * Var.enUS: _siteRequest
 	 */
 	protected void _requeteSite_(Couverture<RequeteSite> c) {}
 
 	/**	
-	 * var.enUS: _userName
+	 * Var.enUS: _userName
 	 * description.frFR: Le nom d'utilisateur pour se connecter au site. 
-	 * indexe: true
-	 * stocke: true
+	 * Indexe: true
+	 * Stocke: true
 	 */
 	protected void _utilisateurNom(Couverture<String> c) {
 		String o = requeteSite_.getUtilisateurNom();
@@ -39,19 +39,19 @@ public class UtilisateurSite extends UtilisateurSiteGen<Cluster> {
 	}
 
 	/**	
-	 * var.enUS: _userEmail
+	 * Var.enUS: _userEmail
 	 * description.frFR: Le mail pour recevoir des courriels. 
-	 * indexe: true
-	 * stocke: true
+	 * Indexe: true
+	 * Stocke: true
 	 */
 	protected void _utilisateurMail(Couverture<String> c) {
 	}
 
 	/**	
-	 * var.enUS: _userId
+	 * Var.enUS: _userId
 	 * description.frFR: L'identifiant Keycloak pour cet utilisateur. 
-	 * indexe: true
-	 * stocke: true
+	 * Indexe: true
+	 * Stocke: true
 	 */
 	protected void _utilisateurId(Couverture<String> c) {
 		String o = requeteSite_.getUtilisateurId();
@@ -59,10 +59,10 @@ public class UtilisateurSite extends UtilisateurSiteGen<Cluster> {
 	}
 
 	/**	
-	 * var.enUS: _userFirstName
+	 * Var.enUS: _userFirstName
 	 * description.frFR: Le prénom pour cet utilisateur. 
-	 * indexe: true
-	 * stocke: true
+	 * Indexe: true
+	 * Stocke: true
 	 */
 	protected void _utilisateurPrenom(Couverture<String> c) {
 		String o = requeteSite_.getUtilisateurPrenom();
@@ -70,10 +70,10 @@ public class UtilisateurSite extends UtilisateurSiteGen<Cluster> {
 	}
 
 	/**	
-	 * var.enUS: _userLastName
+	 * Var.enUS: _userLastName
 	 * description.frFR: Le nom de famille pour cet utilisateur. 
-	 * indexe: true
-	 * stocke: true
+	 * Indexe: true
+	 * Stocke: true
 	 */
 	protected void _utilisateurNomFamille(Couverture<String> c) {
 		String o = requeteSite_.getUtilisateurNomFamille();
@@ -81,10 +81,10 @@ public class UtilisateurSite extends UtilisateurSiteGen<Cluster> {
 	}
 
 	/**	
-	 * var.enUS: _userFullName
+	 * Var.enUS: _userFullName
 	 * description.frFR: Le prénom et nom de famille pour cet utilisateur. 
-	 * indexe: true
-	 * stocke: true
+	 * Indexe: true
+	 * Stocke: true
 	 * r: utilisateurPrenom
 	 * r.enUS: userFirstName
 	 * r: utilisateurNomFamille
@@ -96,40 +96,40 @@ public class UtilisateurSite extends UtilisateurSiteGen<Cluster> {
 	}
 
 	/**	
-	 * var.enUS: _userSite
+	 * Var.enUS: _userSite
 	 * description.frFR: L'URL du site Web pour cet utilisateur. 
-	 * indexe: true
-	 * stocke: true
+	 * Indexe: true
+	 * Stocke: true
 	 */
 	protected void _utilisateurSite(Couverture<String> c) {
 	}
 
 	/**	
-	 * var.enUS: _userReceiveEmails
+	 * Var.enUS: _userReceiveEmails
 	 * description.frFR: Le nom de famille pour cet utilisateur. 
-	 * indexe: true
-	 * stocke: true
+	 * Indexe: true
+	 * Stocke: true
 	 */
 	protected void _utilisateurRecevoirCourriels(Couverture<Boolean> c) {
 		c.o(false);
 	}
 
 	/**	
-	 * var.enUS: _modelDeleted
+	 * Var.enUS: _modelDeleted
 	 * description.frFR: Marquer le modèle comme supprimé. 
 	 * On ne devrait jamais actuellement supprimer de la base de données. 
-	 * indexe: true
-	 * stocke: true
+	 * Indexe: true
+	 * Stocke: true
 	 */
 	protected void _modeleSupprime(Couverture<Boolean> c) {
 		c.o(false);
 	}
 
 	/**	
-	 * var.enUS: _modelCreated
+	 * Var.enUS: _modelCreated
 	 * description.frFR: La date créée pour le modèle. 
-	 * indexe: true
-	 * stocke: true
+	 * Indexe: true
+	 * Stocke: true
 	 */         
 	protected void _modeleCree(Couverture<ZonedDateTime> c) {
 		ZonedDateTime o = ZonedDateTime.now();
@@ -137,10 +137,10 @@ public class UtilisateurSite extends UtilisateurSiteGen<Cluster> {
 	}
 
 	/**	
-	 * var.enUS: _modelModified
+	 * Var.enUS: _modelModified
 	 * description.frFR: La date modifiée pour le modele. 
-	 * indexe: true
-	 * stocke: true
+	 * Indexe: true
+	 * Stocke: true
 	 */
 	protected void _modeleModifie(Couverture<ZonedDateTime> c) {
 		ZonedDateTime o = ZonedDateTime.now();
@@ -148,29 +148,29 @@ public class UtilisateurSite extends UtilisateurSiteGen<Cluster> {
 	}
 
 	/**	
-	 * var.enUS: _modelClassCanonicalName
+	 * Var.enUS: _modelClassCanonicalName
 	 * description.frFR: Le nom canonique de cette classe Java pour le modèle. 
-	 * indexe: true
-	 * stocke: true
+	 * Indexe: true
+	 * Stocke: true
 	 */
 	protected void _modeleClasseNomCanonique(Couverture<String> c) {
 		c.o(getClass().getCanonicalName());
 	}
 
 	/**	
-	 * var.enUS: _modelKey
+	 * Var.enUS: _modelKey
 	 * description.frFR: Le clé primaire pour ce modèle dans la base de données. 
-	 * indexe: true
-	 * stocke: true
+	 * Indexe: true
+	 * Stocke: true
 	 */
 	protected void _modeleCle(Couverture<Long> c) {
 	}
 
 	/**	
-	 * var.enUS: _modelSuggestionStored
+	 * Var.enUS: _modelSuggestionStored
 	 * description.frFR: Le texte de suggérée qui est affichée mais pas indexée dans le moteur de recherche. 
-	 * indexe: true
-	 * stocke: true
+	 * Indexe: true
+	 * Stocke: true
 	 * r: utilisateurPrenom
 	 * r.enUS: userFirstName
 	 * r: utilisateurNomFamille
@@ -183,11 +183,11 @@ public class UtilisateurSite extends UtilisateurSiteGen<Cluster> {
 	}
 
 	/**	
-	 * var.enUS: _modelSuggestionIndexed
+	 * Var.enUS: _modelSuggestionIndexed
 	 * description.frFR: Le texte de suggérée qui est indexée dans le moteur de recherche. 
 	 * Ça peut contenir plus qui est affiché dans le suggestion. 
-	 * indexe: true
-	 * stocke: true
+	 * Indexe: true
+	 * Stocke: true
 	 * r: utilisateurPrenom
 	 * r.enUS: userFirstName
 	 * r: utilisateurNomFamille

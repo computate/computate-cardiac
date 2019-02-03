@@ -1953,9 +1953,6 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 	public Object attribuerUtilisateurSite(String var, Object val) {
 		UtilisateurSite oUtilisateurSite = (UtilisateurSite)this;
 		switch(var) {
-			case "calculInrPks":
-				oUtilisateurSite.addCalculInrPks((Long)val);
-				return val;
 			default:
 				return super.attribuerCluster(var, val);
 		}
@@ -1982,6 +1979,11 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 	}
 	public Object definirUtilisateurSite(String var, String val) {
 		switch(var) {
+			case "calculInrPks":
+				addCalculInrPks(val);
+				if(!sauvegardesUtilisateurSite.contains(var))
+					sauvegardesUtilisateurSite.add(var);
+				return val;
 			case "utilisateurNom":
 				setUtilisateurNom(val);
 				sauvegardesUtilisateurSite.add(var);
@@ -2245,7 +2247,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 	//////////////
 
 	@Override public int hashCode() {
-		return Objects.hash(super.hashCode(), utilisateurNom, utilisateurMail, utilisateurId, utilisateurPrenom, utilisateurNomFamille, utilisateurNomComplet, utilisateurSite, utilisateurRecevoirCourriels, modeleSupprime, modeleCree, modeleModifie, modeleClasseNomCanonique, modeleCle, modeleSuggestionStocke, modeleSuggestionIndexe);
+		return Objects.hash(super.hashCode(), calculInrPks, utilisateurNom, utilisateurMail, utilisateurId, utilisateurPrenom, utilisateurNomFamille, utilisateurNomComplet, utilisateurSite, utilisateurRecevoirCourriels, modeleSupprime, modeleCree, modeleModifie, modeleClasseNomCanonique, modeleCle, modeleSuggestionStocke, modeleSuggestionIndexe);
 	}
 
 	////////////
@@ -2259,6 +2261,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 			return false;
 		UtilisateurSite that = (UtilisateurSite)o;
 		return super.equals(o)
+				&& Objects.equals( calculInrPks, that.calculInrPks )
 				&& Objects.equals( utilisateurNom, that.utilisateurNom )
 				&& Objects.equals( utilisateurMail, that.utilisateurMail )
 				&& Objects.equals( utilisateurId, that.utilisateurId )
@@ -2284,7 +2287,8 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 		StringBuilder sb = new StringBuilder();
 		sb.append(super.toString() + "\n");
 		sb.append("UtilisateurSite {");
-		sb.append( "utilisateurNom: \"" ).append(utilisateurNom).append( "\"" );
+		sb.append( "calculInrPks: " ).append(calculInrPks);
+		sb.append( ", utilisateurNom: \"" ).append(utilisateurNom).append( "\"" );
 		sb.append( ", utilisateurMail: \"" ).append(utilisateurMail).append( "\"" );
 		sb.append( ", utilisateurId: \"" ).append(utilisateurId).append( "\"" );
 		sb.append( ", utilisateurPrenom: \"" ).append(utilisateurPrenom).append( "\"" );

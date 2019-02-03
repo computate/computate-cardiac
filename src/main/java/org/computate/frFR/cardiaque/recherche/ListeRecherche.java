@@ -891,7 +891,7 @@ public class ListeRecherche<DEV> extends ListeRechercheGen<DEV> {
 	 *
 	 * @param b
 	 *            flag to indicate if MoreLikeThis should be enabled. if b==false
-	 *            removes all mlt.* parameters
+	 *            removes all mlt.* Parameters
 	 * @return this
 	 */
 	public SolrQuery setMoreLikeThis(boolean b) {

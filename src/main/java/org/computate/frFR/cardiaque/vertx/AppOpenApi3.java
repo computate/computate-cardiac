@@ -5,7 +5,7 @@ import org.computate.frFR.cardiaque.contexte.SiteContexte;
 import org.computate.frFR.cardiaque.couverture.Couverture;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
 /**
- * nomCanonique.enUS: org.computate.enUS.cardiac.vertx.AppOpenApi3
+ * NomCanonique.enUS: org.computate.enUS.cardiac.vertx.AppOpenApi3
  */
 public class AppOpenApi3 extends AppOpenApi3Gen<AppSwagger2> { 
 
@@ -30,19 +30,19 @@ public class AppOpenApi3 extends AppOpenApi3Gen<AppSwagger2> {
 	}
 //
 //	/**
-//	 * var.enUS: requeteSite_
+//	 * Var.enUS: requeteSite_
 //	 */
 //	protected void _requeteSite_(Couverture<RequeteSite> c) throws Exception {
 //	}
 //
 //	/**
-//	 * var.enUS: siteContext
+//	 * Var.enUS: siteContext
 //	 */
 //	protected void _siteContexte(SiteContexte o) throws Exception {
 //	}
 //
 //	/**
-//	 * var.enUS: siteConfig
+//	 * Var.enUS: siteConfig
 //	 * r: siteContexte.getConfigSite
 //	 * r.enUS: siteContext.getSiteConfig
 //	 */
@@ -63,7 +63,7 @@ public class AppOpenApi3 extends AppOpenApi3Gen<AppSwagger2> {
 //	}
 //
 //	/**
-//	 * var.enUS: generateOpenApi
+//	 * Var.enUS: generateOpenApi
 //	 * r: configSite
 //	 * r.enUS: siteConfig
 //	 * r: ConfigSite
@@ -100,7 +100,7 @@ public class AppOpenApi3 extends AppOpenApi3Gen<AppSwagger2> {
 //	}
 //
 //	/**
-//	 * var.enUS: generateChemins
+//	 * Var.enUS: generateChemins
 //	 * r: configSite
 //	 * r.enUS: siteConfig
 //	 * r: rechercheClasses

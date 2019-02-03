@@ -11,27 +11,27 @@ import org.computate.frFR.cardiaque.requete.RequeteSite;
 
 
 /**
- * nomCanonique.enUS: org.computate.site.course.c000.cluster.Cluster
- * modele: true
- * apiUri.enUS: /api/v1/warfarin/cluster
- * apiUri.frFR: /api/v1/warfarin/cluster
- * apiMethode: Recherche
- * apiMethode: POST
- * apiMethode: PATCH
- * apiMethode: GET
- * apiMethode: PUT
- * apiMethode: DELETE
- * apiTag.enUS: Cluster
- * apiTag.frFR: Cluster
+ * NomCanonique.enUS: org.computate.site.course.c000.cluster.Cluster
+ * Modele: true
+ * ApiUri.enUS: /api/v1/warfarin/cluster
+ * ApiUri.frFR: /api/v1/warfarin/cluster
+ * ApiMethode: Recherche
+ * ApiMethode: POST
+ * ApiMethode: PATCH
+ * ApiMethode: GET
+ * ApiMethode: PUT
+ * ApiMethode: DELETE
+ * ApiTag.enUS: Cluster
+ * ApiTag.frFR: Cluster
  */       
 public class Cluster extends ClusterGen<Object> {     
 
 	public static DateTimeFormatter FORMAT_dateMedicalCourt = DateTimeFormatter.ofPattern("M/d/yyyy", Locale.FRANCE);
 
 //	/**
-//	 * ignorer: true
-//	 * var.enUS: siteRequestCluster
-//	 * param1.var.enUS: siteRequest
+//	 * Ignorer: true
+//	 * Var.enUS: siteRequestCluster
+//	 * Param1.var.enUS: siteRequest
 //	 * remplacer.enUS: requeteSite
 //	 * siteRequest
 //	 */
@@ -42,22 +42,22 @@ public class Cluster extends ClusterGen<Object> {
 
 	/**
 	 * {@inheritDoc}
-	 * var.enUS: _siteRequest
+	 * Var.enUS: _siteRequest
 	 */       
 	protected void _requeteSite_(Couverture<RequeteSite> c) {}
 	protected void _page_(Couverture<MiseEnPage> c) {}
 
 	/**
 	 * {@inheritDoc}
-	 * indexe: true
-	 * stocke: true
-	 * clePrimaire: true
+	 * Indexe: true
+	 * Stocke: true
+	 * ClePrimaire: true
 	 */                          
 	protected void _pk(Couverture<Long> c) {}
 
 	/**
 	 * {@inheritDoc}
-	 * cleUnique: true
+	 * CleUnique: true
 	 */
 	protected void _id(Couverture<String> c) {
 		if(pk != null)
@@ -65,30 +65,30 @@ public class Cluster extends ClusterGen<Object> {
 	}
 
 	/**
-	 * indexe: true
-	 * stocke: true
-	 * var.enUS: _created
+	 * Indexe: true
+	 * Stocke: true
+	 * Var.enUS: _created
 	 */
 	protected void _cree(Couverture<LocalDateTime> c) {}
 
 	/**
-	 * indexe: true
-	 * stocke: true
-	 * var.enUS: _modified
+	 * Indexe: true
+	 * Stocke: true
+	 * Var.enUS: _modified
 	 */
 	protected void _modifie(Couverture<LocalDateTime> c) {}
 
 	/**
-	 * indexe: true
-	 * stocke: true
-	 * var.enUS: _userId
+	 * Indexe: true
+	 * Stocke: true
+	 * Var.enUS: _userId
 	 */
 	protected void _utilisateurId(Couverture<String> c) {}
 
 	/**
-	 * indexe: true
-	 * stocke: true
-	 * var.enUS: _clusterCanonicalName
+	 * Indexe: true
+	 * Stocke: true
+	 * Var.enUS: _clusterCanonicalName
 	 */      
 	protected void _clusterNomCanonique(Couverture<String> c) {
 		String o = getClass().getCanonicalName();
@@ -96,9 +96,9 @@ public class Cluster extends ClusterGen<Object> {
 	}
 
 	/**
-	 * indexe: true
-	 * stocke: true
-	 * var.enUS: _clusterSimpleName
+	 * Indexe: true
+	 * Stocke: true
+	 * Var.enUS: _clusterSimpleName
 	 */          
 	protected void _clusterNomSimple(Couverture<String> c) {
 		String o = getClass().getSimpleName();
@@ -106,7 +106,7 @@ public class Cluster extends ClusterGen<Object> {
 	}
 
 	/**        
-	 * var.enUS: _deleted
+	 * Var.enUS: _deleted
 	 */
 	protected void _supprime(Couverture<Boolean> c) {
 		Boolean o = false;
@@ -124,8 +124,8 @@ public class Cluster extends ClusterGen<Object> {
 //
 //	/**
 //	 * genInclure: true
-//	 * param1.var.enUS: attributeName
-//	 * param2.var.enUS: objects
+//	 * Param1.var.enUS: attributeName
+//	 * Param2.var.enUS: objects
 //	 * remplacer.enUS: nomAttribut
 //	 * attributeName
 //	 * remplacer.enUS: objets
@@ -196,7 +196,7 @@ public class Cluster extends ClusterGen<Object> {
 //
 //	/**
 //	 * genInclure: true
-//	 * param1.var.enUS: objects
+//	 * Param1.var.enUS: objects
 //	 * remplacer.enUS: objets
 //	 * objects
 //	 * remplacer.enUS: toutXml
@@ -231,7 +231,7 @@ public class Cluster extends ClusterGen<Object> {
 //
 //	/**
 //	 * genInclure: true
-//	 * param1.var.enUS: localName
+//	 * Param1.var.enUS: localName
 //	 * remplacer.enUS: nomLocal
 //	 * localName
 //	 */

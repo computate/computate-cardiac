@@ -4,6 +4,7 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.time.format.DateTimeFormatter;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -21,12 +22,13 @@ import org.computate.frFR.cardiaque.xml.OutilXml;
 import io.vertx.core.http.HttpServerRequest;
 
 /**
- * nomCanonique.enUS: org.computate.enUS.cardiac.page.PageLayout
- */   
-public class MiseEnPage extends MiseEnPageGen<Object> { 
+ * NomCanonique.enUS: org.computate.enUS.cardiac.page.PageLayout
+ * Html: true
+ */    
+public class MiseEnPage extends MiseEnPageGen<Object> {  
 
 	/**
-	 * var.enUS: HTML_CLOSED_ELEMENTS
+	 * Var.enUS: HTML_CLOSED_ELEMENTS
 	 */
 	public static List<String> HTML_ELEMENTS_FERMES = Arrays.asList("area", "base", "br", "col", "command", "embed", "hr", "img", "input", "keygen", "link", "meta", "param", "source", "track", "wbr");
 	public static List<String> HTML_ELEMENTS_NO_WRAP = Arrays.asList("script", "span", "a", "b", "i", "u", "title", "use", "h1", "h2", "h3", "h4", "h5", "h6", "pre", "p");
@@ -66,14 +68,14 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 
 	/**
 	 * {@inheritDoc}
-	 * var.enUS: documentSolr
+	 * Var.enUS: pageDocumentSolr
 	 **/
-	protected void _documentSolr(Couverture<SolrDocument> c) {
+	protected void _pageDocumentSolr(Couverture<SolrDocument> c) {
 		
 	}
 
 	/**
-	 * var.enUS: _writer
+	 * Var.enUS: _writer
 	 * frFR: L'écrivain pour écrirer le résultat du réponse. 
 	 * r.enUS: requeteSite_
 	 * siteRequest
@@ -85,99 +87,103 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 	}
 //
 //	/**
-//	 * var.enUS: _pageCanonicalName
+//	 * Var.enUS: _pageCanonicalName
 //	 * frFR: Le nom canonique de cette classe Java pour la page. 
 //	 * frFR: Le servlet va rechercher l'URL et construire une nouvelle page de ce type. 
-//	 * indexe: true
-//	 * stocke: true
+//	 * Indexe: true
+//	 * Stocke: true
 //	 */
 //	protected void _pageNomCanonique(Couverture<String> c)  {
 //		c.o(getClass().getCanonicalName());
 //	}
 //
 //	/**
-//	 * var.enUS: _pageSimpleName
+//	 * Var.enUS: _pageSimpleName
 //	 * frFR: Le nom simple de cette classe Java pour la page. 
 //	 * frFR: Le servlet va rechercher l'URL et construire une nouvelle page de ce type. 
-//	 * indexe: true
-//	 * stocke: true
+//	 * Indexe: true
+//	 * Stocke: true
 //	 */
 //	protected void _pageNomSimple(Couverture<String> c)  {
 //		c.o(getClass().getSimpleName());
 //	}
 
 	/**
-	 * var.enUS: pageVisibleToBots
+	 * Var.enUS: pageVisibleToBots
 	 * frFR: Choisir si cette page est trouvée dans le /sitemap.xml.
 	 * frFR: Si true, les bots de Google, Bing, Yahoo peuvent trouver la page. 
-	 * indexe: true
-	 * stocke: true
+	 * Indexe: true
+	 * Stocke: true
 	 */
 	protected void _pageVisibleAuxBots(Couverture<Boolean> c)  {
-		c.o(BooleanUtils.toBooleanDefaultIfNull((Boolean)documentSolr.get(c.var + "_stored_boolean"), false));
+		c.o(BooleanUtils.toBooleanDefaultIfNull((Boolean)pageDocumentSolr.get(c.var + "_stored_boolean"), false));
 	}
 
 	/**
-	 * indexe: true
-	 * stocke: true
+	 * Indexe: true
+	 * Stocke: true
 	 */
 	protected void _pageH1(Couverture<String> c)  {
-		c.o(StringUtils.defaultIfBlank((String)documentSolr.get(c.var + "_stored_string"), null));
+		c.o(StringUtils.defaultIfBlank((String)pageDocumentSolr.get(c.var + "_stored_string"), null));
 	}
 
 	/**
-	 * indexe: true
-	 * stocke: true
+	 * Indexe: true
+	 * Stocke: true
 	 */
 	protected void _pageH2(Couverture<String> c)  {
-		c.o(StringUtils.defaultIfBlank((String)documentSolr.get(c.var + "_stored_string"), null));
+		c.o(StringUtils.defaultIfBlank((String)pageDocumentSolr.get(c.var + "_stored_string"), null));
 	}
 
 	/**
-	 * var.enUS: _pageH1Short
+	 * Var.enUS: _pageH1Short
 	 */
 	protected void _pageH1Court(Couverture<String> c)  {
-		c.o(StringUtils.defaultIfBlank((String)documentSolr.get(c.var + "_stored_string"), pageH1));
+		c.o(StringUtils.defaultIfBlank((String)pageDocumentSolr.get(c.var + "_stored_string"), pageH1));
 	}
 
 	/**
-	 * var.enUS: _pageH2Short
+	 * Var.enUS: _pageH2Short
 	 */
 	protected void _pageH2Court(Couverture<String> c)  {
-		c.o(StringUtils.defaultIfBlank((String)documentSolr.get(c.var + "_stored_string"), pageH2));
+		c.o(StringUtils.defaultIfBlank((String)pageDocumentSolr.get(c.var + "_stored_string"), pageH2));
 	}
 
 	/**
-	 * var.enUS: pageTitle
-	 * indexe: true
-	 * stocke: true
+	 * Var.enUS: pageTitle
+	 * Indexe: true
+	 * Stocke: true
+	 * r: frFR
+	 * r.enUS: enUS
 	 */
 	protected void _pageTitre(Couverture<String> c)  {
-		c.o(StringUtils.defaultIfBlank((String)documentSolr.get(c.var + "_stored_string"), StringUtils.join(pageH1, pageH2)));
+		c.o(StringUtils.defaultIfBlank((String)pageDocumentSolr.get(c.var + "_frFR_stored_string"), StringUtils.join(pageH1, pageH2)));
 	}
 
 	/**	la version plus courte de l'URL qui commence avec « / » 
-	 * indexe: true
-		stocke: true
+	 * Indexe: true
+	 * Stocke: true
+	 * r: frFR
+	 * r.enUS: enUS
 	 * **/
 	protected void _pageUri(Couverture<String> c)  {
-		c.o(StringUtils.defaultIfBlank((String)documentSolr.get(c.var + "_stored_string"), null));
+		c.o(StringUtils.defaultIfBlank((String)pageDocumentSolr.get(c.var + "_frFR_stored_string"), null));
 	}
 //
 //	/**
-//	 * var.enUS: _key
+//	 * Var.enUS: _key
 //	 * frFR: la version plus courte de l'URL en français qui commence avec « / » 
-//	 * clePrimaire: true
+//	 * ClePrimaire: true
 //	 * r.enUS: pageNomCanonique
-//	 * pageCanonicalName
+//	 * PageCanonicalName
 //	 */
 //	protected void _cle(Couverture<String> c)  {
 //		c.o(pageNomCanonique);
 //	}
 
 	/**	Tous les URIs ensemble pour toutes les langues dans cette liste. 
-	 * indexe: true
-	 * stocke: true
+	 * Indexe: true
+	 * Stocke: true
 	 * **/
 	protected void _pageUris(List<String> l)  {
 		l.add(pageUri.toString());
@@ -186,8 +192,8 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 
 	/**
 	 * frFR: l'URL complet. 
-	 * indexe: true
-	 * stocke: true
+	 * Indexe: true
+	 * Stocke: true
 	 * r.enUS: requeteSite_
 	 * siteRequest
 	 * r.enUS: configSite
@@ -205,22 +211,22 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 		if(requeteServeur != null) {
 			q = requeteServeur.query();
 		}
-		c.o(StringUtils.defaultIfBlank((String)documentSolr.get(c.var + "_stored_string"), "https://" + requeteSite_.getConfigSite_().getSiteNomHote() + pageUri + (StringUtils.isEmpty(q) ? "" : "?" + q)));
+		c.o(StringUtils.defaultIfBlank((String)pageDocumentSolr.get(c.var + "_stored_string"), "https://" + requeteSite_.getConfigSite_().getSiteNomHote() + pageUri + (StringUtils.isEmpty(q) ? "" : "?" + q)));
 	}
 
 	/**
 	 * frFR: l'URI courte vers l'image. 
-	 * indexe: true
-	 * stocke: true
+	 * Indexe: true
+	 * Stocke: true
 	 */
 	protected void _pageImageUri(Couverture<String> c)  {
-		c.o(StringUtils.defaultIfBlank((String)documentSolr.get(c.var + "_stored_string"), null));
+		c.o(StringUtils.defaultIfBlank((String)pageDocumentSolr.get(c.var + "_stored_string"), null));
 	}
 
 	/**
 	 * frFR: l'URL complet vers l'image. 
-	 * indexe: true
-	 * stocke: true
+	 * Indexe: true
+	 * Stocke: true
 	 * r.enUS: requeteSite_
 	 * siteRequest
 	 * r.enUS: configSite
@@ -229,13 +235,13 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 	 * siteHostName
 	 */
 	protected void _pageImageUrl(Couverture<String> c)  {
-		c.o(StringUtils.defaultIfBlank((String)documentSolr.get(c.var + "_stored_string"), "https://" + requeteSite_.getConfigSite_().getSiteNomHote() + pageImageUri));
+		c.o(StringUtils.defaultIfBlank((String)pageDocumentSolr.get(c.var + "_stored_string"), "https://" + requeteSite_.getConfigSite_().getSiteNomHote() + pageImageUri));
 	}
 
 	/**
 	 * frFR: l'ID Youtube du video. 
-	 * indexe: true
-	 * stocke: true
+	 * Indexe: true
+	 * Stocke: true
 	 * r.enUS: requeteSite_
 	 * siteRequest
 	 * r.enUS: configSite
@@ -244,13 +250,13 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 	 * siteHostName
 	 */
 	protected void _pageVideoId(Couverture<String> c)  {
-		c.o(StringUtils.defaultIfBlank((String)documentSolr.get(c.var + "_stored_string"), null));
+		c.o(StringUtils.defaultIfBlank((String)pageDocumentSolr.get(c.var + "_stored_string"), null));
 	}
 
 	/**
 	 * frFR: l'URL complet vers le video. 
-	 * indexe: true
-	 * stocke: true
+	 * Indexe: true
+	 * Stocke: true
 	 * r.enUS: requeteSite_
 	 * siteRequest
 	 * r.enUS: configSite
@@ -260,14 +266,14 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 	 */
 	protected void _pageVideoUrl(Couverture<String> c)  {
 		if(pageVideoId != null) {
-			c.o(StringUtils.defaultIfBlank((String)documentSolr.get(c.var + "_stored_string"), "https://youtu.be/" + pageVideoId));
+			c.o(StringUtils.defaultIfBlank((String)pageDocumentSolr.get(c.var + "_stored_string"), "https://youtu.be/" + pageVideoId));
 		}
 	}
 
 	/**
 	 * frFR: l'URL embed vers le video. 
-	 * indexe: true
-	 * stocke: true
+	 * Indexe: true
+	 * Stocke: true
 	 * r.enUS: requeteSite_
 	 * siteRequest
 	 * r.enUS: configSite
@@ -277,38 +283,38 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 	 */
 	protected void _pageVideoUrlEmbed(Couverture<String> c)  {
 		if(pageVideoId != null) {
-			c.o(StringUtils.defaultIfBlank((String)documentSolr.get(c.var + "_stored_string"), "https://www.youtube.com/embed/" + pageVideoId));
+			c.o(StringUtils.defaultIfBlank((String)pageDocumentSolr.get(c.var + "_stored_string"), "https://www.youtube.com/embed/" + pageVideoId));
 		}
 	}
 
 	/**
-	 * var.enUS: _pageImageWidth
+	 * Var.enUS: _pageImageWidth
 	 * frFR: Le longeur de l'image. 
-	 * indexe: true
-	 * stocke: true
+	 * Indexe: true
+	 * Stocke: true
 	 */
 	protected void _pageImageLargeur(Couverture<Integer> c)  {
-		c.o((Integer)documentSolr.get(c.var + "_stored_int"));
+		c.o((Integer)pageDocumentSolr.get(c.var + "_stored_int"));
 	}
 
 	/**
-	 * var.enUS: _pageImageHeight
+	 * Var.enUS: _pageImageHeight
 	 * frFR: Le hauteur de l'image. 
-	 * indexe: true
-	 * stocke: true
+	 * Indexe: true
+	 * Stocke: true
 	 */
 	protected void _pageImageHauteur(Couverture<Integer> c)  {
-		c.o((Integer)documentSolr.get(c.var + "_stored_int"));
+		c.o((Integer)pageDocumentSolr.get(c.var + "_stored_int"));
 	}
 
 	/**
-	 * var.enUS: _pageImageContentType
+	 * Var.enUS: _pageImageContentType
 	 * frFR: Le type de contenu de l'image. 
-	 * indexe: true
-	 * stocke: true
+	 * Indexe: true
+	 * Stocke: true
 	 */
 	protected void _pageImageTypeContenu(Couverture<String> c)  {
-		c.o(StringUtils.defaultIfBlank((String)documentSolr.get(c.var + "_stored_string"), null));
+		c.o(StringUtils.defaultIfBlank((String)pageDocumentSolr.get(c.var + "_stored_string"), null));
 	}
 //
 //	/**
@@ -331,12 +337,12 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 //	}
 
 	/** 
-	 * var.enUS: _pageMethod
+	 * Var.enUS: _pageMethod
 	 * r.enUS: requeteSite_.requete
 	 * siteRequest.request
 	 * Le nom du méthode à appeler pour charger la page. 
-	 * indexe: true
-	 * stocke: true
+	 * Indexe: true
+	 * Stocke: true
 	 */
 	protected void _pageMethode(Couverture<String> c)  {
 		HttpServerRequest requeteServeur = requeteSite_.getRequeteServeur();
@@ -356,10 +362,10 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 	}
 
 	/**
-	 * var.enUS: _pageContentType
+	 * Var.enUS: _pageContentType
 	 * frFR: Le type de contenu de la page. 
-	 * indexe: true
-	 * stocke: true
+	 * Indexe: true
+	 * Stocke: true
 	 * r.enUS: requeteSite_
 	 * siteRequest
 	 * r.enUS: requete
@@ -389,23 +395,23 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 //	}
 
 	/**
-	 * var.enUS: _pageCreated
-	 * indexe: true
-	 * stocke: true
+	 * Var.enUS: _pageCreated
+	 * Indexe: true
+	 * Stocke: true
 	 */
 	protected void _pageCree(Couverture<LocalDateTime> c)  {   
-		Date solrVal = (Date)documentSolr.get(c.var + "_stored_date");
+		Date solrVal = (Date)pageDocumentSolr.get(c.var + "_stored_date");
 		if(solrVal != null)
 			c.o(solrVal.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
 	}
 
 	/**
-	 * var.enUS: _pageModified
+	 * Var.enUS: _pageModified
 	 * r.enUS: pageCree
-	 * pageCreated
+	 * PageCreated
 	 */
 	protected void _pageModifiee(Couverture<LocalDateTime> c)  {
-		Date solrVal = (Date)documentSolr.get(c.var + "_stored_date");
+		Date solrVal = (Date)pageDocumentSolr.get(c.var + "_stored_date");
 		if(solrVal != null)
 			c.o(solrVal.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime());
 		else
@@ -427,27 +433,36 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 //			}
 //		}
 //	}
-//
-//	/**
-//	 * var.enUS: _pageKeywords
-//	 * indexe: true
-//	 * stocke: true
-//	 */
-//	protected void _pageMotsCles(Couverture<String> c)  {
-//	}
-//
-//	/**
-//	 * indexe: true
-//	 * stocke: true
-//	 */
-//	protected void _pageDescription(Couverture<String> c)  {
-//	}
 
 	/**
-	 * var.enUS: _homePageUri
+	 * Var.enUS: _pageKeywords
+	 * Indexe: true
+	 * Stocke: true
+	 */
+	protected void _pageMotsCles(Couverture<String> c)  {
+	}
+
+	/**
+	 * Indexe: true
+	 * Stocke: true
+	 */
+	protected void _pageDescription(Couverture<String> c)  {
+	}
+
+	/**
+	 * Var.enUS: _homePageUri
 	 */
 	protected void _pageAccueilUri(Couverture<String> c)  {
 		c.o("");
+	}
+
+	/**
+	 * Var.enUS: _pageInrEntry
+	 * r: /calcul-inr
+	 * r.enUS: /inr-entry
+	 */
+	protected void _pageCalculInr(Couverture<String> c)  {
+		c.o("/calcul-inr");
 	}
 //
 //	protected void _pageBlogUri(Couverture<String> c)  {
@@ -455,7 +470,7 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 //	}
 
 	/**
-	 * var.enUS: _aboutPageUri
+	 * Var.enUS: _aboutPageUri
 	 * r.enUS: apropos
 	 * about
 	 */
@@ -468,7 +483,7 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 	}
 
 	/**
-	 * var.enUS: _userPageUri
+	 * Var.enUS: _userPageUri
 	 * r.enUS: utilisateur
 	 * user
 	 */
@@ -477,7 +492,7 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 	}
 
 	/**
-	 * var.enUS: _logoutPageUri
+	 * Var.enUS: _logoutPageUri
 	 * r.enUS: deconnexion
 	 * logout
 	 */
@@ -510,11 +525,11 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 //	 * pinterestAccount
 //	 */
 //	protected void _pagePinterestUrl(Couverture<String> c)  {
-//		c.o("https://www.pinterest.com/computateorg/computate-en-fran%C3%A7ais/");
+//		c.o("https://www.pinterest.com/computateorg/site-en-fran%C3%A7ais/");
 //	}
 //
 //	/**
-//	 * var.enUS: _requestKey
+//	 * Var.enUS: _requestKey
 //	 * r.enUS: requeteSite_
 //	 * siteRequest
 //	 * r.enUS: requete
@@ -529,7 +544,7 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 //	}
 
 	/**
-	 * var.enUS: _requestKey
+	 * Var.enUS: _requestKey
 	 * r.enUS: requeteSite_
 	 * siteRequest
 	 * r.enUS: requete
@@ -600,6 +615,136 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 //			}
 //	}
 
+	@Override public void htmlMiseEnPageAvant() {
+		e("html").a("xmlns:xlink", "http://www.w3.org/1999/xlink").a("xmlns", "http://www.w3.org/1999/xhtml").a("xmlns:fb", "http://ogp.me/ns/fb#").f();
+		e("head").f();
+			e("meta").a("charset", "UTF-8").fg();
+			e("meta").a("name", "viewport").a("content", "width=device-width, initial-scale=1").fg();
+			e("link").a("rel", "stylesheet").a("href", "https://www.w3schools.com/w3css/4/w3.css").fg();
+			e("link").a("rel", "stylesheet").a("href", "/static/css/site.css").fg();
+			e("link").a("rel", "stylesheet").a("href", "https://fonts.googleapis.com/css?family=Khand").fg();
+			e("link").a("rel", "stylesheet").a("href", "https://pro.fontawesome.com/releases/v5.7.1/css/all.css").a("integrity", "sha384-6jHF7Z3XI3fF4XZixAuSu0gGKrXwoX/w3uFPxC56OtjChio7wtTGJWRW53Nhx6Ev").a("crossorigin", "anonymous").fg();
+//			e("link").a("rel", "stylesheet").a("href", "https://use.fontawesome.com/releases/v5.7.1/css/all.css").a("integrity", "sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr").a("crossorigin", "anonymous").fg();
+			e("script").a("src", "https://code.jquery.com/jquery-1.12.4.min.js").f().g("script");
+			e("script").a("src", "/static/js/site.js").f().g("script");
+//			e("script").a("async", "").a("defer", "").a("src", "https://apis.google.com/js/platform.js").f().g("script");
+//			e("script").a("async", "").a("src", "https://www.googletagmanager.com/gtag/js?id=UA-118970786-1").f().g("script");
+//			e("script").f().l("/*<![CDATA[*/");
+//				l("window.dataLayer = window.dataLayer || [];");
+//				l("function gtag(){dataLayer.push(arguments);}");
+//				l("gtag('js', new Date());");
+//				l("gtag('config', 'UA-118970786-1');");
+//			s("/*]]>*/").g("script");
+
+			e("meta").a("name", "description").a("content", pageDescription).fg();
+			e("title").f();
+				sx(pageTitre);
+			g("title");
+			e("meta").a("name", "keywords").a("content", pageMotsCles).fg();
+			e("meta").a("property", "og:title").a("content", pageTitre).fg();
+			e("meta").a("property", "og:description").a("content", pageDescription).fg();
+			e("meta").a("property", "og:url").a("content", pageUrl).fg();
+			e("meta").a("property", "og:site_name").a("content", requeteSite_.getConfigSite_().getNomDomaine()).fg();
+			e("meta").a("property", "og:image").a("content", pageImageUrl).fg();
+			e("meta").a("property", "og:image:width").a("content", pageImageLargeur).fg();
+			e("meta").a("property", "og:image:height").a("content", pageImageHauteur).fg();
+			e("meta").a("property", "og:image:type").a("content", pageImageTypeContenu).fg();
+			e("meta").a("property", "og:image:alt").a("content", pageTitre).fg();
+			e("meta").a("property", "og:type").a("content", "article").fg();
+			e("meta").a("name", "twitter:card").a("content", "summary_large_image").fg();
+			e("meta").a("name", "twitter:site").a("content", "@computateorg").fg();
+			e("meta").a("name", "twitter:creator").a("content", "@computateorg").fg();
+			e("meta").a("name", "twitter:title").a("content", pageTitre).fg();
+			e("meta").a("name", "twitter:description").a("content", pageDescription).fg();
+			e("meta").a("name", "twitter:image").a("content", pageImageUrl).fg();
+		g("head");
+		e("body").f(); 
+			e("a").a("name", "top").f().g("a");
+//			e("script").a("type", "text/javascript").a("async", "").a("defer", "").a("src", "//assets.pinterest.com/js/pinit_main.js?0.8726554954646004").f().g("script");
+//			e("div").a("id", "fb-root").f().g("div");
+//			e("script").f().l("/*<![CDATA[*/");
+//				l("(function(d, s, id) {");
+//				l("var js, fjs = d.getElementsByTagName(s)[0];");
+//				l("if (d.getElementById(id)) return;");
+//				l("js = d.createElement(s); js.id = id;");
+//				s("js.src = '");
+//				s("//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10&appId=1871568493111919");
+//				l("';");
+//				l("fjs.parentNode.insertBefore(js, fjs);");
+//				l("}(document, 'script', 'facebook-jssdk'));");
+//			s("/*]]>*/").g("script");
+//			e("script").f().l("/*<![CDATA[*/");
+//				s("var _ctct_m = \"805a4a78c2843d257b9b05ea244b6ec7\"; ");
+//			s("/*]]>*/").g("script");
+//			e("script").a("id", "signupScript").a("src", "//static.ctctcdn.com/js/signup-form-widget/current/signup-form-widget.min.js").a("async", "").a("defer", "").f();
+//			g("script");
+			e("div").a("id", "modaleErreur").a("class", "w3-modal").a("onclick", "this.style.display = 'none';").f();
+				e("div").a("class", "w3-modal-content w3-animate-zoom").f();
+					e("header").a("class", "w3-container w3-center w3-red ").f();
+						e("h3").f();
+							sx("Une erreur s'est produite. ");
+						g("h3");
+					g("header");
+				g("div");
+				e("div").a("id", "modaleErreurMessage").a("class", "w3-container w3-center").f().g("div");
+				e("header").a("class", "w3-container w3-center w3-padding-16 ").f();
+					sx("L'erreur a été envoyée par e-mail à l'administrateur pour analyse. ");
+				g("header");
+			g("div");
+			e("div").a("class", "site-section-all ").f();
+				e("div").a("class", "site-section-above ").f();
+					e("div").a("class", "w3-content w3-center w3-text-black ").f();
+						e("div").a("class", "").f();
+//							e("img").a("src", "/img/trailblaze-top.jpg").a("class", "w3-img ").a("style", "width: 100%; margin-bottom: -10px; ").fg();
+							menu();
+						g("div"); 
+					g("div");
+					e("div").a("id", "site-section-primary").a("class", "site-section-primary w3-text-black w3-padding-bottom-32 ").f();
+						e("div").a("class", "w3-content ").f();
+	}
+
+	@Override public void htmlMiseEnPageApres() {
+								e("footer").a("class", "w3-center w3-black w3-padding-48 ").f();
+									e("div").a("class", "w3-xxlarge ").f();
+										sx("This site is open-source. ");
+									g("div");
+									e("div").a("class", "w3-large ").f();
+										e("a").a("href", "https://github.com/computate/computate-cardiac").a("target", "_new").f();
+											sx("View the source code here. ");
+										g("a");
+									g("div");
+								g("footer");
+							g("div");
+						g("div");
+					g("div");
+				g("div");
+				e("div").a("class", "w3-row site-section-contact ").f();
+					e("div").a("class", "w3-content w3-center  w3-cell-row w3-margin-bottom-32 ").f();
+						menu();
+						e("div").a("class", "w3-container ").f();
+							e("div").a("class", "w3-container w3-text-black w3-margin-top ").f();
+								e("h6").a("id", "h2-contactez-nous").a("class",  "w3-xlarge ").f();
+									sx("Let's get connected. ");
+								g("h6");
+								e("div").a("style", "").f();
+									e("a").a("data-ajax", "false").a("href", "https://www.facebook.com/Trail-Blaze-Hunting-Consultants-LLC-179217055464922/").f();
+//											e("img").a("class", "grow-30 ").a("style", "display: inline-block; width: 50px; height: 50px; margin: 0 10px;").a("src", "https://www.computate.org/svg/facebook.svg").fg();
+									g("a");
+								g("div");
+								e("h6").f();
+									e("a").a("href", "#top").f();
+										sx("Up to the top. ");
+									g("a");
+								g("h6");
+							g("div");
+						g("div");
+					g("div");
+				g("div");
+			g("body");
+		g("html");
+
+	}
+
 	/** 
 	 * r.enUS: Home 
 	 * Accueil 
@@ -617,9 +762,7 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 	 * r.enUS: Logout
 	 */
 	public void menu()  {
-		e("div").a("class", "w3-bar w3-text-white w3-card-2 w3-padding-bottom-8 w3-padding-top-8 ").a("style", "padding-left: 16px; padding-right: 16px; ").f();
-			e("div").a("class", "").f();
-				e("span").a("class", "").f();
+		e("div").a("class", "w3-black w3-bar w3-text-white w3-card-2 w3-padding-bottom-8 w3-padding-top-8 ").a("style", "padding-left: 16px; padding-right: 16px; ").f();
 //					e("span").a("class", "header-icon-a grow-30 w3-center ").f();
 //						e("a").a("class", "w3-hover-opacity").a("title", "English").a("href", pageUri.enUS()).f();
 //							e("img").a("src", "/svg/flag-US.svg").a("style", "height: 50px; ").fg();
@@ -628,57 +771,64 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 //							e("img").a("src", "/svg/flag-FR.svg").a("style", "height: 50px; ").fg();
 //						g("a");
 //						e("br").fg();
-//						e("span").a("class", "computate-menu-item").f();
+//						e("span").a("class", "site-menu-item").f();
 //							enUSx("Language");
 //							frFRx("Langue");
 //						g("span");
 //					g("span");
-					e("a").a("class", "header-icon-a grow-30 w3-hover-opacity w3-center ").a("href", pageAccueilUri).f();
-						e("img").a("src", "/svg/computate.org.svg").a("style", "height: 50px; ").fg();
-						e("br").fg();
-						e("span").a("class", "computate-menu-item").a("id", "computate_org_span").f();
-							sx("Home");
-							sx("Accueil");
-						g("span");
-					g("a");
-					e("a").a("class", "header-icon-a grow-30 w3-hover-opacity w3-center ").a("href", pageAProposUri).f();
-						e("img").a("src", "/png/computate.png").a("style", "height: 50px; ").fg();
-						e("br").fg();
-						e("span").a("class", "computate-menu-item").a("id", "computate_org_span").f();
-							sx("About");
-							sx("À propos");
-						g("span");
-					g("a");
-					e("a").a("class", "header-icon-a grow-30 w3-hover-opacity w3-center ").a("href", pageFaqUri).f();
-						e("img").a("src", "/svg/ufo.svg").a("style", "height: 50px; ").fg();
-						e("br").fg();
-						e("span").a("class", "computate-menu-item").a("id", "computate_org_span").f();
-							sx("FAQ");
-							sx("FAQ");
-						g("span");
-					g("a");
-					if(requeteSite_.getUtilisateurId() == null) {
-						e("a").a("class", "header-icon-a grow-30 w3-hover-opacity w3-center ").a("href", pageUtilisateurUri).f(); 
-							e("img").a("src", "/svg/astronaut-helmet.svg").a("style", "height: 50px; ").fg();
-							e("br").fg();
-							e("span").a("class", "computate-menu-item").a("id", "computate_org_span").f();
-								sx("Login");
-								sx("Se connecter");
-							g("span");
-						g("a");
-					}
-					if(requeteSite_.getUtilisateurId() != null) {
-						e("a").a("class", "header-icon-a grow-30 w3-hover-opacity w3-center ").a("href", pageDeconnexionUri).f();
-							e("img").a("src", "/svg/light-speed.svg").a("style", "height: 50px; ").fg();
-							e("br").fg();
-							e("span").a("class", "computate-menu-item").a("id", "computate_org_span").f();
-								sx("Logout");
-								sx("Se déconnecter");
-							g("span");
-						g("a");
-					}
-				g("span");
+			e("div").a("class", "w3-bar-item ").f();
+				e("a").a("class", "header-icon-a grow-30 w3-hover-opacity w3-center ").a("href", pageAccueilUri).f();
+					e("i").a("class", "fas fa-clinic-medical site-menu-icon ").f().g("i");
+					e("span").a("class", "site-menu-item").a("id", "computate_org_span").f();
+						sx("Home");
+					g("span");
+				g("a");
 			g("div");
+			e("div").a("class", "w3-bar-item ").f();
+				e("a").a("class", "header-icon-a grow-30 w3-hover-opacity w3-center ").a("href", pageCalculInr).f();
+					e("i").a("class", "fas fa-clipboard-prescription site-menu-icon ").f().g("i");
+					e("span").a("class", "site-menu-item").a("id", "computate_org_span").f();
+						sx("Inr Entries");
+					g("span");
+				g("a");
+			g("div");
+			e("div").a("class", "w3-bar-item ").f();
+				e("a").a("class", "header-icon-a grow-30 w3-hover-opacity w3-center ").a("href", pageAProposUri).f();
+					e("i").a("class", "fas fa-book-open site-menu-icon ").f().g("i");
+					e("span").a("class", "site-menu-item").a("id", "computate_org_span").f();
+						sx("About");
+					g("span");
+				g("a");
+			g("div");
+			e("div").a("class", "w3-bar-item ").f();
+				e("a").a("class", "header-icon-a grow-30 w3-hover-opacity w3-center ").a("href", pageFaqUri).f();
+					e("i").a("class", "fas fa-question-square site-menu-icon ").f().g("i");
+					e("span").a("class", "site-menu-item").a("id", "computate_org_span").f();
+						sx("FAQ");
+					g("span");
+				g("a");
+			g("div");
+			if(requeteSite_.getUtilisateurId() == null) {
+				e("div").a("class", "w3-bar-item ").f();
+					e("a").a("class", "header-icon-a grow-30 w3-hover-opacity w3-center ").a("href", pageUtilisateurUri).f(); 
+						e("i").a("class", "fas fa-sign-in site-menu-icon ").f().g("i");
+						e("span").a("class", "site-menu-item").a("id", "computate_org_span").f();
+							sx("Login");
+						g("span");
+					g("a");
+				g("div");
+			}
+			if(requeteSite_.getUtilisateurId() != null) {
+				e("div").a("class", "w3-bar-item ").f();
+					e("a").a("class", "header-icon-a grow-30 w3-hover-opacity w3-center ").a("href", pageDeconnexionUri).f();
+						e("i").a("class", "fas fa-sign-out site-menu-icon ").f().g("i");
+						e("span").a("class", "site-menu-item").a("id", "computate_org_span").f();
+							sx("Logout");
+							sx("Se déconnecter");
+						g("span");
+					g("a");
+				g("div");
+			}
 		g("div");
 	}
 
@@ -715,7 +865,7 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 	}
 
 	/**
-	 * param1.var.enUS: localName
+	 * Param1.var.enUS: localName
 	 * r.enUS: nomLocal
 	 * localName
 	 * r.enUS: xmlPile
@@ -764,8 +914,8 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 	}
 
 	/**  
-	 * param1.var.enUS: attributeName
-	 * param2.var.enUS: objects
+	 * Param1.var.enUS: attributeName
+	 * Param2.var.enUS: objects
 	 * r.enUS: nomAttribut
 	 * attributeName
 	 * r.enUS: objets
@@ -809,8 +959,8 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 	}
 
 	/**
-	 * var.enUS: all
-	 * param1.var.enUS: objects
+	 * Var.enUS: all
+	 * Param1.var.enUS: objects
 	 * r.enUS: objet
 	 * object
 	 * r.enUS: ecrivain
@@ -835,8 +985,8 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 	}
 
 	/**
-	 * param1.var.enUS: numberTabs
-	 * param2.var.enUS: objects
+	 * Param1.var.enUS: numberTabs
+	 * Param2.var.enUS: objects
 	 * r.enUS: nombreTabulations
 	 * numberTabs
 	 * r.enUS: objets
@@ -852,9 +1002,9 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 	}
 
 	/**
-	 * var.enUS: tabLine
-	 * param1.var.enUS: numberTabs
-	 * param2.var.enUS: objects
+	 * Var.enUS: tabLine
+	 * Param1.var.enUS: numberTabs
+	 * Param2.var.enUS: objects
 	 * r.enUS: nombreTabulations
 	 * numberTabs
 	 * r.enUS: objets
@@ -871,14 +1021,14 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 	}
 
 	/** 
-	 * var.enUS: allLine
-	 * param1.var.enUS: objects
+	 * Var.enUS: allLine
+	 * Param1.var.enUS: objects
 	 * r.enUS: objets
 	 * objects
 	 * r.enUS: tout
 	 * all
 	 */
-	public MiseEnPage tl(Object...objets) {
+	public MiseEnPage l(Object...objets) {
 		s(objets);
 		s("\n");
 		return this;
@@ -891,8 +1041,8 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 	}
 
 	/** 
-	 * var.enUS: allXml
-	 * param1.var.enUS: objects
+	 * Var.enUS: allXml
+	 * Param1.var.enUS: objects
 	 * r.enUS: objet
 	 * object
 	 * r.enUS: ecrivain
@@ -921,9 +1071,9 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 	}
 
 	/**
-	 * var.enUS: allXml
-	 * param1.var.enUS: numberTabs
-	 * param2.var.enUS: objects
+	 * Var.enUS: allXml
+	 * Param1.var.enUS: numberTabs
+	 * Param2.var.enUS: objects
 	 * r.enUS: nombreTabulations
 	 * numberTabs
 	 * r.enUS: objets
@@ -939,9 +1089,9 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 	}
 
 	/**
-	 * var.enUS: tabLineXml
-	 * param1.var.enUS: numberTabs
-	 * param2.var.enUS: objects
+	 * Var.enUS: tabLineXml
+	 * Param1.var.enUS: numberTabs
+	 * Param2.var.enUS: objects
 	 * r.enUS: nombreTabulations
 	 * numberTabs
 	 * r.enUS: objets
@@ -952,20 +1102,6 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 	public MiseEnPage tlx(int nombreTabulations, Object...objets) {
 		for(int i = 0; i < nombreTabulations; i++)
 			sx("\t");
-		sx(objets);
-		sx("\n");
-		return this;
-	}
-
-	/**
-	 * var.enUS: allLineXml
-	 * param1.var.enUS: objects
-	 * r.enUS: objets
-	 * objects
-	 * r.enUS: tout
-	 * all
-	 */
-	public MiseEnPage tlx(Object...objets) {
 		sx(objets);
 		sx("\n");
 		return this;
@@ -987,7 +1123,7 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 	}
 
 	/**    
-	 * param1.var.enUS: localName
+	 * Param1.var.enUS: localName
 	 * r.enUS: nomLocal
 	 * localName
 	 * r.enUS: nomLocalParent
@@ -1005,8 +1141,9 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 	 */
 	public MiseEnPage g(String nomLocal) {
 		String nomLocalParent = requeteSite_.getXmlPile().peek();
-
 		boolean eNoWrap = nomLocalParent == null || HTML_ELEMENTS_NO_WRAP.contains(nomLocal);
+
+		requeteSite_.getXmlPile().pop();
 		String tabulations = String.join("", Collections.nCopies(requeteSite_.getXmlPile().size(), "\t"));
 		String tabulationsEchappes = String.join("", Collections.nCopies(requeteSite_.getXmlPile().size(), "\\t"));
 
@@ -1017,7 +1154,6 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 		w.s("</");
 		w.s(nomLocal);
 		w.s(">");
-		requeteSite_.getXmlPile().pop();
 		
 		return this;
 	}

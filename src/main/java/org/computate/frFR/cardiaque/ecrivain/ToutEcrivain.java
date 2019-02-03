@@ -19,7 +19,7 @@ import io.vertx.core.buffer.Buffer;
 
 
 /**  
- * nomCanonique.enUS: org.computate.enUS.cardiac.writer.AllWriter
+ * NomCanonique.enUS: org.computate.enUS.cardiac.writer.AllWriter
  **/
 public class ToutEcrivain extends ToutEcrivainGen<Object> {    
 
@@ -40,8 +40,8 @@ public class ToutEcrivain extends ToutEcrivainGen<Object> {
 
 	/**
 	 * {@inheritDoc}
-	 * var.enUS: create
-	 * param1.var.enUS: siteRequest
+	 * Var.enUS: create
+	 * Param1.var.enUS: siteRequest
 	 * r: initLoinPourClasse
 	 * r.enUS: initDeepForClass
 	 * r: requeteSite
@@ -57,8 +57,8 @@ public class ToutEcrivain extends ToutEcrivainGen<Object> {
 
 	/**
 	 * {@inheritDoc}
-	 * var.enUS: create
-	 * param1.var.enUS: siteRequest
+	 * Var.enUS: create
+	 * Param1.var.enUS: siteRequest
 	 * r: initLoinPourClasse
 	 * r.enUS: initDeepForClass
 	 * r: requeteSite
@@ -75,9 +75,9 @@ public class ToutEcrivain extends ToutEcrivainGen<Object> {
 
 	/**
 	 * {@inheritDoc}
-	 * var.enUS: create
-	 * param1.var.enUS: siteRequest
-	 * param2.var.enUS: fichier
+	 * Var.enUS: create
+	 * Param1.var.enUS: siteRequest
+	 * Param2.var.enUS: fichier
 	 * r: Fichier
 	 * r.enUS: File
 	 * r: fichier
@@ -98,9 +98,9 @@ public class ToutEcrivain extends ToutEcrivainGen<Object> {
 
 	/**
 	 * {@inheritDoc}
-	 * var.enUS: create
-	 * param1.var.enUS: siteRequest
-	 * param2.var.enUS: fichier
+	 * Var.enUS: create
+	 * Param1.var.enUS: siteRequest
+	 * Param2.var.enUS: fichier
 	 * r: Fichier
 	 * r.enUS: File
 	 * r: fichier
@@ -122,9 +122,9 @@ public class ToutEcrivain extends ToutEcrivainGen<Object> {
 
 	/**
 	 * {@inheritDoc}
-	 * var.enUS: create
-	 * param1.var.enUS: siteRequest
-	 * param2.var.enUS: fichier
+	 * Var.enUS: create
+	 * Param1.var.enUS: siteRequest
+	 * Param2.var.enUS: fichier
 	 * r: Fichier
 	 * r.enUS: File
 	 * r: fichier
@@ -145,9 +145,9 @@ public class ToutEcrivain extends ToutEcrivainGen<Object> {
 
 	/**
 	 * {@inheritDoc}
-	 * var.enUS: create
-	 * param1.var.enUS: siteRequest
-	 * param2.var.enUS: fichier
+	 * Var.enUS: create
+	 * Param1.var.enUS: siteRequest
+	 * Param2.var.enUS: fichier
 	 * r: Fichier
 	 * r.enUS: File
 	 * r: fichier
@@ -169,13 +169,13 @@ public class ToutEcrivain extends ToutEcrivainGen<Object> {
 
 	/**
 	 * {@inheritDoc}
-	 * var.enUS: fichier
+	 * Var.enUS: fichier
 	 **/
 	protected void _fichier(Couverture<File> c) {
 	}
 
 	/**
-	 * var.enUS: stringWriter
+	 * Var.enUS: stringWriter
 	 * r: fichier
 	 * r.enUS: file
 	 * r: ecrivainString
@@ -195,13 +195,13 @@ public class ToutEcrivain extends ToutEcrivainGen<Object> {
 //
 //	/**
 //	 * {@inheritDoc}
-//	 * var.enUS: httpServerResponse
+//	 * Var.enUS: httpServerResponse
 //	 **/
 //	protected void _reponseServeurHttp(Couverture<HttpServerResponse> c) {
 //	}
 
 	/**
-	 * var.enUS: printWriter
+	 * Var.enUS: printWriter
 	 * r: ecrivainString
 	 * r.enUS: stringWriter
 	 * r: fichier
@@ -226,15 +226,15 @@ public class ToutEcrivain extends ToutEcrivainGen<Object> {
 
 	/**
 	 * {@inheritDoc}
-	 * var.enUS: empty
+	 * Var.enUS: empty
 	 **/
 	protected void _vide(Couverture<Boolean> c) {
 		c.o(true);
 	}
 
 	/**
-	 * param1.var.enUS: tabNumber
-	 * param2.var.enUS: objects
+	 * Param1.var.enUS: tabNumber
+	 * Param2.var.enUS: objects
 	 * r: objets
 	 * r.enUS: objects
 	 * r: nombreTabulations
@@ -248,8 +248,8 @@ public class ToutEcrivain extends ToutEcrivainGen<Object> {
 	}
 
 	/**
-	 * param1.var.enUS: tabNumber
-	 * param2.var.enUS: objects
+	 * Param1.var.enUS: tabNumber
+	 * Param2.var.enUS: objects
 	 * r: objets
 	 * r.enUS: objects
 	 * r: nombreTabulations
@@ -264,7 +264,7 @@ public class ToutEcrivain extends ToutEcrivainGen<Object> {
 	}
 
 	/**
-	 * param1.var.enUS: objects
+	 * Param1.var.enUS: objects
 	 * r: objets
 	 * r.enUS: objects
 	 */

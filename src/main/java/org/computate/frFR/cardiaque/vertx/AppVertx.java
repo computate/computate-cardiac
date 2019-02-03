@@ -202,7 +202,7 @@ public class AppVertx extends AbstractVerticle {
 		Router siteRouteur = siteContexte.getUsineRouteur().getRouter();
 //			siteContexte.setSiteRouteur_(siteRouteur);
 
-//		siteRouteur.route().handler(StaticHandler.create());
+		siteRouteur.route("/static/*").handler(StaticHandler.create().setCachingEnabled(false).setFilesReadOnly(true));
 
 		String siteNomHote = configSite.getSiteNomHote();
 		Integer sitePort = configSite.getSitePort();
@@ -214,7 +214,6 @@ public class AppVertx extends AbstractVerticle {
 		options.setHost(siteNomHote);
 
 		LOGGER.info(String.format("HTTP server starting: %s://%s:%s", "https", siteNomHote, sitePort));
-//		vertx.createHttpServer(options).requestHandler(siteRouteur).listen();
 		vertx.createHttpServer(options).requestHandler(siteRouteur).listen(ar -> {
 			if (ar.succeeded()) {
 				LOGGER.info(String.format("HTTP server running: %s:%s", siteNomHote, sitePort));

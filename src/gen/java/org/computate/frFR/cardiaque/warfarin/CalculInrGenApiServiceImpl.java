@@ -21,6 +21,7 @@ import org.computate.frFR.cardiaque.requete.RequeteSite;
 import io.vertx.ext.web.api.contract.openapi3.OpenAPI3RouterFactory;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.logging.Logger;
+import io.vertx.core.http.CaseInsensitiveHeaders;
 import java.io.PrintWriter;
 import java.util.Collection;
 import java.sql.Timestamp;
@@ -152,36 +153,37 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 	}
 
 	public Future<OperationResponse> reponse200RechercheCalculInr(ListeRecherche<CalculInr> listeCalculInr) {
-		Buffer buffer = Buffer.buffer();
-		RequeteSite requeteSite = listeCalculInr.getRequeteSite_();
-		ToutEcrivain w = ToutEcrivain.creer(listeCalculInr.getRequeteSite_(), buffer);
-		QueryResponse reponseRecherche = listeCalculInr.getQueryResponse();
-		SolrDocumentList documentsSolr = listeCalculInr.getSolrDocumentList();
-		Long millisRecherche = Long.valueOf(reponseRecherche.getQTime());
-		Long millisTransmission = reponseRecherche.getElapsedTime();
-		Long numCommence = reponseRecherche.getResults().getStart();
-		Long numTrouve = reponseRecherche.getResults().getNumFound();
-		Integer numRetourne = reponseRecherche.getResults().size();
-		String tempsRecherche = String.format("%d.%03d sec", TimeUnit.MILLISECONDS.toSeconds(millisRecherche), TimeUnit.MILLISECONDS.toMillis(millisRecherche) - TimeUnit.SECONDS.toMillis(TimeUnit.MILLISECONDS.toSeconds(millisRecherche)));
-		String tempsTransmission = String.format("%d.%03d sec", TimeUnit.MILLISECONDS.toSeconds(millisTransmission), TimeUnit.MILLISECONDS.toMillis(millisTransmission) - TimeUnit.SECONDS.toSeconds(TimeUnit.MILLISECONDS.toSeconds(millisTransmission)));
-		Exception exceptionRecherche = reponseRecherche.getException();
+		try {
+			Buffer buffer = Buffer.buffer();
+			RequeteSite requeteSite = listeCalculInr.getRequeteSite_();
+			ToutEcrivain w = ToutEcrivain.creer(listeCalculInr.getRequeteSite_(), buffer);
+			QueryResponse reponseRecherche = listeCalculInr.getQueryResponse();
+			SolrDocumentList documentsSolr = listeCalculInr.getSolrDocumentList();
+			Long millisRecherche = Long.valueOf(reponseRecherche.getQTime());
+			Long millisTransmission = reponseRecherche.getElapsedTime();
+			Long numCommence = reponseRecherche.getResults().getStart();
+			Long numTrouve = reponseRecherche.getResults().getNumFound();
+			Integer numRetourne = reponseRecherche.getResults().size();
+			String tempsRecherche = String.format("%d.%03d sec", TimeUnit.MILLISECONDS.toSeconds(millisRecherche), TimeUnit.MILLISECONDS.toMillis(millisRecherche) - TimeUnit.SECONDS.toMillis(TimeUnit.MILLISECONDS.toSeconds(millisRecherche)));
+			String tempsTransmission = String.format("%d.%03d sec", TimeUnit.MILLISECONDS.toSeconds(millisTransmission), TimeUnit.MILLISECONDS.toMillis(millisTransmission) - TimeUnit.SECONDS.toSeconds(TimeUnit.MILLISECONDS.toSeconds(millisTransmission)));
+			Exception exceptionRecherche = reponseRecherche.getException();
 
-		w.l("{");
-		w.tl(1, "\"numCommence\": ", numCommence);
-		w.tl(1, ", \"numTrouve\": ", numTrouve);
-		w.tl(1, ", \"numRetourne\": ", numRetourne);
-		w.tl(1, ", \"tempsRecherche\": ", w.q(tempsRecherche));
-		w.tl(1, ", \"tempsTransmission\": ", w.q(tempsTransmission));
-		w.tl(1, ", \"liste\": [");
-		for(int i = 0; i < documentsSolr.size(); i++) {
-			SolrDocument documentSolr = documentsSolr.get(i);
-			Object entiteValeur;
-			Integer entiteNumero = 0;
+			w.l("{");
+			w.tl(1, "\"numCommence\": ", numCommence);
+			w.tl(1, ", \"numTrouve\": ", numTrouve);
+			w.tl(1, ", \"numRetourne\": ", numRetourne);
+			w.tl(1, ", \"tempsRecherche\": ", w.q(tempsRecherche));
+			w.tl(1, ", \"tempsTransmission\": ", w.q(tempsTransmission));
+			w.tl(1, ", \"liste\": [");
+			for(int i = 0; i < documentsSolr.size(); i++) {
+				SolrDocument documentSolr = documentsSolr.get(i);
+				Object entiteValeur;
+				Integer entiteNumero = 0;
 
-			w.t(2);
-			if(i > 0)
-				w.s(", ");
-			w.s("{");
+				w.t(2);
+				if(i > 0)
+					w.s(", ");
+				w.s("{");
 
 			entiteValeur = documentSolr.getFieldValues("utilisateurPk_stored_long").stream().findFirst().orElse(null);
 			if(entiteValeur != null)
@@ -223,14 +225,18 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 			if(entiteValeur != null)
 				w.l(entiteNumero++ == 0 ? "" : ", ", "\"infoContact\": ", w.q(entiteValeur));
 
-			w.tl(2, "}");
+				w.tl(2, "}");
+			}
+			w.tl(1, "]");
+			if(exceptionRecherche != null) {
+				w.tl(1, ", \"exceptionRecherche\": ", w.q(exceptionRecherche.getMessage()));
+			}
+			w.l("}");
+			return Future.succeededFuture(OperationResponse.completedWithJson(buffer));
+		} catch(Exception e) {
+			ExceptionUtils.printRootCauseStackTrace(e);
+			return Future.failedFuture(e);
 		}
-		w.tl(1, "]");
-		if(exceptionRecherche != null) {
-			w.tl(1, ", \"exceptionRecherche\": ", w.q(exceptionRecherche.getMessage()));
-		}
-		w.l("}");
-		return Future.succeededFuture(OperationResponse.completedWithJson(buffer));
 	}
 
 	// POST //
@@ -287,8 +293,8 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 		for(String entiteVar : entiteVars) {
 			switch(entiteVar) {
 				case "utilisateurPk":
-					postSql.append(SiteContexte.SQL_addA);
-					postSqlParams.addAll(Arrays.asList("calculInrPks", pk, "utilisateurPk", jsonObject.getLong(entiteVar)));
+					postSql.append(SiteContexte.SQL_setP);
+					postSqlParams.addAll(Arrays.asList("utilisateurPk", jsonObject.getLong(entiteVar), pk));
 					break;
 				case "dateInr":
 					postSql.append(SiteContexte.SQL_setP);
@@ -339,10 +345,15 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 	}
 
 	public Future<OperationResponse> reponse200POSTCalculInr(CalculInr o) {
-		Buffer buffer = Buffer.buffer();
-		RequeteSite requeteSite = o.getRequeteSite_();
-		ToutEcrivain w = ToutEcrivain.creer(o.getRequeteSite_(), buffer);
-		return Future.succeededFuture(OperationResponse.completedWithJson(buffer));
+		try {
+			Buffer buffer = Buffer.buffer();
+			RequeteSite requeteSite = o.getRequeteSite_();
+			ToutEcrivain w = ToutEcrivain.creer(o.getRequeteSite_(), buffer);
+			return Future.succeededFuture(OperationResponse.completedWithJson(buffer));
+		} catch(Exception e) {
+			ExceptionUtils.printRootCauseStackTrace(e);
+			return Future.failedFuture(e);
+		}
 	}
 
 	// PATCH //
@@ -386,6 +397,10 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 
 		for(String methodeNom : methodeNoms) {
 			switch(methodeNom) {
+				case "setUtilisateurPk":
+					patchSql.append(SiteContexte.SQL_setP);
+					patchSqlParams.addAll(Arrays.asList("utilisateurPk", requeteJson.getLong(methodeNom), pk));
+					break;
 				case "setDateInr":
 					patchSql.append(SiteContexte.SQL_setP);
 					patchSqlParams.addAll(Arrays.asList("dateInr", requeteJson.getInstant(methodeNom), pk));
@@ -435,9 +450,14 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 	}
 
 	public Future<OperationResponse> reponse200PATCHCalculInr(ListeRecherche<CalculInr> listeCalculInr) {
-		Buffer buffer = Buffer.buffer();
-		ToutEcrivain w = ToutEcrivain.creer(listeCalculInr.getRequeteSite_(), buffer);
-		return Future.succeededFuture(OperationResponse.completedWithJson(buffer));
+		try {
+			Buffer buffer = Buffer.buffer();
+			ToutEcrivain w = ToutEcrivain.creer(listeCalculInr.getRequeteSite_(), buffer);
+			return Future.succeededFuture(OperationResponse.completedWithJson(buffer));
+		} catch(Exception e) {
+			ExceptionUtils.printRootCauseStackTrace(e);
+			return Future.failedFuture(e);
+		}
 	}
 
 	// GET //
@@ -452,16 +472,17 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 	}
 
 	public Future<OperationResponse> reponse200GETCalculInr(ListeRecherche<CalculInr> listeCalculInr) {
-		Buffer buffer = Buffer.buffer();
-		ToutEcrivain w = ToutEcrivain.creer(listeCalculInr.getRequeteSite_(), buffer);
-		SolrDocumentList documentsSolr = listeCalculInr.getSolrDocumentList();
+		try {
+			Buffer buffer = Buffer.buffer();
+			ToutEcrivain w = ToutEcrivain.creer(listeCalculInr.getRequeteSite_(), buffer);
+			SolrDocumentList documentsSolr = listeCalculInr.getSolrDocumentList();
 
-		if(documentsSolr.size() > 0) {
-			SolrDocument documentSolr = documentsSolr.get(0);
-			Object entiteValeur;
-			Integer entiteNumero = 0;
+			if(documentsSolr.size() > 0) {
+				SolrDocument documentSolr = documentsSolr.get(0);
+				Object entiteValeur;
+				Integer entiteNumero = 0;
 
-			w.l("{");
+				w.l("{");
 
 			entiteValeur = documentSolr.getFieldValues("utilisateurPk_stored_long").stream().findFirst().orElse(null);
 			if(entiteValeur != null)
@@ -503,9 +524,13 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 			if(entiteValeur != null)
 				w.l(entiteNumero++ == 0 ? "" : ", ", "\"infoContact\": ", w.q(entiteValeur));
 
-			w.l("}");
+				w.l("}");
+			}
+			return Future.succeededFuture(OperationResponse.completedWithJson(buffer));
+		} catch(Exception e) {
+			ExceptionUtils.printRootCauseStackTrace(e);
+			return Future.failedFuture(e);
 		}
-		return Future.succeededFuture(OperationResponse.completedWithJson(buffer));
 	}
 
 	// PUT //
@@ -561,8 +586,8 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 		for(String entiteVar : entiteVars) {
 			switch(entiteVar) {
 				case "utilisateurPk":
-					postSql.append(SiteContexte.SQL_addA);
-					postSqlParams.addAll(Arrays.asList("calculInrPks", pk, "utilisateurPk", jsonObject.getLong(entiteVar)));
+					postSql.append(SiteContexte.SQL_setP);
+					postSqlParams.addAll(Arrays.asList("utilisateurPk", jsonObject.getLong(entiteVar), pk));
 					break;
 				case "dateInr":
 					postSql.append(SiteContexte.SQL_setP);
@@ -613,10 +638,15 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 	}
 
 	public Future<OperationResponse> reponse200PUTCalculInr(CalculInr o) {
-		Buffer buffer = Buffer.buffer();
-		RequeteSite requeteSite = o.getRequeteSite_();
-		ToutEcrivain w = ToutEcrivain.creer(o.getRequeteSite_(), buffer);
-		return Future.succeededFuture(OperationResponse.completedWithJson(buffer));
+		try {
+			Buffer buffer = Buffer.buffer();
+			RequeteSite requeteSite = o.getRequeteSite_();
+			ToutEcrivain w = ToutEcrivain.creer(o.getRequeteSite_(), buffer);
+			return Future.succeededFuture(OperationResponse.completedWithJson(buffer));
+		} catch(Exception e) {
+			ExceptionUtils.printRootCauseStackTrace(e);
+			return Future.failedFuture(e);
+		}
 	}
 
 	// DELETE //
@@ -651,34 +681,107 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 	}
 
 	public Future<OperationResponse> reponse200DELETECalculInr(RequeteSite requeteSite) {
-		Buffer buffer = Buffer.buffer();
-		ToutEcrivain w = ToutEcrivain.creer(requeteSite, buffer);
-		return Future.succeededFuture(OperationResponse.completedWithJson(buffer));
+		try {
+			Buffer buffer = Buffer.buffer();
+			ToutEcrivain w = ToutEcrivain.creer(requeteSite, buffer);
+			return Future.succeededFuture(OperationResponse.completedWithJson(buffer));
+		} catch(Exception e) {
+			ExceptionUtils.printRootCauseStackTrace(e);
+			return Future.failedFuture(e);
+		}
 	}
 
-	// GETPage //
+	// RecherchePage //
 
 	@Override
-	public void getpageCalculInr(OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
+	public void recherchepageCalculInr(OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
 		RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte, operationRequete);
-		Future<OperationResponse> etapesFutures = rechercheCalculInr(requeteSite).compose(listeCalculInr -> 
-			reponse200GETPageCalculInr(listeCalculInr)
+		Future<OperationResponse> etapesFutures = recherchepageCalculInr(requeteSite).compose(listeCalculInr -> 
+			reponse200RecherchePageCalculInr(listeCalculInr)
 		);
 		etapesFutures.setHandler(gestionnaireEvenements);
 	}
 
-	public Future<OperationResponse> reponse200GETPageCalculInr(ListeRecherche<CalculInr> listeCalculInr) {
-		Buffer buffer = Buffer.buffer();
-		ToutEcrivain w = ToutEcrivain.creer(listeCalculInr.getRequeteSite_(), buffer);
-		SolrDocumentList documentsSolr = listeCalculInr.getSolrDocumentList();
+	public Future<ListeRecherche<CalculInr>> recherchepageCalculInr(RequeteSite requeteSite) {
+		OperationRequest operationRequete = requeteSite.getOperationRequete();
+		String entiteListeStr = requeteSite.getOperationRequete().getParams().getJsonObject("query").getString("fl");
+		String[] entiteListe = entiteListeStr == null ? null : entiteListeStr.split(",\\s*");
+		ListeRecherche<CalculInr> listeRecherche = new ListeRecherche<CalculInr>();
+		listeRecherche.setQuery("*:*");
+		listeRecherche.setRows(1000000);
+		if(entiteListe != null)
+			listeRecherche.setFields(entiteListe);
+		listeRecherche.addSort("partNumero_indexed_int", ORDER.asc);
+		operationRequete.getParams().getJsonObject("query").forEach(paramRequete -> {
+			String entiteVar = null;
+			String valeurIndexe = null;
+			String varIndexe = null;
+			String valeurTri = null;
+			Integer rechercheDebut = null;
+			Integer rechercheNum = null;
+			String paramNom = paramRequete.getKey();
+			Object paramValeursObjet = paramRequete.getValue();
+			JsonArray paramObjets = paramValeursObjet instanceof JsonArray ? (JsonArray)paramValeursObjet : new JsonArray().add(paramValeursObjet);
 
-		CalculInrPage page = new CalculInrPage();
-		RequeteSite requeteSite = listeCalculInr.getRequeteSite_();
-		SolrDocument documentSolr = new SolrDocument();
-		documentSolr.setField("pageUri_frFR_stored_string", "/calcul-inr");
-		page.setDocumentSolr(documentSolr);
-		page.initLoinCalculInrPage(requeteSite);
-		return Future.succeededFuture(OperationResponse.completedWithJson(buffer));
+			for(Object paramObjet : paramObjets) {
+				switch(paramNom) {
+					case "q":
+						entiteVar = StringUtils.trim(StringUtils.substringBefore((String)paramObjet, ":"));
+						valeurIndexe = StringUtils.trim(StringUtils.substringAfter((String)paramObjet, ":"));
+						varIndexe = "*".equals(entiteVar) ? entiteVar : varIndexeCalculInr(entiteVar);
+						listeRecherche.setQuery(varIndexe + ":" + ("*".equals(valeurIndexe) ? valeurIndexe : ClientUtils.escapeQueryChars(valeurIndexe)));
+						break;
+					case "fq":
+						entiteVar = StringUtils.trim(StringUtils.substringBefore((String)paramObjet, ":"));
+						valeurIndexe = StringUtils.trim(StringUtils.substringAfter((String)paramObjet, ":"));
+						varIndexe = varIndexeCalculInr(entiteVar);
+						listeRecherche.addFilterQuery(varIndexe + ":" + ClientUtils.escapeQueryChars(valeurIndexe));
+						break;
+					case "sort":
+						entiteVar = StringUtils.trim(StringUtils.substringBefore((String)paramObjet, " "));
+						valeurTri = StringUtils.trim(StringUtils.substringAfter((String)paramObjet, " "));
+						varIndexe = varIndexeCalculInr(entiteVar);
+						listeRecherche.addSort(varIndexe, ORDER.valueOf(valeurTri));
+						break;
+					case "fl":
+						entiteVar = StringUtils.trim((String)paramObjet);
+						varIndexe = varIndexeCalculInr(entiteVar);
+						listeRecherche.addField(varIndexe);
+						break;
+					case "start":
+						rechercheDebut = (Integer)paramObjet;
+						listeRecherche.setStart(rechercheDebut);
+						break;
+					case "rows":
+						rechercheNum = (Integer)paramObjet;
+						listeRecherche.setRows(rechercheNum);
+						break;
+				}
+			}
+		});
+		listeRecherche.initLoinPourClasse(requeteSite);
+		return Future.succeededFuture(listeRecherche);
+	}
+
+	public Future<OperationResponse> reponse200RecherchePageCalculInr(ListeRecherche<CalculInr> listeCalculInr) {
+		try {
+			Buffer buffer = Buffer.buffer();
+			RequeteSite requeteSite = listeCalculInr.getRequeteSite_();
+			ToutEcrivain w = ToutEcrivain.creer(listeCalculInr.getRequeteSite_(), buffer);
+			CalculInrPage page = new CalculInrPage();
+			SolrDocument pageDocumentSolr = new SolrDocument();
+
+			pageDocumentSolr.setField("pageUri_frFR_stored_string", "/calcul-inr");
+			page.setPageDocumentSolr(pageDocumentSolr);
+			page.setW(w);
+			page.setListeCalculInr(listeCalculInr);
+			page.initLoinCalculInrPage(requeteSite);
+			page.html();
+			return Future.succeededFuture(new OperationResponse(200, "OK", buffer, new CaseInsensitiveHeaders()));
+		} catch(Exception e) {
+			ExceptionUtils.printRootCauseStackTrace(e);
+			return Future.failedFuture(e);
+		}
 	}
 
 	public String varIndexeCalculInr(String entiteVar) {

@@ -52,49 +52,40 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		this.requeteSite_ = requeteSite_;
 		this.requeteSite_Couverture.dejaInitialise = true;
 	}
-	protected MiseEnPage requeteSite_Init() {
-		if(!requeteSite_Couverture.dejaInitialise) {
-			_requeteSite_(requeteSite_Couverture);
-			if(requeteSite_ == null)
-				setRequeteSite_(requeteSite_Couverture.o);
-		}
-		requeteSite_Couverture.dejaInitialise(true);
-		return (MiseEnPage)this;
-	}
 
-	//////////////////
-	// documentSolr //
-	//////////////////
+	//////////////////////
+	// pageDocumentSolr //
+	//////////////////////
 
-	/**	L'entité « documentSolr »
+	/**	L'entité « pageDocumentSolr »
 	 *	 is defined as null before being initialized. 
 	 */
-	protected SolrDocument documentSolr;
-	public Couverture<SolrDocument> documentSolrCouverture = new Couverture<SolrDocument>().p(this).c(SolrDocument.class).var("documentSolr").o(documentSolr);
+	protected SolrDocument pageDocumentSolr;
+	public Couverture<SolrDocument> pageDocumentSolrCouverture = new Couverture<SolrDocument>().p(this).c(SolrDocument.class).var("pageDocumentSolr").o(pageDocumentSolr);
 
-	/**	<br/>L'entité « documentSolr »
+	/**	<br/>L'entité « pageDocumentSolr »
 	 *  est défini comme null avant d'être initialisé. 
-	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.MiseEnPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:documentSolr">Trouver l'entité documentSolr dans Solr</a>
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.MiseEnPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:pageDocumentSolr">Trouver l'entité pageDocumentSolr dans Solr</a>
 	 * <br/>
 	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _documentSolr(Couverture<SolrDocument> c);
+	protected abstract void _pageDocumentSolr(Couverture<SolrDocument> c);
 
-	public SolrDocument getDocumentSolr() {
-		return documentSolr;
+	public SolrDocument getPageDocumentSolr() {
+		return pageDocumentSolr;
 	}
 
-	public void setDocumentSolr(SolrDocument documentSolr) {
-		this.documentSolr = documentSolr;
-		this.documentSolrCouverture.dejaInitialise = true;
+	public void setPageDocumentSolr(SolrDocument pageDocumentSolr) {
+		this.pageDocumentSolr = pageDocumentSolr;
+		this.pageDocumentSolrCouverture.dejaInitialise = true;
 	}
-	protected MiseEnPage documentSolrInit() {
-		if(!documentSolrCouverture.dejaInitialise) {
-			_documentSolr(documentSolrCouverture);
-			if(documentSolr == null)
-				setDocumentSolr(documentSolrCouverture.o);
+	protected MiseEnPage pageDocumentSolrInit() {
+		if(!pageDocumentSolrCouverture.dejaInitialise) {
+			_pageDocumentSolr(pageDocumentSolrCouverture);
+			if(pageDocumentSolr == null)
+				setPageDocumentSolr(pageDocumentSolrCouverture.o);
 		}
-		documentSolrCouverture.dejaInitialise(true);
+		pageDocumentSolrCouverture.dejaInitialise(true);
 		return (MiseEnPage)this;
 	}
 
@@ -1371,6 +1362,118 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		return pageModifiee == null ? "" : StringEscapeUtils.escapeHtml4(strPageModifiee());
 	}
 
+	//////////////////
+	// pageMotsCles //
+	//////////////////
+
+	/**	L'entité « pageMotsCles »
+	 *	 is defined as null before being initialized. 
+	 */
+	protected String pageMotsCles;
+	public Couverture<String> pageMotsClesCouverture = new Couverture<String>().p(this).c(String.class).var("pageMotsCles").o(pageMotsCles);
+
+	/**	<br/>L'entité « pageMotsCles »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.MiseEnPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:pageMotsCles">Trouver l'entité pageMotsCles dans Solr</a>
+	 * <br/>
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
+	protected abstract void _pageMotsCles(Couverture<String> c);
+
+	public String getPageMotsCles() {
+		return pageMotsCles;
+	}
+
+	public void setPageMotsCles(String pageMotsCles) {
+		this.pageMotsCles = pageMotsCles;
+		this.pageMotsClesCouverture.dejaInitialise = true;
+	}
+	protected MiseEnPage pageMotsClesInit() {
+		if(!pageMotsClesCouverture.dejaInitialise) {
+			_pageMotsCles(pageMotsClesCouverture);
+			if(pageMotsCles == null)
+				setPageMotsCles(pageMotsClesCouverture.o);
+		}
+		pageMotsClesCouverture.dejaInitialise(true);
+		return (MiseEnPage)this;
+	}
+
+	public String solrPageMotsCles() {
+		return pageMotsCles;
+	}
+
+	public String strPageMotsCles() {
+		return pageMotsCles == null ? "" : pageMotsCles;
+	}
+
+	public String nomAffichagePageMotsCles() {
+		return null;
+	}
+
+	public String htmTooltipPageMotsCles() {
+		return null;
+	}
+
+	public String htmPageMotsCles() {
+		return pageMotsCles == null ? "" : StringEscapeUtils.escapeHtml4(strPageMotsCles());
+	}
+
+	/////////////////////
+	// pageDescription //
+	/////////////////////
+
+	/**	L'entité « pageDescription »
+	 *	 is defined as null before being initialized. 
+	 */
+	protected String pageDescription;
+	public Couverture<String> pageDescriptionCouverture = new Couverture<String>().p(this).c(String.class).var("pageDescription").o(pageDescription);
+
+	/**	<br/>L'entité « pageDescription »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.MiseEnPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:pageDescription">Trouver l'entité pageDescription dans Solr</a>
+	 * <br/>
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
+	protected abstract void _pageDescription(Couverture<String> c);
+
+	public String getPageDescription() {
+		return pageDescription;
+	}
+
+	public void setPageDescription(String pageDescription) {
+		this.pageDescription = pageDescription;
+		this.pageDescriptionCouverture.dejaInitialise = true;
+	}
+	protected MiseEnPage pageDescriptionInit() {
+		if(!pageDescriptionCouverture.dejaInitialise) {
+			_pageDescription(pageDescriptionCouverture);
+			if(pageDescription == null)
+				setPageDescription(pageDescriptionCouverture.o);
+		}
+		pageDescriptionCouverture.dejaInitialise(true);
+		return (MiseEnPage)this;
+	}
+
+	public String solrPageDescription() {
+		return pageDescription;
+	}
+
+	public String strPageDescription() {
+		return pageDescription == null ? "" : pageDescription;
+	}
+
+	public String nomAffichagePageDescription() {
+		return null;
+	}
+
+	public String htmTooltipPageDescription() {
+		return null;
+	}
+
+	public String htmPageDescription() {
+		return pageDescription == null ? "" : StringEscapeUtils.escapeHtml4(strPageDescription());
+	}
+
 	////////////////////
 	// pageAccueilUri //
 	////////////////////
@@ -1425,6 +1528,62 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 
 	public String htmPageAccueilUri() {
 		return pageAccueilUri == null ? "" : StringEscapeUtils.escapeHtml4(strPageAccueilUri());
+	}
+
+	///////////////////
+	// pageCalculInr //
+	///////////////////
+
+	/**	L'entité « pageCalculInr »
+	 *	 is defined as null before being initialized. 
+	 */
+	protected String pageCalculInr;
+	public Couverture<String> pageCalculInrCouverture = new Couverture<String>().p(this).c(String.class).var("pageCalculInr").o(pageCalculInr);
+
+	/**	<br/>L'entité « pageCalculInr »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.MiseEnPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:pageCalculInr">Trouver l'entité pageCalculInr dans Solr</a>
+	 * <br/>
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
+	protected abstract void _pageCalculInr(Couverture<String> c);
+
+	public String getPageCalculInr() {
+		return pageCalculInr;
+	}
+
+	public void setPageCalculInr(String pageCalculInr) {
+		this.pageCalculInr = pageCalculInr;
+		this.pageCalculInrCouverture.dejaInitialise = true;
+	}
+	protected MiseEnPage pageCalculInrInit() {
+		if(!pageCalculInrCouverture.dejaInitialise) {
+			_pageCalculInr(pageCalculInrCouverture);
+			if(pageCalculInr == null)
+				setPageCalculInr(pageCalculInrCouverture.o);
+		}
+		pageCalculInrCouverture.dejaInitialise(true);
+		return (MiseEnPage)this;
+	}
+
+	public String solrPageCalculInr() {
+		return pageCalculInr;
+	}
+
+	public String strPageCalculInr() {
+		return pageCalculInr == null ? "" : pageCalculInr;
+	}
+
+	public String nomAffichagePageCalculInr() {
+		return null;
+	}
+
+	public String htmTooltipPageCalculInr() {
+		return null;
+	}
+
+	public String htmPageCalculInr() {
+		return pageCalculInr == null ? "" : StringEscapeUtils.escapeHtml4(strPageCalculInr());
 	}
 
 	////////////////////
@@ -1671,8 +1830,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 	}
 
 	public void initMiseEnPage() {
-		requeteSite_Init();
-		documentSolrInit();
+		pageDocumentSolrInit();
 		wInit();
 		pageVisibleAuxBotsInit();
 		pageH1Init();
@@ -1695,7 +1853,10 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		pageTypeContenuInit();
 		pageCreeInit();
 		pageModifieeInit();
+		pageMotsClesInit();
+		pageDescriptionInit();
 		pageAccueilUriInit();
+		pageCalculInrInit();
 		pageAProposUriInit();
 		pageFaqUriInit();
 		pageUtilisateurUriInit();
@@ -1740,8 +1901,8 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		switch(var) {
 			case "requeteSite_":
 				return oMiseEnPage.requeteSite_;
-			case "documentSolr":
-				return oMiseEnPage.documentSolr;
+			case "pageDocumentSolr":
+				return oMiseEnPage.pageDocumentSolr;
 			case "w":
 				return oMiseEnPage.w;
 			case "pageVisibleAuxBots":
@@ -1786,8 +1947,14 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 				return oMiseEnPage.pageCree;
 			case "pageModifiee":
 				return oMiseEnPage.pageModifiee;
+			case "pageMotsCles":
+				return oMiseEnPage.pageMotsCles;
+			case "pageDescription":
+				return oMiseEnPage.pageDescription;
 			case "pageAccueilUri":
 				return oMiseEnPage.pageAccueilUri;
+			case "pageCalculInr":
+				return oMiseEnPage.pageCalculInr;
 			case "pageAProposUri":
 				return oMiseEnPage.pageAProposUri;
 			case "pageFaqUri":
@@ -1852,12 +2019,37 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		}
 	}
 
+	//////////
+	// html //
+	//////////
+
+	public void html() {
+		htmlAvant();
+		htmlMilieu();
+		htmlApres();
+	}
+	public void htmlAvant() {
+		htmlMiseEnPageAvant();
+	}
+	public void htmlMilieu() {
+		htmlMiseEnPageMilieu();
+	}
+	public void htmlApres() {
+		htmlMiseEnPageApres();
+	}
+	public void htmlMiseEnPageAvant() {
+	}
+	public void htmlMiseEnPageMilieu() {
+	}
+	public void htmlMiseEnPageApres() {
+	}
+
 	//////////////
 	// hashCode //
 	//////////////
 
 	@Override public int hashCode() {
-		return Objects.hash(pageVisibleAuxBots, pageH1, pageH2, pageH1Court, pageH2Court, pageTitre, pageUri, pageUris, pageUrl, pageImageUri, pageImageUrl, pageVideoId, pageVideoUrl, pageVideoUrlEmbed, pageImageLargeur, pageImageHauteur, pageImageTypeContenu, pageMethode, pageTypeContenu, pageCree, pageModifiee, pageAccueilUri, pageAProposUri, pageFaqUri, pageUtilisateurUri, pageDeconnexionUri);
+		return Objects.hash(pageVisibleAuxBots, pageH1, pageH2, pageH1Court, pageH2Court, pageTitre, pageUri, pageUris, pageUrl, pageImageUri, pageImageUrl, pageVideoId, pageVideoUrl, pageVideoUrlEmbed, pageImageLargeur, pageImageHauteur, pageImageTypeContenu, pageMethode, pageTypeContenu, pageCree, pageModifiee, pageMotsCles, pageDescription, pageAccueilUri, pageCalculInr, pageAProposUri, pageFaqUri, pageUtilisateurUri, pageDeconnexionUri);
 	}
 
 	////////////
@@ -1891,7 +2083,10 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 				&& Objects.equals( pageTypeContenu, that.pageTypeContenu )
 				&& Objects.equals( pageCree, that.pageCree )
 				&& Objects.equals( pageModifiee, that.pageModifiee )
+				&& Objects.equals( pageMotsCles, that.pageMotsCles )
+				&& Objects.equals( pageDescription, that.pageDescription )
 				&& Objects.equals( pageAccueilUri, that.pageAccueilUri )
+				&& Objects.equals( pageCalculInr, that.pageCalculInr )
 				&& Objects.equals( pageAProposUri, that.pageAProposUri )
 				&& Objects.equals( pageFaqUri, that.pageFaqUri )
 				&& Objects.equals( pageUtilisateurUri, that.pageUtilisateurUri )
@@ -1926,7 +2121,10 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		sb.append( ", pageTypeContenu: \"" ).append(pageTypeContenu).append( "\"" );
 		sb.append( ", pageCree: " ).append(pageCree);
 		sb.append( ", pageModifiee: " ).append(pageModifiee);
+		sb.append( ", pageMotsCles: \"" ).append(pageMotsCles).append( "\"" );
+		sb.append( ", pageDescription: \"" ).append(pageDescription).append( "\"" );
 		sb.append( ", pageAccueilUri: \"" ).append(pageAccueilUri).append( "\"" );
+		sb.append( ", pageCalculInr: \"" ).append(pageCalculInr).append( "\"" );
 		sb.append( ", pageAProposUri: \"" ).append(pageAProposUri).append( "\"" );
 		sb.append( ", pageFaqUri: \"" ).append(pageFaqUri).append( "\"" );
 		sb.append( ", pageUtilisateurUri: \"" ).append(pageUtilisateurUri).append( "\"" );

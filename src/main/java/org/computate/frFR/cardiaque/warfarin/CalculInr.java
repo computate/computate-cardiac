@@ -8,40 +8,40 @@ import org.computate.frFR.cardiaque.couverture.Couverture;
 
 
 
-/** 
- * modele: true
- * nomCanonique.enUS: org.computate.enUS.cardiac.warfarin.InrEntry
- * apiUri.enUS: /api/v1/warfarin/inr-entry
- * apiUri.frFR: /api/v1/warfarin/calcul-inr
- * apiMethode: Recherche
- * apiMethode: POST
- * apiMethode: PATCH
- * apiMethode: GET
- * apiMethode: PUT
- * apiMethode: DELETE
- * apiMethode: GETPage
- * apiMotCleGETPage.frFR: page
- * apiMotCleGETPage.enUS: page
- * apiUriGETPage.frFR: /calcul-inr
- * apiUriGETPage.enUS: /inr-entry
- * apiTypeMedia200GETPage: text/html
- * pageGETPage: CalculInrPage
+/**  
+ * Modele: true
+ * NomCanonique.enUS: org.computate.enUS.cardiac.warfarin.InrEntry
+ * ApiUri.enUS: /api/v1/warfarin/inr-entry
+ * ApiUri.frFR: /api/v1/warfarin/calcul-inr
+ * ApiMethode: Recherche
+ * ApiMethode: POST
+ * ApiMethode: PATCH
+ * ApiMethode: GET
+ * ApiMethode: PUT
+ * ApiMethode: DELETE
+ * ApiMethode: RecherchePage
+ * ApiMotCleRecherchePage.frFR: page
+ * ApiMotCleRecherchePage.enUS: page
+ * ApiUriRecherchePage.frFR: /calcul-inr
+ * ApiUriRecherchePage.enUS: /inr-entry
+ * ApiTypeMedia200GETPage: text/html
+ * PageRecherchePage: CalculInrPage
  * 
- * val.VAL_patientPrendCoumadinOui.frFR:Yes
- * val.VAL_patientPrendCoumadinNon.frFR:No
- * val.VAL_patientPrendCoumadinOuiDosageInitial.frFR:Yes, initial dosing
- * val.VAL_patientPrendCoumadinOuiRecommence.frFR:Yes, restarted
- * role.frFR: Something
- * map.this.Integer: 1
- * apiTag.enUS: InrEntry
- * apiTag.frFR: CalculInr
-*/                
+ * Val.VAL_patientPrendCoumadinOui.frFR:Yes
+ * Val.VAL_patientPrendCoumadinNon.frFR:No
+ * Val.VAL_patientPrendCoumadinOuiDosageInitial.frFR:Yes, initial dosing
+ * Val.VAL_patientPrendCoumadinOuiRecommence.frFR:Yes, restarted
+ * Role.frFR: Something
+ * Map.this.Integer: 1
+ * ApiTag.enUS: InrEntry
+ * ApiTag.frFR: CalculInr
+*/        
 public class CalculInr extends CalculInrGen<Cluster> {  
 
 	/**
 	 * {@inheritDoc}
-	 * indexe: true
-	 * stocke: true
+	 * Indexe: true
+	 * Stocke: true
 	 * attribuer: UtilisateurSite.calculInrPks
 	 * enUS: User primary key. 
 	 */         
@@ -50,8 +50,8 @@ public class CalculInr extends CalculInrGen<Cluster> {
 
 	/**
 	 * {@inheritDoc}
-	 * indexe: true
-	 * stocke: true
+	 * Indexe: true
+	 * Stocke: true
 	 */
 	protected void _dateInr(Couverture<LocalDate> c) {
 		c.o(LocalDate.now());
@@ -59,8 +59,8 @@ public class CalculInr extends CalculInrGen<Cluster> {
 
 	/**
 	 * {@inheritDoc}
-	 * indexe: true
-	 * stocke: true
+	 * Indexe: true
+	 * Stocke: true
 	 */
 	protected void _dateReverifier(Couverture<LocalDate> c) {
 
@@ -68,50 +68,50 @@ public class CalculInr extends CalculInrGen<Cluster> {
 
 	/**
 	 * {@inheritDoc}
-	 * var.enUS: currentDosageText
-	 * indexe: true
-	 * stocke: true
-	 * option.frFR.vide:""
-	 * option.frFR.oui:CalculInr.VAL_patientPrendCoumadinOui
-	 * option.frFR.non:CalculInr.VAL_patientPrendCoumadinNon
-	 * option.frFR.ouiDosageInitial:CalculInr.VAL_patientPrendCoumadinOuiDosageInitial
-	 * option.frFR.ouiRecommence:CalculInr.VAL_patientPrendCoumadinOuiRecommence
+	 * Var.enUS: currentDosageText
+	 * Indexe: true
+	 * Stocke: true
+	 * Option.frFR.vide:""
+	 * Option.frFR.oui:CalculInr.VAL_patientPrendCoumadinOui
+	 * Option.frFR.non:CalculInr.VAL_patientPrendCoumadinNon
+	 * Option.frFR.ouiDosageInitial:CalculInr.VAL_patientPrendCoumadinOuiDosageInitial
+	 * Option.frFR.ouiRecommence:CalculInr.VAL_patientPrendCoumadinOuiRecommence
 	 */ 
 	protected void _patientPrendCoumadin(Chaine o) {
 	}
 
 	/**
 	 * {@inheritDoc}
-	 * var.enUS: currentGoal
-	 * indexe: true
-	 * stocke: true
+	 * Var.enUS: currentGoal
+	 * Indexe: true
+	 * Stocke: true
 	 */ 
 	protected void _butActuel(Chaine o) {
 	}
 
 	/**
 	 * {@inheritDoc}
-	 * var.enUS: currentDosage
-	 * indexe: true
-	 * stocke: true
+	 * Var.enUS: currentDosage
+	 * Indexe: true
+	 * Stocke: true
 	 */ 
 	protected void _doseActuel(Chaine o) {
 	}
 
 	/**
 	 * {@inheritDoc}
-	 * var.enUS: currentMedication
-	 * indexe: true
-	 * stocke: true
+	 * Var.enUS: currentMedication
+	 * Indexe: true
+	 * Stocke: true
 	 */ 
 	protected void _medicamentActuel(Chaine o) {
 	}
 
 	/**
 	 * {@inheritDoc}
-	 * var.enUS: dosageChange
-	 * indexe: true
-	 * stocke: true
+	 * Var.enUS: dosageChange
+	 * Indexe: true
+	 * Stocke: true
 	 * r: FORMAT_dateMedicalCourt
 	 * r.enUS: FORMAT_dateMedicalShort
 	 */
@@ -121,18 +121,18 @@ public class CalculInr extends CalculInrGen<Cluster> {
 
 	/**
 	 * {@inheritDoc}
-	 * var.enUS: additionalNotes
-	 * indexe: true
-	 * stocke: true
+	 * Var.enUS: additionalNotes
+	 * Indexe: true
+	 * Stocke: true
 	 */
 	protected void _notesComplementaires(Chaine o) {
 	}
 
 	/**
 	 * {@inheritDoc}
-	 * var.enUS: contactInfo
-	 * indexe: true
-	 * stocke: true
+	 * Var.enUS: contactInfo
+	 * Indexe: true
+	 * Stocke: true
 	 */ 
 	protected void _infoContact(Chaine o) {
 	}

@@ -70,7 +70,7 @@ public class RequeteSite extends RequeteSiteGen<Object> implements Serializable 
 	}
 
 	/**
-	 * var.enUS: operationRequest
+	 * Var.enUS: operationRequest
 	 */
 	protected void _operationRequete(Couverture<OperationRequest> c) {
 	}

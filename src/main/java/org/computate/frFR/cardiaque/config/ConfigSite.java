@@ -16,7 +16,7 @@ import org.computate.frFR.cardiaque.requete.RequeteSite;
 
 
 /**
- * nomCanonique.enUS: org.computate.enUS.java.SiteConfig
+ * NomCanonique.enUS: org.computate.enUS.java.SiteConfig
  * enUS: Loads the properties in the application config file into specific fields. 
  * frFR: Charge les propriétés dans le fichier de config de l'application dans des champs spécifiques. 
  */    
@@ -222,7 +222,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 	}
 
 	/**
-	 * var.enUS: urlDomainBase
+	 * Var.enUS: urlDomainBase
 	 * 	L'URL du domaine de base pour les URLs du site. **/
 	protected void _urlDomaineBase(Couverture<String> c) {
 		String o;
@@ -575,7 +575,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 	}
 
 	/**
-	 * var.enUS: vertxServiceAddress
+	 * Var.enUS: vertxServiceAddress
 	 * r: addresse
 	 * r.enUS: address
 	 */

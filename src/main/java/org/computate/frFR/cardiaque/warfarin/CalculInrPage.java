@@ -1,30 +1,38 @@
-package org.computate.frFR.cardiaque.warfarin;  
+package org.computate.frFR.cardiaque.warfarin;   
 
-import org.apache.solr.common.SolrDocument;
 import org.computate.frFR.cardiaque.couverture.Couverture;
 import org.computate.frFR.cardiaque.page.MiseEnPage;
 import org.computate.frFR.cardiaque.recherche.ListeRecherche;
 
+/**
+ * Html: true
+ */       
 public class CalculInrPage extends CalculInrPageGen<MiseEnPage> { 
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 **/
+	protected void _listeCalculInr(Couverture<ListeRecherche<CalculInr>> c) {
+		
+	}
 
 	@Override public void initLoinCalculInrPage() {
 		initCalculInrPage();
 		super.initLoinMiseEnPage(requeteSite_);
 	}
 
-	/**
-	 * {@inheritDoc}
-	 * 
-	 **/
-	protected void _listeRecherche(ListeRecherche<CalculInr> o) {
-		
+	@Override public void htmlCalculInrPageMilieu() {
+		if(listeCalculInr.size() == 1) {
+			e("h1").f().sx("INR Entry").g("h1");
+			
+		}
+		else {
+			e("h1").f().sx("INR Entries").g("h1");
+			
+		}
 	}
-
-	@Override protected void _documentSolr(Couverture<SolrDocument> c) {
-		c.o(listeRecherche.getdo)
-	}
-
-	public void htmlPageAccueil() {
+//	public void htmlPageAccueil() {
 //e("nav").a("class", "w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding").a("style", "z-index:3;width:300px;font-weight:bold;").a("id", "mySidebar").f();
 //	eg("br");
 //  e("a").a("href", "javascript:void(0)").a("onclick", "w3_close()").a("class", "w3-button w3-hide-large w3-display-topleft").a("style", "width:100%;font-size:22px").f().s("Close Menu").g("a");
@@ -40,7 +48,7 @@ public class CalculInrPage extends CalculInrPageGen<MiseEnPage> {
 //    e("a href="#contact" onclick="w3_close()" class="w3-bar-item w3-button w3-hover-white">Contactg("a>
 //  g("div>
 //g("nav>
-	}
+//	}
 //	
 //	protected void _body(Couverture<É> c) {
 //		É body = c.o(html.é("body")).o();

@@ -36,19 +36,19 @@ public class AppSwagger2 extends AppSwagger2Gen<Object> {
 	}
 
 	/**
-	 * var.enUS: siteRequest_
+	 * Var.enUS: siteRequest_
 	 */
 	protected void _requeteSite_(Couverture<RequeteSite> c) {
 	}
 
 	/**
-	 * var.enUS: siteContext
+	 * Var.enUS: siteContext
 	 */
 	protected void _siteContexte(SiteContexte o) {
 	}
 
 	/**
-	 * var.enUS: siteConfig
+	 * Var.enUS: siteConfig
 	 * r: siteContexte
 	 * r.enUS: siteContext
 	 * r: ConfigSite
@@ -60,7 +60,7 @@ public class AppSwagger2 extends AppSwagger2Gen<Object> {
 
 	/**
 	 * {@inheritDoc}
-	 * var.enUS: appPath
+	 * Var.enUS: appPath
 	 * r: configSite
 	 * r.enUS: siteConfig
 	 * r: AppliChemin
@@ -79,7 +79,7 @@ public class AppSwagger2 extends AppSwagger2Gen<Object> {
 
 	/**
 	 * {@inheritDoc}
-	 * var.enUS: openApiVersionNumber
+	 * Var.enUS: openApiVersionNumber
 	 **/
 	protected void _openApiVersionNumero(Couverture<Integer> c) {
 		c.o((int)Double.parseDouble(StringUtils.substringBefore(openApiVersion, ".")));
@@ -104,7 +104,7 @@ public class AppSwagger2 extends AppSwagger2Gen<Object> {
 
 	/**
 	 * {@inheritDoc}
-	 * var.enUS: openApiYamlPath
+	 * Var.enUS: openApiYamlPath
 	 * r: appliChemin
 	 * r.enUS: appPath
 	 **/
@@ -114,7 +114,7 @@ public class AppSwagger2 extends AppSwagger2Gen<Object> {
 
 	/**
 	 * {@inheritDoc}
-	 * var.enUS: openApiYamlFile
+	 * Var.enUS: openApiYamlFile
 	 * r: openApiYamlChemin
 	 * r.enUS: openApiYamlPath
 	 **/
@@ -139,7 +139,7 @@ public class AppSwagger2 extends AppSwagger2Gen<Object> {
 
 	/**
 	 * {@inheritDoc}
-	 * var.enUS: wPaths
+	 * Var.enUS: wPaths
 	 * r: creer
 	 * r.enUS: create
 	 * r: ToutEcrivain
@@ -153,7 +153,7 @@ public class AppSwagger2 extends AppSwagger2Gen<Object> {
 
 	/**
 	 * {@inheritDoc}
-	 * var.enUS: wRequestBodies
+	 * Var.enUS: wRequestBodies
 	 * r: creer
 	 * r.enUS: create
 	 * r: ToutEcrivain
@@ -190,7 +190,7 @@ public class AppSwagger2 extends AppSwagger2Gen<Object> {
 	List<String> classeMotsCles;
 
 	/**
-	 * var.enUS: writeOpenApi
+	 * Var.enUS: writeOpenApi
 	 */
 	public void ecrireOpenApi() {
 

@@ -8,19 +8,19 @@ import org.computate.frFR.cardiaque.requete.RequeteSite;
 
 
 /**   
- * nomCanonique.enUS: org.computate.enUS.cardiac.writer.AllWriters
+ * NomCanonique.enUS: org.computate.enUS.cardiac.writer.AllWriters
  **/
 public class TousEcrivains extends TousEcrivainsGen<Object> {    
 
 	/**
 	 * {@inheritDoc}
-	 * var.enUS: siteRequest_
+	 * Var.enUS: siteRequest_
 	 **/
 	protected void _requeteSite_(Couverture<RequeteSite> c) {
 	}
 
 	/**
-	 * var.enUS: create
+	 * Var.enUS: create
 	 * r: initLoinPourClasse
 	 * r.enUS: initDeepForClass
 	 */

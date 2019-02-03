@@ -1296,9 +1296,6 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	public Object attribuerCalculInr(String var, Object val) {
 		CalculInr oCalculInr = (CalculInr)this;
 		switch(var) {
-			case "utilisateurPk":
-				oCalculInr.setUtilisateurPk((Long)val);
-				return val;
 			default:
 				return super.attribuerCluster(var, val);
 		}
@@ -1325,6 +1322,10 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	}
 	public Object definirCalculInr(String var, String val) {
 		switch(var) {
+			case "utilisateurPk":
+				setUtilisateurPk(val);
+				sauvegardesCalculInr.add(var);
+				return val;
 			case "dateInr":
 				setDateInr(val);
 				sauvegardesCalculInr.add(var);
@@ -1504,7 +1505,7 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	//////////////
 
 	@Override public int hashCode() {
-		return Objects.hash(super.hashCode(), dateInr, dateReverifier, patientPrendCoumadin, butActuel, doseActuel, medicamentActuel, changementDose, notesComplementaires, infoContact);
+		return Objects.hash(super.hashCode(), utilisateurPk, dateInr, dateReverifier, patientPrendCoumadin, butActuel, doseActuel, medicamentActuel, changementDose, notesComplementaires, infoContact);
 	}
 
 	////////////
@@ -1518,6 +1519,7 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 			return false;
 		CalculInr that = (CalculInr)o;
 		return super.equals(o)
+				&& Objects.equals( utilisateurPk, that.utilisateurPk )
 				&& Objects.equals( dateInr, that.dateInr )
 				&& Objects.equals( dateReverifier, that.dateReverifier )
 				&& Objects.equals( patientPrendCoumadin, that.patientPrendCoumadin )
@@ -1537,7 +1539,8 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 		StringBuilder sb = new StringBuilder();
 		sb.append(super.toString() + "\n");
 		sb.append("CalculInr {");
-		sb.append( "dateInr: " ).append(dateInr);
+		sb.append( "utilisateurPk: " ).append(utilisateurPk);
+		sb.append( ", dateInr: " ).append(dateInr);
 		sb.append( ", dateReverifier: " ).append(dateReverifier);
 		sb.append( ", patientPrendCoumadin: " ).append(patientPrendCoumadin);
 		sb.append( ", butActuel: " ).append(butActuel);
