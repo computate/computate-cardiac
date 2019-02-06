@@ -4,6 +4,7 @@ import org.computate.frFR.cardiaque.couverture.Couverture;
 import org.computate.frFR.cardiaque.config.ConfigSite;
 import org.computate.frFR.cardiaque.cluster.Cluster;
 import io.vertx.core.Vertx;
+import io.vertx.ext.web.handler.OAuth2AuthHandler;
 import org.apache.commons.text.StringEscapeUtils;
 import org.apache.commons.lang3.StringUtils;
 import java.lang.Integer;
@@ -60,42 +61,6 @@ public abstract class SiteContexteGen<DEV> extends Object {
 		return (SiteContexte)this;
 	}
 
-	//////////////
-	// siteAuth //
-	//////////////
-
-	/**	L'entité « siteAuth »
-	 *	 is defined as null before being initialized. 
-	 */
-	protected OAuth2Auth siteAuth;
-	public Couverture<OAuth2Auth> siteAuthCouverture = new Couverture<OAuth2Auth>().p(this).c(OAuth2Auth.class).var("siteAuth").o(siteAuth);
-
-	/**	<br/>L'entité « siteAuth »
-	 *  est défini comme null avant d'être initialisé. 
-	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.contexte.SiteContexte&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:siteAuth">Trouver l'entité siteAuth dans Solr</a>
-	 * <br/>
-	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
-	 **/
-	protected abstract void _siteAuth(Couverture<OAuth2Auth> c);
-
-	public OAuth2Auth getSiteAuth() {
-		return siteAuth;
-	}
-
-	public void setSiteAuth(OAuth2Auth siteAuth) {
-		this.siteAuth = siteAuth;
-		this.siteAuthCouverture.dejaInitialise = true;
-	}
-	protected SiteContexte siteAuthInit() {
-		if(!siteAuthCouverture.dejaInitialise) {
-			_siteAuth(siteAuthCouverture);
-			if(siteAuth == null)
-				setSiteAuth(siteAuthCouverture.o);
-		}
-		siteAuthCouverture.dejaInitialise(true);
-		return (SiteContexte)this;
-	}
-
 	//////////////////
 	// usineRouteur //
 	//////////////////
@@ -129,6 +94,78 @@ public abstract class SiteContexteGen<DEV> extends Object {
 				setUsineRouteur(usineRouteurCouverture.o);
 		}
 		usineRouteurCouverture.dejaInitialise(true);
+		return (SiteContexte)this;
+	}
+
+	//////////////////////
+	// gestionnaireAuth //
+	//////////////////////
+
+	/**	L'entité « gestionnaireAuth »
+	 *	 is defined as null before being initialized. 
+	 */
+	protected OAuth2AuthHandler gestionnaireAuth;
+	public Couverture<OAuth2AuthHandler> gestionnaireAuthCouverture = new Couverture<OAuth2AuthHandler>().p(this).c(OAuth2AuthHandler.class).var("gestionnaireAuth").o(gestionnaireAuth);
+
+	/**	<br/>L'entité « gestionnaireAuth »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.contexte.SiteContexte&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:gestionnaireAuth">Trouver l'entité gestionnaireAuth dans Solr</a>
+	 * <br/>
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
+	protected abstract void _gestionnaireAuth(Couverture<OAuth2AuthHandler> c);
+
+	public OAuth2AuthHandler getGestionnaireAuth() {
+		return gestionnaireAuth;
+	}
+
+	public void setGestionnaireAuth(OAuth2AuthHandler gestionnaireAuth) {
+		this.gestionnaireAuth = gestionnaireAuth;
+		this.gestionnaireAuthCouverture.dejaInitialise = true;
+	}
+	protected SiteContexte gestionnaireAuthInit() {
+		if(!gestionnaireAuthCouverture.dejaInitialise) {
+			_gestionnaireAuth(gestionnaireAuthCouverture);
+			if(gestionnaireAuth == null)
+				setGestionnaireAuth(gestionnaireAuthCouverture.o);
+		}
+		gestionnaireAuthCouverture.dejaInitialise(true);
+		return (SiteContexte)this;
+	}
+
+	/////////////////////
+	// authFournisseur //
+	/////////////////////
+
+	/**	L'entité « authFournisseur »
+	 *	 is defined as null before being initialized. 
+	 */
+	protected OAuth2Auth authFournisseur;
+	public Couverture<OAuth2Auth> authFournisseurCouverture = new Couverture<OAuth2Auth>().p(this).c(OAuth2Auth.class).var("authFournisseur").o(authFournisseur);
+
+	/**	<br/>L'entité « authFournisseur »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.contexte.SiteContexte&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:authFournisseur">Trouver l'entité authFournisseur dans Solr</a>
+	 * <br/>
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
+	protected abstract void _authFournisseur(Couverture<OAuth2Auth> c);
+
+	public OAuth2Auth getAuthFournisseur() {
+		return authFournisseur;
+	}
+
+	public void setAuthFournisseur(OAuth2Auth authFournisseur) {
+		this.authFournisseur = authFournisseur;
+		this.authFournisseurCouverture.dejaInitialise = true;
+	}
+	protected SiteContexte authFournisseurInit() {
+		if(!authFournisseurCouverture.dejaInitialise) {
+			_authFournisseur(authFournisseurCouverture);
+			if(authFournisseur == null)
+				setAuthFournisseur(authFournisseurCouverture.o);
+		}
+		authFournisseurCouverture.dejaInitialise(true);
 		return (SiteContexte)this;
 	}
 
@@ -565,13 +602,6 @@ public abstract class SiteContexteGen<DEV> extends Object {
 		this.requeteSite_ = requeteSite_;
 		this.requeteSite_Couverture.dejaInitialise = true;
 	}
-	protected SiteContexte requeteSite_Init() {
-		if(!requeteSite_Couverture.dejaInitialise) {
-			_requeteSite_(requeteSite_);
-		}
-		requeteSite_Couverture.dejaInitialise(true);
-		return (SiteContexte)this;
-	}
 
 	//////////////
 	// initLoin //
@@ -594,8 +624,9 @@ public abstract class SiteContexteGen<DEV> extends Object {
 
 	public void initSiteContexte() {
 		vertxInit();
-		siteAuthInit();
 		usineRouteurInit();
+		gestionnaireAuthInit();
+		authFournisseurInit();
 		configSiteInit();
 		jdbcConfigInit();
 		clientSqlInit();
@@ -605,7 +636,6 @@ public abstract class SiteContexteGen<DEV> extends Object {
 		motDePasseCryptageInit();
 		jetonIdentitePaypalInit();
 		nombreExecuteursInit();
-		requeteSite_Init();
 	}
 
 	public void initLoinPourClasse(RequeteSite requeteSite_) {
@@ -646,10 +676,12 @@ public abstract class SiteContexteGen<DEV> extends Object {
 		switch(var) {
 			case "vertx":
 				return oSiteContexte.vertx;
-			case "siteAuth":
-				return oSiteContexte.siteAuth;
 			case "usineRouteur":
 				return oSiteContexte.usineRouteur;
+			case "gestionnaireAuth":
+				return oSiteContexte.gestionnaireAuth;
+			case "authFournisseur":
+				return oSiteContexte.authFournisseur;
 			case "configSite":
 				return oSiteContexte.configSite;
 			case "jdbcConfig":

@@ -1,8 +1,5 @@
 package org.computate.frFR.cardiaque.contexte;  
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.solr.client.solrj.impl.HttpSolrClient;
 import org.computate.frFR.cardiaque.config.ConfigSite;
@@ -17,6 +14,7 @@ import io.vertx.ext.auth.oauth2.OAuth2Auth;
 import io.vertx.ext.jdbc.JDBCClient;
 import io.vertx.ext.sql.SQLClient;
 import io.vertx.ext.web.api.contract.openapi3.OpenAPI3RouterFactory;
+import io.vertx.ext.web.handler.OAuth2AuthHandler;
 
 
 public class SiteContexte extends SiteContexteGen<Object> {    
@@ -41,10 +39,13 @@ public class SiteContexte extends SiteContexteGen<Object> {
 	protected void _vertx(Couverture<Vertx> c) {
 	}
 
-	protected void _siteAuth(Couverture<OAuth2Auth> c) {
+	protected void _usineRouteur(Couverture<OpenAPI3RouterFactory> c) {
 	}
 
-	protected void _usineRouteur(Couverture<OpenAPI3RouterFactory> c) {
+	protected void _gestionnaireAuth(Couverture<OAuth2AuthHandler> c) {
+	}
+
+	protected void _authFournisseur(Couverture<OAuth2Auth> c) {
 	}
 
 //	protected void _siteRouteur_(Couverture<Router> c) {

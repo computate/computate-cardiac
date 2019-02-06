@@ -46,13 +46,6 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		this.requeteSite_ = requeteSite_;
 		this.requeteSite_Couverture.dejaInitialise = true;
 	}
-	protected ConfigSite requeteSite_Init() {
-		if(!requeteSite_Couverture.dejaInitialise) {
-			_requeteSite_(requeteSite_);
-		}
-		requeteSite_Couverture.dejaInitialise(true);
-		return (ConfigSite)this;
-	}
 
 	///////////////////
 	// siteContexte_ //
@@ -79,15 +72,6 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	public void setSiteContexte_(SiteContexte siteContexte_) {
 		this.siteContexte_ = siteContexte_;
 		this.siteContexte_Couverture.dejaInitialise = true;
-	}
-	protected ConfigSite siteContexte_Init() {
-		if(!siteContexte_Couverture.dejaInitialise) {
-			_siteContexte_(siteContexte_Couverture);
-			if(siteContexte_ == null)
-				setSiteContexte_(siteContexte_Couverture.o);
-		}
-		siteContexte_Couverture.dejaInitialise(true);
-		return (ConfigSite)this;
 	}
 
 	//////////////////
@@ -3330,8 +3314,6 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	}
 
 	public void initConfigSite() {
-		requeteSite_Init();
-		siteContexte_Init();
 		configCheminInit();
 		configInit();
 		identifiantSiteInit();

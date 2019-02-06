@@ -1910,6 +1910,135 @@ public abstract class ApiEcrivainGen<DEV> extends Object {
 	}
 
 	////////////////////////
+	// classeRolesTrouves //
+	////////////////////////
+
+	/**	L'entité « classeRolesTrouves »
+	 *	 is defined as null before being initialized. 
+	 */
+	protected Boolean classeRolesTrouves;
+	public Couverture<Boolean> classeRolesTrouvesCouverture = new Couverture<Boolean>().p(this).c(Boolean.class).var("classeRolesTrouves").o(classeRolesTrouves);
+
+	/**	<br/>L'entité « classeRolesTrouves »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.ecrivain.ApiEcrivain&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:classeRolesTrouves">Trouver l'entité classeRolesTrouves dans Solr</a>
+	 * <br/>
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
+	protected abstract void _classeRolesTrouves(Couverture<Boolean> c);
+
+	public Boolean getClasseRolesTrouves() {
+		return classeRolesTrouves;
+	}
+
+	public void setClasseRolesTrouves(Boolean classeRolesTrouves) {
+		this.classeRolesTrouves = classeRolesTrouves;
+		this.classeRolesTrouvesCouverture.dejaInitialise = true;
+	}
+	public ApiEcrivain setClasseRolesTrouves(String o) {
+		if(org.apache.commons.lang3.BooleanUtils.isTrue(org.apache.commons.lang3.BooleanUtils.toBoolean(o)))
+			this.classeRolesTrouves = Boolean.parseBoolean(o);
+		this.classeRolesTrouvesCouverture.dejaInitialise = true;
+		return (ApiEcrivain)this;
+	}
+	protected ApiEcrivain classeRolesTrouvesInit() {
+		if(!classeRolesTrouvesCouverture.dejaInitialise) {
+			_classeRolesTrouves(classeRolesTrouvesCouverture);
+			if(classeRolesTrouves == null)
+				setClasseRolesTrouves(classeRolesTrouvesCouverture.o);
+		}
+		classeRolesTrouvesCouverture.dejaInitialise(true);
+		return (ApiEcrivain)this;
+	}
+
+	public Boolean solrClasseRolesTrouves() {
+		return classeRolesTrouves;
+	}
+
+	public String strClasseRolesTrouves() {
+		return classeRolesTrouves == null ? "" : classeRolesTrouves.toString();
+	}
+
+	public String nomAffichageClasseRolesTrouves() {
+		return null;
+	}
+
+	public String htmTooltipClasseRolesTrouves() {
+		return null;
+	}
+
+	public String htmClasseRolesTrouves() {
+		return classeRolesTrouves == null ? "" : StringEscapeUtils.escapeHtml4(strClasseRolesTrouves());
+	}
+
+	/////////////////
+	// classeRoles //
+	/////////////////
+
+	/**	L'entité « classeRoles »
+	 *	 is defined as null before being initialized. 
+	 */
+	protected List<String> classeRoles;
+	public Couverture<List<String>> classeRolesCouverture = new Couverture<List<String>>().p(this).c(List.class).var("classeRoles").o(classeRoles);
+
+	/**	<br/>L'entité « classeRoles »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.ecrivain.ApiEcrivain&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:classeRoles">Trouver l'entité classeRoles dans Solr</a>
+	 * <br/>
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
+	protected abstract void _classeRoles(Couverture<List<String>> c);
+
+	public List<String> getClasseRoles() {
+		return classeRoles;
+	}
+
+	public void setClasseRoles(List<String> classeRoles) {
+		this.classeRoles = classeRoles;
+		this.classeRolesCouverture.dejaInitialise = true;
+	}
+	public ApiEcrivain addClasseRoles(String...objets) {
+		for(String o : objets) {
+			addClasseRoles(o);
+		}
+		return (ApiEcrivain)this;
+	}
+	public ApiEcrivain addClasseRoles(String o) {
+		if(o != null && !classeRoles.contains(o))
+			this.classeRoles.add(o);
+		return (ApiEcrivain)this;
+	}
+	protected ApiEcrivain classeRolesInit() {
+		if(!classeRolesCouverture.dejaInitialise) {
+			_classeRoles(classeRolesCouverture);
+			if(classeRoles == null)
+				setClasseRoles(classeRolesCouverture.o);
+		}
+		classeRolesCouverture.dejaInitialise(true);
+		return (ApiEcrivain)this;
+	}
+
+	public List<String> solrClasseRoles() {
+		return classeRoles;
+	}
+
+	public String strClasseRoles() {
+		return classeRoles == null ? "" : classeRoles.toString();
+	}
+
+	public String nomAffichageClasseRoles() {
+		return null;
+	}
+
+	public String htmTooltipClasseRoles() {
+		return null;
+	}
+
+	public String htmClasseRoles() {
+		return classeRoles == null ? "" : StringEscapeUtils.escapeHtml4(strClasseRoles());
+	}
+
+	////////////////////////
 	// entiteDocumentSolr //
 	////////////////////////
 
@@ -2002,6 +2131,8 @@ public abstract class ApiEcrivainGen<DEV> extends Object {
 		classeSuperApiOperationIdMethodeReponseInit();
 		classeMotsClesTrouvesInit();
 		classeMotsClesInit();
+		classeRolesTrouvesInit();
+		classeRolesInit();
 		entiteDocumentSolrInit();
 	}
 
@@ -2130,6 +2261,10 @@ public abstract class ApiEcrivainGen<DEV> extends Object {
 				return oApiEcrivain.classeMotsClesTrouves;
 			case "classeMotsCles":
 				return oApiEcrivain.classeMotsCles;
+			case "classeRolesTrouves":
+				return oApiEcrivain.classeRolesTrouves;
+			case "classeRoles":
+				return oApiEcrivain.classeRoles;
 			case "entiteDocumentSolr":
 				return oApiEcrivain.entiteDocumentSolr;
 			default:
@@ -2193,7 +2328,7 @@ public abstract class ApiEcrivainGen<DEV> extends Object {
 	//////////////
 
 	@Override public int hashCode() {
-		return Objects.hash(classeApiMethode, openApiVersion, classeUris, openApiVersionNumero, tabsSchema, tabsReponses, classeApiTag, vertxServiceAddresse, classeEtendBase, classeEstBase, classeNomSimple, classeCheminAbsolu, classeApiUriMethode, classeApiMethodeMethode, classeApiTypeMedia200Methode, classeApiOperationIdMethode, classeApiOperationIdMethodeRequete, classeApiOperationIdMethodeReponse, classeSuperApiOperationIdMethodeRequete, classeSuperApiOperationIdMethodeReponse, classeMotsClesTrouves, classeMotsCles);
+		return Objects.hash(classeApiMethode, openApiVersion, classeUris, openApiVersionNumero, tabsSchema, tabsReponses, classeApiTag, vertxServiceAddresse, classeEtendBase, classeEstBase, classeNomSimple, classeCheminAbsolu, classeApiUriMethode, classeApiMethodeMethode, classeApiTypeMedia200Methode, classeApiOperationIdMethode, classeApiOperationIdMethodeRequete, classeApiOperationIdMethodeReponse, classeSuperApiOperationIdMethodeRequete, classeSuperApiOperationIdMethodeReponse, classeMotsClesTrouves, classeMotsCles, classeRolesTrouves, classeRoles);
 	}
 
 	////////////
@@ -2227,7 +2362,9 @@ public abstract class ApiEcrivainGen<DEV> extends Object {
 				&& Objects.equals( classeSuperApiOperationIdMethodeRequete, that.classeSuperApiOperationIdMethodeRequete )
 				&& Objects.equals( classeSuperApiOperationIdMethodeReponse, that.classeSuperApiOperationIdMethodeReponse )
 				&& Objects.equals( classeMotsClesTrouves, that.classeMotsClesTrouves )
-				&& Objects.equals( classeMotsCles, that.classeMotsCles );
+				&& Objects.equals( classeMotsCles, that.classeMotsCles )
+				&& Objects.equals( classeRolesTrouves, that.classeRolesTrouves )
+				&& Objects.equals( classeRoles, that.classeRoles );
 	}
 
 	//////////////
@@ -2259,6 +2396,8 @@ public abstract class ApiEcrivainGen<DEV> extends Object {
 		sb.append( ", classeSuperApiOperationIdMethodeReponse: \"" ).append(classeSuperApiOperationIdMethodeReponse).append( "\"" );
 		sb.append( ", classeMotsClesTrouves: " ).append(classeMotsClesTrouves);
 		sb.append( ", classeMotsCles: " ).append(classeMotsCles);
+		sb.append( ", classeRolesTrouves: " ).append(classeRolesTrouves);
+		sb.append( ", classeRoles: " ).append(classeRoles);
 		sb.append(" }");
 		return sb.toString();
 	}

@@ -169,7 +169,7 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 		if(config == null)
 			o = System.getenv(c.var);
 		else
-			o = StringUtils.defaultIfBlank(config.getString(prefixeEchappe + c.var), identifiantSite);
+			o = StringUtils.defaultIfBlank(config.getString(prefixeEchappe + c.var), "all");
 		c.o(o);
 	}
 

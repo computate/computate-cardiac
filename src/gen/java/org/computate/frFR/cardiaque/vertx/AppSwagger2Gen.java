@@ -46,15 +46,6 @@ public abstract class AppSwagger2Gen<DEV> extends Object {
 		this.requeteSite_ = requeteSite_;
 		this.requeteSite_Couverture.dejaInitialise = true;
 	}
-	protected AppSwagger2 requeteSite_Init() {
-		if(!requeteSite_Couverture.dejaInitialise) {
-			_requeteSite_(requeteSite_Couverture);
-			if(requeteSite_ == null)
-				setRequeteSite_(requeteSite_Couverture.o);
-		}
-		requeteSite_Couverture.dejaInitialise(true);
-		return (AppSwagger2)this;
-	}
 
 	//////////////////
 	// siteContexte //
@@ -685,7 +676,6 @@ public abstract class AppSwagger2Gen<DEV> extends Object {
 	}
 
 	public void initAppSwagger2() {
-		requeteSite_Init();
 		siteContexteInit();
 		configSiteInit();
 		appliCheminInit();

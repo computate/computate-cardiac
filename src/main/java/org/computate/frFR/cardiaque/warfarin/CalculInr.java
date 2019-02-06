@@ -31,7 +31,7 @@ import org.computate.frFR.cardiaque.couverture.Couverture;
  * Val.VAL_patientPrendCoumadinNon.frFR:No
  * Val.VAL_patientPrendCoumadinOuiDosageInitial.frFR:Yes, initial dosing
  * Val.VAL_patientPrendCoumadinOuiRecommence.frFR:Yes, restarted
- * Role.frFR: Something
+ * Role.frFR: SiteAdmin
  * Map.this.Integer: 1
  * ApiTag.enUS: InrEntry
  * ApiTag.frFR: CalculInr

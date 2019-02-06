@@ -509,6 +509,35 @@ public class ApiEcrivain extends ApiEcrivainGen<Object> implements Comparable<Ap
 
 	/**
 	 * {@inheritDoc}
+	 * Var.enUS: classRolesFound
+	 * r: classeDocumentSolr
+	 * r.enUS: classSolrDocument
+	 * r: classeRolesTrouves
+	 * r.enUS: classRolesFound
+	 **/
+	protected void _classeRolesTrouves(Couverture<Boolean> c) {
+		c.o((Boolean)classeDocumentSolr.get("classeRolesTrouves_stored_boolean"));
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * Var.enUS: classRoles
+	 * r: classeDocumentSolr
+	 * r.enUS: classSolrDocument
+	 * r: classeRolesTrouves
+	 * r.enUS: classRolesFound
+	 * r: frFR
+	 * r.enUS: enUS
+	 **/
+	protected void _classeRoles(Couverture<List<String>> c) {
+		List<String> o = (List<String>)classeDocumentSolr.get("classeRoles_frFR_stored_strings");
+		if(o == null)
+			o = new ArrayList<>();
+		c.o(o);
+	}
+
+	/**
+	 * {@inheritDoc}
 	 * Var.enUS: entitySolrDocument
 	 **/
 	protected void _entiteDocumentSolr(Couverture<SolrDocument> c) {
@@ -620,9 +649,9 @@ public class ApiEcrivain extends ApiEcrivainGen<Object> implements Comparable<Ap
 	List<String> entiteOptionsVar;
 
 	/**
-	 * Var.enUS: entityOptionsValue
+	 * Var.enUS: entityOptionsDescription
 	 */
-	List<String> entiteOptionsValeur;
+	List<String> entiteOptionsDescription;
 
 	/**
 	 * Var.enUS: initEntity
@@ -642,7 +671,7 @@ public class ApiEcrivain extends ApiEcrivainGen<Object> implements Comparable<Ap
 		entiteTypeJson = (String)entiteDocumentSolr.get("entiteTypeJson_stored_string");
 		entiteFormatJson = (String)entiteDocumentSolr.get("entiteFormatJson_stored_string");
 		entiteOptionsVar = (List<String>)entiteDocumentSolr.get("entiteOptionsVar_stored_strings");
-		entiteOptionsValeur = (List<String>)entiteDocumentSolr.get("entiteOptionsValeur_stored_strings");
+		entiteOptionsDescription = (List<String>)entiteDocumentSolr.get("entiteOptionsDescription_stored_strings");
 		entiteDescription = (String)entiteDocumentSolr.get("entiteDescription_stored_string");
 	}
 
@@ -691,10 +720,10 @@ public class ApiEcrivain extends ApiEcrivainGen<Object> implements Comparable<Ap
 				wDescription.tl(nombreTabulations + 1, "- min: ", entiteMin);
 			if(entiteMax != null)
 				wDescription.tl(nombreTabulations + 1, "- max: ", entiteMax);
-			if(entiteOptionsVar != null && entiteOptionsValeur != null && entiteOptionsVar.size() > 0 && entiteOptionsValeur.size() == entiteOptionsVar.size()) {
+			if(entiteOptionsVar != null && entiteOptionsDescription != null && entiteOptionsVar.size() > 0 && entiteOptionsDescription.size() == entiteOptionsVar.size()) {
 				wDescription.tl(nombreTabulations + 1, "- enum:");
 				for(int m = 0; m < entiteOptionsVar.size(); m++) {
-					wDescription.tl(nombreTabulations + 2, "- " + entiteOptionsVar.get(m) + ": " + entiteOptionsValeur.get(m));
+					wDescription.tl(nombreTabulations + 2, "- " + entiteOptionsVar.get(m) + ": " + entiteOptionsDescription.get(m));
 				}
 			}
 			if(entiteMotsCles.contains("apiModel")) {
@@ -729,7 +758,7 @@ public class ApiEcrivain extends ApiEcrivainGen<Object> implements Comparable<Ap
 							String entiteTypeJsonAncien = entiteTypeJson;
 							String entiteFormatJsonAncien = entiteFormatJson;
 							List<String> entiteOptionsVarAncien = entiteOptionsVar;
-							List<String> entiteOptionsValeurAncien = entiteOptionsValeur;
+							List<String> entiteOptionsDescriptionAncien = entiteOptionsDescription;
 							String entiteDescriptionAncien = entiteDescription;
 							
 							entiteVar = (String)entiteDocumentSolr.get("entiteVar_enUS_stored_string");
@@ -744,7 +773,7 @@ public class ApiEcrivain extends ApiEcrivainGen<Object> implements Comparable<Ap
 							entiteTypeJson = (String)entiteDocumentSolr.get("entiteTypeJson_stored_string");
 							entiteFormatJson = (String)entiteDocumentSolr.get("entiteFormatJson_stored_string");
 							entiteOptionsVar = (List<String>)entiteDocumentSolr.get("entiteOptionsVar_stored_strings");
-							entiteOptionsValeur = (List<String>)entiteDocumentSolr.get("entiteOptionsValeur_stored_strings");
+							entiteOptionsDescription = (List<String>)entiteDocumentSolr.get("entiteOptionsDescription_stored_strings");
 							entiteDescription = (String)entiteDocumentSolr.get("entiteDescription_stored_string");
 	
 							ecrireEntiteDescription(nombreTabulations + 3, w, apiRequeteOuReponse);
@@ -765,7 +794,7 @@ public class ApiEcrivain extends ApiEcrivainGen<Object> implements Comparable<Ap
 							entiteTypeJson = entiteTypeJsonAncien;
 							entiteFormatJson = entiteFormatJsonAncien;
 							entiteOptionsVar = entiteOptionsVarAncien;
-							entiteOptionsValeur = entiteOptionsValeurAncien;
+							entiteOptionsDescription = entiteOptionsDescriptionAncien;
 							entiteDescription = entiteDescriptionAncien;
 						}
 					}
@@ -855,7 +884,7 @@ public class ApiEcrivain extends ApiEcrivainGen<Object> implements Comparable<Ap
 //							String entiteJsonTypeAncien = entiteTypeJson;
 //							String entiteJsonFormatAncien = entiteFormatJson;
 //							List<String> entiteOptionsVarAncien = entiteOptionsVar;
-//							List<String> entiteOptionsValueurAncien = entiteOptionsValeur;
+//							List<String> entiteOptionsValueurAncien = entiteOptionsDescription;
 //							String entiteDescriptionAncien = entiteDescription;
 //
 //							entiteVar = (String)entiteDocumentSolr.get("entiteVar_enUS_stored_string");
@@ -868,7 +897,7 @@ public class ApiEcrivain extends ApiEcrivainGen<Object> implements Comparable<Ap
 //							entiteTypeJson = (String)entiteDocumentSolr.get("entiteTypeJson_stored_string");
 //							entiteFormatJson = (String)entiteDocumentSolr.get("entiteFormatJson_stored_string");
 //							entiteOptionsVar = (List<String>)entiteDocumentSolr.get("entiteOptionsVar_stored_strings");
-//							entiteOptionsValeur = (List<String>)entiteDocumentSolr.get("entiteOptionsValeur_stored_strings");
+//							entiteOptionsDescription = (List<String>)entiteDocumentSolr.get("entiteOptionsDescription_stored_strings");
 //							entiteDescription = (String)entiteDocumentSolr.get("entiteDescription_stored_string");
 //
 //							if(entiteNomCanoniqueGenerique == null) {
@@ -888,7 +917,7 @@ public class ApiEcrivain extends ApiEcrivainGen<Object> implements Comparable<Ap
 //							entiteTypeJson = entiteJsonTypeAncien;
 //							entiteFormatJson = entiteJsonFormatAncien;
 //							entiteOptionsVar = entiteOptionsVarAncien;
-//							entiteOptionsValeur = entiteOptionsValueurAncien;
+//							entiteOptionsDescription = entiteOptionsValueurAncien;
 //							entiteDescription = entiteDescriptionAncien;
 //						}
 //					}
@@ -898,7 +927,7 @@ public class ApiEcrivain extends ApiEcrivainGen<Object> implements Comparable<Ap
 
 				w.tl(4 + tabsSchema + nombreTabulations, entiteVarApi, ":");
 				w.tl(5 + tabsSchema + nombreTabulations, "type: ", entiteTypeJson);
-				if(entiteListeTypeJson == null && entiteOptionsVar != null && entiteOptionsValeur != null && entiteOptionsVar.size() > 0 && entiteOptionsValeur.size() == entiteOptionsVar.size()) {
+				if(entiteListeTypeJson == null && entiteOptionsVar != null && entiteOptionsDescription != null && entiteOptionsVar.size() > 0 && entiteOptionsDescription.size() == entiteOptionsVar.size()) {
 					w.tl(5 + tabsSchema + nombreTabulations, "enum:");
 					for(String entiteOptionVar : entiteOptionsVar) {
 						w.tl(6 + tabsSchema + nombreTabulations, "- ", entiteOptionVar);
@@ -908,7 +937,7 @@ public class ApiEcrivain extends ApiEcrivainGen<Object> implements Comparable<Ap
 				if(entiteListeTypeJson != null) {
 					w.tl(5 + tabsSchema + nombreTabulations, "items:");
 					w.tl(6 + tabsSchema + nombreTabulations, "type: ", entiteListeTypeJson);
-					if(entiteOptionsVar != null && entiteOptionsValeur != null && entiteOptionsVar.size() > 0 && entiteOptionsValeur.size() == entiteOptionsVar.size()) {
+					if(entiteOptionsVar != null && entiteOptionsDescription != null && entiteOptionsVar.size() > 0 && entiteOptionsDescription.size() == entiteOptionsVar.size()) {
 						w.tl(6 + tabsSchema + nombreTabulations, "enum:");
 						for(String entiteOptionVar : entiteOptionsVar) {
 							w.tl(7 + tabsSchema + nombreTabulations, "- ", entiteOptionVar);
@@ -933,6 +962,13 @@ public class ApiEcrivain extends ApiEcrivainGen<Object> implements Comparable<Ap
 		wChemins.tl(2, StringUtils.lowerCase(classeApiMethodeMethode), ":");
 		wChemins.tl(3, "operationId: ", classeApiOperationIdMethode);
 		wChemins.tl(3, "x-vertx-event-bus: ", vertxServiceAddresse);
+
+		if(classeRolesTrouves) {
+			wChemins.tl(3, "security:");
+			wChemins.tl(4, "- openIdConnect:");
+			for(String classeRole : classeRoles)
+				wChemins.tl(5, "- ", classeRole);
+		}
 
 		wChemins.t(3, "description: ").yamlStr(4, "");
 		wChemins.t(3, "summary: ").yamlStr(4, "");

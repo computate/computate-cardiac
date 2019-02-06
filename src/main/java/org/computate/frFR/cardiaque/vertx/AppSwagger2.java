@@ -237,6 +237,12 @@ public class AppSwagger2 extends AppSwagger2Gen<Object> {
 			}
 			else {
 				wCorpsRequetes.tl(0, "components:");
+				if(configSite.getAuthUrl() != null) {
+					wCorpsRequetes.tl(1, "securitySchemes:");
+						wCorpsRequetes.tl(2, "openIdConnect:");
+						wCorpsRequetes.tl(3, "type: openIdConnect");
+						wCorpsRequetes.tl(3, "openIdConnectUrl: ", configSite.getAuthUrl(), "/realms/", configSite.getAuthRoyaume(), "/.well-known/openid-configuration");
+				}
 				wCorpsRequetes.tl(1, "requestBodies:");
 				wCorpsRequetes.tl(2, "ErrorResponse:");
 				wCorpsRequetes.tl(3, "content:");

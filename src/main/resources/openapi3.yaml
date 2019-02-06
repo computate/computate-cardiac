@@ -3,7 +3,11 @@ info:
   title: "computate-cardiac"
   version: 3.0.0
 servers:
-  - url: https://cardiac.heytate.com
+  - url: https://cardiac.heytate.com:8080
+security:
+  - openIdConnect:
+      - openid
+      - offline_access
 paths:
   /api/v1/warfarin/cluster:
     get:
@@ -459,6 +463,9 @@ paths:
     get:
       operationId: rechercheCalculInr
       x-vertx-event-bus: api
+      security:
+        - openIdConnect:
+          - SiteAdmin
       description: >+
       summary: >+
       tags:
@@ -565,6 +572,9 @@ paths:
     post:
       operationId: postCalculInr
       x-vertx-event-bus: api
+      security:
+        - openIdConnect:
+          - SiteAdmin
       description: >+
       summary: >+
       tags:
@@ -632,6 +642,9 @@ paths:
     patch:
       operationId: patchCalculInr
       x-vertx-event-bus: api
+      security:
+        - openIdConnect:
+          - SiteAdmin
       description: >+
       summary: >+
       tags:
@@ -700,6 +713,9 @@ paths:
     get:
       operationId: getCalculInr
       x-vertx-event-bus: api
+      security:
+        - openIdConnect:
+          - SiteAdmin
       description: >+
       summary: >+
       tags:
@@ -767,6 +783,9 @@ paths:
     put:
       operationId: putCalculInr
       x-vertx-event-bus: api
+      security:
+        - openIdConnect:
+          - SiteAdmin
       description: >+
       summary: >+
       tags:
@@ -841,6 +860,9 @@ paths:
     delete:
       operationId: deleteCalculInr
       x-vertx-event-bus: api
+      security:
+        - openIdConnect:
+          - SiteAdmin
       description: >+
       summary: >+
       tags:
@@ -909,6 +931,9 @@ paths:
     get:
       operationId: recherchepageCalculInr
       x-vertx-event-bus: api
+      security:
+        - openIdConnect:
+          - SiteAdmin
       description: >+
       summary: >+
       tags:
@@ -1013,6 +1038,10 @@ paths:
               schema:
                 $ref: '#/components/requestBodies/ErrorResponse'
 components:
+  securitySchemes:
+    openIdConnect:
+      type: openIdConnect
+      openIdConnectUrl: https://auth.computate.org/auth/realms/computate.org/.well-known/openid-configuration
   requestBodies:
     ErrorResponse:
       content:
