@@ -8,7 +8,7 @@ import org.computate.frFR.cardiaque.couverture.Couverture;
 
 
 
-/**  
+/**    
  * Modele: true
  * NomCanonique.enUS: org.computate.enUS.cardiac.warfarin.InrEntry
  * ApiUri.enUS: /api/v1/warfarin/inr-entry
@@ -35,7 +35,7 @@ import org.computate.frFR.cardiaque.couverture.Couverture;
  * Map.this.Integer: 1
  * ApiTag.enUS: InrEntry
  * ApiTag.frFR: CalculInr
-*/        
+*/         
 public class CalculInr extends CalculInrGen<Cluster> {  
 
 	/**
