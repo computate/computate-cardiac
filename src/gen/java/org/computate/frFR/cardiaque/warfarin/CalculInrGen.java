@@ -1076,6 +1076,107 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 		}
 	}
 
+	////////////
+	// pageH2 //
+	////////////
+
+	/**	L'entité « pageH2 »
+	 *	Il est construit avant d'être initialisé avec le constructeur par défaut Chaine(). 
+	 */
+	protected Chaine pageH2 = new Chaine();
+	public Couverture<Chaine> pageH2Couverture = new Couverture<Chaine>().p(this).c(Chaine.class).var("pageH2").o(pageH2);
+
+	/**	<br/>L'entité « pageH2 »
+	 * Il est construit avant d'être initialisé avec le constructeur par défaut Chaine(). 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.warfarin.CalculInr&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:pageH2">Trouver l'entité pageH2 dans Solr</a>
+	 * <br/>
+	 * @param pageH2 est l'entité déjà construit. 
+	 **/
+	protected abstract void _pageH2(Chaine o);
+
+	public Chaine getPageH2() {
+		return pageH2;
+	}
+
+	public void setPageH2(Chaine pageH2) {
+		this.pageH2 = pageH2;
+		this.pageH2Couverture.dejaInitialise = true;
+	}
+	public CalculInr setPageH2(String o) {
+		pageH2.s(o);
+		this.pageH2Couverture.dejaInitialise = true;
+		return (CalculInr)this;
+	}
+	protected CalculInr pageH2Init() {
+		if(!pageH2Couverture.dejaInitialise) {
+			_pageH2(pageH2);
+		}
+		pageH2.initLoinPourClasse(requeteSite_);
+		pageH2Couverture.dejaInitialise(true);
+		return (CalculInr)this;
+	}
+
+	public String solrPageH2() {
+		return pageH2 == null ? null : pageH2.toString();
+	}
+
+	public String strPageH2() {
+		return pageH2 == null ? "" : pageH2.toString();
+	}
+
+	public String nomAffichagePageH2() {
+		return null;
+	}
+
+	public String htmTooltipPageH2() {
+		return null;
+	}
+
+	public String htmPageH2() {
+		return pageH2 == null ? "" : StringEscapeUtils.escapeHtml4(strPageH2());
+	}
+
+	public void htmPageH2(ToutEcrivain r, Boolean patchDroits) {
+		if(pk!= null) {
+			r.s("<div id=\"patchCalculInr", strPk(), "PageH2\">");
+			if(patchDroits) {
+				r.l();
+				r.l("	<script>//<![CDATA[");
+				r.l("		function patchCalculInr", strPk(), "PageH2() {");
+				r.l("			$.ajax({");
+				r.l("				url: '/api/v1/warfarin/calcul-inr?fq=pk:", strPk(), "',");
+				r.l("				dataType: 'json',");
+				r.l("				type: 'patch',");
+				r.l("				contentType: 'application/json',");
+				r.l("				processData: false,");
+				r.l("				success: function( data, textStatus, jQxhr ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				error: function( jqXhr, textStatus, errorThrown ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				data: {\"setPageH2\": this.value },");
+				r.l("				");
+				r.l("			});");
+				r.l("		}");
+				r.l("	//]]></script>");
+				r.l("	<div class=\"\">");
+				r.l("		<label class=\"w3-tooltip \">");
+				r.l("			<span>", StringEscapeUtils.escapeHtml4(nomAffichagePageH2()), "</span>");
+				r.s("			<input");
+							r.s(" name=\"pageH2\"");
+							r.s(" value=\"", htmPageH2(), "\");");
+							r.s(" onchange=\"\"");
+							r.l("/>");
+				r.l("		</label>");
+				r.l("	</div>");
+			} else {
+				r.s(htmPageH2());
+			}
+			r.l("</div>");
+		}
+	}
+
 	//////////////
 	// initLoin //
 	//////////////
@@ -1107,6 +1208,7 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 		changementDoseInit();
 		notesComplementairesInit();
 		infoContactInit();
+		pageH2Init();
 	}
 
 	@Override public void initLoinPourClasse(RequeteSite requeteSite_) {
@@ -1126,6 +1228,7 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 		changementDose.setRequeteSite_(requeteSite_);
 		notesComplementaires.setRequeteSite_(requeteSite_);
 		infoContact.setRequeteSite_(requeteSite_);
+		pageH2.setRequeteSite_(requeteSite_);
 	}
 
 	public void requeteSitePourClasse(RequeteSite requeteSite_) {
@@ -1271,6 +1374,8 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 				return oCalculInr.notesComplementaires;
 			case "infoContact":
 				return oCalculInr.infoContact;
+			case "pageH2":
+				return oCalculInr.pageH2;
 			default:
 				return super.obtenirCluster(var);
 		}
@@ -1360,6 +1465,10 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 				return val;
 			case "infoContact":
 				setInfoContact(val);
+				sauvegardesCalculInr.add(var);
+				return val;
+			case "pageH2":
+				setPageH2(val);
 				sauvegardesCalculInr.add(var);
 				return val;
 			default:
@@ -1505,7 +1614,7 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	//////////////
 
 	@Override public int hashCode() {
-		return Objects.hash(super.hashCode(), utilisateurPk, dateInr, dateReverifier, patientPrendCoumadin, butActuel, doseActuel, medicamentActuel, changementDose, notesComplementaires, infoContact);
+		return Objects.hash(super.hashCode(), utilisateurPk, dateInr, dateReverifier, patientPrendCoumadin, butActuel, doseActuel, medicamentActuel, changementDose, notesComplementaires, infoContact, pageH2);
 	}
 
 	////////////
@@ -1528,7 +1637,8 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 				&& Objects.equals( medicamentActuel, that.medicamentActuel )
 				&& Objects.equals( changementDose, that.changementDose )
 				&& Objects.equals( notesComplementaires, that.notesComplementaires )
-				&& Objects.equals( infoContact, that.infoContact );
+				&& Objects.equals( infoContact, that.infoContact )
+				&& Objects.equals( pageH2, that.pageH2 );
 	}
 
 	//////////////
@@ -1549,6 +1659,7 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 		sb.append( ", changementDose: " ).append(changementDose);
 		sb.append( ", notesComplementaires: " ).append(notesComplementaires);
 		sb.append( ", infoContact: " ).append(infoContact);
+		sb.append( ", pageH2: " ).append(pageH2);
 		sb.append(" }");
 		return sb.toString();
 	}

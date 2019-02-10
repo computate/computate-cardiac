@@ -26,6 +26,11 @@ import org.computate.frFR.cardiaque.couverture.Couverture;
  * ApiUriRecherchePage.enUS: /inr-entry
  * ApiTypeMedia200GETPage: text/html
  * PageRecherchePage: CalculInrPage
+ * UnNomMinuscule.frFR: un calcul INR
+ * NomPluriel.frFR: calculs INR
+ * Couleur: green
+ * IconeGroupe: regular
+ * IconeNom: calculator-alt
  * 
  * Val.VAL_patientPrendCoumadinOui.frFR:Yes
  * Val.VAL_patientPrendCoumadinNon.frFR:No
@@ -35,8 +40,8 @@ import org.computate.frFR.cardiaque.couverture.Couverture;
  * Map.this.Integer: 1
  * ApiTag.enUS: InrEntry
  * ApiTag.frFR: CalculInr
-*/         
-public class CalculInr extends CalculInrGen<Cluster> {  
+*/            
+public class CalculInr extends CalculInrGen<Cluster> {   
 
 	/**
 	 * {@inheritDoc}
@@ -52,6 +57,7 @@ public class CalculInr extends CalculInrGen<Cluster> {
 	 * {@inheritDoc}
 	 * Indexe: true
 	 * Stocke: true
+	 * HtmlLigne: 1
 	 */
 	protected void _dateInr(Couverture<LocalDate> c) {
 		c.o(LocalDate.now());
@@ -61,6 +67,7 @@ public class CalculInr extends CalculInrGen<Cluster> {
 	 * {@inheritDoc}
 	 * Indexe: true
 	 * Stocke: true
+	 * HtmlLigne: 1
 	 */
 	protected void _dateReverifier(Couverture<LocalDate> c) {
 
@@ -76,6 +83,7 @@ public class CalculInr extends CalculInrGen<Cluster> {
 	 * Option.frFR.non:CalculInr.VAL_patientPrendCoumadinNon
 	 * Option.frFR.ouiDosageInitial:CalculInr.VAL_patientPrendCoumadinOuiDosageInitial
 	 * Option.frFR.ouiRecommence:CalculInr.VAL_patientPrendCoumadinOuiRecommence
+	 * HtmlLigne: 2
 	 */ 
 	protected void _patientPrendCoumadin(Chaine o) {
 	}
@@ -85,6 +93,7 @@ public class CalculInr extends CalculInrGen<Cluster> {
 	 * Var.enUS: currentGoal
 	 * Indexe: true
 	 * Stocke: true
+	 * HtmlLigne: 2
 	 */ 
 	protected void _butActuel(Chaine o) {
 	}
@@ -94,6 +103,7 @@ public class CalculInr extends CalculInrGen<Cluster> {
 	 * Var.enUS: currentDosage
 	 * Indexe: true
 	 * Stocke: true
+	 * HtmlLigne: 3
 	 */ 
 	protected void _doseActuel(Chaine o) {
 	}
@@ -103,6 +113,7 @@ public class CalculInr extends CalculInrGen<Cluster> {
 	 * Var.enUS: currentMedication
 	 * Indexe: true
 	 * Stocke: true
+	 * HtmlLigne: 3
 	 */ 
 	protected void _medicamentActuel(Chaine o) {
 	}
@@ -114,16 +125,18 @@ public class CalculInr extends CalculInrGen<Cluster> {
 	 * Stocke: true
 	 * r: FORMAT_dateMedicalCourt
 	 * r.enUS: FORMAT_dateMedicalShort
+	 * HtmlLigne: 4
 	 */
 	protected void _changementDose(Chaine o) {
 		o.s(dateInr.format(FORMAT_dateMedicalCourt), " INR @ ");
-	}
+	}    
 
 	/**
 	 * {@inheritDoc}
 	 * Var.enUS: additionalNotes
 	 * Indexe: true
 	 * Stocke: true
+	 * HtmlLigne: 4
 	 */
 	protected void _notesComplementaires(Chaine o) {
 	}
@@ -133,7 +146,16 @@ public class CalculInr extends CalculInrGen<Cluster> {
 	 * Var.enUS: contactInfo
 	 * Indexe: true
 	 * Stocke: true
+	 * HtmlLigne: 5
 	 */ 
 	protected void _infoContact(Chaine o) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * 
+	 **/
+	protected void _pageH2(Chaine o) {
+		o.s(strDateInr());
 	}
 }

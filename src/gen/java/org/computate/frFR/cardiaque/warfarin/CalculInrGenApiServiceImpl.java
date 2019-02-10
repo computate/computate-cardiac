@@ -1,9 +1,9 @@
 package org.computate.frFR.cardiaque.warfarin;
 
 import org.computate.frFR.cardiaque.ecrivain.ToutEcrivain;
-import org.computate.frFR.cardiaque.recherche.ListeRecherche;
 import org.computate.frFR.cardiaque.recherche.ResultatRecherche;
 import java.util.Arrays;
+import org.computate.frFR.cardiaque.recherche.ListeRecherche;
 import io.vertx.ext.web.api.validation.ParameterTypeValidator;
 import org.computate.frFR.cardiaque.config.ConfigSite;
 import org.apache.solr.common.SolrDocumentList;
@@ -34,7 +34,6 @@ import org.computate.frFR.cardiaque.contexte.SiteContexte;
 import java.util.List;
 import java.security.Principal;
 import io.vertx.core.buffer.Buffer;
-import io.vertx.core.http.HttpServerResponse;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.http.client.utils.URLEncodedUtils;
 import io.vertx.ext.auth.oauth2.OAuth2Auth;
@@ -42,8 +41,6 @@ import org.apache.solr.client.solrj.util.ClientUtils;
 import io.vertx.ext.sql.SQLClient;
 import org.apache.http.NameValuePair;
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import io.vertx.core.http.HttpServerRequest;
-import org.computate.frFR.cardiaque.couverture.Couverture;
 import io.vertx.core.json.Json;
 import java.time.LocalDateTime;
 import io.vertx.core.logging.LoggerFactory;
@@ -63,7 +60,6 @@ import io.vertx.core.json.JsonArray;
 import io.vertx.ext.web.api.OperationRequest;
 import java.time.format.DateTimeFormatter;
 import io.vertx.ext.sql.SQLConnection;
-import org.computate.frFR.cardiaque.page.MiseEnPage;
 import org.apache.solr.client.solrj.SolrQuery.ORDER;
 import io.vertx.core.Handler;
 import java.util.Collections;
@@ -334,6 +330,10 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 					postSql.append(SiteContexte.SQL_setP);
 					postSqlParams.addAll(Arrays.asList("infoContact", jsonObject.getString(entiteVar), pk));
 					break;
+				case "pageH2":
+					postSql.append(SiteContexte.SQL_setP);
+					postSqlParams.addAll(Arrays.asList("pageH2", jsonObject.getString(entiteVar), pk));
+					break;
 			}
 		}
 		connexionSql.queryWithParams(
@@ -438,6 +438,10 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 				case "setInfoContact":
 					patchSql.append(SiteContexte.SQL_setP);
 					patchSqlParams.addAll(Arrays.asList("infoContact", requeteJson.getString(methodeNom), pk));
+					break;
+				case "setPageH2":
+					patchSql.append(SiteContexte.SQL_setP);
+					patchSqlParams.addAll(Arrays.asList("pageH2", requeteJson.getString(methodeNom), pk));
 					break;
 			}
 		}
@@ -626,6 +630,10 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 				case "infoContact":
 					postSql.append(SiteContexte.SQL_setP);
 					postSqlParams.addAll(Arrays.asList("infoContact", jsonObject.getString(entiteVar), pk));
+					break;
+				case "pageH2":
+					postSql.append(SiteContexte.SQL_setP);
+					postSqlParams.addAll(Arrays.asList("pageH2", jsonObject.getString(entiteVar), pk));
 					break;
 			}
 		}
