@@ -175,6 +175,18 @@ public abstract class CalculInrGenPageGen<DEV> extends MiseEnPage {
 	}
 
 	//////////////
+	// htmlBody //
+	//////////////
+
+	@Override public void htmlBody() {
+		htmlBodyCalculInrGenPage();
+		super.htmlBodyMiseEnPage();
+	}
+
+	public void htmlBodyCalculInrGenPage() {
+	}
+
+	//////////////
 	// hashCode //
 	//////////////
 

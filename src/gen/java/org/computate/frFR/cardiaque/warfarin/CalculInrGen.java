@@ -7,6 +7,7 @@ import io.vertx.core.logging.LoggerFactory;
 import java.util.ArrayList;
 import java.lang.Long;
 import org.computate.frFR.cardiaque.requete.RequeteSite;
+import java.lang.Boolean;
 import org.computate.frFR.cardiaque.ecrivain.ToutEcrivain;
 import io.vertx.core.json.JsonObject;
 import java.lang.String;
@@ -204,7 +205,7 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	}
 
 	public String nomAffichageDateInr() {
-		return null;
+		return "Date INR";
 	}
 
 	public String htmTooltipDateInr() {
@@ -317,7 +318,7 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	}
 
 	public String nomAffichageDateReverifier() {
-		return null;
+		return "Date \u00E0 reverifier";
 	}
 
 	public String htmTooltipDateReverifier() {
@@ -374,43 +375,45 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	//////////////////////////
 
 	/**	L'entité « patientPrendCoumadin »
-	 *	Il est construit avant d'être initialisé avec le constructeur par défaut Chaine(). 
+	 *	 is defined as null before being initialized. 
 	 */
-	protected Chaine patientPrendCoumadin = new Chaine();
-	public Couverture<Chaine> patientPrendCoumadinCouverture = new Couverture<Chaine>().p(this).c(Chaine.class).var("patientPrendCoumadin").o(patientPrendCoumadin);
+	protected Boolean patientPrendCoumadin;
+	public Couverture<Boolean> patientPrendCoumadinCouverture = new Couverture<Boolean>().p(this).c(Boolean.class).var("patientPrendCoumadin").o(patientPrendCoumadin);
 
 	/**	<br/>L'entité « patientPrendCoumadin »
-	 * Il est construit avant d'être initialisé avec le constructeur par défaut Chaine(). 
+	 *  est défini comme null avant d'être initialisé. 
 	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.warfarin.CalculInr&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:patientPrendCoumadin">Trouver l'entité patientPrendCoumadin dans Solr</a>
 	 * <br/>
-	 * @param patientPrendCoumadin est l'entité déjà construit. 
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _patientPrendCoumadin(Chaine o);
+	protected abstract void _patientPrendCoumadin(Couverture<Boolean> c);
 
-	public Chaine getPatientPrendCoumadin() {
+	public Boolean getPatientPrendCoumadin() {
 		return patientPrendCoumadin;
 	}
 
-	public void setPatientPrendCoumadin(Chaine patientPrendCoumadin) {
+	public void setPatientPrendCoumadin(Boolean patientPrendCoumadin) {
 		this.patientPrendCoumadin = patientPrendCoumadin;
 		this.patientPrendCoumadinCouverture.dejaInitialise = true;
 	}
 	public CalculInr setPatientPrendCoumadin(String o) {
-		patientPrendCoumadin.s(o);
+		if(org.apache.commons.lang3.BooleanUtils.isTrue(org.apache.commons.lang3.BooleanUtils.toBoolean(o)))
+			this.patientPrendCoumadin = Boolean.parseBoolean(o);
 		this.patientPrendCoumadinCouverture.dejaInitialise = true;
 		return (CalculInr)this;
 	}
 	protected CalculInr patientPrendCoumadinInit() {
 		if(!patientPrendCoumadinCouverture.dejaInitialise) {
-			_patientPrendCoumadin(patientPrendCoumadin);
+			_patientPrendCoumadin(patientPrendCoumadinCouverture);
+			if(patientPrendCoumadin == null)
+				setPatientPrendCoumadin(patientPrendCoumadinCouverture.o);
 		}
-		patientPrendCoumadin.initLoinPourClasse(requeteSite_);
 		patientPrendCoumadinCouverture.dejaInitialise(true);
 		return (CalculInr)this;
 	}
 
-	public String solrPatientPrendCoumadin() {
-		return patientPrendCoumadin == null ? null : patientPrendCoumadin.toString();
+	public Boolean solrPatientPrendCoumadin() {
+		return patientPrendCoumadin;
 	}
 
 	public String strPatientPrendCoumadin() {
@@ -418,7 +421,7 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	}
 
 	public String nomAffichagePatientPrendCoumadin() {
-		return null;
+		return "Patient prend coumadin";
 	}
 
 	public String htmTooltipPatientPrendCoumadin() {
@@ -519,7 +522,7 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	}
 
 	public String nomAffichageButActuel() {
-		return null;
+		return "But actuel";
 	}
 
 	public String htmTooltipButActuel() {
@@ -620,7 +623,7 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	}
 
 	public String nomAffichageDoseActuel() {
-		return null;
+		return "Dose actuel";
 	}
 
 	public String htmTooltipDoseActuel() {
@@ -721,7 +724,7 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	}
 
 	public String nomAffichageMedicamentActuel() {
-		return null;
+		return "Dose actuel";
 	}
 
 	public String htmTooltipMedicamentActuel() {
@@ -822,7 +825,7 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	}
 
 	public String nomAffichageChangementDose() {
-		return null;
+		return "Changement de dose";
 	}
 
 	public String htmTooltipChangementDose() {
@@ -923,7 +926,7 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	}
 
 	public String nomAffichageNotesComplementaires() {
-		return null;
+		return "Notes compl\u00E9mentaires";
 	}
 
 	public String htmTooltipNotesComplementaires() {
@@ -1024,7 +1027,7 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	}
 
 	public String nomAffichageInfoContact() {
-		return null;
+		return "Info contact";
 	}
 
 	public String htmTooltipInfoContact() {
@@ -1221,7 +1224,6 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 
 	public void requeteSiteCalculInr(RequeteSite requeteSite_) {
 			super.requeteSiteCluster(requeteSite_);
-		patientPrendCoumadin.setRequeteSite_(requeteSite_);
 		butActuel.setRequeteSite_(requeteSite_);
 		doseActuel.setRequeteSite_(requeteSite_);
 		medicamentActuel.setRequeteSite_(requeteSite_);
@@ -1289,8 +1291,8 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 			document.addField("dateReverifier_stored_date", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(dateReverifier.atStartOfDay(ZoneId.systemDefault())));
 		}
 		if(patientPrendCoumadin != null) {
-			document.addField("patientPrendCoumadin_indexed_string", patientPrendCoumadin);
-			document.addField("patientPrendCoumadin_stored_string", patientPrendCoumadin);
+			document.addField("patientPrendCoumadin_indexed_boolean", patientPrendCoumadin);
+			document.addField("patientPrendCoumadin_stored_boolean", patientPrendCoumadin);
 		}
 		if(butActuel != null) {
 			document.addField("butActuel_indexed_string", butActuel);
@@ -1512,7 +1514,7 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 		}
 
 		if(sauvegardesCalculInr.contains("patientPrendCoumadin")) {
-			String patientPrendCoumadin = (String)solrDocument.get("patientPrendCoumadin_stored_string");
+			Boolean patientPrendCoumadin = (Boolean)solrDocument.get("patientPrendCoumadin_stored_boolean");
 			if(patientPrendCoumadin != null)
 				oCalculInr.setPatientPrendCoumadin(patientPrendCoumadin);
 		}
@@ -1578,7 +1580,7 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 		if(dateReverifier != null)
 			oCalculInr.setDateReverifier(dateReverifier);
 
-		String patientPrendCoumadin = (String)solrDocument.get("patientPrendCoumadin_stored_string");
+		Boolean patientPrendCoumadin = (Boolean)solrDocument.get("patientPrendCoumadin_stored_boolean");
 		if(patientPrendCoumadin != null)
 			oCalculInr.setPatientPrendCoumadin(patientPrendCoumadin);
 

@@ -1,4 +1,4 @@
-package org.computate.frFR.cardiaque.page;
+package org.computate.frFR.cardiaque.page; 
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -23,8 +23,7 @@ import io.vertx.core.http.HttpServerRequest;
 
 /**
  * NomCanonique.enUS: org.computate.enUS.cardiac.page.PageLayout
- * Html: true
- */    
+ */  
 public class MiseEnPage extends MiseEnPageGen<Object> {  
 
 	/**
@@ -615,106 +614,135 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 //			}
 //	}
 
-	@Override public void htmlMiseEnPageAvant() {
-		e("html").a("xmlns:xlink", "http://www.w3.org/1999/xlink").a("xmlns", "http://www.w3.org/1999/xhtml").a("xmlns:fb", "http://ogp.me/ns/fb#").f();
-		e("head").f();
-			e("meta").a("charset", "UTF-8").fg();
-			e("meta").a("name", "viewport").a("content", "width=device-width, initial-scale=1").fg();
-			e("link").a("rel", "stylesheet").a("href", "https://www.w3schools.com/w3css/4/w3.css").fg();
-			e("link").a("rel", "stylesheet").a("href", "/static/css/site.css").fg();
-			e("link").a("rel", "stylesheet").a("href", "https://fonts.googleapis.com/css?family=Khand").fg();
-			e("link").a("rel", "stylesheet").a("href", "https://pro.fontawesome.com/releases/v5.7.1/css/all.css").a("integrity", "sha384-6jHF7Z3XI3fF4XZixAuSu0gGKrXwoX/w3uFPxC56OtjChio7wtTGJWRW53Nhx6Ev").a("crossorigin", "anonymous").fg();
-//			e("link").a("rel", "stylesheet").a("href", "https://use.fontawesome.com/releases/v5.7.1/css/all.css").a("integrity", "sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr").a("crossorigin", "anonymous").fg();
-			e("script").a("src", "https://code.jquery.com/jquery-1.12.4.min.js").f().g("script");
-			e("script").a("src", "/static/js/site.js").f().g("script");
-//			e("script").a("async", "").a("defer", "").a("src", "https://apis.google.com/js/platform.js").f().g("script");
-//			e("script").a("async", "").a("src", "https://www.googletagmanager.com/gtag/js?id=UA-118970786-1").f().g("script");
-//			e("script").f().l("/*<![CDATA[*/");
-//				l("window.dataLayer = window.dataLayer || [];");
-//				l("function gtag(){dataLayer.push(arguments);}");
-//				l("gtag('js', new Date());");
-//				l("gtag('config', 'UA-118970786-1');");
-//			s("/*]]>*/").g("script");
-
-			e("meta").a("name", "description").a("content", pageDescription).fg();
-			e("title").f();
-				sx(pageTitre);
-			g("title");
-			e("meta").a("name", "keywords").a("content", pageMotsCles).fg();
-			e("meta").a("property", "og:title").a("content", pageTitre).fg();
-			e("meta").a("property", "og:description").a("content", pageDescription).fg();
-			e("meta").a("property", "og:url").a("content", pageUrl).fg();
-			e("meta").a("property", "og:site_name").a("content", requeteSite_.getConfigSite_().getNomDomaine()).fg();
-			e("meta").a("property", "og:image").a("content", pageImageUrl).fg();
-			e("meta").a("property", "og:image:width").a("content", pageImageLargeur).fg();
-			e("meta").a("property", "og:image:height").a("content", pageImageHauteur).fg();
-			e("meta").a("property", "og:image:type").a("content", pageImageTypeContenu).fg();
-			e("meta").a("property", "og:image:alt").a("content", pageTitre).fg();
-			e("meta").a("property", "og:type").a("content", "article").fg();
-			e("meta").a("name", "twitter:card").a("content", "summary_large_image").fg();
-			e("meta").a("name", "twitter:site").a("content", "@computateorg").fg();
-			e("meta").a("name", "twitter:creator").a("content", "@computateorg").fg();
-			e("meta").a("name", "twitter:title").a("content", pageTitre).fg();
-			e("meta").a("name", "twitter:description").a("content", pageDescription).fg();
-			e("meta").a("name", "twitter:image").a("content", pageImageUrl).fg();
-		g("head");
-		e("body").f(); 
-			e("a").a("name", "top").f().g("a");
-//			e("script").a("type", "text/javascript").a("async", "").a("defer", "").a("src", "//assets.pinterest.com/js/pinit_main.js?0.8726554954646004").f().g("script");
-//			e("div").a("id", "fb-root").f().g("div");
-//			e("script").f().l("/*<![CDATA[*/");
-//				l("(function(d, s, id) {");
-//				l("var js, fjs = d.getElementsByTagName(s)[0];");
-//				l("if (d.getElementById(id)) return;");
-//				l("js = d.createElement(s); js.id = id;");
-//				s("js.src = '");
-//				s("//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10&appId=1871568493111919");
-//				l("';");
-//				l("fjs.parentNode.insertBefore(js, fjs);");
-//				l("}(document, 'script', 'facebook-jssdk'));");
-//			s("/*]]>*/").g("script");
-//			e("script").f().l("/*<![CDATA[*/");
-//				s("var _ctct_m = \"805a4a78c2843d257b9b05ea244b6ec7\"; ");
-//			s("/*]]>*/").g("script");
-//			e("script").a("id", "signupScript").a("src", "//static.ctctcdn.com/js/signup-form-widget/current/signup-form-widget.min.js").a("async", "").a("defer", "").f();
-//			g("script");
-			e("div").a("id", "modaleErreur").a("class", "w3-modal").a("onclick", "this.style.display = 'none';").f();
-				e("div").a("class", "w3-modal-content w3-animate-zoom").f();
-					e("header").a("class", "w3-container w3-center w3-red ").f();
-						e("h3").f();
-							sx("Une erreur s'est produite. ");
-						g("h3");
-					g("header");
-				g("div");
-				e("div").a("id", "modaleErreurMessage").a("class", "w3-container w3-center").f().g("div");
-				e("header").a("class", "w3-container w3-center w3-padding-16 ").f();
-					sx("L'erreur a été envoyée par e-mail à l'administrateur pour analyse. ");
-				g("header");
-			g("div");
-			e("div").a("class", "site-section-all ").f();
-				e("div").a("class", "site-section-above ").f();
-					e("div").a("class", "w3-content w3-center w3-text-black ").f();
-						e("div").a("class", "").f();
-//							e("img").a("src", "/img/trailblaze-top.jpg").a("class", "w3-img ").a("style", "width: 100%; margin-bottom: -10px; ").fg();
-							menu();
-						g("div"); 
-					g("div");
-					e("div").a("id", "site-section-primary").a("class", "site-section-primary w3-text-black w3-padding-bottom-32 ").f();
-						e("div").a("class", "w3-content ").f();
+	@Override public void htmlMeta() {
+		e("meta").a("charset", "UTF-8").fg();
+		e("meta").a("name", "viewport").a("content", "width=device-width, initial-scale=1").fg();
+		e("meta").a("name", "keywords").a("content", pageMotsCles).fg();
+		e("meta").a("property", "og:title").a("content", pageTitre).fg();
+		e("meta").a("property", "og:description").a("content", pageDescription).fg();
+		e("meta").a("property", "og:url").a("content", pageUrl).fg();
+		e("meta").a("property", "og:site_name").a("content", requeteSite_.getConfigSite_().getNomDomaine()).fg();
+		e("meta").a("property", "og:image").a("content", pageImageUrl).fg();
+		e("meta").a("property", "og:image:width").a("content", pageImageLargeur).fg();
+		e("meta").a("property", "og:image:height").a("content", pageImageHauteur).fg();
+		e("meta").a("property", "og:image:type").a("content", pageImageTypeContenu).fg();
+		e("meta").a("property", "og:image:alt").a("content", pageTitre).fg();
+		e("meta").a("property", "og:type").a("content", "article").fg();
+		e("meta").a("name", "twitter:card").a("content", "summary_large_image").fg();
+		e("meta").a("name", "twitter:site").a("content", "@computateorg").fg();
+		e("meta").a("name", "twitter:creator").a("content", "@computateorg").fg();
+		e("meta").a("name", "twitter:title").a("content", pageTitre).fg();
+		e("meta").a("name", "twitter:description").a("content", pageDescription).fg();
+		e("meta").a("name", "twitter:image").a("content", pageImageUrl).fg();
+		e("meta").a("name", "description").a("content", pageDescription).fg();
 	}
 
-	@Override public void htmlMiseEnPageApres() {
-								e("footer").a("class", "w3-center w3-black w3-padding-48 ").f();
-									e("div").a("class", "w3-xxlarge ").f();
-										sx("This site is open-source. ");
-									g("div");
-									e("div").a("class", "w3-large ").f();
-										e("a").a("href", "https://github.com/computate/computate-cardiac").a("target", "_new").f();
-											sx("View the source code here. ");
-										g("a");
-									g("div");
-								g("footer");
-							g("div");
+	@Override public void html() {
+		super.html();
+	}
+
+	@Override public void htmlScripts() {
+		e("script").a("src", "https://code.jquery.com/jquery-1.12.4.min.js").f().g("script");
+		e("script").a("src", "/static/js/site.js").f().g("script");
+//		e("script").a("async", "").a("defer", "").a("src", "https://apis.google.com/js/platform.js").f().g("script");
+//		e("script").a("async", "").a("src", "https://www.googletagmanager.com/gtag/js?id=UA-118970786-1").f().g("script");
+//		e("script").f().l("/*<![CDATA[*/");
+//			l("window.dataLayer = window.dataLayer || [];");
+//			l("function gtag(){dataLayer.push(arguments);}");
+//			l("gtag('js', new Date());");
+//			l("gtag('config', 'UA-118970786-1');");
+//		s("/*]]>*/").g("script");
+	}
+
+	@Override public void htmlScript() {
+	}
+
+	@Override public void htmlStyles() {
+		e("link").a("rel", "stylesheet").a("href", "https://www.w3schools.com/w3css/4/w3.css").fg();
+		e("link").a("rel", "stylesheet").a("href", "/static/css/site.css").fg();
+		e("link").a("rel", "stylesheet").a("href", "https://fonts.googleapis.com/css?family=Khand").fg();
+		e("link").a("rel", "stylesheet").a("href", "https://pro.fontawesome.com/releases/v5.7.1/css/all.css").a("integrity", "sha384-6jHF7Z3XI3fF4XZixAuSu0gGKrXwoX/w3uFPxC56OtjChio7wtTGJWRW53Nhx6Ev").a("crossorigin", "anonymous").fg();
+//		e("link").a("rel", "stylesheet").a("href", "https://use.fontawesome.com/releases/v5.7.1/css/all.css").a("integrity", "sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr").a("crossorigin", "anonymous").fg();
+	}
+
+	@Override public void htmlStyle() {
+	}
+
+	@Override public void htmlBody() {
+	}
+
+	@Override public void htmlMiseEnPage() {
+		e("html").a("xmlns:xlink", "http://www.w3.org/1999/xlink").a("xmlns", "http://www.w3.org/1999/xhtml").a("xmlns:fb", "http://ogp.me/ns/fb#").f();
+			e("head").f();
+				e("title").f();
+					sx(pageTitre);
+				g("title");
+				htmlScripts();
+				e("script").f().l("/*<![CDATA[*/");
+				htmlScript();
+				s("/*]]>*/").g("script");
+				htmlStyles();
+				e("style").f().l("/*<![CDATA[*/");
+				htmlStyle();
+				s("/*]]>*/").g("style");
+	
+			g("head");
+			e("body").f(); 
+				e("a").a("name", "top").f().g("a");
+	//			e("script").a("type", "text/javascript").a("async", "").a("defer", "").a("src", "//assets.pinterest.com/js/pinit_main.js?0.8726554954646004").f().g("script");
+	//			e("div").a("id", "fb-root").f().g("div");
+	//			e("script").f().l("/*<![CDATA[*/");
+	//				l("(function(d, s, id) {");
+	//				l("var js, fjs = d.getElementsByTagName(s)[0];");
+	//				l("if (d.getElementById(id)) return;");
+	//				l("js = d.createElement(s); js.id = id;");
+	//				s("js.src = '");
+	//				s("//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.10&appId=1871568493111919");
+	//				l("';");
+	//				l("fjs.parentNode.insertBefore(js, fjs);");
+	//				l("}(document, 'script', 'facebook-jssdk'));");
+	//			s("/*]]>*/").g("script");
+	//			e("script").f().l("/*<![CDATA[*/");
+	//				s("var _ctct_m = \"805a4a78c2843d257b9b05ea244b6ec7\"; ");
+	//			s("/*]]>*/").g("script");
+	//			e("script").a("id", "signupScript").a("src", "//static.ctctcdn.com/js/signup-form-widget/current/signup-form-widget.min.js").a("async", "").a("defer", "").f();
+	//			g("script");
+				e("div").a("id", "modaleErreur").a("class", "w3-modal").a("onclick", "this.style.display = 'none';").f();
+					e("div").a("class", "w3-modal-content w3-animate-zoom").f();
+						e("header").a("class", "w3-container w3-center w3-red ").f();
+							e("h3").f();
+								sx("Une erreur s'est produite. ");
+							g("h3");
+						g("header");
+					g("div");
+					e("div").a("id", "modaleErreurMessage").a("class", "w3-container w3-center").f().g("div");
+					e("header").a("class", "w3-container w3-center w3-padding-16 ").f();
+						sx("L'erreur a été envoyée par e-mail à l'administrateur pour analyse. ");
+					g("header");
+				g("div");
+				e("div").a("class", "site-section-all ").f();
+					e("div").a("class", "site-section-above ").f();
+						e("div").a("class", "w3-content w3-center w3-text-black ").f();
+							e("div").a("class", "").f();
+	//							e("img").a("src", "/img/trailblaze-top.jpg").a("class", "w3-img ").a("style", "width: 100%; margin-bottom: -10px; ").fg();
+								menu();
+							g("div"); 
+						g("div");
+						e("div").a("id", "site-section-primary").a("class", "site-section-primary w3-text-black w3-padding-bottom-32 ").f();
+							e("div").a("class", "w3-content ").f();
+
+							htmlBody();
+
+							e("footer").a("class", "w3-center w3-black w3-padding-48 ").f();
+								e("div").a("class", "w3-xxlarge ").f();
+									sx("This site is open-source. ");
+								g("div");
+								e("div").a("class", "w3-large ").f();
+									e("a").a("href", "https://github.com/computate/computate-cardiac").a("target", "_new").f();
+										sx("View the source code here. ");
+									g("a");
+								g("div");
+							g("footer");
 						g("div");
 					g("div");
 				g("div");

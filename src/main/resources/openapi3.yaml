@@ -988,7 +988,7 @@ paths:
         '200':
           description: >+
           content:
-            text/html:
+            text/html; charset=utf-8:
               schema:
                 $ref: '#/components/requestBodies/RecherchePageCalculInrReponse'
         '400':
@@ -1140,7 +1140,7 @@ components:
             $ref: '#/components/schemas/DELETECalculInrReponse'
     RecherchePageCalculInrReponse:
       content:
-        text/html:
+        text/html; charset=utf-8:
           schema:
             $ref: '#/components/schemas/RecherchePageCalculInrReponse'
   schemas:

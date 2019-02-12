@@ -1074,7 +1074,7 @@ public class ApiEcrivain extends ApiEcrivainGen<Object> implements Comparable<Ap
 			String strReponseDescription = wReponseDescription.toString();
 			wChemins.t(5, "description: ").yamlStr(6, strReponseDescription);
 			wChemins.tl(5, "content:");
-			wChemins.tl(6, classeApiTypeMedia200Methode, ":");
+			wChemins.tl(6, classeApiTypeMedia200Methode, "; charset=utf-8:");
 		}
 		else {
 	
@@ -1148,7 +1148,7 @@ public class ApiEcrivain extends ApiEcrivainGen<Object> implements Comparable<Ap
 			}
 			wCorpsRequetes.tl(2, classeApiOperationIdMethodeReponse, ":");
 			wCorpsRequetes.tl(3, "content:");
-			wCorpsRequetes.tl(4, classeApiTypeMedia200Methode, ":");
+			wCorpsRequetes.tl(4, classeApiTypeMedia200Methode, "; charset=utf-8:");
 			wCorpsRequetes.tl(5, "schema:");
 			wCorpsRequetes.tl(6, "$ref: '#/components/schemas/", classeApiOperationIdMethodeReponse, "'");
 		}

@@ -2024,24 +2024,76 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 	//////////
 
 	public void html() {
-		htmlAvant();
-		htmlMilieu();
-		htmlApres();
+		htmlMiseEnPage();
 	}
-	public void htmlAvant() {
-		htmlMiseEnPageAvant();
+
+	public void htmlMiseEnPage() {
 	}
-	public void htmlMilieu() {
-		htmlMiseEnPageMilieu();
+
+	//////////////
+	// htmlMeta //
+	//////////////
+
+	public void htmlMeta() {
+		htmlMetaMiseEnPage();
 	}
-	public void htmlApres() {
-		htmlMiseEnPageApres();
+
+	public void htmlMetaMiseEnPage() {
 	}
-	public void htmlMiseEnPageAvant() {
+
+	/////////////////
+	// htmlScripts //
+	/////////////////
+
+	public void htmlScripts() {
+		htmlScriptsMiseEnPage();
 	}
-	public void htmlMiseEnPageMilieu() {
+
+	public void htmlScriptsMiseEnPage() {
 	}
-	public void htmlMiseEnPageApres() {
+
+	////////////////
+	// htmlScript //
+	////////////////
+
+	public void htmlScript() {
+		htmlScriptMiseEnPage();
+	}
+
+	public void htmlScriptMiseEnPage() {
+	}
+
+	////////////////
+	// htmlStyles //
+	////////////////
+
+	public void htmlStyles() {
+		htmlStylesMiseEnPage();
+	}
+
+	public void htmlStylesMiseEnPage() {
+	}
+
+	///////////////
+	// htmlStyle //
+	///////////////
+
+	public void htmlStyle() {
+		htmlStyleMiseEnPage();
+	}
+
+	public void htmlStyleMiseEnPage() {
+	}
+
+	//////////////
+	// htmlBody //
+	//////////////
+
+	public void htmlBody() {
+		htmlBodyMiseEnPage();
+	}
+
+	public void htmlBodyMiseEnPage() {
 	}
 
 	//////////////

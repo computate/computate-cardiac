@@ -30,7 +30,8 @@ import org.computate.frFR.cardiaque.couverture.Couverture;
  * NomPluriel.frFR: calculs INR
  * Couleur: green
  * IconeGroupe: regular
- * IconeNom: calculator-alt
+ * IconeNom: clinic-medical
+ * Page: true
  * 
  * Val.VAL_patientPrendCoumadinOui.frFR:Yes
  * Val.VAL_patientPrendCoumadinNon.frFR:No
@@ -58,6 +59,10 @@ public class CalculInr extends CalculInrGen<Cluster> {
 	 * Indexe: true
 	 * Stocke: true
 	 * HtmlLigne: 1
+	 * Description.frFR: Date du calcul INR. 
+	 * Description.enUS: INR Entry Date. 
+	 * NomAffichage.frFR: Date INR
+	 * NomAffichage.enUS: INR Date
 	 */
 	protected void _dateInr(Couverture<LocalDate> c) {
 		c.o(LocalDate.now());
@@ -68,6 +73,10 @@ public class CalculInr extends CalculInrGen<Cluster> {
 	 * Indexe: true
 	 * Stocke: true
 	 * HtmlLigne: 1
+	 * Description.frFR: Date à reverifier. 
+	 * Description.enUS: Date to reverify. 
+	 * NomAffichage.frFR: Date à reverifier
+	 * NomAffichage.enUS: Date to reverify
 	 */
 	protected void _dateReverifier(Couverture<LocalDate> c) {
 
@@ -83,9 +92,13 @@ public class CalculInr extends CalculInrGen<Cluster> {
 	 * Option.frFR.non:CalculInr.VAL_patientPrendCoumadinNon
 	 * Option.frFR.ouiDosageInitial:CalculInr.VAL_patientPrendCoumadinOuiDosageInitial
 	 * Option.frFR.ouiRecommence:CalculInr.VAL_patientPrendCoumadinOuiRecommence
+	 * Description.frFR: Le patient prend coumadin. 
+	 * Description.enUS: The patient takes coumadin. 
+	 * NomAffichage.frFR: Patient prend coumadin
+	 * NomAffichage.enUS: Patient takes coumadin
 	 * HtmlLigne: 2
 	 */ 
-	protected void _patientPrendCoumadin(Chaine o) {
+	protected void _patientPrendCoumadin(Couverture<Boolean> c) {
 	}
 
 	/**
@@ -94,6 +107,10 @@ public class CalculInr extends CalculInrGen<Cluster> {
 	 * Indexe: true
 	 * Stocke: true
 	 * HtmlLigne: 2
+	 * Description.frFR: But actuel. 
+	 * Description.enUS: Actual goal. 
+	 * NomAffichage.frFR: But actuel
+	 * NomAffichage.enUS: Actual goal
 	 */ 
 	protected void _butActuel(Chaine o) {
 	}
@@ -104,6 +121,10 @@ public class CalculInr extends CalculInrGen<Cluster> {
 	 * Indexe: true
 	 * Stocke: true
 	 * HtmlLigne: 3
+	 * Description.frFR: Dose actuel. 
+	 * Description.enUS: Actual dosage. 
+	 * NomAffichage.frFR: Dose actuel
+	 * NomAffichage.enUS: Actual dosage
 	 */ 
 	protected void _doseActuel(Chaine o) {
 	}
@@ -114,6 +135,10 @@ public class CalculInr extends CalculInrGen<Cluster> {
 	 * Indexe: true
 	 * Stocke: true
 	 * HtmlLigne: 3
+	 * Description.frFR: Medicament actuel. 
+	 * Description.enUS: Current medication. 
+	 * NomAffichage.frFR: Dose actuel
+	 * NomAffichage.enUS: Actual dose
 	 */ 
 	protected void _medicamentActuel(Chaine o) {
 	}
@@ -126,6 +151,10 @@ public class CalculInr extends CalculInrGen<Cluster> {
 	 * r: FORMAT_dateMedicalCourt
 	 * r.enUS: FORMAT_dateMedicalShort
 	 * HtmlLigne: 4
+	 * Description.frFR: Changement de dose. 
+	 * Description.enUS: Dosage change. 
+	 * NomAffichage.frFR: Changement de dose
+	 * NomAffichage.enUS: Dosage change
 	 */
 	protected void _changementDose(Chaine o) {
 		o.s(dateInr.format(FORMAT_dateMedicalCourt), " INR @ ");
@@ -137,6 +166,10 @@ public class CalculInr extends CalculInrGen<Cluster> {
 	 * Indexe: true
 	 * Stocke: true
 	 * HtmlLigne: 4
+	 * Description.frFR: Notes complémentaires. 
+	 * Description.enUS: Additional notes. 
+	 * NomAffichage.frFR: Notes complémentaires
+	 * NomAffichage.enUS: Additional notes
 	 */
 	protected void _notesComplementaires(Chaine o) {
 	}
@@ -147,6 +180,10 @@ public class CalculInr extends CalculInrGen<Cluster> {
 	 * Indexe: true
 	 * Stocke: true
 	 * HtmlLigne: 5
+	 * Description.frFR: Info contact. 
+	 * Description.enUS: Contact info. 
+	 * NomAffichage.frFR: Info contact
+	 * NomAffichage.enUS: Contact info
 	 */ 
 	protected void _infoContact(Chaine o) {
 	}

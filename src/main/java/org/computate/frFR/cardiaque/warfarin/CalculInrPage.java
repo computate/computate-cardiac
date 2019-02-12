@@ -7,31 +7,13 @@ import org.computate.frFR.cardiaque.recherche.ListeRecherche;
 /**
  * Html: true
  */       
-public class CalculInrPage extends CalculInrPageGen<MiseEnPage> { 
+public class CalculInrPage extends CalculInrPageGen<CalculInrGenPage> {  
 
-	/**
-	 * {@inheritDoc}
-	 * 
-	 **/
-	protected void _listeCalculInr(Couverture<ListeRecherche<CalculInr>> c) {
-		
-	}
+//	@Override public void initLoinCalculInrPage() {
+//		initCalculInrPage();
+//		super.initLoinMiseEnPage(requeteSite_);
+//	}
 
-	@Override public void initLoinCalculInrPage() {
-		initCalculInrPage();
-		super.initLoinMiseEnPage(requeteSite_);
-	}
-
-	@Override public void htmlCalculInrPageMilieu() {
-		if(listeCalculInr.size() == 1) {
-			e("h1").f().sx("INR Entry").g("h1");
-			
-		}
-		else {
-			e("h1").f().sx("INR Entries").g("h1");
-			
-		}
-	}
 //	public void htmlPageAccueil() {
 //e("nav").a("class", "w3-sidebar w3-red w3-collapse w3-top w3-large w3-padding").a("style", "z-index:3;width:300px;font-weight:bold;").a("id", "mySidebar").f();
 //	eg("br");

@@ -195,9 +195,9 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 			if(entiteValeur != null)
 				w.l(entiteNumero++ == 0 ? "" : ", ", "\"dateReverifier\": ", w.q(entiteValeur));
 
-			entiteValeur = documentSolr.getFieldValues("patientPrendCoumadin_stored_string").stream().findFirst().orElse(null);
+			entiteValeur = documentSolr.getFieldValues("patientPrendCoumadin_stored_boolean").stream().findFirst().orElse(null);
 			if(entiteValeur != null)
-				w.l(entiteNumero++ == 0 ? "" : ", ", "\"patientPrendCoumadin\": ", w.q(entiteValeur));
+				w.l(entiteNumero++ == 0 ? "" : ", ", "\"patientPrendCoumadin\": ", entiteValeur);
 
 			entiteValeur = documentSolr.getFieldValues("butActuel_stored_string").stream().findFirst().orElse(null);
 			if(entiteValeur != null)
@@ -304,7 +304,7 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 					break;
 				case "patientPrendCoumadin":
 					postSql.append(SiteContexte.SQL_setP);
-					postSqlParams.addAll(Arrays.asList("patientPrendCoumadin", jsonObject.getString(entiteVar), pk));
+					postSqlParams.addAll(Arrays.asList("patientPrendCoumadin", jsonObject.getBoolean(entiteVar), pk));
 					break;
 				case "butActuel":
 					postSql.append(SiteContexte.SQL_setP);
@@ -413,7 +413,7 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 					break;
 				case "setPatientPrendCoumadin":
 					patchSql.append(SiteContexte.SQL_setP);
-					patchSqlParams.addAll(Arrays.asList("patientPrendCoumadin", requeteJson.getString(methodeNom), pk));
+					patchSqlParams.addAll(Arrays.asList("patientPrendCoumadin", requeteJson.getBoolean(methodeNom), pk));
 					break;
 				case "setButActuel":
 					patchSql.append(SiteContexte.SQL_setP);
@@ -502,9 +502,9 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 			if(entiteValeur != null)
 				w.l(entiteNumero++ == 0 ? "" : ", ", "\"dateReverifier\": ", w.q(entiteValeur));
 
-			entiteValeur = documentSolr.getFieldValues("patientPrendCoumadin_stored_string").stream().findFirst().orElse(null);
+			entiteValeur = documentSolr.getFieldValues("patientPrendCoumadin_stored_boolean").stream().findFirst().orElse(null);
 			if(entiteValeur != null)
-				w.l(entiteNumero++ == 0 ? "" : ", ", "\"patientPrendCoumadin\": ", w.q(entiteValeur));
+				w.l(entiteNumero++ == 0 ? "" : ", ", "\"patientPrendCoumadin\": ", entiteValeur);
 
 			entiteValeur = documentSolr.getFieldValues("butActuel_stored_string").stream().findFirst().orElse(null);
 			if(entiteValeur != null)
@@ -605,7 +605,7 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 					break;
 				case "patientPrendCoumadin":
 					postSql.append(SiteContexte.SQL_setP);
-					postSqlParams.addAll(Arrays.asList("patientPrendCoumadin", jsonObject.getString(entiteVar), pk));
+					postSqlParams.addAll(Arrays.asList("patientPrendCoumadin", jsonObject.getBoolean(entiteVar), pk));
 					break;
 				case "butActuel":
 					postSql.append(SiteContexte.SQL_setP);
@@ -803,7 +803,7 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 			case "dateReverifier":
 				return "dateReverifier_indexed_date";
 			case "patientPrendCoumadin":
-				return "patientPrendCoumadin_indexed_string";
+				return "patientPrendCoumadin_indexed_boolean";
 			case "butActuel":
 				return "butActuel_indexed_string";
 			case "doseActuel":
