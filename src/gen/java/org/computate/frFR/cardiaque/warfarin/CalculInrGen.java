@@ -1265,6 +1265,7 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	public void indexerCalculInr(SolrClient clientSolr) throws Exception {
 		SolrInputDocument document = new SolrInputDocument();
 		indexerCalculInr(document);
+		document.addField("sauvegardesCalculInr_stored_strings", sauvegardesCalculInr);
 		clientSolr.add(document);
 		clientSolr.commit();
 	}
@@ -1272,6 +1273,7 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	public void indexerCalculInr() throws Exception {
 		SolrInputDocument document = new SolrInputDocument();
 		indexerCalculInr(document);
+		document.addField("sauvegardesCalculInr_stored_strings", sauvegardesCalculInr);
 		SolrClient clientSolr = requeteSite_.getSiteContexte_().getClientSolr();
 		clientSolr.add(document);
 		clientSolr.commit();
@@ -1283,12 +1285,12 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 			document.addField("utilisateurPk_stored_long", utilisateurPk);
 		}
 		if(dateInr != null) {
-			document.addField("dateInr_indexed_date", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(dateInr.atStartOfDay(ZoneId.systemDefault())));
-			document.addField("dateInr_stored_date", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(dateInr.atStartOfDay(ZoneId.systemDefault())));
+			document.addField("dateInr_indexed_date", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(dateInr.atStartOfDay(ZoneId.of("Z"))));
+			document.addField("dateInr_stored_date", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(dateInr.atStartOfDay(ZoneId.of("Z"))));
 		}
 		if(dateReverifier != null) {
-			document.addField("dateReverifier_indexed_date", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(dateReverifier.atStartOfDay(ZoneId.systemDefault())));
-			document.addField("dateReverifier_stored_date", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(dateReverifier.atStartOfDay(ZoneId.systemDefault())));
+			document.addField("dateReverifier_indexed_date", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(dateReverifier.atStartOfDay(ZoneId.of("Z"))));
+			document.addField("dateReverifier_stored_date", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(dateReverifier.atStartOfDay(ZoneId.of("Z"))));
 		}
 		if(patientPrendCoumadin != null) {
 			document.addField("patientPrendCoumadin_indexed_boolean", patientPrendCoumadin);
@@ -1494,65 +1496,67 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	public void peuplerCalculInr(SolrDocument solrDocument) {
 		CalculInr oCalculInr = (CalculInr)this;
 		sauvegardesCalculInr = (List<String>)solrDocument.get("sauvegardesCalculInr_stored_strings");
+		if(sauvegardesCalculInr != null) {
 
-		if(sauvegardesCalculInr.contains("utilisateurPk")) {
-			Long utilisateurPk = (Long)solrDocument.get("utilisateurPk_stored_long");
-			if(utilisateurPk != null)
-				oCalculInr.setUtilisateurPk(utilisateurPk);
-		}
+			if(sauvegardesCalculInr.contains("utilisateurPk")) {
+				Long utilisateurPk = (Long)solrDocument.get("utilisateurPk_stored_long");
+				if(utilisateurPk != null)
+					oCalculInr.setUtilisateurPk(utilisateurPk);
+			}
 
-		if(sauvegardesCalculInr.contains("dateInr")) {
-			Date dateInr = (Date)solrDocument.get("dateInr_stored_date");
-			if(dateInr != null)
-				oCalculInr.setDateInr(dateInr);
-		}
+			if(sauvegardesCalculInr.contains("dateInr")) {
+				Date dateInr = (Date)solrDocument.get("dateInr_stored_date");
+				if(dateInr != null)
+					oCalculInr.setDateInr(dateInr);
+			}
 
-		if(sauvegardesCalculInr.contains("dateReverifier")) {
-			Date dateReverifier = (Date)solrDocument.get("dateReverifier_stored_date");
-			if(dateReverifier != null)
-				oCalculInr.setDateReverifier(dateReverifier);
-		}
+			if(sauvegardesCalculInr.contains("dateReverifier")) {
+				Date dateReverifier = (Date)solrDocument.get("dateReverifier_stored_date");
+				if(dateReverifier != null)
+					oCalculInr.setDateReverifier(dateReverifier);
+			}
 
-		if(sauvegardesCalculInr.contains("patientPrendCoumadin")) {
-			Boolean patientPrendCoumadin = (Boolean)solrDocument.get("patientPrendCoumadin_stored_boolean");
-			if(patientPrendCoumadin != null)
-				oCalculInr.setPatientPrendCoumadin(patientPrendCoumadin);
-		}
+			if(sauvegardesCalculInr.contains("patientPrendCoumadin")) {
+				Boolean patientPrendCoumadin = (Boolean)solrDocument.get("patientPrendCoumadin_stored_boolean");
+				if(patientPrendCoumadin != null)
+					oCalculInr.setPatientPrendCoumadin(patientPrendCoumadin);
+			}
 
-		if(sauvegardesCalculInr.contains("butActuel")) {
-			String butActuel = (String)solrDocument.get("butActuel_stored_string");
-			if(butActuel != null)
-				oCalculInr.setButActuel(butActuel);
-		}
+			if(sauvegardesCalculInr.contains("butActuel")) {
+				String butActuel = (String)solrDocument.get("butActuel_stored_string");
+				if(butActuel != null)
+					oCalculInr.setButActuel(butActuel);
+			}
 
-		if(sauvegardesCalculInr.contains("doseActuel")) {
-			String doseActuel = (String)solrDocument.get("doseActuel_stored_string");
-			if(doseActuel != null)
-				oCalculInr.setDoseActuel(doseActuel);
-		}
+			if(sauvegardesCalculInr.contains("doseActuel")) {
+				String doseActuel = (String)solrDocument.get("doseActuel_stored_string");
+				if(doseActuel != null)
+					oCalculInr.setDoseActuel(doseActuel);
+			}
 
-		if(sauvegardesCalculInr.contains("medicamentActuel")) {
-			String medicamentActuel = (String)solrDocument.get("medicamentActuel_stored_string");
-			if(medicamentActuel != null)
-				oCalculInr.setMedicamentActuel(medicamentActuel);
-		}
+			if(sauvegardesCalculInr.contains("medicamentActuel")) {
+				String medicamentActuel = (String)solrDocument.get("medicamentActuel_stored_string");
+				if(medicamentActuel != null)
+					oCalculInr.setMedicamentActuel(medicamentActuel);
+			}
 
-		if(sauvegardesCalculInr.contains("changementDose")) {
-			String changementDose = (String)solrDocument.get("changementDose_stored_string");
-			if(changementDose != null)
-				oCalculInr.setChangementDose(changementDose);
-		}
+			if(sauvegardesCalculInr.contains("changementDose")) {
+				String changementDose = (String)solrDocument.get("changementDose_stored_string");
+				if(changementDose != null)
+					oCalculInr.setChangementDose(changementDose);
+			}
 
-		if(sauvegardesCalculInr.contains("notesComplementaires")) {
-			String notesComplementaires = (String)solrDocument.get("notesComplementaires_stored_string");
-			if(notesComplementaires != null)
-				oCalculInr.setNotesComplementaires(notesComplementaires);
-		}
+			if(sauvegardesCalculInr.contains("notesComplementaires")) {
+				String notesComplementaires = (String)solrDocument.get("notesComplementaires_stored_string");
+				if(notesComplementaires != null)
+					oCalculInr.setNotesComplementaires(notesComplementaires);
+			}
 
-		if(sauvegardesCalculInr.contains("infoContact")) {
-			String infoContact = (String)solrDocument.get("infoContact_stored_string");
-			if(infoContact != null)
-				oCalculInr.setInfoContact(infoContact);
+			if(sauvegardesCalculInr.contains("infoContact")) {
+				String infoContact = (String)solrDocument.get("infoContact_stored_string");
+				if(infoContact != null)
+					oCalculInr.setInfoContact(infoContact);
+			}
 		}
 
 		super.peuplerCluster(solrDocument);

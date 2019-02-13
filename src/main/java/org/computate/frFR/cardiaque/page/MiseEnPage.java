@@ -205,12 +205,6 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 	 * r.enUS: serverRequest
 	 */ 
 	protected void _pageUrl(Couverture<String> c)  {
-		String q = null;
-		HttpServerRequest requeteServeur = requeteSite_.getRequeteServeur();
-		if(requeteServeur != null) {
-			q = requeteServeur.query();
-		}
-		c.o(StringUtils.defaultIfBlank((String)pageDocumentSolr.get(c.var + "_stored_string"), "https://" + requeteSite_.getConfigSite_().getSiteNomHote() + pageUri + (StringUtils.isEmpty(q) ? "" : "?" + q)));
 	}
 
 	/**
@@ -334,31 +328,6 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 //			}
 //		});
 //	}
-
-	/** 
-	 * Var.enUS: _pageMethod
-	 * r.enUS: requeteSite_.requete
-	 * siteRequest.request
-	 * Le nom du méthode à appeler pour charger la page. 
-	 * Indexe: true
-	 * Stocke: true
-	 */
-	protected void _pageMethode(Couverture<String> c)  {
-		HttpServerRequest requeteServeur = requeteSite_.getRequeteServeur();
-		if(requeteServeur != null) {
-			String uri = requeteServeur.uri();
-//			if(uri.endsWith(".recapituler.html"))
-//				c.o("htmlRecapituler");
-//			else if(uri.endsWith(".sh.html"))
-//				c.o("shHtml" + getClass().getSimpleName());
-//			else if(uri.endsWith(".sh"))
-//				c.o("sh" + getClass().getSimpleName());
-//			else
-				c.o("html" + getClass().getSimpleName());
-		}
-		else
-			c.o("html" + getClass().getSimpleName());
-	}
 
 	/**
 	 * Var.enUS: _pageContentType
@@ -637,11 +606,7 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 		e("meta").a("name", "description").a("content", pageDescription).fg();
 	}
 
-	@Override public void html() {
-		super.html();
-	}
-
-	@Override public void htmlScripts() {
+	@Override public void htmlScriptsMiseEnPage() {
 		e("script").a("src", "https://code.jquery.com/jquery-1.12.4.min.js").f().g("script");
 		e("script").a("src", "/static/js/site.js").f().g("script");
 //		e("script").a("async", "").a("defer", "").a("src", "https://apis.google.com/js/platform.js").f().g("script");
@@ -654,10 +619,10 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 //		s("/*]]>*/").g("script");
 	}
 
-	@Override public void htmlScript() {
+	@Override public void htmlScriptMiseEnPage() {
 	}
 
-	@Override public void htmlStyles() {
+	@Override public void htmlStylesMiseEnPage() {
 		e("link").a("rel", "stylesheet").a("href", "https://www.w3schools.com/w3css/4/w3.css").fg();
 		e("link").a("rel", "stylesheet").a("href", "/static/css/site.css").fg();
 		e("link").a("rel", "stylesheet").a("href", "https://fonts.googleapis.com/css?family=Khand").fg();
@@ -665,10 +630,10 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 //		e("link").a("rel", "stylesheet").a("href", "https://use.fontawesome.com/releases/v5.7.1/css/all.css").a("integrity", "sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr").a("crossorigin", "anonymous").fg();
 	}
 
-	@Override public void htmlStyle() {
+	@Override public void htmlStyleMiseEnPage() {
 	}
 
-	@Override public void htmlBody() {
+	@Override public void htmlBodyMiseEnPage() {
 	}
 
 	@Override public void htmlMiseEnPage() {
@@ -730,19 +695,20 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 						g("div");
 						e("div").a("id", "site-section-primary").a("class", "site-section-primary w3-text-black w3-padding-bottom-32 ").f();
 							e("div").a("class", "w3-content ").f();
-
-							htmlBody();
-
-							e("footer").a("class", "w3-center w3-black w3-padding-48 ").f();
-								e("div").a("class", "w3-xxlarge ").f();
-									sx("This site is open-source. ");
-								g("div");
-								e("div").a("class", "w3-large ").f();
-									e("a").a("href", "https://github.com/computate/computate-cardiac").a("target", "_new").f();
-										sx("View the source code here. ");
-									g("a");
-								g("div");
-							g("footer");
+	
+								htmlBody();
+	
+								e("footer").a("class", "w3-center w3-black w3-padding-48 ").f();
+									e("div").a("class", "w3-xxlarge ").f();
+										sx("This site is open-source. ");
+									g("div");
+									e("div").a("class", "w3-large ").f();
+										e("a").a("href", "https://github.com/computate/computate-cardiac").a("target", "_new").f();
+											sx("View the source code here. ");
+										g("a");
+									g("div");
+								g("footer");
+							g("div");
 						g("div");
 					g("div");
 				g("div");

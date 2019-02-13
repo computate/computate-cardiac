@@ -65,15 +65,6 @@ public abstract class ClusterGen<DEV> extends Object {
 		this.requeteSite_ = requeteSite_;
 		this.requeteSite_Couverture.dejaInitialise = true;
 	}
-	protected Cluster requeteSite_Init() {
-		if(!requeteSite_Couverture.dejaInitialise) {
-			_requeteSite_(requeteSite_Couverture);
-			if(requeteSite_ == null)
-				setRequeteSite_(requeteSite_Couverture.o);
-		}
-		requeteSite_Couverture.dejaInitialise(true);
-		return (Cluster)this;
-	}
 
 	///////////
 	// page_ //
@@ -100,15 +91,6 @@ public abstract class ClusterGen<DEV> extends Object {
 	public void setPage_(MiseEnPage page_) {
 		this.page_ = page_;
 		this.page_Couverture.dejaInitialise = true;
-	}
-	protected Cluster page_Init() {
-		if(!page_Couverture.dejaInitialise) {
-			_page_(page_Couverture);
-			if(page_ == null)
-				setPage_(page_Couverture.o);
-		}
-		page_Couverture.dejaInitialise(true);
-		return (Cluster)this;
 	}
 
 	////////
@@ -951,8 +933,6 @@ public abstract class ClusterGen<DEV> extends Object {
 	}
 
 	public void initCluster() {
-		requeteSite_Init();
-		page_Init();
 		pkInit();
 		idInit();
 		creeInit();
@@ -1006,6 +986,7 @@ public abstract class ClusterGen<DEV> extends Object {
 	public void indexerCluster(SolrClient clientSolr) throws Exception {
 		SolrInputDocument document = new SolrInputDocument();
 		indexerCluster(document);
+		document.addField("sauvegardesCluster_stored_strings", sauvegardesCluster);
 		clientSolr.add(document);
 		clientSolr.commit();
 	}
@@ -1013,6 +994,7 @@ public abstract class ClusterGen<DEV> extends Object {
 	public void indexerCluster() throws Exception {
 		SolrInputDocument document = new SolrInputDocument();
 		indexerCluster(document);
+		document.addField("sauvegardesCluster_stored_strings", sauvegardesCluster);
 		SolrClient clientSolr = requeteSite_.getSiteContexte_().getClientSolr();
 		clientSolr.add(document);
 		clientSolr.commit();
@@ -1206,46 +1188,48 @@ public abstract class ClusterGen<DEV> extends Object {
 	public void peuplerCluster(SolrDocument solrDocument) {
 		Cluster oCluster = (Cluster)this;
 		sauvegardesCluster = (List<String>)solrDocument.get("sauvegardesCluster_stored_strings");
+		if(sauvegardesCluster != null) {
 
-		if(sauvegardesCluster.contains("pk")) {
-			Long pk = (Long)solrDocument.get("pk_stored_long");
-			if(pk != null)
-				oCluster.setPk(pk);
-		}
+			if(sauvegardesCluster.contains("pk")) {
+				Long pk = (Long)solrDocument.get("pk_stored_long");
+				if(pk != null)
+					oCluster.setPk(pk);
+			}
 
-		if(sauvegardesCluster.contains("id")) {
-			String id = (String)solrDocument.get("id_stored_string");
-			oCluster.setId(id);
-		}
+			if(sauvegardesCluster.contains("id")) {
+				String id = (String)solrDocument.get("id_stored_string");
+				oCluster.setId(id);
+			}
 
-		if(sauvegardesCluster.contains("cree")) {
-			Date cree = (Date)solrDocument.get("cree_stored_date");
-			if(cree != null)
-				oCluster.setCree(cree);
-		}
+			if(sauvegardesCluster.contains("cree")) {
+				Date cree = (Date)solrDocument.get("cree_stored_date");
+				if(cree != null)
+					oCluster.setCree(cree);
+			}
 
-		if(sauvegardesCluster.contains("modifie")) {
-			Date modifie = (Date)solrDocument.get("modifie_stored_date");
-			if(modifie != null)
-				oCluster.setModifie(modifie);
-		}
+			if(sauvegardesCluster.contains("modifie")) {
+				Date modifie = (Date)solrDocument.get("modifie_stored_date");
+				if(modifie != null)
+					oCluster.setModifie(modifie);
+			}
 
-		if(sauvegardesCluster.contains("utilisateurId")) {
-			String utilisateurId = (String)solrDocument.get("utilisateurId_stored_string");
-			if(utilisateurId != null)
-				oCluster.setUtilisateurId(utilisateurId);
-		}
+			if(sauvegardesCluster.contains("utilisateurId")) {
+				String utilisateurId = (String)solrDocument.get("utilisateurId_stored_string");
+				if(utilisateurId != null)
+					oCluster.setUtilisateurId(utilisateurId);
+			}
 
-		if(sauvegardesCluster.contains("clusterNomCanonique")) {
-			String clusterNomCanonique = (String)solrDocument.get("clusterNomCanonique_stored_string");
-			if(clusterNomCanonique != null)
-				oCluster.setClusterNomCanonique(clusterNomCanonique);
-		}
+			if(sauvegardesCluster.contains("clusterNomCanonique")) {
+				String clusterNomCanonique = (String)solrDocument.get("clusterNomCanonique_stored_string");
+				if(clusterNomCanonique != null)
+					oCluster.setClusterNomCanonique(clusterNomCanonique);
+			}
 
-		if(sauvegardesCluster.contains("clusterNomSimple")) {
-			String clusterNomSimple = (String)solrDocument.get("clusterNomSimple_stored_string");
-			if(clusterNomSimple != null)
-				oCluster.setClusterNomSimple(clusterNomSimple);
+			if(sauvegardesCluster.contains("clusterNomSimple")) {
+				String clusterNomSimple = (String)solrDocument.get("clusterNomSimple_stored_string");
+				if(clusterNomSimple != null)
+					oCluster.setClusterNomSimple(clusterNomSimple);
+			}
 		}
 	}
 

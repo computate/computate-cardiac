@@ -14,7 +14,7 @@ import org.apache.commons.lang3.StringUtils;
 import java.lang.Integer;
 
 /**	
- *	Charge les propriétés dans le fichier de config de l'application dans des champs spécifiques.
+ *	Charge les propriétés dans le fichier de config de l'application dans des champs spécifiques. 
  * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstClasse_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.config.ConfigSite&fq=classeEtendGen_indexed_boolean:true">Trouver la classe  dans Solr</a>
  * <br/>
  **/
@@ -1124,60 +1124,60 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		return motDePasseCryptage == null ? "" : StringEscapeUtils.escapeHtml4(strMotDePasseCryptage());
 	}
 
-	////////////////////
-	// urlDomaineBase //
-	////////////////////
+	/////////////////
+	// siteUrlBase //
+	/////////////////
 
-	/**	L'entité « urlDomaineBase »
+	/**	L'entité « siteUrlBase »
 	 *	 is defined as null before being initialized. 
 	 */
-	protected String urlDomaineBase;
-	public Couverture<String> urlDomaineBaseCouverture = new Couverture<String>().p(this).c(String.class).var("urlDomaineBase").o(urlDomaineBase);
+	protected String siteUrlBase;
+	public Couverture<String> siteUrlBaseCouverture = new Couverture<String>().p(this).c(String.class).var("siteUrlBase").o(siteUrlBase);
 
-	/**	<br/>L'entité « urlDomaineBase »
+	/**	<br/>L'entité « siteUrlBase »
 	 *  est défini comme null avant d'être initialisé. 
-	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.config.ConfigSite&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:urlDomaineBase">Trouver l'entité urlDomaineBase dans Solr</a>
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.config.ConfigSite&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:siteUrlBase">Trouver l'entité siteUrlBase dans Solr</a>
 	 * <br/>
 	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _urlDomaineBase(Couverture<String> c);
+	protected abstract void _siteUrlBase(Couverture<String> c);
 
-	public String getUrlDomaineBase() {
-		return urlDomaineBase;
+	public String getSiteUrlBase() {
+		return siteUrlBase;
 	}
 
-	public void setUrlDomaineBase(String urlDomaineBase) {
-		this.urlDomaineBase = urlDomaineBase;
-		this.urlDomaineBaseCouverture.dejaInitialise = true;
+	public void setSiteUrlBase(String siteUrlBase) {
+		this.siteUrlBase = siteUrlBase;
+		this.siteUrlBaseCouverture.dejaInitialise = true;
 	}
-	protected ConfigSite urlDomaineBaseInit() {
-		if(!urlDomaineBaseCouverture.dejaInitialise) {
-			_urlDomaineBase(urlDomaineBaseCouverture);
-			if(urlDomaineBase == null)
-				setUrlDomaineBase(urlDomaineBaseCouverture.o);
+	protected ConfigSite siteUrlBaseInit() {
+		if(!siteUrlBaseCouverture.dejaInitialise) {
+			_siteUrlBase(siteUrlBaseCouverture);
+			if(siteUrlBase == null)
+				setSiteUrlBase(siteUrlBaseCouverture.o);
 		}
-		urlDomaineBaseCouverture.dejaInitialise(true);
+		siteUrlBaseCouverture.dejaInitialise(true);
 		return (ConfigSite)this;
 	}
 
-	public String solrUrlDomaineBase() {
-		return urlDomaineBase;
+	public String solrSiteUrlBase() {
+		return siteUrlBase;
 	}
 
-	public String strUrlDomaineBase() {
-		return urlDomaineBase == null ? "" : urlDomaineBase;
+	public String strSiteUrlBase() {
+		return siteUrlBase == null ? "" : siteUrlBase;
 	}
 
-	public String nomAffichageUrlDomaineBase() {
+	public String nomAffichageSiteUrlBase() {
 		return null;
 	}
 
-	public String htmTooltipUrlDomaineBase() {
+	public String htmTooltipSiteUrlBase() {
 		return null;
 	}
 
-	public String htmUrlDomaineBase() {
-		return urlDomaineBase == null ? "" : StringEscapeUtils.escapeHtml4(strUrlDomaineBase());
+	public String htmSiteUrlBase() {
+		return siteUrlBase == null ? "" : StringEscapeUtils.escapeHtml4(strSiteUrlBase());
 	}
 
 	//////////////////////
@@ -3333,7 +3333,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		authUrlInit();
 		selCryptageInit();
 		motDePasseCryptageInit();
-		urlDomaineBaseInit();
+		siteUrlBaseInit();
 		siteNomAffichageInit();
 		jdbcClassePiloteInit();
 		jdbcUtilisateurInit();
@@ -3450,8 +3450,8 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 				return oConfigSite.selCryptage;
 			case "motDePasseCryptage":
 				return oConfigSite.motDePasseCryptage;
-			case "urlDomaineBase":
-				return oConfigSite.urlDomaineBase;
+			case "siteUrlBase":
+				return oConfigSite.siteUrlBase;
 			case "siteNomAffichage":
 				return oConfigSite.siteNomAffichage;
 			case "jdbcClassePilote":
@@ -3587,7 +3587,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 	//////////////
 
 	@Override public int hashCode() {
-		return Objects.hash(configChemin, identifiantSite, prefixeEchappe, appliChemin, racineDocument, nomEntreprise, nomDomaine, siteNomHote, sitePort, authRoyaume, authRessource, authSecret, authSslRequis, sslJksChemin, sslJksMotDePasse, authUrl, selCryptage, motDePasseCryptage, urlDomaineBase, siteNomAffichage, jdbcClassePilote, jdbcUtilisateur, jdbcMotDePasse, jdbcTailleMaxPiscine, jdbcTailleInitialePiscine, jdbcTailleMinPiscine, jdbcMaxDeclarations, jdbcMaxDeclarationsParConnexion, jdbcTempsInactiviteMax, jdbcUrl, solrUrl, solrUrlComputate, jetonIdentitePaypal, compteFacebook, compteTwitter, compteGooglePlus, compteInstagram, compteYoutube, identifiantCanalYoutube, comptePinterest, compteOpenclipart, compteMail, roleAdmin, mailAdmin, nombreExecuteurs, openApiVersion, apiDescription, apiTitre, apiTermsService, apiVersion, apiContactMail, apiLicenceNom, apiLicenceUrl, apiNomHote, apiCheminBase, vertxServiceAddresse);
+		return Objects.hash(configChemin, identifiantSite, prefixeEchappe, appliChemin, racineDocument, nomEntreprise, nomDomaine, siteNomHote, sitePort, authRoyaume, authRessource, authSecret, authSslRequis, sslJksChemin, sslJksMotDePasse, authUrl, selCryptage, motDePasseCryptage, siteUrlBase, siteNomAffichage, jdbcClassePilote, jdbcUtilisateur, jdbcMotDePasse, jdbcTailleMaxPiscine, jdbcTailleInitialePiscine, jdbcTailleMinPiscine, jdbcMaxDeclarations, jdbcMaxDeclarationsParConnexion, jdbcTempsInactiviteMax, jdbcUrl, solrUrl, solrUrlComputate, jetonIdentitePaypal, compteFacebook, compteTwitter, compteGooglePlus, compteInstagram, compteYoutube, identifiantCanalYoutube, comptePinterest, compteOpenclipart, compteMail, roleAdmin, mailAdmin, nombreExecuteurs, openApiVersion, apiDescription, apiTitre, apiTermsService, apiVersion, apiContactMail, apiLicenceNom, apiLicenceUrl, apiNomHote, apiCheminBase, vertxServiceAddresse);
 	}
 
 	////////////
@@ -3618,7 +3618,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 				&& Objects.equals( authUrl, that.authUrl )
 				&& Objects.equals( selCryptage, that.selCryptage )
 				&& Objects.equals( motDePasseCryptage, that.motDePasseCryptage )
-				&& Objects.equals( urlDomaineBase, that.urlDomaineBase )
+				&& Objects.equals( siteUrlBase, that.siteUrlBase )
 				&& Objects.equals( siteNomAffichage, that.siteNomAffichage )
 				&& Objects.equals( jdbcClassePilote, that.jdbcClassePilote )
 				&& Objects.equals( jdbcUtilisateur, that.jdbcUtilisateur )
@@ -3683,7 +3683,7 @@ public abstract class ConfigSiteGen<DEV> extends Object {
 		sb.append( ", authUrl: \"" ).append(authUrl).append( "\"" );
 		sb.append( ", selCryptage: \"" ).append(selCryptage).append( "\"" );
 		sb.append( ", motDePasseCryptage: \"" ).append(motDePasseCryptage).append( "\"" );
-		sb.append( ", urlDomaineBase: \"" ).append(urlDomaineBase).append( "\"" );
+		sb.append( ", siteUrlBase: \"" ).append(siteUrlBase).append( "\"" );
 		sb.append( ", siteNomAffichage: \"" ).append(siteNomAffichage).append( "\"" );
 		sb.append( ", jdbcClassePilote: \"" ).append(jdbcClassePilote).append( "\"" );
 		sb.append( ", jdbcUtilisateur: \"" ).append(jdbcUtilisateur).append( "\"" );

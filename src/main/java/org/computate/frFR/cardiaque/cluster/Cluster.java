@@ -1,4 +1,4 @@
-package org.computate.frFR.cardiaque.cluster;   
+package org.computate.frFR.cardiaque.cluster;    
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;

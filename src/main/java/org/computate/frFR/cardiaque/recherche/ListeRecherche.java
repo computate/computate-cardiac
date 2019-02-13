@@ -57,7 +57,7 @@ public class ListeRecherche<DEV> extends ListeRechercheGen<DEV> {
 	/**
 	 * {@inheritDoc}
 	 * 
-	 **/
+	 **/ 
 	protected void _solrDocumentList(Couverture<SolrDocumentList> c) {
 		SolrDocumentList o = queryResponse.getResults();
 		c.o(o);

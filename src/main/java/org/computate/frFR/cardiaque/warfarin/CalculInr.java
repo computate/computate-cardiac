@@ -42,7 +42,7 @@ import org.computate.frFR.cardiaque.couverture.Couverture;
  * ApiTag.enUS: InrEntry
  * ApiTag.frFR: CalculInr
 */            
-public class CalculInr extends CalculInrGen<Cluster> {   
+public class CalculInr extends CalculInrGen<Cluster> {  
 
 	/**
 	 * {@inheritDoc}

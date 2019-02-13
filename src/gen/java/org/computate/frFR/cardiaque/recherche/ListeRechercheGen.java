@@ -81,15 +81,6 @@ public abstract class ListeRechercheGen<DEV> {
 		this.requeteSite_ = requeteSite_;
 		this.requeteSite_Couverture.dejaInitialise = true;
 	}
-	protected ListeRecherche requeteSite_Init() {
-		if(!requeteSite_Couverture.dejaInitialise) {
-			_requeteSite_(requeteSite_Couverture);
-			if(requeteSite_ == null)
-				setRequeteSite_(requeteSite_Couverture.o);
-		}
-		requeteSite_Couverture.dejaInitialise(true);
-		return (ListeRecherche)this;
-	}
 
 	///////////////
 	// solrQuery //
@@ -263,7 +254,6 @@ public abstract class ListeRechercheGen<DEV> {
 
 	public void initListeRecherche() {
 		cInit();
-		requeteSite_Init();
 		solrQueryInit();
 		queryResponseInit();
 		solrDocumentListInit();

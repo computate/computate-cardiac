@@ -28,6 +28,13 @@ public class CalculInrGenPage extends CalculInrGenPageGen<MiseEnPage> {
 		super.initLoinMiseEnPage();
 	}
 
+	@Override public void htmlScriptsCalculInrGenPage() {
+		e("script").a("src", "/static/js/CalculInrPage.js").f().g("script");
+	}
+
+	@Override public void htmlScriptCalculInrGenPage() {
+	}
+
 	@Override public void htmlBodyCalculInrGenPage() {
 		if(listeCalculInr.size() == 0) {
 			//aucun calcul INR trouvé
@@ -201,5 +208,29 @@ public class CalculInrGenPage extends CalculInrGenPageGen<MiseEnPage> {
 				e("span").a("class", " ").f().sx("calculs INR").g("i");
 			} g("h1");
 		}
+
+		e("button")
+			.a("class", "w3-btn w3-round w3-border w3-border-black w3-section w3-ripple w3-padding w3-green ")
+			.a("onclick", "postCalculInr(); ")
+			.f().sx("Créer un calcul INR")
+		.g("button");
+
+		e("button")
+			.a("class", "w3-btn w3-round w3-border w3-border-black w3-section w3-ripple w3-padding w3-green ")
+			.a("onclick", "patchCalculInr(); ")
+			.f().sx("Modifier un calcul INR")
+		.g("button");
+
+		e("button")
+			.a("class", "w3-btn w3-round w3-border w3-border-black w3-section w3-ripple w3-padding w3-green ")
+			.a("onclick", "putCalculInr(); ")
+			.f().sx("Remplacer un calcul INR")
+		.g("button");
+
+		e("button")
+			.a("class", "w3-btn w3-round w3-border w3-border-black w3-section w3-ripple w3-padding w3-green ")
+			.a("onclick", "deleteCalculInr(); ")
+			.f().sx("Supprimer un calcul INR")
+		.g("button");
 	}
 }

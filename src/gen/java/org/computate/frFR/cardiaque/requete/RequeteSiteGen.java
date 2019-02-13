@@ -1,13 +1,11 @@
 package org.computate.frFR.cardiaque.requete;
 
-import io.vertx.core.http.HttpServerRequest;
 import org.computate.frFR.cardiaque.couverture.Couverture;
 import org.computate.frFR.cardiaque.config.ConfigSite;
 import org.apache.solr.common.SolrDocumentList;
 import java.security.MessageDigest;
 import org.computate.frFR.cardiaque.utilisateur.UtilisateurSite;
 import javax.crypto.spec.SecretKeySpec;
-import io.vertx.ext.web.RoutingContext;
 import org.apache.commons.lang3.StringUtils;
 import javax.crypto.Cipher;
 import java.util.Stack;
@@ -25,9 +23,7 @@ import org.apache.commons.text.StringEscapeUtils;
 import java.util.Objects;
 import org.computate.frFR.cardiaque.contexte.SiteContexte;
 import org.apache.solr.common.SolrDocument;
-import io.vertx.ext.auth.User;
 import io.vertx.ext.web.api.OperationRequest;
-import io.vertx.core.http.HttpServerResponse;
 import org.apache.solr.client.solrj.SolrQuery;
 import io.vertx.ext.sql.SQLConnection;
 import java.lang.Object;
@@ -64,15 +60,6 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		this.siteContexte_ = siteContexte_;
 		this.siteContexte_Couverture.dejaInitialise = true;
 	}
-	protected RequeteSite siteContexte_Init() {
-		if(!siteContexte_Couverture.dejaInitialise) {
-			_siteContexte_(siteContexte_Couverture);
-			if(siteContexte_ == null)
-				setSiteContexte_(siteContexte_Couverture.o);
-		}
-		siteContexte_Couverture.dejaInitialise(true);
-		return (RequeteSite)this;
-	}
 
 	/////////////////
 	// configSite_ //
@@ -100,15 +87,6 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		this.configSite_ = configSite_;
 		this.configSite_Couverture.dejaInitialise = true;
 	}
-	protected RequeteSite configSite_Init() {
-		if(!configSite_Couverture.dejaInitialise) {
-			_configSite_(configSite_Couverture);
-			if(configSite_ == null)
-				setConfigSite_(configSite_Couverture.o);
-		}
-		configSite_Couverture.dejaInitialise(true);
-		return (RequeteSite)this;
-	}
 
 	//////////////////
 	// requeteSite_ //
@@ -135,15 +113,6 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	public void setRequeteSite_(RequeteSite requeteSite_) {
 		this.requeteSite_ = requeteSite_;
 		this.requeteSite_Couverture.dejaInitialise = true;
-	}
-	protected RequeteSite requeteSite_Init() {
-		if(!requeteSite_Couverture.dejaInitialise) {
-			_requeteSite_(requeteSite_Couverture);
-			if(requeteSite_ == null)
-				setRequeteSite_(requeteSite_Couverture.o);
-		}
-		requeteSite_Couverture.dejaInitialise(true);
-		return (RequeteSite)this;
 	}
 
 	///////////
@@ -182,39 +151,39 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		return (RequeteSite)this;
 	}
 
-	////////////////////////
-	// contexteItineraire //
-	////////////////////////
+	///////////////
+	// objetJson //
+	///////////////
 
-	/**	L'entité « contexteItineraire »
+	/**	L'entité « objetJson »
 	 *	 is defined as null before being initialized. 
 	 */
-	protected RoutingContext contexteItineraire;
-	public Couverture<RoutingContext> contexteItineraireCouverture = new Couverture<RoutingContext>().p(this).c(RoutingContext.class).var("contexteItineraire").o(contexteItineraire);
+	protected JsonObject objetJson;
+	public Couverture<JsonObject> objetJsonCouverture = new Couverture<JsonObject>().p(this).c(JsonObject.class).var("objetJson").o(objetJson);
 
-	/**	<br/>L'entité « contexteItineraire »
+	/**	<br/>L'entité « objetJson »
 	 *  est défini comme null avant d'être initialisé. 
-	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.requete.RequeteSite&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:contexteItineraire">Trouver l'entité contexteItineraire dans Solr</a>
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.requete.RequeteSite&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:objetJson">Trouver l'entité objetJson dans Solr</a>
 	 * <br/>
 	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _contexteItineraire(Couverture<RoutingContext> c);
+	protected abstract void _objetJson(Couverture<JsonObject> c);
 
-	public RoutingContext getContexteItineraire() {
-		return contexteItineraire;
+	public JsonObject getObjetJson() {
+		return objetJson;
 	}
 
-	public void setContexteItineraire(RoutingContext contexteItineraire) {
-		this.contexteItineraire = contexteItineraire;
-		this.contexteItineraireCouverture.dejaInitialise = true;
+	public void setObjetJson(JsonObject objetJson) {
+		this.objetJson = objetJson;
+		this.objetJsonCouverture.dejaInitialise = true;
 	}
-	protected RequeteSite contexteItineraireInit() {
-		if(!contexteItineraireCouverture.dejaInitialise) {
-			_contexteItineraire(contexteItineraireCouverture);
-			if(contexteItineraire == null)
-				setContexteItineraire(contexteItineraireCouverture.o);
+	protected RequeteSite objetJsonInit() {
+		if(!objetJsonCouverture.dejaInitialise) {
+			_objetJson(objetJsonCouverture);
+			if(objetJson == null)
+				setObjetJson(objetJsonCouverture.o);
 		}
-		contexteItineraireCouverture.dejaInitialise(true);
+		objetJsonCouverture.dejaInitialise(true);
 		return (RequeteSite)this;
 	}
 
@@ -362,78 +331,6 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 		return (RequeteSite)this;
 	}
 
-	////////////////////
-	// requeteServeur //
-	////////////////////
-
-	/**	L'entité « requeteServeur »
-	 *	 is defined as null before being initialized. 
-	 */
-	protected HttpServerRequest requeteServeur;
-	public Couverture<HttpServerRequest> requeteServeurCouverture = new Couverture<HttpServerRequest>().p(this).c(HttpServerRequest.class).var("requeteServeur").o(requeteServeur);
-
-	/**	<br/>L'entité « requeteServeur »
-	 *  est défini comme null avant d'être initialisé. 
-	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.requete.RequeteSite&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:requeteServeur">Trouver l'entité requeteServeur dans Solr</a>
-	 * <br/>
-	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
-	 **/
-	protected abstract void _requeteServeur(Couverture<HttpServerRequest> c);
-
-	public HttpServerRequest getRequeteServeur() {
-		return requeteServeur;
-	}
-
-	public void setRequeteServeur(HttpServerRequest requeteServeur) {
-		this.requeteServeur = requeteServeur;
-		this.requeteServeurCouverture.dejaInitialise = true;
-	}
-	protected RequeteSite requeteServeurInit() {
-		if(!requeteServeurCouverture.dejaInitialise) {
-			_requeteServeur(requeteServeurCouverture);
-			if(requeteServeur == null)
-				setRequeteServeur(requeteServeurCouverture.o);
-		}
-		requeteServeurCouverture.dejaInitialise(true);
-		return (RequeteSite)this;
-	}
-
-	////////////////////
-	// reponseServeur //
-	////////////////////
-
-	/**	L'entité « reponseServeur »
-	 *	 is defined as null before being initialized. 
-	 */
-	protected HttpServerResponse reponseServeur;
-	public Couverture<HttpServerResponse> reponseServeurCouverture = new Couverture<HttpServerResponse>().p(this).c(HttpServerResponse.class).var("reponseServeur").o(reponseServeur);
-
-	/**	<br/>L'entité « reponseServeur »
-	 *  est défini comme null avant d'être initialisé. 
-	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.requete.RequeteSite&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:reponseServeur">Trouver l'entité reponseServeur dans Solr</a>
-	 * <br/>
-	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
-	 **/
-	protected abstract void _reponseServeur(Couverture<HttpServerResponse> c);
-
-	public HttpServerResponse getReponseServeur() {
-		return reponseServeur;
-	}
-
-	public void setReponseServeur(HttpServerResponse reponseServeur) {
-		this.reponseServeur = reponseServeur;
-		this.reponseServeurCouverture.dejaInitialise = true;
-	}
-	protected RequeteSite reponseServeurInit() {
-		if(!reponseServeurCouverture.dejaInitialise) {
-			_reponseServeur(reponseServeurCouverture);
-			if(reponseServeur == null)
-				setReponseServeur(reponseServeurCouverture.o);
-		}
-		reponseServeurCouverture.dejaInitialise(true);
-		return (RequeteSite)this;
-	}
-
 	///////
 	// w //
 	///////
@@ -479,8 +376,8 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	/**	L'entité « utilisateurVertx »
 	 *	 is defined as null before being initialized. 
 	 */
-	protected User utilisateurVertx;
-	public Couverture<User> utilisateurVertxCouverture = new Couverture<User>().p(this).c(User.class).var("utilisateurVertx").o(utilisateurVertx);
+	protected JsonObject utilisateurVertx;
+	public Couverture<JsonObject> utilisateurVertxCouverture = new Couverture<JsonObject>().p(this).c(JsonObject.class).var("utilisateurVertx").o(utilisateurVertx);
 
 	/**	<br/>L'entité « utilisateurVertx »
 	 *  est défini comme null avant d'être initialisé. 
@@ -488,13 +385,13 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	 * <br/>
 	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
 	 **/
-	protected abstract void _utilisateurVertx(Couverture<User> c);
+	protected abstract void _utilisateurVertx(Couverture<JsonObject> c);
 
-	public User getUtilisateurVertx() {
+	public JsonObject getUtilisateurVertx() {
 		return utilisateurVertx;
 	}
 
-	public void setUtilisateurVertx(User utilisateurVertx) {
+	public void setUtilisateurVertx(JsonObject utilisateurVertx) {
 		this.utilisateurVertx = utilisateurVertx;
 		this.utilisateurVertxCouverture.dejaInitialise = true;
 	}
@@ -654,44 +551,6 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 
 	public String htmUtilisateurNomEnsemble() {
 		return utilisateurNomEnsemble == null ? "" : StringEscapeUtils.escapeHtml4(strUtilisateurNomEnsemble());
-	}
-
-	/////////////////////
-	// utilisateurSite //
-	/////////////////////
-
-	/**	L'entité « utilisateurSite »
-	 *	 is defined as null before being initialized. 
-	 */
-	protected UtilisateurSite utilisateurSite;
-	public Couverture<UtilisateurSite> utilisateurSiteCouverture = new Couverture<UtilisateurSite>().p(this).c(UtilisateurSite.class).var("utilisateurSite").o(utilisateurSite);
-
-	/**	<br/>L'entité « utilisateurSite »
-	 *  est défini comme null avant d'être initialisé. 
-	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.requete.RequeteSite&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:utilisateurSite">Trouver l'entité utilisateurSite dans Solr</a>
-	 * <br/>
-	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
-	 **/
-	protected abstract void _utilisateurSite(Couverture<UtilisateurSite> c);
-
-	public UtilisateurSite getUtilisateurSite() {
-		return utilisateurSite;
-	}
-
-	public void setUtilisateurSite(UtilisateurSite utilisateurSite) {
-		this.utilisateurSite = utilisateurSite;
-		this.utilisateurSiteCouverture.dejaInitialise = true;
-	}
-	protected RequeteSite utilisateurSiteInit() {
-		if(!utilisateurSiteCouverture.dejaInitialise) {
-			_utilisateurSite(utilisateurSiteCouverture);
-			if(utilisateurSite == null)
-				setUtilisateurSite(utilisateurSiteCouverture.o);
-		}
-		if(utilisateurSite != null)
-			utilisateurSite.initLoinPourClasse(requeteSite_);
-		utilisateurSiteCouverture.dejaInitialise(true);
-		return (RequeteSite)this;
 	}
 
 	///////////////////
@@ -972,6 +831,44 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 
 	public String htmUtilisateurNomComplet() {
 		return utilisateurNomComplet == null ? "" : StringEscapeUtils.escapeHtml4(strUtilisateurNomComplet());
+	}
+
+	/////////////////////
+	// utilisateurSite //
+	/////////////////////
+
+	/**	L'entité « utilisateurSite »
+	 *	 is defined as null before being initialized. 
+	 */
+	protected UtilisateurSite utilisateurSite;
+	public Couverture<UtilisateurSite> utilisateurSiteCouverture = new Couverture<UtilisateurSite>().p(this).c(UtilisateurSite.class).var("utilisateurSite").o(utilisateurSite);
+
+	/**	<br/>L'entité « utilisateurSite »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.requete.RequeteSite&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:utilisateurSite">Trouver l'entité utilisateurSite dans Solr</a>
+	 * <br/>
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
+	protected abstract void _utilisateurSite(Couverture<UtilisateurSite> c);
+
+	public UtilisateurSite getUtilisateurSite() {
+		return utilisateurSite;
+	}
+
+	public void setUtilisateurSite(UtilisateurSite utilisateurSite) {
+		this.utilisateurSite = utilisateurSite;
+		this.utilisateurSiteCouverture.dejaInitialise = true;
+	}
+	protected RequeteSite utilisateurSiteInit() {
+		if(!utilisateurSiteCouverture.dejaInitialise) {
+			_utilisateurSite(utilisateurSiteCouverture);
+			if(utilisateurSite == null)
+				setUtilisateurSite(utilisateurSiteCouverture.o);
+		}
+		if(utilisateurSite != null)
+			utilisateurSite.initLoinPourClasse(requeteSite_);
+		utilisateurSiteCouverture.dejaInitialise(true);
+		return (RequeteSite)this;
 	}
 
 	/////////////
@@ -1612,28 +1509,23 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 	}
 
 	public void initRequeteSite() {
-		siteContexte_Init();
-		configSite_Init();
-		requeteSite_Init();
 		vertxInit();
-		contexteItineraireInit();
+		objetJsonInit();
 		rechercheSolrInit();
 		operationRequeteInit();
 		reponseRechercheInit();
 		resultatsRechercheInit();
-		requeteServeurInit();
-		reponseServeurInit();
 		wInit();
 		utilisateurVertxInit();
 		principalJsonInit();
 		utilisateurNomDomaineInit();
 		utilisateurNomEnsembleInit();
-		utilisateurSiteInit();
 		utilisateurIdInit();
 		utilisateurNomInit();
 		utilisateurNomFamilleInit();
 		utilisateurPrenomInit();
 		utilisateurNomCompletInit();
+		utilisateurSiteInit();
 		xmlPileInit();
 		solrDocumentInit();
 		pageAcheteInit();
@@ -1695,8 +1587,8 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 				return oRequeteSite.requeteSite_;
 			case "vertx":
 				return oRequeteSite.vertx;
-			case "contexteItineraire":
-				return oRequeteSite.contexteItineraire;
+			case "objetJson":
+				return oRequeteSite.objetJson;
 			case "rechercheSolr":
 				return oRequeteSite.rechercheSolr;
 			case "operationRequete":
@@ -1705,10 +1597,6 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 				return oRequeteSite.reponseRecherche;
 			case "resultatsRecherche":
 				return oRequeteSite.resultatsRecherche;
-			case "requeteServeur":
-				return oRequeteSite.requeteServeur;
-			case "reponseServeur":
-				return oRequeteSite.reponseServeur;
 			case "w":
 				return oRequeteSite.w;
 			case "utilisateurVertx":
@@ -1719,8 +1607,6 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 				return oRequeteSite.utilisateurNomDomaine;
 			case "utilisateurNomEnsemble":
 				return oRequeteSite.utilisateurNomEnsemble;
-			case "utilisateurSite":
-				return oRequeteSite.utilisateurSite;
 			case "utilisateurId":
 				return oRequeteSite.utilisateurId;
 			case "utilisateurNom":
@@ -1731,6 +1617,8 @@ public abstract class RequeteSiteGen<DEV> extends Object {
 				return oRequeteSite.utilisateurPrenom;
 			case "utilisateurNomComplet":
 				return oRequeteSite.utilisateurNomComplet;
+			case "utilisateurSite":
+				return oRequeteSite.utilisateurSite;
 			case "xmlPile":
 				return oRequeteSite.xmlPile;
 			case "solrDocument":

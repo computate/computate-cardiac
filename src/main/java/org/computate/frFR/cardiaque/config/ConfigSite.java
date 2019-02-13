@@ -222,9 +222,9 @@ public class ConfigSite extends ConfigSiteGen<Object> implements Serializable {
 	}
 
 	/**
-	 * Var.enUS: urlDomainBase
+	 * Var.enUS: siteBaseUrl
 	 * 	L'URL du domaine de base pour les URLs du site. **/
-	protected void _urlDomaineBase(Couverture<String> c) {
+	protected void _siteUrlBase(Couverture<String> c) {
 		String o;
 		if(config == null)
 			o = System.getenv(c.var);

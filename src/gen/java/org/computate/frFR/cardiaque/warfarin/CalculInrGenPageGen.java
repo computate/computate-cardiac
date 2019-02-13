@@ -174,6 +174,30 @@ public abstract class CalculInrGenPageGen<DEV> extends MiseEnPage {
 		}
 	}
 
+	/////////////////
+	// htmlScripts //
+	/////////////////
+
+	@Override public void htmlScripts() {
+		htmlScriptsCalculInrGenPage();
+		super.htmlScriptsMiseEnPage();
+	}
+
+	public void htmlScriptsCalculInrGenPage() {
+	}
+
+	////////////////
+	// htmlScript //
+	////////////////
+
+	@Override public void htmlScript() {
+		htmlScriptCalculInrGenPage();
+		super.htmlScriptMiseEnPage();
+	}
+
+	public void htmlScriptCalculInrGenPage() {
+	}
+
 	//////////////
 	// htmlBody //
 	//////////////

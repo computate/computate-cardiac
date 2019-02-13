@@ -35,10 +35,8 @@ import io.vertx.core.Vertx;
 import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.http.HttpServerResponse;
 import io.vertx.core.json.JsonObject;
-import io.vertx.ext.auth.User;
 import io.vertx.ext.auth.oauth2.KeycloakHelper;
 import io.vertx.ext.sql.SQLConnection;
-import io.vertx.ext.web.RoutingContext;
 import io.vertx.ext.web.api.OperationRequest; 
 
 public class RequeteSite extends RequeteSiteGen<Object> implements Serializable {   
@@ -63,7 +61,7 @@ public class RequeteSite extends RequeteSiteGen<Object> implements Serializable 
 		c.o(siteContexte_.getVertx());
 	}
 
-	protected void _contexteItineraire(Couverture<RoutingContext> c) {
+	protected void _objetJson(Couverture<JsonObject> c) {
 	}
 
 	protected void _rechercheSolr(Couverture<SolrQuery> c) {
@@ -93,22 +91,6 @@ public class RequeteSite extends RequeteSiteGen<Object> implements Serializable 
 		}
 	} 
 
-	/**	Le HttpServletRequest du requête. **/
-	protected void _requeteServeur(Couverture<HttpServerRequest> c) {
-		if(contexteItineraire != null) {
-			HttpServerRequest o = contexteItineraire.request();
-			c.o(o);
-		}
-	}
-
-	/**	Le HttpServletResponse du requête. **/
-	protected void _reponseServeur(Couverture<HttpServerResponse> c) { 
-		if(contexteItineraire != null) {
-			HttpServerResponse o = contexteItineraire.response();
-			c.o(o);
-		}
-	}
-
 	/**
 	 * frFR: L'écrivain pour écrirer le résultat du réponse. 
 	 * r.enUS: requeteSite_
@@ -128,9 +110,9 @@ public class RequeteSite extends RequeteSiteGen<Object> implements Serializable 
 //	protected void _jetonAcces(Couverture<AccessToken> c) {
 //	}
 
-	protected void _utilisateurVertx(Couverture<User> c) {
-		if(contexteItineraire != null) {
-			User o = contexteItineraire.user();
+	protected void _utilisateurVertx(Couverture<JsonObject> c) {
+		if(operationRequete != null) {
+			JsonObject o = operationRequete.getUser();
 			c.o(o);
 		}
 
@@ -142,13 +124,13 @@ public class RequeteSite extends RequeteSiteGen<Object> implements Serializable 
 //			c.o(o);
 //		}
 		if(utilisateurVertx != null) {
-			JsonObject o = utilisateurVertx.principal();
+			JsonObject o = KeycloakHelper.parseToken(utilisateurVertx.getString("access_token"));
 			c.o(o);
 		}
 	}
 	
 	protected void _utilisateurNomDomaine(Couverture<String> c) {
-		String o = principalJson == null ? "example.com" : null;
+		String o = principalJson == null ? "example.com" : "example.com";
 		c.o(o);
 	}
 	
@@ -157,10 +139,6 @@ public class RequeteSite extends RequeteSiteGen<Object> implements Serializable 
 		ArrayUtils.reverse(partis);
 		String o = StringUtils.join(partis, ".");
 		c.o(o);
-	}
-
-	/**	L'utilisateur de la requête. **/
-	protected void _utilisateurSite(Couverture<UtilisateurSite> c) { 
 	}
 
 	/**	Le sujet d'acces Keycloak pour l'utilisateur. 
@@ -176,7 +154,8 @@ public class RequeteSite extends RequeteSiteGen<Object> implements Serializable 
 	/**	Le nom d'utilisateur prefere de l'utilisateur. **/
 	protected void _utilisateurNom(Couverture<String> c) {
 		if(principalJson != null) {
-			String o = KeycloakHelper.preferredUsername(principalJson);
+//			String o = KeycloakHelper.preferredUsername(principalJson);
+			String o = principalJson.getString("preferred_username");
 //			String o = jetonAcces.getPreferredUsername();
 			c.o(o);
 		}
@@ -185,7 +164,8 @@ public class RequeteSite extends RequeteSiteGen<Object> implements Serializable 
 	/**	Le nom de famille de l'utilisateur. **/
 	protected void _utilisateurNomFamille(Couverture<String> c) {
 		if(principalJson != null) {
-			String o = KeycloakHelper.name(principalJson);
+//			String o = KeycloakHelper.name(principalJson);
+			String o = principalJson.getString("family_name");
 //			String o = jetonAcces.getFamilyName();
 			c.o(o);
 		}
@@ -194,7 +174,8 @@ public class RequeteSite extends RequeteSiteGen<Object> implements Serializable 
 	/**	Le prenom de l'utilisateur. **/
 	protected void _utilisateurPrenom(Couverture<String> c) { 
 		if(principalJson != null) {
-			String o = KeycloakHelper.name(principalJson);
+			String o = principalJson.getString("given_name");
+//			String o = KeycloakHelper.name(principalJson);
 			c.o(o);
 		}
 	}
@@ -202,7 +183,8 @@ public class RequeteSite extends RequeteSiteGen<Object> implements Serializable 
 	/**	Le nom complet de l'utilisateur. **/
 	protected void _utilisateurNomComplet(Couverture<String> c) {
 		if(principalJson != null) {
-			String o = KeycloakHelper.name(principalJson);
+			String o = principalJson.getString("name");
+//			String o = KeycloakHelper.name(principalJson);
 			c.o(o);
 		}
 	}
@@ -249,6 +231,10 @@ public class RequeteSite extends RequeteSiteGen<Object> implements Serializable 
 //		;
 //		return o;
 //	}
+
+	/**	L'utilisateur de la requête. **/
+	protected void _utilisateurSite(Couverture<UtilisateurSite> c) { 
+	}
 
 	protected void _xmlPile(Stack<String> o) {}
 //

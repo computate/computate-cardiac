@@ -1106,62 +1106,6 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		return pageImageTypeContenu == null ? "" : StringEscapeUtils.escapeHtml4(strPageImageTypeContenu());
 	}
 
-	/////////////////
-	// pageMethode //
-	/////////////////
-
-	/**	L'entité « pageMethode »
-	 *	 is defined as null before being initialized. 
-	 */
-	protected String pageMethode;
-	public Couverture<String> pageMethodeCouverture = new Couverture<String>().p(this).c(String.class).var("pageMethode").o(pageMethode);
-
-	/**	<br/>L'entité « pageMethode »
-	 *  est défini comme null avant d'être initialisé. 
-	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.page.MiseEnPage&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:pageMethode">Trouver l'entité pageMethode dans Solr</a>
-	 * <br/>
-	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
-	 **/
-	protected abstract void _pageMethode(Couverture<String> c);
-
-	public String getPageMethode() {
-		return pageMethode;
-	}
-
-	public void setPageMethode(String pageMethode) {
-		this.pageMethode = pageMethode;
-		this.pageMethodeCouverture.dejaInitialise = true;
-	}
-	protected MiseEnPage pageMethodeInit() {
-		if(!pageMethodeCouverture.dejaInitialise) {
-			_pageMethode(pageMethodeCouverture);
-			if(pageMethode == null)
-				setPageMethode(pageMethodeCouverture.o);
-		}
-		pageMethodeCouverture.dejaInitialise(true);
-		return (MiseEnPage)this;
-	}
-
-	public String solrPageMethode() {
-		return pageMethode;
-	}
-
-	public String strPageMethode() {
-		return pageMethode == null ? "" : pageMethode;
-	}
-
-	public String nomAffichagePageMethode() {
-		return null;
-	}
-
-	public String htmTooltipPageMethode() {
-		return null;
-	}
-
-	public String htmPageMethode() {
-		return pageMethode == null ? "" : StringEscapeUtils.escapeHtml4(strPageMethode());
-	}
-
 	/////////////////////
 	// pageTypeContenu //
 	/////////////////////
@@ -1849,7 +1793,6 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		pageImageLargeurInit();
 		pageImageHauteurInit();
 		pageImageTypeContenuInit();
-		pageMethodeInit();
 		pageTypeContenuInit();
 		pageCreeInit();
 		pageModifieeInit();
@@ -1939,8 +1882,6 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 				return oMiseEnPage.pageImageHauteur;
 			case "pageImageTypeContenu":
 				return oMiseEnPage.pageImageTypeContenu;
-			case "pageMethode":
-				return oMiseEnPage.pageMethode;
 			case "pageTypeContenu":
 				return oMiseEnPage.pageTypeContenu;
 			case "pageCree":
@@ -2101,7 +2042,7 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 	//////////////
 
 	@Override public int hashCode() {
-		return Objects.hash(pageVisibleAuxBots, pageH1, pageH2, pageH1Court, pageH2Court, pageTitre, pageUri, pageUris, pageUrl, pageImageUri, pageImageUrl, pageVideoId, pageVideoUrl, pageVideoUrlEmbed, pageImageLargeur, pageImageHauteur, pageImageTypeContenu, pageMethode, pageTypeContenu, pageCree, pageModifiee, pageMotsCles, pageDescription, pageAccueilUri, pageCalculInr, pageAProposUri, pageFaqUri, pageUtilisateurUri, pageDeconnexionUri);
+		return Objects.hash(pageVisibleAuxBots, pageH1, pageH2, pageH1Court, pageH2Court, pageTitre, pageUri, pageUris, pageUrl, pageImageUri, pageImageUrl, pageVideoId, pageVideoUrl, pageVideoUrlEmbed, pageImageLargeur, pageImageHauteur, pageImageTypeContenu, pageTypeContenu, pageCree, pageModifiee, pageMotsCles, pageDescription, pageAccueilUri, pageCalculInr, pageAProposUri, pageFaqUri, pageUtilisateurUri, pageDeconnexionUri);
 	}
 
 	////////////
@@ -2131,7 +2072,6 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 				&& Objects.equals( pageImageLargeur, that.pageImageLargeur )
 				&& Objects.equals( pageImageHauteur, that.pageImageHauteur )
 				&& Objects.equals( pageImageTypeContenu, that.pageImageTypeContenu )
-				&& Objects.equals( pageMethode, that.pageMethode )
 				&& Objects.equals( pageTypeContenu, that.pageTypeContenu )
 				&& Objects.equals( pageCree, that.pageCree )
 				&& Objects.equals( pageModifiee, that.pageModifiee )
@@ -2169,7 +2109,6 @@ public abstract class MiseEnPageGen<DEV> extends Object {
 		sb.append( ", pageImageLargeur: " ).append(pageImageLargeur);
 		sb.append( ", pageImageHauteur: " ).append(pageImageHauteur);
 		sb.append( ", pageImageTypeContenu: \"" ).append(pageImageTypeContenu).append( "\"" );
-		sb.append( ", pageMethode: \"" ).append(pageMethode).append( "\"" );
 		sb.append( ", pageTypeContenu: \"" ).append(pageTypeContenu).append( "\"" );
 		sb.append( ", pageCree: " ).append(pageCree);
 		sb.append( ", pageModifiee: " ).append(pageModifiee);
