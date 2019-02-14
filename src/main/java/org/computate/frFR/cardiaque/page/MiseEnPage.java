@@ -609,6 +609,9 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 	@Override public void htmlScriptsMiseEnPage() {
 		e("script").a("src", "https://code.jquery.com/jquery-1.12.4.min.js").f().g("script");
 		e("script").a("src", "/static/js/site.js").f().g("script");
+		e("script").a("src", "/static/js/moment.min.js").f().g("script");
+		e("script").a("src", "/static/js/jqDatePicker.js").f().g("script");
+		e("script").a("src", "/static/js/jquery.serialize-object.js").f().g("script");
 //		e("script").a("async", "").a("defer", "").a("src", "https://apis.google.com/js/platform.js").f().g("script");
 //		e("script").a("async", "").a("src", "https://www.googletagmanager.com/gtag/js?id=UA-118970786-1").f().g("script");
 //		e("script").f().l("/*<![CDATA[*/");
@@ -625,6 +628,7 @@ public class MiseEnPage extends MiseEnPageGen<Object> {
 	@Override public void htmlStylesMiseEnPage() {
 		e("link").a("rel", "stylesheet").a("href", "https://www.w3schools.com/w3css/4/w3.css").fg();
 		e("link").a("rel", "stylesheet").a("href", "/static/css/site.css").fg();
+		e("link").a("rel", "stylesheet").a("href", "/static/css/datePicker.css").fg();
 		e("link").a("rel", "stylesheet").a("href", "https://fonts.googleapis.com/css?family=Khand").fg();
 		e("link").a("rel", "stylesheet").a("href", "https://pro.fontawesome.com/releases/v5.7.1/css/all.css").a("integrity", "sha384-6jHF7Z3XI3fF4XZixAuSu0gGKrXwoX/w3uFPxC56OtjChio7wtTGJWRW53Nhx6Ev").a("crossorigin", "anonymous").fg();
 //		e("link").a("rel", "stylesheet").a("href", "https://use.fontawesome.com/releases/v5.7.1/css/all.css").a("integrity", "sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr").a("crossorigin", "anonymous").fg();
