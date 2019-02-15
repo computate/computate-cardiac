@@ -6,6 +6,8 @@ import org.computate.frFR.cardiaque.couverture.Couverture;
 import org.computate.frFR.cardiaque.chaine.Chaine;
 import org.computate.frFR.cardiaque.config.ConfigSite;
 import org.computate.frFR.cardiaque.utilisateur.UtilisateurSite;
+import java.time.ZonedDateTime;
+import java.time.LocalDateTime;
 import java.io.IOException;
 import org.computate.frFR.cardiaque.contexte.SiteContexte;
 import java.lang.Long;
@@ -40,6 +42,83 @@ public class CalculInrGenPage extends CalculInrGenPageGen<MiseEnPage> {
 	}
 
 	public void htmlFormCalculInr(CalculInr o) {
+		{ e("div").a("class", "w3-cell-row ").f();
+			{ e("div").a("class", "w3-cell w3-cell-middle w3-center w3-mobile ").f();
+				e("label").a("class", "").f().sx("clé primaire").g("label");
+
+				e("input")
+							.a("type", "text")
+					.a("name", "pk")
+					.a("class", "w3-input w3-border ")
+					.a("placeholder", "clé primaire")
+					.a("title", "La clé primaire dans la base de données. ")
+					.a("onchange", "envoyer(); ")
+				.fg();
+
+			} g("div");
+			{ e("div").a("class", "w3-cell w3-cell-middle w3-center w3-mobile ").f();
+				e("input")
+					.a("type", "hidden")
+					.a("name", "supprime")
+					.a("value", "false")
+				.fg();
+
+				e("input")
+					.a("type", "checkbox")
+					.a("name", "supprime")
+					.a("value", "true")
+					.a("onchange", "envoyer(); ");
+					if(o.getSupprime() != null && o.getSupprime())
+						a("checked", "checked");
+				fg();
+
+				e("label").a("class", "").f().sx("Supprimé").g("label");
+			} g("div");
+		} g("div");
+		{ e("div").a("class", "w3-cell-row ").f();
+			{ e("div").a("class", "w3-cell w3-cell-middle w3-center w3-mobile ").f();
+				LocalDateTime val = o.getCree();
+
+				e("label").a("class", "").f().sx("Crée").g("label");
+				e("input")
+					.a("type", "text")
+					.a("class", "w3-input w3-border datepicker ")
+					.a("placeholder", "DD/MM/YYYY")
+					.a("data-timeformat", "DD/MM/YYYY")
+					.a("onclick", "enleverLueur($(this)); ")
+					.a("title", "La date et l'heure créées.  (DD/MM/YYYY)")
+					.a("value", val == null ? "" : DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.forLanguageTag("fr-FR")).format(val))
+					.a("onchange", "var t = moment(this.value, 'DD/MM/YYYY'); if(t) { var s = t.format('YYYY-MM-DD'); $(this).next().val(s); $(this).next().trigger('change'); } ")
+					.fg();
+				e("input")
+					.a("type", "hidden")
+					.a("name", "cree")
+					.a("onchange", "envoyer(); ")
+					.a("value", o.strCree())
+				.fg();
+			} g("div");
+			{ e("div").a("class", "w3-cell w3-cell-middle w3-center w3-mobile ").f();
+				LocalDateTime val = o.getModifie();
+
+				e("label").a("class", "").f().sx("Modifié").g("label");
+				e("input")
+					.a("type", "text")
+					.a("class", "w3-input w3-border datepicker ")
+					.a("placeholder", "DD/MM/YYYY")
+					.a("data-timeformat", "DD/MM/YYYY")
+					.a("onclick", "enleverLueur($(this)); ")
+					.a("title", "La date et l'heure modifiéés.  (DD/MM/YYYY)")
+					.a("value", val == null ? "" : DateTimeFormatter.ofPattern("dd/MM/yyyy", Locale.forLanguageTag("fr-FR")).format(val))
+					.a("onchange", "var t = moment(this.value, 'DD/MM/YYYY'); if(t) { var s = t.format('YYYY-MM-DD'); $(this).next().val(s); $(this).next().trigger('change'); } ")
+					.fg();
+				e("input")
+					.a("type", "hidden")
+					.a("name", "modifie")
+					.a("onchange", "envoyer(); ")
+					.a("value", o.strModifie())
+				.fg();
+			} g("div");
+		} g("div");
 		{ e("div").a("class", "w3-cell-row ").f();
 			{ e("div").a("class", "w3-cell w3-cell-middle w3-center w3-mobile ").f();
 				LocalDate val = o.getDateInr();
@@ -254,35 +333,33 @@ public class CalculInrGenPage extends CalculInrGenPageGen<MiseEnPage> {
 		} g("div");
 
 
-		if(listeCalculInr.size() == 1) {
-			e("button")
-				.a("class", "w3-btn w3-round w3-border w3-border-black w3-section w3-ripple w3-padding w3-green ")
-				.a("onclick", "$('#patchCalculInrModale').show(); ")
-				.f().sx("Actualiser le calcul INR")
-			.g("button");
-			{ e("div").a("id", "patchCalculInrModale").a("class", "w3-modal ").f();
-				{ e("div").a("class", "w3-modal-content w3-card-4 ").f();
-					{ e("header").a("class", "w3-container w3-green ").f();
-						e("span").a("class", "w3-button w3-display-topright ").a("onclick", "$('#patchCalculInrModale').hide(); ").f().sx("×").g("span");
-						e("h2").a("class", "").f().sx("Actualiser le calcul INR").g("h2");
-					} g("header");
-					{ e("div").a("class", "w3-container ").f();
-						CalculInr o = new CalculInr();
+		e("button")
+			.a("class", "w3-btn w3-round w3-border w3-border-black w3-section w3-ripple w3-padding w3-green ")
+			.a("onclick", "$('#patchCalculInrModale').show(); ")
+			.f().sx("Modifier des calculs INR")
+		.g("button");
+		{ e("div").a("id", "patchCalculInrModale").a("class", "w3-modal ").f();
+			{ e("div").a("class", "w3-modal-content w3-card-4 ").f();
+				{ e("header").a("class", "w3-container w3-green ").f();
+					e("span").a("class", "w3-button w3-display-topright ").a("onclick", "$('#patchCalculInrModale').hide(); ").f().sx("×").g("span");
+					e("h2").a("class", "").f().sx("Modifier des calculs INR").g("h2");
+				} g("header");
+				{ e("div").a("class", "w3-container ").f();
+					CalculInr o = new CalculInr();
 
-						{ e("form").a("id", "patchCalculInrFormulaire").f();
-							htmlFormCalculInr(o);
-						} g("form");
-						e("button")
-							.a("class", "w3-btn w3-round w3-border w3-border-black w3-section w3-ripple w3-padding w3-green ")
-							.a("onclick", "patchCalculInr(", o.getPk(), "); ")
-							.f().sx("Actualiser le calcul INR")
-						.g("button");
+					{ e("form").a("id", "patchCalculInrFormulaire").f();
+						htmlFormCalculInr(o);
+					} g("form");
+					e("button")
+						.a("class", "w3-btn w3-round w3-border w3-border-black w3-section w3-ripple w3-padding w3-green ")
+						.a("onclick", "patchCalculInr(); ")
+						.f().sx("Modifier des calculs INR")
+					.g("button");
 
-					} g("div");
 				} g("div");
 			} g("div");
+		} g("div");
 
-		}
 
 		if(listeCalculInr.size() == 1) {
 			e("button")
@@ -314,35 +391,33 @@ public class CalculInrGenPage extends CalculInrGenPageGen<MiseEnPage> {
 
 		}
 
-		if(listeCalculInr.size() == 1) {
-			e("button")
-				.a("class", "w3-btn w3-round w3-border w3-border-black w3-section w3-ripple w3-padding w3-green ")
-				.a("onclick", "$('#deleteCalculInrModale').show(); ")
-				.f().sx("Supprimer le calcul INR")
-			.g("button");
-			{ e("div").a("id", "deleteCalculInrModale").a("class", "w3-modal ").f();
-				{ e("div").a("class", "w3-modal-content w3-card-4 ").f();
-					{ e("header").a("class", "w3-container w3-green ").f();
-						e("span").a("class", "w3-button w3-display-topright ").a("onclick", "$('#deleteCalculInrModale').hide(); ").f().sx("×").g("span");
-						e("h2").a("class", "").f().sx("Supprimer le calcul INR").g("h2");
-					} g("header");
-					{ e("div").a("class", "w3-container ").f();
-						CalculInr o = new CalculInr();
+		e("button")
+			.a("class", "w3-btn w3-round w3-border w3-border-black w3-section w3-ripple w3-padding w3-green ")
+			.a("onclick", "$('#deleteCalculInrModale').show(); ")
+			.f().sx("Supprimer des calculs INR")
+		.g("button");
+		{ e("div").a("id", "deleteCalculInrModale").a("class", "w3-modal ").f();
+			{ e("div").a("class", "w3-modal-content w3-card-4 ").f();
+				{ e("header").a("class", "w3-container w3-green ").f();
+					e("span").a("class", "w3-button w3-display-topright ").a("onclick", "$('#deleteCalculInrModale').hide(); ").f().sx("×").g("span");
+					e("h2").a("class", "").f().sx("Supprimer des calculs INR").g("h2");
+				} g("header");
+				{ e("div").a("class", "w3-container ").f();
+					CalculInr o = new CalculInr();
 
-						{ e("form").a("id", "deleteCalculInrFormulaire").f();
-							htmlFormCalculInr(o);
-						} g("form");
-						e("button")
-							.a("class", "w3-btn w3-round w3-border w3-border-black w3-section w3-ripple w3-padding w3-green ")
-							.a("onclick", "deleteCalculInr(", o.getPk(), "); ")
-							.f().sx("Supprimer le calcul INR")
-						.g("button");
+					{ e("form").a("id", "deleteCalculInrFormulaire").f();
+						htmlFormCalculInr(o);
+					} g("form");
+					e("button")
+						.a("class", "w3-btn w3-round w3-border w3-border-black w3-section w3-ripple w3-padding w3-green ")
+						.a("onclick", "deleteCalculInr(); ")
+						.f().sx("Supprimer des calculs INR")
+					.g("button");
 
-					} g("div");
 				} g("div");
 			} g("div");
+		} g("div");
 
-		}
 		g("div");
 	}
 }

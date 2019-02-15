@@ -58,7 +58,7 @@ public class CalculInr extends CalculInrGen<Cluster> {
 	 * {@inheritDoc}
 	 * Indexe: true
 	 * Stocke: true
-	 * HtmlLigne: 1
+	 * HtmlLigne: 3
 	 * Description.frFR: Date du calcul INR. 
 	 * Description.enUS: INR Entry Date. 
 	 * NomAffichage.frFR: Date INR
@@ -72,7 +72,7 @@ public class CalculInr extends CalculInrGen<Cluster> {
 	 * {@inheritDoc}
 	 * Indexe: true
 	 * Stocke: true
-	 * HtmlLigne: 1
+	 * HtmlLigne: 3
 	 * Description.frFR: Date à reverifier. 
 	 * Description.enUS: Date to reverify. 
 	 * NomAffichage.frFR: Date à reverifier
@@ -96,7 +96,7 @@ public class CalculInr extends CalculInrGen<Cluster> {
 	 * Description.enUS: The patient takes coumadin. 
 	 * NomAffichage.frFR: Patient prend coumadin
 	 * NomAffichage.enUS: Patient takes coumadin
-	 * HtmlLigne: 2
+	 * HtmlLigne: 4
 	 */ 
 	protected void _patientPrendCoumadin(Couverture<Boolean> c) {
 	}
@@ -106,7 +106,7 @@ public class CalculInr extends CalculInrGen<Cluster> {
 	 * Var.enUS: currentGoal
 	 * Indexe: true
 	 * Stocke: true
-	 * HtmlLigne: 2
+	 * HtmlLigne: 4
 	 * Description.frFR: But actuel. 
 	 * Description.enUS: Actual goal. 
 	 * NomAffichage.frFR: But actuel
@@ -120,7 +120,7 @@ public class CalculInr extends CalculInrGen<Cluster> {
 	 * Var.enUS: currentDosage
 	 * Indexe: true
 	 * Stocke: true
-	 * HtmlLigne: 3
+	 * HtmlLigne: 5
 	 * Description.frFR: Dose actuel. 
 	 * Description.enUS: Actual dosage. 
 	 * NomAffichage.frFR: Dose actuel
@@ -134,7 +134,7 @@ public class CalculInr extends CalculInrGen<Cluster> {
 	 * Var.enUS: currentMedication
 	 * Indexe: true
 	 * Stocke: true
-	 * HtmlLigne: 3
+	 * HtmlLigne: 5
 	 * Description.frFR: Medicament actuel. 
 	 * Description.enUS: Current medication. 
 	 * NomAffichage.frFR: Dose actuel
@@ -150,7 +150,7 @@ public class CalculInr extends CalculInrGen<Cluster> {
 	 * Stocke: true
 	 * r: FORMAT_dateMedicalCourt
 	 * r.enUS: FORMAT_dateMedicalShort
-	 * HtmlLigne: 4
+	 * HtmlLigne: 6
 	 * Description.frFR: Changement de dose. 
 	 * Description.enUS: Dosage change. 
 	 * NomAffichage.frFR: Changement de dose
@@ -165,7 +165,7 @@ public class CalculInr extends CalculInrGen<Cluster> {
 	 * Var.enUS: additionalNotes
 	 * Indexe: true
 	 * Stocke: true
-	 * HtmlLigne: 4
+	 * HtmlLigne: 6
 	 * Description.frFR: Notes complémentaires. 
 	 * Description.enUS: Additional notes. 
 	 * NomAffichage.frFR: Notes complémentaires
@@ -179,7 +179,7 @@ public class CalculInr extends CalculInrGen<Cluster> {
 	 * Var.enUS: contactInfo
 	 * Indexe: true
 	 * Stocke: true
-	 * HtmlLigne: 5
+	 * HtmlLigne: 7
 	 * Description.frFR: Info contact. 
 	 * Description.enUS: Contact info. 
 	 * NomAffichage.frFR: Info contact

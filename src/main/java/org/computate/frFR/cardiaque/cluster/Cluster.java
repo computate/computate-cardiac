@@ -52,6 +52,11 @@ public class Cluster extends ClusterGen<Object> {
 	 * Indexe: true
 	 * Stocke: true
 	 * ClePrimaire: true
+	 * HtmlLigne: 1
+	 * Description.frFR: La clé primaire dans la base de données. 
+	 * Description.enUS: The primary key in the database. 
+	 * NomAffichage.frFR: clé primaire
+	 * NomAffichage.enUS: primary key
 	 */                          
 	protected void _pk(Couverture<Long> c) {}
 
@@ -64,19 +69,18 @@ public class Cluster extends ClusterGen<Object> {
 			c.o(pk.toString());
 	}
 
-	/**
-	 * Indexe: true
-	 * Stocke: true
-	 * Var.enUS: _created
+	/**        
+	 * Var.enUS: _deleted
+	 * HtmlLigne: 1
+	 * Description.frFR: Supprimé. 
+	 * Description.enUS: Deleted. 
+	 * NomAffichage.frFR: Supprimé
+	 * NomAffichage.enUS: Deleted
 	 */
-	protected void _cree(Couverture<LocalDateTime> c) {}
-
-	/**
-	 * Indexe: true
-	 * Stocke: true
-	 * Var.enUS: _modified
-	 */
-	protected void _modifie(Couverture<LocalDateTime> c) {}
+	protected void _supprime(Couverture<Boolean> c) {
+		Boolean o = false;
+		c.o(o);
+	}
 
 	/**
 	 * Indexe: true
@@ -84,6 +88,30 @@ public class Cluster extends ClusterGen<Object> {
 	 * Var.enUS: _userId
 	 */
 	protected void _utilisateurId(Couverture<String> c) {}
+
+	/**
+	 * Indexe: true
+	 * Stocke: true
+	 * Var.enUS: _created
+	 * HtmlLigne: 2
+	 * Description.frFR: La date et l'heure créées. 
+	 * Description.enUS: The date and time created. 
+	 * NomAffichage.frFR: Crée
+	 * NomAffichage.enUS: Created
+	 */
+	protected void _cree(Couverture<LocalDateTime> c) {}
+
+	/**
+	 * Indexe: true
+	 * Stocke: true
+	 * Var.enUS: _modified
+	 * HtmlLigne: 2
+	 * Description.frFR: La date et l'heure modifiéés. 
+	 * Description.enUS: The date and time modified. 
+	 * NomAffichage.frFR: Modifié
+	 * NomAffichage.enUS: Modified
+	 */
+	protected void _modifie(Couverture<LocalDateTime> c) {}
 
 	/**
 	 * Indexe: true
@@ -102,14 +130,6 @@ public class Cluster extends ClusterGen<Object> {
 	 */          
 	protected void _clusterNomSimple(Couverture<String> c) {
 		String o = getClass().getSimpleName();
-		c.o(o);
-	}
-
-	/**        
-	 * Var.enUS: _deleted
-	 */
-	protected void _supprime(Couverture<Boolean> c) {
-		Boolean o = false;
 		c.o(o);
 	}
 //

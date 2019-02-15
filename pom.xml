@@ -16,9 +16,11 @@
 		<fabric8.version>2.3.7</fabric8.version>
 
 		<!-- maven plugin versions -->
-		<fabric8.maven.plugin.version>3.5.44</fabric8.maven.plugin.version>
+		<fabric8-maven-plugin.version>3.5.42</fabric8-maven-plugin.version>
 		<maven-compiler-plugin.version>3.6.0</maven-compiler-plugin.version>
 		<maven-surefire-plugin.version>2.19.1</maven-surefire-plugin.version>
+		<vertx-maven-plugin.version>1.0.9</vertx-maven-plugin.version>
+		<build-helper-maven-plugin.version>3.0.0</build-helper-maven-plugin.version>
 		<vertx.verticle>org.computate.frFR.cardiaque.AppVertx</vertx.verticle>
 		<!--<vertx.version>3.5.4</vertx.version> -->
 		<vertx.version>3.6.2</vertx.version>
@@ -183,7 +185,7 @@
 			<artifactId>vertx-codegen</artifactId>
 			<version>${vertx.version}</version>
 			<scope>provided</scope>
-			<!--<classifier>processor</classifier>-->
+			<!--<classifier>processor</classifier> -->
 		</dependency>
 		<dependency>
 			<groupId>io.vertx</groupId>
@@ -220,15 +222,24 @@
 				<exclude>**/*KT.java</exclude> </excludes> </configuration> </plugin> <plugin> 
 				<groupId>org.springframework.boot</groupId> <artifactId>spring-boot-maven-plugin</artifactId> 
 				<version>${spring-boot.version}</version> <executions> <execution> <goals> 
-				<goal>repackage</goal> </goals> </execution> </executions> </plugin> <plugin> 
-				<groupId>io.fabric8</groupId> <artifactId>fabric8-maven-plugin</artifactId> 
-				<version>${fabric8.maven.plugin.version}</version> <executions> <execution> 
-				<goals> <goal>resource</goal> <goal>build</goal> </goals> </execution> </executions> 
-				</plugin> -->
+				<goal>repackage</goal> </goals> </execution> </executions> </plugin> -->
+
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<version>${maven-compiler-plugin.version}</version>
+				<configuration>
+					<source>1.8</source>
+					<target>1.8</target>
+					<annotationProcessors>
+						<annotationProcessor>io.vertx.codegen.CodeGenProcessor</annotationProcessor>
+					</annotationProcessors>
+				</configuration>
+			</plugin>
 
 			<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>build-helper-maven-plugin</artifactId>
+				<version>${build-helper-maven-plugin.version}</version>
 				<executions>
 					<execution>
 						<phase>generate-sources</phase>
@@ -246,21 +257,9 @@
 			</plugin>
 
 			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>${maven-compiler-plugin.version}</version>
-				<configuration>
-					<source>1.8</source>
-					<target>1.8</target>
-					<annotationProcessors>
-						<annotationProcessor>io.vertx.codegen.CodeGenProcessor</annotationProcessor>
-					</annotationProcessors>
-				</configuration>
-			</plugin>
-
-			<plugin>
-				<groupId>io.reactiverse</groupId>
+				<groupId>io.fabric8</groupId>
 				<artifactId>vertx-maven-plugin</artifactId>
-				<version>1.0.18</version>
+				<version>${vertx-maven-plugin.version}</version>
 				<executions>
 					<execution>
 						<id>vmp</id>
@@ -273,6 +272,20 @@
 				<configuration>
 					<redeploy>true</redeploy>
 				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>io.fabric8</groupId>
+				<artifactId>fabric8-maven-plugin</artifactId>
+				<version>${fabric8-maven-plugin.version}</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>resource</goal>
+							<goal>build</goal>
+						</goals>
+					</execution>
+				</executions>
 			</plugin>
 		</plugins>
 	</build>

@@ -21,6 +21,7 @@ import org.computate.frFR.cardiaque.requete.RequeteSite;
 import io.vertx.ext.web.api.contract.openapi3.OpenAPI3RouterFactory;
 import io.vertx.core.json.JsonObject;
 import io.vertx.core.logging.Logger;
+import io.vertx.core.http.CaseInsensitiveHeaders;
 import java.io.PrintWriter;
 import java.util.Collection;
 import java.sql.Timestamp;
@@ -32,16 +33,16 @@ import java.time.ZoneId;
 import org.computate.frFR.cardiaque.contexte.SiteContexte;
 import java.util.List;
 import java.security.Principal;
+import java.util.stream.Stream;
 import io.vertx.core.buffer.Buffer;
-import io.vertx.core.http.HttpServerResponse;
 import org.apache.solr.client.solrj.SolrQuery;
 import org.apache.http.client.utils.URLEncodedUtils;
+import java.util.Optional;
 import io.vertx.ext.auth.oauth2.OAuth2Auth;
 import org.apache.solr.client.solrj.util.ClientUtils;
 import io.vertx.ext.sql.SQLClient;
 import org.apache.http.NameValuePair;
 import org.apache.commons.lang3.exception.ExceptionUtils;
-import io.vertx.core.http.HttpServerRequest;
 import io.vertx.core.json.Json;
 import java.time.LocalDateTime;
 import io.vertx.core.logging.LoggerFactory;
@@ -120,24 +121,35 @@ public class UtilisateurSiteGenApiServiceImpl implements UtilisateurSiteGenApiSe
 
 	public Future<Void> sqlUtilisateurSite(RequeteSite requeteSite) {
 		Future<Void> future = Future.future();
-		SQLClient clientSql = requeteSite.getSiteContexte_().getClientSql();
+		try {
+			SQLClient clientSql = requeteSite.getSiteContexte_().getClientSql();
 
-		clientSql.getConnection(sqlAsync -> {
-			if(sqlAsync.succeeded()) {
-				requeteSite.setConnexionSql(sqlAsync.result());
-				future.complete();
-			}
-		});
-		return future;
+			clientSql.getConnection(sqlAsync -> {
+				if(sqlAsync.succeeded()) {
+					requeteSite.setConnexionSql(sqlAsync.result());
+					future.complete();
+				}
+			});
+			return future;
+		} catch(Exception e) {
+			ExceptionUtils.printRootCauseStackTrace(e);
+			return Future.failedFuture(e);
+		}
 	}
 
 	// Partagé //
 
 	public RequeteSite genererRequeteSitePourUtilisateurSite(SiteContexte siteContexte, OperationRequest operationRequete) {
+		return genererRequeteSitePourUtilisateurSite(siteContexte, operationRequete, null);
+	}
+
+	public RequeteSite genererRequeteSitePourUtilisateurSite(SiteContexte siteContexte, OperationRequest operationRequete, JsonObject objetJson) {
 		Vertx vertx = siteContexte.getVertx();
 		RequeteSite requeteSite = new RequeteSite();
+		requeteSite.setObjetJson(objetJson);
 		requeteSite.setVertx(vertx);
 		requeteSite.setSiteContexte_(siteContexte);
+		requeteSite.setConfigSite_(siteContexte.getConfigSite());
 		requeteSite.setOperationRequete(operationRequete);
 		requeteSite.initLoinRequeteSite(requeteSite);
 
@@ -150,37 +162,49 @@ public class UtilisateurSiteGenApiServiceImpl implements UtilisateurSiteGenApiSe
 
 	public Future<Void> definirUtilisateurSite(UtilisateurSite o) {
 		Future<Void> future = Future.future();
-		RequeteSite requeteSite = o.getRequeteSite_();
-		SQLConnection connexionSql = requeteSite.getConnexionSql();
-		Long pk = o.getPk();
-		connexionSql.queryWithParams(
-				SiteContexte.SQL_definir
-				, new JsonArray(Arrays.asList(pk))
-				, definirAsync
-		-> {
-			for(JsonArray definition : definirAsync.result().getResults()) {
-				o.definirPourClasse(definition.getString(0), definition.getString(1));
-			}
-			future.complete();
-		});
+		try {
+			RequeteSite requeteSite = o.getRequeteSite_();
+			SQLConnection connexionSql = requeteSite.getConnexionSql();
+			Long pk = o.getPk();
+			connexionSql.queryWithParams(
+					SiteContexte.SQL_definir
+					, new JsonArray(Arrays.asList(pk))
+					, definirAsync
+			-> {
+				for(JsonArray definition : definirAsync.result().getResults()) {
+					o.definirPourClasse(definition.getString(0), definition.getString(1));
+				}
+				future.complete();
+			});
+		} catch(Exception e) {
+			ExceptionUtils.printRootCauseStackTrace(e);
+			return Future.failedFuture(e);
+		}
 		return future;
 	}
 
 	public Future<Void> attribuerUtilisateurSite(UtilisateurSite o) {
 		Future<Void> future = Future.future();
-		RequeteSite requeteSite = o.getRequeteSite_();
-		SQLConnection connexionSql = requeteSite.getConnexionSql();
-		Long pk = o.getPk();
-		connexionSql.queryWithParams(
-				SiteContexte.SQL_attribuer
-				, new JsonArray(Arrays.asList(pk))
-				, attribuerAsync
-		-> {
-			for(JsonArray definition : attribuerAsync.result().getResults()) {
-				o.attribuerPourClasse(definition.getString(0), definition.getString(1));
-			}
-			future.complete();
-		});
+		try {
+			RequeteSite requeteSite = o.getRequeteSite_();
+			SQLConnection connexionSql = requeteSite.getConnexionSql();
+			Long pk = o.getPk();
+			connexionSql.queryWithParams(
+					SiteContexte.SQL_attribuer
+					, new JsonArray(Arrays.asList(pk))
+					, attribuerAsync
+			-> {
+				if(attribuerAsync.result() != null) {
+					for(JsonArray definition : attribuerAsync.result().getResults()) {
+						o.attribuerPourClasse(definition.getString(0), definition.getString(1));
+					}
+				}
+				future.complete();
+			});
+		} catch(Exception e) {
+			ExceptionUtils.printRootCauseStackTrace(e);
+			return Future.failedFuture(e);
+		}
 		return future;
 	}
 
@@ -193,7 +217,8 @@ public class UtilisateurSiteGenApiServiceImpl implements UtilisateurSiteGenApiSe
 			future.complete();
 		} catch(Exception e) {
 			requeteSite.getConnexionSql().close();
-			future.fail(e.getCause());
+			ExceptionUtils.printRootCauseStackTrace(e);
+			return Future.failedFuture(e);
 		}
 		return future;
 	}

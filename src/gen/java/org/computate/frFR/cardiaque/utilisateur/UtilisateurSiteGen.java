@@ -176,15 +176,6 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 		this.requeteSite_ = requeteSite_;
 		this.requeteSite_Couverture.dejaInitialise = true;
 	}
-	protected UtilisateurSite requeteSite_Init() {
-		if(!requeteSite_Couverture.dejaInitialise) {
-			_requeteSite_(requeteSite_Couverture);
-			if(requeteSite_ == null)
-				setRequeteSite_(requeteSite_Couverture.o);
-		}
-		requeteSite_Couverture.dejaInitialise(true);
-		return (UtilisateurSite)this;
-	}
 
 	////////////////////
 	// utilisateurNom //
@@ -1713,7 +1704,6 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 
 	public void initUtilisateurSite() {
 		calculInrPksInit();
-		requeteSite_Init();
 		utilisateurNomInit();
 		utilisateurMailInit();
 		utilisateurIdInit();
@@ -1775,6 +1765,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 	public void indexerUtilisateurSite(SolrClient clientSolr) throws Exception {
 		SolrInputDocument document = new SolrInputDocument();
 		indexerUtilisateurSite(document);
+		document.addField("sauvegardesUtilisateurSite_stored_strings", sauvegardesUtilisateurSite);
 		clientSolr.add(document);
 		clientSolr.commit();
 	}
@@ -1782,6 +1773,7 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 	public void indexerUtilisateurSite() throws Exception {
 		SolrInputDocument document = new SolrInputDocument();
 		indexerUtilisateurSite(document);
+		document.addField("sauvegardesUtilisateurSite_stored_strings", sauvegardesUtilisateurSite);
 		SolrClient clientSolr = requeteSite_.getSiteContexte_().getClientSolr();
 		clientSolr.add(document);
 		clientSolr.commit();
@@ -2065,101 +2057,103 @@ public abstract class UtilisateurSiteGen<DEV> extends Cluster {
 	public void peuplerUtilisateurSite(SolrDocument solrDocument) {
 		UtilisateurSite oUtilisateurSite = (UtilisateurSite)this;
 		sauvegardesUtilisateurSite = (List<String>)solrDocument.get("sauvegardesUtilisateurSite_stored_strings");
+		if(sauvegardesUtilisateurSite != null) {
 
-		if(sauvegardesUtilisateurSite.contains("calculInrPks")) {
-			List<Long> calculInrPks = (List<Long>)solrDocument.get("calculInrPks_stored_longs");
-			if(calculInrPks != null)
-				oUtilisateurSite.calculInrPks.addAll(calculInrPks);
-		}
+			if(sauvegardesUtilisateurSite.contains("calculInrPks")) {
+				List<Long> calculInrPks = (List<Long>)solrDocument.get("calculInrPks_stored_longs");
+				if(calculInrPks != null)
+					oUtilisateurSite.calculInrPks.addAll(calculInrPks);
+			}
 
-		if(sauvegardesUtilisateurSite.contains("utilisateurNom")) {
-			String utilisateurNom = (String)solrDocument.get("utilisateurNom_stored_string");
-			if(utilisateurNom != null)
-				oUtilisateurSite.setUtilisateurNom(utilisateurNom);
-		}
+			if(sauvegardesUtilisateurSite.contains("utilisateurNom")) {
+				String utilisateurNom = (String)solrDocument.get("utilisateurNom_stored_string");
+				if(utilisateurNom != null)
+					oUtilisateurSite.setUtilisateurNom(utilisateurNom);
+			}
 
-		if(sauvegardesUtilisateurSite.contains("utilisateurMail")) {
-			String utilisateurMail = (String)solrDocument.get("utilisateurMail_stored_string");
-			if(utilisateurMail != null)
-				oUtilisateurSite.setUtilisateurMail(utilisateurMail);
-		}
+			if(sauvegardesUtilisateurSite.contains("utilisateurMail")) {
+				String utilisateurMail = (String)solrDocument.get("utilisateurMail_stored_string");
+				if(utilisateurMail != null)
+					oUtilisateurSite.setUtilisateurMail(utilisateurMail);
+			}
 
-		if(sauvegardesUtilisateurSite.contains("utilisateurId")) {
-			String utilisateurId = (String)solrDocument.get("utilisateurId_stored_string");
-			if(utilisateurId != null)
-				oUtilisateurSite.setUtilisateurId(utilisateurId);
-		}
+			if(sauvegardesUtilisateurSite.contains("utilisateurId")) {
+				String utilisateurId = (String)solrDocument.get("utilisateurId_stored_string");
+				if(utilisateurId != null)
+					oUtilisateurSite.setUtilisateurId(utilisateurId);
+			}
 
-		if(sauvegardesUtilisateurSite.contains("utilisateurPrenom")) {
-			String utilisateurPrenom = (String)solrDocument.get("utilisateurPrenom_stored_string");
-			if(utilisateurPrenom != null)
-				oUtilisateurSite.setUtilisateurPrenom(utilisateurPrenom);
-		}
+			if(sauvegardesUtilisateurSite.contains("utilisateurPrenom")) {
+				String utilisateurPrenom = (String)solrDocument.get("utilisateurPrenom_stored_string");
+				if(utilisateurPrenom != null)
+					oUtilisateurSite.setUtilisateurPrenom(utilisateurPrenom);
+			}
 
-		if(sauvegardesUtilisateurSite.contains("utilisateurNomFamille")) {
-			String utilisateurNomFamille = (String)solrDocument.get("utilisateurNomFamille_stored_string");
-			if(utilisateurNomFamille != null)
-				oUtilisateurSite.setUtilisateurNomFamille(utilisateurNomFamille);
-		}
+			if(sauvegardesUtilisateurSite.contains("utilisateurNomFamille")) {
+				String utilisateurNomFamille = (String)solrDocument.get("utilisateurNomFamille_stored_string");
+				if(utilisateurNomFamille != null)
+					oUtilisateurSite.setUtilisateurNomFamille(utilisateurNomFamille);
+			}
 
-		if(sauvegardesUtilisateurSite.contains("utilisateurNomComplet")) {
-			String utilisateurNomComplet = (String)solrDocument.get("utilisateurNomComplet_stored_string");
-			if(utilisateurNomComplet != null)
-				oUtilisateurSite.setUtilisateurNomComplet(utilisateurNomComplet);
-		}
+			if(sauvegardesUtilisateurSite.contains("utilisateurNomComplet")) {
+				String utilisateurNomComplet = (String)solrDocument.get("utilisateurNomComplet_stored_string");
+				if(utilisateurNomComplet != null)
+					oUtilisateurSite.setUtilisateurNomComplet(utilisateurNomComplet);
+			}
 
-		if(sauvegardesUtilisateurSite.contains("utilisateurSite")) {
-			String utilisateurSite = (String)solrDocument.get("utilisateurSite_stored_string");
-			if(utilisateurSite != null)
-				oUtilisateurSite.setUtilisateurSite(utilisateurSite);
-		}
+			if(sauvegardesUtilisateurSite.contains("utilisateurSite")) {
+				String utilisateurSite = (String)solrDocument.get("utilisateurSite_stored_string");
+				if(utilisateurSite != null)
+					oUtilisateurSite.setUtilisateurSite(utilisateurSite);
+			}
 
-		if(sauvegardesUtilisateurSite.contains("utilisateurRecevoirCourriels")) {
-			Boolean utilisateurRecevoirCourriels = (Boolean)solrDocument.get("utilisateurRecevoirCourriels_stored_boolean");
-			if(utilisateurRecevoirCourriels != null)
-				oUtilisateurSite.setUtilisateurRecevoirCourriels(utilisateurRecevoirCourriels);
-		}
+			if(sauvegardesUtilisateurSite.contains("utilisateurRecevoirCourriels")) {
+				Boolean utilisateurRecevoirCourriels = (Boolean)solrDocument.get("utilisateurRecevoirCourriels_stored_boolean");
+				if(utilisateurRecevoirCourriels != null)
+					oUtilisateurSite.setUtilisateurRecevoirCourriels(utilisateurRecevoirCourriels);
+			}
 
-		if(sauvegardesUtilisateurSite.contains("modeleSupprime")) {
-			Boolean modeleSupprime = (Boolean)solrDocument.get("modeleSupprime_stored_boolean");
-			if(modeleSupprime != null)
-				oUtilisateurSite.setModeleSupprime(modeleSupprime);
-		}
+			if(sauvegardesUtilisateurSite.contains("modeleSupprime")) {
+				Boolean modeleSupprime = (Boolean)solrDocument.get("modeleSupprime_stored_boolean");
+				if(modeleSupprime != null)
+					oUtilisateurSite.setModeleSupprime(modeleSupprime);
+			}
 
-		if(sauvegardesUtilisateurSite.contains("modeleCree")) {
-			Date modeleCree = (Date)solrDocument.get("modeleCree_stored_date");
-			if(modeleCree != null)
-				oUtilisateurSite.setModeleCree(modeleCree);
-		}
+			if(sauvegardesUtilisateurSite.contains("modeleCree")) {
+				Date modeleCree = (Date)solrDocument.get("modeleCree_stored_date");
+				if(modeleCree != null)
+					oUtilisateurSite.setModeleCree(modeleCree);
+			}
 
-		if(sauvegardesUtilisateurSite.contains("modeleModifie")) {
-			Date modeleModifie = (Date)solrDocument.get("modeleModifie_stored_date");
-			if(modeleModifie != null)
-				oUtilisateurSite.setModeleModifie(modeleModifie);
-		}
+			if(sauvegardesUtilisateurSite.contains("modeleModifie")) {
+				Date modeleModifie = (Date)solrDocument.get("modeleModifie_stored_date");
+				if(modeleModifie != null)
+					oUtilisateurSite.setModeleModifie(modeleModifie);
+			}
 
-		if(sauvegardesUtilisateurSite.contains("modeleClasseNomCanonique")) {
-			String modeleClasseNomCanonique = (String)solrDocument.get("modeleClasseNomCanonique_stored_string");
-			if(modeleClasseNomCanonique != null)
-				oUtilisateurSite.setModeleClasseNomCanonique(modeleClasseNomCanonique);
-		}
+			if(sauvegardesUtilisateurSite.contains("modeleClasseNomCanonique")) {
+				String modeleClasseNomCanonique = (String)solrDocument.get("modeleClasseNomCanonique_stored_string");
+				if(modeleClasseNomCanonique != null)
+					oUtilisateurSite.setModeleClasseNomCanonique(modeleClasseNomCanonique);
+			}
 
-		if(sauvegardesUtilisateurSite.contains("modeleCle")) {
-			Long modeleCle = (Long)solrDocument.get("modeleCle_stored_long");
-			if(modeleCle != null)
-				oUtilisateurSite.setModeleCle(modeleCle);
-		}
+			if(sauvegardesUtilisateurSite.contains("modeleCle")) {
+				Long modeleCle = (Long)solrDocument.get("modeleCle_stored_long");
+				if(modeleCle != null)
+					oUtilisateurSite.setModeleCle(modeleCle);
+			}
 
-		if(sauvegardesUtilisateurSite.contains("modeleSuggestionStocke")) {
-			String modeleSuggestionStocke = (String)solrDocument.get("modeleSuggestionStocke_stored_string");
-			if(modeleSuggestionStocke != null)
-				oUtilisateurSite.setModeleSuggestionStocke(modeleSuggestionStocke);
-		}
+			if(sauvegardesUtilisateurSite.contains("modeleSuggestionStocke")) {
+				String modeleSuggestionStocke = (String)solrDocument.get("modeleSuggestionStocke_stored_string");
+				if(modeleSuggestionStocke != null)
+					oUtilisateurSite.setModeleSuggestionStocke(modeleSuggestionStocke);
+			}
 
-		if(sauvegardesUtilisateurSite.contains("modeleSuggestionIndexe")) {
-			String modeleSuggestionIndexe = (String)solrDocument.get("modeleSuggestionIndexe_stored_string");
-			if(modeleSuggestionIndexe != null)
-				oUtilisateurSite.setModeleSuggestionIndexe(modeleSuggestionIndexe);
+			if(sauvegardesUtilisateurSite.contains("modeleSuggestionIndexe")) {
+				String modeleSuggestionIndexe = (String)solrDocument.get("modeleSuggestionIndexe_stored_string");
+				if(modeleSuggestionIndexe != null)
+					oUtilisateurSite.setModeleSuggestionIndexe(modeleSuggestionIndexe);
+			}
 		}
 
 		super.peuplerCluster(solrDocument);

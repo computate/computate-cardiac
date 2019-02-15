@@ -224,7 +224,7 @@ public class AppSwagger2 extends AppSwagger2Gen<Object> {
 		else if(openApiVersionNumero > 2) {
 			wChemins.tl(1, "version: ", apiVersion);
 			wChemins.tl(0, "servers:");
-			wChemins.tl(1, "- url: ", configSite.getUrlDomaineBase());
+			wChemins.tl(1, "- url: ", configSite.getSiteUrlBase());
 		}
 	}
 

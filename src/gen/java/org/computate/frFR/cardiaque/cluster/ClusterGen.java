@@ -144,7 +144,7 @@ public abstract class ClusterGen<DEV> extends Object {
 	}
 
 	public String nomAffichagePk() {
-		return null;
+		return "cl\u00E9 primaire";
 	}
 
 	public String htmTooltipPk() {
@@ -293,6 +293,206 @@ public abstract class ClusterGen<DEV> extends Object {
 		}
 	}
 
+	//////////////
+	// supprime //
+	//////////////
+
+	/**	L'entité « supprime »
+	 *	 is defined as null before being initialized. 
+	 */
+	protected Boolean supprime;
+	public Couverture<Boolean> supprimeCouverture = new Couverture<Boolean>().p(this).c(Boolean.class).var("supprime").o(supprime);
+
+	/**	<br/>L'entité « supprime »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.cluster.Cluster&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:supprime">Trouver l'entité supprime dans Solr</a>
+	 * <br/>
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
+	protected abstract void _supprime(Couverture<Boolean> c);
+
+	public Boolean getSupprime() {
+		return supprime;
+	}
+
+	public void setSupprime(Boolean supprime) {
+		this.supprime = supprime;
+		this.supprimeCouverture.dejaInitialise = true;
+	}
+	public Cluster setSupprime(String o) {
+		if(org.apache.commons.lang3.BooleanUtils.isTrue(org.apache.commons.lang3.BooleanUtils.toBoolean(o)))
+			this.supprime = Boolean.parseBoolean(o);
+		this.supprimeCouverture.dejaInitialise = true;
+		return (Cluster)this;
+	}
+	protected Cluster supprimeInit() {
+		if(!supprimeCouverture.dejaInitialise) {
+			_supprime(supprimeCouverture);
+			if(supprime == null)
+				setSupprime(supprimeCouverture.o);
+		}
+		supprimeCouverture.dejaInitialise(true);
+		return (Cluster)this;
+	}
+
+	public Boolean solrSupprime() {
+		return supprime;
+	}
+
+	public String strSupprime() {
+		return supprime == null ? "" : supprime.toString();
+	}
+
+	public String nomAffichageSupprime() {
+		return "Supprim\u00E9";
+	}
+
+	public String htmTooltipSupprime() {
+		return null;
+	}
+
+	public String htmSupprime() {
+		return supprime == null ? "" : StringEscapeUtils.escapeHtml4(strSupprime());
+	}
+
+	public void htmSupprime(ToutEcrivain r, Boolean patchDroits) {
+		if(pk!= null) {
+			r.s("<div id=\"patchCluster", strPk(), "Supprime\">");
+			if(patchDroits) {
+				r.l();
+				r.l("	<script>//<![CDATA[");
+				r.l("		function patchCluster", strPk(), "Supprime() {");
+				r.l("			$.ajax({");
+				r.l("				url: '/api/v1/warfarin/cluster?fq=pk:", strPk(), "',");
+				r.l("				dataType: 'json',");
+				r.l("				type: 'patch',");
+				r.l("				contentType: 'application/json',");
+				r.l("				processData: false,");
+				r.l("				success: function( data, textStatus, jQxhr ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				error: function( jqXhr, textStatus, errorThrown ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				data: {\"setSupprime\": this.value },");
+				r.l("				");
+				r.l("			});");
+				r.l("		}");
+				r.l("	//]]></script>");
+				r.l("	<div class=\"\">");
+				r.l("		<label class=\"w3-tooltip \">");
+				r.l("			<span>", StringEscapeUtils.escapeHtml4(nomAffichageSupprime()), "</span>");
+				r.s("			<input");
+							r.s(" name=\"supprime\"");
+							r.s(" value=\"", htmSupprime(), "\");");
+							r.s(" onchange=\"\"");
+							r.l("/>");
+				r.l("		</label>");
+				r.l("	</div>");
+			} else {
+				r.s(htmSupprime());
+			}
+			r.l("</div>");
+		}
+	}
+
+	///////////////////
+	// utilisateurId //
+	///////////////////
+
+	/**	L'entité « utilisateurId »
+	 *	 is defined as null before being initialized. 
+	 */
+	protected String utilisateurId;
+	public Couverture<String> utilisateurIdCouverture = new Couverture<String>().p(this).c(String.class).var("utilisateurId").o(utilisateurId);
+
+	/**	<br/>L'entité « utilisateurId »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.cluster.Cluster&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:utilisateurId">Trouver l'entité utilisateurId dans Solr</a>
+	 * <br/>
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
+	protected abstract void _utilisateurId(Couverture<String> c);
+
+	public String getUtilisateurId() {
+		return utilisateurId;
+	}
+
+	public void setUtilisateurId(String utilisateurId) {
+		this.utilisateurId = utilisateurId;
+		this.utilisateurIdCouverture.dejaInitialise = true;
+	}
+	protected Cluster utilisateurIdInit() {
+		if(!utilisateurIdCouverture.dejaInitialise) {
+			_utilisateurId(utilisateurIdCouverture);
+			if(utilisateurId == null)
+				setUtilisateurId(utilisateurIdCouverture.o);
+		}
+		utilisateurIdCouverture.dejaInitialise(true);
+		return (Cluster)this;
+	}
+
+	public String solrUtilisateurId() {
+		return utilisateurId;
+	}
+
+	public String strUtilisateurId() {
+		return utilisateurId == null ? "" : utilisateurId;
+	}
+
+	public String nomAffichageUtilisateurId() {
+		return null;
+	}
+
+	public String htmTooltipUtilisateurId() {
+		return null;
+	}
+
+	public String htmUtilisateurId() {
+		return utilisateurId == null ? "" : StringEscapeUtils.escapeHtml4(strUtilisateurId());
+	}
+
+	public void htmUtilisateurId(ToutEcrivain r, Boolean patchDroits) {
+		if(pk!= null) {
+			r.s("<div id=\"patchCluster", strPk(), "UtilisateurId\">");
+			if(patchDroits) {
+				r.l();
+				r.l("	<script>//<![CDATA[");
+				r.l("		function patchCluster", strPk(), "UtilisateurId() {");
+				r.l("			$.ajax({");
+				r.l("				url: '/api/v1/warfarin/cluster?fq=pk:", strPk(), "',");
+				r.l("				dataType: 'json',");
+				r.l("				type: 'patch',");
+				r.l("				contentType: 'application/json',");
+				r.l("				processData: false,");
+				r.l("				success: function( data, textStatus, jQxhr ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				error: function( jqXhr, textStatus, errorThrown ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				data: {\"setUtilisateurId\": this.value },");
+				r.l("				");
+				r.l("			});");
+				r.l("		}");
+				r.l("	//]]></script>");
+				r.l("	<div class=\"\">");
+				r.l("		<label class=\"w3-tooltip \">");
+				r.l("			<span>", StringEscapeUtils.escapeHtml4(nomAffichageUtilisateurId()), "</span>");
+				r.s("			<input");
+							r.s(" name=\"utilisateurId\"");
+							r.s(" value=\"", htmUtilisateurId(), "\");");
+							r.s(" onchange=\"\"");
+							r.l("/>");
+				r.l("		</label>");
+				r.l("	</div>");
+			} else {
+				r.s(htmUtilisateurId());
+			}
+			r.l("</div>");
+		}
+	}
+
 	//////////
 	// cree //
 	//////////
@@ -354,7 +554,7 @@ public abstract class ClusterGen<DEV> extends Object {
 	}
 
 	public String nomAffichageCree() {
-		return null;
+		return "Cr\u00E9e";
 	}
 
 	public String htmTooltipCree() {
@@ -467,7 +667,7 @@ public abstract class ClusterGen<DEV> extends Object {
 	}
 
 	public String nomAffichageModifie() {
-		return null;
+		return "Modifi\u00E9";
 	}
 
 	public String htmTooltipModifie() {
@@ -514,103 +714,6 @@ public abstract class ClusterGen<DEV> extends Object {
 				r.l("	</div>");
 			} else {
 				r.s(htmModifie());
-			}
-			r.l("</div>");
-		}
-	}
-
-	///////////////////
-	// utilisateurId //
-	///////////////////
-
-	/**	L'entité « utilisateurId »
-	 *	 is defined as null before being initialized. 
-	 */
-	protected String utilisateurId;
-	public Couverture<String> utilisateurIdCouverture = new Couverture<String>().p(this).c(String.class).var("utilisateurId").o(utilisateurId);
-
-	/**	<br/>L'entité « utilisateurId »
-	 *  est défini comme null avant d'être initialisé. 
-	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.cluster.Cluster&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:utilisateurId">Trouver l'entité utilisateurId dans Solr</a>
-	 * <br/>
-	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
-	 **/
-	protected abstract void _utilisateurId(Couverture<String> c);
-
-	public String getUtilisateurId() {
-		return utilisateurId;
-	}
-
-	public void setUtilisateurId(String utilisateurId) {
-		this.utilisateurId = utilisateurId;
-		this.utilisateurIdCouverture.dejaInitialise = true;
-	}
-	protected Cluster utilisateurIdInit() {
-		if(!utilisateurIdCouverture.dejaInitialise) {
-			_utilisateurId(utilisateurIdCouverture);
-			if(utilisateurId == null)
-				setUtilisateurId(utilisateurIdCouverture.o);
-		}
-		utilisateurIdCouverture.dejaInitialise(true);
-		return (Cluster)this;
-	}
-
-	public String solrUtilisateurId() {
-		return utilisateurId;
-	}
-
-	public String strUtilisateurId() {
-		return utilisateurId == null ? "" : utilisateurId;
-	}
-
-	public String nomAffichageUtilisateurId() {
-		return null;
-	}
-
-	public String htmTooltipUtilisateurId() {
-		return null;
-	}
-
-	public String htmUtilisateurId() {
-		return utilisateurId == null ? "" : StringEscapeUtils.escapeHtml4(strUtilisateurId());
-	}
-
-	public void htmUtilisateurId(ToutEcrivain r, Boolean patchDroits) {
-		if(pk!= null) {
-			r.s("<div id=\"patchCluster", strPk(), "UtilisateurId\">");
-			if(patchDroits) {
-				r.l();
-				r.l("	<script>//<![CDATA[");
-				r.l("		function patchCluster", strPk(), "UtilisateurId() {");
-				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/warfarin/cluster?fq=pk:", strPk(), "',");
-				r.l("				dataType: 'json',");
-				r.l("				type: 'patch',");
-				r.l("				contentType: 'application/json',");
-				r.l("				processData: false,");
-				r.l("				success: function( data, textStatus, jQxhr ) {");
-				r.l("					");
-				r.l("				},");
-				r.l("				error: function( jqXhr, textStatus, errorThrown ) {");
-				r.l("					");
-				r.l("				},");
-				r.l("				data: {\"setUtilisateurId\": this.value },");
-				r.l("				");
-				r.l("			});");
-				r.l("		}");
-				r.l("	//]]></script>");
-				r.l("	<div class=\"\">");
-				r.l("		<label class=\"w3-tooltip \">");
-				r.l("			<span>", StringEscapeUtils.escapeHtml4(nomAffichageUtilisateurId()), "</span>");
-				r.s("			<input");
-							r.s(" name=\"utilisateurId\"");
-							r.s(" value=\"", htmUtilisateurId(), "\");");
-							r.s(" onchange=\"\"");
-							r.l("/>");
-				r.l("		</label>");
-				r.l("	</div>");
-			} else {
-				r.s(htmUtilisateurId());
 			}
 			r.l("</div>");
 		}
@@ -811,109 +914,6 @@ public abstract class ClusterGen<DEV> extends Object {
 	}
 
 	//////////////
-	// supprime //
-	//////////////
-
-	/**	L'entité « supprime »
-	 *	 is defined as null before being initialized. 
-	 */
-	protected Boolean supprime;
-	public Couverture<Boolean> supprimeCouverture = new Couverture<Boolean>().p(this).c(Boolean.class).var("supprime").o(supprime);
-
-	/**	<br/>L'entité « supprime »
-	 *  est défini comme null avant d'être initialisé. 
-	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.cluster.Cluster&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:supprime">Trouver l'entité supprime dans Solr</a>
-	 * <br/>
-	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
-	 **/
-	protected abstract void _supprime(Couverture<Boolean> c);
-
-	public Boolean getSupprime() {
-		return supprime;
-	}
-
-	public void setSupprime(Boolean supprime) {
-		this.supprime = supprime;
-		this.supprimeCouverture.dejaInitialise = true;
-	}
-	public Cluster setSupprime(String o) {
-		if(org.apache.commons.lang3.BooleanUtils.isTrue(org.apache.commons.lang3.BooleanUtils.toBoolean(o)))
-			this.supprime = Boolean.parseBoolean(o);
-		this.supprimeCouverture.dejaInitialise = true;
-		return (Cluster)this;
-	}
-	protected Cluster supprimeInit() {
-		if(!supprimeCouverture.dejaInitialise) {
-			_supprime(supprimeCouverture);
-			if(supprime == null)
-				setSupprime(supprimeCouverture.o);
-		}
-		supprimeCouverture.dejaInitialise(true);
-		return (Cluster)this;
-	}
-
-	public Boolean solrSupprime() {
-		return supprime;
-	}
-
-	public String strSupprime() {
-		return supprime == null ? "" : supprime.toString();
-	}
-
-	public String nomAffichageSupprime() {
-		return null;
-	}
-
-	public String htmTooltipSupprime() {
-		return null;
-	}
-
-	public String htmSupprime() {
-		return supprime == null ? "" : StringEscapeUtils.escapeHtml4(strSupprime());
-	}
-
-	public void htmSupprime(ToutEcrivain r, Boolean patchDroits) {
-		if(pk!= null) {
-			r.s("<div id=\"patchCluster", strPk(), "Supprime\">");
-			if(patchDroits) {
-				r.l();
-				r.l("	<script>//<![CDATA[");
-				r.l("		function patchCluster", strPk(), "Supprime() {");
-				r.l("			$.ajax({");
-				r.l("				url: '/api/v1/warfarin/cluster?fq=pk:", strPk(), "',");
-				r.l("				dataType: 'json',");
-				r.l("				type: 'patch',");
-				r.l("				contentType: 'application/json',");
-				r.l("				processData: false,");
-				r.l("				success: function( data, textStatus, jQxhr ) {");
-				r.l("					");
-				r.l("				},");
-				r.l("				error: function( jqXhr, textStatus, errorThrown ) {");
-				r.l("					");
-				r.l("				},");
-				r.l("				data: {\"setSupprime\": this.value },");
-				r.l("				");
-				r.l("			});");
-				r.l("		}");
-				r.l("	//]]></script>");
-				r.l("	<div class=\"\">");
-				r.l("		<label class=\"w3-tooltip \">");
-				r.l("			<span>", StringEscapeUtils.escapeHtml4(nomAffichageSupprime()), "</span>");
-				r.s("			<input");
-							r.s(" name=\"supprime\"");
-							r.s(" value=\"", htmSupprime(), "\");");
-							r.s(" onchange=\"\"");
-							r.l("/>");
-				r.l("		</label>");
-				r.l("	</div>");
-			} else {
-				r.s(htmSupprime());
-			}
-			r.l("</div>");
-		}
-	}
-
-	//////////////
 	// initLoin //
 	//////////////
 
@@ -935,12 +935,12 @@ public abstract class ClusterGen<DEV> extends Object {
 	public void initCluster() {
 		pkInit();
 		idInit();
+		supprimeInit();
+		utilisateurIdInit();
 		creeInit();
 		modifieInit();
-		utilisateurIdInit();
 		clusterNomCanoniqueInit();
 		clusterNomSimpleInit();
-		supprimeInit();
 	}
 
 	public void initLoinPourClasse(RequeteSite requeteSite_) {
@@ -1008,6 +1008,10 @@ public abstract class ClusterGen<DEV> extends Object {
 		if(id != null) {
 			document.addField("id", id);
 		}
+		if(utilisateurId != null) {
+			document.addField("utilisateurId_indexed_string", utilisateurId);
+			document.addField("utilisateurId_stored_string", utilisateurId);
+		}
 		if(cree != null) {
 			document.addField("cree_indexed_date", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(cree));
 			document.addField("cree_stored_date", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(cree));
@@ -1015,10 +1019,6 @@ public abstract class ClusterGen<DEV> extends Object {
 		if(modifie != null) {
 			document.addField("modifie_indexed_date", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(modifie));
 			document.addField("modifie_stored_date", DateTimeFormatter.ISO_OFFSET_DATE_TIME.format(modifie));
-		}
-		if(utilisateurId != null) {
-			document.addField("utilisateurId_indexed_string", utilisateurId);
-			document.addField("utilisateurId_stored_string", utilisateurId);
 		}
 		if(clusterNomCanonique != null) {
 			document.addField("clusterNomCanonique_indexed_string", clusterNomCanonique);
@@ -1072,18 +1072,18 @@ public abstract class ClusterGen<DEV> extends Object {
 				return oCluster.pk;
 			case "id":
 				return oCluster.id;
+			case "supprime":
+				return oCluster.supprime;
+			case "utilisateurId":
+				return oCluster.utilisateurId;
 			case "cree":
 				return oCluster.cree;
 			case "modifie":
 				return oCluster.modifie;
-			case "utilisateurId":
-				return oCluster.utilisateurId;
 			case "clusterNomCanonique":
 				return oCluster.clusterNomCanonique;
 			case "clusterNomSimple":
 				return oCluster.clusterNomSimple;
-			case "supprime":
-				return oCluster.supprime;
 			default:
 				return null;
 		}
@@ -1143,6 +1143,14 @@ public abstract class ClusterGen<DEV> extends Object {
 				setId(val);
 				sauvegardesCluster.add(var);
 				return val;
+			case "supprime":
+				setSupprime(val);
+				sauvegardesCluster.add(var);
+				return val;
+			case "utilisateurId":
+				setUtilisateurId(val);
+				sauvegardesCluster.add(var);
+				return val;
 			case "cree":
 				setCree(val);
 				sauvegardesCluster.add(var);
@@ -1151,20 +1159,12 @@ public abstract class ClusterGen<DEV> extends Object {
 				setModifie(val);
 				sauvegardesCluster.add(var);
 				return val;
-			case "utilisateurId":
-				setUtilisateurId(val);
-				sauvegardesCluster.add(var);
-				return val;
 			case "clusterNomCanonique":
 				setClusterNomCanonique(val);
 				sauvegardesCluster.add(var);
 				return val;
 			case "clusterNomSimple":
 				setClusterNomSimple(val);
-				sauvegardesCluster.add(var);
-				return val;
-			case "supprime":
-				setSupprime(val);
 				sauvegardesCluster.add(var);
 				return val;
 			default:
@@ -1201,6 +1201,12 @@ public abstract class ClusterGen<DEV> extends Object {
 				oCluster.setId(id);
 			}
 
+			if(sauvegardesCluster.contains("utilisateurId")) {
+				String utilisateurId = (String)solrDocument.get("utilisateurId_stored_string");
+				if(utilisateurId != null)
+					oCluster.setUtilisateurId(utilisateurId);
+			}
+
 			if(sauvegardesCluster.contains("cree")) {
 				Date cree = (Date)solrDocument.get("cree_stored_date");
 				if(cree != null)
@@ -1211,12 +1217,6 @@ public abstract class ClusterGen<DEV> extends Object {
 				Date modifie = (Date)solrDocument.get("modifie_stored_date");
 				if(modifie != null)
 					oCluster.setModifie(modifie);
-			}
-
-			if(sauvegardesCluster.contains("utilisateurId")) {
-				String utilisateurId = (String)solrDocument.get("utilisateurId_stored_string");
-				if(utilisateurId != null)
-					oCluster.setUtilisateurId(utilisateurId);
 			}
 
 			if(sauvegardesCluster.contains("clusterNomCanonique")) {
@@ -1250,6 +1250,10 @@ public abstract class ClusterGen<DEV> extends Object {
 		String id = (String)solrDocument.get("id_stored_string");
 		oCluster.setId(id);
 
+		String utilisateurId = (String)solrDocument.get("utilisateurId_stored_string");
+		if(utilisateurId != null)
+			oCluster.setUtilisateurId(utilisateurId);
+
 		Date cree = (Date)solrDocument.get("cree_stored_date");
 		if(cree != null)
 			oCluster.setCree(cree);
@@ -1257,10 +1261,6 @@ public abstract class ClusterGen<DEV> extends Object {
 		Date modifie = (Date)solrDocument.get("modifie_stored_date");
 		if(modifie != null)
 			oCluster.setModifie(modifie);
-
-		String utilisateurId = (String)solrDocument.get("utilisateurId_stored_string");
-		if(utilisateurId != null)
-			oCluster.setUtilisateurId(utilisateurId);
 
 		String clusterNomCanonique = (String)solrDocument.get("clusterNomCanonique_stored_string");
 		if(clusterNomCanonique != null)
@@ -1276,7 +1276,7 @@ public abstract class ClusterGen<DEV> extends Object {
 	//////////////
 
 	@Override public int hashCode() {
-		return Objects.hash(pk, id, cree, modifie, utilisateurId, clusterNomCanonique, clusterNomSimple, supprime);
+		return Objects.hash(pk, id, supprime, utilisateurId, cree, modifie, clusterNomCanonique, clusterNomSimple);
 	}
 
 	////////////
@@ -1291,12 +1291,12 @@ public abstract class ClusterGen<DEV> extends Object {
 		Cluster that = (Cluster)o;
 		return Objects.equals( pk, that.pk )
 				&& Objects.equals( id, that.id )
+				&& Objects.equals( supprime, that.supprime )
+				&& Objects.equals( utilisateurId, that.utilisateurId )
 				&& Objects.equals( cree, that.cree )
 				&& Objects.equals( modifie, that.modifie )
-				&& Objects.equals( utilisateurId, that.utilisateurId )
 				&& Objects.equals( clusterNomCanonique, that.clusterNomCanonique )
-				&& Objects.equals( clusterNomSimple, that.clusterNomSimple )
-				&& Objects.equals( supprime, that.supprime );
+				&& Objects.equals( clusterNomSimple, that.clusterNomSimple );
 	}
 
 	//////////////
@@ -1308,12 +1308,12 @@ public abstract class ClusterGen<DEV> extends Object {
 		sb.append("Cluster {");
 		sb.append( "pk: " ).append(pk);
 		sb.append( ", id: \"" ).append(id).append( "\"" );
+		sb.append( ", supprime: " ).append(supprime);
+		sb.append( ", utilisateurId: \"" ).append(utilisateurId).append( "\"" );
 		sb.append( ", cree: " ).append(cree);
 		sb.append( ", modifie: " ).append(modifie);
-		sb.append( ", utilisateurId: \"" ).append(utilisateurId).append( "\"" );
 		sb.append( ", clusterNomCanonique: \"" ).append(clusterNomCanonique).append( "\"" );
 		sb.append( ", clusterNomSimple: \"" ).append(clusterNomSimple).append( "\"" );
-		sb.append( ", supprime: " ).append(supprime);
 		sb.append(" }");
 		return sb.toString();
 	}

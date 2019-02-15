@@ -195,6 +195,10 @@ public class ClusterGenApiServiceImpl implements ClusterGenApiService {
 			if(entiteValeur != null)
 				w.l(entiteNumero++ == 0 ? "" : ", ", "\"pk\": ", entiteValeur);
 
+			entiteValeur = Optional.ofNullable(documentSolr.getFieldValues("utilisateurId_stored_string")).map(Collection<Object>::stream).orElseGet(Stream::empty).findFirst().orElse(null);
+			if(entiteValeur != null)
+				w.l(entiteNumero++ == 0 ? "" : ", ", "\"utilisateurId\": ", w.q(entiteValeur));
+
 			entiteValeur = Optional.ofNullable(documentSolr.getFieldValues("cree_stored_date")).map(Collection<Object>::stream).orElseGet(Stream::empty).findFirst().orElse(null);
 			if(entiteValeur != null)
 				w.l(entiteNumero++ == 0 ? "" : ", ", "\"cree\": ", w.q(entiteValeur));
@@ -202,10 +206,6 @@ public class ClusterGenApiServiceImpl implements ClusterGenApiService {
 			entiteValeur = Optional.ofNullable(documentSolr.getFieldValues("modifie_stored_date")).map(Collection<Object>::stream).orElseGet(Stream::empty).findFirst().orElse(null);
 			if(entiteValeur != null)
 				w.l(entiteNumero++ == 0 ? "" : ", ", "\"modifie\": ", w.q(entiteValeur));
-
-			entiteValeur = Optional.ofNullable(documentSolr.getFieldValues("utilisateurId_stored_string")).map(Collection<Object>::stream).orElseGet(Stream::empty).findFirst().orElse(null);
-			if(entiteValeur != null)
-				w.l(entiteNumero++ == 0 ? "" : ", ", "\"utilisateurId\": ", w.q(entiteValeur));
 
 			entiteValeur = Optional.ofNullable(documentSolr.getFieldValues("clusterNomCanonique_stored_string")).map(Collection<Object>::stream).orElseGet(Stream::empty).findFirst().orElse(null);
 			if(entiteValeur != null)
@@ -297,6 +297,14 @@ public class ClusterGenApiServiceImpl implements ClusterGenApiService {
 						postSql.append(SiteContexte.SQL_setP);
 						postSqlParams.addAll(Arrays.asList("id", jsonObject.getString(entiteVar), pk));
 						break;
+					case "supprime":
+						postSql.append(SiteContexte.SQL_setP);
+						postSqlParams.addAll(Arrays.asList("supprime", jsonObject.getBoolean(entiteVar), pk));
+						break;
+					case "utilisateurId":
+						postSql.append(SiteContexte.SQL_setP);
+						postSqlParams.addAll(Arrays.asList("utilisateurId", jsonObject.getString(entiteVar), pk));
+						break;
 					case "cree":
 						postSql.append(SiteContexte.SQL_setP);
 						postSqlParams.addAll(Arrays.asList("cree", jsonObject.getInstant(entiteVar), pk));
@@ -305,10 +313,6 @@ public class ClusterGenApiServiceImpl implements ClusterGenApiService {
 						postSql.append(SiteContexte.SQL_setP);
 						postSqlParams.addAll(Arrays.asList("modifie", jsonObject.getInstant(entiteVar), pk));
 						break;
-					case "utilisateurId":
-						postSql.append(SiteContexte.SQL_setP);
-						postSqlParams.addAll(Arrays.asList("utilisateurId", jsonObject.getString(entiteVar), pk));
-						break;
 					case "clusterNomCanonique":
 						postSql.append(SiteContexte.SQL_setP);
 						postSqlParams.addAll(Arrays.asList("clusterNomCanonique", jsonObject.getString(entiteVar), pk));
@@ -316,10 +320,6 @@ public class ClusterGenApiServiceImpl implements ClusterGenApiService {
 					case "clusterNomSimple":
 						postSql.append(SiteContexte.SQL_setP);
 						postSqlParams.addAll(Arrays.asList("clusterNomSimple", jsonObject.getString(entiteVar), pk));
-						break;
-					case "supprime":
-						postSql.append(SiteContexte.SQL_setP);
-						postSqlParams.addAll(Arrays.asList("supprime", jsonObject.getBoolean(entiteVar), pk));
 						break;
 					}
 				}
@@ -399,6 +399,14 @@ public class ClusterGenApiServiceImpl implements ClusterGenApiService {
 						patchSql.append(SiteContexte.SQL_setP);
 						patchSqlParams.addAll(Arrays.asList("id", requeteJson.getString(methodeNom), pk));
 						break;
+					case "setSupprime":
+						patchSql.append(SiteContexte.SQL_setP);
+						patchSqlParams.addAll(Arrays.asList("supprime", requeteJson.getBoolean(methodeNom), pk));
+						break;
+					case "setUtilisateurId":
+						patchSql.append(SiteContexte.SQL_setP);
+						patchSqlParams.addAll(Arrays.asList("utilisateurId", requeteJson.getString(methodeNom), pk));
+						break;
 					case "setCree":
 						patchSql.append(SiteContexte.SQL_setP);
 						patchSqlParams.addAll(Arrays.asList("cree", requeteJson.getInstant(methodeNom), pk));
@@ -407,10 +415,6 @@ public class ClusterGenApiServiceImpl implements ClusterGenApiService {
 						patchSql.append(SiteContexte.SQL_setP);
 						patchSqlParams.addAll(Arrays.asList("modifie", requeteJson.getInstant(methodeNom), pk));
 						break;
-					case "setUtilisateurId":
-						patchSql.append(SiteContexte.SQL_setP);
-						patchSqlParams.addAll(Arrays.asList("utilisateurId", requeteJson.getString(methodeNom), pk));
-						break;
 					case "setClusterNomCanonique":
 						patchSql.append(SiteContexte.SQL_setP);
 						patchSqlParams.addAll(Arrays.asList("clusterNomCanonique", requeteJson.getString(methodeNom), pk));
@@ -418,10 +422,6 @@ public class ClusterGenApiServiceImpl implements ClusterGenApiService {
 					case "setClusterNomSimple":
 						patchSql.append(SiteContexte.SQL_setP);
 						patchSqlParams.addAll(Arrays.asList("clusterNomSimple", requeteJson.getString(methodeNom), pk));
-						break;
-					case "setSupprime":
-						patchSql.append(SiteContexte.SQL_setP);
-						patchSqlParams.addAll(Arrays.asList("supprime", requeteJson.getBoolean(methodeNom), pk));
 						break;
 				}
 			}
@@ -478,6 +478,10 @@ public class ClusterGenApiServiceImpl implements ClusterGenApiService {
 			if(entiteValeur != null)
 				w.l(entiteNumero++ == 0 ? "" : ", ", "\"pk\": ", entiteValeur);
 
+			entiteValeur = Optional.ofNullable(documentSolr.getFieldValues("utilisateurId_stored_string")).map(Collection<Object>::stream).orElseGet(Stream::empty).findFirst().orElse(null);
+			if(entiteValeur != null)
+				w.l(entiteNumero++ == 0 ? "" : ", ", "\"utilisateurId\": ", w.q(entiteValeur));
+
 			entiteValeur = Optional.ofNullable(documentSolr.getFieldValues("cree_stored_date")).map(Collection<Object>::stream).orElseGet(Stream::empty).findFirst().orElse(null);
 			if(entiteValeur != null)
 				w.l(entiteNumero++ == 0 ? "" : ", ", "\"cree\": ", w.q(entiteValeur));
@@ -485,10 +489,6 @@ public class ClusterGenApiServiceImpl implements ClusterGenApiService {
 			entiteValeur = Optional.ofNullable(documentSolr.getFieldValues("modifie_stored_date")).map(Collection<Object>::stream).orElseGet(Stream::empty).findFirst().orElse(null);
 			if(entiteValeur != null)
 				w.l(entiteNumero++ == 0 ? "" : ", ", "\"modifie\": ", w.q(entiteValeur));
-
-			entiteValeur = Optional.ofNullable(documentSolr.getFieldValues("utilisateurId_stored_string")).map(Collection<Object>::stream).orElseGet(Stream::empty).findFirst().orElse(null);
-			if(entiteValeur != null)
-				w.l(entiteNumero++ == 0 ? "" : ", ", "\"utilisateurId\": ", w.q(entiteValeur));
 
 			entiteValeur = Optional.ofNullable(documentSolr.getFieldValues("clusterNomCanonique_stored_string")).map(Collection<Object>::stream).orElseGet(Stream::empty).findFirst().orElse(null);
 			if(entiteValeur != null)
@@ -573,6 +573,14 @@ public class ClusterGenApiServiceImpl implements ClusterGenApiService {
 						postSql.append(SiteContexte.SQL_setP);
 						postSqlParams.addAll(Arrays.asList("id", jsonObject.getString(entiteVar), pk));
 						break;
+					case "supprime":
+						postSql.append(SiteContexte.SQL_setP);
+						postSqlParams.addAll(Arrays.asList("supprime", jsonObject.getBoolean(entiteVar), pk));
+						break;
+					case "utilisateurId":
+						postSql.append(SiteContexte.SQL_setP);
+						postSqlParams.addAll(Arrays.asList("utilisateurId", jsonObject.getString(entiteVar), pk));
+						break;
 					case "cree":
 						postSql.append(SiteContexte.SQL_setP);
 						postSqlParams.addAll(Arrays.asList("cree", jsonObject.getInstant(entiteVar), pk));
@@ -581,10 +589,6 @@ public class ClusterGenApiServiceImpl implements ClusterGenApiService {
 						postSql.append(SiteContexte.SQL_setP);
 						postSqlParams.addAll(Arrays.asList("modifie", jsonObject.getInstant(entiteVar), pk));
 						break;
-					case "utilisateurId":
-						postSql.append(SiteContexte.SQL_setP);
-						postSqlParams.addAll(Arrays.asList("utilisateurId", jsonObject.getString(entiteVar), pk));
-						break;
 					case "clusterNomCanonique":
 						postSql.append(SiteContexte.SQL_setP);
 						postSqlParams.addAll(Arrays.asList("clusterNomCanonique", jsonObject.getString(entiteVar), pk));
@@ -592,10 +596,6 @@ public class ClusterGenApiServiceImpl implements ClusterGenApiService {
 					case "clusterNomSimple":
 						postSql.append(SiteContexte.SQL_setP);
 						postSqlParams.addAll(Arrays.asList("clusterNomSimple", jsonObject.getString(entiteVar), pk));
-						break;
-					case "supprime":
-						postSql.append(SiteContexte.SQL_setP);
-						postSqlParams.addAll(Arrays.asList("supprime", jsonObject.getBoolean(entiteVar), pk));
 						break;
 					}
 				}
@@ -677,12 +677,12 @@ public class ClusterGenApiServiceImpl implements ClusterGenApiService {
 		switch(entiteVar) {
 			case "pk":
 				return "pk_indexed_long";
+			case "utilisateurId":
+				return "utilisateurId_indexed_string";
 			case "cree":
 				return "cree_indexed_date";
 			case "modifie":
 				return "modifie_indexed_date";
-			case "utilisateurId":
-				return "utilisateurId_indexed_string";
 			case "clusterNomCanonique":
 				return "clusterNomCanonique_indexed_string";
 			case "clusterNomSimple":

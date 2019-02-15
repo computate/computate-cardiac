@@ -8,6 +8,36 @@ $(window).on('load', function() {
 	});
 });
 
+$(document).ready(function() {
+	$('.datepicker').datePicker({
+	weekDays: ['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa']
+	, months: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+		, readValue: function(element) {
+			if (!element.value) {
+				var d = new Date();
+				var s = moment(d).format('YYYY-MM-DD'); 
+				return s; // initial time if empty
+			}
+			var result = moment(element.value, 'DD/MM/YYYY').format('YYYY-MM-DD');
+			return result; // triggers default behavior
+		}
+		, renderValue: function(container, element, value) {
+			element.value = moment(value, 'YYYY-MM-DD').format('DD/MM/YYYY');
+		}
+	});
+	$('.timepicker').datePicker({
+		timeFormat: "HH:MM AM"
+		, readValue: function(element) {
+			if (!element.value) {
+				var d = new Date();
+				var s = dateFormat(d, "h'h'MM"); 
+				return s; // initial time if empty
+			}
+			return element.value; // triggers default behavior
+		}
+	});
+});
+
 /* http://blog.stevenlevithan.com/archives/date-time-format
  * Date Format 1.2.3
  * (c) 2007-2009 Steven Levithan <stevenlevithan.com>

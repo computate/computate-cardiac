@@ -37,7 +37,7 @@ function postCalculInr(valeurs) {
 // PATCH //
 
 /**
- * Actualiser un ou plusiers calculs INR sans valuers qui change, 
+ * Modifier un ou plusiers calculs INR sans valuers qui change, 
  * ou changer des valeurs pour un ou plusiers le calcul INR. 
  * @param params: [ "q=*:*", "fq=pk:1", "sort=pk asc", "rows=1", "fl=pk" ]
  *        Une liste des opérations de recherche sur des calculs INR 
