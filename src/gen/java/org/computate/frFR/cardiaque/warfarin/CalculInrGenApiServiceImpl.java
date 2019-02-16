@@ -207,6 +207,14 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 			if(entiteValeur != null)
 				w.l(entiteNumero++ == 0 ? "" : ", ", "\"patientPrendCoumadin\": ", entiteValeur);
 
+			entiteValeur = Optional.ofNullable(documentSolr.getFieldValues("dosageInitial_stored_boolean")).map(Collection<Object>::stream).orElseGet(Stream::empty).findFirst().orElse(null);
+			if(entiteValeur != null)
+				w.l(entiteNumero++ == 0 ? "" : ", ", "\"dosageInitial\": ", entiteValeur);
+
+			entiteValeur = Optional.ofNullable(documentSolr.getFieldValues("dosageRecommence_stored_boolean")).map(Collection<Object>::stream).orElseGet(Stream::empty).findFirst().orElse(null);
+			if(entiteValeur != null)
+				w.l(entiteNumero++ == 0 ? "" : ", ", "\"dosageRecommence\": ", entiteValeur);
+
 			entiteValeur = Optional.ofNullable(documentSolr.getFieldValues("butActuel_stored_string")).map(Collection<Object>::stream).orElseGet(Stream::empty).findFirst().orElse(null);
 			if(entiteValeur != null)
 				w.l(entiteNumero++ == 0 ? "" : ", ", "\"butActuel\": ", w.q(entiteValeur));
@@ -248,8 +256,8 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 	// POST //
 
 	@Override
-	public void postCalculInr(JsonObject objetJson, OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
-		RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte, operationRequete, objetJson);
+	public void postCalculInr(JsonObject body, OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
+		RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte, operationRequete, body);
 		Future<OperationResponse> etapesFutures = sqlCalculInr(requeteSite).compose(a -> 
 			creerPOSTCalculInr(requeteSite).compose(calculInr -> 
 				sqlPOSTCalculInr(calculInr).compose(c -> 
@@ -321,6 +329,14 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 						postSql.append(SiteContexte.SQL_setP);
 						postSqlParams.addAll(Arrays.asList("patientPrendCoumadin", jsonObject.getBoolean(entiteVar), pk));
 						break;
+					case "dosageInitial":
+						postSql.append(SiteContexte.SQL_setP);
+						postSqlParams.addAll(Arrays.asList("dosageInitial", jsonObject.getBoolean(entiteVar), pk));
+						break;
+					case "dosageRecommence":
+						postSql.append(SiteContexte.SQL_setP);
+						postSqlParams.addAll(Arrays.asList("dosageRecommence", jsonObject.getBoolean(entiteVar), pk));
+						break;
 					case "butActuel":
 						postSql.append(SiteContexte.SQL_setP);
 						postSqlParams.addAll(Arrays.asList("butActuel", jsonObject.getString(entiteVar), pk));
@@ -381,8 +397,8 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 	// PATCH //
 
 	@Override
-	public void patchCalculInr(JsonObject objetJson, OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
-		RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte, operationRequete, objetJson);
+	public void patchCalculInr(JsonObject body, OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
+		RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte, operationRequete, body);
 		Future<OperationResponse> etapesFutures = sqlCalculInr(requeteSite).compose(a -> 
 			rechercheCalculInr(requeteSite).compose(listeCalculInr-> 
 				listePATCHCalculInr(listeCalculInr)
@@ -434,6 +450,14 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 					case "setPatientPrendCoumadin":
 						patchSql.append(SiteContexte.SQL_setP);
 						patchSqlParams.addAll(Arrays.asList("patientPrendCoumadin", requeteJson.getBoolean(methodeNom), pk));
+						break;
+					case "setDosageInitial":
+						patchSql.append(SiteContexte.SQL_setP);
+						patchSqlParams.addAll(Arrays.asList("dosageInitial", requeteJson.getBoolean(methodeNom), pk));
+						break;
+					case "setDosageRecommence":
+						patchSql.append(SiteContexte.SQL_setP);
+						patchSqlParams.addAll(Arrays.asList("dosageRecommence", requeteJson.getBoolean(methodeNom), pk));
 						break;
 					case "setButActuel":
 						patchSql.append(SiteContexte.SQL_setP);
@@ -530,6 +554,14 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 			if(entiteValeur != null)
 				w.l(entiteNumero++ == 0 ? "" : ", ", "\"patientPrendCoumadin\": ", entiteValeur);
 
+			entiteValeur = Optional.ofNullable(documentSolr.getFieldValues("dosageInitial_stored_boolean")).map(Collection<Object>::stream).orElseGet(Stream::empty).findFirst().orElse(null);
+			if(entiteValeur != null)
+				w.l(entiteNumero++ == 0 ? "" : ", ", "\"dosageInitial\": ", entiteValeur);
+
+			entiteValeur = Optional.ofNullable(documentSolr.getFieldValues("dosageRecommence_stored_boolean")).map(Collection<Object>::stream).orElseGet(Stream::empty).findFirst().orElse(null);
+			if(entiteValeur != null)
+				w.l(entiteNumero++ == 0 ? "" : ", ", "\"dosageRecommence\": ", entiteValeur);
+
 			entiteValeur = Optional.ofNullable(documentSolr.getFieldValues("butActuel_stored_string")).map(Collection<Object>::stream).orElseGet(Stream::empty).findFirst().orElse(null);
 			if(entiteValeur != null)
 				w.l(entiteNumero++ == 0 ? "" : ", ", "\"butActuel\": ", w.q(entiteValeur));
@@ -566,8 +598,8 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 	// PUT //
 
 	@Override
-	public void putCalculInr(JsonObject objetJson, OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
-		RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte, operationRequete, objetJson);
+	public void putCalculInr(JsonObject body, OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
+		RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte, operationRequete, body);
 		Future<OperationResponse> etapesFutures = sqlCalculInr(requeteSite).compose(a -> 
 			remplacerPUTCalculInr(requeteSite).compose(calculInr -> 
 				sqlPUTCalculInr(calculInr).compose(c -> 
@@ -636,6 +668,14 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 					case "patientPrendCoumadin":
 						postSql.append(SiteContexte.SQL_setP);
 						postSqlParams.addAll(Arrays.asList("patientPrendCoumadin", jsonObject.getBoolean(entiteVar), pk));
+						break;
+					case "dosageInitial":
+						postSql.append(SiteContexte.SQL_setP);
+						postSqlParams.addAll(Arrays.asList("dosageInitial", jsonObject.getBoolean(entiteVar), pk));
+						break;
+					case "dosageRecommence":
+						postSql.append(SiteContexte.SQL_setP);
+						postSqlParams.addAll(Arrays.asList("dosageRecommence", jsonObject.getBoolean(entiteVar), pk));
 						break;
 					case "butActuel":
 						postSql.append(SiteContexte.SQL_setP);
@@ -851,6 +891,10 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 				return "dateReverifier_indexed_date";
 			case "patientPrendCoumadin":
 				return "patientPrendCoumadin_indexed_boolean";
+			case "dosageInitial":
+				return "dosageInitial_indexed_boolean";
+			case "dosageRecommence":
+				return "dosageRecommence_indexed_boolean";
 			case "butActuel":
 				return "butActuel_indexed_string";
 			case "doseActuel":
@@ -892,10 +936,10 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 		return genererRequeteSitePourCalculInr(siteContexte, operationRequete, null);
 	}
 
-	public RequeteSite genererRequeteSitePourCalculInr(SiteContexte siteContexte, OperationRequest operationRequete, JsonObject objetJson) {
+	public RequeteSite genererRequeteSitePourCalculInr(SiteContexte siteContexte, OperationRequest operationRequete, JsonObject body) {
 		Vertx vertx = siteContexte.getVertx();
 		RequeteSite requeteSite = new RequeteSite();
-		requeteSite.setObjetJson(objetJson);
+		requeteSite.setObjetJson(body);
 		requeteSite.setVertx(vertx);
 		requeteSite.setSiteContexte_(siteContexte);
 		requeteSite.setConfigSite_(siteContexte.getConfigSite());

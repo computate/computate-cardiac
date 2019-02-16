@@ -473,6 +473,212 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 		}
 	}
 
+	///////////////////
+	// dosageInitial //
+	///////////////////
+
+	/**	L'entité « dosageInitial »
+	 *	 is defined as null before being initialized. 
+	 */
+	protected Boolean dosageInitial;
+	public Couverture<Boolean> dosageInitialCouverture = new Couverture<Boolean>().p(this).c(Boolean.class).var("dosageInitial").o(dosageInitial);
+
+	/**	<br/>L'entité « dosageInitial »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.warfarin.CalculInr&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:dosageInitial">Trouver l'entité dosageInitial dans Solr</a>
+	 * <br/>
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
+	protected abstract void _dosageInitial(Couverture<Boolean> c);
+
+	public Boolean getDosageInitial() {
+		return dosageInitial;
+	}
+
+	public void setDosageInitial(Boolean dosageInitial) {
+		this.dosageInitial = dosageInitial;
+		this.dosageInitialCouverture.dejaInitialise = true;
+	}
+	public CalculInr setDosageInitial(String o) {
+		if(org.apache.commons.lang3.BooleanUtils.isTrue(org.apache.commons.lang3.BooleanUtils.toBoolean(o)))
+			this.dosageInitial = Boolean.parseBoolean(o);
+		this.dosageInitialCouverture.dejaInitialise = true;
+		return (CalculInr)this;
+	}
+	protected CalculInr dosageInitialInit() {
+		if(!dosageInitialCouverture.dejaInitialise) {
+			_dosageInitial(dosageInitialCouverture);
+			if(dosageInitial == null)
+				setDosageInitial(dosageInitialCouverture.o);
+		}
+		dosageInitialCouverture.dejaInitialise(true);
+		return (CalculInr)this;
+	}
+
+	public Boolean solrDosageInitial() {
+		return dosageInitial;
+	}
+
+	public String strDosageInitial() {
+		return dosageInitial == null ? "" : dosageInitial.toString();
+	}
+
+	public String nomAffichageDosageInitial() {
+		return "dosage initial";
+	}
+
+	public String htmTooltipDosageInitial() {
+		return null;
+	}
+
+	public String htmDosageInitial() {
+		return dosageInitial == null ? "" : StringEscapeUtils.escapeHtml4(strDosageInitial());
+	}
+
+	public void htmDosageInitial(ToutEcrivain r, Boolean patchDroits) {
+		if(pk!= null) {
+			r.s("<div id=\"patchCalculInr", strPk(), "DosageInitial\">");
+			if(patchDroits) {
+				r.l();
+				r.l("	<script>//<![CDATA[");
+				r.l("		function patchCalculInr", strPk(), "DosageInitial() {");
+				r.l("			$.ajax({");
+				r.l("				url: '/api/v1/warfarin/calcul-inr?fq=pk:", strPk(), "',");
+				r.l("				dataType: 'json',");
+				r.l("				type: 'patch',");
+				r.l("				contentType: 'application/json',");
+				r.l("				processData: false,");
+				r.l("				success: function( data, textStatus, jQxhr ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				error: function( jqXhr, textStatus, errorThrown ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				data: {\"setDosageInitial\": this.value },");
+				r.l("				");
+				r.l("			});");
+				r.l("		}");
+				r.l("	//]]></script>");
+				r.l("	<div class=\"\">");
+				r.l("		<label class=\"w3-tooltip \">");
+				r.l("			<span>", StringEscapeUtils.escapeHtml4(nomAffichageDosageInitial()), "</span>");
+				r.s("			<input");
+							r.s(" name=\"dosageInitial\"");
+							r.s(" value=\"", htmDosageInitial(), "\");");
+							r.s(" onchange=\"\"");
+							r.l("/>");
+				r.l("		</label>");
+				r.l("	</div>");
+			} else {
+				r.s(htmDosageInitial());
+			}
+			r.l("</div>");
+		}
+	}
+
+	//////////////////////
+	// dosageRecommence //
+	//////////////////////
+
+	/**	L'entité « dosageRecommence »
+	 *	 is defined as null before being initialized. 
+	 */
+	protected Boolean dosageRecommence;
+	public Couverture<Boolean> dosageRecommenceCouverture = new Couverture<Boolean>().p(this).c(Boolean.class).var("dosageRecommence").o(dosageRecommence);
+
+	/**	<br/>L'entité « dosageRecommence »
+	 *  est défini comme null avant d'être initialisé. 
+	 * <br/><a href="http://localhost:10383/solr/computate/select?q=*:*&fq=partEstEntite_indexed_boolean:true&fq=classeNomCanonique_frFR_indexed_string:org.computate.frFR.cardiaque.warfarin.CalculInr&fq=classeEtendGen_indexed_boolean:true&fq=entiteVar_frFR_indexed_string:dosageRecommence">Trouver l'entité dosageRecommence dans Solr</a>
+	 * <br/>
+	 * @param c est pour envelopper une valeur à assigner à cette entité lors de l'initialisation. 
+	 **/
+	protected abstract void _dosageRecommence(Couverture<Boolean> c);
+
+	public Boolean getDosageRecommence() {
+		return dosageRecommence;
+	}
+
+	public void setDosageRecommence(Boolean dosageRecommence) {
+		this.dosageRecommence = dosageRecommence;
+		this.dosageRecommenceCouverture.dejaInitialise = true;
+	}
+	public CalculInr setDosageRecommence(String o) {
+		if(org.apache.commons.lang3.BooleanUtils.isTrue(org.apache.commons.lang3.BooleanUtils.toBoolean(o)))
+			this.dosageRecommence = Boolean.parseBoolean(o);
+		this.dosageRecommenceCouverture.dejaInitialise = true;
+		return (CalculInr)this;
+	}
+	protected CalculInr dosageRecommenceInit() {
+		if(!dosageRecommenceCouverture.dejaInitialise) {
+			_dosageRecommence(dosageRecommenceCouverture);
+			if(dosageRecommence == null)
+				setDosageRecommence(dosageRecommenceCouverture.o);
+		}
+		dosageRecommenceCouverture.dejaInitialise(true);
+		return (CalculInr)this;
+	}
+
+	public Boolean solrDosageRecommence() {
+		return dosageRecommence;
+	}
+
+	public String strDosageRecommence() {
+		return dosageRecommence == null ? "" : dosageRecommence.toString();
+	}
+
+	public String nomAffichageDosageRecommence() {
+		return "Dosage recommenc\u00E9";
+	}
+
+	public String htmTooltipDosageRecommence() {
+		return null;
+	}
+
+	public String htmDosageRecommence() {
+		return dosageRecommence == null ? "" : StringEscapeUtils.escapeHtml4(strDosageRecommence());
+	}
+
+	public void htmDosageRecommence(ToutEcrivain r, Boolean patchDroits) {
+		if(pk!= null) {
+			r.s("<div id=\"patchCalculInr", strPk(), "DosageRecommence\">");
+			if(patchDroits) {
+				r.l();
+				r.l("	<script>//<![CDATA[");
+				r.l("		function patchCalculInr", strPk(), "DosageRecommence() {");
+				r.l("			$.ajax({");
+				r.l("				url: '/api/v1/warfarin/calcul-inr?fq=pk:", strPk(), "',");
+				r.l("				dataType: 'json',");
+				r.l("				type: 'patch',");
+				r.l("				contentType: 'application/json',");
+				r.l("				processData: false,");
+				r.l("				success: function( data, textStatus, jQxhr ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				error: function( jqXhr, textStatus, errorThrown ) {");
+				r.l("					");
+				r.l("				},");
+				r.l("				data: {\"setDosageRecommence\": this.value },");
+				r.l("				");
+				r.l("			});");
+				r.l("		}");
+				r.l("	//]]></script>");
+				r.l("	<div class=\"\">");
+				r.l("		<label class=\"w3-tooltip \">");
+				r.l("			<span>", StringEscapeUtils.escapeHtml4(nomAffichageDosageRecommence()), "</span>");
+				r.s("			<input");
+							r.s(" name=\"dosageRecommence\"");
+							r.s(" value=\"", htmDosageRecommence(), "\");");
+							r.s(" onchange=\"\"");
+							r.l("/>");
+				r.l("		</label>");
+				r.l("	</div>");
+			} else {
+				r.s(htmDosageRecommence());
+			}
+			r.l("</div>");
+		}
+	}
+
 	///////////////
 	// butActuel //
 	///////////////
@@ -1205,6 +1411,8 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 		dateInrInit();
 		dateReverifierInit();
 		patientPrendCoumadinInit();
+		dosageInitialInit();
+		dosageRecommenceInit();
 		butActuelInit();
 		doseActuelInit();
 		medicamentActuelInit();
@@ -1296,6 +1504,14 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 			document.addField("patientPrendCoumadin_indexed_boolean", patientPrendCoumadin);
 			document.addField("patientPrendCoumadin_stored_boolean", patientPrendCoumadin);
 		}
+		if(dosageInitial != null) {
+			document.addField("dosageInitial_indexed_boolean", dosageInitial);
+			document.addField("dosageInitial_stored_boolean", dosageInitial);
+		}
+		if(dosageRecommence != null) {
+			document.addField("dosageRecommence_indexed_boolean", dosageRecommence);
+			document.addField("dosageRecommence_stored_boolean", dosageRecommence);
+		}
 		if(butActuel != null) {
 			document.addField("butActuel_indexed_string", butActuel);
 			document.addField("butActuel_stored_string", butActuel);
@@ -1366,6 +1582,10 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 				return oCalculInr.dateReverifier;
 			case "patientPrendCoumadin":
 				return oCalculInr.patientPrendCoumadin;
+			case "dosageInitial":
+				return oCalculInr.dosageInitial;
+			case "dosageRecommence":
+				return oCalculInr.dosageRecommence;
 			case "butActuel":
 				return oCalculInr.butActuel;
 			case "doseActuel":
@@ -1447,6 +1667,14 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 				setPatientPrendCoumadin(val);
 				sauvegardesCalculInr.add(var);
 				return val;
+			case "dosageInitial":
+				setDosageInitial(val);
+				sauvegardesCalculInr.add(var);
+				return val;
+			case "dosageRecommence":
+				setDosageRecommence(val);
+				sauvegardesCalculInr.add(var);
+				return val;
 			case "butActuel":
 				setButActuel(val);
 				sauvegardesCalculInr.add(var);
@@ -1522,6 +1750,18 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 					oCalculInr.setPatientPrendCoumadin(patientPrendCoumadin);
 			}
 
+			if(sauvegardesCalculInr.contains("dosageInitial")) {
+				Boolean dosageInitial = (Boolean)solrDocument.get("dosageInitial_stored_boolean");
+				if(dosageInitial != null)
+					oCalculInr.setDosageInitial(dosageInitial);
+			}
+
+			if(sauvegardesCalculInr.contains("dosageRecommence")) {
+				Boolean dosageRecommence = (Boolean)solrDocument.get("dosageRecommence_stored_boolean");
+				if(dosageRecommence != null)
+					oCalculInr.setDosageRecommence(dosageRecommence);
+			}
+
 			if(sauvegardesCalculInr.contains("butActuel")) {
 				String butActuel = (String)solrDocument.get("butActuel_stored_string");
 				if(butActuel != null)
@@ -1588,6 +1828,14 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 		if(patientPrendCoumadin != null)
 			oCalculInr.setPatientPrendCoumadin(patientPrendCoumadin);
 
+		Boolean dosageInitial = (Boolean)solrDocument.get("dosageInitial_stored_boolean");
+		if(dosageInitial != null)
+			oCalculInr.setDosageInitial(dosageInitial);
+
+		Boolean dosageRecommence = (Boolean)solrDocument.get("dosageRecommence_stored_boolean");
+		if(dosageRecommence != null)
+			oCalculInr.setDosageRecommence(dosageRecommence);
+
 		String butActuel = (String)solrDocument.get("butActuel_stored_string");
 		if(butActuel != null)
 			oCalculInr.setButActuel(butActuel);
@@ -1620,7 +1868,7 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 	//////////////
 
 	@Override public int hashCode() {
-		return Objects.hash(super.hashCode(), utilisateurPk, dateInr, dateReverifier, patientPrendCoumadin, butActuel, doseActuel, medicamentActuel, changementDose, notesComplementaires, infoContact, pageH2);
+		return Objects.hash(super.hashCode(), utilisateurPk, dateInr, dateReverifier, patientPrendCoumadin, dosageInitial, dosageRecommence, butActuel, doseActuel, medicamentActuel, changementDose, notesComplementaires, infoContact, pageH2);
 	}
 
 	////////////
@@ -1638,6 +1886,8 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 				&& Objects.equals( dateInr, that.dateInr )
 				&& Objects.equals( dateReverifier, that.dateReverifier )
 				&& Objects.equals( patientPrendCoumadin, that.patientPrendCoumadin )
+				&& Objects.equals( dosageInitial, that.dosageInitial )
+				&& Objects.equals( dosageRecommence, that.dosageRecommence )
 				&& Objects.equals( butActuel, that.butActuel )
 				&& Objects.equals( doseActuel, that.doseActuel )
 				&& Objects.equals( medicamentActuel, that.medicamentActuel )
@@ -1659,6 +1909,8 @@ public abstract class CalculInrGen<DEV> extends Cluster {
 		sb.append( ", dateInr: " ).append(dateInr);
 		sb.append( ", dateReverifier: " ).append(dateReverifier);
 		sb.append( ", patientPrendCoumadin: " ).append(patientPrendCoumadin);
+		sb.append( ", dosageInitial: " ).append(dosageInitial);
+		sb.append( ", dosageRecommence: " ).append(dosageRecommence);
 		sb.append( ", butActuel: " ).append(butActuel);
 		sb.append( ", doseActuel: " ).append(doseActuel);
 		sb.append( ", medicamentActuel: " ).append(medicamentActuel);

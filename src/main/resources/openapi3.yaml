@@ -4,10 +4,6 @@ info:
   version: 3.0.0
 servers:
   - url: https://cardiac.heytate.com:8080
-security:
-  - openIdConnect:
-      - openid
-      - offline_access
 paths:
   /api/v1/warfarin/cluster:
     get:
@@ -67,7 +63,7 @@ paths:
         '200':
           description: >+
           content:
-            application/json:
+            application/json; charset=utf-8:
               schema:
                 $ref: '#/components/requestBodies/RechercheClusterReponse'
         '400':
@@ -134,7 +130,7 @@ paths:
         '200':
           description: >+
           content:
-            application/json:
+            application/json; charset=utf-8:
               schema:
                 $ref: '#/components/requestBodies/POSTClusterReponse'
         '400':
@@ -201,7 +197,7 @@ paths:
         '200':
           description: >+
           content:
-            application/json:
+            application/json; charset=utf-8:
               schema:
                 $ref: '#/components/requestBodies/PATCHClusterReponse'
         '400':
@@ -269,7 +265,7 @@ paths:
         '200':
           description: >+
           content:
-            application/json:
+            application/json; charset=utf-8:
               schema:
                 $ref: '#/components/requestBodies/GETClusterReponse'
         '400':
@@ -343,7 +339,7 @@ paths:
         '200':
           description: >+
           content:
-            application/json:
+            application/json; charset=utf-8:
               schema:
                 $ref: '#/components/requestBodies/PUTClusterReponse'
         '400':
@@ -410,7 +406,7 @@ paths:
         '200':
           description: >+
           content:
-            application/json:
+            application/json; charset=utf-8:
               schema:
                 $ref: '#/components/requestBodies/DELETEClusterReponse'
         '400':
@@ -520,7 +516,7 @@ paths:
         '200':
           description: >+
           content:
-            application/json:
+            application/json; charset=utf-8:
               schema:
                 $ref: '#/components/requestBodies/RechercheCalculInrReponse'
         '400':
@@ -590,7 +586,7 @@ paths:
         '200':
           description: >+
           content:
-            application/json:
+            application/json; charset=utf-8:
               schema:
                 $ref: '#/components/requestBodies/POSTCalculInrReponse'
         '400':
@@ -660,7 +656,7 @@ paths:
         '200':
           description: >+
           content:
-            application/json:
+            application/json; charset=utf-8:
               schema:
                 $ref: '#/components/requestBodies/PATCHCalculInrReponse'
         '400':
@@ -731,7 +727,7 @@ paths:
         '200':
           description: >+
           content:
-            application/json:
+            application/json; charset=utf-8:
               schema:
                 $ref: '#/components/requestBodies/GETCalculInrReponse'
         '400':
@@ -808,7 +804,7 @@ paths:
         '200':
           description: >+
           content:
-            application/json:
+            application/json; charset=utf-8:
               schema:
                 $ref: '#/components/requestBodies/PUTCalculInrReponse'
         '400':
@@ -878,7 +874,7 @@ paths:
         '200':
           description: >+
           content:
-            application/json:
+            application/json; charset=utf-8:
               schema:
                 $ref: '#/components/requestBodies/DELETECalculInrReponse'
         '400':
@@ -1041,7 +1037,7 @@ components:
   securitySchemes:
     openIdConnect:
       type: openIdConnect
-      openIdConnectUrl: https://auth.computate.org/auth/realms/computate.org/.well-known/openid-configuration
+      openIdConnectUrl: https://auth.computate.org/auth/realms/heytate.com/.well-known/openid-configuration
   requestBodies:
     ErrorResponse:
       content:
@@ -1050,7 +1046,7 @@ components:
             $ref: '#/components/schemas/ErrorResponse'
     RechercheClusterReponse:
       content:
-        application/json:
+        application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/RechercheClusterReponse'
     POSTClusterRequete:
@@ -1060,7 +1056,7 @@ components:
             $ref: '#/components/schemas/POSTClusterRequete'
     POSTClusterReponse:
       content:
-        application/json:
+        application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/POSTClusterReponse'
     PATCHClusterRequete:
@@ -1070,12 +1066,12 @@ components:
             $ref: '#/components/schemas/PATCHClusterRequete'
     PATCHClusterReponse:
       content:
-        application/json:
+        application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/PATCHClusterReponse'
     GETClusterReponse:
       content:
-        application/json:
+        application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/GETClusterReponse'
     PUTClusterRequete:
@@ -1085,17 +1081,17 @@ components:
             $ref: '#/components/schemas/PUTClusterRequete'
     PUTClusterReponse:
       content:
-        application/json:
+        application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/PUTClusterReponse'
     DELETEClusterReponse:
       content:
-        application/json:
+        application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/DELETEClusterReponse'
     RechercheCalculInrReponse:
       content:
-        application/json:
+        application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/RechercheCalculInrReponse'
     POSTCalculInrRequete:
@@ -1105,7 +1101,7 @@ components:
             $ref: '#/components/schemas/POSTCalculInrRequete'
     POSTCalculInrReponse:
       content:
-        application/json:
+        application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/POSTCalculInrReponse'
     PATCHCalculInrRequete:
@@ -1115,12 +1111,12 @@ components:
             $ref: '#/components/schemas/PATCHCalculInrRequete'
     PATCHCalculInrReponse:
       content:
-        application/json:
+        application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/PATCHCalculInrReponse'
     GETCalculInrReponse:
       content:
-        application/json:
+        application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/GETCalculInrReponse'
     PUTCalculInrRequete:
@@ -1130,12 +1126,12 @@ components:
             $ref: '#/components/schemas/PUTCalculInrRequete'
     PUTCalculInrReponse:
       content:
-        application/json:
+        application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/PUTCalculInrReponse'
     DELETECalculInrReponse:
       content:
-        application/json:
+        application/json; charset=utf-8:
           schema:
             $ref: '#/components/schemas/DELETECalculInrReponse'
     RecherchePageCalculInrReponse:
@@ -1154,20 +1150,20 @@ components:
                 type: number
               id:
                 type: string
+              supprime:
+                type: boolean
+              utilisateurId:
+                type: string
               cree:
                 type: string
                 format: date-time
               modifie:
                 type: string
                 format: date-time
-              utilisateurId:
-                type: string
               clusterNomCanonique:
                 type: string
               clusterNomSimple:
                 type: string
-              supprime:
-                type: boolean
     POSTClusterRequete:
       allOf:
         - type: object
@@ -1176,20 +1172,20 @@ components:
               type: number
             id:
               type: string
+            supprime:
+              type: boolean
+            utilisateurId:
+              type: string
             cree:
               type: string
               format: date-time
             modifie:
               type: string
               format: date-time
-            utilisateurId:
-              type: string
             clusterNomCanonique:
               type: string
             clusterNomSimple:
               type: string
-            supprime:
-              type: boolean
     POSTClusterReponse:
       allOf:
         - type: object
@@ -1198,20 +1194,20 @@ components:
               type: number
             id:
               type: string
+            supprime:
+              type: boolean
+            utilisateurId:
+              type: string
             cree:
               type: string
               format: date-time
             modifie:
               type: string
               format: date-time
-            utilisateurId:
-              type: string
             clusterNomCanonique:
               type: string
             clusterNomSimple:
               type: string
-            supprime:
-              type: boolean
     PATCHClusterRequete:
       allOf:
         - type: object
@@ -1220,20 +1216,20 @@ components:
               type: number
             id:
               type: string
+            supprime:
+              type: boolean
+            utilisateurId:
+              type: string
             cree:
               type: string
               format: date-time
             modifie:
               type: string
               format: date-time
-            utilisateurId:
-              type: string
             clusterNomCanonique:
               type: string
             clusterNomSimple:
               type: string
-            supprime:
-              type: boolean
     PATCHClusterReponse:
       allOf:
         - type: object
@@ -1242,20 +1238,20 @@ components:
               type: number
             id:
               type: string
+            supprime:
+              type: boolean
+            utilisateurId:
+              type: string
             cree:
               type: string
               format: date-time
             modifie:
               type: string
               format: date-time
-            utilisateurId:
-              type: string
             clusterNomCanonique:
               type: string
             clusterNomSimple:
               type: string
-            supprime:
-              type: boolean
     GETClusterReponse:
       allOf:
         - type: object
@@ -1264,20 +1260,20 @@ components:
               type: number
             id:
               type: string
+            supprime:
+              type: boolean
+            utilisateurId:
+              type: string
             cree:
               type: string
               format: date-time
             modifie:
               type: string
               format: date-time
-            utilisateurId:
-              type: string
             clusterNomCanonique:
               type: string
             clusterNomSimple:
               type: string
-            supprime:
-              type: boolean
     PUTClusterRequete:
       allOf:
         - type: object
@@ -1286,20 +1282,20 @@ components:
               type: number
             id:
               type: string
+            supprime:
+              type: boolean
+            utilisateurId:
+              type: string
             cree:
               type: string
               format: date-time
             modifie:
               type: string
               format: date-time
-            utilisateurId:
-              type: string
             clusterNomCanonique:
               type: string
             clusterNomSimple:
               type: string
-            supprime:
-              type: boolean
     PUTClusterReponse:
       allOf:
         - type: object
@@ -1308,20 +1304,20 @@ components:
               type: number
             id:
               type: string
+            supprime:
+              type: boolean
+            utilisateurId:
+              type: string
             cree:
               type: string
               format: date-time
             modifie:
               type: string
               format: date-time
-            utilisateurId:
-              type: string
             clusterNomCanonique:
               type: string
             clusterNomSimple:
               type: string
-            supprime:
-              type: boolean
     DELETEClusterReponse:
       allOf:
         - type: object
@@ -1330,20 +1326,20 @@ components:
               type: number
             id:
               type: string
+            supprime:
+              type: boolean
+            utilisateurId:
+              type: string
             cree:
               type: string
               format: date-time
             modifie:
               type: string
               format: date-time
-            utilisateurId:
-              type: string
             clusterNomCanonique:
               type: string
             clusterNomSimple:
               type: string
-            supprime:
-              type: boolean
     RechercheCalculInrReponse:
       allOf:
         - $ref: "#/components/schemas/RechercheClusterReponse"
@@ -1360,13 +1356,11 @@ components:
                 type: string
                 format: date
               patientPrendCoumadin:
-                type: string
-                enum:
-                  - vide
-                  - oui
-                  - non
-                  - ouiDosageInitial
-                  - ouiRecommence
+                type: boolean
+              dosageInitial:
+                type: boolean
+              dosageRecommence:
+                type: boolean
               butActuel:
                 type: string
               doseActuel:
@@ -1378,6 +1372,8 @@ components:
               notesComplementaires:
                 type: string
               infoContact:
+                type: string
+              pageH2:
                 type: string
     POSTCalculInrRequete:
       allOf:
@@ -1393,13 +1389,11 @@ components:
               type: string
               format: date
             patientPrendCoumadin:
-              type: string
-              enum:
-                - vide
-                - oui
-                - non
-                - ouiDosageInitial
-                - ouiRecommence
+              type: boolean
+            dosageInitial:
+              type: boolean
+            dosageRecommence:
+              type: boolean
             butActuel:
               type: string
             doseActuel:
@@ -1411,6 +1405,8 @@ components:
             notesComplementaires:
               type: string
             infoContact:
+              type: string
+            pageH2:
               type: string
     POSTCalculInrReponse:
       allOf:
@@ -1426,13 +1422,11 @@ components:
               type: string
               format: date
             patientPrendCoumadin:
-              type: string
-              enum:
-                - vide
-                - oui
-                - non
-                - ouiDosageInitial
-                - ouiRecommence
+              type: boolean
+            dosageInitial:
+              type: boolean
+            dosageRecommence:
+              type: boolean
             butActuel:
               type: string
             doseActuel:
@@ -1444,6 +1438,8 @@ components:
             notesComplementaires:
               type: string
             infoContact:
+              type: string
+            pageH2:
               type: string
     PATCHCalculInrRequete:
       allOf:
@@ -1459,13 +1455,11 @@ components:
               type: string
               format: date
             patientPrendCoumadin:
-              type: string
-              enum:
-                - vide
-                - oui
-                - non
-                - ouiDosageInitial
-                - ouiRecommence
+              type: boolean
+            dosageInitial:
+              type: boolean
+            dosageRecommence:
+              type: boolean
             butActuel:
               type: string
             doseActuel:
@@ -1477,6 +1471,8 @@ components:
             notesComplementaires:
               type: string
             infoContact:
+              type: string
+            pageH2:
               type: string
     PATCHCalculInrReponse:
       allOf:
@@ -1492,13 +1488,11 @@ components:
               type: string
               format: date
             patientPrendCoumadin:
-              type: string
-              enum:
-                - vide
-                - oui
-                - non
-                - ouiDosageInitial
-                - ouiRecommence
+              type: boolean
+            dosageInitial:
+              type: boolean
+            dosageRecommence:
+              type: boolean
             butActuel:
               type: string
             doseActuel:
@@ -1510,6 +1504,8 @@ components:
             notesComplementaires:
               type: string
             infoContact:
+              type: string
+            pageH2:
               type: string
     GETCalculInrReponse:
       allOf:
@@ -1525,13 +1521,11 @@ components:
               type: string
               format: date
             patientPrendCoumadin:
-              type: string
-              enum:
-                - vide
-                - oui
-                - non
-                - ouiDosageInitial
-                - ouiRecommence
+              type: boolean
+            dosageInitial:
+              type: boolean
+            dosageRecommence:
+              type: boolean
             butActuel:
               type: string
             doseActuel:
@@ -1543,6 +1537,8 @@ components:
             notesComplementaires:
               type: string
             infoContact:
+              type: string
+            pageH2:
               type: string
     PUTCalculInrRequete:
       allOf:
@@ -1558,13 +1554,11 @@ components:
               type: string
               format: date
             patientPrendCoumadin:
-              type: string
-              enum:
-                - vide
-                - oui
-                - non
-                - ouiDosageInitial
-                - ouiRecommence
+              type: boolean
+            dosageInitial:
+              type: boolean
+            dosageRecommence:
+              type: boolean
             butActuel:
               type: string
             doseActuel:
@@ -1576,6 +1570,8 @@ components:
             notesComplementaires:
               type: string
             infoContact:
+              type: string
+            pageH2:
               type: string
     PUTCalculInrReponse:
       allOf:
@@ -1591,13 +1587,11 @@ components:
               type: string
               format: date
             patientPrendCoumadin:
-              type: string
-              enum:
-                - vide
-                - oui
-                - non
-                - ouiDosageInitial
-                - ouiRecommence
+              type: boolean
+            dosageInitial:
+              type: boolean
+            dosageRecommence:
+              type: boolean
             butActuel:
               type: string
             doseActuel:
@@ -1609,6 +1603,8 @@ components:
             notesComplementaires:
               type: string
             infoContact:
+              type: string
+            pageH2:
               type: string
     DELETECalculInrReponse:
       allOf:
@@ -1624,13 +1620,11 @@ components:
               type: string
               format: date
             patientPrendCoumadin:
-              type: string
-              enum:
-                - vide
-                - oui
-                - non
-                - ouiDosageInitial
-                - ouiRecommence
+              type: boolean
+            dosageInitial:
+              type: boolean
+            dosageRecommence:
+              type: boolean
             butActuel:
               type: string
             doseActuel:
@@ -1642,6 +1636,8 @@ components:
             notesComplementaires:
               type: string
             infoContact:
+              type: string
+            pageH2:
               type: string
     RecherchePageCalculInrReponse:
       allOf:

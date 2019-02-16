@@ -26,6 +26,8 @@ public class AppOpenApi3 extends AppOpenApi3Gen<AppSwagger2> {
 		SiteContexte siteContexte = new SiteContexte();
 		siteContexte.initLoinSiteContexte(requeteSite);
 		api.initLoinAppOpenApi3(requeteSite);
+		requeteSite.setSiteContexte_(siteContexte);
+		requeteSite.setConfigSite_(siteContexte.getConfigSite());
 		api.ecrireOpenApi();
 	}
 //

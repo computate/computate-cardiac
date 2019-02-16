@@ -58,7 +58,8 @@ public class RequeteSite extends RequeteSiteGen<Object> implements Serializable 
 	}
 
 	protected void _vertx(Couverture<Vertx> c) {
-		c.o(siteContexte_.getVertx());
+		if(siteContexte_ != null)
+			c.o(siteContexte_.getVertx());
 	}
 
 	protected void _objetJson(Couverture<JsonObject> c) {

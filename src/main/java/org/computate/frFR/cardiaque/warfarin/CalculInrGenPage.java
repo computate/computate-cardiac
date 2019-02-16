@@ -48,6 +48,7 @@ public class CalculInrGenPage extends CalculInrGenPageGen<MiseEnPage> {
 
 				e("input")
 							.a("type", "text")
+					.a("class", "valeurPk")
 					.a("name", "pk")
 					.a("class", "w3-input w3-border ")
 					.a("placeholder", "clé primaire")
@@ -65,6 +66,7 @@ public class CalculInrGenPage extends CalculInrGenPageGen<MiseEnPage> {
 
 				e("input")
 					.a("type", "checkbox")
+					.a("class", "valeurSupprime")
 					.a("name", "supprime")
 					.a("value", "true")
 					.a("onchange", "envoyer(); ");
@@ -92,6 +94,7 @@ public class CalculInrGenPage extends CalculInrGenPageGen<MiseEnPage> {
 					.fg();
 				e("input")
 					.a("type", "hidden")
+					.a("class", "valeurCree")
 					.a("name", "cree")
 					.a("onchange", "envoyer(); ")
 					.a("value", o.strCree())
@@ -113,6 +116,7 @@ public class CalculInrGenPage extends CalculInrGenPageGen<MiseEnPage> {
 					.fg();
 				e("input")
 					.a("type", "hidden")
+					.a("class", "valeurModifie")
 					.a("name", "modifie")
 					.a("onchange", "envoyer(); ")
 					.a("value", o.strModifie())
@@ -135,6 +139,7 @@ public class CalculInrGenPage extends CalculInrGenPageGen<MiseEnPage> {
 					.a("onchange", "var t = moment(this.value, 'DD/MM/YYYY'); if(t) { var s = t.format('YYYY-MM-DD'); $(this).next().val(s); $(this).next().trigger('change'); } ")
 					.fg();
 				e("input")
+					.a("class", "valeurDateInr")
 					.a("name", "dateInr")
 					.a("type", "hidden")
 					.a("onchange", "envoyer(); ")
@@ -156,6 +161,7 @@ public class CalculInrGenPage extends CalculInrGenPageGen<MiseEnPage> {
 					.a("onchange", "var t = moment(this.value, 'DD/MM/YYYY'); if(t) { var s = t.format('YYYY-MM-DD'); $(this).next().val(s); $(this).next().trigger('change'); } ")
 					.fg();
 				e("input")
+					.a("class", "valeurDateReverifier")
 					.a("name", "dateReverifier")
 					.a("type", "hidden")
 					.a("onchange", "envoyer(); ")
@@ -173,6 +179,7 @@ public class CalculInrGenPage extends CalculInrGenPageGen<MiseEnPage> {
 
 				e("input")
 					.a("type", "checkbox")
+					.a("class", "valeurPatientPrendCoumadin")
 					.a("name", "patientPrendCoumadin")
 					.a("value", "true")
 					.a("onchange", "envoyer(); ");
@@ -183,10 +190,49 @@ public class CalculInrGenPage extends CalculInrGenPageGen<MiseEnPage> {
 				e("label").a("class", "").f().sx("Patient prend coumadin").g("label");
 			} g("div");
 			{ e("div").a("class", "w3-cell w3-cell-middle w3-center w3-mobile ").f();
+				e("input")
+					.a("type", "hidden")
+					.a("name", "dosageInitial")
+					.a("value", "false")
+				.fg();
+
+				e("input")
+					.a("type", "checkbox")
+					.a("class", "valeurDosageInitial")
+					.a("name", "dosageInitial")
+					.a("value", "true")
+					.a("onchange", "envoyer(); ");
+					if(o.getDosageInitial() != null && o.getDosageInitial())
+						a("checked", "checked");
+				fg();
+
+				e("label").a("class", "").f().sx("dosage initial").g("label");
+			} g("div");
+			{ e("div").a("class", "w3-cell w3-cell-middle w3-center w3-mobile ").f();
+				e("input")
+					.a("type", "hidden")
+					.a("name", "dosageRecommence")
+					.a("value", "false")
+				.fg();
+
+				e("input")
+					.a("type", "checkbox")
+					.a("class", "valeurDosageRecommence")
+					.a("name", "dosageRecommence")
+					.a("value", "true")
+					.a("onchange", "envoyer(); ");
+					if(o.getDosageRecommence() != null && o.getDosageRecommence())
+						a("checked", "checked");
+				fg();
+
+				e("label").a("class", "").f().sx("Dosage recommencé").g("label");
+			} g("div");
+			{ e("div").a("class", "w3-cell w3-cell-middle w3-center w3-mobile ").f();
 				e("label").a("class", "").f().sx("But actuel").g("label");
 
 				e("input")
 							.a("type", "text")
+					.a("class", "valeurButActuel")
 					.a("name", "butActuel")
 					.a("class", "w3-input w3-border ")
 					.a("placeholder", "But actuel")
@@ -202,6 +248,7 @@ public class CalculInrGenPage extends CalculInrGenPageGen<MiseEnPage> {
 
 				e("input")
 							.a("type", "text")
+					.a("class", "valeurDoseActuel")
 					.a("name", "doseActuel")
 					.a("class", "w3-input w3-border ")
 					.a("placeholder", "Dose actuel")
@@ -215,6 +262,7 @@ public class CalculInrGenPage extends CalculInrGenPageGen<MiseEnPage> {
 
 				e("input")
 							.a("type", "text")
+					.a("class", "valeurMedicamentActuel")
 					.a("name", "medicamentActuel")
 					.a("class", "w3-input w3-border ")
 					.a("placeholder", "Dose actuel")
@@ -230,6 +278,7 @@ public class CalculInrGenPage extends CalculInrGenPageGen<MiseEnPage> {
 
 				e("input")
 							.a("type", "text")
+					.a("class", "valeurChangementDose")
 					.a("name", "changementDose")
 					.a("class", "w3-input w3-border ")
 					.a("placeholder", "Changement de dose")
@@ -243,6 +292,7 @@ public class CalculInrGenPage extends CalculInrGenPageGen<MiseEnPage> {
 
 				e("input")
 							.a("type", "text")
+					.a("class", "valeurNotesComplementaires")
 					.a("name", "notesComplementaires")
 					.a("class", "w3-input w3-border ")
 					.a("placeholder", "Notes complémentaires")
@@ -258,6 +308,7 @@ public class CalculInrGenPage extends CalculInrGenPageGen<MiseEnPage> {
 
 				e("input")
 							.a("type", "text")
+					.a("class", "valeurInfoContact")
 					.a("name", "infoContact")
 					.a("class", "w3-input w3-border ")
 					.a("placeholder", "Info contact")
@@ -324,7 +375,7 @@ public class CalculInrGenPage extends CalculInrGenPageGen<MiseEnPage> {
 					} g("form");
 					e("button")
 						.a("class", "w3-btn w3-round w3-border w3-border-black w3-section w3-ripple w3-padding w3-green ")
-						.a("onclick", "postCalculInr($('#postCalculInrFormulaire').serializeObject()); ")
+						.a("onclick", "postCalculInr($('#postCalculInrFormulaire')); ")
 						.f().sx("Créer un calcul INR")
 					.g("button");
 
@@ -381,7 +432,7 @@ public class CalculInrGenPage extends CalculInrGenPageGen<MiseEnPage> {
 						} g("form");
 						e("button")
 							.a("class", "w3-btn w3-round w3-border w3-border-black w3-section w3-ripple w3-padding w3-green ")
-							.a("onclick", "putCalculInr(", o.getPk(), ", $('#putCalculInrFormulaire').serializeObject()); ")
+							.a("onclick", "putCalculInr(", o.getPk(), ", $('#putCalculInrFormulaire')); ")
 							.f().sx("Remplacer le calcul INR")
 						.g("button");
 

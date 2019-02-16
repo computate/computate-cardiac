@@ -87,11 +87,6 @@ public class CalculInr extends CalculInrGen<Cluster> {
 	 * Var.enUS: currentDosageText
 	 * Indexe: true
 	 * Stocke: true
-	 * Option.frFR.vide:""
-	 * Option.frFR.oui:CalculInr.VAL_patientPrendCoumadinOui
-	 * Option.frFR.non:CalculInr.VAL_patientPrendCoumadinNon
-	 * Option.frFR.ouiDosageInitial:CalculInr.VAL_patientPrendCoumadinOuiDosageInitial
-	 * Option.frFR.ouiRecommence:CalculInr.VAL_patientPrendCoumadinOuiRecommence
 	 * Description.frFR: Le patient prend coumadin. 
 	 * Description.enUS: The patient takes coumadin. 
 	 * NomAffichage.frFR: Patient prend coumadin
@@ -99,6 +94,34 @@ public class CalculInr extends CalculInrGen<Cluster> {
 	 * HtmlLigne: 4
 	 */ 
 	protected void _patientPrendCoumadin(Couverture<Boolean> c) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * Var.enUS: currentDosageText
+	 * Indexe: true
+	 * Stocke: true
+	 * Description.frFR: Dosage initial. 
+	 * Description.enUS: Initial dosage. 
+	 * NomAffichage.frFR: dosage initial
+	 * NomAffichage.enUS: initial dose
+	 * HtmlLigne: 4
+	 */ 
+	protected void _dosageInitial(Couverture<Boolean> c) {
+	}
+
+	/**
+	 * {@inheritDoc}
+	 * Var.enUS: doseRestarted
+	 * Indexe: true
+	 * Stocke: true
+	 * Description.frFR: Dosage recommencé. 
+	 * Description.enUS: Dose restarted. 
+	 * NomAffichage.frFR: Dosage recommencé
+	 * NomAffichage.enUS: Dose restarted
+	 * HtmlLigne: 4
+	 */ 
+	protected void _dosageRecommence(Couverture<Boolean> c) {
 	}
 
 	/**
