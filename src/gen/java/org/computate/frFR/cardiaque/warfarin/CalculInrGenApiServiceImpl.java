@@ -85,13 +85,23 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 	@Override
 	public void rechercheCalculInr(OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
 		RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte, operationRequete);
-		Future<OperationResponse> etapesFutures = rechercheCalculInr(requeteSite).compose(listeCalculInr -> 
-			reponse200RechercheCalculInr(listeCalculInr)
-		);
-		etapesFutures.setHandler(gestionnaireEvenements);
+		rechercheCalculInr(requeteSite, a -> {
+			if(a.succeeded()) {
+				ListeRecherche<CalculInr> listeCalculInr = a.result();
+				reponse200RechercheCalculInr(listeCalculInr, b -> {
+					if(b.succeeded()) {
+						gestionnaireEvenements.handle(Future.succeededFuture(b.result()));
+					} else {
+						erreurCalculInr(requeteSite, gestionnaireEvenements, b);
+					}
+				});
+			} else {
+				erreurCalculInr(requeteSite, gestionnaireEvenements, a);
+			}
+		});
 	}
 
-	public Future<ListeRecherche<CalculInr>> rechercheCalculInr(RequeteSite requeteSite) {
+	public void rechercheCalculInr(RequeteSite requeteSite, Handler<AsyncResult<ListeRecherche<CalculInr>>> gestionnaireEvenements) {
 		try {
 			OperationRequest operationRequete = requeteSite.getOperationRequete();
 			String entiteListeStr = requeteSite.getOperationRequete().getParams().getJsonObject("query").getString("fl");
@@ -151,14 +161,13 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 				}
 			});
 			listeRecherche.initLoinPourClasse(requeteSite);
-			return Future.succeededFuture(listeRecherche);
+			gestionnaireEvenements.handle(Future.succeededFuture(listeRecherche));
 		} catch(Exception e) {
-			ExceptionUtils.printRootCauseStackTrace(e);
-			return Future.failedFuture(e);
+			gestionnaireEvenements.handle(Future.failedFuture(e));
 		}
 	}
 
-	public Future<OperationResponse> reponse200RechercheCalculInr(ListeRecherche<CalculInr> listeCalculInr) {
+	public void reponse200RechercheCalculInr(ListeRecherche<CalculInr> listeCalculInr, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
 		try {
 			Buffer buffer = Buffer.buffer();
 			RequeteSite requeteSite = listeCalculInr.getRequeteSite_();
@@ -246,10 +255,9 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 				w.tl(1, ", \"exceptionRecherche\": ", w.q(exceptionRecherche.getMessage()));
 			}
 			w.l("}");
-			return Future.succeededFuture(OperationResponse.completedWithJson(buffer));
+			gestionnaireEvenements.handle(Future.succeededFuture(OperationResponse.completedWithJson(buffer)));
 		} catch(Exception e) {
-			ExceptionUtils.printRootCauseStackTrace(e);
-			return Future.failedFuture(e);
+			gestionnaireEvenements.handle(Future.failedFuture(e));
 		}
 	}
 
@@ -258,24 +266,66 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 	@Override
 	public void postCalculInr(JsonObject body, OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
 		RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte, operationRequete, body);
-		Future<OperationResponse> etapesFutures = sqlCalculInr(requeteSite).compose(a -> 
-			creerPOSTCalculInr(requeteSite).compose(calculInr -> 
-				sqlPOSTCalculInr(calculInr).compose(c -> 
-					definirCalculInr(calculInr).compose(d -> 
-						attribuerCalculInr(calculInr).compose(e -> 
-							indexerCalculInr(calculInr).compose(f -> 
-								reponse200POSTCalculInr(calculInr)
-							)
-						)
-					)
-				)
-			)
-		);
-		etapesFutures.setHandler(gestionnaireEvenements);
+		sqlCalculInr(requeteSite, a -> {
+			if(a.succeeded()) {
+				creerPOSTCalculInr(requeteSite, b -> {
+					if(b.succeeded()) {
+						CalculInr calculInr = b.result();
+						sqlPOSTCalculInr(calculInr, c -> {
+							if(c.succeeded()) {
+								definirCalculInr(calculInr, d -> {
+									if(d.succeeded()) {
+										attribuerCalculInr(calculInr, e -> {
+											if(e.succeeded()) {
+												indexerCalculInr(calculInr, f -> {
+													if(f.succeeded()) {
+														reponse200POSTCalculInr(calculInr, g -> {
+															if(f.succeeded()) {
+																SQLConnection connexionSql = requeteSite.getConnexionSql();
+																connexionSql.commit(h -> {
+																	if(a.succeeded()) {
+																		connexionSql.close(i -> {
+																			if(a.succeeded()) {
+																				gestionnaireEvenements.handle(Future.succeededFuture(g.result()));
+																			} else {
+																				erreurCalculInr(requeteSite, gestionnaireEvenements, i);
+																			}
+																		});
+																	} else {
+																		erreurCalculInr(requeteSite, gestionnaireEvenements, h);
+																	}
+																});
+															} else {
+																erreurCalculInr(requeteSite, gestionnaireEvenements, g);
+															}
+														});
+													} else {
+														erreurCalculInr(requeteSite, gestionnaireEvenements, f);
+													}
+												});
+											} else {
+												erreurCalculInr(requeteSite, gestionnaireEvenements, e);
+											}
+										});
+									} else {
+										erreurCalculInr(requeteSite, gestionnaireEvenements, d);
+									}
+								});
+							} else {
+								erreurCalculInr(requeteSite, gestionnaireEvenements, c);
+							}
+						});
+					} else {
+						erreurCalculInr(requeteSite, gestionnaireEvenements, b);
+					}
+				});
+			} else {
+				erreurCalculInr(requeteSite, gestionnaireEvenements, a);
+			}
+		});
 	}
 
-	public Future<CalculInr> creerPOSTCalculInr(RequeteSite requeteSite) {
-		Future<CalculInr> future = Future.future();
+	public void creerPOSTCalculInr(RequeteSite requeteSite, Handler<AsyncResult<CalculInr>> gestionnaireEvenements) {
 		try {
 			SQLConnection connexionSql = requeteSite.getConnexionSql();
 			String utilisateurId = requeteSite.getUtilisateurId();
@@ -290,17 +340,14 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 				CalculInr o = new CalculInr();
 				o.setPk(pk);
 				o.initLoinCalculInr(requeteSite);
-				future.complete(o);
+				gestionnaireEvenements.handle(Future.succeededFuture(o));
 			});
-			return future;
 		} catch(Exception e) {
-			ExceptionUtils.printRootCauseStackTrace(e);
-			return Future.failedFuture(e);
+			gestionnaireEvenements.handle(Future.failedFuture(e));
 		}
 	}
 
-	public Future<Void> sqlPOSTCalculInr(CalculInr o) {
-		Future<Void> future = Future.future();
+	public void sqlPOSTCalculInr(CalculInr o, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
 		try {
 			RequeteSite requeteSite = o.getRequeteSite_();
 			SQLConnection connexionSql = requeteSite.getConnexionSql();
@@ -373,24 +420,21 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 					, new JsonArray(postSqlParams)
 					, postAsync
 			-> {
-				future.complete();
+				gestionnaireEvenements.handle(Future.succeededFuture());
 			});
-			return future;
 		} catch(Exception e) {
-			ExceptionUtils.printRootCauseStackTrace(e);
-			return Future.failedFuture(e);
+			gestionnaireEvenements.handle(Future.failedFuture(e));
 		}
 	}
 
-	public Future<OperationResponse> reponse200POSTCalculInr(CalculInr o) {
+	public void reponse200POSTCalculInr(CalculInr o, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
 		try {
 			Buffer buffer = Buffer.buffer();
 			RequeteSite requeteSite = o.getRequeteSite_();
 			ToutEcrivain w = ToutEcrivain.creer(o.getRequeteSite_(), buffer);
-			return Future.succeededFuture(OperationResponse.completedWithJson(buffer));
+			gestionnaireEvenements.handle(Future.succeededFuture(OperationResponse.completedWithJson(buffer)));
 		} catch(Exception e) {
-			ExceptionUtils.printRootCauseStackTrace(e);
-			return Future.failedFuture(e);
+			gestionnaireEvenements.handle(Future.failedFuture(e));
 		}
 	}
 
@@ -399,31 +443,46 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 	@Override
 	public void patchCalculInr(JsonObject body, OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
 		RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte, operationRequete, body);
-		Future<OperationResponse> etapesFutures = sqlCalculInr(requeteSite).compose(a -> 
-			rechercheCalculInr(requeteSite).compose(listeCalculInr-> 
-				listePATCHCalculInr(listeCalculInr)
-			)
-		);
-		etapesFutures.setHandler(gestionnaireEvenements);
-	}
-
-	public Future<OperationResponse> listePATCHCalculInr(ListeRecherche<CalculInr> listeCalculInr) {
-		List<Future> futures = new ArrayList<>();
-		listeCalculInr.getList().forEach(o -> {
-			futures.add(
-				sqlPATCHCalculInr(o).compose(
-					b -> indexerCalculInr(o)
-				)
-			);
+		sqlCalculInr(requeteSite, a -> {
+			if(a.succeeded()) {
+				rechercheCalculInr(requeteSite, b -> {
+					if(b.succeeded()) {
+						ListeRecherche<CalculInr> listeCalculInr = b.result();
+						listePATCHCalculInr(listeCalculInr, c -> {
+							if(c.succeeded()) {
+								SQLConnection connexionSql = requeteSite.getConnexionSql();
+								connexionSql.commit(d -> {
+									if(a.succeeded()) {
+										connexionSql.close(e -> {
+											if(a.succeeded()) {
+												gestionnaireEvenements.handle(Future.succeededFuture(c.result()));
+											} else {
+												erreurCalculInr(requeteSite, gestionnaireEvenements, e);
+											}
+										});
+									} else {
+										erreurCalculInr(requeteSite, gestionnaireEvenements, d);
+									}
+								});
+							} else {
+								erreurCalculInr(requeteSite, gestionnaireEvenements, c);
+							}
+						});
+					} else {
+						erreurCalculInr(requeteSite, gestionnaireEvenements, b);
+					}
+				});
+			} else {
+				erreurCalculInr(requeteSite, gestionnaireEvenements, a);
+			}
 		});
-		Future<OperationResponse> future = CompositeFuture.all(futures).compose( a -> 
-			reponse200PATCHCalculInr(listeCalculInr)
-		);
-		return future;
 	}
 
-	public Future<Void> sqlPATCHCalculInr(CalculInr o) {
-		Future<Void> future = Future.future();
+	public Future<OperationResponse> listePATCHCalculInr(ListeRecherche<CalculInr> listeCalculInr, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
+		return null;
+	}
+
+	public void sqlPATCHCalculInr(CalculInr o, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
 		try {
 			RequeteSite requeteSite = o.getRequeteSite_();
 			SQLConnection connexionSql = requeteSite.getConnexionSql();
@@ -494,23 +553,20 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 					, new JsonArray(patchSqlParams)
 					, patchAsync
 			-> {
-				future.complete();
+				gestionnaireEvenements.handle(Future.succeededFuture());
 			});
-			return future;
 		} catch(Exception e) {
-			ExceptionUtils.printRootCauseStackTrace(e);
-			return Future.failedFuture(e);
+			gestionnaireEvenements.handle(Future.failedFuture(e));
 		}
 	}
 
-	public Future<OperationResponse> reponse200PATCHCalculInr(ListeRecherche<CalculInr> listeCalculInr) {
+	public void reponse200PATCHCalculInr(ListeRecherche<CalculInr> listeCalculInr, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
 		try {
 			Buffer buffer = Buffer.buffer();
 			ToutEcrivain w = ToutEcrivain.creer(listeCalculInr.getRequeteSite_(), buffer);
-			return Future.succeededFuture(OperationResponse.completedWithJson(buffer));
+			gestionnaireEvenements.handle(Future.succeededFuture(OperationResponse.completedWithJson(buffer)));
 		} catch(Exception e) {
-			ExceptionUtils.printRootCauseStackTrace(e);
-			return Future.failedFuture(e);
+			gestionnaireEvenements.handle(Future.failedFuture(e));
 		}
 	}
 
@@ -519,13 +575,23 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 	@Override
 	public void getCalculInr(OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
 		RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte, operationRequete);
-		Future<OperationResponse> etapesFutures = rechercheCalculInr(requeteSite).compose(listeCalculInr -> 
-			reponse200GETCalculInr(listeCalculInr)
-		);
-		etapesFutures.setHandler(gestionnaireEvenements);
+		rechercheCalculInr(requeteSite, a -> {
+			if(a.succeeded()) {
+				ListeRecherche<CalculInr> listeCalculInr = a.result();
+				reponse200GETCalculInr(listeCalculInr, b -> {
+					if(b.succeeded()) {
+						gestionnaireEvenements.handle(Future.succeededFuture(b.result()));
+					} else {
+						erreurCalculInr(requeteSite, gestionnaireEvenements, b);
+					}
+				});
+			} else {
+				erreurCalculInr(requeteSite, gestionnaireEvenements, a);
+			}
+		});
 	}
 
-	public Future<OperationResponse> reponse200GETCalculInr(ListeRecherche<CalculInr> listeCalculInr) {
+	public void reponse200GETCalculInr(ListeRecherche<CalculInr> listeCalculInr, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
 		try {
 			Buffer buffer = Buffer.buffer();
 			ToutEcrivain w = ToutEcrivain.creer(listeCalculInr.getRequeteSite_(), buffer);
@@ -588,10 +654,9 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 
 				w.l("}");
 			}
-			return Future.succeededFuture(OperationResponse.completedWithJson(buffer));
+			gestionnaireEvenements.handle(Future.succeededFuture(OperationResponse.completedWithJson(buffer)));
 		} catch(Exception e) {
-			ExceptionUtils.printRootCauseStackTrace(e);
-			return Future.failedFuture(e);
+			gestionnaireEvenements.handle(Future.failedFuture(e));
 		}
 	}
 
@@ -600,24 +665,66 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 	@Override
 	public void putCalculInr(JsonObject body, OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
 		RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte, operationRequete, body);
-		Future<OperationResponse> etapesFutures = sqlCalculInr(requeteSite).compose(a -> 
-			remplacerPUTCalculInr(requeteSite).compose(calculInr -> 
-				sqlPUTCalculInr(calculInr).compose(c -> 
-					definirCalculInr(calculInr).compose(d -> 
-						attribuerCalculInr(calculInr).compose(e -> 
-						indexerCalculInr(calculInr).compose(f -> 
-							reponse200PUTCalculInr(calculInr)
-							)
-						)
-					)
-				)
-			)
-		);
-		etapesFutures.setHandler(gestionnaireEvenements);
+		sqlCalculInr(requeteSite, a -> {
+			if(a.succeeded()) {
+				remplacerPUTCalculInr(requeteSite, b -> {
+					if(b.succeeded()) {
+						CalculInr calculInr = b.result();
+						sqlPUTCalculInr(calculInr, c -> {
+							if(c.succeeded()) {
+								definirCalculInr(calculInr, d -> {
+									if(d.succeeded()) {
+										attribuerCalculInr(calculInr, e -> {
+											if(e.succeeded()) {
+												indexerCalculInr(calculInr, f -> {
+													if(f.succeeded()) {
+														reponse200PUTCalculInr(calculInr, g -> {
+															if(g.succeeded()) {
+																SQLConnection connexionSql = requeteSite.getConnexionSql();
+																connexionSql.commit(h -> {
+																	if(a.succeeded()) {
+																		connexionSql.close(i -> {
+																			if(a.succeeded()) {
+																				gestionnaireEvenements.handle(Future.succeededFuture(g.result()));
+																			} else {
+																				erreurCalculInr(requeteSite, gestionnaireEvenements, i);
+																			}
+																		});
+																	} else {
+																		erreurCalculInr(requeteSite, gestionnaireEvenements, h);
+																	}
+																});
+															} else {
+																erreurCalculInr(requeteSite, gestionnaireEvenements, g);
+															}
+														});
+													} else {
+														erreurCalculInr(requeteSite, gestionnaireEvenements, f);
+													}
+												});
+											} else {
+												erreurCalculInr(requeteSite, gestionnaireEvenements, e);
+											}
+										});
+									} else {
+										erreurCalculInr(requeteSite, gestionnaireEvenements, d);
+									}
+								});
+							} else {
+								erreurCalculInr(requeteSite, gestionnaireEvenements, c);
+							}
+						});
+					} else {
+						erreurCalculInr(requeteSite, gestionnaireEvenements, b);
+					}
+				});
+			} else {
+				erreurCalculInr(requeteSite, gestionnaireEvenements, a);
+			}
+		});
 	}
 
-	public Future<CalculInr> remplacerPUTCalculInr(RequeteSite requeteSite) {
-		Future<CalculInr> future = Future.future();
+	public void remplacerPUTCalculInr(RequeteSite requeteSite, Handler<AsyncResult<CalculInr>> gestionnaireEvenements) {
 		try {
 			SQLConnection connexionSql = requeteSite.getConnexionSql();
 			String utilisateurId = requeteSite.getUtilisateurId();
@@ -630,17 +737,14 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 			-> {
 				CalculInr o = new CalculInr();
 				o.setPk(pk);
-				future.complete(o);
+				gestionnaireEvenements.handle(Future.succeededFuture(o));
 			});
-			return future;
 		} catch(Exception e) {
-			ExceptionUtils.printRootCauseStackTrace(e);
-			return Future.failedFuture(e);
+			gestionnaireEvenements.handle(Future.failedFuture(e));
 		}
 	}
 
-	public Future<Void> sqlPUTCalculInr(CalculInr o) {
-		Future<Void> future = Future.future();
+	public void sqlPUTCalculInr(CalculInr o, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
 		try {
 			RequeteSite requeteSite = o.getRequeteSite_();
 			SQLConnection connexionSql = requeteSite.getConnexionSql();
@@ -713,24 +817,21 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 					, new JsonArray(postSqlParams)
 					, postAsync
 			-> {
-				future.complete();
+				gestionnaireEvenements.handle(Future.succeededFuture());
 			});
-			return future;
 		} catch(Exception e) {
-			ExceptionUtils.printRootCauseStackTrace(e);
-			return Future.failedFuture(e);
+			gestionnaireEvenements.handle(Future.failedFuture(e));
 		}
 	}
 
-	public Future<OperationResponse> reponse200PUTCalculInr(CalculInr o) {
+	public void reponse200PUTCalculInr(CalculInr o, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
 		try {
 			Buffer buffer = Buffer.buffer();
 			RequeteSite requeteSite = o.getRequeteSite_();
 			ToutEcrivain w = ToutEcrivain.creer(o.getRequeteSite_(), buffer);
-			return Future.succeededFuture(OperationResponse.completedWithJson(buffer));
+			gestionnaireEvenements.handle(Future.succeededFuture(OperationResponse.completedWithJson(buffer)));
 		} catch(Exception e) {
-			ExceptionUtils.printRootCauseStackTrace(e);
-			return Future.failedFuture(e);
+			gestionnaireEvenements.handle(Future.failedFuture(e));
 		}
 	}
 
@@ -739,18 +840,48 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 	@Override
 	public void deleteCalculInr(OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
 		RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte, operationRequete);
-		Future<OperationResponse> etapesFutures = sqlCalculInr(requeteSite).compose(a -> 
-			rechercheCalculInr(requeteSite).compose(calculInr -> 
-				supprimerDELETECalculInr(requeteSite).compose(c -> 
-					reponse200DELETECalculInr(requeteSite)
-				)
-			)
-		);
-		etapesFutures.setHandler(gestionnaireEvenements);
+		sqlCalculInr(requeteSite, a -> {
+			if(a.succeeded()) {
+				rechercheCalculInr(requeteSite, b -> {
+					if(b.succeeded()) {
+						ListeRecherche<CalculInr> listeCalculInr = b.result();
+						supprimerDELETECalculInr(requeteSite, c -> {
+							if(c.succeeded()) {
+								reponse200DELETECalculInr(requeteSite, d -> {
+									if(d.succeeded()) {
+										SQLConnection connexionSql = requeteSite.getConnexionSql();
+										connexionSql.commit(e -> {
+											if(a.succeeded()) {
+												connexionSql.close(f -> {
+													if(a.succeeded()) {
+														gestionnaireEvenements.handle(Future.succeededFuture(d.result()));
+													} else {
+														erreurCalculInr(requeteSite, gestionnaireEvenements, f);
+													}
+												});
+											} else {
+												erreurCalculInr(requeteSite, gestionnaireEvenements, e);
+											}
+										});
+									} else {
+										erreurCalculInr(requeteSite, gestionnaireEvenements, d);
+									}
+								});
+							} else {
+								erreurCalculInr(requeteSite, gestionnaireEvenements, c);
+							}
+						});
+					} else {
+						erreurCalculInr(requeteSite, gestionnaireEvenements, b);
+					}
+				});
+			} else {
+				erreurCalculInr(requeteSite, gestionnaireEvenements, a);
+			}
+		});
 	}
 
-	public Future<Void> supprimerDELETECalculInr(RequeteSite requeteSite) {
-		Future<Void> future = Future.future();
+	public void supprimerDELETECalculInr(RequeteSite requeteSite, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
 		try {
 			SQLConnection connexionSql = requeteSite.getConnexionSql();
 			String utilisateurId = requeteSite.getUtilisateurId();
@@ -761,23 +892,20 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 					, new JsonArray(Arrays.asList(pk, CalculInr.class.getCanonicalName(), pk, pk, pk, pk))
 					, supprimerAsync
 			-> {
-				future.complete();
+				gestionnaireEvenements.handle(Future.succeededFuture());
 			});
-			return future;
 		} catch(Exception e) {
-			ExceptionUtils.printRootCauseStackTrace(e);
-			return Future.failedFuture(e);
+			gestionnaireEvenements.handle(Future.failedFuture(e));
 		}
 	}
 
-	public Future<OperationResponse> reponse200DELETECalculInr(RequeteSite requeteSite) {
+	public void reponse200DELETECalculInr(RequeteSite requeteSite, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
 		try {
 			Buffer buffer = Buffer.buffer();
 			ToutEcrivain w = ToutEcrivain.creer(requeteSite, buffer);
-			return Future.succeededFuture(OperationResponse.completedWithJson(buffer));
+			gestionnaireEvenements.handle(Future.succeededFuture(OperationResponse.completedWithJson(buffer)));
 		} catch(Exception e) {
-			ExceptionUtils.printRootCauseStackTrace(e);
-			return Future.failedFuture(e);
+			gestionnaireEvenements.handle(Future.failedFuture(e));
 		}
 	}
 
@@ -786,13 +914,23 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 	@Override
 	public void recherchepageCalculInr(OperationRequest operationRequete, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
 		RequeteSite requeteSite = genererRequeteSitePourCalculInr(siteContexte, operationRequete);
-		Future<OperationResponse> etapesFutures = recherchepageCalculInr(requeteSite).compose(listeCalculInr -> 
-			reponse200RecherchePageCalculInr(listeCalculInr)
-		);
-		etapesFutures.setHandler(gestionnaireEvenements);
+		recherchepageCalculInr(requeteSite, a -> {
+			if(a.succeeded()) {
+				ListeRecherche<CalculInr> listeCalculInr = a.result();
+				reponse200RecherchePageCalculInr(listeCalculInr, b -> {
+					if(b.succeeded()) {
+						gestionnaireEvenements.handle(Future.succeededFuture(b.result()));
+					} else {
+						erreurCalculInr(requeteSite, gestionnaireEvenements, b);
+					}
+				});
+			} else {
+				erreurCalculInr(requeteSite, gestionnaireEvenements, a);
+			}
+		});
 	}
 
-	public Future<ListeRecherche<CalculInr>> recherchepageCalculInr(RequeteSite requeteSite) {
+	public void recherchepageCalculInr(RequeteSite requeteSite, Handler<AsyncResult<ListeRecherche<CalculInr>>> gestionnaireEvenements) {
 		try {
 			OperationRequest operationRequete = requeteSite.getOperationRequete();
 			String entiteListeStr = requeteSite.getOperationRequete().getParams().getJsonObject("query").getString("fl");
@@ -852,14 +990,13 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 				}
 			});
 			listeRecherche.initLoinPourClasse(requeteSite);
-			return Future.succeededFuture(listeRecherche);
+			gestionnaireEvenements.handle(Future.succeededFuture(listeRecherche));
 		} catch(Exception e) {
-			ExceptionUtils.printRootCauseStackTrace(e);
-			return Future.failedFuture(e);
+			gestionnaireEvenements.handle(Future.failedFuture(e));
 		}
 	}
 
-	public Future<OperationResponse> reponse200RecherchePageCalculInr(ListeRecherche<CalculInr> listeCalculInr) {
+	public void reponse200RecherchePageCalculInr(ListeRecherche<CalculInr> listeCalculInr, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
 		try {
 			Buffer buffer = Buffer.buffer();
 			RequeteSite requeteSite = listeCalculInr.getRequeteSite_();
@@ -874,10 +1011,9 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 			page.setListeCalculInr(listeCalculInr);
 			page.initLoinCalculInrPage(requeteSite);
 			page.html();
-			return Future.succeededFuture(new OperationResponse(200, "OK", buffer, new CaseInsensitiveHeaders()));
+			gestionnaireEvenements.handle(Future.succeededFuture(new OperationResponse(200, "OK", buffer, new CaseInsensitiveHeaders())));
 		} catch(Exception e) {
-			ExceptionUtils.printRootCauseStackTrace(e);
-			return Future.failedFuture(e);
+			gestionnaireEvenements.handle(Future.failedFuture(e));
 		}
 	}
 
@@ -912,25 +1048,64 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 		}
 	}
 
-	public Future<Void> sqlCalculInr(RequeteSite requeteSite) {
-		Future<Void> future = Future.future();
+	// Partagé //
+
+	public void erreurCalculInr(RequeteSite requeteSite, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements, AsyncResult<?> resultatAsync) {
+		Throwable e = resultatAsync.cause();
+		ExceptionUtils.printRootCauseStackTrace(e);
+		OperationResponse reponseOperation = new OperationResponse(400, "BAD REQUEST", 
+			Buffer.buffer().appendString(
+				new JsonObject() {{
+					put("erreur", new JsonObject() {{
+					put("message", e.getMessage());
+					}});
+				}}.encodePrettily()
+			)
+			, new CaseInsensitiveHeaders()
+		);
+		SQLConnection connexionSql = requeteSite.getConnexionSql();
+		if(connexionSql != null) {
+			connexionSql.rollback(a -> {
+				if(a.succeeded()) {
+					connexionSql.close(b -> {
+						if(a.succeeded()) {
+							gestionnaireEvenements.handle(Future.succeededFuture(reponseOperation));
+						} else {
+							gestionnaireEvenements.handle(Future.succeededFuture(reponseOperation));
+						}
+					});
+				} else {
+					gestionnaireEvenements.handle(Future.succeededFuture(reponseOperation));
+				}
+			});
+		} else {
+			gestionnaireEvenements.handle(Future.succeededFuture(reponseOperation));
+		}
+	}
+
+	public void sqlCalculInr(RequeteSite requeteSite, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
 		try {
 			SQLClient clientSql = requeteSite.getSiteContexte_().getClientSql();
 
 			clientSql.getConnection(sqlAsync -> {
 				if(sqlAsync.succeeded()) {
-					requeteSite.setConnexionSql(sqlAsync.result());
-					future.complete();
+					SQLConnection connexionSql = sqlAsync.result();
+					connexionSql.setAutoCommit(false, a -> {
+						if(a.succeeded()) {
+							requeteSite.setConnexionSql(connexionSql);
+							gestionnaireEvenements.handle(Future.succeededFuture());
+						} else {
+							gestionnaireEvenements.handle(Future.failedFuture(a.cause()));
+						}
+					});
+				} else {
+					gestionnaireEvenements.handle(Future.failedFuture(sqlAsync.cause()));
 				}
 			});
-			return future;
 		} catch(Exception e) {
-			ExceptionUtils.printRootCauseStackTrace(e);
-			return Future.failedFuture(e);
+			gestionnaireEvenements.handle(Future.failedFuture(e));
 		}
 	}
-
-	// Partagé //
 
 	public RequeteSite genererRequeteSitePourCalculInr(SiteContexte siteContexte, OperationRequest operationRequete) {
 		return genererRequeteSitePourCalculInr(siteContexte, operationRequete, null);
@@ -953,8 +1128,7 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 		return requeteSite;
 	}
 
-	public Future<Void> definirCalculInr(CalculInr o) {
-		Future<Void> future = Future.future();
+	public void definirCalculInr(CalculInr o, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
 		try {
 			RequeteSite requeteSite = o.getRequeteSite_();
 			SQLConnection connexionSql = requeteSite.getConnexionSql();
@@ -964,20 +1138,21 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 					, new JsonArray(Arrays.asList(pk))
 					, definirAsync
 			-> {
-				for(JsonArray definition : definirAsync.result().getResults()) {
-					o.definirPourClasse(definition.getString(0), definition.getString(1));
+				if(definirAsync.succeeded()) {
+					for(JsonArray definition : definirAsync.result().getResults()) {
+						o.definirPourClasse(definition.getString(0), definition.getString(1));
+					}
+					gestionnaireEvenements.handle(Future.succeededFuture());
+				} else {
+					gestionnaireEvenements.handle(Future.failedFuture(definirAsync.cause()));
 				}
-				future.complete();
 			});
 		} catch(Exception e) {
-			ExceptionUtils.printRootCauseStackTrace(e);
-			return Future.failedFuture(e);
+			gestionnaireEvenements.handle(Future.failedFuture(e));
 		}
-		return future;
 	}
 
-	public Future<Void> attribuerCalculInr(CalculInr o) {
-		Future<Void> future = Future.future();
+	public void attribuerCalculInr(CalculInr o, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
 		try {
 			RequeteSite requeteSite = o.getRequeteSite_();
 			SQLConnection connexionSql = requeteSite.getConnexionSql();
@@ -987,32 +1162,30 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 					, new JsonArray(Arrays.asList(pk))
 					, attribuerAsync
 			-> {
-				if(attribuerAsync.result() != null) {
-					for(JsonArray definition : attribuerAsync.result().getResults()) {
-						o.attribuerPourClasse(definition.getString(0), definition.getString(1));
+				if(attribuerAsync.succeeded()) {
+					if(attribuerAsync.result() != null) {
+						for(JsonArray definition : attribuerAsync.result().getResults()) {
+							o.attribuerPourClasse(definition.getString(0), definition.getString(1));
+						}
 					}
+					gestionnaireEvenements.handle(Future.succeededFuture());
+				} else {
+					gestionnaireEvenements.handle(Future.failedFuture(attribuerAsync.cause()));
 				}
-				future.complete();
 			});
 		} catch(Exception e) {
-			ExceptionUtils.printRootCauseStackTrace(e);
-			return Future.failedFuture(e);
+			gestionnaireEvenements.handle(Future.failedFuture(e));
 		}
-		return future;
 	}
 
-	public Future<Void> indexerCalculInr(CalculInr o) {
-		Future<Void> future = Future.future();
+	public void indexerCalculInr(CalculInr o, Handler<AsyncResult<OperationResponse>> gestionnaireEvenements) {
 		RequeteSite requeteSite = o.getRequeteSite_();
 		try {
 			o.initLoinPourClasse(requeteSite);
 			o.indexerPourClasse();
-			future.complete();
+			gestionnaireEvenements.handle(Future.succeededFuture());
 		} catch(Exception e) {
-			requeteSite.getConnexionSql().close();
-			ExceptionUtils.printRootCauseStackTrace(e);
-			return Future.failedFuture(e);
+			gestionnaireEvenements.handle(Future.failedFuture(e));
 		}
-		return future;
 	}
 }

@@ -27,7 +27,7 @@ function postCalculInr($formulaireValeurs) {
 	if(valeurPk)
 		valeurs['pk'] = valeurPk;
 
-	var valeurSupprime = $formulaireValeurs.find('.valeurSupprime').val();
+	var valeurSupprime = $formulaireValeurs.find('.valeurSupprime').prop('checked');
 	if(valeurSupprime)
 		valeurs['supprime'] = valeurSupprime;
 
@@ -47,15 +47,15 @@ function postCalculInr($formulaireValeurs) {
 	if(valeurDateReverifier)
 		valeurs['dateReverifier'] = valeurDateReverifier;
 
-	var valeurPatientPrendCoumadin = $formulaireValeurs.find('.valeurPatientPrendCoumadin').val();
+	var valeurPatientPrendCoumadin = $formulaireValeurs.find('.valeurPatientPrendCoumadin').prop('checked');
 	if(valeurPatientPrendCoumadin)
 		valeurs['patientPrendCoumadin'] = valeurPatientPrendCoumadin;
 
-	var valeurDosageInitial = $formulaireValeurs.find('.valeurDosageInitial').val();
+	var valeurDosageInitial = $formulaireValeurs.find('.valeurDosageInitial').prop('checked');
 	if(valeurDosageInitial)
 		valeurs['dosageInitial'] = valeurDosageInitial;
 
-	var valeurDosageRecommence = $formulaireValeurs.find('.valeurDosageRecommence').val();
+	var valeurDosageRecommence = $formulaireValeurs.find('.valeurDosageRecommence').prop('checked');
 	if(valeurDosageRecommence)
 		valeurs['dosageRecommence'] = valeurDosageRecommence;
 
@@ -115,7 +115,7 @@ function patchCalculInr($formulaireFiltres, $formulaireValeurs) {
 	if(filtrePk)
 		filtres['pk'] = valeurPk;
 
-	var filtreSupprime = $formulaireFiltres.find('.valeurSupprime').val();
+	var filtreSupprime = $formulaireFiltres.find('.valeurSupprime').prop('checked');
 	if(filtreSupprime)
 		filtres['supprime'] = valeurSupprime;
 
@@ -135,15 +135,15 @@ function patchCalculInr($formulaireFiltres, $formulaireValeurs) {
 	if(filtreDateReverifier)
 		filtres['dateReverifier'] = valeurDateReverifier;
 
-	var filtrePatientPrendCoumadin = $formulaireFiltres.find('.valeurPatientPrendCoumadin').val();
+	var filtrePatientPrendCoumadin = $formulaireFiltres.find('.valeurPatientPrendCoumadin').prop('checked');
 	if(filtrePatientPrendCoumadin)
 		filtres['patientPrendCoumadin'] = valeurPatientPrendCoumadin;
 
-	var filtreDosageInitial = $formulaireFiltres.find('.valeurDosageInitial').val();
+	var filtreDosageInitial = $formulaireFiltres.find('.valeurDosageInitial').prop('checked');
 	if(filtreDosageInitial)
 		filtres['dosageInitial'] = valeurDosageInitial;
 
-	var filtreDosageRecommence = $formulaireFiltres.find('.valeurDosageRecommence').val();
+	var filtreDosageRecommence = $formulaireFiltres.find('.valeurDosageRecommence').prop('checked');
 	if(filtreDosageRecommence)
 		filtres['dosageRecommence'] = valeurDosageRecommence;
 
@@ -183,13 +183,13 @@ function patchCalculInr($formulaireFiltres, $formulaireValeurs) {
 	if(removePk)
 		patchs['removePk'] = removePk;
 
-	var setSupprime = $formulaireValeurs.find('.setSupprime').val();
+	var setSupprime = $formulaireValeurs.find('.setSupprime').prop('checked');
 	if(setSupprime)
 		patchs['setSupprime'] = setSupprime;
-	var addSupprime = $formulaireValeurs.find('.addSupprime').val();
+	var addSupprime = $formulaireValeurs.find('.addSupprime').prop('checked');
 	if(addSupprime)
 		patchs['addSupprime'] = addSupprime;
-	var removeSupprime = $formulaireValeurs.find('.removeSupprime').val();
+	var removeSupprime = $formulaireValeurs.find('.removeSupprime').prop('checked');
 	if(removeSupprime)
 		patchs['removeSupprime'] = removeSupprime;
 
@@ -233,33 +233,33 @@ function patchCalculInr($formulaireFiltres, $formulaireValeurs) {
 	if(removeDateReverifier)
 		patchs['removeDateReverifier'] = removeDateReverifier;
 
-	var setPatientPrendCoumadin = $formulaireValeurs.find('.setPatientPrendCoumadin').val();
+	var setPatientPrendCoumadin = $formulaireValeurs.find('.setPatientPrendCoumadin').prop('checked');
 	if(setPatientPrendCoumadin)
 		patchs['setPatientPrendCoumadin'] = setPatientPrendCoumadin;
-	var addPatientPrendCoumadin = $formulaireValeurs.find('.addPatientPrendCoumadin').val();
+	var addPatientPrendCoumadin = $formulaireValeurs.find('.addPatientPrendCoumadin').prop('checked');
 	if(addPatientPrendCoumadin)
 		patchs['addPatientPrendCoumadin'] = addPatientPrendCoumadin;
-	var removePatientPrendCoumadin = $formulaireValeurs.find('.removePatientPrendCoumadin').val();
+	var removePatientPrendCoumadin = $formulaireValeurs.find('.removePatientPrendCoumadin').prop('checked');
 	if(removePatientPrendCoumadin)
 		patchs['removePatientPrendCoumadin'] = removePatientPrendCoumadin;
 
-	var setDosageInitial = $formulaireValeurs.find('.setDosageInitial').val();
+	var setDosageInitial = $formulaireValeurs.find('.setDosageInitial').prop('checked');
 	if(setDosageInitial)
 		patchs['setDosageInitial'] = setDosageInitial;
-	var addDosageInitial = $formulaireValeurs.find('.addDosageInitial').val();
+	var addDosageInitial = $formulaireValeurs.find('.addDosageInitial').prop('checked');
 	if(addDosageInitial)
 		patchs['addDosageInitial'] = addDosageInitial;
-	var removeDosageInitial = $formulaireValeurs.find('.removeDosageInitial').val();
+	var removeDosageInitial = $formulaireValeurs.find('.removeDosageInitial').prop('checked');
 	if(removeDosageInitial)
 		patchs['removeDosageInitial'] = removeDosageInitial;
 
-	var setDosageRecommence = $formulaireValeurs.find('.setDosageRecommence').val();
+	var setDosageRecommence = $formulaireValeurs.find('.setDosageRecommence').prop('checked');
 	if(setDosageRecommence)
 		patchs['setDosageRecommence'] = setDosageRecommence;
-	var addDosageRecommence = $formulaireValeurs.find('.addDosageRecommence').val();
+	var addDosageRecommence = $formulaireValeurs.find('.addDosageRecommence').prop('checked');
 	if(addDosageRecommence)
 		patchs['addDosageRecommence'] = addDosageRecommence;
-	var removeDosageRecommence = $formulaireValeurs.find('.removeDosageRecommence').val();
+	var removeDosageRecommence = $formulaireValeurs.find('.removeDosageRecommence').prop('checked');
 	if(removeDosageRecommence)
 		patchs['removeDosageRecommence'] = removeDosageRecommence;
 
@@ -364,7 +364,7 @@ function putCalculInr(pk, $formulaireValeurs) {
 	if(valeurPk)
 		valeurs['pk'] = valeurPk;
 
-	var valeurSupprime = $formulaireValeurs.find('.valeurSupprime').val();
+	var valeurSupprime = $formulaireValeurs.find('.valeurSupprime').prop('checked');
 	if(valeurSupprime)
 		valeurs['supprime'] = valeurSupprime;
 
@@ -384,15 +384,15 @@ function putCalculInr(pk, $formulaireValeurs) {
 	if(valeurDateReverifier)
 		valeurs['dateReverifier'] = valeurDateReverifier;
 
-	var valeurPatientPrendCoumadin = $formulaireValeurs.find('.valeurPatientPrendCoumadin').val();
+	var valeurPatientPrendCoumadin = $formulaireValeurs.find('.valeurPatientPrendCoumadin').prop('checked');
 	if(valeurPatientPrendCoumadin)
 		valeurs['patientPrendCoumadin'] = valeurPatientPrendCoumadin;
 
-	var valeurDosageInitial = $formulaireValeurs.find('.valeurDosageInitial').val();
+	var valeurDosageInitial = $formulaireValeurs.find('.valeurDosageInitial').prop('checked');
 	if(valeurDosageInitial)
 		valeurs['dosageInitial'] = valeurDosageInitial;
 
-	var valeurDosageRecommence = $formulaireValeurs.find('.valeurDosageRecommence').val();
+	var valeurDosageRecommence = $formulaireValeurs.find('.valeurDosageRecommence').prop('checked');
 	if(valeurDosageRecommence)
 		valeurs['dosageRecommence'] = valeurDosageRecommence;
 

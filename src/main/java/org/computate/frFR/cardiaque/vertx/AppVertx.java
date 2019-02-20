@@ -416,8 +416,13 @@ public class AppVertx extends AbstractVerticle {
 
 		siteContexte.initLoinSiteContexte();
 
-		Future<Void> etapesFutures = preparerDonnees(siteContexte).compose(a -> configurerCluster(siteContexte)
-				.compose(b -> configurerOpenApi(siteContexte).compose(c -> demarrerServeur(siteContexte))));
+		Future<Void> etapesFutures = preparerDonnees(siteContexte).compose(a -> 
+			configurerCluster(siteContexte).compose(b -> 
+				configurerOpenApi(siteContexte).compose(c -> 
+					demarrerServeur(siteContexte)
+				)
+			)
+		);
 		etapesFutures.setHandler(demarrerFuture.completer());
 	}
 }
