@@ -1159,7 +1159,7 @@ public class CalculInrGenApiServiceImpl implements CalculInrGenApiService {
 			Long pk = o.getPk();
 			connexionSql.queryWithParams(
 					SiteContexte.SQL_attribuer
-					, new JsonArray(Arrays.asList(pk))
+					, new JsonArray(Arrays.asList(pk, pk))
 					, attribuerAsync
 			-> {
 				if(attribuerAsync.succeeded()) {
